@@ -4,59 +4,82 @@ export default function
     () {
     return (
         <>
-            <section className='destination_section mt-35'>
+            <section className='destination_section  pb-20 container '>
 
-                <div className="destination_title">
-                    <h2>
+                <div className="destination_title section_title mb-10">
+                    <h2 className='mb-0'>
                         Trending Destinations
                     </h2>
+                    <h5 >
+                        Whatever you're into, we’ve got it
+                    </h5>
                 </div>
                 {/* ************** */}
                 <div className="container_fluid">
+                    {/* ******************** */}
                     <div className="row">
-                        <div className="col-lg-4">
+                        {/* ****************** col-lg-4 */}
+                        <div className="col-lg-3">
                             <div className="destination_box">
-                                <div className="destination_img ">
-                                    <img src="/home/destination/des1.jpg" className='rounded-3xl' alt="" />
+                                <div className="destination_img  ">
+                                    <img src="/home/destination/food.webp" className='rounded-3xl' alt="" />
+                                    <div className="destination_name">
+                                        <h5>
+                                            food
+                                        </h5>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        {/* ******************** */}
+                        {/* ****************** col-lg-4 */}
+                        <div className="col-lg-3">
+                            <div className="destination_box">
+                                <div className="destination_img  ">
+                                    <img src="/home/destination/food.webp" className='rounded-3xl' alt="" />
+                                    <div className="destination_name">
+                                        <h5>
+                                            outdoors
+                                        </h5>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div className="col-lg-8">
-                            <div className="row">
-                                <div className="col-lg-4">
-                                    <div className="destination_box_right">
-                                        <div className="destination_img ">
-                                            <img src="/home/destination/des1.jpg" className='rounded-3xl' alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-8">
-                                    <div className="destination_box">
-                                        <div className="destination_img ">
-                                            <img src="/home/destination/des1.jpg" className='rounded-3xl' alt="" />
-                                        </div>
+                        {/* ******************** */}
+                        {/* ****************** col-lg-4 */}
+                        <div className="col-lg-3">
+                            <div className="destination_box">
+                                <div className="destination_img  ">
+                                    <img src="/home/destination/food.webp" className='rounded-3xl' alt="" />
+                                    <div className="destination_name">
+                                        <h5>
+                                            culture
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
-                            {/* ************************************** */}
-                            <div className="row">
-                                <div className="col-lg-4">
-                                    <div className="destination_box_right">
-                                        <div className="destination_img ">
-                                            <img src="/home/destination/des1.jpg" className='rounded-3xl' alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-8">
-                                    <div className="destination_box">
-                                        <div className="destination_img ">
-                                            <img src="/home/destination/des1.jpg" className='rounded-3xl' alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
+                        {/* ******************** */}
+                        {/* ****************** col-lg-4 */}
+                        <div className="col-lg-3">
+                            <div className="destination_box">
+                                <div className="destination_img  ">
+                                    <img src="/home/destination/outdoors.jpg" className='rounded-3xl' alt="" />
+                                    <div className="destination_name">
+                                        <h5>
+                                            water
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {/* ******************** */}
+
                     </div>
                 </div>
 

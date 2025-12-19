@@ -1,19 +1,23 @@
 import Header from "@/component/Header";
 import DestinationSection from "@/Pages/HomePage/DestinationSection/DestinationSection";
+import ExperienceExploreSection from "@/Pages/HomePage/ExpereinceExploreSection/ExperienceExploreSection";
+import GetOfferSection from "@/Pages/HomePage/GetOfferSection/GetOfferSection";
 import HomeBannerSection from "@/Pages/HomePage/HomeBannerSection";
-import SearchSection from "@/Pages/HomePage/SearchSection";
-import Image from "next/image";
+import RecomendSection from "@/Pages/HomePage/RecommendedSection/RecomendSection";
+// import SearchSection from "@/Pages/HomePage/SearchSection";
+
 
 export default function Home() {
   return (
     <>
-      <section className="ps-15 pe-15">
-
-
+      <section className="">
         <Header />
         {/* <SearchSection /> */}
         <HomeBannerSection />
-        {/* <DestinationSection /> */}
+        <DestinationSection />
+        <RecomendSection />
+        <GetOfferSection />
+        <ExperienceExploreSection />
       </section>
     </>
 
