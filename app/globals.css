@@ -131,7 +131,7 @@ button {
   font-size: 18px;
 }
 .search_box_input > form > .search_box > input {
-  padding: 40px 45px;
+  padding: 20px 45px;
   border-radius: 60px;
 }
 .button_bg2 {
@@ -208,10 +208,11 @@ button {
   letter-spacing: 1px;
   font-family: var(--font-fam);
 }
-/* ***************************** recomended for you  */
+/* *****************************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> recomended for you  */
 .recomend_section > .section_title > .title_icon {
   top: -14%;
 }
+
 .recommend_card_box > .card_box > .card_box_img {
   width: 100%;
 }
@@ -306,6 +307,25 @@ button {
   color: rgba(255, 199, 0, 1);
   font-size: 15px;
 }
+/* *********************** */
+.recommend_card_box {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* stretch to fill available height */
+  height: 100%;
+}
+.card_box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+.card_box_detail {
+  flex-grow: 1; /* allow detail section to take remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* space out content vertically */
+}
 /* ************button */
 .button_more > button {
   background-color: var(--color);
@@ -397,3 +417,122 @@ button {
   z-index: -1;
 }
 /* ***********************************************************************   experience explore section */
+.experience_explore_section > .card > .card-body > .card_detail > h5 {
+  font-size: 17px;
+  font-weight: 600;
+}
+.experience_explore_section > .card > .card-body > .card_detail > p {
+  font-size: 12px;
+  font-weight: 300;
+}
+.experience_explore_section > .card > .card-body > .rating > span {
+  font-size: 13px;
+  color: var(--bg-color);
+}
+.card > .heart_icon > span {
+  color: var(--bg-color);
+  font-size: 30px;
+}
+.card > .heart_icon > span > svg {
+  background: #ffffff;
+  padding: 5px;
+  border-radius: 50%;
+}
+/* ************************************************************** footerrrrrrrrrrr>>>>>>>>>>>>>>>>>>>>>>>  */
+.footer_section {
+  background-color: rgba(29, 31, 39, 1);
+}
+.footer_detail > .footer_title > p {
+  font-family: var(--font-fam);
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 26px;
+  letter-spacing: 0%;
+  text-transform: capitalize;
+}
+.footer_detail > .footer_location > ul > li {
+  color: var(--cl-brown);
+  font-weight: 500;
+  text-transform: capitalize;
+  font-size: 16px;
+}
+.footer_detail > .footer_location > ul > li > span {
+  color: var(--bg-color);
+}
+/* ******** */
+.footer_link > .link_title > h5 {
+  color: #ffffff;
+  text-transform: capitalize;
+}
+.footer_link ul > li {
+  list-style: none;
+}
+.footer_link ul > li > a {
+  font-family: var(--font-fam);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0%;
+  color: var(--cl-brown);
+  text-decoration: none;
+}
+.footer_newslatter > .news_later_button > button {
+  background-color: var(--bg-color);
+  font-family: var(--font-fam);
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+.footer_contact_detail > .contact > .icon > svg {
+  font-size: 60px;
+  color: #ffffff;
+}
+.footer_contact_detail > .contact > .call_us > p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #ffffff;
+}
+.footer_contact_detail > .contact > .call_us > h5 {
+  color: #ffffff;
+}
+.footer_contact_detail > .join_us > .icon > svg {
+  font-size: 60px;
+  color: #ffffff;
+}
+.footer_contact_detail > .join_us > .content > h5 {
+  color: #ffffff;
+}
+.footer_contact_detail > .send_msg > .icon > svg {
+  color: #ffffff;
+  font-size: 16px;
+}
+.footer_contact_detail > .send_msg > .content {
+  color: #ffffff;
+}
+.footer_contact_detail > .send_msg > .icon > img {
+  width: 75px;
+}
+.footer_contact_detail > .send_msg > .content > p {
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: var(--cl-brown);
+}
+/* ******************************************************************************************************** section page  */
+.search_banner_box > .title > h2 {
+  color: var(--color);
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 95px;
+}
+.search_banner_box > .title > h2 > span {
+  color: var(--bg-color);
+}

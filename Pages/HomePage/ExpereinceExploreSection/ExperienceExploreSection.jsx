@@ -1,8 +1,70 @@
+"use client"
 import React from 'react'
+import { FaRegHeart } from 'react-icons/fa'
+import { IoStar } from "react-icons/io5"; import { IoStarHalf } from "react-icons/io5"; import { IoStarOutline } from "react-icons/io5";
 export default function ExperienceExploreSection() {
+    const card = [
+
+        {
+            img: "/home/destination/outdoors.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: "from ₹1000 per person",
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+
+
+            ]
+        },
+        {
+            img: "/home/destination/outdoors.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: "from ₹4500 per person",
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+
+
+            ]
+        },
+        {
+            img: "/home/destination/outdoors.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: "from ₹4500 per person",
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+            ]
+        },
+        {
+            img: "/home/destination/outdoors.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: "from ₹4500 per person",
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+
+
+            ]
+        },
+
+    ]
+
     return (
         <>
-            <section className='experience_explore_section'>
+            <section className='experience_explore_section pb-20'>
                 <div className="container">
                     <div className="explore_section section_title mb-10">
                         <h2 className='mb-0'>
@@ -15,58 +77,145 @@ export default function ExperienceExploreSection() {
 
                     <div className="row">
                         {/* ********************************** */}
-                        <div className="col-lg-3">
-                            <div className="card">
-                                {/* <img src="..." className="card-img-top" alt="..." /> */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            card?.map((item, i) => {
+                                let simplecontetnt = item?.content.split(" ").slice(0, 3).join(" ");
+
+                                if (simplecontetnt?.length > 3) {
+                                    simplecontetnt += "...";
+                                }
+
+                                return (
+
+
+                                    <div className="col-lg-3" key={i}>
+                                        <div className="experience_explore_section ">
+                                            <div className="card  relative border-0 ">
+                                                <img src={item?.img} className="card-img-top rounded-4 " alt="..." />
+                                                <div className="heart_icon absolute top-2 right-4">
+                                                    <span>
+                                                        <FaRegHeart />
+                                                    </span>
+
+                                                </div>
+                                                <div className="card-body ps-0 flex justify-between ">
+                                                    <div className="card_detail">
+                                                        <h5 className="card-title m-0">
+                                                            {
+                                                                simplecontetnt
+                                                            }
+                                                        </h5>
+                                                        <p className='m-0'>
+                                                            {
+                                                                item?.info
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                    <div className="rating flex ">
+                                                        {
+                                                            item?.star?.map((star_item, i) => {
+                                                                return (
+
+                                                                    <span key={i}>{star_item}</span>
+
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                )
+                            })
+                        }
                         {/* ********************************** */}
                         {/* ********************************** */}
-                        <div className="col-lg-3">
-                            <div className="card">
-                                {/* <img src="..." className="card-img-top" alt="..." /> */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        {/* ********************************** */}
-                        {/* ********************************** */}
-                        <div className="col-lg-3">
-                            <div className="card">
-                                {/* <img src="..." className="card-img-top" alt="..." /> */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        {/* ********************************** */}
-                        {/* ********************************** */}
-                        <div className="col-lg-3">
-                            <div className="card">
-                                {/* <img src="..." className="card-img-top" alt="..." /> */}
-                                <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
                         {/* ********************************** */}
                     </div>
                 </div>
             </section>
 
+            {/* ********************************************************************************************************************** section two big cities .........>>>>>>>>>>>>>>>>>> */}
+            <section className=''>
+                <div className="container">
+                    <div className="explore_section section_title mb-10">
+                        <h2 className='mb-0'>
+                            Explore experiences near Chandigarh
+                        </h2>
+                        <h5 >
+                            Top-rated experiences and hidden gems near you
+                        </h5>
+                    </div>
 
+                    <div className="row">
+                        {/* ********************************** */}
+                        {
+                            card?.map((item, i) => {
+                                let simplecontetnt = item?.content.split(" ").slice(0, 3).join(" ");
+
+                                if (simplecontetnt?.length > 3) {
+                                    simplecontetnt += "...";
+                                }
+
+                                return (
+
+
+                                    <div className="col-lg-3" key={i}>
+                                        <div className="experience_explore_section ">
+                                            <div className="card  relative border-0 ">
+                                                <img src={item?.img} className="card-img-top rounded-4 " alt="..." />
+                                                <div className="heart_icon absolute top-2 right-4">
+                                                    <span>
+                                                        <FaRegHeart />
+                                                    </span>
+
+                                                </div>
+                                                <div className="card-body ps-0 flex justify-between ">
+                                                    <div className="card_detail">
+                                                        <h5 className="card-title m-0">
+                                                            {
+                                                                simplecontetnt
+                                                            }
+                                                        </h5>
+                                                        <p className='m-0'>
+                                                            {
+                                                                item?.info
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                    <div className="rating flex ">
+                                                        {
+                                                            item?.star?.map((star_item, i) => {
+                                                                return (
+
+                                                                    <span key={i}>{star_item}</span>
+
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                )
+                            })
+                        }
+                        {/* ********************************** */}
+                        {/* ********************************** */}
+                        {/* ********************************** */}
+                    </div>
+                </div>
+            </section>
 
 
 
