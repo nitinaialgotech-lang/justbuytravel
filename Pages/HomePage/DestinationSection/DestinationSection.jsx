@@ -5,7 +5,6 @@ export default function
     return (
         <>
             <section className='destination_section  pb-20 container '>
-
                 <div className="destination_title section_title mb-10">
                     <h2 className='mb-0'>
                         Trending Destinations
@@ -38,7 +37,7 @@ export default function
                         <div className="col-lg-3">
                             <div className="destination_box">
                                 <div className="destination_img  ">
-                                    <img src="/home/destination/food.webp" className='rounded-3xl' alt="" />
+                                    <img src="/home/destination/outdoor.webp" className='rounded-3xl' alt="" />
                                     <div className="destination_name">
                                         <h5>
                                             outdoors
@@ -53,7 +52,7 @@ export default function
                         <div className="col-lg-3">
                             <div className="destination_box">
                                 <div className="destination_img  ">
-                                    <img src="/home/destination/food.webp" className='rounded-3xl' alt="" />
+                                    <img src="/home/destination/culture.webp" className='rounded-3xl' alt="" />
                                     <div className="destination_name">
                                         <h5>
                                             culture
@@ -61,14 +60,13 @@ export default function
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         {/* ******************** */}
                         {/* ****************** col-lg-4 */}
                         <div className="col-lg-3">
                             <div className="destination_box">
                                 <div className="destination_img  ">
-                                    <img src="/home/destination/outdoors.jpg" className='rounded-3xl' alt="" />
+                                    <img src="/home/destination/water.jpg" className='rounded-3xl' alt="" />
                                     <div className="destination_name">
                                         <h5>
                                             water
@@ -76,10 +74,8 @@ export default function
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         {/* ******************** */}
-
                     </div>
                 </div>
 

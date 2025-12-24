@@ -14,14 +14,19 @@ import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function Search() {
-    //    **********************************************************************
-    const [location, setLocation] = useState("")
-    const [searchcontetn, setContent] = useState("")
-    // ********************************************************************************
+    const [location, setLocation] = useState(""); // For storing resolved location
+    const [isLoadingLocation, setIsLoadingLocation] = useState(true); // Loading state for geolocation
+    const [searchContent, setSearchContent] = useState(""); // For the search input
+
+    // Assuming these are defined elsewhere (e.g., Redux, props, or constants)
+    // If not, add them or remove references in doSearch
+    const adults = 1; // Example: Replace with actual value
+    const checkin = null; // Example: Replace with actual value
+    const checkout = null; // Example: Replace with actual value
+    const API_BASE = "https://your-api-base.com"; // Example: Replace with actual API base
 
     const reverseGeocode = useCallback(async (lat, lng) => {
         try {
-            // Using OpenStreetMap Nominatim API (free, no key required)
             const response = await fetch(
                 `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`,
                 {
@@ -32,7 +37,6 @@ export default function Search() {
             );
             const data = await response.json();
             if (data && data.address) {
-                // Try to get city name from various fields
                 const city =
                     data.address.city ||
                     data.address.town ||
@@ -45,57 +49,14 @@ export default function Search() {
                     return city;
                 }
             }
-            // Fallback: return coordinates as location string
-            return `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+            return `${lat.toFixed(4)}, ${lng.toFixed(4)}`; // Fallback to coords
         } catch (error) {
             console.error("Reverse geocoding error:", error);
             return null;
         }
     }, []);
 
-    //    **********************************************************************
-
-
-    navigator.geolocation.getCurrentPosition(
-        async (position) => {
-            const { latitude, longitude } = position.coords;
-            console.log(`Current location: ${latitude}, ${longitude}`);
-            // Get city name from coordinates
-            const cityName = await reverseGeocode(latitude, longitude);
-            if (cityName) {
-                setLocation(cityName);
-                console.log(`Location resolved to: ${cityName}`);
-                console.log(cityName, "................");
-                localStorage.setItem("search", cityName)
-                await doSearch(cityName);
-
-            } else {
-                // If reverse geocoding fails, use coordinates or fallback
-                const coordLocation = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
-                setLocation(coordLocation);
-                await doSearch(coordLocation);
-            }
-            // setLocationFetching(false);
-        },
-        (err) => {
-            console.error("Geolocation error:", err);
-            // Fallback to default search on error
-            doSearch("New York");
-            // setLocationFetching(false);
-        },
-        {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 60000, // Cache for 1 minute
-        }
-    );
-
-
-    //    ********************************************************************** 
     const doSearch = useCallback(async (locOverride) => {
-        // setError("");
-        // setLoading(true);
-        // setResults(null);
         try {
             const params = new URLSearchParams({
                 location: locOverride || location || "New York",
@@ -109,30 +70,74 @@ export default function Search() {
             if (!json.success) {
                 throw new Error(json.message || "Failed to fetch hotels");
             }
-            // setResults(json.data);
+            // Handle results (e.g., dispatch to Redux or set state)
+            // Example: dispatch(searching(json.data));
         } catch (err) {
-            // setError(err.message);
-        } finally {
-            // setLoading(false);
+            console.error("doSearch error:", err);
         }
-    }, [location]);
-    //    **********************************************************************
+    }, [location, adults, checkin, checkout, API_BASE]);
+
+    // Geolocation effect: Run once on mount
+    useEffect(() => {
+        // Check localStorage for a cached location first
+        const cachedLocation = localStorage.getItem("search");
+        if (cachedLocation) {
+            setSearchContent(cachedLocation); // Pre-fill input with cached value
+            setLocation(cachedLocation);
+            setIsLoadingLocation(false);
+            return; // Skip geolocation if cached
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+                console.log(`Current location: ${latitude}, ${longitude}`);
+                const cityName = await reverseGeocode(latitude, longitude);
+                if (cityName) {
+                    setLocation(cityName);
+                    setSearchContent(cityName); // Auto-fill the search input
+                    console.log(`Location resolved to: ${cityName}`);
+                    localStorage.setItem("search", cityName);
+                    // Optional: Trigger hotel search
+                    await doSearch(cityName);
+                } else {
+                    const coordLocation = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+                    setLocation(coordLocation);
+                    setSearchContent(coordLocation); // Fallback to coords in input
+                    await doSearch(coordLocation);
+                }
+                setIsLoadingLocation(false);
+            },
+            (err) => {
+                console.error("Geolocation error:", err);
+                // Fallback: Set to "New York" and update UI
+                setLocation("New York");
+                setSearchContent("New York");
+                localStorage.setItem("search", "New York");
+                doSearch("New York");
+                setIsLoadingLocation(false);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 60000,
+            }
+        );
+    }, [reverseGeocode, doSearch]); // Dependencies: Add if needed
 
     const router = useRouter();
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
 
-    const [searchContent, setSearchContent] = useState(query);
-
     useEffect(() => {
-        setSearchContent(query);
+        setSearchContent(query); // Sync with URL query if present
     }, [query]);
 
     const handleSearch = () => {
-        if (!searchContent) return;
-
-        router.push(`/search?query=${searchContent}`);
+        if (!searchContent.trim()) return;
+        router.push(`/search?query=${encodeURIComponent(searchContent)}`);
     };
+
     return (
         <section className="Search_section pb-20">
             <div className="container">
@@ -180,8 +185,7 @@ export default function Search() {
                                 className="px-15 mx-auto"
                                 onSubmit={(e) => {
                                     e.preventDefault();
-
-
+                                    handleSearch();
                                 }}
                             >
                                 <div className="relative search_box">
@@ -190,18 +194,18 @@ export default function Search() {
                                     </div>
                                     <input
                                         type="text"
-                                        value={searchContent}
+                                        // value={searchContent}
                                         onChange={(e) => setSearchContent(e.target.value)}
+                                        disabled={isLoadingLocation} // Disable input while loading
                                         className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
-                                        placeholder="Places to go, things to do, hotels..."
-
+                                        placeholder={isLoadingLocation ? "Detecting location..." : "Places to go, things to do, hotels..."}
                                     />
                                     <button
                                         type="submit"
-                                        onClick={() => handleSearch()}
+                                        disabled={isLoadingLocation}
                                         className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs px-3 focus:outline-none button_bg2"
                                     >
-                                        Search
+                                        {isLoadingLocation ? "Loading..." : "Search"}
                                     </button>
                                 </div>
                             </form>
