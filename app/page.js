@@ -19,11 +19,7 @@ export default function Home() {
       <Header />
       {/* <SearchSection /> */}
       <HomeBannerSection />
-      <DestinationSection />
-      <RecomendSection />
-      <GetOfferSection />
-      <ExperienceExploreSection />
-      <Footer />
+
 
 
 

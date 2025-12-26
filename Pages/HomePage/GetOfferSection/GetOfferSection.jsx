@@ -15,7 +15,7 @@ export default function GetOfferSection() {
             <section className="GetOfferSection pb-20">
                 <div className="container">
                     <div className="row justify-center">
-                        <div className="col-md-10">
+                        <div className="col-md-12">
                             <div className="offer_banner_wrapper rounded-3xl bg-color-green">
                                 <Swiper
                                     spaceBetween={30}

@@ -1,11 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import "../../style/searchresult.css";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { SearchLocation } from "@/app/Route/endpoints";
 import ReactPaginate from "react-paginate";
+
+import { useRouter } from "next/navigation";
 export default function SearchContentBox() {
+    // ********************************
 
     const searchQuery = useSearchParams();
     const LIMIT = 20;
@@ -58,6 +61,34 @@ export default function SearchContentBox() {
             setHasMore(false);
         }
     }, [data, page, search]);
+    console.log(hotels, "detailsnow")
+    // const params = new URLSearchParams({
+    //           location: searchParams.location || "hotels",
+    //           adults: searchParams.adults || "2"
+    //         });
+    // ****************************** view detail 
+    const router = useRouter();
+    // const searchParams = useSearchParams();
+    // const search = searchParams.get("query") || ""
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?query=${id}`)
+
+    }
+
+
+
+    // const title = hotels.title || hotels.name || hotels.property_id || "hotels";
+    // const price = hotels.price || hotels.rate_per_night?.lowest || "N/A";
+    // const rating = hotels.rating || "N/A";
+    // const reviews = hotels.reviews || hotels.review_count || "N/A";
+    // const address = hotels.address || hotels.location || "";
+    // const thumbnail = hotels.thumbnail;
+    // const token = hotels.property_token || hotels.property_id || "";
+    // const hotelSlug = createSlug(title);
+
+
+    console.log();
+
 
 
     return (
@@ -244,6 +275,7 @@ export default function SearchContentBox() {
                                                 <a
                                                     href="#"
                                                     className="primary-btn1"
+                                                    onClick={() => viewDetail(item?.property_token)}
                                                 >
                                                     <span>
                                                         Book Now{" "}

@@ -12,16 +12,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-export default function RecomendSection() {
-    // const search = useSelector((state) => state?.user?.search);
-    // const active = useSelector((state) => state?.user?.active);
-
-    const search = localStorage.getItem("search")
-
+export default function RecomendSection({ location }) {
     const { data } = useQuery({
-        queryKey: ["hotels ", search],
-        queryFn: async () => await SearchLocation(search)
+        queryKey: ["hotels ", location],
+        queryFn: async () => await SearchLocation(location)
     })
+
+
+    console.log(location, "recomenr");
 
     return (
         <>

@@ -12,14 +12,17 @@ import { useQuery } from "@tanstack/react-query";
 import { SearchLocation } from "@/app/Route/endpoints";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import DestinationSection from "./DestinationSection/DestinationSection";
+import RecomendSection from "./RecommendedSection/RecomendSection";
+import GetOfferSection from "./GetOfferSection/GetOfferSection";
+import ExperienceExploreSection from "./ExpereinceExploreSection/ExperienceExploreSection";
+import Footer from "@/component/Footer";
 
 export default function Search() {
     const [location, setLocation] = useState(""); // For storing resolved location
     const [isLoadingLocation, setIsLoadingLocation] = useState(true); // Loading state for geolocation
     const [searchContent, setSearchContent] = useState(""); // For the search input
 
-    // Assuming these are defined elsewhere (e.g., Redux, props, or constants)
-    // If not, add them or remove references in doSearch
     const adults = 1; // Example: Replace with actual value
     const checkin = null; // Example: Replace with actual value
     const checkout = null; // Example: Replace with actual value
@@ -28,38 +31,43 @@ export default function Search() {
     const reverseGeocode = useCallback(async (lat, lng) => {
         try {
             const response = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`,
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`,
                 {
                     headers: {
-                        'User-Agent': 'JustBuyTravel/1.0'
+                        "User-Agent": "JustBuyTravel/1.0 (contact@justbuytravel.com)"
                     }
                 }
             );
+
             const data = await response.json();
-            if (data && data.address) {
-                const city =
-                    data.address.city ||
-                    data.address.town ||
-                    data.address.village ||
-                    data.address.municipality ||
-                    data.address.county ||
-                    data.address.state ||
-                    data.address.country;
-                if (city) {
-                    return city;
-                }
-            }
-            return `${lat.toFixed(4)}, ${lng.toFixed(4)}`; // Fallback to coords
+
+            if (!data?.address) return null;
+
+            const address = data.address;
+
+            const city =
+                address.city ||
+                address.town ||
+                address.village ||
+                address.suburb ||
+                address.neighbourhood ||
+                address.borough ||
+                address.municipality ||
+                address.county ||
+                address.state;
+
+            return city || null;
         } catch (error) {
             console.error("Reverse geocoding error:", error);
             return null;
         }
     }, []);
 
+    // ***************************************************************************************
     const doSearch = useCallback(async (locOverride) => {
         try {
             const params = new URLSearchParams({
-                location: locOverride || location || "New York",
+                location: locOverride || location,
                 adults: adults.toString(),
                 num: "100"
             });
@@ -70,8 +78,6 @@ export default function Search() {
             if (!json.success) {
                 throw new Error(json.message || "Failed to fetch hotels");
             }
-            // Handle results (e.g., dispatch to Redux or set state)
-            // Example: dispatch(searching(json.data));
         } catch (err) {
             console.error("doSearch error:", err);
         }
@@ -84,10 +90,9 @@ export default function Search() {
         if (cachedLocation) {
             setSearchContent(cachedLocation); // Pre-fill input with cached value
             setLocation(cachedLocation);
-            setIsLoadingLocation(false);
-            return; // Skip geolocation if cached
-        }
 
+        }
+        // *****************************************************************************************************************
         navigator.geolocation.getCurrentPosition(
             async (position) => {
                 const { latitude, longitude } = position.coords;
@@ -98,7 +103,7 @@ export default function Search() {
                     setSearchContent(cityName); // Auto-fill the search input
                     console.log(`Location resolved to: ${cityName}`);
                     localStorage.setItem("search", cityName);
-                    // Optional: Trigger hotel search
+
                     await doSearch(cityName);
                 } else {
                     const coordLocation = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
@@ -109,11 +114,8 @@ export default function Search() {
                 setIsLoadingLocation(false);
             },
             (err) => {
-                console.error("Geolocation error:", err);
-                // Fallback: Set to "New York" and update UI
                 setLocation("New York");
                 setSearchContent("New York");
-                localStorage.setItem("search", "New York");
                 doSearch("New York");
                 setIsLoadingLocation(false);
             },
@@ -124,13 +126,22 @@ export default function Search() {
             }
         );
     }, [reverseGeocode, doSearch]); // Dependencies: Add if needed
+    // **************************************************************************************
 
+    console.log(location, "locationnn.....");
+    console.log();
+
+
+
+
+
+    // ********************************************************************************************************************
     const router = useRouter();
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
 
     useEffect(() => {
-        setSearchContent(query); // Sync with URL query if present
+        setSearchContent(query);
     }, [query]);
 
     const handleSearch = () => {
@@ -139,80 +150,92 @@ export default function Search() {
     };
 
     return (
-        <section className="Search_section pb-20">
-            <div className="container">
-                <div className="search_container">
-                    <div className="search_container_box bg-white rounded-2xl pb-4 w-full">
-                        <div className="search_tab ps-5 pe-5 pt-4 pb-4">
-                            <div className="tab_link flex justify-between">
-                                <ul className="flex items-center gap-3 p-0">
-                                    <li>
-                                        <Link href={""} className="button_bg text-white">
-                                            search all
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href={""}>
-                                            <FaHotel /> hotels
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href={""}>
-                                            <MdFlight /> flights
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href={""}>
-                                            <FaCar /> Things to do
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href={""}>
-                                            <GrBike /> Restaurant
-                                        </Link>
-                                    </li>
-                                </ul>
-                                <div className="help_info">
-                                    <p className="flex items-center gap-2">
-                                        <FaUser /> need some help ?
-                                    </p>
+        <>
+            <section className="Search_section pb-20">
+                <div className="container">
+                    <div className="search_container">
+                        <div className="search_container_box bg-white rounded-2xl pb-4 w-full">
+                            <div className="search_tab ps-5 pe-5 pt-4 pb-4">
+                                <div className="tab_link flex justify-between">
+                                    <ul className="flex items-center gap-3 p-0">
+                                        <li>
+                                            <Link href={""} className="button_bg text-white">
+                                                search all
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link href={""}>
+                                                <FaHotel /> hotels
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link href={""}>
+                                                <MdFlight /> flights
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link href={""}>
+                                                <FaCar /> Things to do
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link href={""}>
+                                                <GrBike /> Restaurant
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                    <div className="help_info">
+                                        <p className="flex items-center gap-2">
+                                            <FaUser /> need some help ?
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="search_box_input">
-                            <form
-                                className="px-15 mx-auto"
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    handleSearch();
-                                }}
-                            >
-                                <div className="relative search_box">
-                                    <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none icon_search">
-                                        <CiSearch />
+                            <div className="search_box_input">
+                                <form
+                                    className="px-15 mx-auto"
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                        handleSearch();
+                                    }}
+                                >
+                                    <div className="relative search_box">
+                                        <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none icon_search">
+                                            <CiSearch />
+                                        </div>
+                                        <input
+                                            type="text"
+                                            // value={searchContent}
+                                            onChange={(e) => setSearchContent(e.target.value)}
+                                            disabled={isLoadingLocation} // Disable input while loading
+                                            className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
+                                            placeholder="Places to go, things to do, hotels..."
+                                        />
+                                        <button
+                                            type="submit"
+
+                                            className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs px-3 focus:outline-none button_bg2"
+                                        >
+                                            Search
+                                        </button>
                                     </div>
-                                    <input
-                                        type="text"
-                                        // value={searchContent}
-                                        onChange={(e) => setSearchContent(e.target.value)}
-                                        disabled={isLoadingLocation} // Disable input while loading
-                                        className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
-                                        placeholder={isLoadingLocation ? "Detecting location..." : "Places to go, things to do, hotels..."}
-                                    />
-                                    <button
-                                        type="submit"
-                                        disabled={isLoadingLocation}
-                                        className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs px-3 focus:outline-none button_bg2"
-                                    >
-                                        {isLoadingLocation ? "Loading..." : "Search"}
-                                    </button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <DestinationSection />
+            <RecomendSection location={location} />
+            <GetOfferSection />
+            <ExperienceExploreSection />
+            <Footer />
+
+
+        </>
+
+
     );
 }

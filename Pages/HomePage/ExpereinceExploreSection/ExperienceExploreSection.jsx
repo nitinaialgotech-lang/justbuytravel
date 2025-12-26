@@ -1,4 +1,6 @@
 "use client"
+import { HotelDetail } from '@/app/Route/endpoints';
+import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { FaRegHeart } from 'react-icons/fa'
 import { IoStar } from "react-icons/io5"; import { IoStarHalf } from "react-icons/io5"; import { IoStarOutline } from "react-icons/io5";
@@ -61,6 +63,17 @@ export default function ExperienceExploreSection() {
         },
 
     ]
+    const search = localStorage.getItem("search")
+
+    const { data } = useQuery({
+        queryKey: ["hotels", search],
+        queryFn: () => HotelDetail(search)
+    })
+
+    console.log(data?.data?.data, "deatils");
+
+
+
 
     return (
         <>
