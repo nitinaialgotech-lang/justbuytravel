@@ -327,7 +327,7 @@ export default function SearchContentBox() {
                     </div>
                 </div>
             </div>{" "}
-            {/* <div id="hide-ax">
+            <div id="hide-ax">
                 <div
                     className="pagination-area hotel wow animate fadeInUp mt-60"
                     data-wow-delay="200ms"
@@ -388,7 +388,7 @@ export default function SearchContentBox() {
                         </a>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </>
     );
 }

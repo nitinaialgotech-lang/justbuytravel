@@ -12,14 +12,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-export default function RecomendSection({ location }) {
+export default function RecomendSection() {
+    // const search = useSelector((state) => state?.user?.search);
+    // const active = useSelector((state) => state?.user?.active);
+
+    const search = localStorage.getItem("search")
+
     const { data } = useQuery({
-        queryKey: ["hotels ", location],
-        queryFn: async () => await SearchLocation(location)
+        queryKey: ["hotels ", search],
+        queryFn: async () => await SearchLocation(search)
     })
-
-
-    console.log(location, "recomenr");
+    console.log(data, ".........pkpk");
 
     return (
         <>
@@ -50,6 +53,17 @@ export default function RecomendSection({ location }) {
                         autoplay={{
                             delay: 3000, // 3 seconds
                             disableOnInteraction: false, // continue autoplay after user interaction
+                        }}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 1, // mobile
+                            },
+                            768: {
+                                slidesPerView: 2, // tablet
+                            },
+                            1024: {
+                                slidesPerView: 3, // desktop (optional)
+                            },
                         }}
                         loop={true}
                         id='swiper_sldie'
@@ -117,12 +131,8 @@ export default function RecomendSection({ location }) {
                                             {/* *********** */}
                                         </div>
                                         {/* *********** */}
-                                    </div></SwiperSlide>
-
-
-
-
-
+                                    </div>
+                                    </SwiperSlide>
                                 )
                             })
 

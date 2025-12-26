@@ -1,0 +1,55 @@
+@media only screen and (max-width: 768px) {
+  /* ***************** */
+  .search_container > .search_container_box > .search_tab {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .search_container
+    > .search_container_box
+    > .search_tab
+    > .tab_link
+    > .help_info {
+    display: none;
+  }
+  .search_box_input > form {
+    padding: 0px !important;
+  }
+  /* Header >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+  .section_home_banner {
+    height: 200px;
+  }
+  .banner_box > .title > h2 {
+    font-size: 42px;
+
+    line-height: 0px;
+  }
+  .banner_box > .title > h5 {
+    font-size: 18px;
+
+    margin-top: 32px;
+  }
+  .destination_box > .destination_img {
+    position: relative;
+    margin-top: 15px;
+  }
+  /* ********* swiper  */
+  .swiper-slide .slide-text > .text > h2 {
+    margin-bottom: 0px !important;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 35px;
+  }
+  .swiper-slide .slide-text > .text_point {
+    font-size: 10px;
+  }
+  .swiper-slide .slide-text > .text_button > button > span {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .swiper-slide .slide-text > .text_button > button {
+    padding: 10px 30px;
+  }
+  .swiper-slide .slide-text > .text_button {
+    margin-top: 0px !important;
+  }
+}

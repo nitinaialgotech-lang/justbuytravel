@@ -22,11 +22,10 @@ export default function Search() {
     const [location, setLocation] = useState(""); // For storing resolved location
     const [isLoadingLocation, setIsLoadingLocation] = useState(true); // Loading state for geolocation
     const [searchContent, setSearchContent] = useState(""); // For the search input
-
     const adults = 1; // Example: Replace with actual value
     const checkin = null; // Example: Replace with actual value
     const checkout = null; // Example: Replace with actual value
-    const API_BASE = "https://your-api-base.com"; // Example: Replace with actual API base
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE; // Example: Replace with actual API base
 
     const reverseGeocode = useCallback(async (lat, lng) => {
         try {
@@ -129,11 +128,6 @@ export default function Search() {
     // **************************************************************************************
 
     console.log(location, "locationnn.....");
-    console.log();
-
-
-
-
 
     // ********************************************************************************************************************
     const router = useRouter();
@@ -227,11 +221,7 @@ export default function Search() {
                 </div>
             </section>
 
-            <DestinationSection />
-            <RecomendSection location={location} />
-            <GetOfferSection />
-            <ExperienceExploreSection />
-            <Footer />
+
 
 
         </>

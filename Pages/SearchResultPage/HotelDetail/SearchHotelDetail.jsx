@@ -11,6 +11,7 @@ import NearByHotel from './NearByHotel';
 import HotelLocation from './HotelLocation';
 import SearchSidebar from '../SearchSidebar'
 import Footer from '@/component/Footer'
+import HotelFacilities from './HotelFacilities'
 export default function SearchHotelDetail() {
 
     const searchid = useSearchParams();
@@ -38,6 +39,11 @@ export default function SearchHotelDetail() {
     const near_by_places = hotel?.nearby_places;
     const prices = hotel?.prices;
     const name = hotel?.name
+
+
+
+
+    console.log(data, "datat..........<><>><>");
 
     return (
         <>
@@ -147,14 +153,20 @@ export default function SearchHotelDetail() {
 
 
                 <div className="row matrix_fix">
-                    <div className="col-lg-8">
+                    <div className="col-lg-8 pt-4">
+
+                        <div className="content_box_detail my-5   rounded-2xl border border-gray-300">
 
 
-                        <AboutHotelDetail detail={description} name={name} />
+                            <AboutHotelDetail detail={description} name={name} />
 
-                        <NearByHotel places={near_by_places} />
 
-                        <HotelLocation lat={lat} long={long} />
+                            <HotelFacilities />
+
+                            <NearByHotel places={near_by_places} />
+
+                            <HotelLocation lat={lat} long={long} />
+                        </div>
                     </div>
                     {/* ***************************** */}
                     <div className="col-lg-4">

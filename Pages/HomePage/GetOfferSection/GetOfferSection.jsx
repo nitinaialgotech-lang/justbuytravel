@@ -26,6 +26,7 @@ export default function GetOfferSection() {
                                         delay: 4000,
                                         disableOnInteraction: false,
                                     }}
+
                                     modules={[EffectFade, Autoplay]}
                                     className=""
                                 >

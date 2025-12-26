@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 import { SearchLocation } from '@/app/Route/endpoints'
 import Footer from '@/component/Footer';
+import Link from 'next/link';
 export default function SearchResult() {
 
     const searchQuery = useSearchParams();
@@ -54,6 +55,14 @@ export default function SearchResult() {
 
             {/* ***************************************************** seasrch container  */}
             <div className="container">
+                <div className="crums z-1 relative">
+                    <nav aria-label="breadcrumb ">
+                        <ol className="breadcrumb mb-0 pt-3 pb-3 ps-2">
+                            <li className="breadcrumb-item"><Link href="/">Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
+                </div>
                 <div className="row">
 
                     <div className="col-lg-12">

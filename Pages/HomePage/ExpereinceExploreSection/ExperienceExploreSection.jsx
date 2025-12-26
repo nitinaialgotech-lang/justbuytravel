@@ -73,7 +73,7 @@ export default function ExperienceExploreSection() {
     console.log(data?.data?.data, "deatils");
 
 
-
+    const name = localStorage.getItem("search")
 
     return (
         <>
@@ -81,7 +81,7 @@ export default function ExperienceExploreSection() {
                 <div className="container">
                     <div className="explore_section section_title mb-10">
                         <h2 className='mb-0'>
-                            Explore experiences near Chandigarh
+                            Explore experiences near {name}
                         </h2>
                         <h5 >
                             Top-rated experiences and hidden gems near you
@@ -101,7 +101,7 @@ export default function ExperienceExploreSection() {
                                 return (
 
 
-                                    <div className="col-lg-3" key={i}>
+                                    <div className="col-12 col-md-6 col-lg-3" key={i}>
                                         <div className="experience_explore_section ">
                                             <div className="card  relative border-0 ">
                                                 <img src={item?.img} className="card-img-top rounded-4 " alt="..." />
@@ -158,7 +158,7 @@ export default function ExperienceExploreSection() {
                 <div className="container">
                     <div className="explore_section section_title mb-10">
                         <h2 className='mb-0'>
-                            Explore experiences near Chandigarh
+                            Explore experiences near {name}
                         </h2>
                         <h5 >
                             Top-rated experiences and hidden gems near you
@@ -178,7 +178,7 @@ export default function ExperienceExploreSection() {
                                 return (
 
 
-                                    <div className="col-lg-3" key={i}>
+                                    <div className="col-md-6 col-lg-3" key={i}>
                                         <div className="experience_explore_section ">
                                             <div className="card  relative border-0 ">
                                                 <img src={item?.img} className="card-img-top rounded-4 " alt="..." />

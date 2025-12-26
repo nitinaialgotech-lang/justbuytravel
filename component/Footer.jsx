@@ -11,7 +11,7 @@ export default function Footer() {
         <>
             <section className='footer_section '>
                 <footer className='footer'>
-                    <div className="container pt-20 pb-20">
+                    <div className="container pt-20 ">
                         <div className="row items-center">
                             <div className="col-lg-4">
                                 <div className="footer_detail">
@@ -146,14 +146,14 @@ export default function Footer() {
                         </div>
                         {/* ******************************************************************** botton ooter */}
                         <div className="bottom_footer">
-                            <div className="reserved_section">
+                            <div className="reserved_section flex justify-between items-center py-10">
                                 <div className="content">
-                                    <p>
+                                    <p className='m-0'>
                                         © 2025 Justbuytravel.com. All rights reserved.
                                     </p>
                                 </div>
-                                <div className="follow_icon">
-                                    <h5>
+                                <div className="follow_icon flex justify-center items-center gap-3">
+                                    <h5 className='m-0 capitalize'>
                                         follow us
                                     </h5>
                                     <span>

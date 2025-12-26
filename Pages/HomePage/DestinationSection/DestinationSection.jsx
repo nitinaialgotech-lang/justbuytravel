@@ -18,7 +18,7 @@ export default function
                     {/* ******************** */}
                     <div className="row">
                         {/* ****************** col-lg-4 */}
-                        <div className="col-lg-3">
+                        <div className="col-12 col-lg-3 col-md-6">
                             <div className="destination_box">
                                 <div className="destination_img  ">
                                     <img src="/home/destination/food.webp" className='rounded-3xl' alt="" />
@@ -34,7 +34,7 @@ export default function
                         </div>
                         {/* ******************** */}
                         {/* ****************** col-lg-4 */}
-                        <div className="col-lg-3">
+                        <div className="col-12 col-lg-3 col-md-6">
                             <div className="destination_box">
                                 <div className="destination_img  ">
                                     <img src="/home/destination/outdoor.webp" className='rounded-3xl' alt="" />
@@ -49,7 +49,7 @@ export default function
                         </div>
                         {/* ******************** */}
                         {/* ****************** col-lg-4 */}
-                        <div className="col-lg-3">
+                        <div className="col-12 col-lg-3 col-md-6">
                             <div className="destination_box">
                                 <div className="destination_img  ">
                                     <img src="/home/destination/culture.webp" className='rounded-3xl' alt="" />
@@ -63,7 +63,7 @@ export default function
                         </div>
                         {/* ******************** */}
                         {/* ****************** col-lg-4 */}
-                        <div className="col-lg-3">
+                        <div className="col-12 col-lg-3 col-md-6">
                             <div className="destination_box">
                                 <div className="destination_img  ">
                                     <img src="/home/destination/water.jpg" className='rounded-3xl' alt="" />

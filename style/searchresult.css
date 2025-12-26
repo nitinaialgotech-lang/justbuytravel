@@ -926,3 +926,11 @@
   align-items: stretch;
   display: flex;
 }
+
+.breadcrumb > .active {
+  color: var(--bg-color);
+}
+.breadcrumb > .breadcrumb-item > a {
+  color: var(--cl-bl);
+  text-decoration: none;
+}
