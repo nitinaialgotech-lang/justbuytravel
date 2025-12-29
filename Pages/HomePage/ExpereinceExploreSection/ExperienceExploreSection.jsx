@@ -88,7 +88,7 @@ export default function ExperienceExploreSection() {
                         </h5>
                     </div>
 
-                    <div className="row">
+                    <div className="row d-none d-lg-block">
                         {/* ********************************** */}
                         {
                             card?.map((item, i) => {
@@ -150,6 +150,8 @@ export default function ExperienceExploreSection() {
                         {/* ********************************** */}
                         {/* ********************************** */}
                     </div>
+
+                    {/* ************************************************** m */}
                 </div>
             </section>
 

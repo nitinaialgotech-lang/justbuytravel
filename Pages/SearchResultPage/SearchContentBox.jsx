@@ -323,72 +323,11 @@ export default function SearchContentBox() {
 
                     {/* ***************************************************************************** pagination >>>>>>>>>>>>>>>>>>> */}
                     <div className="pagination_wrapper text-center flex justify-center mb-10">
-                        <button className="btn bg-danger text-light" onClick={handleLoadMore}> {isFetching ? "Loading..." : "Load More"} </button>
+                        <button className=" px-3 py-2 rounded bg-color-green  text-black font-semibold" onClick={handleLoadMore}> {isFetching ? "Loading..." : "Load More"} </button>
                     </div>
                 </div>
             </div>{" "}
-            <div id="hide-ax">
-                <div
-                    className="pagination-area hotel wow animate fadeInUp mt-60"
-                    data-wow-delay="200ms"
-                    data-wow-duration="1500ms"
-                >
-                    <div className="paginations-button">
-                        <a href="https://gofly-wp.egenstheme.com/hotel/">
-                            <svg
-                                width="10"
-                                height="10"
-                                viewBox="0 0 10 10"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <g>
-                                    <path
-                                        d="M7.86133 9.28516C7.14704 7.49944 3.57561 5.71373 1.43276 4.99944C3.57561 4.28516 6.7899 3.21373 7.86133 0.713728"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                    ></path>
-                                </g>
-                            </svg>
-                            Prev{" "}
-                        </a>
-                    </div>
-                    <ul className="paginations">
-                        <li className="page-item">
-                            <a aria-label="Page 1" aria-current="page" className=" current">
-                                01
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a
-                                aria-label="Page 2"
-                                className=""
-                                href="https://gofly-wp.egenstheme.com/hotel/page/2/"
-                            >
-                                02
-                            </a>
-                        </li>
-                    </ul>
-                    <div className="paginations-button">
-                        <a href="https://gofly-wp.egenstheme.com/hotel/page/2/">
-                            Next{" "}
-                            <svg
-                                width="10"
-                                height="10"
-                                viewBox="0 0 10 10"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <g>
-                                    <path
-                                        d="M1.42969 9.28613C2.14397 7.50042 5.7154 5.7147 7.85826 5.00042C5.7154 4.28613 2.50112 3.21471 1.42969 0.714705"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                    ></path>
-                                </g>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+
         </>
     );
 }

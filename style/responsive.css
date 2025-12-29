@@ -1,3 +1,15 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --grey-cl: #dfe1df !important;
+  --font-fam: "Outfit", sans-serif !important;
+  --bg-color: #12c081 !important;
+  --color: #1d1f27 !important;
+  --light-green: #5cffec;
+  --cl-brown: rgba(115, 115, 115, 1);
+  --cl-bl: rgba(29, 31, 39, 1);
+}
+
 @media only screen and (max-width: 768px) {
   /* ***************** */
   .search_container > .search_container_box > .search_tab {
@@ -35,7 +47,7 @@
   /* ********* swiper  */
   .swiper-slide .slide-text > .text > h2 {
     margin-bottom: 0px !important;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 500;
     line-height: 35px;
   }
@@ -52,4 +64,177 @@
   .swiper-slide .slide-text > .text_button {
     margin-top: 0px !important;
   }
+}
+/* ************************************************************************************************************************ */
+@media only screen and (max-width: 425px) {
+  body > div,
+  body > footer {
+    overflow-x: hidden;
+  }
+  .md-pb {
+    padding-bottom: 30px !important;
+  }
+
+  .header_section {
+    padding: 0px 20px;
+  }
+  .navbar_link_item > .navbar-nav-scroll {
+    gap: 0 !important;
+  }
+  .mp-s,
+  .mp-e {
+    padding: 0 !important;
+  }
+  .banner_box > .title > h2 {
+    font-size: 30px;
+    line-height: 0;
+  }
+  .banner_box > .title > h5 {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  .section_home_banner {
+    height: 150px;
+  }
+  .search_container > .search_container_box > .search_tab {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: auto;
+    -ms-overflow-style: none;
+  }
+  /* ********************* */
+  .recomend_section > .section_title > .title_icon {
+    top: -20%;
+    right: -20%;
+  }
+  /* ****************** */
+  .search_container
+    > .search_container_box
+    > .search_tab
+    > .tab_link
+    > ul
+    > li:nth-child(1)
+    > a {
+    width: 110px;
+  }
+  .search_container
+    > .search_container_box
+    > .search_tab
+    > .tab_link
+    > ul
+    > li:nth-child(4)
+    > a {
+    width: 125px;
+  }
+  .mobile_search_box {
+    padding: 20px;
+    box-shadow: 0px 0px 3px 0px #c5c5c5;
+    border-radius: 13px;
+  }
+  .mobile_search_box form > input {
+    border-radius: 60px;
+    padding: 13px 43px;
+  }
+  .section_title > h2 {
+    font-size: 32px;
+    line-height: 35px;
+  }
+  .section_title > h5 {
+    margin-top: 5px;
+    font-size: 15px;
+  }
+  .experience_explore_section > .card > .card-body > .card_detail > h5 {
+    font-size: 18px;
+    padding-left: 10px;
+  }
+  .experience_explore_section > .card > .card-body > .card_detail > p {
+    font-size: 15px;
+    font-weight: 300;
+    padding-left: 10px;
+  }
+  /* /********************************* mobile searcfh ing  */
+  /* *************************** destination  */
+  .swiper-backface-hidden .swiper-slide {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    padding: 0px 10px;
+  }
+  .destination_title {
+    margin-bottom: 10px;
+  }
+  .destination_box > .destination_img > img {
+    height: 250px;
+  }
+  /* *************** vanner ofer */
+
+  /* SAME padding for ALL slides */
+  .swiper-slide .slide-text {
+    padding: 0px 30px !important;
+    gap: 10px !important;
+  }
+
+  /* Optional: animation only */
+  .swiper-slide {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .swiper-slide-active {
+    opacity: 1;
+  }
+
+  .swiper-slide-prev,
+  .swiper-slide-next {
+    opacity: 0.95;
+  }
+
+  .offer_swiper {
+    padding: 30px 0px 20px 0px;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .swiper_inner_img {
+    -webkit-mask-image: none;
+    padding: 12px 25px;
+  }
+
+  .swiper_inner_img img {
+    border-radius: 20px;
+  }
+}
+/* ****************** mobile swiper button  */
+.button_swiper {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+#custom_prev > svg,
+#custom_next > svg {
+  fill: var(--background);
+  stroke-opacity: 1;
+}
+#custom_prev,
+#custom_next {
+  background-color: var(--bg-color);
+  font-size: 30px;
+  border-radius: 50%;
+}
+#custom_prev {
+  top: 50%;
+  left: -6% !important;
+  transform: translateY(-50%);
+}
+
+#custom_next {
+  right: -7%;
+  transform: translateY(-50%);
 }

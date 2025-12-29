@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const https_hotels = axios.create({
-    baseURL: "https://justbuygear.com/justbuytravel_next/data/hotels"
+    baseURL: "https://justbuygear.com/justbuytravel_next/"
 })

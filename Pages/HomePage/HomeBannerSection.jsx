@@ -5,7 +5,7 @@ export default function
     () {
     return (
         <div>
-            <section className='ps-15 pe-15'>
+            <section className='ps-15 pe-15 mp-s mp-e'>
                 <div className="section_home_banner rounded-3xl flex items-center">
                     {/* *************************** box title */}
                     <div className="container">

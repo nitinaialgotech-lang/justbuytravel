@@ -145,7 +145,7 @@ export default function Search() {
 
     return (
         <>
-            <section className="Search_section pb-20">
+            <section className="Search_section pb-[70px] md:pb-[20px]  sm:pb-[20px] xs:pb-[20px] md-pb">
                 <div className="container">
                     <div className="search_container">
                         <div className="search_container_box bg-white rounded-2xl pb-4 w-full">
@@ -186,7 +186,7 @@ export default function Search() {
                                 </div>
                             </div>
 
-                            <div className="search_box_input">
+                            <div className="search_box_input d-none d-lg-block">
                                 <form
                                     className="px-15 mx-auto"
                                     onSubmit={(e) => {
@@ -215,14 +215,37 @@ export default function Search() {
                                     </div>
                                 </form>
                             </div>
+
+
+
+                            {/* ********************************** on mobile vooiw show form  */}
+                            <div className="mobile_search_box  d-block d-lg-none">
+                                <div className="mobole_boxs relative">
+                                    <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none icon_search">
+                                        <CiSearch />
+                                    </div>
+                                    <form action="">
+                                        <input
+                                            type="text"
+                                            // value={searchContent}
+                                            onChange={(e) => setSearchContent(e.target.value)}
+                                            className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
+                                            placeholder="Places to go, things to do, hotels..."
+                                        />
+                                    </form>
+                                </div>
+
+                                <button type="submit"
+
+                                    className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs px-3 focus:outline-none button_bg2 w-full w-100">Search</button>
+
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </section>
-
-
-
-
         </>
 
 
