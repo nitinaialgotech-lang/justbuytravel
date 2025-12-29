@@ -13,6 +13,5 @@ export function ReduxProvider({ children }) {
                 {children}
             </QueryClientProvider>
         </PersistGate>
-
     </Provider >
 }

@@ -11,7 +11,7 @@ export default function Footer() {
         <>
             <section className='footer_section '>
                 <footer className='footer'>
-                    <div className="container pt-20 ">
+                    <div className="container pt-20  ">
                         <div className="row items-center">
                             <div className="col-lg-4">
                                 <div className="footer_detail">
@@ -88,7 +88,7 @@ export default function Footer() {
                             </div>
                         </div>
                         {/* ************************************* footer contact info */}
-                        <div className="footer_contact_info pt-10">
+                        <div className="footer_contact_info pt-10 ">
                             <div className="row items-center border rounded-3xl p-3">
                                 <div className="col-lg-4">
                                     <div className="footer_contact_detail ps-5 pe-5">

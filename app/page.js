@@ -14,14 +14,10 @@ import "../style/responsive.css"
 export default function Home() {
   return (
     <>
-
-
-
       <Header />
       {/* <SearchSection /> */}
       <HomeBannerSection />
       <div className="container">
-
         <DestinationSection />
         <RecomendSection />
         <GetOfferSection />
@@ -29,9 +25,6 @@ export default function Home() {
         <Blogs />
       </div>
       <Footer />
-
-
     </>
-
   )
 }

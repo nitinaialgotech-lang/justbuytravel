@@ -13,8 +13,30 @@ import { FaCar } from "react-icons/fa6";
 import { GrBike } from "react-icons/gr";
 import { IoIosDocument } from "react-icons/io";
 import { HiOutlineSearch } from "react-icons/hi";
+import { CgMenuRightAlt } from "react-icons/cg";
+import { FiPlus } from "react-icons/fi";
+import Offcanvas from "react-bootstrap/Offcanvas";
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [show, setShow] = useState(false);
+    const [navOpen, setNavOpen] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [servicesOpen, setServicesOpen] = useState(false);
+
+    let closeTimeout;
+
+    function openMenu() {
+        clearTimeout(closeTimeout);
+        setServicesOpen(true);
+    }
+
+    function closeMenu() {
+        closeTimeout = setTimeout(() => {
+            setServicesOpen(false);
+        }, 150); // 150ms delay
+    }
     return (
         <>
 
@@ -31,9 +53,12 @@ export default function Header() {
                                 </div>
                             </Navbar.Brand>
                             {/* *********************** */}
-                            <Navbar.Toggle aria-controls="navbarScroll" />
+                            <button onClick={handleShow} className='d-block d-lg-none' >
+                                <CgMenuRightAlt size={30} />
+                            </button>
+
                             {/* ************************ */}
-                            <Navbar.Collapse id="navbarScroll" className='justify-end navbar_link_item'>
+                            <Navbar.Collapse className='justify-end navbar_link_item'>
                                 {/* ******** */}
                                 <Nav
                                     className="gap-5"
@@ -45,16 +70,7 @@ export default function Header() {
                                     <Nav.Link href="#action2"><span><FaCar /></span><span>cars</span></Nav.Link>
                                     <Nav.Link href="#action2"><span><GrBike /></span><span>bikes</span></Nav.Link>
                                     <Nav.Link href="#action2"><span><IoIosDocument /></span><span>blogs</span></Nav.Link>
-                                    <NavDropdown title="More" id="navbarScrollingDropdown">
-                                        <NavDropdown.Item href="#action3">More</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">
-                                            Another action
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#action5">
-                                            Something else here
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
+
 
                                     <div className="search_sign_button flex gap-2 items-center">
 
@@ -70,8 +86,69 @@ export default function Header() {
                             </Navbar.Collapse>
                         </Container>
                     </Navbar>
+
+                    {/* ********************  offcanvas */}
+                    <Offcanvas
+                        show={show}
+                        onHide={handleClose}
+                        placement="end"
+                        className="fullscreen-offcanvas" >
+                        <Offcanvas.Header
+                            closeButton
+                            className="text-light text-amber-400"
+                        >
+                            <Offcanvas.Title>
+                                <div className="logo">
+                                    <img src="/logo/logo.png.webp" width={100} height={"auto"} alt="" />
+                                </div>
+                            </Offcanvas.Title>
+                        </Offcanvas.Header>
+                        {/* ******************* */}
+                        <Offcanvas.Body className="p-0">
+                            <div className="mega-menu">
+                                <div className="container p-0">
+                                    <div className="row flex justify-center items-center">
+                                        <div className="col-md-12">
+                                            <div className="mega_menu_item">
+                                                <div className="mega_menu_link">
+                                                    <ul>
+                                                        <li>
+                                                            <Link href={"#"} className='flex justify-between items-center'>
+                                                                <span>Home</span> <span><FiPlus /></span>
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link href={"#"} className='flex justify-between items-center'>
+                                                                <span>Home</span> <span><FiPlus /></span>
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link href={"#"} className='flex justify-between items-center'>
+                                                                <span>Home</span> <span><FiPlus /></span>
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link href={"#"} className='flex justify-between items-center'>
+                                                                <span>Home</span> <span><FiPlus /></span>
+                                                            </Link>
+                                                        </li>
+                                                        <div className="button_nav  text-center px-2 py-2 rounded">
+                                                            <Link href={"#"} className=''>
+                                                                Subscriber</Link>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </Offcanvas.Body>
+                        {/* ******************** */}
+                    </Offcanvas>
                 </div>
-            </section>
+            </section >
 
         </>
 

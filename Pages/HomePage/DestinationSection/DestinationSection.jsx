@@ -28,8 +28,7 @@ const card = [
     }
 ]
 
-export default function
-    () {
+export default function DestinationSection() {
     return (
         <>
             <section className='destination_section  pb-20 container md-pb '>
@@ -47,11 +46,12 @@ export default function
                     <div className=' d-none d-lg-block'>
                         <div className="row ">
                             {
-                                card?.map((item) => {
+                                card?.map((item, k) => {
                                     return (
                                         <>
-                                            {/* ****************** col-lg-4 */}
-                                            <div className="col-12 col-lg-3 col-md-6">
+
+                                            {/* ****************** col-lg-4qqq */}
+                                            <div className="col-12 col-lg-3 " key={k}>
                                                 <div className="destination_box">
                                                     <div className="destination_img  ">
                                                         <img src={item?.img} className='rounded-3xl' alt="" />
@@ -65,15 +65,17 @@ export default function
                                             </div>
                                             {/* ******************** */}
 
-
                                         </>
                                     )
+
+
+
+
+
                                 })
                             }
 
-                            {/* ****************** col-lg-4 */}
 
-                            {/* ******************** */}
                         </div>
                     </div>
                     {/* ************************************************ on croll the page scroller  */}
@@ -116,15 +118,16 @@ export default function
                                         spaceBetween: 24,
                                     },
                                 }}
-                                modules={[Pagination, Navigation, Autoplay]}
+                                modules={[Pagination, Autoplay, Navigation]}
                                 className="mySwiper relative"
                             >
                                 {
-                                    card?.map((item) => {
-                                        return (
-                                            <>
+                                    card?.map((item, i) => {
 
-                                                <SwiperSlide>
+                                        return (
+
+                                            <>
+                                                <SwiperSlide key={i}>
                                                     <div className="destination_box pb-10">
                                                         <div className="destination_img  ">
                                                             <img src={item?.img} className='rounded-3xl' alt="" />
@@ -140,21 +143,21 @@ export default function
 
                                                 </SwiperSlide>
                                                 {/* ********************** */}
-
                                             </>
                                         )
+
                                     })
                                 }
                             </Swiper>
                             <div className="button_swiper absolute ">
                                 <div className="buttons_icon relative">
                                     <button id='custom_prev' className='absolute'>
-                                        <MdOutlineKeyboardArrowLeft size={35} />
+                                        <MdOutlineKeyboardArrowLeft size={30} />
                                     </button>
 
 
                                     <button id='custom_next' className='absolute'>
-                                        <MdOutlineKeyboardArrowRight size={35} />
+                                        <MdOutlineKeyboardArrowRight size={30} />
                                     </button>
                                 </div>
                             </div>

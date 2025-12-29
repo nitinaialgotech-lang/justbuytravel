@@ -59,12 +59,14 @@ export default function GetOfferSection() {
                                 >
                                     {/* Slide 1****************************************************************************************** */}
                                     {
-                                        card?.map((item) => {
+                                        card?.map((item, i) => {
+
                                             return (
                                                 <>
 
 
-                                                    <SwiperSlide>
+
+                                                    <SwiperSlide key={i}>
                                                         <div
                                                             className="grid grid-cols-2 h-full  items-center swiper_item relative"
                                                             id="swiper_item"
@@ -131,6 +133,8 @@ export default function GetOfferSection() {
                                                     </SwiperSlide>
                                                 </>
                                             )
+
+
                                         })
                                     }
                                     {/* Slide 1****************************************************************************************** */}

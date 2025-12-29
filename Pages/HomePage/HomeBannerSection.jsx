@@ -2,7 +2,7 @@
 import Search from './Search';
 import SearchSection from './SearchSection';
 export default function
-    () {
+    HomeBannerSection() {
     return (
         <div>
             <section className='ps-15 pe-15 mp-s mp-e'>
