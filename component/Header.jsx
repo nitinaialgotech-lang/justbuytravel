@@ -16,6 +16,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { CgMenuRightAlt } from "react-icons/cg";
 import { FiPlus } from "react-icons/fi";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { getAssetPath } from '../app/utils/assetPath';
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [show, setShow] = useState(false);
@@ -47,9 +48,9 @@ export default function Header() {
 
                     <Navbar expand="lg" className="">
                         <Container fluid className='p-0'>
-                            <Navbar.Brand href="/">
+                            <Navbar.Brand href={getAssetPath("/")}>
                                 <div className="logo">
-                                    <img src="/logo/logo.png.webp" alt="" />
+                                    <img src={getAssetPath("/logo/logo.png.webp")} alt="Just Buy Travel - Your Trusted Travel Companion" />
                                 </div>
                             </Navbar.Brand>
                             {/* *********************** */}
@@ -99,7 +100,7 @@ export default function Header() {
                         >
                             <Offcanvas.Title>
                                 <div className="logo">
-                                    <img src="/logo/logo.png.webp" width={100} height={"auto"} alt="" />
+                                    <img src={getAssetPath("/logo/logo.png.webp")} width={100} height={"auto"} alt="Just Buy Travel - Your Trusted Travel Companion" />
                                 </div>
                             </Offcanvas.Title>
                         </Offcanvas.Header>

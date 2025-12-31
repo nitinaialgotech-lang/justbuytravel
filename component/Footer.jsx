@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { IoLogoFacebook } from "react-icons/io";
 import { AiFillInstagram } from "react-icons/ai";
 import { RiTwitterXLine } from "react-icons/ri";
+import { getAssetPath } from '../app/utils/assetPath';
 export default function Footer() {
     return (
         <>
@@ -16,7 +17,7 @@ export default function Footer() {
                             <div className="col-lg-4">
                                 <div className="footer_detail">
                                     <div className="footer_logo">
-                                        <img src="/logo/footer_img.png" alt="" />
+                                        <img src={getAssetPath("/logo/footer_img.png")} alt="Just Buy Travel Logo" />
                                     </div>
                                     <div className="footer_title">
                                         <p>
@@ -94,7 +95,7 @@ export default function Footer() {
                                     <div className="footer_contact_detail ps-5 pe-5">
                                         <div className="contact flex items-center gap-2">
                                             <div className="icon">
-                                                <img src="/footer/icon/help.svg_fill.png" alt="" />
+                                                <img src={getAssetPath("/footer/icon/help.svg_fill.png")} alt="Customer Support Help Icon" />
                                             </div>
                                             <div className="call_us">
                                                 <p className='m-0'>Need help? Call us</p>
@@ -114,7 +115,7 @@ export default function Footer() {
                                     <div className="footer_contact_detail ps-5 pe-5">
                                         <div className="join_us flex items-center gap-2">
                                             <div className="icon">
-                                                <img src="/footer/icon/join.svg.png" alt="" />
+                                                <img src={getAssetPath("/footer/icon/join.svg.png")} alt="Join Affiliate Program Icon" />
                                             </div>
                                             <div className="content">
                                                 <h5>
@@ -129,7 +130,7 @@ export default function Footer() {
                                     <div className="footer_contact_detail ps-5 pe-5">
                                         <div className="send_msg flex items-center gap-2">
                                             <div className="icon">
-                                                <img src="/footer/icon/msg.svg.png" alt="" />
+                                                <img src={getAssetPath("/footer/icon/msg.svg.png")} alt="Send Message Icon" />
                                             </div>
                                             <div className="content">
                                                 <h5>

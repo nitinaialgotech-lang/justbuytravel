@@ -400,7 +400,7 @@ button {
   font-size: 22px;
 }
 .swiper_inner_img {
-  mask-image: url("/home/offer/offer-banner-img-shape.png");
+  mask-image: url("/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png");
   mask-repeat: no-repeat;
   margin-left: auto;
   max-width: 525px;
@@ -568,11 +568,11 @@ button {
 /* ************************************************************ */
 
 .facilities-wrap {
-  padding: 30px;
+  padding: 15px 0;
   border: 1px solid var(--borders-color);
   border-radius: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  
   gap: 60px;
   row-gap: 50px;
 }
@@ -594,6 +594,8 @@ button {
   padding: 0;
   margin: 0;
   list-style: none;
+  grid-template-columns: repeat(3, 1fr);
+  display: grid;
 }
 .facilities-wrap .single-facilities .facilities-list li {
   color: var(--text-color);
