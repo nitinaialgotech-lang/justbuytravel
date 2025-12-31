@@ -27,4 +27,4 @@ export const getAssetPath = (path) => {
   // Combine basePath with the asset path
   return `${basePath}${cleanPath}`;
 };
-
+    
