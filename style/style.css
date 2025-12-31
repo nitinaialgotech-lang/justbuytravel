@@ -1,0 +1,16 @@
+/* ****************************************** header css */
+:root {
+  --grey-cl: #dfe1df;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+p,
+a,
+li {
+  font-family: "Trip Sans VF", "Trip Sans", Arial, sans-serif;
+}
