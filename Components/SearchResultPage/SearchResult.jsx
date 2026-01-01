@@ -26,7 +26,7 @@ export default function SearchResult() {
         <>
             <Header />
             {/* ************************** */}
-            <section className='ps-15 pe-15'>
+            <section className='padding_bottom pb-md-0'>
                 <div className="section_search_home_banner pt-10 pb-10 rounded-3xl flex items-center">
                     {/* *************************** box title */}
                     <div className="container">
@@ -37,11 +37,11 @@ export default function SearchResult() {
                                         <h2 className='capitalize'>
                                             {city}  <span>hotels </span>
                                         </h2>
-                                        <h5 className='capitalize'>
-                                            {/* Book with us and you could <span className='bg-theme px-2'>save up to 80%</span> */}
+                                        {/* <h5 className='capitalize'>
+                                           
                                             home / {city} hotels
 
-                                        </h5>
+                                        </h5> */}
 
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@ export default function SearchResult() {
             <div className="container">
                 <div className="crums z-1 relative">
                     <nav aria-label="breadcrumb ">
-                        <ol className="breadcrumb mb-0 pt-3 pb-3 ps-2">
+                        <ol className="breadcrumb mb-2 padding_bottom ps-2 pb-md-0">
                             <li className="breadcrumb-item"><Link href="/">Home</Link></li>
                             <li className="breadcrumb-item active capitalize" aria-current="page">{city}</li>
                         </ol>
@@ -73,6 +73,8 @@ export default function SearchResult() {
 
                 </div>
             </div>
+
+
 
 
             <Footer />

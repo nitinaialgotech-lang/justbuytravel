@@ -10,14 +10,14 @@ import { getAssetPath } from '../app/utils/assetPath';
 export default function Footer() {
     return (
         <>
-            <section className='footer_section '>
+            <section className='footer_section  mt-4'>
                 <footer className='footer'>
                     <div className="container pt-20  ">
                         <div className="row items-center">
                             <div className="col-lg-4">
                                 <div className="footer_detail">
                                     <div className="footer_logo">
-                                        <img src={getAssetPath("/logo/footer_img.png")} alt="Just Buy Travel Logo" />
+                                        <img src={getAssetPath("footer/icon/footer_logo.webp")} alt="Just Buy Travel Logo" />
                                     </div>
                                     <div className="footer_title">
                                         <p>
@@ -44,11 +44,10 @@ export default function Footer() {
                                         <h5>Comapny</h5>
                                     </div>
                                     <ul className='p-0'>
-                                        <li><Link href={""}>About us </Link></li>
-                                        <li><Link href={""}>Comunity & blogs</Link></li>
-                                        <li><Link href={""}>Job & career</Link></li>
-                                        <li><Link href={""}>Contact Us </Link></li>
-                                        <li><Link href={""}>Our Awards</Link></li>
+                                        <li><Link href={""}>About Us </Link></li>
+                                        <li><Link href={""}>Blog</Link></li>
+                                        <li><Link href={""}>Privacy Policy</Link></li>
+                                        <li><Link href={""}>Terms and Conditions </Link></li>
 
                                     </ul>
                                 </div>
@@ -59,11 +58,10 @@ export default function Footer() {
                                         <h5 className='ps-4'>Services</h5>
                                     </div>
                                     <ul className='ps-4'>
-                                        <li><Link href={""}>Tour Gide</Link></li>
-                                        <li><Link href={""}>Tour Booking</Link></li>
-                                        <li><Link href={""}>Hotel Booking</Link></li>
-                                        <li><Link href={""}>Ticket Booking</Link></li>
-                                        <li><Link href={""}>Rental Booking</Link></li>
+                                        <li><Link href={""}>Hotels</Link></li>
+                                        <li><Link href={""}>Flights</Link></li>
+                                        <li><Link href={""}>Contact Us</Link></li>
+                                        <li><Link href={""}>Disclaimer</Link></li>
 
                                     </ul>
                                 </div>

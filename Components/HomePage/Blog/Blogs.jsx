@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 // Import Swiper styles
@@ -10,7 +10,8 @@ import 'swiper/css/pagination';
 import { useQuery } from '@tanstack/react-query';
 import { Get_Blogs } from '@/app/Route/endpoints';
 export default function Blogs() {
-
+    // (((((((((((((((((())))))))))))))))))
+    const [isBlogActive, setBlogActive] = useState(true);
     // ******************************************************
     const { data, isLoading } = useQuery({
         queryKey: ["blog"],
@@ -23,11 +24,11 @@ export default function Blogs() {
         </h4>
     </div>
 
+
     return (
         <>
-
-            <section className='blog_section container mb-10 '>
-                <div className="destination_title section_title mb-10">
+            <section className='blog_section container  '>
+                <div className="section_title ">
                     <h2 className='mb-0 capitalize'>
                         From the blog
                     </h2>
@@ -35,6 +36,7 @@ export default function Blogs() {
                         Whatever you're into, we’ve got it
                     </h5>
                 </div>
+                {/* ********************** */}
                 <div className="d-none d-lg-block">
                     <div className="row">
 
@@ -46,7 +48,7 @@ export default function Blogs() {
                                         {/* **************** */}
                                         <div className="blog_box mb-10">
                                             <div className="blog_img relative ">
-                                                <img src={item?.yoast_head_json?.og_image?.map((item) => item?.url)} className='rounded-2xl' alt={item?.title?.rendered || "Travel blog post image"} />
+                                                <img src={item?.yoast_head_json?.og_image?.map((item) => item?.url)} className='card_rounded' alt={item?.title?.rendered || "Travel blog post image"} />
                                                 <div className="inner_content absolute top-6 left-4">
                                                     Top Rated
                                                 </div>
@@ -85,12 +87,13 @@ export default function Blogs() {
                                 nextEl: "#blog_next",
                             }}
                             loop={true}
-                            autoplay={{
-                                delay: 3200,
-                                disableOnInteraction: false,
-                            }}
+                            // autoplay={{
+                            //     delay: 3200,
+                            //     disableOnInteraction: false,
+                            // }}
 
-
+                            onSwiper={(swiper) => setBlogActive(swiper.isBeginning)}
+                            onSlideChange={(swiper) => setBlogActive(swiper.isBeginning)}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5
@@ -113,7 +116,7 @@ export default function Blogs() {
                                     spaceBetween: 24,
                                 },
                             }}
-                            modules={[Pagination, Autoplay]}
+                            modules={[Pagination]}
                             className="mySwiper relative"
                         >
                             {
@@ -127,7 +130,7 @@ export default function Blogs() {
                                             <SwiperSlide key={i}>
                                                 <div className="blog_box mb-10">
                                                     <div className="blog_img relative ">
-                                                        <img src={item?.yoast_head_json?.og_image?.map((item) => item?.url)} className='rounded-2xl' alt={item?.title?.rendered || "Travel blog post image"} />
+                                                        <img src={item?.yoast_head_json?.og_image?.map((item) => item?.url)} className='card_rounded' alt={item?.title?.rendered || "Travel blog post image"} />
                                                         <div className="inner_content absolute top-6 left-4">
                                                             Top Rated
                                                         </div>
@@ -153,9 +156,14 @@ export default function Blogs() {
                         </Swiper>
                         <div className="button_swiper absolute ">
                             <div className="buttons_icon relative">
-                                <button id='blog_prev' className='absolute'>
-                                    <MdOutlineKeyboardArrowLeft size={30} />
-                                </button>
+                                {
+                                    !isBlogActive && (
+
+                                        <button id='blog_prev' className='absolute'>
+                                            <MdOutlineKeyboardArrowLeft size={30} />
+                                        </button>
+                                    )
+                                }
 
 
                                 <button id='blog_next' className='absolute'>

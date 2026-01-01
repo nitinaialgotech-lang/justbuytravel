@@ -16,10 +16,9 @@ export default function
                                         <h2 className='capitalize'>
                                             Explore more <span>spend</span> less
                                         </h2>
-                                        <h5 className='capitalize'>
-                                            {/* Book with us and you could <span className='bg-theme px-2'>save up to 80%</span> */}
+                                        {/* <h5 className='capitalize'>
                                             How can we help you travel better for less?
-                                        </h5>
+                                        </h5> */}
                                     </div>
                                 </div>
                             </div>

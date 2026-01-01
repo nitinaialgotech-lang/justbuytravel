@@ -39,9 +39,14 @@ button {
 .margin_lr {
   margin: 0px 10px;
 }
-
+.card_rounded {
+  border-radius: 10px;
+}
 .bg-color-green {
   background-color: var(--bg-color);
+}
+.bg-color-black {
+  background-color: var(--foreground);
 }
 .padding_bottom {
   padding-bottom: 50px;
@@ -49,7 +54,17 @@ button {
 .g_color {
   color: var(--bg-color);
 }
+.color_bl {
+  color: var(--foreground);
+}
 /* ************************************************************************************************************ renw */
+.header_section {
+  box-shadow: 0px 0px 4px 1px #ebebeb;
+  position: sticky;
+  z-index: 111;
+  top: 0;
+  background: #ffff;
+}
 .navbar_link_item > .navbar-nav > a {
   display: flex;
   align-items: center;
@@ -59,15 +74,15 @@ button {
   font-family: var(--font-fam);
   color: var(--color);
 }
-.navbar_link_item > .navbar-nav > .search_sign_button > .sign-in-button {
+.sign-in-button {
   text-decoration: none;
   font-weight: 600;
   font-family: var(--font-fam);
-  background-color: var(--color);
   padding: 7.5px 18px;
-  color: #ffff;
-  border-radius: 25px 25px 25px 25px;
+  border-radius: 10px;
   margin-left: 2px;
+  word-wrap: nowrap;
+  text-transform: capitalize;
 }
 .navbar_link_item > .navbar-nav > .search_sign_button > .search > button > svg {
   font-size: 24px;
@@ -116,7 +131,7 @@ button {
   background-color: var(--color);
   padding: 7.5px 18px;
   color: #ffff;
-  border-radius: 25px 25px 25px 25px;
+  border-radius: 10px;
   margin-left: 2px;
 }
 .search_container
@@ -141,6 +156,7 @@ button {
   padding: 20px 45px;
   border-radius: 60px;
 }
+
 .button_bg2 {
   text-decoration: none;
   font-weight: 600;
@@ -148,21 +164,27 @@ button {
   background-color: var(--bg-color);
   padding: 7.5px 18px;
   color: var(--foreground);
-  border-radius: 25px 25px 25px 25px;
+  border-radius: 10px;
   margin-left: 2px;
-  padding: 10px 70px;
+
   display: flex;
+  word-wrap: nowrap;
   align-items: center;
   justify-content: center;
   font-size: 17px;
+}
+.search_full_button_padding {
+  padding: 10px 70px;
+  border-radius: 25px;
 }
 .search_container {
   top: 82%;
   left: 7%;
   right: 7%;
+  background-color: transparent;
 }
 .search_container > .search_container_box {
-  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.05);
+  background-color: transparent;
 }
 /* **************************** destination  */
 .section_title {
@@ -274,14 +296,14 @@ button {
   letter-spacing: 0;
   color: var(--cl-brown);
 }
-.recommend_card_box > .card_box > .card_box_detail > .price_book > button {
+/* .recommend_card_box > .card_box > .card_box_detail > .price_book > button {
   background-color: var(--bg-color);
   padding: 10px 20px;
   border-radius: 25px 25px 25px 25px;
   font-size: 15px;
   font-weight: 700;
   color: var(--cl-bl);
-}
+} */
 /* *** */
 .card_box > .card_box_img .rated_msg > .msg {
   padding: 4px 13px;
@@ -393,18 +415,18 @@ button {
   font-size: 10px;
   font-weight: 600;
 }
-.swiper-slide .slide-text > .text_button > button {
+.arrow_button {
   padding: 15px 30px;
   background-color: var(--color);
   border-radius: 10px;
 }
-.swiper-slide .slide-text > .text_button > button > span {
+.arrow_button > span {
   font-size: 16px;
   font-weight: 600;
   color: var(--background) !important;
   text-transform: capitalize;
 }
-.swiper-slide .slide-text > .text_button > button > span:nth-child(2) > svg {
+.arrow_button > span:nth-child(2) > svg {
   transform: rotate(40deg);
   font-size: 22px;
 }
@@ -454,6 +476,13 @@ button {
 /* ************************************************************** footerrrrrrrrrrr>>>>>>>>>>>>>>>>>>>>>>>  */
 .footer_section {
   background-color: rgba(29, 31, 39, 1);
+}
+.footer_section {
+  margin: 0px 0px 20px 0px;
+}
+.footer_logo > img {
+  width: 100%;
+  max-width: 60%;
 }
 .footer_detail > .footer_title > p {
   font-family: var(--font-fam);
@@ -695,6 +724,9 @@ button {
   min-height: 150px;
   height: 100%;
   object-fit: cover;
+}
+.content_box_detail {
+  padding: 20px 20px;
 }
 /* **********************************************    Blog Details Section */
 .blog_pb {

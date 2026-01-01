@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -31,10 +31,16 @@ const card = [
     }
 ]
 
+
+
+
+
+
 export default function DestinationSection() {
+    const [isDestinationActive, setDestinationActive] = useState(true);
     return (
         <>
-            <section className='destination_section  pb-20 container md-pb '>
+            <section className='destination_section container padding_bottom '>
                 <div className="destination_title section_title mb-10">
                     <h2 className='mb-0'>
                         Trending Destinations
@@ -54,7 +60,7 @@ export default function DestinationSection() {
                                         <div className="col-12 col-lg-3 " key={k}>
                                             <div className="destination_box">
                                                 <div className="destination_img  ">
-                                                    <img src={getAssetPath(item?.img)} className='rounded-3xl' alt={`${item?.name || 'Destination'} travel destination image`} />
+                                                    <img src={getAssetPath(item?.img)} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
                                                     <div className="destination_name">
                                                         <h5>
                                                             {item?.name}
@@ -64,34 +70,30 @@ export default function DestinationSection() {
                                             </div>
                                         </div>
                                     )
-
-
-
-
-
                                 })
                             }
 
 
                         </div>
                     </div>
-                    {/* ************************************************ on croll the page scroller  */}
+                    {/* ************************************************ onscroll the page scroller    */}
                     <div className='d-block d-lg-none'>
                         <div className="row relative">
                             <Swiper
                                 slidesPerView={3}
                                 spaceBetween={15}
-                                pagination={{ clickable: true }}
+
                                 navigation={{
                                     prevEl: "#destination_prev",
                                     nextEl: "#destination_next",
                                 }}
                                 loop={true}
-                                autoplay={{
-                                    delay: 3000,
-                                    disableOnInteraction: false,
-                                }}
-
+                                // autoplay={{
+                                //     delay: 3000,
+                                //     disableOnInteraction: false,
+                                // }}
+                                onSwiper={(swiper) => setDestinationActive(swiper.isBeginning)}
+                                onSlideChange={(swiper) => setDestinationActive(swiper.isBeginning)}
 
                                 breakpoints={{
                                     320: {
@@ -115,7 +117,7 @@ export default function DestinationSection() {
                                         spaceBetween: 24,
                                     },
                                 }}
-                                modules={[Pagination, Autoplay, Navigation]}
+                                modules={[Pagination, Navigation]}
                                 className="mySwiper relative"
                             >
                                 {
@@ -127,7 +129,7 @@ export default function DestinationSection() {
                                                 <SwiperSlide key={i}>
                                                     <div className="destination_box pb-10">
                                                         <div className="destination_img  ">
-                                                            <img src={getAssetPath(item?.img)} className='rounded-3xl' alt={`${item?.name || 'Destination'} travel destination image`} />
+                                                            <img src={getAssetPath(item?.img)} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
                                                             <div className="destination_name">
                                                                 <h5>
                                                                     {item?.name}
@@ -148,11 +150,12 @@ export default function DestinationSection() {
                             </Swiper>
                             <div className="button_swiper absolute ">
                                 <div className="buttons_icon relative">
-                                    <button id='destination_prev' className='absolute'>
-                                        <MdOutlineKeyboardArrowLeft size={30} />
-                                    </button>
+                                    {!isDestinationActive && (
+                                        <button id='destination_prev' className='absolute'>
+                                            <MdOutlineKeyboardArrowLeft size={30} />
+                                        </button>
 
-
+                                    )}
                                     <button id='destination_next' className='absolute'>
                                         <MdOutlineKeyboardArrowRight size={30} />
                                     </button>

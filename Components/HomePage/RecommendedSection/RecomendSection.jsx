@@ -14,6 +14,7 @@ import { getAssetPath } from '@/app/utils/assetPath';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Link from 'next/link';
 export default function RecomendSection() {
     const [search, setSearch] = useState("");
     const [locationName, setLocationName] = useState("");
@@ -199,6 +200,7 @@ export default function RecomendSection() {
         }
     }, [hotels]);
 
+    console.log(hotels, "......................>>>> hotels");
 
     return (
         <>
@@ -279,18 +281,18 @@ export default function RecomendSection() {
 
                                     <SwiperSlide key={itemId}> <div className="card_col " key={i} >
                                         {/* *********** */}
-                                        <div className="recommend_card_box   rounded-3xl shadow margin_lr margin_md-lr ">
+                                        <div className="recommend_card_box   card_rounded shadow margin_lr margin_md-lr ">
                                             {/* *********** */}
                                             <div className="card_box pe-">
-                                                <div className="card_box_img rounded-3xl relative overflow-hidden" style={{ minHeight: '250px', backgroundColor: '#f3f4f6' }}>
+                                                <div className="card_box_img card_rounded relative overflow-hidden" style={{ minHeight: '250px', backgroundColor: '#f3f4f6' }}>
                                                     {imageErrors[itemId] ? (
-                                                        <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded-3xl">
+                                                        <div className="w-full h-full flex items-center justify-center bg-gray-200 card_rounded">
                                                             <span className="text-gray-400 text-sm">Image not available</span>
                                                         </div>
                                                     ) : (
                                                         <img
                                                             src={imageUrl}
-                                                            className='rounded-3xl w-full h-full object-cover'
+                                                            className='card_rounded w-full h-full object-cover'
                                                             alt={item?.name || 'Hotel image'}
                                                             onError={(e) => handleImageError(itemId, item, e)}
                                                             onLoad={() => {
@@ -318,7 +320,7 @@ export default function RecomendSection() {
                                                     {/* ********************* */}
                                                 </div>
                                                 {/* *** */}
-                                                <div className="card_box_detail px-4 py-5 rounded-4xl flex flex-col z-1 gap-2 relative">
+                                                <div className="card_box_detail px-4 py-5 card_rounded flex flex-col z-1 gap-2 relative">
                                                     <h4 className='m-0 capitalize'>
                                                         {item?.name}
                                                     </h4>
@@ -338,9 +340,10 @@ export default function RecomendSection() {
                                                         <h5 className='m-0'>
                                                             ${price}.00 <span>/ person</span>
                                                         </h5>
-                                                        <button className='rounded-full'>
+                                                        <button className='button_bg2  rounded-full bg-color-green color_bl'>
                                                             Book Now
                                                         </button>
+
                                                     </div>
                                                     {/* *************** rating_list */}
                                                     <div className="rating_list absolute flex items-center gap-1 right-10 shadow">

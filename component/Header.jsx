@@ -62,7 +62,7 @@ export default function Header() {
                             <Navbar.Collapse className='justify-end navbar_link_item'>
                                 {/* ******** */}
                                 <Nav
-                                    className="gap-5"
+                                    className="gap-4"
                                     style={{ maxHeight: '100px' }}
                                     navbarScroll
                                 >
@@ -77,7 +77,7 @@ export default function Header() {
 
 
 
-                                        <Link href={""} className='sign-in-button' variant="outline-success">Subscriber</Link>
+                                        <Link href={""} className='sign-in-button bg-color-black text-white' variant="outline-success">Subscriber</Link>
 
                                     </div>
 

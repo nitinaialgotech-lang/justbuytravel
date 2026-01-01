@@ -180,10 +180,10 @@ export default function Search() {
 
     return (
         <>
-            <section className="Search_section pb-[70px] md:pb-[20px]  sm:pb-[20px] xs:pb-[20px] md-pb">
+            <section className="Search_section padding_bottom pb-md-0">
                 <div className="container">
                     <div className="search_container">
-                        <div className="search_container_box bg-white rounded-2xl pb-4 w-full">
+                        <div className="search_container_box  rounded-2xl pb-4 w-full">
                             <div className="search_tab ps-5 pe-5 pt-4 pb-4">
                                 <div className="tab_link flex justify-between">
                                     <ul className="flex items-center gap-3 p-0">
@@ -237,13 +237,13 @@ export default function Search() {
                                             type="text"
                                             // value={searchContent}
                                             onChange={(e) => setSearchContent(e.target.value)}
-                                            className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
+                                            className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body "
                                             placeholder="Places to go, things to do, hotels..."
                                         />
                                         <button
                                             type="submit"
 
-                                            className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2"
+                                            className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 search_full_button_padding"
                                         >
                                             Search
                                         </button>
@@ -272,7 +272,7 @@ export default function Search() {
                                         </div>
                                         <button type="submit"
 
-                                            className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs px-3 focus:outline-none button_bg2 w-full w-100">Search</button>
+                                            className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 w-full w-100 ">Search</button>
                                     </form>
                                 </div>
 

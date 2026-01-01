@@ -3,71 +3,10 @@ import React, { useState } from "react";
 import HotelDetailContent from "./HotelDetail/HotelDetailContent";
 
 export default function SearchSidebar({ prices_hotel }) {
-    const data = [
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-        {
-            liname: "Air Conditioning",
-            nmber: "06",
-        },
-    ];
-    const [show, setshow] = useState(false)
-    const visible = show ? data.length : 5;
-    console.log(visible, data?.length, "ppkpkpkp");
 
     return (
         <>
-            <div className="package-sidebar-area my-5 pt-4 pb-10">
+            <div className=" my-5 pt-4 pb-10  package-sidebar-area card_md_margin">
                 <div className="sidebar-wrapper">
                     <div className="title-area">
                         <h5 className="m-0">Get Detals</h5>

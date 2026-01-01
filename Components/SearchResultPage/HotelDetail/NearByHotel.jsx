@@ -14,12 +14,12 @@ export default function NearByHotel({ places }) {
                 <div className="nearby_hotel_section">
 
                     <div className="container">
-                        <div className="hotel_about_card  p-3">
+                        <div className="hotel_about_card ">
 
 
                             <div className="row">
                                 <div className="col-lg-12">
-                                    <div className="nearby_hotel_heading mb-4">
+                                    <div className="nearby_hotel_heading about_hotel_detail">
                                         <h3>
                                             Near by Places
                                         </h3>

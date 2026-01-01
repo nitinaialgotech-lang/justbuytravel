@@ -73,6 +73,9 @@ export default function ExperienceExploreSection() {
 
     ]
     const [search, setSearch] = useState("");
+    // *************************** show button 
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [secondActive, setSecondActive] = useState(true)
 
     useEffect(() => {
         // Get search from URL params or use default
@@ -91,11 +94,12 @@ export default function ExperienceExploreSection() {
     console.log(data?.data?.data, "deatils");
 
 
-    const name = search || "your location"
+    const name = search || "your location";
+
 
     return (
         <>
-            <section className='experience_explore_section padding_bottom m-0'>
+            <section className='experience_explore_section padding_bottom m-0 pt-3'>
                 <div className="container">
                     <div className="explore_section section_title m">
                         <h2 className='mb-0'>
@@ -122,7 +126,7 @@ export default function ExperienceExploreSection() {
                                         <div className="col-12 col-md-6 col-lg-3" key={i}>
                                             <div className="experience_explore_section ">
                                                 <div className="card  relative border-0 ">
-                                                    <img src={getAssetPath(item?.img)} className="card-img-top rounded-4 " alt="..." />
+                                                    <img src={getAssetPath(item?.img)} className="card-img-top card_rounded " alt="..." />
                                                     <div className="heart_icon absolute top-2 right-4">
                                                         <span>
                                                             <FaRegHeart />
@@ -169,8 +173,7 @@ export default function ExperienceExploreSection() {
                             {/* ********************************** */}
                         </div>
                     </div>
-
-                    {/* ************************************************** mobile view display 
+                    {/*8888888888888888888888888888888888888888888888888888888888888888888888888xxxxxxxx======================************************************************** mobile view display 
                      */}
                     <div className="container d-block d-lg-none relative">
 
@@ -185,11 +188,12 @@ export default function ExperienceExploreSection() {
                                     nextEl: "#custom_next",
                                 }}
                                 loop={true}
-                                autoplay={{
-                                    delay: 3100,
-                                    disableOnInteraction: false,
-                                }}
-
+                                // autoplay={{
+                                //     delay: 3100,
+                                //     disableOnInteraction: false,
+                                // }}
+                                onSwiper={(swiper) => setIsBeginning(swiper.isBeginning)}
+                                onSlideChange={(swiper) => setIsBeginning(swiper.isBeginning)}
 
                                 breakpoints={{
                                     320: {
@@ -213,7 +217,7 @@ export default function ExperienceExploreSection() {
                                         spaceBetween: 24,
                                     },
                                 }}
-                                modules={[Pagination, Navigation, Autoplay]}
+                                modules={[Pagination, Navigation]}
                                 className="mySwiper relative"
                             >
                                 {
@@ -229,9 +233,9 @@ export default function ExperienceExploreSection() {
 
 
                                                 <SwiperSlide key={i}>
-                                                    <div className="experience_explore_section ">
+                                                    <div className="experience_explore_section m-0">
                                                         <div className="card  relative border-0 ">
-                                                            <img src={getAssetPath(item?.img)} className="card-img-top rounded-4 " alt="..." />
+                                                            <img src={getAssetPath(item?.img)} className=" card_rounded " alt="..." />
                                                             <div className="heart_icon absolute top-2 right-4">
                                                                 <span>
                                                                     <FaRegHeart />
@@ -279,10 +283,11 @@ export default function ExperienceExploreSection() {
                             </Swiper>
                             <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">
-                                    <button id='custom_prev' className='absolute'>
-                                        <MdOutlineKeyboardArrowLeft size={30} />
-                                    </button>
-
+                                    {!isBeginning && (
+                                        <button id='custom_prev' className='absolute'>
+                                            <MdOutlineKeyboardArrowLeft size={30} />
+                                        </button>
+                                    )}
 
                                     <button id='custom_next' className='absolute'>
                                         <MdOutlineKeyboardArrowRight size={30} />
@@ -324,7 +329,7 @@ export default function ExperienceExploreSection() {
                                     <div className="col-md-6 col-lg-3" key={i}>
                                         <div className="experience_explore_section ">
                                             <div className="card  relative border-0 ">
-                                                <img src={getAssetPath(item?.img)} className="card-img-top rounded-4 " alt="..." />
+                                                <img src={getAssetPath(item?.img)} className=" card_rounded " alt="..." />
                                                 <div className="heart_icon absolute top-2 right-4">
                                                     <span>
                                                         <FaRegHeart />
@@ -383,11 +388,12 @@ export default function ExperienceExploreSection() {
                                 nextEl: "#experience_next",
                             }}
                             loop={true}
-                            autoplay={{
-                                delay: 3000,
-                                disableOnInteraction: false,
-                            }}
-
+                            // autoplay={{
+                            //     delay: 3000,
+                            //     disableOnInteraction: false,
+                            // }}
+                            onSwiper={(swiper) => setSecondActive(swiper.isBeginning)}
+                            onSlideChange={(swiper) => setSecondActive(swiper.isBeginning)}
 
                             breakpoints={{
                                 320: {
@@ -411,7 +417,7 @@ export default function ExperienceExploreSection() {
                                     spaceBetween: 24,
                                 },
                             }}
-                            modules={[Pagination, Navigation, Autoplay]}
+                            modules={[Pagination, Navigation]}
                             className="mySwiper relative"
                         >
                             {
@@ -428,9 +434,9 @@ export default function ExperienceExploreSection() {
 
 
                                             <SwiperSlide key={i}>
-                                                <div className="experience_explore_section ">
+                                                <div className="experience_explore_section m-0 ">
                                                     <div className="card  relative border-0 ">
-                                                        <img src={getAssetPath(item?.img)} className="card-img-top rounded-4 " alt="..." />
+                                                        <img src={getAssetPath(item?.img)} className="card-img-top card_rounded" alt="..." />
                                                         <div className="heart_icon absolute top-2 right-4">
                                                             <span>
                                                                 <FaRegHeart />
@@ -482,9 +488,14 @@ export default function ExperienceExploreSection() {
                         </Swiper>
                         <div className="button_swiper2 absolute ">
                             <div className="buttons_icon relative">
-                                <button id='experience_prev' className='absolute'>
-                                    <MdOutlineKeyboardArrowLeft size={30} />
-                                </button>
+                                {
+                                    !secondActive && (
+
+                                        <button id='experience_prev' className='absolute'>
+                                            <MdOutlineKeyboardArrowLeft size={30} />
+                                        </button>
+                                    )
+                                }
 
 
                                 <button id='experience_next' className='absolute'>

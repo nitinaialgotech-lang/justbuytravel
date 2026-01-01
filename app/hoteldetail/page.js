@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import Header from '@/component/Header'
 import SearchHotelDetail from '@/Components/SearchResultPage/HotelDetail/SearchHotelDetail'
-
+import "../../style/responsive.css"
 export const metadata = {
     title: "Hotel Details, Reviews & Best Prices",
     description: "View detailed hotel information, reviews, amenities, and compare prices from multiple booking sites. Find the best deals on hotels worldwide.",

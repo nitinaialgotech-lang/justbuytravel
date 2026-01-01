@@ -13,6 +13,18 @@ import SearchSidebar from '../SearchSidebar'
 import Footer from '@/component/Footer'
 import HotelFacilities from './HotelFacilities'
 import ImageGallery from './ImageGallery'
+
+// Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
+import { EffectFade, Navigation, Pagination } from 'swiper/modules'
+import Blogs from '@/Components/HomePage/Blog/Blogs'
+
 export default function SearchHotelDetail() {
 
     const searchid = useSearchParams();
@@ -56,6 +68,8 @@ export default function SearchHotelDetail() {
         data;
 
     const description = hotel?.property?.description;
+    console.log(description, "..................>>>>> description ");
+
     const lat = hotel?.property?.additional_data?.gps_coordinates?.latitude;
     const long = hotel?.property?.additional_data?.gps_coordinates?.longitude;
     const near_by_places = hotel?.property?.additional_data?.nearby_places;
@@ -109,9 +123,12 @@ export default function SearchHotelDetail() {
         );
     }
 
+
+
+
     return (
         <>
-            <section className='hoteldetail'>
+            <section className='hoteldetail '>
                 <div className="container">
                     <div className="row">
 
@@ -131,8 +148,42 @@ export default function SearchHotelDetail() {
                                     </h2>
                                 </div>
                                 {/* Image Gallery */}
-                                <div className="banner_img">
+                                <div className="banner_img d-none d-lg-block">
                                     <ImageGallery images={images} hotelName={name} />
+                                </div>
+
+                                {/* **********************************    on  mobiloe view show cslider  */}
+                                <div className="hotel_detail_slider d-block d-lg-none">
+                                    <div className="slider">
+                                        <Swiper
+                                            spaceBetween={30}
+                                            effect="fade"
+                                            navigation
+
+                                            modules={[Navigation, Pagination, EffectFade]}
+                                            className="mySwiper"
+                                            style={{ width: "100%", height: "100%" }}
+                                        >
+                                            {
+                                                images?.map((item) => {
+                                                    return (
+                                                        <>
+
+                                                            <SwiperSlide>
+                                                                <div className="banner_img ">
+                                                                    <img src={item} alt="" width={"100%"} className='card_rounded' />
+                                                                </div>
+                                                            </SwiperSlide>
+
+                                                        </>
+                                                    )
+                                                })
+                                            }
+
+
+
+                                        </Swiper>
+                                    </div>
                                 </div>
 
                             </div>
@@ -143,13 +194,21 @@ export default function SearchHotelDetail() {
                     </div>
                 </div>
             </section >
+
+
+
+
+            {/* ************************************* on mobile view shoqw section */}
+
+
+            {/* ******************************************************** */}
             <div className="container">
 
 
                 <div className="row matrix_fix">
-                    <div className="col-lg-7 pt-4">
+                    <div className="col-lg-7 ">
 
-                        <div className="content_box_detail my-5   rounded-2xl border border-gray-300">
+                        <div className=" my-5 content_box_detail  rounded-2xl border border-gray-300">
 
 
                             <AboutHotelDetail detail={description} name={name} />
@@ -159,7 +218,11 @@ export default function SearchHotelDetail() {
 
                             <NearByHotel places={near_by_places} />
 
+
                             <HotelLocation lat={lat} long={long} />
+
+
+
                         </div>
                     </div>
                     {/* ***************************** */}

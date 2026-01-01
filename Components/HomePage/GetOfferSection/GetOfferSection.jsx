@@ -41,7 +41,7 @@ export default function GetOfferSection() {
                 <div className="container">
                     <div className="row justify-center">
                         <div className="col-md-12">
-                            <div className="offer_banner_wrapper rounded-3xl bg-color-green">
+                            <div className="offer_banner_wrapper card_rounded bg-color-green">
                                 <Swiper
                                     spaceBetween={30}
                                     effect="fade"
@@ -72,7 +72,7 @@ export default function GetOfferSection() {
                                                             id="swiper_item"
                                                         >
                                                             {/* LEFT TEXT */}
-                                                            <div className="px-16 slide-text flex flex-col gap-2">
+                                                            <div className="px-16 slide-text flex flex-col gap-2 ">
                                                                 <div className="text">
                                                                     <h2 className=" mb-4">
                                                                         {
@@ -105,7 +105,7 @@ export default function GetOfferSection() {
                                                                 </div>
                                                                 {/* ***** */}
                                                                 <div className="text_button mt-4">
-                                                                    <button className="flex items-center  ">
+                                                                    <button className="flex items-center  arrow_button  ">
                                                                         <span>view all activities </span>{" "}
                                                                         <span>
                                                                             <TiArrowUp />
@@ -115,11 +115,11 @@ export default function GetOfferSection() {
                                                             </div>
 
                                                             {/* RIGHT IMAGE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
-                                                            <div className="banner_image relative ">
+                                                            <div className="banner_image relative order-first order-lg-last ">
                                                                 <div className="swiper_inner_img">
                                                                     <img
                                                                         src={item?.banner}
-                                                                        className="w-full object-cover"
+                                                                        className="w-full object-cover card_rounded"
                                                                         alt=""
                                                                     />
                                                                 </div>

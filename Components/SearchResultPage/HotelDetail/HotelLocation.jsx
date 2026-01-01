@@ -4,14 +4,14 @@ import React from 'react'
 export default function HotelLocation({ lat, long }) {
     return (
         <>
-            <section className='pt-10 pb-20'>
+            <section className='padding_bottom'>
                 <div className="container">
-                    <div className="nearbyhotels rounded-2xl  p-3">
+                    <div className="nearbyhotels rounded-2xl ">
 
 
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="nearby_hotel_heading mb-4">
+                                <div className="nearby_hotel_heading about_hotel_detail ">
                                     <h3>
                                         Location
                                     </h3>
