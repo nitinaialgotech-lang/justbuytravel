@@ -1,7 +1,7 @@
 import Footer from '@/component/Footer';
 import Header from '@/component/Header'
 import Blog_Detail_section from '@/Components/Blogs/Blog_Banner/Blog_Detail_section';
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export const metadata = {
     title: "Travel Blogs, Tips & Destination Guides",
@@ -42,7 +42,9 @@ export default function page() {
 
                 <Header />
             </div>
-            <Blog_Detail_section />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Blog_Detail_section />
+            </Suspense>
             <Footer />
 
         </>
