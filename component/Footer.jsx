@@ -1,5 +1,8 @@
-import React from 'react'
+
+"use client"
+import React, { useEffect, useState } from 'react'
 import { MdLocationPin } from "react-icons/md";
+import { FaChevronUp } from "react-icons/fa";
 import { LuClock4 } from "react-icons/lu";
 import { TbMailFilled } from "react-icons/tb";
 import Link from 'next/link';
@@ -8,6 +11,27 @@ import { AiFillInstagram } from "react-icons/ai";
 import { RiTwitterXLine } from "react-icons/ri";
 import { getAssetPath } from '../app/utils/assetPath';
 export default function Footer() {
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => {
+            if (typeof window !== 'undefined') {
+                if (window.scrollY > 300) setVisible(true);
+                else setVisible(false);
+            }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        // check on mount
+        onScroll();
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        if (typeof window !== 'undefined') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
     return (
         <>
             <section className='footer_section  mt-4'>
@@ -27,14 +51,12 @@ export default function Footer() {
                                     </div>
                                     <div className="footer_location">
                                         <ul className='p-0' >
-                                            <li className='flex gap-3'><span><MdLocationPin /></span>   4517 Washington Ave. Manchester, Kentucky
+                                            <li className='flex gap-3 items-center'><span><MdLocationPin /></span>   4517 Washington Ave. Manchester, Kentucky
                                                 39495</li>
-                                            <li className='flex gap-3'><span><LuClock4 /></span> Hours: 8:00 - 17:00, Mon - Sat</li>
-                                            <li className='flex gap-3'><span><TbMailFilled /></span> support@justbuytravel.com</li>
+                                            {/* <li className='flex gap-3'><span><LuClock4 /></span> Hours: 8:00 - 17:00, Mon - Sat</li> */}
+                                            <li className='flex gap-3 items-center'><span><TbMailFilled /></span> support@justbuytravel.com</li>
                                         </ul>
-
                                     </div>
-
                                 </div>
                             </div>
                             <div className="col-lg-1"></div>
@@ -81,9 +103,6 @@ export default function Footer() {
                                         </button>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
                         {/* ************************************* footer contact info */}
@@ -171,13 +190,20 @@ export default function Footer() {
 
                         </div>
                     </div>
-
-
-
                 </footer>
             </section>
 
-
+            {/* Scroll to top button */}
+            <button
+                type="button"
+                title="Scroll to top"
+                aria-label="Scroll to top"
+                className={`bottom-to-top ${visible ? 'show' : ''}`}
+                onClick={scrollToTop}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { scrollToTop(); } }}
+            >
+                <FaChevronUp />
+            </button>
 
         </>
     )

@@ -124,6 +124,7 @@ export default function SearchHotelDetail() {
     }
 
 
+    console.log(hotel, "hotel.........................pk");
 
 
     return (
@@ -141,7 +142,7 @@ export default function SearchHotelDetail() {
                                         ☆
                                         ☆
                                         ☆
-                                        0 Review ( based on 0 reviews )
+                                        {hotel?.property?.rating} Review ( based on {hotel?.property?.reviews} reviews )
                                     </p>
                                     <h2 className='pb-4'>
                                         {hotel?.property?.name}

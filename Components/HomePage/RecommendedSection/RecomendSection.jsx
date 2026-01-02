@@ -15,6 +15,7 @@ import { getAssetPath } from '@/app/utils/assetPath';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 export default function RecomendSection() {
     const [search, setSearch] = useState("");
     const [locationName, setLocationName] = useState("");
@@ -201,6 +202,12 @@ export default function RecomendSection() {
     }, [hotels]);
 
     console.log(hotels, "......................>>>> hotels");
+    // ********************************************
+    const router = useRouter()
+
+    const viewDetails = (id) => {
+        router.push(`/hoteldetail?property_token=${id}`)
+    }
 
     return (
         <>
@@ -340,7 +347,7 @@ export default function RecomendSection() {
                                                         <h5 className='m-0'>
                                                             ${price}.00 <span>/ person</span>
                                                         </h5>
-                                                        <button className='button_bg2  rounded-full bg-color-green color_bl'>
+                                                        <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(item?.property_token)}>
                                                             Book Now
                                                         </button>
 
