@@ -17,6 +17,7 @@ import { CgMenuRightAlt } from "react-icons/cg";
 import { FiPlus } from "react-icons/fi";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { getAssetPath } from '../app/utils/assetPath';
+import "../app/globals.css"
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [show, setShow] = useState(false);

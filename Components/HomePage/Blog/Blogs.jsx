@@ -27,7 +27,7 @@ export default function Blogs() {
 
     return (
         <>
-            <section className='blog_section container  '>
+            <section className='blog_section container padding_top  '>
                 <div className="section_title ">
                     <h2 className='mb-0 capitalize'>
                         From the blog

@@ -31,7 +31,7 @@ export default function Footer() {
     };
     return (
         <>
-            <section className='footer_section  mt-4'>
+            <section className='footer_section'>
                 <footer className='footer'>
                     <div className="container pt-20  ">
                         <div className="row items-center">
@@ -63,7 +63,7 @@ export default function Footer() {
                                         <h5>Comapny</h5>
                                     </div>
                                     <ul className='p-0'>
-                                        <li><Link href={""}>About Us </Link></li>
+                                        <li><Link href={"/aboutus"}>About Us </Link></li>
                                         <li><Link href={""}>Blog</Link></li>
                                         <li><Link href={"/privacy-policy"}>Privacy Policy</Link></li>
                                         <li><Link href={"/term-and-conditions"}>Terms and Conditions </Link></li>
@@ -79,8 +79,8 @@ export default function Footer() {
                                     <ul className='ps-4'>
                                         <li><Link href={""}>Hotels</Link></li>
                                         <li><Link href={""}>Flights</Link></li>
-                                        <li><Link href={""}>Contact Us</Link></li>
-                                        <li><Link href={""}>Disclaimer</Link></li>
+                                        <li><Link href={""}>Cruises</Link></li>
+                                        <li><Link href={""}>Thing to do</Link></li>
 
                                     </ul>
                                 </div>

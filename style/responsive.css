@@ -179,9 +179,9 @@
     top: 18%;
   }
   .section_title > h2 {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 800;
-    line-height: 31px;
+    line-height: 1.2;
   }
   .section_title > h5 {
     margin-top: 5px;
@@ -348,9 +348,10 @@
   }
   /* **************** recomand  */
   .recommend_card_box > .card_box > .card_box_detail > h4 {
-    font-size: 25px;
+    font-size: 22px;
     font-family: var(--font-fam);
     font-weight: 800;
+    line-height: 1.2;
   }
   .recommend_card_box > .card_box > .card_box_detail > .price_book > h5 {
     font-size: 20px;
@@ -468,6 +469,46 @@
   .bottom-to-top {
     width: 40px;
     height: 40px;
+  }
+  /* *************************** faq responsive  */
+  .accordian_header > h3 {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+  }
+  .accordion_body > p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+  .accordion-button {
+    padding: 10px 15px !important;
+  }
+  .accordion-item > .accordion-header > button {
+    gap: 20px !important;
+  }
+  .accordion-item > .accordion-header > button > .accordian_header {
+    gap: 25px !important;
+  }
+  .accordion-body {
+    text-align: justify;
+    padding: 0px 20px 0px 20px !important;
+  }
+  .about_section {
+    background-image: none;
+    padding: 0;
+  }
+  .about_content {
+    margin-top: 20px;
+  }
+
+  .booking_platform > .plane_icon {
+    display: none !important;
+  }
+  /* .about_content > .section_title > p {
+    line-height: normal;
+  } */
+  .platform_img {
+    padding: 0;
   }
 }
 /* ***************************************************************************************** */

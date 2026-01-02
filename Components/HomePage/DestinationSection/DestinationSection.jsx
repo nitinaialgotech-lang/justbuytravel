@@ -88,10 +88,10 @@ export default function DestinationSection() {
                                     nextEl: "#destination_next",
                                 }}
                                 loop={true}
-                                // autoplay={{
-                                //     delay: 3000,
-                                //     disableOnInteraction: false,
-                                // }}
+                                autoplay={{
+                                    delay: 3000,
+                                    disableOnInteraction: false,
+                                }}
                                 onSwiper={(swiper) => setDestinationActive(swiper.isBeginning)}
                                 onSlideChange={(swiper) => setDestinationActive(swiper.isBeginning)}
 
