@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import { MdLocationPin } from "react-icons/md";
 import { FaChevronUp } from "react-icons/fa";
 import { LuClock4 } from "react-icons/lu";
@@ -8,7 +9,26 @@ import { IoLogoFacebook } from "react-icons/io";
 import { AiFillInstagram } from "react-icons/ai";
 import { RiTwitterXLine } from "react-icons/ri";
 import { getAssetPath } from '../app/utils/assetPath';
+
 export default function Footer() {
+    const [visible, setVisible] = useState(false);
+    useEffect(() => {
+        const onScroll = () => {
+            if (typeof window !== 'undefined') {
+                if (window.scrollY > 300) setVisible(true);
+                else setVisible(false);
+            }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        // check on mount
+        onScroll();
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+    const scrollToTop = () => {
+        if (typeof window !== 'undefined') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
     return (
         <>
             <section className='footer_section  mt-4'>
@@ -171,6 +191,17 @@ export default function Footer() {
             </section>
 
 
+
+            <button
+                type="button"
+                title="Scroll to top"
+                aria-label="Scroll to top"
+                className={`bottom-to-top ${visible ? 'show' : ''}`}
+                onClick={scrollToTop}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { scrollToTop(); } }}
+            >
+                <FaChevronUp />
+            </button>
 
         </>
     )

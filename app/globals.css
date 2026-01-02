@@ -527,6 +527,9 @@ button {
 
   text-decoration: none;
 }
+.footer_link ul > li > a:hover {
+  color: var(--bg-color);
+}
 .footer_newslatter > .news_later_button > button {
   background-color: var(--bg-color);
   font-family: var(--font-fam);
@@ -820,4 +823,37 @@ button {
 .blog_section_left_bar > .breadcrumb > h4 {
   font-size: 22px;
   font-weight: 600;
+}
+
+/* ************************************************** button to top  */
+.bottom-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #12c081;
+  color: #fff;
+  border: none;
+  display: none; /* hidden by default; use `.show` to reveal */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+/* Visible state: add the `show` class when you want it displayed */
+.bottom-to-top.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.bottom-to-top:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(18, 192, 129, 0.12);
 }
