@@ -1,13 +1,11 @@
 import React from 'react'
-import Trust_Guide_Section from './Trust_Guide_Section'
-import AboutDetail from './AboutDetail'
 
-export default function About_banner() {
+export default function TrustedPartner_Title() {
     return (
         <>
-            <section className='about_section padding_bottom relative'>
+            <section className='about_section trusted_partner_section'>
                 <div className="container">
-                    <div className="row justify-center">
+                    <div className="row">
                         <div className="col-lg-12">
                             <div className="banner_box">
                                 <div className="title text-center">
@@ -20,13 +18,11 @@ export default function About_banner() {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </section>
-
-            <AboutDetail />
-
-            <Trust_Guide_Section />
         </>
     )
 }

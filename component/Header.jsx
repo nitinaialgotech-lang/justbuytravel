@@ -71,7 +71,7 @@ export default function Header() {
                                     <Nav.Link href="#action2"><span><MdFlight /></span><span>Flights</span></Nav.Link>
                                     <Nav.Link href="#action2"><span><FaCar /></span><span>cars</span></Nav.Link>
                                     <Nav.Link href="#action2"><span><GrBike /></span><span>bikes</span></Nav.Link>
-                                    <Nav.Link href="#action2"><span><IoIosDocument /></span><span>blogs</span></Nav.Link>
+                                    <Nav.Link href="/justbuytravel_next/demo/blog"><span><IoIosDocument /></span><span>blogs</span></Nav.Link>
 
 
                                     <div className="search_sign_button flex gap-2 items-center">
