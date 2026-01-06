@@ -94,6 +94,10 @@
 }
 /* ************************************************************************************************************************ */
 @media only screen and (max-width: 425px) {
+  /* ********** */
+  .search_container {
+    box-shadow: none;
+  }
   /* *************************************** */
   .button_bg2 {
     width: 100%;
@@ -123,7 +127,7 @@
   .search_container > .search_container_box > .search_tab {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   .recomend_section {
     overflow-y: hidden !important;
@@ -301,7 +305,7 @@
     padding-right: 30px;
   }
   .mega_menu_item > .mega_menu_link > ul > li {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
   .mega_menu_item > .mega_menu_link > ul > li > a {
     letter-spacing: 0.4px;
@@ -310,7 +314,7 @@
     position: relative;
     font-family: var(--font-fam);
     font-weight: 650;
-    font-size: 16px;
+    font-size: 15px;
     text-decoration: none;
     transition: all 0.5s ease-out 0s;
     position: relative;
@@ -519,11 +523,29 @@
   .blog_card_box {
     padding: 0px;
   }
+  .section_title > h3 {
+    font-weight: 500;
+    font-size: 19px;
+  }
+  .trusted_content_title > .content_order_list > ul > li {
+    text-align: justify;
+  }
+  /* **************** offer  */
+  .offer_banner_wrapper {
+    padding: 30px 0px;
+  }
+  /* ****************************** */
+  .blog_box > .blog_img > .content > a {
+    font-size: 16px;
+  }
 }
 /* ***************************************************************************************** */
 @media only screen and (max-width: 390px) {
   .search_banner_box > .title > h2 {
     font-size: 35px;
+  }
+  .experience_explore_section > .card > .card-body > .card_detail > p {
+    font-size: 12px;
   }
 }
 /* ******************************************************************************************* 375 */
@@ -687,5 +709,50 @@
 }
 #destination_next {
   right: -7%;
+  transform: translateY(-50%);
+}
+/* ************************** iconicn plaes */
+/* **************************** destination  */
+#iconic_place_prev > svg,
+#iconic_place_next > svg {
+  fill: var(--background);
+  stroke-opacity: 1;
+}
+#iconic_place_prev,
+#iconic_place_next {
+  background-color: var(--bg-color);
+  font-size: 30px;
+  border-radius: 50%;
+}
+#iconic_place_prev {
+  top: 50%;
+  left: -7% !important;
+  transform: translateY(-50%);
+}
+
+#iconic_place_next {
+  right: -7%;
+  transform: translateY(-50%);
+}
+/* **************************** destination  */
+#helping_swiper-btn-prev > svg,
+#helping_swiper-btn-next > svg {
+  fill: var(--background);
+  stroke-opacity: 1;
+}
+#helping_swiper-btn-prev,
+#helping_swiper-btn-next {
+  background-color: var(--bg-color);
+  font-size: 30px;
+  border-radius: 50%;
+}
+#helping_swiper-btn-prev {
+  top: 50%;
+  left: 0 !important;
+  transform: translateY(-50%);
+}
+
+#helping_swiper-btn-next {
+  right: 0;
   transform: translateY(-50%);
 }

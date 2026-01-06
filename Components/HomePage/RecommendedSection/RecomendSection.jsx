@@ -6,7 +6,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import { IoTime } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
-import { SearchLocation } from '@/app/Route/endpoints';
+import { Get_cityName, SearchLocation } from '@/app/Route/endpoints';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { getAssetPath } from '@/app/utils/assetPath';
@@ -209,6 +209,35 @@ export default function RecomendSection() {
         router.push(`/hoteldetail?property_token=${id}`)
     }
 
+
+
+
+
+    const { data: GetSearch_data } = useQuery({
+        queryKey: ["getdata", search],
+        queryFn: () => Get_cityName(search)
+    })
+
+    console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
+
+
+
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const result = await Get_cityName("Delhi,India"); 
+    //             setSearch(result);
+    //             console.log(result, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
+    //         } catch (error) {
+    //             console.error("Error fetching data:", error);
+    //         }
+    //     };
+
+    //     fetchData(); 
+    // }, []); 
+
+    // *****************************************************************************************
     return (
         <>
             <section className='recomend_section container  padding_bottom'>
@@ -217,7 +246,7 @@ export default function RecomendSection() {
                         Recommended For You
                     </h2>
                     <h5 >
-                        The best booking platform you can trust
+                        Handpicked experiences tailored to your interests
                     </h5>
 
                     <div className="title_icon absolute right-5   ">

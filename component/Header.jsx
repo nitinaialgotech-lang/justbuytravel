@@ -18,6 +18,7 @@ import { FiPlus } from "react-icons/fi";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { getAssetPath } from '../app/utils/assetPath';
 import "../app/globals.css"
+import "../style/responsive.css"
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [show, setShow] = useState(false);
@@ -72,16 +73,9 @@ export default function Header() {
                                     <Nav.Link href="#action2"><span><FaCar /></span><span>cars</span></Nav.Link>
                                     <Nav.Link href="#action2"><span><GrBike /></span><span>bikes</span></Nav.Link>
                                     <Nav.Link href="/justbuytravel_next/demo/blog"><span><IoIosDocument /></span><span>blogs</span></Nav.Link>
-
-
                                     <div className="search_sign_button flex gap-2 items-center">
-
-
-
                                         <Link href={""} className='sign-in-button bg-color-black text-white' variant="outline-success">Subscriber</Link>
-
                                     </div>
-
                                 </Nav>
                                 {/* ******** */}
 
@@ -116,24 +110,30 @@ export default function Header() {
                                                     <ul>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span>Home</span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><FaHotel /></span><span>Hotels</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span>Home</span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><MdFlight /></span><span>Flights</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span>Home</span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><FaCar /></span><span>cars</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span>Home</span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><GrBike /></span><span>bikes</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
+                                                        <li>
+                                                            <Link href={"/justbuytravel_next/demo/blog"} className='flex justify-between items-center'>
+                                                                <span className='flex gap-1 capitalize'><span><IoIosDocument /></span><span>blogs</span></span> <span><FiPlus /></span>
+                                                            </Link>
+                                                        </li>
+
                                                         <div className="button_nav  text-center px-2 py-2 rounded">
                                                             <Link href={"#"} className=''>
                                                                 Subscriber</Link>

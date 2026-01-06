@@ -59,7 +59,7 @@ export default function Trusted_Explore_Category() {
                                 <div className="explore_cat_button flex justify-center gap-10">
                                     <div className="display_button flex gap-1 bg-amber-100 p-2 rounded">
                                         <button
-                                            className={`button_bg2   ${active ? "bg-color-green" : "bg-color-black g_color"}`}
+                                            className={`button_bg2   ${categoryType == "hotel" ? "bg-color-green" : "bg-color-black g_color"}`}
                                             type="button"
                                             onClick={() => {
                                                 setCategoryType("hotel"), setActive(false);
@@ -68,7 +68,7 @@ export default function Trusted_Explore_Category() {
                                             Hotel
                                         </button>
                                         <button
-                                            className={`button_bg2   ${active ? "bg-color-green" : "bg-color-black g_color"}`}
+                                            className={`button_bg2   ${categoryType == "flight" ? "bg-color-green" : "bg-color-black g_color"}`}
                                             type="button"
                                             onClick={() => {
                                                 setCategoryType("flight"), setActive(true);
@@ -86,7 +86,7 @@ export default function Trusted_Explore_Category() {
                                             return (
                                                 <>
 
-                                                    <div className="col-lg-3 p-0">
+                                                    <div className="col-lg-3 col-md-6 col-6 p-0">
                                                         <div className="explore_content  flex justify-center">
                                                             <div className="content_icon flex flex-col text-center border_right w-full items-center">
                                                                 <img
@@ -103,8 +103,7 @@ export default function Trusted_Explore_Category() {
                                         }) : flight?.map((item) => {
                                             return (
                                                 <>
-
-                                                    <div className="col-lg-3 p-0">
+                                                    <div className="col-lg-3 col-md-6 col-6 p-0">
                                                         <div className="explore_content  flex justify-center">
                                                             <div className="content_icon flex flex-col text-center border_right w-full items-center">
                                                                 <img

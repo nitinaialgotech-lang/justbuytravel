@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Get_Blogs } from '@/app/Route/endpoints';
 export default function Blogs() {
     // (((((((((((((((((())))))))))))))))))
-    const [isBlogActive, setBlogActive] = useState(true);
+    const [isBlogActive, BlogActive] = useState(true);
     // ******************************************************
     const { data, isLoading } = useQuery({
         queryKey: ["blog"],
@@ -37,7 +37,7 @@ export default function Blogs() {
                     </h5>
                 </div>
                 {/* ********************** */}
-                <div className="d-none d-lg-block">
+                <div className="container d-none d-lg-block">
                     <div className="row">
 
                         {
@@ -49,9 +49,9 @@ export default function Blogs() {
                                         <div className="blog_box mb-10">
                                             <div className="blog_img relative ">
                                                 <img src={item?.yoast_head_json?.og_image?.map((item) => item?.url)} className='card_rounded' alt={item?.title?.rendered || "Travel blog post image"} />
-                                                <div className="inner_content absolute top-6 left-4">
+                                                {/* <div className="inner_content absolute top-6 left-4">
                                                     Top Rated
-                                                </div>
+                                                </div> */}
                                                 <div className="content mt-2">
                                                     <Link href={`/blogs?detail=${item?.id}`}>
                                                         {item?.title?.rendered}
@@ -91,9 +91,9 @@ export default function Blogs() {
                             //     delay: 3200,
                             //     disableOnInteraction: false,
                             // }}
-
-                            onSwiper={(swiper) => setBlogActive(swiper.isBeginning)}
-                            onSlideChange={(swiper) => setBlogActive(swiper.isBeginning)}
+                            modules={[Navigation, Pagination]}
+                            onSwiper={(swiper) => BlogActive(swiper.isBeginning)}
+                            onSlideChange={(swiper) => BlogActive(swiper.isBeginning)}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5
@@ -116,7 +116,7 @@ export default function Blogs() {
                                     spaceBetween: 24,
                                 },
                             }}
-                            modules={[Pagination]}
+
                             className="mySwiper relative"
                         >
                             {
@@ -131,9 +131,9 @@ export default function Blogs() {
                                                 <div className="blog_box mb-10">
                                                     <div className="blog_img relative ">
                                                         <img src={item?.yoast_head_json?.og_image?.map((item) => item?.url)} className='card_rounded' alt={item?.title?.rendered || "Travel blog post image"} />
-                                                        <div className="inner_content absolute top-6 left-4">
+                                                        {/* <div className="inner_content absolute top-6 left-4">
                                                             Top Rated
-                                                        </div>
+                                                        </div> */}
                                                         <div className="content mt-2">
                                                             <Link href={`/blogs?detail=${item?.id}`}>
                                                                 {item?.title?.rendered}
@@ -156,17 +156,14 @@ export default function Blogs() {
                         </Swiper>
                         <div className="button_swiper absolute ">
                             <div className="buttons_icon relative">
-                                {
-                                    !isBlogActive && (
-
-                                        <button id='blog_prev' className='absolute'>
-                                            <MdOutlineKeyboardArrowLeft size={30} />
-                                        </button>
-                                    )
-                                }
 
 
-                                <button id='blog_next' className='absolute'>
+                                <button id='blog_prev' aria-label="Previous" className={`absolute ${isBlogActive ? 'opacity-50 pointer-events-none' : ''}`}>
+                                    <MdOutlineKeyboardArrowLeft size={30} />
+                                </button>
+
+
+                                <button id='blog_next' aria-label="Next" className='absolute'>
                                     <MdOutlineKeyboardArrowRight size={30} />
                                 </button>
                             </div>

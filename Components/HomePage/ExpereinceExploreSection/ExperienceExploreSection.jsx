@@ -17,9 +17,11 @@ export default function ExperienceExploreSection() {
     const card = [
 
         {
-            img: "/home/destination/outdoors.jpg",
+            img: "/iconic/iconic.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-            info: "from ₹1000 per person",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
             star: [
                 <IoStar />,
                 <IoStar />,
@@ -31,9 +33,11 @@ export default function ExperienceExploreSection() {
             ]
         },
         {
-            img: "/home/destination/outdoors.jpg",
+            img: "iconic/iconic4.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-            info: "from ₹4500 per person",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
             star: [
                 <IoStar />,
                 <IoStar />,
@@ -45,9 +49,11 @@ export default function ExperienceExploreSection() {
             ]
         },
         {
-            img: "/home/destination/outdoors.jpg",
+            img: "/iconic/iconic6.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-            info: "from ₹4500 per person",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
             star: [
                 <IoStar />,
                 <IoStar />,
@@ -57,9 +63,11 @@ export default function ExperienceExploreSection() {
             ]
         },
         {
-            img: "/home/destination/outdoors.jpg",
+            img: "/iconic/iconic7.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-            info: "from ₹4500 per person",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
             star: [
                 <IoStar />,
                 <IoStar />,
@@ -70,6 +78,73 @@ export default function ExperienceExploreSection() {
 
             ]
         },
+
+    ]
+    const NearCard = [
+
+        {
+            img: "/near/near.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+
+
+            ]
+        },
+        {
+            img: "/near/near1.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+
+
+            ]
+        },
+        {
+            img: "/near/near2.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+            ]
+        },
+        {
+            img: "/near/near3.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            info: <>
+                Price Start From <span>₹4500</span>
+            </>,
+            star: [
+                <IoStar />,
+                <IoStar />,
+                <IoStar />,
+                <IoStarHalf />,
+                <IoStarOutline />
+
+
+            ]
+        },
+
 
     ]
     const [search, setSearch] = useState("");
@@ -103,17 +178,17 @@ export default function ExperienceExploreSection() {
                 <div className="container">
                     <div className="explore_section section_title m">
                         <h2 className='mb-0'>
-                            Explore experiences near {name}
+                            Near By Loactions
                         </h2>
                         <h5 >
-                            Top-rated experiences and hidden gems near you
+                            Explore nearby destinations and hidden gems
                         </h5>
                     </div>
                     <div className="d-none d-lg-block">
                         <div className="row ">
                             {/* ********************************** */}
                             {
-                                card?.map((item, i) => {
+                                NearCard?.map((item, i) => {
                                     let simplecontetnt = item?.content.split(" ").slice(0, 3).join(" ");
 
                                     if (simplecontetnt?.length > 3) {
@@ -192,6 +267,7 @@ export default function ExperienceExploreSection() {
                                 //     delay: 3100,
                                 //     disableOnInteraction: false,
                                 // }}
+                                modules={[Pagination, Navigation]}
                                 onSwiper={(swiper) => setIsBeginning(swiper.isBeginning)}
                                 onSlideChange={(swiper) => setIsBeginning(swiper.isBeginning)}
 
@@ -217,7 +293,7 @@ export default function ExperienceExploreSection() {
                                         spaceBetween: 24,
                                     },
                                 }}
-                                modules={[Pagination, Navigation]}
+
                                 className="mySwiper relative"
                             >
                                 {
@@ -283,13 +359,11 @@ export default function ExperienceExploreSection() {
                             </Swiper>
                             <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">
-                                    {!isBeginning && (
-                                        <button id='custom_prev' className='absolute'>
-                                            <MdOutlineKeyboardArrowLeft size={30} />
-                                        </button>
-                                    )}
+                                    <button id='custom_prev' aria-label="Previous" className={`absolute ${isBeginning ? 'opacity-50 pointer-events-none' : ''}`}>
+                                        <MdOutlineKeyboardArrowLeft size={30} />
+                                    </button>
 
-                                    <button id='custom_next' className='absolute'>
+                                    <button id='custom_next' aria-label="Next" className='absolute'>
                                         <MdOutlineKeyboardArrowRight size={30} />
                                     </button>
                                 </div>
@@ -304,10 +378,10 @@ export default function ExperienceExploreSection() {
             <div className="container padding_bottom">
                 <div className="explore_section section_title ">
                     <h2 className='mb-0'>
-                        Explore experiences near {name}
+                        Iconic Places
                     </h2>
                     <h5 >
-                        Top-rated experiences and hidden gems near you
+                        Where history, culture, and beauty come together
                     </h5>
                 </div>
                 {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
@@ -488,17 +562,14 @@ export default function ExperienceExploreSection() {
                         </Swiper>
                         <div className="button_swiper2 absolute ">
                             <div className="buttons_icon relative">
-                                {
-                                    !secondActive && (
 
-                                        <button id='experience_prev' className='absolute'>
-                                            <MdOutlineKeyboardArrowLeft size={30} />
-                                        </button>
-                                    )
-                                }
+                                <button id='experience_prev' aria-label="Previous" className={`absolute ${secondActive ? 'opacity-50 pointer-events-none' : ''}`}>
+                                    <MdOutlineKeyboardArrowLeft size={30} />
+                                </button>
 
 
-                                <button id='experience_next' className='absolute'>
+
+                                <button id='experience_next' aria-label="Next" className='absolute'>
                                     <MdOutlineKeyboardArrowRight size={30} />
                                 </button>
                             </div>

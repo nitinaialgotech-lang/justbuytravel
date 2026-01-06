@@ -1,4 +1,4 @@
-import { https_blog, https_blog_category, https_hotels } from "./https"
+import { https_blog, https_blog_category, https_dropdown, https_hotels, https_SearchCity } from "./https"
 
 // Helper function to disambiguate common city names
 const disambiguateCityName = (searchTerm) => {
@@ -72,7 +72,7 @@ export const SearchLocation = async (search) => {
     // Use the disambiguated search (which should be "Delhi, India" for "delhi")
     try {
         console.log("Searching with:", disambiguatedSearch);
-        const res = await https_hotels.get(`/hotels.php?location=${encodeURIComponent(disambiguatedSearch)}`);
+        const res = await https_hotels.get(`/hotelswqewws.php?location=${encodeURIComponent(disambiguatedSearch)}`);
 
         // Check if response status is OK
         if (res.status !== 200) {
@@ -236,7 +236,7 @@ export const HotelDetail = async (id) => {
     }
 
     try {
-        const res = await https_hotels.get(`/hotel-property.php?property_token=${encodeURIComponent(id)}`);
+        const res = await https_hotels.get(`/hotel-fwerfgerproperty.php?property_token=${encodeURIComponent(id)}`);
 
         // Check if response status is OK
         if (res.status !== 200) {
@@ -295,13 +295,24 @@ export const Get_Blog_category = async () => {
 // }
 
 
-export const Get_Blog_data = async (id) => {
+export const Get_Blog_data = async (id, page) => {
     if (!id) {
-        // fetch all posts
-        const response = await https_blog.get("/posts");
-        return response.data;
+        // Fetch All Posts
+        const response = await https_blog.get(`/posts?page=${page}`);
+        return response?.data;
     }
-    // fetch by category
+
+
+    // Fetch by Category
     const response = await https_blog.get(`/posts?categories=${id}`);
     return response.data;
 };
+
+export const Dropdown_Get = async (data) => {
+    return await https_dropdown.get(`/location.php?q=${data}`)
+}
+
+// (((((((((((((())))))))))))))
+export const Get_cityName = async (id) => {
+    return await https_SearchCity.get(`/search.php?location_name=${id}`)
+} 

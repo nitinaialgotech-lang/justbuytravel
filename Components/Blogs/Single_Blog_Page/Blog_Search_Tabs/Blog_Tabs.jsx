@@ -14,6 +14,7 @@ export default function Blog_Tabs() {
     queryKey: ["blog_category"],
     queryFn: () => Get_Blog_category()
   })
+  const [count, setcount] = useState(1)
 
 
 
@@ -21,8 +22,8 @@ export default function Blog_Tabs() {
   const categoryId = activeKey === "showall" ? null : Number(activeKey);
 
   const { data: blog_data, isLoading } = useQuery({
-    queryKey: ["blog_data", categoryId],
-    queryFn: () => Get_Blog_data(categoryId),
+    queryKey: ["blog_data", categoryId, count],
+    queryFn: () => Get_Blog_data(categoryId, count),
     enabled: true,
   });
   console.log(blog_data, ",,,,,,,,,,j", categoryId);
@@ -33,6 +34,8 @@ export default function Blog_Tabs() {
     const words = text.split(/\s+/).slice(0, limit).join(" ");
     return words + (text.split(/\s+/).length > limit ? "..." : "");
   };
+  // ****************************************
+
   return (
     <>
       <section>
@@ -140,10 +143,14 @@ export default function Blog_Tabs() {
                         )
                     })
                   }
-
-
-
                 </Tabs>
+
+                {/* ********************************** yav b more button ........... */}
+                <div className="loadmore text-center flex justify-center padding_bottom ">
+                  <button className="button_bg2" type="button" onClick={() => setcount(count + 1)}>
+                    {isLoading ? <p className="m-0">..Loading</p> : <p className="m-0">Load More</p>}
+                  </button>
+                </div>
               </div>
               {/* **************** */}
             </div>

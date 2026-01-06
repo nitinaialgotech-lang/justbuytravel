@@ -87,14 +87,14 @@ export default function Trust_Guide_Section() {
                                 {
                                     card?.map((item) => {
                                         return (
-                                            <>
-                                                <SwiperSlide>
-                                                    <div className="platform_img pb-5 pt-3">
-                                                        <img src={item?.img} alt="" />
-                                                    </div>
-                                                </SwiperSlide>
 
-                                            </>
+                                            <SwiperSlide>
+                                                <div className="platform_img pb-5 pt-3">
+                                                    <img src={item?.img} alt="" />
+                                                </div>
+                                            </SwiperSlide>
+
+
                                         )
                                     })
                                 }

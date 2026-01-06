@@ -7,7 +7,7 @@ export default function Blog_Search_Secction() {
     <>
       <section className="Search_section padding_bottom pb-md-0">
         <div className="container">
-          <div className="search_container">
+          <div className="search_container blog_search_contain">
             <div className="search_container_box  rounded-2xl pb-4 w-full">
               <div className="search_box_input d-none d-lg-block">
                 <form className="px-15 mx-auto">

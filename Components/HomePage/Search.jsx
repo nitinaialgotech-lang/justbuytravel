@@ -7,7 +7,7 @@ import { FaCar } from "react-icons/fa6";
 import { GrBike } from "react-icons/gr";
 import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
-import { SearchLocation } from "@/app/Route/endpoints";
+import { Dropdown_Get, Get_cityName, SearchLocation } from "@/app/Route/endpoints";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DestinationSection from "./DestinationSection/DestinationSection";
@@ -19,7 +19,7 @@ import Footer from "@/component/Footer";
 export default function Search() {
     const [location, setLocation] = useState(""); // For storing resolved location
     const [isLoadingLocation, setIsLoadingLocation] = useState(true); // Loading state for geolocation
-    const [searchContent, setSearchContent] = useState(""); // For the search input
+    const [searchContent, setSearchContent] = useState("");
     const adults = 1; // Example: Replace with actual value
     const checkin = null; // Example: Replace with actual value
     const checkout = null; // Example: Replace with actual value
@@ -62,7 +62,8 @@ export default function Search() {
             return null;
         }
     }, []);
-
+    // **********************************
+    const [cityName, setCityName] = useState("")
     // ***************************************************************************************
     const doSearch = useCallback(async (locOverride) => {
         try {
@@ -148,9 +149,9 @@ export default function Search() {
                 setIsLoadingLocation(false);
             },
             (err) => {
-                setLocation("New York");
-                setSearchContent("New York");
-                doSearch("New York");
+                setLocation(" ");    /**************** change from nreew york  */
+                setSearchContent(" ");
+                doSearch(" ");
                 setIsLoadingLocation(false);
             },
             {
@@ -177,12 +178,34 @@ export default function Search() {
         if (!searchContent.trim()) return;
         router.push(`/search?query=${encodeURIComponent(searchContent)}`);
     };
+    // *********************************************** dropdown >>>>>>>>>...........................
+    /********************* */
+    const [searchDropdown, setDropdown] = useState("")
+    const [showDropdown, setShowDropdown] = useState(false);
+    /********************* */
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setSearchContent(value);
+        setShowDropdown(value.length > 0);
+    };
+    /********************* */
+    const { data } = useQuery({
+        queryKey: ["dropdown", searchContent],
+        queryFn: () => Dropdown_Get(searchContent)
+    })
+    /********************* */
+    console.log(searchContent, "....................", data?.data);
+    // const { data: GetSearch_data } = useQuery({
+    //     queryKey: ["getdata", cityName],
+    //     queryFn: () => Get_cityName(cityName)
+    // })
+
 
     return (
         <>
-            <section className="Search_section padding_bottom pb-md-0">
+            <section className="Search_section pb-3  padding_bottom">
                 <div className="container">
-                    <div className="search_container">
+                    <div className="search_container ">
                         <div className="search_container_box  rounded-2xl pb-4 w-full">
                             <div className="search_tab ps-5 pe-5 pt-4 pb-4">
                                 <div className="tab_link flex justify-between">
@@ -236,10 +259,33 @@ export default function Search() {
                                         <input
                                             type="text"
                                             // value={searchContent}
-                                            onChange={(e) => setSearchContent(e.target.value)}
+                                            onChange={handleInputChange}
+                                            onFocus={() => setShowDropdown(true)}
                                             className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body "
                                             placeholder="Places to go, things to do, hotels..."
                                         />
+                                        {/* *********************************** */}
+                                        {/* Dropdown moved inside relative container so absolute positioning works */}
+                                        {showDropdown && data?.data?.locations?.length > 0 && (
+                                            <ul className="absolute left-0 right-0 z-50 mt-12 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
+                                                {data?.data?.locations?.map((item, index) => (
+                                                    <li
+                                                        key={index}
+                                                        onClick={() => {
+                                                            setSearchContent(item?.location_name);
+                                                            setShowDropdown(false);
+                                                            setCityName(item?.location_name)
+                                                        }}
+                                                        className="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-secondary-medium"
+                                                    >
+                                                        {item?.location_name}
+                                                    </li>
+
+                                                ))}
+                                            </ul>
+                                        )}
+                                        {/* *********************************** */}
+
                                         <button
                                             type="submit"
 
@@ -250,7 +296,9 @@ export default function Search() {
                                     </div>
                                 </form>
                             </div>
+                            {/* Dropdown */}
 
+                            {/* **************************************** edning */}
 
 
                             {/* ********************************** on mobile vooiw show form  */}
@@ -263,10 +311,28 @@ export default function Search() {
                                         <input
                                             type="text"
                                             // value={location}
-                                            onChange={(e) => setSearchContent(e.target.value)}
+                                            onChange={handleInputChange}
+                                            onFocus={() => setShowDropdown(true)}
                                             className="block relative w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
                                             placeholder="Places to go, things to do, hotels..."
                                         />
+                                        {showDropdown && data?.data?.locations.length > 0 && (
+                                            <ul className="absolute left-0 right-0 z-50 mt-12 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
+                                                {data?.data?.locations.map((item, index) => (
+                                                    <li
+                                                        key={index}
+                                                        onClick={() => {
+                                                            setSearchContent(item?.location_name);
+                                                            setShowDropdown(false);
+                                                            setCityName(item?.location_name)
+                                                        }}
+                                                        className="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-secondary-medium"
+                                                    >
+                                                        {item?.location_name}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                         <div className="absolute start-0 flex items-center ps-4 pointer-events-none icon_search">
                                             <CiSearch />
                                         </div>

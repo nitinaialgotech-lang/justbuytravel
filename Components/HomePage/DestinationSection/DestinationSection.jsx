@@ -30,23 +30,19 @@ const card = [
         img: "/home/destination/water.jpg"
     }
 ]
-
-
-
-
-
+// ****************
 
 export default function DestinationSection() {
     const [isDestinationActive, setDestinationActive] = useState(true);
     return (
         <>
-            <section className='destination_section container padding_bottom '>
+            <section className='destination_section container  padding_bottom '>
                 <div className="destination_title section_title mb-10">
                     <h2 className='mb-0'>
                         Trending Destinations
                     </h2>
                     <h5 >
-                        Whatever you're into, we’ve got it
+                        The hottest places capturing travelers’ attention
                     </h5>
                 </div>
                 {/* ************** */}
@@ -92,6 +88,7 @@ export default function DestinationSection() {
                                     delay: 3000,
                                     disableOnInteraction: false,
                                 }}
+                                modules={[Pagination, Navigation]}
                                 onSwiper={(swiper) => setDestinationActive(swiper.isBeginning)}
                                 onSlideChange={(swiper) => setDestinationActive(swiper.isBeginning)}
 
@@ -117,7 +114,7 @@ export default function DestinationSection() {
                                         spaceBetween: 24,
                                     },
                                 }}
-                                modules={[Pagination, Navigation]}
+
                                 className="mySwiper relative"
                             >
                                 {
@@ -150,12 +147,12 @@ export default function DestinationSection() {
                             </Swiper>
                             <div className="button_swiper absolute ">
                                 <div className="buttons_icon relative">
-                                    {!isDestinationActive && (
-                                        <button id='destination_prev' className='absolute'>
-                                            <MdOutlineKeyboardArrowLeft size={30} />
-                                        </button>
 
-                                    )}
+                                    <button id='destination_prev' className={`absolute ${isDestinationActive ? 'opacity-50 pointer-events-none' : ''}`}>
+                                        <MdOutlineKeyboardArrowLeft size={30} />
+                                    </button>
+
+
                                     <button id='destination_next' className='absolute'>
                                         <MdOutlineKeyboardArrowRight size={30} />
                                     </button>

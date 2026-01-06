@@ -9,7 +9,7 @@ export default function ContactUs() {
         <div className="container">
           <div className="row">
             {/* *************************** */}
-            <div className="col-lg-8">
+            <div className="col-lg-7">
               <div className="contact_form ">
                 <div className="contact_form_title">
                   <div className="section_title">
@@ -22,7 +22,7 @@ export default function ContactUs() {
             </div>
             {/* ****************************** */}
 
-            <div className="col-lg-4">
+            <div className="col-lg-5">
               <div className="contact_location">
                 <Contact_Location />
               </div>
