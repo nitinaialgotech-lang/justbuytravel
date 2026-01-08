@@ -1,7 +1,7 @@
 'use client';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { FaUserAlt } from 'react-icons/fa';
 import { IoTime } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
@@ -187,8 +187,95 @@ export default function RecomendSection() {
         queryFn: () => SearchLocation(search),
         enabled: !!search
     })
-    const hotels = data?.hotels;
-    console.log(data, ".........pkpk");
+    
+    // Log error if present
+    useEffect(() => {
+        if (error) {
+            console.error("Error fetching hotels:", error);
+        }
+    }, [error]);
+    // Handle different data structures: data.hotels, data.data.hotels, or direct array
+    const hotels = useMemo(() => {
+        if (!data) {
+            return null;
+        }
+        
+        let extractedHotels = null;
+        
+        // Try data as direct array first (actual API structure based on error)
+        if (Array.isArray(data) && data.length > 0) {
+            extractedHotels = data;
+        }
+        // Try data.data as direct array
+        else if (Array.isArray(data.data) && data.data.length > 0) {
+            extractedHotels = data.data;
+        }
+        // Try data.hotels
+        else if (data.hotels && Array.isArray(data.hotels) && data.hotels.length > 0) {
+            extractedHotels = data.hotels;
+        }
+        // Try data.data.hotels
+        else if (data.data?.hotels) {
+            if (Array.isArray(data.data.hotels)) {
+                const firstHotel = data.data.hotels[0];
+                if (firstHotel?.items && Array.isArray(firstHotel.items)) {
+                    extractedHotels = data.data.hotels.flatMap(item => item.items || []);
+                } else if (data.data.hotels.length > 0) {
+                    extractedHotels = data.data.hotels;
+                }
+            } else {
+                extractedHotels = data.data.hotels;
+            }
+        }
+        
+        // Ensure hotels is an array
+        if (extractedHotels && !Array.isArray(extractedHotels)) {
+            extractedHotels = [extractedHotels];
+        }
+        
+        // Map the hotel data to match the expected structure
+        if (extractedHotels && Array.isArray(extractedHotels)) {
+            extractedHotels = extractedHotels.map(hotel => {
+                // Ensure reviews is a number, not an object
+                const reviewsCount = typeof hotel.reviews === 'object' && hotel.reviews?.votes_count 
+                    ? hotel.reviews.votes_count 
+                    : (typeof hotel.reviews === 'number' ? hotel.reviews : 0);
+                
+                // Ensure rating is a number
+                const ratingValue = typeof hotel.reviews === 'object' && hotel.reviews?.value
+                    ? hotel.reviews.value
+                    : (typeof hotel.rating === 'number' ? hotel.rating : 0);
+                
+                // Destructure to exclude reviews and rating from spread
+                const { reviews: _, rating: __, ...restOfHotel } = hotel;
+                
+                return {
+                    // Map API fields to component fields
+                    name: hotel.title || hotel.name || 'Hotel',
+                    property_token: hotel.hotel_identifier || hotel.property_token || hotel.data_id,
+                    rating: ratingValue,
+                    reviews: reviewsCount,
+                    image: hotel.overview_images?.[0] || hotel.image,
+                    image_proxy: hotel.overview_images?.[0] || hotel.image_proxy,
+                    price_per_night: {
+                        price: `₹${hotel.prices?.price || 0}`,
+                        extracted_price: hotel.prices?.price || 0
+                    },
+                    total_price: {
+                        price: `₹${hotel.prices?.price || 0}`,
+                        extracted_price: hotel.prices?.price || 0
+                    },
+                    // Keep original data for reference (excluding reviews and rating to avoid conflicts)
+                    ...restOfHotel
+                };
+            });
+        }
+        
+        return extractedHotels;
+    }, [data]);
+    
+    console.log("isLoading:", isLoading, "locationFetching:", locationFetching);
+    console.log("RENDER - hotels:", hotels, "length:", hotels?.length);
 
     // Debug: Log image URLs to help identify issues
     useEffect(() => {
@@ -219,9 +306,91 @@ export default function RecomendSection() {
     console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
 
 
+    // Shimmer skeleton component
+    const ShimmerCard = () => (
+        <div className="card_col">
+            <div className="recommend_card_box card_rounded shadow margin_lr margin_md-lr">
+                <div className="card_box pe-">
+                    <div className="card_box_img card_rounded relative overflow-hidden shimmer-container" style={{ minHeight: '250px', backgroundColor: '#e5e7eb' }}>
+                        <div className="shimmer"></div>
+                        <div className="rated_msg absolute top-5 flex justify-between items-center left-5 right-5">
+                            <div className="msg shimmer-text" style={{ width: '80px', height: '20px', borderRadius: '4px' }}></div>
+                            <div className="msg_icon shimmer-icon" style={{ width: '20px', height: '20px', borderRadius: '50%' }}></div>
+                        </div>
+                    </div>
+                    <div className="card_box_detail px-4 py-5 card_rounded flex flex-col z-1 gap-2 relative">
+                        <div className="shimmer-text" style={{ width: '80%', height: '24px', borderRadius: '4px', marginBottom: '8px' }}></div>
+                        <div className="time flex items-center gap-3 relative">
+                            <div className="icon flex items-center gap-1">
+                                <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
+                                <div className="shimmer-text" style={{ width: '100px', height: '16px', borderRadius: '4px' }}></div>
+                            </div>
+                            <div className="guest flex items-center gap-1">
+                                <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
+                                <div className="shimmer-text" style={{ width: '80px', height: '16px', borderRadius: '4px' }}></div>
+                            </div>
+                        </div>
+                        <div className="price_book flex mt-3 justify-between items-center">
+                            <div className="shimmer-text" style={{ width: '120px', height: '24px', borderRadius: '4px' }}></div>
+                            <div className="shimmer-button" style={{ width: '100px', height: '36px', borderRadius: '9999px' }}></div>
+                        </div>
+                        <div className="rating_list absolute flex items-center gap-1 right-10 shadow">
+                            <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
+                            <div className="shimmer-text" style={{ width: '30px', height: '16px', borderRadius: '4px' }}></div>
+                            <div className="shimmer-text" style={{ width: '80px', height: '16px', borderRadius: '4px' }}></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
     // *****************************************************************************************
     return (
         <>
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes shimmer {
+                    0% {
+                        background-position: -1000px 0;
+                    }
+                    100% {
+                        background-position: 1000px 0;
+                    }
+                }
+                .shimmer-container {
+                    position: relative;
+                    overflow: hidden;
+                }
+                .shimmer {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(
+                        90deg,
+                        #e5e7eb 0%,
+                        #f3f4f6 50%,
+                        #e5e7eb 100%
+                    );
+                    background-size: 1000px 100%;
+                    animation: shimmer 2s infinite;
+                }
+                .shimmer-text,
+                .shimmer-icon,
+                .shimmer-button {
+                    background: linear-gradient(
+                        90deg,
+                        #e5e7eb 0%,
+                        #f3f4f6 50%,
+                        #e5e7eb 100%
+                    );
+                    background-size: 1000px 100%;
+                    animation: shimmer 2s infinite;
+                }
+            `
+            }} />
             <section className='recomend_section container  padding_bottom'>
                 <div className="section_title relative ">
                     <h2 className='mb-0'>
@@ -276,11 +445,22 @@ export default function RecomendSection() {
                                 slidesPerView: 3, // desktop (optional)
                             },
                         }}
-                        loop={true}
+                        loop={!isLoading && hotels?.length > 0}
                         id='swiper_sldie'
                     >
-                        {
-                            hotels?.slice(0, 6)?.map((item, i) => {
+                        {(() => {
+                            const hasHotels = hotels && Array.isArray(hotels) && hotels.length > 0;
+                            console.log("=== RENDER CHECK ===");
+                            console.log("hasHotels:", hasHotels);
+                            console.log("hotels:", hotels);
+                            console.log("hotels type:", typeof hotels);
+                            console.log("isArray:", Array.isArray(hotels));
+                            console.log("length:", hotels?.length);
+                            console.log("===================");
+                            
+                            if (hasHotels) {
+                                console.log("RENDERING HOTELS, count:", hotels.length);
+                                return hotels.slice(0, 6).map((item, i) => {
                                 let titlecontent = item.name
                                 if (titlecontent?.length > 3) {
                                     titlecontent += "..."
@@ -365,8 +545,8 @@ export default function RecomendSection() {
                                                     {/* *************** rating_list */}
                                                     <div className="rating_list absolute flex items-center gap-1 right-10 shadow">
                                                         <span className='w-5'><FontAwesomeIcon icon={faStar} /></span>
-                                                        <span><p className='m-0'>{item?.rating}</p></span>
-                                                        <span><p className='m-0'>({item?.reviews} reviews)</p></span>
+                                                        <span><p className='m-0'>{item?.rating || 0}</p></span>
+                                                        <span><p className='m-0'>({item?.reviews || 0} reviews)</p></span>
                                                     </div>
 
                                                 </div>
@@ -377,9 +557,16 @@ export default function RecomendSection() {
                                     </div>
                                     </SwiperSlide>
                                 )
-                            })
-
-                        }
+                            });
+                            } else {
+                                console.log("RENDERING SHIMMER - no hotels available");
+                                return Array.from({ length: 6 }).map((_, i) => (
+                                    <SwiperSlide key={`shimmer-${i}`}>
+                                        <ShimmerCard />
+                                    </SwiperSlide>
+                                ));
+                            }
+                        })()}
                     </Swiper>
                 </div>
             </section>
