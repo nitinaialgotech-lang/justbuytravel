@@ -504,16 +504,21 @@ button {
 }
 
 .swiper_inner_img {
-  mask-image: url("/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png");
+  /* correct mask-image path (was pointing to another demo path) */
+  mask-image: url("/home/offer/offer-banner-img-shape.png");
   mask-repeat: no-repeat;
   margin-left: auto;
   max-width: 525px;
   width: 100%;
   border-radius: 0px 20px 20px 0px;
+  overflow: hidden;
 }
 
 /* Optional: smooth scaling */
 .swiper_inner_img img {
+  display: block;
+  width: 100%;
+  height: 100%;
   transition: transform 1.2s ease;
   object-fit: cover;
 }

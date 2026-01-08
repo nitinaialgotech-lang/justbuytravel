@@ -27,105 +27,41 @@ import Blogs from '@/Components/HomePage/Blog/Blogs'
 
 export default function SearchHotelDetail() {
 
-    const searchid = useSearchParams();
-    const propertyToken = searchid.get("property_token");
+    const search_detail = useSearchParams();
 
-    // Get passed data from sessionStorage
-    const [passedData, setPassedData] = useState(null);
+    const code = search_detail.get("code");
+    const hotel_id = search_detail.get("id");
 
-    useEffect(() => {
-        if (propertyToken && typeof window !== 'undefined') {
-            const stored = sessionStorage.getItem(`hotel_${propertyToken}`);
-            if (stored) {
-                try {
-                    const parsed = JSON.parse(stored);
-                    setPassedData(parsed);
-                    // Clean up after reading
-                    sessionStorage.removeItem(`hotel_${propertyToken}`);
-                } catch (e) {
-                    console.error('Error parsing stored data:', e);
-                }
-            }
-        }
-    }, [propertyToken]);
-
-    // ********************
-    const { data, isLoading, isError, error } = useQuery({
-        queryKey: ["hotels", propertyToken],
-        queryFn: () => HotelDetail(propertyToken),
-        enabled: !!propertyToken, // Only run query when property_token exists
+    const { data } = useQuery({
+        queryKey: ["hoteldetail", hotel_id, code],
+        queryFn: () => HotelDetail(hotel_id, code)
     })
 
-    // console.log("Full API response:", data);
-    // console.log("Property token:", propertyToken);
-
-    // ********************
-    // Try different possible data structures
-    const hotel = data?.data?.data?.full_data ||
-        data?.data?.full_data ||
-        data?.full_data ||
-        data?.data ||
-        data;
-
-    const description = hotel?.property?.description;
-    console.log(description, "..................>>>>> description ");
-
-    const lat = hotel?.property?.additional_data?.gps_coordinates?.latitude;
-    const long = hotel?.property?.additional_data?.gps_coordinates?.longitude;
-    const near_by_places = hotel?.property?.additional_data?.nearby_places;
-    const prices = hotel?.property?.additional_data?.all_offers;
-    const name = hotel?.property?.name;
-    console.log("prices", prices);
-
-    // Use passed images_full first, then API data, fallback to empty array
-    const images = hotel?.property?.images_proxy || [];
-
-    // Use passed amenities first, then API data, fallback to empty array
-    const amenities = passedData?.amenities || hotel?.property?.amenities || [];
-
-    console.log("images", images);
-    console.log("amenities", amenities);
-
-    // Show loading state
-    if (isLoading) {
-        return (
-            <div className="container py-5">
-                <div className="text-center">
-                    <p>Loading hotel details...</p>
-                </div>
-            </div>
-        );
-    }
-
-    // Show error state
-    if (isError) {
-        return (
-            <div className="container py-5">
-                <div className="text-center">
-                    <p className="text-danger">Error loading hotel details: {error?.message || "Unknown error"}</p>
-                    <p className="text-muted">Property Token: {propertyToken}</p>
-                </div>
-            </div>
-        );
-    }
-
-    // Show message if no data
-    if (!hotel?.property || !name) {
-        return (
-            <div className="container py-5">
-                <div className="text-center">
-                    <p>No hotel data found for property token: {propertyToken}</p>
-                    <pre className="text-left mt-3" style={{ fontSize: '12px', overflow: 'auto', maxHeight: '400px' }}>
-                        {JSON.stringify(data, null, 2)}
-                    </pre>
-                </div>
-            </div>
-        );
-    }
 
 
-    console.log(hotel, "hotel.........................pk");
+    const about_hotel = data?.data?.data?.slice(0, 1)?.map((item) => item);
+    const location = data?.data?.data?.slice(0, 1)?.map((item) => item?.location);
+    console.log(about_hotel, "hote_deytqa>...............................");
 
+    console.log(about_hotel?.slice(0, 1)?.map((item) => item?.about), "pkpkpkpkkpkpkpkpkpkpkpkpk");
+    const about = about_hotel?.slice(0, 1)?.map((item) => item?.about);
+    const hotel = about_hotel?.slice(0, 1)?.map((item) => item?.location)
+    /****************************  send atat */
+    //  price 
+    const price = about_hotel?.slice(0, 1)?.map((item) => item?.prices?.items)
+
+    // imgaesd 
+    const images = about_hotel?.slice(0, 1)?.map((item) => item?.overview_images);
+    // tritle
+    const title = about_hotel?.slice(0, 1)?.map((item) => item?.title)
+    // grid images 
+    const grid_img = images?.flat(1).map((item) => item);
+
+
+    const lat = location?.latitude;
+    const long = location?.longitude;
+
+    console.log(lat, long);
 
     return (
         <>
@@ -142,15 +78,42 @@ export default function SearchHotelDetail() {
                                         ☆
                                         ☆
                                         ☆
-                                        {hotel?.property?.rating} Review ( based on {hotel?.property?.reviews} reviews )
+                                        {/* {hotel?.property?.rating} Review ( based on {hotel?.property?.reviews} reviews ) */}
                                     </p>
                                     <h2 className='pb-4'>
-                                        {hotel?.property?.name}
+                                        {title}
                                     </h2>
                                 </div>
                                 {/* Image Gallery */}
                                 <div className="banner_img d-none d-lg-block">
-                                    <ImageGallery images={images} hotelName={name} />
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <div className="image_head">
+                                                <img src={images?.map((item) => item[0])} alt="" />
+                                            </div>
+
+
+
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                {
+                                                    grid_img?.slice(1, 5)?.map((item) => {
+                                                        return (
+                                                            <>
+                                                                <div className="col-lg-6">
+                                                                    <img src={item} alt="" />
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 {/* **********************************    on  mobiloe view show cslider  */}
@@ -165,21 +128,16 @@ export default function SearchHotelDetail() {
                                             className="mySwiper"
                                             style={{ width: "100%", height: "100%" }}
                                         >
-                                            {
-                                                images?.map((item) => {
-                                                    return (
-                                                        <>
 
-                                                            <SwiperSlide>
-                                                                <div className="banner_img ">
-                                                                    <img src={item} alt="" width={"100%"} className='card_rounded' />
-                                                                </div>
-                                                            </SwiperSlide>
+                                            <>
 
-                                                        </>
-                                                    )
-                                                })
-                                            }
+                                                <SwiperSlide>
+                                                    <div className="banner_img ">
+                                                        <img src="" alt="" width={"100%"} className='card_rounded' />
+                                                    </div>
+                                                </SwiperSlide>
+
+                                            </>
 
 
 
@@ -212,12 +170,12 @@ export default function SearchHotelDetail() {
                         <div className=" my-5 content_box_detail  rounded-2xl border border-gray-300">
 
 
-                            <AboutHotelDetail detail={description} name={name} />
+                            {/* <AboutHotelDetail detail={description} name={name} /> */}
 
 
-                            <HotelFacilities amenities={amenities} />
+                            {/* <HotelFacilities amenities={amenities} /> */}
 
-                            <NearByHotel places={near_by_places} />
+                            {/* <NearByHotel places={near_by_places} /> */}
 
 
                             <HotelLocation lat={lat} long={long} />
@@ -226,9 +184,8 @@ export default function SearchHotelDetail() {
 
                         </div>
                     </div>
-                    {/* ***************************** */}
                     <div className="col-lg-5 order-first order-lg-last">
-                        <SearchSidebar prices_hotel={prices} />
+                        <SearchSidebar prices_hotel={price} />
 
                     </div>
                 </div>

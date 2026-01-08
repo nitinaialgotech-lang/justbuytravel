@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import HotelDetailContent from "./HotelDetail/HotelDetailContent";
 
 export default function SearchSidebar({ prices_hotel }) {
+    console.log(prices_hotel, "oooooo");
+
+    const price = prices_hotel?.flat(1)
+    console.log(price, "popopopo");
 
     return (
         <>
@@ -18,7 +22,7 @@ export default function SearchSidebar({ prices_hotel }) {
 
                         {/* ******************************************* */}
                         <div className="checkbox-container two hotel-category">
-                            <HotelDetailContent prices={prices_hotel} />
+                            <HotelDetailContent prices={price} />
                         </div>
                     </div>
 

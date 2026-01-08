@@ -15,22 +15,22 @@ export default function GetOfferSection() {
     const card = [
         {
             title: " Snowboarding 30% Off – All Winter Spots!",
-            banner: "/justbuytravel_next/demo/home/offer/offer_banner1.webp",
-            back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
+            banner: "/home/offer/offer_banner1.webp",
+            back_img: "/home/offer/offer-banner-img-shape.png",
             option1: "Safe & Verified Equipment",
             option2: "Breathtaking Views"
         },
         {
             title: " Snowboarding 30% Off – All Winter Spots!",
-            banner: "/justbuytravel_next/demo/home/offer/offer_banner2.webp",
-            back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
+            banner: "/home/offer/offer_banner2.webp",
+            back_img: "/home/offer/offer-banner-img-shape.png",
             option1: "Safe & Verified Equipment",
             option2: "Breathtaking Views"
         },
         {
             title: " Snowboarding 30% Off – All Winter Spots!",
-            banner: "/justbuytravel_next/demo/home/offer/offer_banner3.webp",
-            back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
+            banner: "/home/offer/offer_banner3.webp",
+            back_img: "/home/offer/offer-banner-img-shape.png",
             option2: "Breathtaking Views",
             option1: "Safe & Verified Equipment",
         }
@@ -118,7 +118,7 @@ export default function GetOfferSection() {
                                                             <div className="banner_image relative order-first order-lg-last ">
                                                                 <div className="swiper_inner_img">
                                                                     <img
-                                                                        src={item?.banner}
+                                                                        src={item.banner}
                                                                         className="w-full object-cover card_rounded"
                                                                         alt=""
                                                                     />

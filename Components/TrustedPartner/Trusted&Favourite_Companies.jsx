@@ -8,10 +8,10 @@ import { Autoplay, Pagination } from 'swiper/modules';
 export default function Trusted_Favourite_Companies() {
     const card = [
         {
-            img: "/justbuytravel_next/demo/aboutus/booking.webp"
+            img: "/demo/aboutus/booking.webp"
         },
         {
-            img: "/justbuytravel_next/demo/aboutus/Expida.webp"
+            img: "/demo/aboutus/Expida.webp"
         },
     ]
     return (
@@ -86,7 +86,7 @@ export default function Trusted_Favourite_Companies() {
                                 </Swiper>
                                 {/* ******************* */}
                                 <div className="plane_icon ">
-                                    <img src="/justbuytravel_next/demo/aboutus/shadow-plane.webp" alt="" />
+                                    <img src="/aboutus/shadow-plane.webp" alt="" />
                                 </div>
                                 <button type="submit"
                                     className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2  text-light ">Click Here To Descover Them All!</button>

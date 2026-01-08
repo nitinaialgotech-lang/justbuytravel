@@ -266,19 +266,20 @@ export default function Search() {
                                         />
                                         {/* *********************************** */}
                                         {/* Dropdown moved inside relative container so absolute positioning works */}
-                                        {showDropdown && data?.data?.locations?.length > 0 && (
+                                        {showDropdown && data?.data?.suggestions?.length > 0 && (
                                             <ul className="absolute left-0 right-0 z-50 mt-12 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
-                                                {data?.data?.locations?.map((item, index) => (
+                                                {data?.data?.suggestions?.map((item, index) => (
                                                     <li
                                                         key={index}
                                                         onClick={() => {
-                                                            setSearchContent(item?.location_name);
+                                                            setSearchContent(item?.name);
                                                             setShowDropdown(false);
-                                                            setCityName(item?.location_name)
+                                                            setCityName(item?.name)
                                                         }}
                                                         className="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-secondary-medium"
                                                     >
-                                                        {item?.location_name}
+                                                        <Link href={`/search?city=${item?.name}&full_address=${item?.full_address}`}>
+                                                            {item?.name}</Link>
                                                     </li>
 
                                                 ))}
@@ -316,19 +317,19 @@ export default function Search() {
                                             className="block relative w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
                                             placeholder="Places to go, things to do, hotels..."
                                         />
-                                        {showDropdown && data?.data?.locations.length > 0 && (
+                                        {showDropdown && data?.data?.suggestions?.length > 0 && (
                                             <ul className="absolute left-0 right-0 z-50 mt-12 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
-                                                {data?.data?.locations.map((item, index) => (
+                                                {data?.data?.suggestions.map((item, index) => (
                                                     <li
                                                         key={index}
                                                         onClick={() => {
-                                                            setSearchContent(item?.location_name);
+                                                            setSearchContent(item?.name);
                                                             setShowDropdown(false);
-                                                            setCityName(item?.location_name)
+                                                            setCityName(item?.name)
                                                         }}
                                                         className="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-secondary-medium"
                                                     >
-                                                        {item?.location_name}
+                                                        {item?.name}
                                                     </li>
                                                 ))}
                                             </ul>

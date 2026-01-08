@@ -18,34 +18,36 @@ export default function HotelDetailContent({ prices }) {
                                         prices?.map((item, i) => {
 
 
-                                            if (item?.source === "Expedia.com" || item?.source === "Booking.com") {
-                                                return (
 
-                                                    <div className="hotel_price_card flex items-center justify-between  border-t-1 border-gray-300" key={i}>
-                                                        {/* ********************* */}
-                                                        <div className="booking_icon">
-                                                            <img src={getAssetPath(item?.source === "Expedia.com" ? "/logo/hoteldetail/expedia_logo.svg" : "/logo/hoteldetail/Booking_Com.png")} alt={`${item?.source} booking logo - Compare hotel prices`} />
-                                                        </div>
-                                                        {/* ********************* */}
+                                            return (
 
-                                                        {/* ************************* */}
-                                                        <div className="bookign_price">
-                                                            <h4 className='m-0'>
-                                                                {item?.total_price?.price_before_taxes}
-                                                            </h4>
-                                                        </div>
-                                                        {/* ********************** */}
-                                                        <div className="viewdetail">
-                                                            <button className=''>
-                                                                view detail
-                                                            </button>
-                                                        </div>
+                                                <div className="hotel_price_card flex items-center justify-between  border-t-1 border-gray-300" key={i}>
+                                                    {/* ********************* */}
+                                                    <div className="booking_icon">
+                                                        {/* <img src={getAssetPath(item?.source === "Expedia.com" ? "/logo/hoteldetail/expedia_logo.svg" : "/logo/hoteldetail/Booking_Com.png")} alt={`${item?.source} booking logo - Compare hotel prices`} /> */}
 
+                                                        <h2>{item?.title}</h2>
+                                                    </div>
+                                                    {/* ********************* */}
+
+                                                    {/* ************************* */}
+                                                    <div className="bookign_price">
+                                                        <h6 className='m-0'>
+                                                            {item?.price}
+                                                        </h6>
+                                                    </div>
+                                                    {/* ********************** */}
+                                                    <div className="viewdetail">
+                                                        <button className=''>
+                                                            view detail
+                                                        </button>
                                                     </div>
 
+                                                </div>
 
-                                                )
-                                            }
+
+                                            )
+
                                         })
                                     }
 

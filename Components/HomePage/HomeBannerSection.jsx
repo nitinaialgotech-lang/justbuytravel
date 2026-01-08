@@ -4,7 +4,7 @@ import SearchSection from './SearchSection';
 export default function
     HomeBannerSection() {
     return (
-        <div>
+        <>
             <section className='ps-15 pe-15 mp-s mp-e'>
                 <div className="section_home_banner rounded-3xl flex items-center">
                     {/* *************************** box title */}
@@ -32,7 +32,7 @@ export default function
             <Suspense fallback={<div>Loading...</div>}>
                 <Search />
             </Suspense>
+        </>
 
-        </div>
     )
 }

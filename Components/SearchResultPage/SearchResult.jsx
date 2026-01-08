@@ -16,12 +16,12 @@ export default function SearchResult() {
 
     const searchQuery = useSearchParams();
 
-    const search = searchQuery.get("query");
+    const search = searchQuery.get("city");
     const { data } = useQuery({
         queryKey: ["fetch data ", search],
         queryFn: async () => await SearchLocation(search),
     });
-    const city = data?.location?.split(",")[0];
+    const city = data?.data?.keyword?.split(",")[0];
     return (
         <>
             <Header />

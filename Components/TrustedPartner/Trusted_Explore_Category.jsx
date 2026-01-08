@@ -7,19 +7,19 @@ export default function Trusted_Explore_Category() {
 
     const hotel = [
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/hotel/Hotel-new-york-justbuy-travel.png",
+            img: "/TrustedPartner/hotel/Hotel-new-york-justbuy-travel.png",
             title: "Hotel In New York"
         },
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/hotel/Hotel-dubai-justbuy-travel.webp",
+            img: "/TrustedPartner/hotel/Hotel-dubai-justbuy-travel.webp",
             title: "Hotel In Dubai"
         },
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/hotel/Hotel-aus-justbuy-travel.png",
+            img: "/TrustedPartner/hotel/Hotel-aus-justbuy-travel.png",
             title: "Hotel In Australia"
         },
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/hotel/flight-london-justbuytravel.png",
+            img: "/TrustedPartner/hotel/flight-london-justbuytravel.png",
             title: "Hotel In London"
         },
     ]
@@ -27,19 +27,19 @@ export default function Trusted_Explore_Category() {
 
     const flight = [
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/flight/flight-london-justbuytravel.png",
+            img: "/TrustedPartner/flight/flight-london-justbuytravel.png",
             title: "Flight In London"
         },
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/flight/flight-paris-justbuytravel.webp",
+            img: "/TrustedPartner/flight/flight-paris-justbuytravel.webp",
             title: "Flight In Paris"
         },
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/hotel/Hotel-new-york-justbuy-travel.png",
+            img: "/TrustedPartner/hotel/Hotel-new-york-justbuy-travel.png",
             title: "Flight In New York"
         },
         {
-            img: "/justbuytravel_next/demo/TrustedPartner/flight/Hotel-dubai-justbuy-travel.webp",
+            img: "/TrustedPartner/flight/Hotel-dubai-justbuy-travel.webp",
             title: "Flight In Dubai"
         },
 

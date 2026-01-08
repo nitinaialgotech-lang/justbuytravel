@@ -66,6 +66,8 @@ export default function RecomendSection() {
                 { headers: { "User-Agent": "JustBuyTravel/1.0" } }
             );
             const data = await response.json();
+            console.log(data, "pkpkpkoooooooooooooooooool");
+
             if (data && data.address) {
                 const city = data.address.city || data.address.town || data.address.village;
                 if (city) return city;
@@ -183,7 +185,7 @@ export default function RecomendSection() {
     const { data, isLoading, error } = useQuery({
         queryKey: ["hotels", search],
         queryFn: () => SearchLocation(search),
-        enabled: !!search // Only run query when search is available
+        enabled: !!search
     })
     const hotels = data?.hotels;
     console.log(data, ".........pkpk");
@@ -213,15 +215,19 @@ export default function RecomendSection() {
 
 
 
+    // const { data: GetSearch_data } = useQuery({
+    //     queryKey: ["getdata", search],
+    //     queryFn: () => Get_cityName(search)
+    // })
+
+    // console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
+
     const { data: GetSearch_data } = useQuery({
-        queryKey: ["getdata", search],
-        queryFn: () => Get_cityName(search)
+        queryKey: ["getdata", "Panipat,Haryana,India"],
+        queryFn: () => Get_cityName("Panipat,Haryana,India"),
+        enabled: !!search  // only fetch if search is truthy
     })
-
     console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
-
-
-
 
     // useEffect(() => {
     //     const fetchData = async () => {
@@ -316,9 +322,9 @@ export default function RecomendSection() {
                                 return (
 
                                     <SwiperSlide key={itemId}> <div className="card_col " key={i} >
-                                        {/* *********** */}
+
                                         <div className="recommend_card_box   card_rounded shadow margin_lr margin_md-lr ">
-                                            {/* *********** */}
+
                                             <div className="card_box pe-">
                                                 <div className="card_box_img card_rounded relative overflow-hidden" style={{ minHeight: '250px', backgroundColor: '#f3f4f6' }}>
                                                     {imageErrors[itemId] ? (
@@ -332,7 +338,7 @@ export default function RecomendSection() {
                                                             alt={item?.name || 'Hotel image'}
                                                             onError={(e) => handleImageError(itemId, item, e)}
                                                             onLoad={() => {
-                                                                // Remove error state if image loads successfully
+
                                                                 if (imageErrors[itemId]) {
                                                                     setImageErrors(prev => {
                                                                         const newErrors = { ...prev };
@@ -344,7 +350,7 @@ export default function RecomendSection() {
                                                             loading="lazy"
                                                         />
                                                     )}
-                                                    {/* ********************* */}
+
                                                     <div className="rated_msg absolute top-5 flex  justify-between items-center left-5 right-5">
                                                         <div className="msg">
                                                             <p className='m-0'>Top rated</p>
@@ -353,7 +359,7 @@ export default function RecomendSection() {
                                                             <FaRegHeart />
                                                         </div>
                                                     </div>
-                                                    {/* ********************* */}
+
                                                 </div>
                                                 {/* *** */}
                                                 <div className="card_box_detail px-4 py-5 card_rounded flex flex-col z-1 gap-2 relative">

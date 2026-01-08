@@ -10,22 +10,22 @@ import { useRouter } from 'next/navigation';
 
 const card = [
     {
-        img: "/justbuytravel_next/demo/aboutus/booking.webp"
+        img: "/aboutus/booking.webp"
     },
     {
-        img: "/justbuytravel_next/demo/aboutus/Expida.webp"
+        img: "/aboutus/Expida.webp"
     },
     // {
-    //     img: "/justbuytravel_next/demo/aboutus/google.png"
+    //     img: "/demo/aboutus/google.png"
     // },
     // {
-    //     img: "/justbuytravel_next/demo/aboutus/hotellook.png"
+    //     img: "/demo/aboutus/hotellook.png"
     // },
     // {
-    //     img: "/justbuytravel_next/demo/aboutus/skyscanner.png"
+    //     img: "/demo/aboutus/skyscanner.png"
     // },
     // {
-    //     img: "/justbuytravel_next/demo/aboutus/tripadviser.png"
+    //     img: "/demo/aboutus/tripadviser.png"
     // }
 ]
 
@@ -101,7 +101,7 @@ export default function Trust_Guide_Section() {
                             </Swiper>
                             {/* ******************* */}
                             <div className="plane_icon ">
-                                <img src="/justbuytravel_next/demo/aboutus/shadow-plane.webp" alt="" />
+                                <img src="/aboutus/shadow-plane.webp" alt="" />
                             </div>
                             <button type="submit"
                                 className="z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2  text-light " onClick={() => navigate.push("/my-favorite-travel-resources")}>Click Here To Descover Them All!</button>
