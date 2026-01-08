@@ -6,7 +6,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import { IoTime } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
-import { Get_cityName, SearchLocation } from '@/app/Route/endpoints';
+import { SearchLocation } from '@/app/Route/endpoints';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { getAssetPath } from '@/app/utils/assetPath';
@@ -127,7 +127,7 @@ export default function RecomendSection() {
 
         const success = async (position) => {
             const { latitude, longitude } = position.coords;
-            console.log(`Current location: ${latitude}, ${longitude}`);
+            console.log(`Current location: ${latitude}, ${longitude} .........................................................`);
 
             try {
                 const cityName = await reverseGeocode(latitude, longitude);
@@ -211,37 +211,13 @@ export default function RecomendSection() {
         router.push(`/hoteldetail?property_token=${id}`)
     }
 
-
-
-
-
-    // const { data: GetSearch_data } = useQuery({
-    //     queryKey: ["getdata", search],
-    //     queryFn: () => Get_cityName(search)
-    // })
-
-    // console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
-
     const { data: GetSearch_data } = useQuery({
-        queryKey: ["getdata", "Panipat,Haryana,India"],
-        queryFn: () => Get_cityName("Panipat,Haryana,India"),
+        queryKey: ["getdata", search],
+        queryFn: () => SearchLocation(search),
         enabled: !!search  // only fetch if search is truthy
     })
     console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const result = await Get_cityName("Delhi,India"); 
-    //             setSearch(result);
-    //             console.log(result, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
-    //         } catch (error) {
-    //             console.error("Error fetching data:", error);
-    //         }
-    //     };
-
-    //     fetchData(); 
-    // }, []); 
 
     // *****************************************************************************************
     return (
@@ -254,7 +230,6 @@ export default function RecomendSection() {
                     <h5 >
                         Handpicked experiences tailored to your interests
                     </h5>
-
                     <div className="title_icon absolute right-5   ">
                         <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" />
                     </div>
@@ -271,10 +246,10 @@ export default function RecomendSection() {
                         modules={[Navigation, Pagination]}
                         className="mySwiper"
                         // navigation={true}
-                        // autoplay={{
-                        //     delay: 3000, 
-                        //     disableOnInteraction: false, 
-                        // }}
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false,
+                        }}
                         breakpoints={{
                             320: {
                                 slidesPerView: 1,

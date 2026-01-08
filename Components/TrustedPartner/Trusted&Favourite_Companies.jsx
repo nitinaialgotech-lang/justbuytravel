@@ -8,10 +8,10 @@ import { Autoplay, Pagination } from 'swiper/modules';
 export default function Trusted_Favourite_Companies() {
     const card = [
         {
-            img: "/demo/aboutus/booking.webp"
+            img: "/aboutus/booking.webp"
         },
         {
-            img: "/demo/aboutus/Expida.webp"
+            img: "/aboutus/Expida.webp"
         },
     ]
     return (

@@ -1,6 +1,9 @@
 import React from 'react'
 
-export default function AboutHotelDetail({ detail, name }) {
+export default function AboutHotelDetail({ detail, sub_desc }) {
+    console.log(detail, "kkkkkkkkkkllll",);
+
+    const sub = sub_desc?.flat(1)
     return (
         <>
             <div className="section_about_hotel_detail ">
@@ -10,11 +13,21 @@ export default function AboutHotelDetail({ detail, name }) {
                             <div className="col-lg-12">
                                 <div className="about_hotel_detail">
                                     <h3 className=''>
-                                        About {name}
-                                    </h3>
-                                    <p>
                                         {detail}
-                                    </p>
+                                    </h3>
+                                    {
+                                        sub?.map((item) => {
+                                            return (
+                                                <>
+                                                    <p>
+                                                        {item}
+                                                    </p>
+
+                                                </>
+                                            )
+                                        })
+                                    }
+
 
                                 </div>
                             </div>

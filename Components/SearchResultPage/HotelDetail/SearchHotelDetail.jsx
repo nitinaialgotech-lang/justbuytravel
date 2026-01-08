@@ -41,16 +41,17 @@ export default function SearchHotelDetail() {
 
     const about_hotel = data?.data?.data?.slice(0, 1)?.map((item) => item);
     const location = data?.data?.data?.slice(0, 1)?.map((item) => item?.location);
-    console.log(about_hotel, "hote_deytqa>...............................");
+    console.log(data, "hote_deytqa>...............................");
 
     console.log(about_hotel?.slice(0, 1)?.map((item) => item?.about), "pkpkpkpkkpkpkpkpkpkpkpkpk");
-    const about = about_hotel?.slice(0, 1)?.map((item) => item?.about);
     const hotel = about_hotel?.slice(0, 1)?.map((item) => item?.location)
     /****************************  send atat */
     //  price 
     const price = about_hotel?.slice(0, 1)?.map((item) => item?.prices?.items)
 
     // imgaesd 
+    // ******* reviews
+    const review = about_hotel?.slice(0, 1)?.map((item) => item?.reviews)
     const images = about_hotel?.slice(0, 1)?.map((item) => item?.overview_images);
     // tritle
     const title = about_hotel?.slice(0, 1)?.map((item) => item?.title)
@@ -58,10 +59,18 @@ export default function SearchHotelDetail() {
     const grid_img = images?.flat(1).map((item) => item);
 
 
-    const lat = location?.latitude;
-    const long = location?.longitude;
+    const lat = location?.map((item) => item?.latitude);
+    const long = location?.map((item) => item?.longitude);
 
-    console.log(lat, long);
+    console.log(review, "reviwwwwwww");
+    // ***************************** imunitiexs
+    const amenities = about_hotel?.slice(0, 1)?.map((item) => item?.about);
+    console.log(amenities, ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+    // ************************ descriptionsss
+
+    const description = amenities?.map((item) => item?.description)
+    const sub_desc = amenities?.map((item) => item?.sub_descriptions);
+    console.log(description, "des", sub_desc);
 
     return (
         <>
@@ -78,7 +87,7 @@ export default function SearchHotelDetail() {
                                         ☆
                                         ☆
                                         ☆
-                                        {/* {hotel?.property?.rating} Review ( based on {hotel?.property?.reviews} reviews ) */}
+                                        {review?.map((item) => item?.value)} Review ( based on {review?.map((item) => item?.votes_count)} reviews )
                                     </p>
                                     <h2 className='pb-4'>
                                         {title}
@@ -86,8 +95,8 @@ export default function SearchHotelDetail() {
                                 </div>
                                 {/* Image Gallery */}
                                 <div className="banner_img d-none d-lg-block">
-                                    <div className="row">
-                                        <div className="col-lg-6">
+                                    <div className="row px-3">
+                                        <div className="col-lg-6 p-1">
                                             <div className="image_head">
                                                 <img src={images?.map((item) => item[0])} alt="" />
                                             </div>
@@ -101,8 +110,11 @@ export default function SearchHotelDetail() {
                                                     grid_img?.slice(1, 5)?.map((item) => {
                                                         return (
                                                             <>
-                                                                <div className="col-lg-6">
-                                                                    <img src={item} alt="" />
+                                                                <div className="col-lg-6 p-1">
+                                                                    <div className="image_head">
+
+                                                                        <img src={item} alt="" />
+                                                                    </div>
                                                                 </div>
                                                             </>
                                                         )
@@ -128,16 +140,25 @@ export default function SearchHotelDetail() {
                                             className="mySwiper"
                                             style={{ width: "100%", height: "100%" }}
                                         >
+                                            {
+                                                grid_img?.map((item) => {
 
-                                            <>
+                                                    return (
 
-                                                <SwiperSlide>
-                                                    <div className="banner_img ">
-                                                        <img src="" alt="" width={"100%"} className='card_rounded' />
-                                                    </div>
-                                                </SwiperSlide>
+                                                        <>
 
-                                            </>
+                                                            <SwiperSlide>
+                                                                <div className="banner_img ">
+                                                                    <img src={item} alt="" width={"100%"} className='card_rounded' />
+                                                                </div>
+                                                            </SwiperSlide>
+
+                                                        </>
+
+                                                    )
+                                                })
+                                            }
+
 
 
 
@@ -170,10 +191,10 @@ export default function SearchHotelDetail() {
                         <div className=" my-5 content_box_detail  rounded-2xl border border-gray-300">
 
 
-                            {/* <AboutHotelDetail detail={description} name={name} /> */}
+                            <AboutHotelDetail detail={description} sub_desc={sub_desc} />
 
 
-                            {/* <HotelFacilities amenities={amenities} /> */}
+                            <HotelFacilities amenities={amenities} />
 
                             {/* <NearByHotel places={near_by_places} /> */}
 

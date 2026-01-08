@@ -79,7 +79,7 @@ export default function FaqSection() {
     }
 
     return (
-        <section className="faq-wrapper  pt-5 pb-20  ">
+        <section className="faq-wrapper  padding_bottom">
             <div className="container ">
                 <div className="section_title ">
                     <h2 className='mb-0 capitalize'>

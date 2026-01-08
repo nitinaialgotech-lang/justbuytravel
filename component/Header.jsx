@@ -68,11 +68,11 @@ export default function Header() {
                                     style={{ maxHeight: '100px' }}
                                     navbarScroll
                                 >
-                                    <Nav.Link href="#action1"><span><FaHotel /></span><span>Hotels</span></Nav.Link>
-                                    <Nav.Link href="#action2"><span><MdFlight /></span><span>Flights</span></Nav.Link>
-                                    <Nav.Link href="#action2"><span><FaCar /></span><span>cars</span></Nav.Link>
-                                    <Nav.Link href="#action2"><span><GrBike /></span><span>bikes</span></Nav.Link>
-                                    <Nav.Link href="/justbuytravel_next/demo/blog"><span><IoIosDocument /></span><span>blogs</span></Nav.Link>
+                                    <Nav.Link href="#action1"><span><img className='icon_link' src="/header_icon/icon_hotel.webp" alt="" /></span><span>Hotels</span></Nav.Link>
+                                    <Nav.Link href="#action2"><span><img className='icon_link' src="/header_icon/icon_flight.webp" alt="" /></span><span>Flights</span></Nav.Link>
+                                    <Nav.Link href="#action2"><span><img className='icon_link' src="/header_icon/icon_cruises.webp" alt="" /></span><span>Cruises</span></Nav.Link>
+                                    <Nav.Link href="#action2"><span><img className='icon_link' src="/header_icon/package-1.webp" alt="" /></span><span>Packages</span></Nav.Link>
+                                    <Nav.Link href="/blog"><span><img className='icon_link' src="/header_icon/icon_blog.webp" alt="" /></span><span>blogs</span></Nav.Link>
                                     <div className="search_sign_button flex gap-2 items-center">
                                         <Link href={""} className='sign-in-button bg-color-black text-white' variant="outline-success">Subscriber</Link>
                                     </div>
@@ -110,27 +110,27 @@ export default function Header() {
                                                     <ul>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span className='flex gap-1 capitalize'><span><FaHotel /></span><span>Hotels</span></span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><img className='icon_link' src="/header_icon/icon_hotel.webp" alt="" /></span><span>Hotels</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span className='flex gap-1 capitalize'><span><MdFlight /></span><span>Flights</span></span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><img className='icon_link' src="/header_icon/icon_flight.webp" alt="" /></span><span>Flights</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span className='flex gap-1 capitalize'><span><FaCar /></span><span>cars</span></span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><img className='icon_link' src="/header_icon/icon_cruises.webp" alt="" /></span><span>cruises</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link href={"#"} className='flex justify-between items-center'>
-                                                                <span className='flex gap-1 capitalize'><span><GrBike /></span><span>bikes</span></span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><img className='icon_link' src="/header_icon/package-1.webp" alt="" /></span><span>Packages</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link href={"/justbuytravel_next/demo/blog"} className='flex justify-between items-center'>
-                                                                <span className='flex gap-1 capitalize'><span><IoIosDocument /></span><span>blogs</span></span> <span><FiPlus /></span>
+                                                                <span className='flex gap-1 capitalize'><span><img className='icon_link' src="/header_icon/icon_blog.webp" alt="" /></span><span>blogs</span></span> <span><FiPlus /></span>
                                                             </Link>
                                                         </li>
 

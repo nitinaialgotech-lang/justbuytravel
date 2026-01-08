@@ -69,9 +69,22 @@ button {
 .color_bl {
   color: var(--foreground) !important;
 }
-/* *************************************************** */
-.destination_section {
-  margin-top: 20px;
+/* *********************************** */
+.icon_link {
+  width: 20px;
+  height: 20px;
+}
+
+/* (*********************************** */
+.suggestion_dropdown > li > a {
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--color);
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.suggestion_dropdown > li > a:hover {
+  color: var(--bg-color);
 }
 
 /* ************************************************************************************************************ renw */
@@ -167,6 +180,11 @@ button {
   margin-left: 2px;
 }
 
+/* ********************** search container */
+.search_container {
+  padding: 30px;
+  box-shadow: 0px 0px 6px rgba(219, 219, 219, 0.82);
+}
 .search_container
   > .search_container_box
   > .search_tab
@@ -181,6 +199,15 @@ button {
   color: var(--color);
   font-weight: 500;
   text-transform: capitalize;
+}
+.search_container
+  > .search_container_box
+  > .search_tab
+  > .tab_link
+  > ul
+  > li
+  > a:hover {
+  color: var(--bg-color);
 }
 
 .search_box_input > form > .search_box > div > svg {
@@ -206,6 +233,8 @@ button {
   align-items: center;
   justify-content: center;
   font-size: 17px;
+  right: 10px;
+  top: 13%;
 }
 
 .search_full_button_padding {
@@ -1557,4 +1586,8 @@ button {
 /* *************************** swiperr helping button .......... */
 .helping_swiper-btn-prev,
 .helping_swiper-btn-next {
+}
+.booking_icon > h6:hover {
+  color: var(--bg-color);
+  cursor: pointer;
 }

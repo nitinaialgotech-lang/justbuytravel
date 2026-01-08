@@ -37,7 +37,7 @@ export default function DestinationSection() {
     return (
         <>
             <section className='destination_section container  padding_bottom '>
-                <div className="destination_title section_title mb-10">
+                <div className="destination_title section_title ">
                     <h2 className='mb-0'>
                         Trending Destinations
                     </h2>
@@ -124,7 +124,7 @@ export default function DestinationSection() {
 
                                             <>
                                                 <SwiperSlide key={i}>
-                                                    <div className="destination_box pb-10">
+                                                    <div className="destination_box">
                                                         <div className="destination_img  ">
                                                             <img src={getAssetPath(item?.img)} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
                                                             <div className="destination_name">

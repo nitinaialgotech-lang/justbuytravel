@@ -174,7 +174,7 @@ export default function ExperienceExploreSection() {
 
     return (
         <>
-            <section className='experience_explore_section padding_bottom m-0 pt-3'>
+            <section className='experience_explore_section padding_bottom'>
                 <div className="container">
                     <div className="explore_section section_title m">
                         <h2 className='mb-0'>

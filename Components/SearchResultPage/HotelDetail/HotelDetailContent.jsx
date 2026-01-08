@@ -23,10 +23,10 @@ export default function HotelDetailContent({ prices }) {
 
                                                 <div className="hotel_price_card flex items-center justify-between  border-t-1 border-gray-300" key={i}>
                                                     {/* ********************* */}
-                                                    <div className="booking_icon">
+                                                    <div className="booking_icon flex items-center">
                                                         {/* <img src={getAssetPath(item?.source === "Expedia.com" ? "/logo/hoteldetail/expedia_logo.svg" : "/logo/hoteldetail/Booking_Com.png")} alt={`${item?.source} booking logo - Compare hotel prices`} /> */}
 
-                                                        <h2>{item?.title}</h2>
+                                                        <h6 className='m-0'>{item?.title}</h6>
                                                     </div>
                                                     {/* ********************* */}
 

@@ -840,13 +840,13 @@
   padding: 10px;
   border: 1px solid var(--grey-cl);
 }
-.hotel_price_detail > .hotel_price_card > .booking_icon {
+/* .hotel_price_detail > .hotel_price_card > .booking_icon {
   height: 40px;
-}
-.hotel_price_detail > .hotel_price_card > .booking_icon img {
+} */
+/* .hotel_price_detail > .hotel_price_card > .booking_icon img {
   width: 95px;
   height: 100%;
-}
+} */
 
 .hotel_price_detail > .hotel_price_card > .bookign_price > h4 a {
   font-family: var(--font-fam);
@@ -931,4 +931,9 @@
 .breadcrumb > .breadcrumb-item > a {
   color: var(--cl-bl);
   text-decoration: none;
+}
+.image_head > img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }

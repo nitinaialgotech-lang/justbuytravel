@@ -10,7 +10,7 @@ export default function SearchSidebar({ prices_hotel }) {
 
     return (
         <>
-            <div className=" my-5 pt-4 pb-10  package-sidebar-area card_md_margin">
+            <div className=" my-5  pb-10  package-sidebar-area card_md_margin">
                 <div className="sidebar-wrapper">
                     <div className="title-area">
                         <h5 className="m-0">Get Detals</h5>

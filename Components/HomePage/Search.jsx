@@ -203,12 +203,12 @@ export default function Search() {
 
     return (
         <>
-            <section className="Search_section pb-3  padding_bottom">
+            <section className="Search_section padding_bottom">
                 <div className="container">
                     <div className="search_container ">
-                        <div className="search_container_box  rounded-2xl pb-4 w-full">
-                            <div className="search_tab ps-5 pe-5 pt-4 pb-4">
-                                <div className="tab_link flex justify-between">
+                        <div className="search_container_box  rounded-2xl  w-full">
+                            <div className="search_tab">
+                                <div className="tab_link flex justify-between items-center">
                                     <ul className="flex items-center gap-3 p-0">
                                         <li>
                                             <Link href={""} className="button_bg text-white">
@@ -217,24 +217,24 @@ export default function Search() {
                                         </li>
                                         <li>
                                             <Link href={""}>
-                                                <FaHotel /> hotels
+                                                <img className='icon_link' src="/header_icon/icon_hotel.webp" alt="" /> hotels
                                             </Link>
                                         </li>
                                         <li>
                                             <Link href={""}>
-                                                <MdFlight /> flights
+                                                <img className='icon_link' src="/header_icon/icon_flight.webp" alt="" /> flights
                                             </Link>
                                         </li>
                                         <li>
                                             <Link href={""}>
-                                                <FaCar /> Things to do
+                                                <img className='icon_link' src="/header_icon/package-1.webp" alt="" /> Packages
                                             </Link>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <Link href={""}>
                                                 <GrBike /> Restaurant
                                             </Link>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                     <div className="help_info">
                                         <p className="flex items-center gap-2">
@@ -246,7 +246,7 @@ export default function Search() {
 
                             <div className="search_box_input d-none d-lg-block">
                                 <form
-                                    className="px-15 mx-auto"
+                                    className=" mx-auto"
                                     onSubmit={(e) => {
                                         e.preventDefault();
                                         handleSearch();
@@ -267,7 +267,7 @@ export default function Search() {
                                         {/* *********************************** */}
                                         {/* Dropdown moved inside relative container so absolute positioning works */}
                                         {showDropdown && data?.data?.suggestions?.length > 0 && (
-                                            <ul className="absolute left-0 right-0 z-50 mt-12 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
+                                            <ul className="absolute suggestion_dropdown left-0 right-0 z-50 mt-12 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
                                                 {data?.data?.suggestions?.map((item, index) => (
                                                     <li
                                                         key={index}
@@ -318,7 +318,7 @@ export default function Search() {
                                             placeholder="Places to go, things to do, hotels..."
                                         />
                                         {showDropdown && data?.data?.suggestions?.length > 0 && (
-                                            <ul className="absolute left-0 right-0 z-50 mt-12 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
+                                            <ul className="absolute left-0 right-0 z-50 mt-12 p-0 bg-white border border-default-medium rounded-base shadow-md max-h-60 overflow-auto">
                                                 {data?.data?.suggestions.map((item, index) => (
                                                     <li
                                                         key={index}
@@ -329,7 +329,8 @@ export default function Search() {
                                                         }}
                                                         className="px-4 py-2 text-sm cursor-pointer hover:bg-neutral-secondary-medium"
                                                     >
-                                                        {item?.name}
+                                                        <Link href={`/search?city=${item?.name}&full_address=${item?.full_address}`}>
+                                                            {item?.name}</Link>
                                                     </li>
                                                 ))}
                                             </ul>
