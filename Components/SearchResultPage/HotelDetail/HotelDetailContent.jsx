@@ -64,7 +64,7 @@ export default function HotelDetailContent({ prices }) {
 
                                                 </div>
                                             )
-
+                                            git
                                         })
                                     }
                                 </div>
