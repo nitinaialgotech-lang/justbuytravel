@@ -1,32 +1,88 @@
-import Footer from '@/component/Footer'
-import React from 'react'
+import Footer from "@/component/Footer";
+import React from "react";
 
-export default function HotelLocation({ lat, long }) {
+export default function HotelLocation({ lat, long, load }) {
+    console.log(load, ".........>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+    const ShimmerMap = () => {
+        return (
+            <div className="hotel_map">
+                <div
+                    className="shimmer-map rounded-2xl"
+                    style={{ width: "100%", height: "450px" }}
+                >
+
+
+                </div>
+
+                {/* Shimmer CSS */}
+                <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            background-position: -1000px 0;
+          }
+          100% {
+            background-position: 1000px 0;
+          }
+        }
+
+        .shimmer-map {
+          position: relative;
+          overflow: hidden;
+          background-color: #e5e7eb;
+        }
+
+        .shimmer-map::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background: linear-gradient(
+            90deg,
+            #e5e7eb 0%,
+            #f3f4f6 50%,
+            #e5e7eb 100%
+          );
+          background-size: 1000px 100%;
+          animation: shimmer 2s infinite;
+        }
+      `}</style>
+            </div>
+        );
+    };
+
     return (
         <>
-            <section className='padding_bottom'>
+            <section className="padding_bottom">
                 <div className="container">
                     <div className="nearbyhotels rounded-2xl ">
-
-
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="nearby_hotel_heading about_hotel_detail ">
-                                    <h3>
-                                        Location
-                                    </h3>
+                                    <h3>Location</h3>
                                 </div>
                                 {/* *********************** */}
-                                <div className="hotel_map">
-                                    <iframe src={`https://www.google.com/maps?q=${lat},${long}&hl=en&z=15&output=embed`} width="100%" height="450" className='rounded-2xl' allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-                                </div>
-
+                                {
+                                    load ? <ShimmerMap /> :
+                                        <div className="hotel_map">
+                                            <iframe
+                                                src={`https://www.google.com/maps?q=${lat},${long}&hl=en&z=15&output=embed`}
+                                                width="100%"
+                                                height="450"
+                                                className="rounded-2xl"
+                                                allowFullScreen=""
+                                                loading="lazy"
+                                                referrerPolicy="no-referrer-when-downgrade"
+                                            />
+                                        </div>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
         </>
-    )
+    );
 }

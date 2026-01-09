@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import HotelDetailContent from "./HotelDetail/HotelDetailContent";
 
-export default function SearchSidebar({ prices_hotel }) {
+export default function SearchSidebar({ prices_hotel, load }) {
     console.log(prices_hotel, "oooooo");
 
     const price = prices_hotel?.flat(1)
@@ -22,7 +22,7 @@ export default function SearchSidebar({ prices_hotel }) {
 
                         {/* ******************************************* */}
                         <div className="checkbox-container two hotel-category">
-                            <HotelDetailContent prices={price} />
+                            <HotelDetailContent prices={price} load={load} />
                         </div>
                     </div>
 
