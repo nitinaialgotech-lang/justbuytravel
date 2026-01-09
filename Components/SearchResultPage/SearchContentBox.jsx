@@ -16,7 +16,7 @@ export default function SearchContentBox() {
     const search = searchQuery.get("city");
     const address = searchQuery.get("full_address");
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["hotels", search, address],
         queryFn: async () => SearchLocation(search, address)
     })
@@ -32,7 +32,7 @@ export default function SearchContentBox() {
     const ShimmerCard = () => (
         <div className="card_col">
             <div className="recommend_card_box card_rounded shadow margin_lr margin_md-lr">
-                <div className="card_box pe-">
+                <div className="card_box ">
                     <div className="card_box_img card_rounded relative overflow-hidden shimmer-container" style={{ minHeight: '250px', backgroundColor: '#e5e7eb' }}>
                         <div className="shimmer"></div>
                         <div className="rated_msg absolute top-5 flex justify-between items-center left-5 right-5">
@@ -126,9 +126,20 @@ export default function SearchContentBox() {
 
                     {
 
+                        isLoading ? Array.from({ length: 9 }).map((_, i) => (
 
-                        hotels?.[0]?.map((item, i) => {
-                            if (item) {
+                            <div
+                                className="col-md-4 item wow animate fadeInDown"
+                                data-wow-delay="200ms"
+                                data-wow-duration="1500ms"
+                                key={`shimmer-${i}`}>
+
+                                <ShimmerCard />
+                            </div>)) :
+
+
+                            hotels?.[0]?.map((item, i) => {
+
 
 
                                 return (
@@ -250,23 +261,11 @@ export default function SearchContentBox() {
                                         </div>
                                     </>
                                 );
-                            }
-                            else {
-                                console.log("RENDERING SHIMMER - no hotels available");
-                                return Array.from({ length: 6 }).map((_, i) => (
 
-                                    <div
-                                        className="col-md-4 item wow animate fadeInDown"
-                                        data-wow-delay="200ms"
-                                        data-wow-duration="1500ms"
-                                        key={`shimmer-${i}`}>
 
-                                        <ShimmerCard />
-                                    </div>
 
-                                ));
-                            }
-                        })}
+
+                            })}
 
                     {/* *********************************************************************** */}
 
