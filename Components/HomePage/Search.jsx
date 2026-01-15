@@ -193,6 +193,11 @@ export default function Search() {
         queryKey: ["dropdown", searchContent],
         queryFn: () => Dropdown_Get(searchContent)
     })
+    const { data: autoCompleteData } = useQuery({
+        queryKey: ["autoComplete", searchContent],
+        queryFn: () => autoComplete(latitude, longitude)
+    })
+    console.log(autoCompleteData, "...................jgggggggggggggggggggggggg");
     /********************* */
     console.log(searchContent, "....................", data?.data);
     // const { data: GetSearch_data } = useQuery({

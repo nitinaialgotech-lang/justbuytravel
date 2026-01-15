@@ -825,7 +825,7 @@
 .hoteldetail_banner > .content > p {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
   margin-bottom: 15px;
 }
 .hoteldetail_banner > .content > h2 {

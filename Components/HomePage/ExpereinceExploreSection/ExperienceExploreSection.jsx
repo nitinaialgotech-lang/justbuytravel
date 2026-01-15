@@ -1,5 +1,5 @@
 "use client"
-import { HotelDetail } from '@/app/Route/endpoints';
+import { nearbyPlaces } from '@/app/Route/endpoints';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -148,105 +148,116 @@ export default function ExperienceExploreSection() {
 
 
     ]
-    const [search, setSearch] = useState("");
-    // *************************** show button 
     const [isBeginning, setIsBeginning] = useState(true);
     const [secondActive, setSecondActive] = useState(true)
+    const [nearbyActive, setNearbyActive] = useState(true)
 
-    useEffect(() => {
-        // Get search from URL params or use default
-        if (typeof window !== "undefined") {
-            const params = new URLSearchParams(window.location.search);
-            const query = params.get("query") || "";
-            setSearch(query);
+    // Helper to render Bootstrap-style star rating icons from numeric rating
+    const renderBootstrapStars = (rating) => {
+        const stars = [];
+        const value = Number(rating) || 0;
+        const maxStars = 5;
+        const fullStars = Math.floor(value);
+        const hasHalfStar = value - fullStars >= 0.5;
+
+        for (let i = 0; i < Math.min(fullStars, maxStars); i++) {
+            stars.push(<i key={`full-${i}`} className="bi bi-star-fill"></i>);
         }
-    }, []);
 
-    const { data } = useQuery({
-        queryKey: ["hotels", search],
-        queryFn: () => HotelDetail(search)
+        if (hasHalfStar && stars.length < maxStars) {
+            stars.push(<i key="half" className="bi bi-star-half"></i>);
+        }
+
+        while (stars.length < maxStars) {
+            stars.push(<i key={`empty-${stars.length}`} className="bi bi-star"></i>);
+        }
+
+        return stars;
+    };
+    const lat = 28.7041;
+    const lng = 77.1025;
+    const { data: nearbyPlacesData } = useQuery({
+        queryKey: ["nearbyPlaces"],
+        queryFn: () => nearbyPlaces(lat, lng)
     })
-
-    console.log(data?.data?.data, "deatils");
-
-
-    const name = search || "your location";
-
-
+    const nearbyPlaceslist = nearbyPlacesData?.data?.places;
+    console.log(nearbyPlaceslist, "...................nearbyPlaceslistNitin");
     return (
         <>
             <section className='experience_explore_section padding_bottom'>
                 <div className="container">
-                    <div className="explore_section section_title m">
-                        <h2 className='mb-0'>
-                            Near By Loactions
-                        </h2>
-                        <h5 >
-                            Explore nearby destinations and hidden gems
-                        </h5>
+                    <div className="row">
+                        <div className="explore_section section_title m">
+                            <h2 className='mb-0'>
+                                Near By Loactions
+                            </h2>
+                            <h5 >
+                                Explore nearby destinations and hidden gems
+                            </h5>
+                        </div>
                     </div>
-                    <div className="d-none d-lg-block">
-                        <div className="row ">
-                            {/* ********************************** */}
-                            {
-                                NearCard?.map((item, i) => {
-                                    let simplecontetnt = item?.content.split(" ").slice(0, 3).join(" ");
 
-                                    if (simplecontetnt?.length > 3) {
-                                        simplecontetnt += "...";
-                                    }
-
-                                    return (
-
-
-                                        <div className="col-12 col-md-6 col-lg-3" key={i}>
-                                            <div className="experience_explore_section ">
-                                                <div className="card  relative border-0 ">
-                                                    <img src={item?.img} className="card-img-top card_rounded " alt="..." />
-                                                    <div className="heart_icon absolute top-2 right-4">
-                                                        <span>
-                                                            <FaRegHeart />
-                                                        </span>
-
-                                                    </div>
-                                                    <div className="card-body ps-0 flex justify-between ">
-                                                        <div className="card_detail">
-                                                            <h5 className="card-title m-0">
-                                                                {
-                                                                    simplecontetnt
-                                                                }
-                                                            </h5>
-                                                            <p className='m-0'>
-                                                                {
-                                                                    item?.info
-                                                                }
-                                                            </p>
-                                                        </div>
-                                                        <div className="rating flex ">
-                                                            {
-                                                                item?.star?.map((star_item, i) => {
-                                                                    return (
-
-                                                                        <span key={i}>{star_item}</span>
-
-                                                                    )
-                                                                })
+                    <div className="d-none d-lg-block relative">
+                        <div className="row relative">
+                            <Swiper
+                                slidesPerView={4}
+                                spaceBetween={24}
+                                navigation={{
+                                    prevEl: "#nearby_prev",
+                                    nextEl: "#nearby_next",
+                                }}
+                                loop={nearbyPlaceslist && nearbyPlaceslist.length > 4}
+                                modules={[Navigation]}
+                                onSwiper={(swiper) => setNearbyActive(swiper.isBeginning)}
+                                onSlideChange={(swiper) => setNearbyActive(swiper.isBeginning)}
+                                className="mySwiper relative"
+                            >
+                                {
+                                    nearbyPlaceslist?.map((item, i) => {
+                                        return (
+                                            <SwiperSlide key={i}>
+                                                <div className="experience_explore_section">
+                                                    <div className="card relative border-0">
+                                                        <img
+                                                            src={
+                                                                item?.photos?.[0]?.name
+                                                                    ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item.photos[0].name}`
+                                                                    : "/no-image.jpg"
                                                             }
-                                                        </div>
+                                                            className="card-img-top card_rounded"
+                                                            alt="Place"
+                                                        />
+                                                        <div className="card-body ps-0 flex justify-between">
+                                                            <div className="card_detail">
+                                                                <h5 className="card-title m-0">
+                                                                    {
+                                                                        item?.displayName?.text
+                                                                    }
+                                                                </h5>
+                                                                <div className="rating flex align-items-center gap-1">
+                                                                    {renderBootstrapStars(item?.rating)}
+                                                                    <span className="ms-1">{item?.rating}</span>
+                                                                </div>
+                                                            </div>
 
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    )
-                                })
-                            }
-                            {/* ********************************** */}
-                            {/* ********************************** */}
-                            {/* ********************************** */}
+                                            </SwiperSlide>
+                                        )
+                                    })
+                                }
+                            </Swiper>
+                            <div className="button_swiper2 absolute">
+                                <div className="buttons_icon relative">
+                                    <button id='nearby_prev' aria-label="Previous" className={`absolute ${nearbyActive ? 'd-none pointer-events-none' : ''}`}>
+                                        <MdOutlineKeyboardArrowLeft size={30} />
+                                    </button>
+                                    <button id='nearby_next' aria-label="Next" className='absolute'>
+                                        <MdOutlineKeyboardArrowRight size={30} />
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {/*8888888888888888888888888888888888888888888888888888888888888888888888888xxxxxxxx======================************************************************** mobile view display 
@@ -375,21 +386,6 @@ export default function ExperienceExploreSection() {
             </section>
 
             {/* ************************************ test */}
-            <div className="container">
-                <div className="row">
-                    <h2>dsfhiduh</h2>
-                    <ExpediaBanner />
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
 
             {/* ********************************************************************************************************************** section two big cities .........>>>>>>>>>>>>>>>>>> */}
 

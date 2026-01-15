@@ -6,6 +6,7 @@ import ExperienceExploreSection from "@/Components/HomePage/ExpereinceExploreSec
 import GetOfferSection from "@/Components/HomePage/GetOfferSection/GetOfferSection";
 import HomeBannerSection from "@/Components/HomePage/HomeBannerSection";
 import RecomendSection from "@/Components/HomePage/RecommendedSection/RecomendSection";
+import Searchinput from "@/Components/HomePage/Searchinput";
 // import SearchSection from "@/Components/HomePage/SearchSectionhhh";
 import "../style/responsive.css"
 import FaqSection from "@/Components/HomePage/Faq/FaqSection";
@@ -48,11 +49,10 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Header />
-      {/* <SearchSection /> */}
+      <Searchinput />
       <HomeBannerSection />
-
-      <DestinationSection />
       <RecomendSection />
+      <DestinationSection />
       <GetOfferSection />
       <ExperienceExploreSection />
       <Trust_Guide_Section />

@@ -188,7 +188,7 @@ button {
   border-radius: 10px;
 }
 .search_container > .search_container_box > .search_tab > .tab_link > ul {
-  gap: 10px;
+  gap: 20px;
 }
 .search_container
   > .search_container_box
@@ -1629,4 +1629,24 @@ button {
 .booking_icon > h6:hover {
   color: var(--bg-color);
   cursor: pointer;
+}
+.booking_icon.flex img {
+  width: 110px;
+}
+.rating-stars i{ font-size: 14px;}
+span.rating-stars {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+.rating i{
+  color: var(--bg-color);
+}
+.card_detail{
+  overflow: hidden;
+}
+.card_detail h5{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
