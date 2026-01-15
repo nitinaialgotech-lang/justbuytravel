@@ -9,19 +9,15 @@ import "../../style/searchresult.css"
 import Search from '../HomePage/Search'
 import { useSearchParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
-import { SearchLocation } from '@/app/Route/endpoints'
+import { nearbyPlaces, SearchLocation } from '@/app/Route/endpoints'
 import Footer from '@/component/Footer';
 import Link from 'next/link';
 export default function SearchResult() {
 
-    const searchQuery = useSearchParams();
+    const searchCity = useSearchParams();
 
-    const search = searchQuery.get("city");
-    const { data } = useQuery({
-        queryKey: ["fetch data ", search],
-        queryFn: async () => await SearchLocation(search),
-    });
-    const city = data?.data?.keyword?.split(",")[0];
+    const city = searchCity.get("name")
+
     return (
         <>
             <Header />
@@ -35,10 +31,10 @@ export default function SearchResult() {
                                 <div className="search_banner_box">
                                     <div className="title text-center">
                                         <h2 className='capitalize'>
-                                            {search}  <span>hotels </span>
+                                            {city}  <span> hotels </span>
                                         </h2>
                                         {/* <h5 className='capitalize'>
-                                           
+
                                             home / {city} hotels
 
                                         </h5> */}
@@ -60,7 +56,7 @@ export default function SearchResult() {
                     <nav aria-label="breadcrumb ">
                         <ol className="breadcrumb mb-2 padding_bottom ps-2 pb-md-0">
                             <li className="breadcrumb-item"><Link href="/">Home</Link></li>
-                            <li className="breadcrumb-item active capitalize" aria-current="page">{search}</li>
+                            <li className="breadcrumb-item active capitalize" aria-current="page">{city}</li>
                         </ol>
                     </nav>
                 </div>

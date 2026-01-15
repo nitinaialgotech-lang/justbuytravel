@@ -1,5 +1,5 @@
 "use client"
-import { nearbyPlaces } from '@/app/Route/endpoints';
+import { nearbyPlaces, Restro } from '@/app/Route/endpoints';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -174,11 +174,12 @@ export default function ExperienceExploreSection() {
 
         return stars;
     };
+    /***********************xxxxxxxxxxx................ */
     const lat = 28.7041;
     const lng = 77.1025;
     const { data: nearbyPlacesData } = useQuery({
         queryKey: ["nearbyPlaces"],
-        queryFn: () => nearbyPlaces(lat, lng)
+        queryFn: () => Restro(lat, lng)
     })
     const nearbyPlaceslist = nearbyPlacesData?.data?.places;
     console.log(nearbyPlaceslist, "...................nearbyPlaceslistNitin");
