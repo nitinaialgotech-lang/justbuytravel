@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
-import { HotelDetail } from "@/app/Route/endpoints";
+import { GetHotel_Detail, HotelDetail } from "@/app/Route/endpoints";
 import { useSearchParams } from "next/navigation";
 import AboutHotelDetail from "./AboutHotelDetail";
 import NearByHotel from "./NearByHotel";
@@ -23,54 +23,15 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { EffectFade, Navigation, Pagination } from "swiper/modules";
 import Blogs from "@/Components/HomePage/Blog/Blogs";
+import Header from "@/component/Header";
 
 export default function SearchHotelDetail() {
     const search_detail = useSearchParams();
 
-    const code = search_detail.get("code");
-    const hotel_id = search_detail.get("id");
+    const code = search_detail.get("hotel");
 
-    const { data, isLoading } = useQuery({
-        queryKey: ["hoteldetail", hotel_id, code],
-        queryFn: () => HotelDetail(hotel_id, code),
-    });
+    console.log(code, "code,,,,,,,,,,,,,,,,,");
 
-
-
-    const about_hotel = data?.data?.data?.slice(0, 1)?.map((item) => item);
-    const location = data?.data?.data?.slice(0, 1)?.map((item) => item?.location);
-    console.log(data, "hote_deytqa>...............................");
-
-    console.log(
-        about_hotel?.slice(0, 1)?.map((item) => item?.about),
-        "pkpkpkpkkpkpkpkpkpkpkpkpk"
-    );
-    const hotel = about_hotel?.slice(0, 1)?.map((item) => item?.location);
-    /****************************  send atat */
-    //  price
-    const price = about_hotel?.slice(0, 1)?.map((item) => item?.prices?.items);
-
-    // imgaesd
-    // ******* reviews
-    const review = about_hotel?.slice(0, 1)?.map((item) => item?.reviews);
-    const images = about_hotel?.slice(0, 1)?.map((item) => item?.overview_images);
-    // tritle
-    const title = about_hotel?.slice(0, 1)?.map((item) => item?.title);
-    // grid images
-    const grid_img = images?.flat(1)?.filter(Boolean)?.filter((item) => item) || [];
-
-    const lat = location?.map((item) => item?.latitude);
-    const long = location?.map((item) => item?.longitude);
-
-    console.log(review, "reviwwwwwww");
-    // ***************************** imunitiexs
-    const amenities = about_hotel?.slice(0, 1)?.map((item) => item?.about);
-    console.log(amenities, ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
-    // ************************ descriptionsss
-
-    const description = amenities?.map((item) => item?.description);
-    const sub_desc = amenities?.map((item) => item?.sub_descriptions);
-    console.log(description, "des", sub_desc);
 
     // ****************************************************************************************************************
     const ShimmerCard = () => (
@@ -122,8 +83,21 @@ export default function SearchHotelDetail() {
         </div>
     )
     /************************************************************************** */
+    const { data, isLoading } = useQuery({
+        queryKey: ["gethoteldetail"],
+        queryFn: () => GetHotel_Detail(code),
+
+    })
+    console.log(data?.data, "data hotel detail ,........... chart ");
+    const HotelDetail = data?.data;
+    const oneImage = HotelDetail?.photos?.slice(0, 1)?.map((item) => item?.name) || '';
+    const longitude = HotelDetail?.location?.longitude;
+    const latitude = HotelDetail?.location?.latitude;
+
     return (
         <>
+            <Header />
+
 
             <style dangerouslySetInnerHTML={{
                 __html: `
@@ -170,90 +144,182 @@ export default function SearchHotelDetail() {
             <section className="hoteldetail ">
                 <div className="container">
                     <div className="row">
-                        {
-                            isLoading ?
-                                <ShimmerCard /> :
 
-                                <div className="col-lg-12">
-                                    <div className="hoteldetail_banner pt-5">
-                                        <div className="content">
-                                                <span className="rating-stars" style={{ marginRight: 6 }}>
-                                                    {(() => {
-                                                        // Assume first review object for star rendering, fallback to 0
-                                                        const rating = review?.[0]?.value || 0;
-                                                        const fullStars = Math.floor(rating);
-                                                        const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
-                                                        return Array.from({ length: 5 }).map((_, idx) => (
-                                                            <span key={idx}>
-                                                                {idx < fullStars ? (
-                                                                    <i className="bi bi-star-fill"></i>
-                                                                ) : idx === fullStars && hasHalfStar ? (
-                                                                    <i className="bi bi-star-half"></i>
-                                                                ) : (
-                                                                    <i className="bi bi-star"></i>
-                                                                )}
-                                                            </span>
-                                                        ));
-                                                    })()}
-                                                </span>
-                                                {review?.[0]?.value ? review[0].value : 0} Review ( based on {review?.[0]?.votes_count || 0} reviews )
-                                            <h2 className="pb-4">{title}</h2>
-                                        </div>
-                                        {/* Image Gallery */}
-                                        <div className="banner_img d-none d-lg-block">
-                                            <div className="row px-3">
-                                                <div className="col-lg-6 p-1">
-                                                    <div className="image_head">
-                                                        <img src={images?.[0]?.[0] || ''} alt="" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-6">
-                                                    <div className="row">
-                                                        {grid_img?.slice(1, 5)?.filter(Boolean)?.map((item, index) => {
-                                                            return (
-                                                                <div className="col-lg-6 p-1" key={index}>
-                                                                    <div className="image_head">
-                                                                        <img src={item || ''} alt="" />
-                                                                    </div>
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                </div>
+
+                        <div className="col-lg-12">
+                            <div className="hoteldetail_banner pt-5">
+                                <div className="content">
+                                    <span className="rating-stars" style={{ marginRight: 6 }}>
+                                        {/* {(() => {
+                                                    // Assume first review object for star rendering, fallback to 0
+                                                    // const rating = review?.[0]?.value || 0;
+                                                    // const fullStars = Math.floor(rating);
+                                                    // const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
+                                                    return Array.from({ length: 5 }).map((_, idx) => (
+                                                        <span key={idx}>
+                                                            {idx < fullStars ? (
+                                                                <i className="bi bi-star-fill"></i>
+                                                            ) : idx === fullStars && hasHalfStar ? (
+                                                                <i className="bi bi-star-half"></i>
+                                                            ) : (
+                                                                <i className="bi bi-star"></i>
+                                                            )}
+                                                        </span>
+                                                    ));
+                                                })()} */}
+                                    </span>
+                                    Review {HotelDetail?.rating} ( based on   reviews )
+                                    <h2 className="pb-4">{HotelDetail?.displayName?.text}</h2>
+                                </div>
+                                {/* Image Gallery */}
+                                {/* <div className="banner_img d-none d-lg-block">
+                                    <div className="row px-3">
+                                        <div className="col-lg-6 p-1">
+                                            <div className="image_head side_image_head">
+                                                <img src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`} alt="" />
                                             </div>
                                         </div>
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                {HotelDetail?.photos?.slice(1, 5)?.map((item, index) => {
+                                                    return (
 
-                                        {/* **********************************    on  mobiloe view show cslider  */}
-                                        <div className="hotel_detail_slider d-block d-lg-none">
-                                            <div className="slider">
-                                                <Swiper
-                                                    spaceBetween={30}
-                                                    effect="fade"
-                                                    navigation
-                                                    modules={[Navigation, Pagination, EffectFade]}
-                                                    className="mySwiper"
-                                                    style={{ width: "100%", height: "100%" }}
-                                                >
-                                                    {grid_img?.filter(Boolean)?.map((item, index) => {
-                                                        return (
-                                                            <SwiperSlide key={index}>
-                                                                <div className="banner_img ">
-                                                                    <img
-                                                                        src={item || ''}
-                                                                        alt=""
-                                                                        width={"100%"}
-                                                                        className="card_rounded"
-                                                                    />
+                                                        <>
+                                                            <div className="col-lg-6 p-1" key={index} >
+                                                                <div className="image_head">
+                                                                    <img src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`} alt="" />
                                                                 </div>
-                                                            </SwiperSlide>
-                                                        );
-                                                    })}
-                                                </Swiper>
+                                                            </div>
+
+                                                        </>
+                                                    )
+
+                                                })}
                                             </div>
                                         </div>
                                     </div>
+                                </div> */}
+                                {/* ******************* desktop view wwwwwwwwwwwwwwwwwwwwww */}
+                                <div className="banner_img d-none d-lg-block">
+                                    {isLoading ? (
+                                        <div className="row px-3">
+                                            <div className="col-lg-6 p-1">
+                                                <div className="image_head shimmer-container" style={{ minHeight: 410 }}>
+                                                    <div className="shimmer" />
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-6">
+                                                <div className="row">
+                                                    {Array.from({ length: 4 }).map((_, i) => (
+                                                        <div className="col-lg-6 p-1" key={i}>
+                                                            <div className="image_head shimmer-container" style={{ minHeight: 200 }}>
+                                                                <div className="shimmer" />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="row px-3">
+                                            <div className="col-lg-6 p-1">
+                                                <div className="image_head side_image_head">
+                                                    <img
+                                                        src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`}
+                                                        alt=""
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-lg-6">
+                                                <div className="row">
+                                                    {HotelDetail?.photos?.slice(1, 5).map((item, index) => (
+                                                        <div className="col-lg-6 p-1" key={index}>
+                                                            <div className="image_head">
+                                                                <img
+                                                                    src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                        }
+
+                                {/* **********************************    on  mobiloe view show cslider  */}
+                                {/* <div className="hotel_detail_slider d-block d-lg-none">
+                                    <div className="slider">
+                                        <Swiper
+                                            spaceBetween={30}
+                                            effect="fade"
+                                            navigation
+                                            modules={[Navigation, Pagination, EffectFade]}
+                                            className="mySwiper"
+                                            style={{ width: "100%", height: "100%" }}
+                                        >
+                                            {HotelDetail?.photos?.filter(Boolean)?.map((item, index) => {
+                                                return (
+                                                    <SwiperSlide key={index}>
+                                                        <div className="banner_img mobile_banner ">
+                                                            <img
+                                                                src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                                alt=""
+                                                                width={"100%"}
+                                                                className="card_rounded"
+                                                            />
+                                                        </div>
+                                                    </SwiperSlide>
+                                                );
+                                            })}
+                                        </Swiper>
+                                    </div>
+                                </div> */}
+
+
+                                {/* ********************** mobile viewwwwwwwwwwwwwwwwwwwww  */}
+                                <div className="hotel_detail_slider d-block d-lg-none">
+                                    {isLoading ? (
+                                        <div className="slider">
+                                            {Array.from({ length: 1 }).map((_, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="shimmer-container"
+                                                    style={{ height: 220, marginBottom: 10 }}
+                                                >
+                                                    <div className="shimmer" />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <Swiper
+                                            spaceBetween={30}
+                                            effect="fade"
+                                            navigation
+                                            modules={[Navigation, Pagination, EffectFade]}
+                                            className="mySwiper"
+                                        >
+                                            {HotelDetail?.photos?.map((item, index) => (
+                                                <SwiperSlide key={index}>
+                                                    <div className="banner_img mobile_banner ">
+                                                        <img
+                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                            width="100%"
+                                                            className="card_rounded"
+                                                        />
+                                                    </div>
+                                                </SwiperSlide>
+                                            ))}
+                                        </Swiper>
+                                    )}
+                                </div>
+
+                                {/* ******************** end ******* */}
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -265,21 +331,19 @@ export default function SearchHotelDetail() {
                 <div className="row matrix_fix">
                     <div className="col-lg-7 ">
                         <div className=" my-5 content_box_detail  rounded-2xl border border-gray-300">
-                            <AboutHotelDetail
-                                detail={description}
-                                sub_desc={sub_desc}
-                                load={isLoading}
-                            />
+                            {/* <AboutHotelDetail
 
-                            <HotelFacilities amenities={amenities} load={isLoading} />
+                            /> */}
+
+                            {/* <HotelFacilities /> */}
 
                             {/* <NearByHotel places={near_by_places} /> */}
 
-                            <HotelLocation lat={lat} long={long} load={isLoading} />
+                            <HotelLocation lat={latitude} long={longitude} />
                         </div>
                     </div>
                     <div className="col-lg-5 order-first order-lg-last">
-                        <SearchSidebar prices_hotel={price} load={isLoading} title_url={title?.[0]} />
+                        {/* <SearchSidebar /> */}
                     </div>
                 </div>
             </div>

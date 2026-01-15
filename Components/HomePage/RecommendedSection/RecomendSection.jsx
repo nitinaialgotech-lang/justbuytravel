@@ -127,7 +127,7 @@ export default function RecomendSection() {
 
         const success = async (position) => {
             const { latitude, longitude } = position.coords;
-            console.log(`Current location: ${latitude}, ${longitude} .........................................................`);
+            console.log(`Current location: ${latitude}, ${longitude} .........................................................xxxxxxxxxxx`);
 
             try {
                 const cityName = await reverseGeocode(latitude, longitude);
@@ -294,14 +294,14 @@ export default function RecomendSection() {
     // ********************************************
     const router = useRouter()
 
-    const viewDetails = (code,id) => {
+    const viewDetails = (code, id) => {
         router.push(`/hoteldetail?code=${code}&id=${id}`)
     }
 
     const { data: GetSearch_data } = useQuery({
         queryKey: ["getdata", search],
         queryFn: () => SearchLocation(search),
-        enabled: !!search  
+        enabled: !!search
     })
     console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
     const location_code = data?.data?.hotels?.map((item) => item?.location_code || []);
@@ -467,18 +467,18 @@ export default function RecomendSection() {
                                     // Correctly derive price with currency
                                     const currencySymbol = currency || '₹';
                                     // Try extracted_price first, fall back to price string then to 0
-                                    const price = 
+                                    const price =
                                         (typeof item?.price_per_night?.extracted_price === "number" && item.price_per_night.extracted_price > 0)
                                             ? item.price_per_night.extracted_price
-                                        : (typeof item?.total_price?.extracted_price === "number" && item.total_price.extracted_price > 0)
-                                            ? item.total_price.extracted_price
-                                        : (
-                                            (typeof item?.price_per_night?.price === "string" && item.price_per_night.price.replace(/[^\d.]/g, '').length)
-                                                ? Number(item.price_per_night.price.replace(/[^\d.]/g, ''))
-                                            : (typeof item?.total_price?.price === "string" && item.total_price.price.replace(/[^\d.]/g, '').length)
-                                                ? Number(item.total_price.price.replace(/[^\d.]/g, ''))
-                                            : 0
-                                        );
+                                            : (typeof item?.total_price?.extracted_price === "number" && item.total_price.extracted_price > 0)
+                                                ? item.total_price.extracted_price
+                                                : (
+                                                    (typeof item?.price_per_night?.price === "string" && item.price_per_night.price.replace(/[^\d.]/g, '').length)
+                                                        ? Number(item.price_per_night.price.replace(/[^\d.]/g, ''))
+                                                        : (typeof item?.total_price?.price === "string" && item.total_price.price.replace(/[^\d.]/g, '').length)
+                                                            ? Number(item.total_price.price.replace(/[^\d.]/g, ''))
+                                                            : 0
+                                                );
                                     // Format price string for UI display with symbol
                                     const displayPrice = `${currencySymbol} ${price}`;
 
@@ -545,7 +545,7 @@ export default function RecomendSection() {
                                                             <h5 className='m-0'>
                                                                 {displayPrice}.00 <span>/ person</span>
                                                             </h5>
-                                                            <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(location_code,item?.hotel_identifier)}>
+                                                            <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(location_code, item?.hotel_identifier)}>
                                                                 Book Now
                                                             </button>
 

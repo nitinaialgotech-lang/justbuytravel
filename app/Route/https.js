@@ -17,4 +17,5 @@ export const https_api = axios.create({
 export const https_SearchCity = axios.create({
     baseURL: "https://justbuygear.com/justbuytravel-api"
 }
+
 )

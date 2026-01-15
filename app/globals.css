@@ -39,7 +39,7 @@ button {
 }
 
 .margin_lr {
-  margin: 0px 10px;
+  margin-right: 15px;
 }
 
 .card_rounded {
@@ -342,25 +342,48 @@ button {
 .recommend_card_box > .card_box > .card_box_img > img {
   width: 100%;
   object-fit: cover;
+  max-height: 250px;
+  height: 100%;
 }
 
 .recommend_card_box > .card_box > .card_box_detail {
   background: #ffff;
   margin-top: -14%;
   z-index: 111;
+  gap: 10px;
+  padding: 26px 20px;
   position: relative;
 }
-
+.recommend_card_box > .card_box > .card_box_detail > .price_book > .rating > i {
+  font-size: 12px;
+}
+.recommend_card_box
+  > .card_box
+  > .card_box_detail
+  > .price_book
+  > .rating
+  > span {
+  font-size: 12px;
+}
 .recommend_card_box > .card_box > .card_box_detail > h4 {
   font-family: var(--font-fam);
   font-weight: 700;
-  font-size: 22px;
+  font-size: 16px;
   color: var(--cl-bl);
-  line-height: 32px;
+  line-height: 22px;
   letter-spacing: 0%;
   vertical-align: middle;
+  /* ******************** dot do t */
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds "..." at the end */
+  max-width: 30ch;
 }
-
+.recomend_btn {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 5px;
+}
 /* ************ time */
 .recommend_card_box > .card_box > .card_box_detail > .time > .icon,
 .recommend_card_box > .card_box > .card_box_detail > .time > .guest {
@@ -428,6 +451,7 @@ button {
   background-color: #ffff;
   padding: 5px 10px;
   border-radius: 25px 25px;
+  font-size: 12px;
 }
 
 .recommend_card_box
@@ -457,7 +481,7 @@ button {
 }
 
 .card_box_detail {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   /* allow detail section to take remaining space */
   display: flex;
   flex-direction: column;
@@ -762,9 +786,12 @@ button {
 .card_col {
   height: 100%;
 }
+.recomand_card_shadow {
+  box-shadow: 0 0 35px 2px #0000000d;
+}
 
 #swiper_sldie > .swiper-wrapper {
-  padding: 0 0 54px 0px;
+  padding: 0 0 20px 0px;
 }
 
 .swiper-pagination-bullet-active {
@@ -1633,20 +1660,46 @@ button {
 .booking_icon.flex img {
   width: 110px;
 }
-.rating-stars i{ font-size: 14px;}
+.rating-stars i {
+  font-size: 14px;
+}
 span.rating-stars {
   display: inline-flex;
   gap: 5px;
   align-items: center;
 }
-.rating i{
+.rating i {
   color: var(--bg-color);
 }
-.card_detail{
+.card_detail {
   overflow: hidden;
 }
-.card_detail h5{
+.card_detail h5 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+/* **************************** recomd  */
+#recomand_prev > svg,
+#recomand_next > svg {
+  fill: var(--background);
+  stroke-opacity: 1;
+  width: 35px;
+  height: 35px;
+}
+#recomand_prev,
+#recomand_next {
+  background-color: var(--bg-color);
+  font-size: 30px;
+  border-radius: 50%;
+}
+#recomand_prev {
+  top: 50%;
+  left: 0 !important;
+  transform: translateY(-50%);
+}
+
+#recomand_next {
+  right: 0;
+  transform: translateY(-50%);
 }

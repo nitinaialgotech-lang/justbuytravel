@@ -3,31 +3,46 @@ import React, { useEffect, useState } from "react";
 import "../../style/searchresult.css";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { SearchLocation } from "@/app/Route/endpoints";
+import { nearbyPlaces, SearchLocation } from "@/app/Route/endpoints";
 import ReactPaginate from "react-paginate";
-
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 export default function SearchContentBox() {
     // ********************************
-
     const searchQuery = useSearchParams();
 
-    const search = searchQuery.get("city");
-    const address = searchQuery.get("full_address");
+    const lat = searchQuery.get("lat");
+    const long = searchQuery.get("long")
 
     const { data, isLoading } = useQuery({
-        queryKey: ["hotels", search, address],
-        queryFn: async () => SearchLocation(search, address)
+        queryKey: ["gethotels", lat, long],
+        queryFn: () => nearbyPlaces(lat, long)
     })
+    console.log(lat, long, data, "latlong data.config......................................kokkokokok");
+    const hotelData = data?.data?.places;
 
-    console.log(data?.data?.hotels, "hotel detail ,,,,,,,,,,,,,,,,,,,", data);
+    console.log(hotelData, "?????????????????????????????????????????");
 
-    const hotels = data?.data?.hotels?.map((item) => item?.items);
 
-    console.log(hotels, "............");
 
-    const location_code = data?.data?.hotels?.map((item) => item?.location_code);
+
+    // const searchQuery = useSearchParams();
+
+    // const search = searchQuery.get("city");
+    // const address = searchQuery.get("full_address");
+
+    // const { data, isLoading } = useQuery({
+    //     queryKey: ["hotels", search, address],
+    //     queryFn: async () => SearchLocation(search, address)
+    // })
+
+    // console.log(data?.data?.hotels, "hotel detail ,,,,,,,,,,,,,,,,,,,", data);
+
+    // const hotels = data?.data?.hotels?.map((item) => item?.items);
+
+    // console.log(hotels, "............");
+
+    // const location_code = data?.data?.hotels?.map((item) => item?.location_code);
     // ************************************** swimmer effect **************
     const ShimmerCard = () => (
         <div className="card_col">
@@ -138,9 +153,18 @@ export default function SearchContentBox() {
                             </div>)) :
 
 
-                            hotels?.[0]?.map((item, i) => {
+                            hotelData?.map((item, i) => {
 
-
+                                const image = item?.photos
+                                    ?.slice(0, 1)
+                                    ?.map((item) => item?.name);
+                                // ****** text
+                                const truncateText = (text, maxLength = 20) => {
+                                    if (!text) return "";
+                                    return text.length > maxLength
+                                        ? text.slice(0, maxLength) + "..."
+                                        : text;
+                                };
 
                                 return (
                                     <>
@@ -154,7 +178,7 @@ export default function SearchContentBox() {
                                                 <div className="hotel-img-wrap">
                                                     <a href="#" className="hotel-img">
                                                         <img
-                                                            src={item?.overview_images?.slice(0, 1)?.map((item) => item)}
+                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
                                                             className="rounded-3xl w-full h-full object-cover"
                                                             loading="lazy"
                                                         />
@@ -186,11 +210,11 @@ export default function SearchContentBox() {
                                                                     })()}
                                                                 </ul>
                                                             </div>
-                                                            <span className="total">reviews  {item?.reviews?.value} ({item?.reviews?.votes_count})</span>
+                                                            <span className="total">reviews  {item?.rating} ({item?.userRatingCount})</span>
                                                         </div>
                                                     </div>
                                                     <h5>
-                                                        <a href="#">{item?.title}   </a>
+                                                        <a href="#">{truncateText(item?.displayName?.text, 30)}   </a>
                                                     </h5>
 
                                                     {/* <ul className="hotel-feature-list">
@@ -215,7 +239,7 @@ export default function SearchContentBox() {
                                                     
                                                     </li>
                                                 </ul> */}
-                                                    <div className="cancellation">
+                                                    {/* <div className="cancellation">
                                                         <svg
                                                             width="14"
                                                             height="14"
@@ -226,10 +250,10 @@ export default function SearchContentBox() {
                                                             <path d="M10.6947 5.45777L6.24644 9.90841C6.17556 9.97689 6.08572 10.0124 5.99596 10.0124C5.9494 10.0125 5.90328 10.0033 5.86027 9.98548C5.81727 9.96763 5.77822 9.94144 5.7454 9.90841L3.3038 7.46681C3.16436 7.32969 3.16436 7.10521 3.3038 6.96577L4.16652 6.10065C4.29892 5.96833 4.53524 5.96833 4.66764 6.10065L5.99596 7.42897L9.33092 4.09161C9.36377 4.05868 9.40278 4.03255 9.44573 4.01471C9.48868 3.99686 9.53473 3.98766 9.58124 3.98761C9.67572 3.98761 9.76556 4.02545 9.83172 4.09161L10.6944 4.95681C10.8341 5.09625 10.8341 5.32073 10.6947 5.45777Z"></path>
                                                         </svg>
                                                         <span>Free Cancellation Policy</span>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="btn-and-price-area">
                                                         <Link
-                                                            href={`/hoteldetail?code=${location_code}&id=${item?.hotel_identifier}`}
+                                                            href={`/hoteldetail?hotel=${item?.id}`}
                                                             className="primary-btn1"
                                                         // onClick={() =>
                                                         //     viewDetail(item?.hotel_identifier, item)
