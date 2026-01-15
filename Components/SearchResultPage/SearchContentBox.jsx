@@ -159,23 +159,34 @@ export default function SearchContentBox() {
                                                             loading="lazy"
                                                         />
                                                     </a>
-                                                    <div className="batch">
+                                                    {/* <div className="batch">
                                                         <span>Sale on!</span>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className="hotel-content">
                                                     <div className="rating-area">
                                                         <div className="rating-text">
                                                             <div className="rating-stars">
                                                                 <ul>
-                                                                    <li>☆</li>
-                                                                    <li>☆</li>
-                                                                    <li>☆</li>
-                                                                    <li>☆</li>
-                                                                    <li>☆</li>{" "}
+                                                                    {(() => {
+                                                                        const rating = item?.reviews?.value || 0;
+                                                                        const fullStars = Math.floor(rating);
+                                                                        const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
+                                                                        return Array.from({ length: 5 }).map((_, idx) => (
+                                                                            <li key={idx}>
+                                                                                {idx < fullStars ? (
+                                                                                    <i className="bi bi-star-fill"></i>
+                                                                                ) : idx === fullStars && hasHalfStar ? (
+                                                                                    <i className="bi bi-star-half"></i>
+                                                                                ) : (
+                                                                                    <i className="bi bi-star"></i>
+                                                                                )}
+                                                                            </li>
+                                                                        ));
+                                                                    })()}
                                                                 </ul>
                                                             </div>
-                                                            <span className="total">reviews  {item?.reviews?.value} </span>
+                                                            <span className="total">reviews  {item?.reviews?.value} ({item?.reviews?.votes_count})</span>
                                                         </div>
                                                     </div>
                                                     <h5>
@@ -250,9 +261,173 @@ export default function SearchContentBox() {
                                                         <div className="price-area">
                                                             <h6>Starting From</h6>
                                                             <span>
-                                                                {/* <del>$55.00</del> */}
-
-                                                                {item?.prices?.price}.00
+                                                                {(() => {
+                                                                    // Map of many popular currencies, but fallback to the 3-letter code if needed
+                                                                    const currencySymbols = {
+                                                                        "AED": "د.إ",
+                                                                        "AFN": "؋",
+                                                                        "ALL": "L",
+                                                                        "AMD": "֏",
+                                                                        "ANG": "ƒ",
+                                                                        "AOA": "Kz",
+                                                                        "ARS": "$",
+                                                                        "AUD": "$",
+                                                                        "AWG": "ƒ",
+                                                                        "AZN": "₼",
+                                                                        "BAM": "КМ",
+                                                                        "BBD": "$",
+                                                                        "BDT": "৳",
+                                                                        "BGN": "лв",
+                                                                        "BHD": ".د.ب",
+                                                                        "BIF": "FBu",
+                                                                        "BMD": "$",
+                                                                        "BND": "$",
+                                                                        "BOB": "Bs.",
+                                                                        "BRL": "R$",
+                                                                        "BSD": "$",
+                                                                        "BTN": "Nu.",
+                                                                        "BWP": "P",
+                                                                        "BYN": "Br",
+                                                                        "BZD": "$",
+                                                                        "CAD": "$",
+                                                                        "CDF": "FC",
+                                                                        "CHF": "Fr",
+                                                                        "CLP": "$",
+                                                                        "CNY": "¥",
+                                                                        "COP": "$",
+                                                                        "CRC": "₡",
+                                                                        "CUC": "$",
+                                                                        "CUP": "$",
+                                                                        "CVE": "$",
+                                                                        "CZK": "Kč",
+                                                                        "DJF": "Fdj",
+                                                                        "DKK": "kr",
+                                                                        "DOP": "RD$",
+                                                                        "DZD": "دج",
+                                                                        "EGP": "£",
+                                                                        "ERN": "Nfk",
+                                                                        "ETB": "Br",
+                                                                        "EUR": "€",
+                                                                        "FJD": "$",
+                                                                        "FKP": "£",
+                                                                        "FOK": "kr",
+                                                                        "GBP": "£",
+                                                                        "GEL": "₾",
+                                                                        "GGP": "£",
+                                                                        "GHS": "₵",
+                                                                        "GIP": "£",
+                                                                        "GMD": "D",
+                                                                        "GNF": "FG",
+                                                                        "GTQ": "Q",
+                                                                        "GYD": "$",
+                                                                        "HKD": "$",
+                                                                        "HNL": "L",
+                                                                        "HRK": "kn",
+                                                                        "HTG": "G",
+                                                                        "HUF": "Ft",
+                                                                        "IDR": "Rp",
+                                                                        "ILS": "₪",
+                                                                        "IMP": "£",
+                                                                        "INR": "₹",
+                                                                        "IQD": "ع.د",
+                                                                        "IRR": "﷼",
+                                                                        "ISK": "kr",
+                                                                        "JMD": "J$",
+                                                                        "JOD": "د.ا",
+                                                                        "JPY": "¥",
+                                                                        "KES": "KSh",
+                                                                        "KGS": "лв",
+                                                                        "KHR": "៛",
+                                                                        "KID": "$",
+                                                                        "KMF": "CF",
+                                                                        "KRW": "₩",
+                                                                        "KWD": "د.ك",
+                                                                        "KYD": "$",
+                                                                        "KZT": "₸",
+                                                                        "LAK": "₭",
+                                                                        "LBP": "ل.ل",
+                                                                        "LKR": "₨",
+                                                                        "LRD": "$",
+                                                                        "LSL": "L",
+                                                                        "LYD": "ل.د",
+                                                                        "MAD": "د.م.",
+                                                                        "MDL": "L",
+                                                                        "MGA": "Ar",
+                                                                        "MKD": "ден",
+                                                                        "MMK": "K",
+                                                                        "MNT": "₮",
+                                                                        "MOP": "P",
+                                                                        "MRU": "UM",
+                                                                        "MUR": "₨",
+                                                                        "MVR": "Rf",
+                                                                        "MWK": "MK",
+                                                                        "MXN": "$",
+                                                                        "MYR": "RM",
+                                                                        "MZN": "MT",
+                                                                        "NAD": "$",
+                                                                        "NGN": "₦",
+                                                                        "NIO": "C$",
+                                                                        "NOK": "kr",
+                                                                        "NPR": "₨",
+                                                                        "NZD": "$",
+                                                                        "OMR": "ر.ع.",
+                                                                        "PAB": "B/.",
+                                                                        "PEN": "S/",
+                                                                        "PGK": "K",
+                                                                        "PHP": "₱",
+                                                                        "PKR": "₨",
+                                                                        "PLN": "zł",
+                                                                        "PYG": "₲",
+                                                                        "QAR": "ر.ق",
+                                                                        "RON": "lei",
+                                                                        "RSD": "дин",
+                                                                        "RUB": "₽",
+                                                                        "RWF": "FRw",
+                                                                        "SAR": "ر.س",
+                                                                        "SBD": "$",
+                                                                        "SCR": "₨",
+                                                                        "SDG": "ج.س.",
+                                                                        "SEK": "kr",
+                                                                        "SGD": "$",
+                                                                        "SHP": "£",
+                                                                        "SLE": "Le",
+                                                                        "SOS": "Sh",
+                                                                        "SRD": "$",
+                                                                        "SSP": "£",
+                                                                        "STN": "Db",
+                                                                        "SYP": "£",
+                                                                        "SZL": "E",
+                                                                        "THB": "฿",
+                                                                        "TJS": "ЅМ",
+                                                                        "TMT": "m",
+                                                                        "TND": "د.ت",
+                                                                        "TOP": "T$",
+                                                                        "TRY": "₺",
+                                                                        "TTD": "$",
+                                                                        "TVD": "$",
+                                                                        "TWD": "NT$",
+                                                                        "TZS": "Sh",
+                                                                        "UAH": "₴",
+                                                                        "UGX": "USh",
+                                                                        "USD": "$",
+                                                                        "UYU": "$U",
+                                                                        "UZS": "soʻm",
+                                                                        "VES": "Bs.S",
+                                                                        "VND": "₫",
+                                                                        "VUV": "Vt",
+                                                                        "WST": "T",
+                                                                        "XAF": "FCFA",
+                                                                        "XCD": "$",
+                                                                        "XOF": "F CFA",
+                                                                        "XPF": "₣",
+                                                                        "YER": "﷼",
+                                                                        "ZAR": "R",
+                                                                        "ZMW": "ZK",
+                                                                        "ZWL": "$"
+                                                                    };
+                                                                    const code = item?.prices?.currency;
+                                                                    return (currencySymbols[code] || code || "") + (item?.prices?.price ?? "");
+                                                                })()}
                                                             </span>
                                                         </div>{" "}
                                                     </div>

@@ -57,7 +57,7 @@ export default function SearchHotelDetail() {
     // tritle
     const title = about_hotel?.slice(0, 1)?.map((item) => item?.title);
     // grid images
-    const grid_img = images?.flat(1).map((item) => item);
+    const grid_img = images?.flat(1)?.filter(Boolean)?.filter((item) => item) || [];
 
     const lat = location?.map((item) => item?.latitude);
     const long = location?.map((item) => item?.longitude);
@@ -177,10 +177,26 @@ export default function SearchHotelDetail() {
                                 <div className="col-lg-12">
                                     <div className="hoteldetail_banner pt-5">
                                         <div className="content">
-                                            <p className="m-0">
-                                                ☆ ☆ ☆ ☆ ☆{review?.map((item) => item?.value)} Review ( based
-                                                on {review?.map((item) => item?.votes_count)} reviews )
-                                            </p>
+                                                <span className="rating-stars" style={{ marginRight: 6 }}>
+                                                    {(() => {
+                                                        // Assume first review object for star rendering, fallback to 0
+                                                        const rating = review?.[0]?.value || 0;
+                                                        const fullStars = Math.floor(rating);
+                                                        const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
+                                                        return Array.from({ length: 5 }).map((_, idx) => (
+                                                            <span key={idx}>
+                                                                {idx < fullStars ? (
+                                                                    <i className="bi bi-star-fill"></i>
+                                                                ) : idx === fullStars && hasHalfStar ? (
+                                                                    <i className="bi bi-star-half"></i>
+                                                                ) : (
+                                                                    <i className="bi bi-star"></i>
+                                                                )}
+                                                            </span>
+                                                        ));
+                                                    })()}
+                                                </span>
+                                                {review?.[0]?.value ? review[0].value : 0} Review ( based on {review?.[0]?.votes_count || 0} reviews )
                                             <h2 className="pb-4">{title}</h2>
                                         </div>
                                         {/* Image Gallery */}
@@ -188,20 +204,18 @@ export default function SearchHotelDetail() {
                                             <div className="row px-3">
                                                 <div className="col-lg-6 p-1">
                                                     <div className="image_head">
-                                                        <img src={images?.map((item) => item[0])} alt="" />
+                                                        <img src={images?.[0]?.[0] || ''} alt="" />
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-6">
                                                     <div className="row">
-                                                        {grid_img?.slice(1, 5)?.map((item) => {
+                                                        {grid_img?.slice(1, 5)?.filter(Boolean)?.map((item, index) => {
                                                             return (
-                                                                <>
-                                                                    <div className="col-lg-6 p-1">
-                                                                        <div className="image_head">
-                                                                            <img src={item} alt="" />
-                                                                        </div>
+                                                                <div className="col-lg-6 p-1" key={index}>
+                                                                    <div className="image_head">
+                                                                        <img src={item || ''} alt="" />
                                                                     </div>
-                                                                </>
+                                                                </div>
                                                             );
                                                         })}
                                                     </div>
@@ -220,20 +234,18 @@ export default function SearchHotelDetail() {
                                                     className="mySwiper"
                                                     style={{ width: "100%", height: "100%" }}
                                                 >
-                                                    {grid_img?.map((item) => {
+                                                    {grid_img?.filter(Boolean)?.map((item, index) => {
                                                         return (
-                                                            <>
-                                                                <SwiperSlide>
-                                                                    <div className="banner_img ">
-                                                                        <img
-                                                                            src={item}
-                                                                            alt=""
-                                                                            width={"100%"}
-                                                                            className="card_rounded"
-                                                                        />
-                                                                    </div>
-                                                                </SwiperSlide>
-                                                            </>
+                                                            <SwiperSlide key={index}>
+                                                                <div className="banner_img ">
+                                                                    <img
+                                                                        src={item || ''}
+                                                                        alt=""
+                                                                        width={"100%"}
+                                                                        className="card_rounded"
+                                                                    />
+                                                                </div>
+                                                            </SwiperSlide>
                                                         );
                                                     })}
                                                 </Swiper>
@@ -267,7 +279,7 @@ export default function SearchHotelDetail() {
                         </div>
                     </div>
                     <div className="col-lg-5 order-first order-lg-last">
-                        <SearchSidebar prices_hotel={price} load={isLoading} />
+                        <SearchSidebar prices_hotel={price} load={isLoading} title_url={title?.[0]} />
                     </div>
                 </div>
             </div>

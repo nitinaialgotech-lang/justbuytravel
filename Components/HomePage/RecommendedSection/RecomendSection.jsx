@@ -294,16 +294,19 @@ export default function RecomendSection() {
     // ********************************************
     const router = useRouter()
 
-    const viewDetails = (id) => {
-        router.push(`/hoteldetail?property_token=${id}`)
+    const viewDetails = (code,id) => {
+        router.push(`/hoteldetail?code=${code}&id=${id}`)
     }
 
     const { data: GetSearch_data } = useQuery({
         queryKey: ["getdata", search],
         queryFn: () => SearchLocation(search),
-        enabled: !!search  // only fetch if search is truthy
+        enabled: !!search  
     })
     console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
+    const location_code = data?.data?.hotels?.map((item) => item?.location_code || []);
+    const currency = data?.data?.currency || '';
+    console.log(currency, "currency.......................Nitin");
 
 
     // Shimmer skeleton component
@@ -407,8 +410,8 @@ export default function RecomendSection() {
 
                 <div className="row">
                     <Swiper
-                        slidesPerView={3}
-                        spaceBetween={30}
+                        slidesPerView={4}
+                        spaceBetween={5}
                         pagination={{
                             clickable: true,
                         }}
@@ -442,7 +445,7 @@ export default function RecomendSection() {
                                 slidesPerView: 2, // tablet
                             },
                             1024: {
-                                slidesPerView: 3, // desktop (optional)
+                                slidesPerView: 4, // desktop (optional)
                             },
                         }}
                         loop={!isLoading && hotels?.length > 0}
@@ -450,16 +453,9 @@ export default function RecomendSection() {
                     >
                         {(() => {
                             const hasHotels = hotels && Array.isArray(hotels) && hotels.length > 0;
-                            console.log("=== RENDER CHECK ===");
-                            console.log("hasHotels:", hasHotels);
-                            console.log("hotels:", hotels);
-                            console.log("hotels type:", typeof hotels);
-                            console.log("isArray:", Array.isArray(hotels));
-                            console.log("length:", hotels?.length);
-                            console.log("===================");
 
                             if (hasHotels) {
-                                console.log("RENDERING HOTELS, count:", hotels.length);
+                                console.log("RENDERING HOTELS, count:", hotels);
                                 return hotels.slice(0, 6).map((item, i) => {
                                     let titlecontent = item.name
                                     if (titlecontent?.length > 3) {
@@ -468,11 +464,23 @@ export default function RecomendSection() {
                                     const itemId = item?.property_token || item?.data_id || i;
                                     const imageUrl = getImageUrl(item);
                                     // Get price from price_per_night or total_price
-                                    const price = item?.price_per_night?.extracted_price ||
-                                        item?.price_per_night?.price?.replace('$', '') ||
-                                        item?.total_price?.extracted_price ||
-                                        item?.total_price?.price?.replace('$', '') ||
-                                        '0';
+                                    // Correctly derive price with currency
+                                    const currencySymbol = currency || '₹';
+                                    // Try extracted_price first, fall back to price string then to 0
+                                    const price = 
+                                        (typeof item?.price_per_night?.extracted_price === "number" && item.price_per_night.extracted_price > 0)
+                                            ? item.price_per_night.extracted_price
+                                        : (typeof item?.total_price?.extracted_price === "number" && item.total_price.extracted_price > 0)
+                                            ? item.total_price.extracted_price
+                                        : (
+                                            (typeof item?.price_per_night?.price === "string" && item.price_per_night.price.replace(/[^\d.]/g, '').length)
+                                                ? Number(item.price_per_night.price.replace(/[^\d.]/g, ''))
+                                            : (typeof item?.total_price?.price === "string" && item.total_price.price.replace(/[^\d.]/g, '').length)
+                                                ? Number(item.total_price.price.replace(/[^\d.]/g, ''))
+                                            : 0
+                                        );
+                                    // Format price string for UI display with symbol
+                                    const displayPrice = `${currencySymbol} ${price}`;
 
                                     return (
 
@@ -507,12 +515,12 @@ export default function RecomendSection() {
                                                         )}
 
                                                         <div className="rated_msg absolute top-5 flex  justify-between items-center left-5 right-5">
-                                                            <div className="msg">
+                                                            {/* <div className="msg">
                                                                 <p className='m-0'>Top rated</p>
                                                             </div>
                                                             <div className="msg_icon">
                                                                 <FaRegHeart />
-                                                            </div>
+                                                            </div> */}
                                                         </div>
 
                                                     </div>
@@ -535,9 +543,9 @@ export default function RecomendSection() {
                                                         {/* ******* */}
                                                         <div className="price_book flex mt-3 justify-between items-center">
                                                             <h5 className='m-0'>
-                                                                ${price}.00 <span>/ person</span>
+                                                                {displayPrice}.00 <span>/ person</span>
                                                             </h5>
-                                                            <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(item?.hotel_identifier)}>
+                                                            <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(location_code,item?.hotel_identifier)}>
                                                                 Book Now
                                                             </button>
 

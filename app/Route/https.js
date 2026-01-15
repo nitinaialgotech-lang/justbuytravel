@@ -10,9 +10,6 @@ export const https_blog = axios.create({
     baseURL: "https://justbuytravel.com/wp-json/wp/v2"
 })
 export const https_api = axios.create({
-
-
-
     baseURL: "https://justbuygear.com/justbuytravel-api"
 })
 
