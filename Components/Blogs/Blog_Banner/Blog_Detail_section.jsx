@@ -17,12 +17,15 @@ export default function Blog_Detail_section() {
         queryFn: () => Get_Blogs()
     })
 
+
+    console.log(data, "blog data");
+
     const blog_slug = useSearchParams();
     const slug = blog_slug.get("detail")
     console.log(slug);
     // ***************************************
     const blog_content = data?.data?.map((item) => {
-        if (item?.id == Number(slug)) {
+        if (item?.slug == slug) {
             return item?.excerpt?.rendered
         }
         return null
@@ -30,7 +33,7 @@ export default function Blog_Detail_section() {
     // ***************************************
     console.log(blog_content, "content");
     const blog_img = data?.data?.map((item) => {
-        if (item?.id == Number(slug)) {
+        if (item?.slug == slug) {
             return item?.yoast_head_json?.og_image
         }
         return null
@@ -46,7 +49,7 @@ export default function Blog_Detail_section() {
                             {
                                 data?.data?.map((item, i) => {
 
-                                    if (item?.id == Number(slug)) {
+                                    if (item?.slug == slug) {
                                         console.log(item, "......................item blog");
 
                                         return (
@@ -55,7 +58,7 @@ export default function Blog_Detail_section() {
                                                 {/* **************************************** */}
                                                 <div className='blog_section_left_bar'>
                                                     <div className="breadcrumb m-0">
-                                                        <h4 className='flex '>Home <span className='g_color'><MdKeyboardDoubleArrowRight /></span> Should Kpop and Kdrama Lovers Visit Seoul in 2026? </h4>
+                                                        <h4 className='flex '>Home <span className='g_color'><MdKeyboardDoubleArrowRight /></span>{item?.slug}  </h4>
                                                     </div>
                                                 </div>
                                                 {/* **************************************** */}
@@ -88,11 +91,7 @@ export default function Blog_Detail_section() {
 
                                         )
                                     }
-
-
-
                                     return null
-
                                 })
                             }
 

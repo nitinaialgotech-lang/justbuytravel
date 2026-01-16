@@ -149,9 +149,6 @@ export default function Flight_Iconic_Places() {
                                                 {/* ********************************* */}
                                             </div>
                                         </SwiperSlide>
-
-
-
                                     )
                                 })
                             }

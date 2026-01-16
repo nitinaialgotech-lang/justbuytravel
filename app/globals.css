@@ -10,6 +10,7 @@
   --light-green: #5cffec;
   --cl-brown: rgba(115, 115, 115, 1);
   --cl-bl: rgba(29, 31, 39, 1);
+  --p-color: #575757;
 }
 
 @theme inline {
@@ -65,7 +66,9 @@ button {
 .g_color {
   color: var(--bg-color) !important;
 }
-
+.bg_grey {
+  background-color: #f6f6fa !important;
+}
 .color_bl {
   color: var(--foreground) !important;
 }
@@ -1069,8 +1072,12 @@ button {
 }
 
 .blog_section_left_bar > .breadcrumb > h4 {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-transform: capitalize;
 }
 
 /* ************************************************** button to top  */
@@ -1177,10 +1184,6 @@ button {
   background-position: 100% 0;
   background-size: 16%;
   pointer-events: none;
-}
-
-.bg_grey {
-  background-color: #f6f6fa !important;
 }
 
 .trust_guide_section {
@@ -1650,9 +1653,7 @@ button {
   text-transform: capitalize;
 }
 /* *************************** swiperr helping button .......... */
-.helping_swiper-btn-prev,
-.helping_swiper-btn-next {
-}
+
 .booking_icon > h6:hover {
   color: var(--bg-color);
   cursor: pointer;
@@ -1702,4 +1703,100 @@ span.rating-stars {
 #recomand_next {
   right: 0;
   transform: translateY(-50%);
+}
+/* **************************************** */
+#custom_prev > svg,
+#custom_next > svg {
+  width: 35px;
+  height: 35px;
+
+  fill: var(--background);
+  stroke-opacity: 1;
+}
+#custom_prev,
+#custom_next {
+  background-color: var(--bg-color);
+  font-size: 30px;
+  border-radius: 50%;
+}
+#custom_prev {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+#custom_next {
+  right: 0;
+  transform: translateY(-50%);
+}
+/* ******************************* experienc e */
+#experience_prev > svg,
+#experience_next > svg {
+  height: 35px;
+  width: 35px;
+
+  fill: var(--background);
+  stroke-opacity: 1;
+}
+#experience_prev,
+#experience_next {
+  background-color: var(--bg-color);
+  font-size: 30px;
+  border-radius: 50%;
+}
+#experience_prev {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+#experience_next {
+  right: 0;
+  transform: translateY(-50%);
+}
+/* ************************** iconic places in boking flights */
+#helping_swiper-btn-prev > svg,
+#helping_swiper-btn-next > svg {
+  fill: var(--background);
+  stroke-opacity: 1;
+  width: 35px;
+  height: 35px;
+}
+
+/* ******************************* new york pages ****************** */
+.hotel_tips_img > img {
+  border-radius: 10px;
+  border: 3px solid var(--bg-color);
+}
+.hotel_tips_title > .tips_title > h2 {
+  font-family: var(--font-fam);
+  vertical-align: middle;
+  font-size: 48px;
+  font-weight: 700;
+  padding: 0px 0px 0px 20px;
+}
+.hotel_tips_content {
+  padding: 50px 0px 0px 0px;
+}
+.hotel_tips_content > p {
+  font-size: 19px;
+  text-transform: capitalize;
+  text-align: justify;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--p-color);
+  font-family: var(--font-fam);
+}
+/* *********************************** newyork hotel amazing tips */
+.amazing_deals_title > h2 {
+  font-family: var(--font-fam);
+  vertical-align: middle;
+  font-size: 48px;
+  font-weight: 700;
+}
+.amazing_deals_content {
+  padding: 30px 0px 0px 0px;
+}
+.amazing_deals_content > p {
+  color: var(--color);
 }

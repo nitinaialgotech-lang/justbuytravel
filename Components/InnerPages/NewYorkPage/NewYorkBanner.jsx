@@ -1,8 +1,7 @@
-import { Suspense } from 'react';
-import Search from './Search';
-import SearchSection from './SearchSection';
-export default function
-    HomeBannerSection() {
+import Search from '@/Components/HomePage/Search'
+import React from 'react'
+
+export default function NewYorkBanner() {
     return (
         <>
             <section className='mp-s mp-e'>
@@ -14,7 +13,7 @@ export default function
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h2 className='capitalize'>
-                                            Explore more <span>spend</span> less
+                                            Book Hotel in<span> New York</span>
                                         </h2>
                                         {/* <h5 className='capitalize'>
                                             How can we help you travel better for less?
@@ -30,8 +29,6 @@ export default function
             </section>
             {/* <SearchSection /> */}
             <Search />
-
         </>
-
     )
 }
