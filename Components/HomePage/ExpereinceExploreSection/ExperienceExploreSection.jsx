@@ -38,6 +38,7 @@ export default function ExperienceExploreSection() {
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
     ];
+
     const NearCard = [
         {
             img: "/justbuytravel_next/demo/near/near.jpg",
