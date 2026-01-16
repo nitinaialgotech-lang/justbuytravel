@@ -7,7 +7,7 @@ import { FaCar } from "react-icons/fa6";
 import { GrBike } from "react-icons/gr";
 import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
-import { Dropdown_Get, Get_cityName, SearchLocation } from "@/app/Route/endpoints";
+import { Dropdown_Get, Get_cityName, searchHotel, SearchLocation } from "@/app/Route/endpoints";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DestinationSection from "./DestinationSection/DestinationSection";
@@ -162,7 +162,8 @@ export default function Search() {
     //     router.push(`/search?query=${encodeURIComponent(searchContent)}`);
     // };
     // *********************************************** dropdown >>>>>>>>>...........................
-    /********************* */
+    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button  */
+    const [searchAll, setSearchAll] = useState(true);
     /********************* */
     /*********************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
     const [searchContent, setSearchContent] = useState("");
@@ -236,8 +237,10 @@ export default function Search() {
 
     // Fetch autocomplete results
     const { data: autoCompleteData, isLoading } = useQuery({
-        queryKey: ["autoComplete", searchContent],
-        queryFn: () => searchText(searchContent),
+        queryKey: ["autoComplete", searchContent, searchAll],
+        queryFn: () =>
+            searchAll ? searchText(searchContent) : searchHotel(searchContent)
+        ,
         enabled: searchContent.length > 0,
         staleTime: 30000, // Cache for 30 seconds
     });
@@ -289,12 +292,16 @@ export default function Search() {
 
         const long =
             place?.location?.longitude || " "
-
+        const id = place?.id
         // You can add navigation or search logic here
         console.log("Selected placeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq:", place);
+        // ************************************** searching hortel or search alll
+        if (searchAll) {
 
-        if (lat && long) {
-            viewHotels(lat, long)
+            viewSearchAll(lat, long)
+        }
+        else {
+            ViewHotels(id)
         }
     };
 
@@ -329,9 +336,14 @@ export default function Search() {
     const cityName = places?.map((item) => item?.displayName?.text)
     // (**************************** mrouter )
 
-    const viewHotels = (lat, long) => {
+    const viewSearchAll = (lat, long) => {
         route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
         console.log(lat, long, ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;llllll");
+    }
+    // **************************** hotel search
+
+    const ViewHotels = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
     }
 
     return (
@@ -344,12 +356,12 @@ export default function Search() {
                                 <div className="tab_link flex justify-between items-center">
                                     <ul className="flex items-center p-0">
                                         <li>
-                                            <Link href={""} className="g_color">
+                                            <Link href={""} className={`${searchAll ? "g_color" : ""}`} onClick={(e) => { e.preventDefault(); setSearchAll(true) }}>
                                                 <span> <FiSearch /></span> <span>search all</span>
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href={""}>
+                                            <Link href={""} className={`${searchAll ? "" : "g_color"}`} onClick={(e) => { e.preventDefault(); setSearchAll(false) }}>
                                                 <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_hotel.webp" alt="" /> hotels
                                             </Link>
                                         </li>
@@ -443,7 +455,7 @@ export default function Search() {
                                                                 // onClick={() => handleSelectPlace(place)}
                                                                 onMouseEnter={() => setSelectedIndex(index)}
                                                                 onMouseDown={(e) => {
-                                                                    e.preventDefault(); // VERY IMPORTANT
+                                                                    e.preventDefault();
                                                                     handleSelectPlace(place);
                                                                 }}
                                                                 className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ${selectedIndex === index

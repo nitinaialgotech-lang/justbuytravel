@@ -100,10 +100,14 @@ export const Dropdown_Get = async (data) => {
 export const Get_cityName = async (id) => {
     return await https_SearchCity.get(`/search.php?city=${id}`)
 }
-
+// *************************** search text 
 export const searchText = async (text, limit = 50) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=${text}&maxResultCount=${limit}`)
 }
+export const searchHotel = async (text, limit = 50) => {
+    return await https_SearchCity.get(`/text-search.php?textQuery=hotels in ${text}&maxResultCount=${limit}`)
+}
+// *((((((((((((((((((((((()))))))))))))))))))))))
 export const autoComplete = async (text, limit = 10) => {
     return await https_SearchCity.get(`/autocomplete.php?input=${text}&maxResultCount=${limit}`)
 }
@@ -111,8 +115,15 @@ export const nearbyPlaces = async (lat, lng) => {
     return await https_SearchCity.get(`/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=10`)
 }
 export const Restro = async (lat, lng) => {
-    return await https_SearchCity.get(`/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=restaurant&radius=10000&maxResultCount=10`)
-}
+    return await https_SearchCity.get(
+        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=restaurant&radius=10000&maxResultCount=10`
+    );
+};
+export const IconicPlaces = async (lat, lng) => {
+    return await https_SearchCity.get(
+        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=tourist_attraction&radius=10000&maxResultCount=10`
+    );
+};
 export const GetHotel_Detail = async (id) => {
     return await https_SearchCity.get(`/place-details.php?placeId=${id}`)
 }

@@ -1,61 +1,42 @@
-"use client";
-import React from "react";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect, useMemo } from "react";
-import { FaRegHeart, FaUserAlt } from "react-icons/fa";
-import { IoTime } from "react-icons/io5";
+"use client"
+import React from 'react'
+import { useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { nearbyPlaces } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-export default function Recomended() {
-    //   ***********************************
+import NearByPlacesInSingapore from './NearByPlacesInSingapore';
+import IconicPlacesSingapore from './IconicPlacesSingapore';
+import SingaporeBookingTips from './SingaporeBookingTips';
+import SingaporeAmazingDeals from './SingaporeAmazingDeals';
+import Blogs from '@/Components/HomePage/Blog/Blogs';
+import FaqSection from '@/Components/HomePage/Faq/FaqSection';
+import Footer from '@/component/Footer';
+
+// ********************************************************
+export default function SingaporeRecomdSection() {
+    /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
-
-    // xxxxxxxxxxxxxxxxxx
-    // xxxxxxxxxxxxxxxxxx
-    const [coords, setCoords] = useState({ lat: null, lng: null });
-    const [locationError, setLocationError] = useState(null);
-
-    useEffect(() => {
-        if (typeof window === "undefined" || !navigator?.geolocation) {
-            setLocationError("Geolocation is not supported");
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                setCoords({
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude,
-                });
-            },
-            (err) => {
-                console.error("Geolocation error", err);
-                setLocationError(err.message || "Unable to fetch location");
-            }
-        );
-    }, []);
+    /*********************** end stte ****** */
+    /********************* apis calls *********** */
+    const lat = 1.3521;
+    const long = 103.8198;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", coords.lat, coords.lng],
-        queryFn: () => nearbyPlaces(coords.lat, coords.lng),
-        enabled: coords.lat !== null && coords.lng !== null,
+        queryKey: ["lodgingnearby", lat, long],
+        queryFn: () => nearbyPlaces(lat, long),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
-    console.log(nearbyPlace, "...........mmm");
+    console.log(nearbyPlace, "...........mmm", nearbyPlacesData);
 
-    // ***xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    /***************** end of api calls ************* */
+    /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (
             <div className="card_col">
@@ -104,7 +85,7 @@ export default function Recomended() {
             </div>
         );
     };
-
+    /*********************** end of shimmer effect ************* */
     // *****************************************************************************************
     const renderBootstrapStars = (rating) => {
         const stars = [];
@@ -127,17 +108,9 @@ export default function Recomended() {
 
         return stars;
     };
-    // **********************************************************
-    const router = useRouter();
-    const viewDetail = (id) => {
-        router.push(`/hoteldetail?hotel=${id}`);
-
-        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
-
-    }
-
     return (
         <>
+            {/* ********************* style start ****** */}
             <style
                 dangerouslySetInnerHTML={{
                     __html: `
@@ -167,6 +140,8 @@ export default function Recomended() {
             `,
                 }}
             />
+            {/* ************************ style end of shimmer */}
+            {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Recommended For You</h2>
@@ -322,6 +297,15 @@ export default function Recomended() {
                     </div>
                 </div>
             </section>
+            <NearByPlacesInSingapore lat={lat} long={long} />
+            <IconicPlacesSingapore lat={lat} long={long} />
+            <SingaporeBookingTips />
+            <SingaporeAmazingDeals />
+            <Blogs />
+            <FaqSection />
+            <Footer />
         </>
-    );
+
+
+    )
 }

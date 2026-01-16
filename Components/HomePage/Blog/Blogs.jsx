@@ -53,7 +53,7 @@ export default function Blogs() {
                                                     Top Rated
                                                 </div> */}
                                                 <div className="content mt-2">
-                                                    <Link href={`/blogs?detail=${item?.id}`}>
+                                                    <Link href={`/blogs?detail=${item?.slug}`}>
                                                         {item?.title?.rendered}
                                                     </Link>
                                                 </div>
@@ -135,7 +135,7 @@ export default function Blogs() {
                                                             Top Rated
                                                         </div> */}
                                                         <div className="content mt-2">
-                                                            <Link href={`/blogs?detail=${item?.id}`}>
+                                                            <Link href={`/blogs?detail=${item?.slug}`}>
                                                                 {item?.title?.rendered}
                                                             </Link>
                                                         </div>

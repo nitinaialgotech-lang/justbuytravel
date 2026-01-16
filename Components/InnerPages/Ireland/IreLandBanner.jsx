@@ -1,10 +1,11 @@
-import { Suspense } from 'react';
-import Search from './Search';
-import SearchSection from './SearchSection';
-export default function
-    HomeBannerSection() {
+import Search from '@/Components/HomePage/Search'
+import React from 'react'
+import IreLandRecond from './IreLandRecond'
+
+export default function IreLandBanner() {
     return (
         <>
+
             <section className='mp-s mp-e'>
                 <div className="section_home_banner rounded-3xl flex items-center">
                     {/* *************************** box title */}
@@ -14,11 +15,11 @@ export default function
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h2 className='capitalize'>
-                                            Explore more <span>spend</span> less
+                                            Book Hotel in<span> Ireland</span>
                                         </h2>
                                         {/* <h5 className='capitalize'>
-                                            How can we help you travel better for less?
-                                        </h5> */}
+                                                              How can we help you travel better for less?
+                                                          </h5> */}
                                     </div>
                                 </div>
                             </div>
@@ -30,8 +31,7 @@ export default function
             </section>
             {/* <SearchSection /> */}
             <Search />
-
+            <IreLandRecond />
         </>
-
     )
 }
