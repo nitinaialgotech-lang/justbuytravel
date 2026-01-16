@@ -112,8 +112,10 @@ export const autoComplete = async (text, limit = 10) => {
     return await https_SearchCity.get(`/autocomplete.php?input=${text}&maxResultCount=${limit}`)
 }
 export const nearbyPlaces = async (lat, lng) => {
-    return await https_SearchCity.get(`/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=10`)
-}
+    return await https_SearchCity.get(
+        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=10`
+    );
+};
 export const Restro = async (lat, lng) => {
     return await https_SearchCity.get(
         `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=restaurant&radius=10000&maxResultCount=10`

@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { FaRegHeart, FaUserAlt } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -13,17 +13,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces as fetchNearbyPlaces } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 export default function Recomended() {
-    //   ***********************************
     const [Active, setActive] = useState(true);
-
-    // xxxxxxxxxxxxxxxxxx
-    // xxxxxxxxxxxxxxxxxx
     const [coords, setCoords] = useState({ lat: null, lng: null });
     const [locationError, setLocationError] = useState(null);
 
@@ -105,7 +101,6 @@ export default function Recomended() {
         );
     };
 
-    // *****************************************************************************************
     const renderBootstrapStars = (rating) => {
         const stars = [];
         const value = Number(rating) || 0;
