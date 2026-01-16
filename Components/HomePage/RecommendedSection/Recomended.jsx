@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces as fetchNearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces as fetchNearbyPlaces, nearbyPlaces } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -128,8 +128,7 @@ export default function Recomended() {
         router.push(`/hoteldetail?hotel=${id}`);
 
         console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
-
-    }
+    };
 
     return (
         <>
@@ -277,7 +276,10 @@ export default function Recomended() {
                                                                             {item?.rating} ({item?.userRatingCount})
                                                                         </span>
                                                                     </div>
-                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id)}>
+                                                                    <button
+                                                                        className="button_bg2  rounded-full bg-color-green color_bl recomend_btn"
+                                                                        onClick={() => viewDetail(item?.id)}
+                                                                    >
                                                                         View Detail
                                                                     </button>
                                                                 </div>
