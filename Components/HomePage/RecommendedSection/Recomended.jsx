@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { FaRegHeart, FaUserAlt } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces as fetchNearbyPlaces } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -24,13 +24,35 @@ export default function Recomended() {
     const [Active, setActive] = useState(true);
 
     // xxxxxxxxxxxxxxxxxx
-    const lat = 28.7041;
-    const lng = 77.1025;
-    const { data: nearbyPlaces, isLoading } = useQuery({
-        queryKey: ["nearbyPlaces"],
-        queryFn: () => nearbyPlaces(lat, lng),
+    const [coords, setCoords] = useState({ lat: null, lng: null });
+    const [locationError, setLocationError] = useState(null);
+
+    useEffect(() => {
+        if (typeof window === "undefined" || !navigator?.geolocation) {
+            setLocationError("Geolocation is not supported");
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                setCoords({
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude,
+                });
+            },
+            (err) => {
+                console.error("Geolocation error", err);
+                setLocationError(err.message || "Unable to fetch location");
+            }
+        );
+    }, []);
+
+    const { data: nearbyPlacesData, isLoading } = useQuery({
+        queryKey: ["lodgingnearby", coords.lat, coords.lng],
+        queryFn: () => fetchNearbyPlaces(coords.lat, coords.lng),
+        enabled: coords.lat !== null && coords.lng !== null,
     });
-    const nearbyPlace = nearbyPlaces?.data?.places;
+    const nearbyPlace = nearbyPlacesData?.data?.places;
     console.log(nearbyPlace, "...........mmm");
 
     // ***xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
