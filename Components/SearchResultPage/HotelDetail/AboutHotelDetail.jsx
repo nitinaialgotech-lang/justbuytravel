@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function AboutHotelDetail({ detail, sub_desc, load }) {
+export default function AboutHotelDetail({ detail, load }) {
 
-    console.log(load, ".......................");
+    console.log(detail, ".......................");
 
 
-    const sub = sub_desc?.flat(1);
+    // const sub = sub_desc?.flat(1);
     const ShimmerAboutHotel = () => {
         return (
             <div className="about_hotel rounded-2xl">
@@ -78,21 +78,13 @@ export default function AboutHotelDetail({ detail, sub_desc, load }) {
                                 <div className="row">
                                     <div className="col-lg-12">
                                         <div className="about_hotel_detail">
-                                            <h3 className=''>
+                                            {/* <h3 className=''>
                                                 {detail}
-                                            </h3>
-                                            {
-                                                sub?.map((item) => {
-                                                    return (
-                                                        <>
-                                                            <p>
-                                                                {item}
-                                                            </p>
+                                            </h3> */}
+                                            <p>
+                                                {detail}
 
-                                                        </>
-                                                    )
-                                                })
-                                            }
+                                            </p>
 
 
                                         </div>

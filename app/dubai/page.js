@@ -1,12 +1,15 @@
+import React, { Suspense } from 'react'
 import Header from '@/component/Header'
 import DubaiBanner from '@/Components/InnerPages/Dubai/DubaiBanner'
-import React from 'react'
 
 export default function page() {
     return (
         <>
             <Header />
-            <DubaiBanner />
+            <Suspense fallback={<div>Loading...</div>}>
+
+                <DubaiBanner />
+            </Suspense>
 
         </>
     )
