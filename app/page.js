@@ -12,6 +12,7 @@ import "../style/responsive.css"
 import FaqSection from "@/Components/HomePage/Faq/FaqSection";
 import Trust_Guide_Section from "@/Components/Aboutus/Trust_Guide_Section";
 import Recomended from "@/Components/HomePage/RecommendedSection/Recomended";
+import QuickLinks from "@/Components/QuickLinks/QuickLinks";
 
 export const metadata = {
   title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
@@ -58,6 +59,7 @@ export default function Home() {
       <GetOfferSection />
       <ExperienceExploreSection />
       <Trust_Guide_Section />
+      <QuickLinks />
       <Blogs />
       <FaqSection />
 

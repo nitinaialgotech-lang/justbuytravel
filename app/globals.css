@@ -150,7 +150,7 @@ button {
   font-size: 98px;
   color: var(--color);
   font-weight: 900;
-  line-height: 60px;
+  line-height: 1;
 }
 
 .banner_box > .title > h2 > span {
@@ -330,9 +330,9 @@ button {
 }
 
 /* *****************************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> recomended for you  */
-.recomend_section {
+/* .recomend_section {
   height: 100%;
-}
+} */
 
 .recomend_section > .section_title > .title_icon {
   top: -14%;
@@ -1799,4 +1799,40 @@ span.rating-stars {
 }
 .amazing_deals_content > p {
   color: var(--color);
+}
+/* ************************************** quick Links >>>>>>>>xxxxxxxxxxxxxxxxxxxxxxxx */
+.quick_links {
+  /* box-shadow: 0px 0px 35px 2px rgb(0 0 0 / 5%); */
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #b5b5b569;
+}
+.quick_links > .quick_link_box {
+}
+.quick_links > .quick_link_box > .quick_link_items > h4 {
+  font-family: var(--font-fam);
+  color: var(--color);
+  font-weight: 700;
+}
+.quick_links > .quick_link_box > .quick_link_items > ul > li {
+  font: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.quick_links > .quick_link_box > .quick_link_items > ul > li > a {
+  text-decoration: none;
+  color: var(--color);
+}
+.quick_links > .quick_link_box > .quick_link_items > ul > li > a:hover {
+  color: var(--bg-color);
+}
+.quick_links > .quick_link_box > .quick_link_items > ul {
+  flex-wrap: wrap;
+  gap: 22px;
+  /* margin: 20px 0 0; */
+  padding: 0;
+  list-style: none;
+  display: flex;
 }

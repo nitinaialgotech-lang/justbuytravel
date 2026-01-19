@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
-import { GetHotel_Detail, HotelDetail } from "@/app/Route/endpoints";
+import { GetAccommodationDetails, GetHotel_Detail, HotelDetail } from "@/app/Route/endpoints";
 import { useSearchParams } from "next/navigation";
 import AboutHotelDetail from "./AboutHotelDetail";
 import NearByHotel from "./NearByHotel";
@@ -93,6 +93,29 @@ export default function SearchHotelDetail() {
     const oneImage = HotelDetail?.photos?.slice(0, 1)?.map((item) => item?.name) || '';
     const longitude = HotelDetail?.location?.longitude;
     const latitude = HotelDetail?.location?.latitude;
+    // ****************************************** to fetch the detail of hotel api >>>>>>>>>>>>>>>>>>>>>>>>
+    const locationName = (HotelDetail?.displayName?.text ?? HotelDetail?.displayName ?? "").toString().trim();
+    const locationAddress = (HotelDetail?.formattedAddress?.text ?? HotelDetail?.formattedAddress ?? "").toString().trim();
+
+    const { data: accommodationData, } = useQuery({
+        queryKey: ["getaccommodationprice", locationName, locationAddress],
+        queryFn: ({ queryKey }) => {
+            const [name, address] = queryKey;
+            return GetAccommodationDetails(name, address);
+        },
+        enabled: Boolean(locationName) && Boolean(locationAddress),
+        retry: 0,
+    })
+    console.log(accommodationData, "accommodation data ,........... ooooooooooooooo ", locationName, locationAddress);
+
+    // *****************************detail of apis
+    const hotelDescription = accommodationData?.data?.data?.description;
+
+
+    const hotelAmenties = accommodationData?.data?.data?.amenities;
+    const hotelPricing = accommodationData?.data?.data?.otaPricing;
+    console.log(hotelDescription, "hoteldetail?>>>>>>>>>>>>>>>>>>>>>>>>>", hotelAmenties, hotelPricing);
+
 
     return (
         <>
@@ -331,19 +354,17 @@ export default function SearchHotelDetail() {
                 <div className="row matrix_fix">
                     <div className="col-lg-7 ">
                         <div className=" my-5 content_box_detail  rounded-2xl border border-gray-300">
-                            {/* <AboutHotelDetail
+                            <AboutHotelDetail detail={hotelDescription} load={isLoading} />
 
-                            /> */}
-
-                            {/* <HotelFacilities /> */}
+                            <HotelFacilities hotelAmenties={hotelAmenties} load={isLoading} />
 
                             {/* <NearByHotel places={near_by_places} /> */}
 
-                            <HotelLocation lat={latitude} long={longitude} />
+                            <HotelLocation lat={latitude} long={longitude} load={isLoading} />
                         </div>
                     </div>
                     <div className="col-lg-5 order-first order-lg-last">
-                        {/* <SearchSidebar /> */}
+                        <SearchSidebar hotelPricing={hotelPricing} load={isLoading} />
                     </div>
                 </div>
             </div>

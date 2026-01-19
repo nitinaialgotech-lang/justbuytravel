@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import "../../style/searchresult.css";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces, SearchLocation } from "@/app/Route/endpoints";
+import { GetAccommodationDetails, nearbyPlaces, SearchLocation } from "@/app/Route/endpoints";
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import HotelSearchRecomand from "./HotelSearchRecomand";
+import HotelSearchNearByLocation from "./HotelSearchNearByLocation";
+import HotelSearchIconicPlaces from "./HotelSearchIconicPlaces";
 export default function SearchContentBox() {
     // ********************************
     const searchQuery = useSearchParams();
@@ -22,9 +25,6 @@ export default function SearchContentBox() {
     const hotelData = data?.data?.places;
 
     console.log(hotelData, "?????????????????????????????????????????");
-
-
-
 
     // const searchQuery = useSearchParams();
 
@@ -81,9 +81,16 @@ export default function SearchContentBox() {
             </div>
         </div>
     );
-
+    // ************************************* on load more button show 
+    const itemPerPage = 6;
+    const [visibleCount, setVisibleCount] = useState(itemPerPage);
+    useEffect(() => {
+        setVisibleCount(itemPerPage);
+    }, [hotelData]);
     return (
         <>
+            {/* ********************** recomand section show    */}
+            <HotelSearchRecomand lat={lat} long={long} />
 
             {/* *************** swimmer effect ***************** */}
             <style dangerouslySetInnerHTML={{
@@ -134,90 +141,91 @@ export default function SearchContentBox() {
 
             {/* ********************* end of swimmer effect ********* */}
 
+            <section>
 
-            <div className="list-grid-product-wrap">
-                <div id="sidebar_filter_hotel" className="row gy-md-5 gy-4">
-                    {/* ***************************** */}
+                <div className="list-grid-product-wrap">
+                    <div id="sidebar_filter_hotel" className="row gy-md-5 gy-4">
+                        {/* ***************************** shimmer show  */}
 
-                    {
+                        {
 
-                        isLoading ? Array.from({ length: 9 }).map((_, i) => (
+                            isLoading ? Array.from({ length: itemPerPage }).map((_, i) => (
 
-                            <div
-                                className="col-md-4 item wow animate fadeInDown"
-                                data-wow-delay="200ms"
-                                data-wow-duration="1500ms"
-                                key={`shimmer-${i}`}>
+                                <div
+                                    className="col-md-4 item wow animate fadeInDown"
+                                    data-wow-delay="200ms"
+                                    data-wow-duration="1500ms"
+                                    key={`shimmer-${i}`}>
 
-                                <ShimmerCard />
-                            </div>)) :
+                                    <ShimmerCard />
+                                </div>)) :
 
 
-                            hotelData?.map((item, i) => {
+                                hotelData?.slice(0, visibleCount)?.map((item, i) => {
 
-                                const image = item?.photos
-                                    ?.slice(0, 1)
-                                    ?.map((item) => item?.name);
-                                // ****** text
-                                const truncateText = (text, maxLength = 20) => {
-                                    if (!text) return "";
-                                    return text.length > maxLength
-                                        ? text.slice(0, maxLength) + "..."
-                                        : text;
-                                };
+                                    const image = item?.photos
+                                        ?.slice(0, 1)
+                                        ?.map((item) => item?.name);
+                                    // ****** text
+                                    const truncateText = (text, maxLength = 20) => {
+                                        if (!text) return "";
+                                        return text.length > maxLength
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
 
-                                return (
-                                    <>
-                                        <div
-                                            className="col-md-4 item wow animate fadeInDown"
-                                            data-wow-delay="200ms"
-                                            data-wow-duration="1500ms"
-                                            key={i}
-                                        >
-                                            <div className="hotel-card">
-                                                <div className="hotel-img-wrap">
-                                                    <a href="#" className="hotel-img">
-                                                        <img
-                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
-                                                            className="rounded-3xl w-full h-full object-cover"
-                                                            loading="lazy"
-                                                        />
-                                                    </a>
-                                                    {/* <div className="batch">
+                                    return (
+                                        <>
+                                            <div
+                                                className="col-md-4 item wow animate fadeInDown"
+                                                data-wow-delay="200ms"
+                                                data-wow-duration="1500ms"
+                                                key={i}
+                                            >
+                                                <div className="hotel-card">
+                                                    <div className="hotel-img-wrap">
+                                                        <a href="#" className="hotel-img">
+                                                            <img
+                                                                src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                className="rounded-3xl w-full h-full object-cover"
+                                                                loading="lazy"
+                                                            />
+                                                        </a>
+                                                        {/* <div className="batch">
                                                         <span>Sale on!</span>
                                                     </div> */}
-                                                </div>
-                                                <div className="hotel-content">
-                                                    <div className="rating-area">
-                                                        <div className="rating-text">
-                                                            <div className="rating-stars">
-                                                                <ul>
-                                                                    {(() => {
-                                                                        const rating = item?.reviews?.value || 0;
-                                                                        const fullStars = Math.floor(rating);
-                                                                        const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
-                                                                        return Array.from({ length: 5 }).map((_, idx) => (
-                                                                            <li key={idx}>
-                                                                                {idx < fullStars ? (
-                                                                                    <i className="bi bi-star-fill"></i>
-                                                                                ) : idx === fullStars && hasHalfStar ? (
-                                                                                    <i className="bi bi-star-half"></i>
-                                                                                ) : (
-                                                                                    <i className="bi bi-star"></i>
-                                                                                )}
-                                                                            </li>
-                                                                        ));
-                                                                    })()}
-                                                                </ul>
-                                                            </div>
-                                                            <span className="total">reviews  {item?.rating} ({item?.userRatingCount})</span>
-                                                        </div>
                                                     </div>
-                                                    <h5>
-                                                        <a href="#">{truncateText(item?.displayName?.text, 30)}   </a>
-                                                    </h5>
+                                                    <div className="hotel-content">
+                                                        <div className="rating-area">
+                                                            <div className="rating-text">
+                                                                <div className="rating-stars">
+                                                                    <ul>
+                                                                        {(() => {
+                                                                            const rating = item?.reviews?.value || 0;
+                                                                            const fullStars = Math.floor(rating);
+                                                                            const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
+                                                                            return Array.from({ length: 5 }).map((_, idx) => (
+                                                                                <li key={idx}>
+                                                                                    {idx < fullStars ? (
+                                                                                        <i className="bi bi-star-fill"></i>
+                                                                                    ) : idx === fullStars && hasHalfStar ? (
+                                                                                        <i className="bi bi-star-half"></i>
+                                                                                    ) : (
+                                                                                        <i className="bi bi-star"></i>
+                                                                                    )}
+                                                                                </li>
+                                                                            ));
+                                                                        })()}
+                                                                    </ul>
+                                                                </div>
+                                                                <span className="total">reviews  {item?.rating} ({item?.userRatingCount})</span>
+                                                            </div>
+                                                        </div>
+                                                        <h5>
+                                                            <a href="#">{truncateText(item?.displayName?.text, 30)}   </a>
+                                                        </h5>
 
-                                                    {/* <ul className="hotel-feature-list">
+                                                        {/* <ul className="hotel-feature-list">
 
 
                                                     <li>
@@ -239,7 +247,7 @@ export default function SearchContentBox() {
                                                     
                                                     </li>
                                                 </ul> */}
-                                                    {/* <div className="cancellation">
+                                                        {/* <div className="cancellation">
                                                         <svg
                                                             width="14"
                                                             height="14"
@@ -251,233 +259,243 @@ export default function SearchContentBox() {
                                                         </svg>
                                                         <span>Free Cancellation Policy</span>
                                                     </div> */}
-                                                    <div className="btn-and-price-area">
-                                                        <Link
-                                                            href={`/hoteldetail?hotel=${item?.id}`}
-                                                            className="primary-btn1"
-                                                        // onClick={() =>
-                                                        //     viewDetail(item?.hotel_identifier, item)
-                                                        // }
-                                                        >
-                                                            <span>
-                                                                Book Now{" "}
-                                                                <svg
-                                                                    width="10"
-                                                                    height="10"
-                                                                    viewBox="0 0 10 10"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path d="M9.73535 1.14746C9.57033 1.97255 9.32924 3.26406 9.24902 4.66797C9.16817 6.08312 9.25559 7.5453 9.70214 8.73633C9.84754 9.12406 9.65129 9.55659 9.26367 9.70215C8.9001 9.83849 8.4969 9.67455 8.32812 9.33398L8.29785 9.26367L8.19921 8.98438C7.73487 7.5758 7.67054 5.98959 7.75097 4.58203C7.77875 4.09598 7.82525 3.62422 7.87988 3.17969L1.53027 9.53027C1.23738 9.82317 0.762615 9.82317 0.469722 9.53027C0.176829 9.23738 0.176829 8.76262 0.469722 8.46973L6.83593 2.10254C6.3319 2.16472 5.79596 2.21841 5.25 2.24902C3.8302 2.32862 2.2474 2.26906 0.958003 1.79102L0.704097 1.68945L0.635738 1.65527C0.303274 1.47099 0.157578 1.06102 0.310542 0.704102C0.463655 0.347333 0.860941 0.170391 1.22363 0.28418L1.29589 0.310547L1.48828 0.387695C2.47399 0.751207 3.79966 0.827571 5.16601 0.750977C6.60111 0.670504 7.97842 0.428235 8.86132 0.262695L9.95312 0.0585938L9.73535 1.14746Z"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <span>
-                                                                Book Now{" "}
-                                                                <svg
-                                                                    width="10"
-                                                                    height="10"
-                                                                    viewBox="0 0 10 10"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path d="M9.73535 1.14746C9.57033 1.97255 9.32924 3.26406 9.24902 4.66797C9.16817 6.08312 9.25559 7.5453 9.70214 8.73633C9.84754 9.12406 9.65129 9.55659 9.26367 9.70215C8.9001 9.83849 8.4969 9.67455 8.32812 9.33398L8.29785 9.26367L8.19921 8.98438C7.73487 7.5758 7.67054 5.98959 7.75097 4.58203C7.77875 4.09598 7.82525 3.62422 7.87988 3.17969L1.53027 9.53027C1.23738 9.82317 0.762615 9.82317 0.469722 9.53027C0.176829 9.23738 0.176829 8.76262 0.469722 8.46973L6.83593 2.10254C6.3319 2.16472 5.79596 2.21841 5.25 2.24902C3.8302 2.32862 2.2474 2.26906 0.958003 1.79102L0.704097 1.68945L0.635738 1.65527C0.303274 1.47099 0.157578 1.06102 0.310542 0.704102C0.463655 0.347333 0.860941 0.170391 1.22363 0.28418L1.29589 0.310547L1.48828 0.387695C2.47399 0.751207 3.79966 0.827571 5.16601 0.750977C6.60111 0.670504 7.97842 0.428235 8.86132 0.262695L9.95312 0.0585938L9.73535 1.14746Z"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </Link>
-                                                        <div className="price-area">
-                                                            <h6>Starting From</h6>
-                                                            <span>
-                                                                {(() => {
-                                                                    // Map of many popular currencies, but fallback to the 3-letter code if needed
-                                                                    const currencySymbols = {
-                                                                        "AED": "د.إ",
-                                                                        "AFN": "؋",
-                                                                        "ALL": "L",
-                                                                        "AMD": "֏",
-                                                                        "ANG": "ƒ",
-                                                                        "AOA": "Kz",
-                                                                        "ARS": "$",
-                                                                        "AUD": "$",
-                                                                        "AWG": "ƒ",
-                                                                        "AZN": "₼",
-                                                                        "BAM": "КМ",
-                                                                        "BBD": "$",
-                                                                        "BDT": "৳",
-                                                                        "BGN": "лв",
-                                                                        "BHD": ".د.ب",
-                                                                        "BIF": "FBu",
-                                                                        "BMD": "$",
-                                                                        "BND": "$",
-                                                                        "BOB": "Bs.",
-                                                                        "BRL": "R$",
-                                                                        "BSD": "$",
-                                                                        "BTN": "Nu.",
-                                                                        "BWP": "P",
-                                                                        "BYN": "Br",
-                                                                        "BZD": "$",
-                                                                        "CAD": "$",
-                                                                        "CDF": "FC",
-                                                                        "CHF": "Fr",
-                                                                        "CLP": "$",
-                                                                        "CNY": "¥",
-                                                                        "COP": "$",
-                                                                        "CRC": "₡",
-                                                                        "CUC": "$",
-                                                                        "CUP": "$",
-                                                                        "CVE": "$",
-                                                                        "CZK": "Kč",
-                                                                        "DJF": "Fdj",
-                                                                        "DKK": "kr",
-                                                                        "DOP": "RD$",
-                                                                        "DZD": "دج",
-                                                                        "EGP": "£",
-                                                                        "ERN": "Nfk",
-                                                                        "ETB": "Br",
-                                                                        "EUR": "€",
-                                                                        "FJD": "$",
-                                                                        "FKP": "£",
-                                                                        "FOK": "kr",
-                                                                        "GBP": "£",
-                                                                        "GEL": "₾",
-                                                                        "GGP": "£",
-                                                                        "GHS": "₵",
-                                                                        "GIP": "£",
-                                                                        "GMD": "D",
-                                                                        "GNF": "FG",
-                                                                        "GTQ": "Q",
-                                                                        "GYD": "$",
-                                                                        "HKD": "$",
-                                                                        "HNL": "L",
-                                                                        "HRK": "kn",
-                                                                        "HTG": "G",
-                                                                        "HUF": "Ft",
-                                                                        "IDR": "Rp",
-                                                                        "ILS": "₪",
-                                                                        "IMP": "£",
-                                                                        "INR": "₹",
-                                                                        "IQD": "ع.د",
-                                                                        "IRR": "﷼",
-                                                                        "ISK": "kr",
-                                                                        "JMD": "J$",
-                                                                        "JOD": "د.ا",
-                                                                        "JPY": "¥",
-                                                                        "KES": "KSh",
-                                                                        "KGS": "лв",
-                                                                        "KHR": "៛",
-                                                                        "KID": "$",
-                                                                        "KMF": "CF",
-                                                                        "KRW": "₩",
-                                                                        "KWD": "د.ك",
-                                                                        "KYD": "$",
-                                                                        "KZT": "₸",
-                                                                        "LAK": "₭",
-                                                                        "LBP": "ل.ل",
-                                                                        "LKR": "₨",
-                                                                        "LRD": "$",
-                                                                        "LSL": "L",
-                                                                        "LYD": "ل.د",
-                                                                        "MAD": "د.م.",
-                                                                        "MDL": "L",
-                                                                        "MGA": "Ar",
-                                                                        "MKD": "ден",
-                                                                        "MMK": "K",
-                                                                        "MNT": "₮",
-                                                                        "MOP": "P",
-                                                                        "MRU": "UM",
-                                                                        "MUR": "₨",
-                                                                        "MVR": "Rf",
-                                                                        "MWK": "MK",
-                                                                        "MXN": "$",
-                                                                        "MYR": "RM",
-                                                                        "MZN": "MT",
-                                                                        "NAD": "$",
-                                                                        "NGN": "₦",
-                                                                        "NIO": "C$",
-                                                                        "NOK": "kr",
-                                                                        "NPR": "₨",
-                                                                        "NZD": "$",
-                                                                        "OMR": "ر.ع.",
-                                                                        "PAB": "B/.",
-                                                                        "PEN": "S/",
-                                                                        "PGK": "K",
-                                                                        "PHP": "₱",
-                                                                        "PKR": "₨",
-                                                                        "PLN": "zł",
-                                                                        "PYG": "₲",
-                                                                        "QAR": "ر.ق",
-                                                                        "RON": "lei",
-                                                                        "RSD": "дин",
-                                                                        "RUB": "₽",
-                                                                        "RWF": "FRw",
-                                                                        "SAR": "ر.س",
-                                                                        "SBD": "$",
-                                                                        "SCR": "₨",
-                                                                        "SDG": "ج.س.",
-                                                                        "SEK": "kr",
-                                                                        "SGD": "$",
-                                                                        "SHP": "£",
-                                                                        "SLE": "Le",
-                                                                        "SOS": "Sh",
-                                                                        "SRD": "$",
-                                                                        "SSP": "£",
-                                                                        "STN": "Db",
-                                                                        "SYP": "£",
-                                                                        "SZL": "E",
-                                                                        "THB": "฿",
-                                                                        "TJS": "ЅМ",
-                                                                        "TMT": "m",
-                                                                        "TND": "د.ت",
-                                                                        "TOP": "T$",
-                                                                        "TRY": "₺",
-                                                                        "TTD": "$",
-                                                                        "TVD": "$",
-                                                                        "TWD": "NT$",
-                                                                        "TZS": "Sh",
-                                                                        "UAH": "₴",
-                                                                        "UGX": "USh",
-                                                                        "USD": "$",
-                                                                        "UYU": "$U",
-                                                                        "UZS": "soʻm",
-                                                                        "VES": "Bs.S",
-                                                                        "VND": "₫",
-                                                                        "VUV": "Vt",
-                                                                        "WST": "T",
-                                                                        "XAF": "FCFA",
-                                                                        "XCD": "$",
-                                                                        "XOF": "F CFA",
-                                                                        "XPF": "₣",
-                                                                        "YER": "﷼",
-                                                                        "ZAR": "R",
-                                                                        "ZMW": "ZK",
-                                                                        "ZWL": "$"
-                                                                    };
-                                                                    const code = item?.prices?.currency;
-                                                                    return (currencySymbols[code] || code || "") + (item?.prices?.price ?? "");
-                                                                })()}
-                                                            </span>
-                                                        </div>{" "}
+                                                        <div className="btn-and-price-area">
+                                                            <Link
+                                                                href={`/hoteldetail?hotel=${item?.id}`}
+                                                                className="primary-btn1"
+                                                            // onClick={() =>
+                                                            //     viewDetail(item?.hotel_identifier, item)
+                                                            // }
+                                                            >
+                                                                <span>
+                                                                    Book Now{" "}
+                                                                    <svg
+                                                                        width="10"
+                                                                        height="10"
+                                                                        viewBox="0 0 10 10"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                    >
+                                                                        <path d="M9.73535 1.14746C9.57033 1.97255 9.32924 3.26406 9.24902 4.66797C9.16817 6.08312 9.25559 7.5453 9.70214 8.73633C9.84754 9.12406 9.65129 9.55659 9.26367 9.70215C8.9001 9.83849 8.4969 9.67455 8.32812 9.33398L8.29785 9.26367L8.19921 8.98438C7.73487 7.5758 7.67054 5.98959 7.75097 4.58203C7.77875 4.09598 7.82525 3.62422 7.87988 3.17969L1.53027 9.53027C1.23738 9.82317 0.762615 9.82317 0.469722 9.53027C0.176829 9.23738 0.176829 8.76262 0.469722 8.46973L6.83593 2.10254C6.3319 2.16472 5.79596 2.21841 5.25 2.24902C3.8302 2.32862 2.2474 2.26906 0.958003 1.79102L0.704097 1.68945L0.635738 1.65527C0.303274 1.47099 0.157578 1.06102 0.310542 0.704102C0.463655 0.347333 0.860941 0.170391 1.22363 0.28418L1.29589 0.310547L1.48828 0.387695C2.47399 0.751207 3.79966 0.827571 5.16601 0.750977C6.60111 0.670504 7.97842 0.428235 8.86132 0.262695L9.95312 0.0585938L9.73535 1.14746Z"></path>
+                                                                    </svg>
+                                                                </span>
+                                                                <span>
+                                                                    Book Now{" "}
+                                                                    <svg
+                                                                        width="10"
+                                                                        height="10"
+                                                                        viewBox="0 0 10 10"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                    >
+                                                                        <path d="M9.73535 1.14746C9.57033 1.97255 9.32924 3.26406 9.24902 4.66797C9.16817 6.08312 9.25559 7.5453 9.70214 8.73633C9.84754 9.12406 9.65129 9.55659 9.26367 9.70215C8.9001 9.83849 8.4969 9.67455 8.32812 9.33398L8.29785 9.26367L8.19921 8.98438C7.73487 7.5758 7.67054 5.98959 7.75097 4.58203C7.77875 4.09598 7.82525 3.62422 7.87988 3.17969L1.53027 9.53027C1.23738 9.82317 0.762615 9.82317 0.469722 9.53027C0.176829 9.23738 0.176829 8.76262 0.469722 8.46973L6.83593 2.10254C6.3319 2.16472 5.79596 2.21841 5.25 2.24902C3.8302 2.32862 2.2474 2.26906 0.958003 1.79102L0.704097 1.68945L0.635738 1.65527C0.303274 1.47099 0.157578 1.06102 0.310542 0.704102C0.463655 0.347333 0.860941 0.170391 1.22363 0.28418L1.29589 0.310547L1.48828 0.387695C2.47399 0.751207 3.79966 0.827571 5.16601 0.750977C6.60111 0.670504 7.97842 0.428235 8.86132 0.262695L9.95312 0.0585938L9.73535 1.14746Z"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </Link>
+                                                            <div className="price-area">
+                                                                <h6>Starting From</h6>
+                                                                <span>
+                                                                    {(() => {
+                                                                        // Map of many popular currencies, but fallback to the 3-letter code if needed
+                                                                        const currencySymbols = {
+                                                                            "AED": "د.إ",
+                                                                            "AFN": "؋",
+                                                                            "ALL": "L",
+                                                                            "AMD": "֏",
+                                                                            "ANG": "ƒ",
+                                                                            "AOA": "Kz",
+                                                                            "ARS": "$",
+                                                                            "AUD": "$",
+                                                                            "AWG": "ƒ",
+                                                                            "AZN": "₼",
+                                                                            "BAM": "КМ",
+                                                                            "BBD": "$",
+                                                                            "BDT": "৳",
+                                                                            "BGN": "лв",
+                                                                            "BHD": ".د.ب",
+                                                                            "BIF": "FBu",
+                                                                            "BMD": "$",
+                                                                            "BND": "$",
+                                                                            "BOB": "Bs.",
+                                                                            "BRL": "R$",
+                                                                            "BSD": "$",
+                                                                            "BTN": "Nu.",
+                                                                            "BWP": "P",
+                                                                            "BYN": "Br",
+                                                                            "BZD": "$",
+                                                                            "CAD": "$",
+                                                                            "CDF": "FC",
+                                                                            "CHF": "Fr",
+                                                                            "CLP": "$",
+                                                                            "CNY": "¥",
+                                                                            "COP": "$",
+                                                                            "CRC": "₡",
+                                                                            "CUC": "$",
+                                                                            "CUP": "$",
+                                                                            "CVE": "$",
+                                                                            "CZK": "Kč",
+                                                                            "DJF": "Fdj",
+                                                                            "DKK": "kr",
+                                                                            "DOP": "RD$",
+                                                                            "DZD": "دج",
+                                                                            "EGP": "£",
+                                                                            "ERN": "Nfk",
+                                                                            "ETB": "Br",
+                                                                            "EUR": "€",
+                                                                            "FJD": "$",
+                                                                            "FKP": "£",
+                                                                            "FOK": "kr",
+                                                                            "GBP": "£",
+                                                                            "GEL": "₾",
+                                                                            "GGP": "£",
+                                                                            "GHS": "₵",
+                                                                            "GIP": "£",
+                                                                            "GMD": "D",
+                                                                            "GNF": "FG",
+                                                                            "GTQ": "Q",
+                                                                            "GYD": "$",
+                                                                            "HKD": "$",
+                                                                            "HNL": "L",
+                                                                            "HRK": "kn",
+                                                                            "HTG": "G",
+                                                                            "HUF": "Ft",
+                                                                            "IDR": "Rp",
+                                                                            "ILS": "₪",
+                                                                            "IMP": "£",
+                                                                            "INR": "₹",
+                                                                            "IQD": "ع.د",
+                                                                            "IRR": "﷼",
+                                                                            "ISK": "kr",
+                                                                            "JMD": "J$",
+                                                                            "JOD": "د.ا",
+                                                                            "JPY": "¥",
+                                                                            "KES": "KSh",
+                                                                            "KGS": "лв",
+                                                                            "KHR": "៛",
+                                                                            "KID": "$",
+                                                                            "KMF": "CF",
+                                                                            "KRW": "₩",
+                                                                            "KWD": "د.ك",
+                                                                            "KYD": "$",
+                                                                            "KZT": "₸",
+                                                                            "LAK": "₭",
+                                                                            "LBP": "ل.ل",
+                                                                            "LKR": "₨",
+                                                                            "LRD": "$",
+                                                                            "LSL": "L",
+                                                                            "LYD": "ل.د",
+                                                                            "MAD": "د.م.",
+                                                                            "MDL": "L",
+                                                                            "MGA": "Ar",
+                                                                            "MKD": "ден",
+                                                                            "MMK": "K",
+                                                                            "MNT": "₮",
+                                                                            "MOP": "P",
+                                                                            "MRU": "UM",
+                                                                            "MUR": "₨",
+                                                                            "MVR": "Rf",
+                                                                            "MWK": "MK",
+                                                                            "MXN": "$",
+                                                                            "MYR": "RM",
+                                                                            "MZN": "MT",
+                                                                            "NAD": "$",
+                                                                            "NGN": "₦",
+                                                                            "NIO": "C$",
+                                                                            "NOK": "kr",
+                                                                            "NPR": "₨",
+                                                                            "NZD": "$",
+                                                                            "OMR": "ر.ع.",
+                                                                            "PAB": "B/.",
+                                                                            "PEN": "S/",
+                                                                            "PGK": "K",
+                                                                            "PHP": "₱",
+                                                                            "PKR": "₨",
+                                                                            "PLN": "zł",
+                                                                            "PYG": "₲",
+                                                                            "QAR": "ر.ق",
+                                                                            "RON": "lei",
+                                                                            "RSD": "дин",
+                                                                            "RUB": "₽",
+                                                                            "RWF": "FRw",
+                                                                            "SAR": "ر.س",
+                                                                            "SBD": "$",
+                                                                            "SCR": "₨",
+                                                                            "SDG": "ج.س.",
+                                                                            "SEK": "kr",
+                                                                            "SGD": "$",
+                                                                            "SHP": "£",
+                                                                            "SLE": "Le",
+                                                                            "SOS": "Sh",
+                                                                            "SRD": "$",
+                                                                            "SSP": "£",
+                                                                            "STN": "Db",
+                                                                            "SYP": "£",
+                                                                            "SZL": "E",
+                                                                            "THB": "฿",
+                                                                            "TJS": "ЅМ",
+                                                                            "TMT": "m",
+                                                                            "TND": "د.ت",
+                                                                            "TOP": "T$",
+                                                                            "TRY": "₺",
+                                                                            "TTD": "$",
+                                                                            "TVD": "$",
+                                                                            "TWD": "NT$",
+                                                                            "TZS": "Sh",
+                                                                            "UAH": "₴",
+                                                                            "UGX": "USh",
+                                                                            "USD": "$",
+                                                                            "UYU": "$U",
+                                                                            "UZS": "soʻm",
+                                                                            "VES": "Bs.S",
+                                                                            "VND": "₫",
+                                                                            "VUV": "Vt",
+                                                                            "WST": "T",
+                                                                            "XAF": "FCFA",
+                                                                            "XCD": "$",
+                                                                            "XOF": "F CFA",
+                                                                            "XPF": "₣",
+                                                                            "YER": "﷼",
+                                                                            "ZAR": "R",
+                                                                            "ZMW": "ZK",
+                                                                            "ZWL": "$"
+                                                                        };
+                                                                        const code = item?.prices?.currency;
+                                                                        return (currencySymbols[code] || code || "") + (item?.prices?.price ?? "");
+                                                                    })()}
+                                                                </span>
+                                                            </div>{" "}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </>
-                                );
+                                        </>
+                                    );
 
 
 
 
-                            })}
+                                })}
 
-                    {/* *********************************************************************** */}
 
-                    {/* ************************************* */}
 
-                    {/* ***************************************************************************** pagination >>>>>>>>>>>>>>>>>>> */}
-                    <div className="pagination_wrapper text-center flex justify-center mb-10">
-                        <button className=" px-3 py-2 rounded bg-color-green  text-black font-semibold">
-                            Load More
-                        </button>
+
+                        {/* ***************************************************************************** pagination >>>>>>>>>>>>>>>>>>> */}
+                        <div className="pagination_wrapper text-center flex justify-center mb-10">
+                            {visibleCount < hotelData?.length && (
+                                <button
+                                    className="px-3 py-2 rounded bg-color-green text-black font-semibold"
+                                    onClick={() => setVisibleCount(prev => prev + itemPerPage)}
+                                >
+                                    Load More
+                                </button>
+                            )}
+                        </div>
                     </div>
-                </div>
-            </div>{" "}
+                </div>{" "}
+            </section>
+
+            {/* **************************************** near buy location xxxxxxxxxxxxxxxxxxxxx */}
+            <HotelSearchNearByLocation lat={lat} long={long} />
+            {/* ******************************* iconic plaeces xxxxxxxxxxxxxxxxxxxxxxxxxx */}
+            <HotelSearchIconicPlaces lat={lat} long={long} />
         </>
     );
 }

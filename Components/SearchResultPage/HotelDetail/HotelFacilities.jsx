@@ -1,13 +1,11 @@
 import React from "react";
 import { RiCheckboxCircleLine } from "react-icons/ri";
-export default function HotelFacilities({ amenities = [], load }) {
+export default function HotelFacilities({ hotelAmenties = [], load }) {
     // If no amenities provided, show default static content
-    const hasAmenities = amenities && amenities.length > 0;
-    console.log(amenities?.amenities, ".................");
+    const hasAmenities = hotelAmenties && hotelAmenties.length > 0;
+    console.log(hotelAmenties, ".................");
 
-    const facility = amenities?.map((item) => item?.amenities);
-    console.log(facility, "...........");
-    const fact = facility?.flat(1);
+
     // ****************************************************
     const ShimmerFacilities = () => {
         return (
@@ -100,16 +98,24 @@ export default function HotelFacilities({ amenities = [], load }) {
                                             <div className="facilities-wrap">
                                                 <div className="single-facilities">
                                                     <ul className="facilities-list">
-                                                        {fact?.map((item, i) => {
-                                                            return (
-                                                                <>
+
+
+                                                        {
+                                                            hotelAmenties?.map((item, i) => {
+                                                                return (
+
+
                                                                     <li key={i}>
                                                                         <RiCheckboxCircleLine />
-                                                                        {item?.category}
+                                                                        {item}
                                                                     </li>
-                                                                </>
-                                                            );
-                                                        })}
+
+
+                                                                )
+                                                            })
+                                                        }
+
+
                                                     </ul>
                                                 </div>
                                             </div>
