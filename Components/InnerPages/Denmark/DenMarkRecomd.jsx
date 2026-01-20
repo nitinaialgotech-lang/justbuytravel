@@ -19,6 +19,7 @@ import NearByDenMark from './NearByDenMark';
 import IconicPlacesInDenMark from './IconicPlacesInDenMark';
 import DenMarkBookingTips from './DenMarkBookingTips';
 import DenMarkAmazingDeals from './DenMarkAmazingDeals';
+import { useRouter } from 'next/navigation';
 
 export default function DenMarkRecomd() {
 
@@ -108,6 +109,13 @@ export default function DenMarkRecomd() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

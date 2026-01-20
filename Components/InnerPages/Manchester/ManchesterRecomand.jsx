@@ -18,6 +18,7 @@ import ManchesterBookingTips from "./ManchesterBookingTips";
 import ManchesterNearByPlaces from "./ManchesterNearByPlaces";
 import ManchesterIconicPlaces from "./ManchesterIconicPlaces";
 import ManchesterAmazingDeals from "./ManchesterAmazingDeals";
+import { useRouter } from "next/navigation";
 
 export default function ManchesterRecomand() {
     /************************* ustate contetn *** */
@@ -106,6 +107,14 @@ export default function ManchesterRecomand() {
         }
 
         return stars;
+    };
+    // **********
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

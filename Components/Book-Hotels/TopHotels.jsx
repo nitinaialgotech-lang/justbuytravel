@@ -1,41 +1,27 @@
+
 "use client"
+import { TopHotelAroundWorld } from '@/app/Route/endpoints'
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
-import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import Blogs from '@/Components/HomePage/Blog/Blogs';
-import FaqSection from '@/Components/HomePage/Faq/FaqSection';
-import Footer from '@/component/Footer';
-import NearByCanada from './NearByCanada';
-import IconicPlaceInCanada from './IconicPlaceInCanada';
-import CanadaBookingTips from './CanadaBookingTips';
-import CanadaAmazingDeals from './CanadaAmazingDeals';
-import { useRouter } from 'next/navigation';
-export default function CanadaRecomd() {
-
+import "swiper/css/pagination";
+export default function TopHotels() {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
-    /*********************** end stte ****** */
-    /********************* apis calls *********** */
-    const lat = 56.1304;
-    const long = -106.3468;
-
-    const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
-    });
-    const nearbyPlace = nearbyPlacesData?.data?.places;
-    console.log(nearbyPlace, "...........mmm", nearbyPlacesData);
-
-    /***************** end of api calls ************* */
+    const { data: TopHotels, isLoading } = useQuery({
+        queryKey: ["tophotels"],
+        queryFn: () => TopHotelAroundWorld()
+    })
+    const Hotels = TopHotels?.data;
+    console.log(Hotels, "topHotrlssssssssss");
     /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (
@@ -115,6 +101,7 @@ export default function CanadaRecomd() {
 
         console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
+
     return (
         <>
             {/* ********************* style start ****** */}
@@ -147,12 +134,11 @@ export default function CanadaRecomd() {
             `
                 }}
             />
-            {/* ************************ style end of shimmer */}
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
-                    <h2 className="mb-0">Recommended For You</h2>
-                    <h5>Handpicked experiences tailored to your interests</h5>
+                    <h2 className="mb-0">Popular Hotels Around The World</h2>
+                    <h5>Let our experts guide you every step of the way in booking the perfect hotel!</h5>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -214,7 +200,7 @@ export default function CanadaRecomd() {
                                         <ShimmerCard />
                                     </SwiperSlide>
                                 ))
-                                : nearbyPlace?.map((item, i) => {
+                                : Hotels?.map((item, i) => {
                                     const image = item?.photos
                                         ?.slice(0, 1)
                                         ?.map((item) => item?.name);
@@ -250,7 +236,7 @@ export default function CanadaRecomd() {
                                                             {/* *** */}
                                                             <div className="card_box_detail card_rounded flex flex-col z-1  relative">
                                                                 <h4 className="m-0 capitalize">
-                                                                    {item?.displayName?.text}
+                                                                    {item?.name}
                                                                 </h4>
                                                                 {/* ****** */}
 
@@ -304,14 +290,8 @@ export default function CanadaRecomd() {
                     </div>
                 </div>
             </section>
-            <NearByCanada lat={lat} long={long} />
-            <IconicPlaceInCanada lat={lat} long={long} />
-            <CanadaBookingTips />
-            <CanadaAmazingDeals />
 
-            <Blogs />
-            <FaqSection />
-            <Footer />
+
 
         </>
     )

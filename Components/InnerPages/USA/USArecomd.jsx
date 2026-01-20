@@ -18,6 +18,7 @@ import USAnearPlaces from './USAnearPlaces';
 import USAiconicPlaces from './USAiconicPlaces';
 import USAbookingTips from './USAbookingTips';
 import USAamazingDeals from './USAamazingDeals';
+import { useRouter } from 'next/navigation';
 
 export default function USArecomd() {
 
@@ -107,6 +108,13 @@ export default function USArecomd() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

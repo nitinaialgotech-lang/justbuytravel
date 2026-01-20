@@ -68,7 +68,7 @@ export default function Header() {
                                     style={{ maxHeight: "100px" }}
                                     navbarScroll
                                 >
-                                    <Nav.Link href="/justbuytravel_next/demo/hotels" className="capitalize">
+                                    <Nav.Link className="capitalize" href="/book-hotels">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -76,9 +76,10 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span>Hotels</span>
+                                        <span><Link href="/book-hotels">Hotels</Link></span>
+
                                     </Nav.Link>
-                                    <Nav.Link href="#action2" className="capitalize">
+                                    <Nav.Link className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -86,9 +87,9 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span>Flights</span>
+                                        <span><Link href="/book-flights">Flights</Link></span>
                                     </Nav.Link>
-                                    <Nav.Link href="#action2" className="capitalize">
+                                    <Nav.Link className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -96,9 +97,9 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span>Cruises</span>
+                                        <span><Link href="/book-cruises">Cruises</Link></span>
                                     </Nav.Link>
-                                    <Nav.Link href="#action2" className="capitalize">
+                                    <Nav.Link className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -106,10 +107,9 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span>Packages</span>
+                                        <span><Link href="/packages">Packages</Link></span>
                                     </Nav.Link>
                                     <Nav.Link
-                                        href="/justbuytravel_next/demo/blog"
                                         className="capitalize"
                                     >
                                         <span>
@@ -119,10 +119,10 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span>blogs</span>
+                                        <span><Link href="/blog">blogs</Link></span>
                                     </Nav.Link>
                                     <Nav.Link
-                                        href="/justbuytravel_next/demo/aboutus"
+
                                         className="capitalize"
                                     >
                                         <span>
@@ -132,7 +132,7 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span>about us</span>
+                                        <span><Link href="/aboutus">about us</Link></span>
                                     </Nav.Link>
                                     {/* <div className="search_sign_button flex gap-2 items-center">
                                         <Link href={""} className='sign-in-button bg-color-black text-white' variant="outline-success">Subscriber</Link>

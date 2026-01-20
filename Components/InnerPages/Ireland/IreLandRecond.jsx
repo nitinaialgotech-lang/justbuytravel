@@ -19,6 +19,7 @@ import NearByIreland from './NearByIreland';
 import IconicPlaceInIreland from './IconicPlaceInIreland';
 import IreLandAmazingDeals from './IreLandAmazingDeals';
 import IreLandBookingTips from './IreLandBookingTips';
+import { useRouter } from 'next/navigation';
 export default function IreLandRecond() {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
@@ -106,6 +107,14 @@ export default function IreLandRecond() {
         }
 
         return stars;
+    };
+    // *
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
 

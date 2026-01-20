@@ -18,6 +18,7 @@ import SingaporeAmazingDeals from './SingaporeAmazingDeals';
 import Blogs from '@/Components/HomePage/Blog/Blogs';
 import FaqSection from '@/Components/HomePage/Faq/FaqSection';
 import Footer from '@/component/Footer';
+import { useRouter } from 'next/navigation';
 
 // ********************************************************
 export default function SingaporeRecomdSection() {
@@ -107,6 +108,13 @@ export default function SingaporeRecomdSection() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

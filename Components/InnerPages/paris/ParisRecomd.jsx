@@ -18,6 +18,7 @@ import ParisBookingTips from './ParisBookingTips';
 import NearByParis from './NearByParis';
 import IconicPlacesInParis from './IconicPlacesInParis';
 import ParisAmazingDeals from './ParisAmazingDeals';
+import { useRouter } from 'next/navigation';
 
 
 export default function ParisRecomd() {
@@ -107,6 +108,13 @@ export default function ParisRecomd() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

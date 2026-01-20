@@ -19,6 +19,7 @@ import TokyoNearByPlaces from './TokyoNearByPlaces';
 import IconicTokyoPlaces from './IconicTokyoPlaces';
 import TokyoBookingTips from './TokyoBookingTips';
 import TokyoAmazingDeals from './TokyoAmazingDeals';
+import { useRouter } from 'next/navigation';
 
 export default function TokyoRecomand() {
     /************************* ustate contetn *** */
@@ -107,6 +108,13 @@ export default function TokyoRecomand() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

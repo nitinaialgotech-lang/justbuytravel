@@ -6,9 +6,9 @@ export default function QuickLinks() {
 
         <>
 
-            <section>
+            <section className=''>
 
-                <div className="container padding_top">
+                <div className="container padding_bottom ">
                     <div className="row">
                         <div className="col-lg-12">
                             {/* ********** links */}

@@ -107,6 +107,13 @@ export const searchText = async (text, limit = 50) => {
 export const searchHotel = async (text, limit = 50) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=hotels in ${text}&maxResultCount=${limit}`)
 }
+// ************ hotel around the world 
+export const TopHotelAroundWorld = async () => {
+    return await https_SearchCity.get(`/top-hotels.php?includedType=lodging`)
+}
+export const TouristAttractionApi = async () => {
+    return await https_SearchCity.get(`/top-hotels.php?includedType=tourist_attraction`)
+}
 // *((((((((((((((((((((((()))))))))))))))))))))))
 export const autoComplete = async (text, limit = 10) => {
     return await https_SearchCity.get(`/autocomplete.php?input=${text}&maxResultCount=${limit}`)
