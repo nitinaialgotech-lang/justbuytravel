@@ -16,7 +16,7 @@ export default function Trusted_Favourite_Companies() {
     ]
     return (
         <>
-            <section className='padding_bottom padding_top'>
+            <section className='padding_bottom padding_top bg_grey'>
                 <div className="container">
                     <div className="row justify-center">
                         <div className="col-lg-12">

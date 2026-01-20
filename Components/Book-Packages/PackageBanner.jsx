@@ -1,12 +1,18 @@
-import React from 'react'
-import Find_CruisesSection from './Find_CruisesSection'
-import Trust_Guide_Section from '../Aboutus/Trust_Guide_Section'
-import Footer from '@/component/Footer'
-import Blogs from '../HomePage/Blog/Blogs'
+"use client";
 
-export default function Book_CruisesBanner() {
+import Footer from "@/component/Footer";
+import PackageDeals from "./PackageDeals";
+import GuidePackage from "./GuidePackage";
+import Trust_Guide_Section from "../Aboutus/Trust_Guide_Section";
+import Blogs from "../HomePage/Blog/Blogs";
+import FaqSection from "../HomePage/Faq/FaqSection";
+
+export default function PackageBanner() {
+
     return (
         <>
+
+
             <section className='about_section page_banner_section relative'>
                 <div className="container">
                     <div className="row justify-center">
@@ -14,7 +20,7 @@ export default function Book_CruisesBanner() {
                             <div className="banner_box">
                                 <div className="title text-center">
                                     <h2 className='capitalize'>
-                                        Quick Cruise Booking with Trusted  <span>Guidance</span>
+                                        Your Perfect Trip   <span>Packages</span>
                                     </h2>
                                     {/* <h5 className='capitalize'>
                                         <strong className='g_color'> JustBuyTravel</strong> Your Easy Way to Book Flights and Hotels
@@ -25,11 +31,23 @@ export default function Book_CruisesBanner() {
                     </div>
                 </div>
             </section>
-            <Find_CruisesSection />
+            <GuidePackage />
+            <PackageDeals />
             <Trust_Guide_Section />
             <Blogs />
+            <FaqSection />
+
+
+
+
+
             <Footer />
 
+
         </>
-    )
+
+
+
+    );
+
 }

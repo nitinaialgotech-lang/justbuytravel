@@ -107,7 +107,7 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/packages">Packages</Link></span>
+                                        <span><Link href="/book-packages">Packages</Link></span>
                                     </Nav.Link>
                                     <Nav.Link
                                         className="capitalize"

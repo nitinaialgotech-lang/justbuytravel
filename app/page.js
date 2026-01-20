@@ -59,7 +59,7 @@ export default function Home() {
       <GetOfferSection />
       <ExperienceExploreSection />
       <Trust_Guide_Section />
-      <QuickLinks />
+      {/* <QuickLinks /> */}
       <Blogs />
       <FaqSection />
 
