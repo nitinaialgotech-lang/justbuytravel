@@ -9,6 +9,7 @@ import { IoLogoFacebook } from "react-icons/io";
 import { AiFillInstagram } from "react-icons/ai";
 import { RiTwitterXLine } from "react-icons/ri";
 import { getAssetPath } from "../app/utils/assetPath";
+import QuickLinks from "@/Components/QuickLinks/QuickLinks";
 
 export default function Footer() {
   // ***************************************
@@ -33,7 +34,9 @@ export default function Footer() {
   // ***************************************
   return (
     <>
-      <section className="footer_section">
+
+      <QuickLinks />
+      <section className="footer_section padding_top">
         <footer className="footer">
           <div className="container pt-20  ">
             <div className="row items-center">

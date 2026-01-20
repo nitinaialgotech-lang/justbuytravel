@@ -18,7 +18,7 @@ export default function TokyoBanner() {
                                         </h2>
                                         {/* <h5 className='capitalize'>
                                                        How can we help you travel better for less?
-                                                   </h5> */}
+                                         </h5> */}
                                     </div>
                                 </div>
                             </div>

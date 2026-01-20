@@ -19,6 +19,7 @@ import GoaNearByPlaces from './GoaNearByPlaces';
 import IconicGoaPlaces from './IconicGoaPlaces';
 import GoaBookingTips from './GoaBookingTips';
 import GoaAmazingDeals from './GoaAmazingDeals';
+import { useRouter } from 'next/navigation';
 export default function GoaRecomand() {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
@@ -106,6 +107,13 @@ export default function GoaRecomand() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

@@ -18,6 +18,7 @@ import NearByGlasGow from './NearByGlasGow';
 import IconicPlacesInGlasGow from './IconicPlacesInGlasGow';
 import GlasGowBookingTips from './GlasGowBookingTips';
 import GlasGowAmazingDeals from './GlasGowAmazingDeals';
+import { useRouter } from 'next/navigation';
 export default function GlasGowRecomd() {
 
     /************************* ustate contetn *** */
@@ -106,6 +107,13 @@ export default function GlasGowRecomd() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

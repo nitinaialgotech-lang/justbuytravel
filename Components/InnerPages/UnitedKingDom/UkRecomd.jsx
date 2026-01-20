@@ -18,6 +18,7 @@ import NearByInUk from './NearByInUk';
 import IconicPlaceInUk from './IconicPlaceInUk';
 import UkBookingTips from './UkBookingTips';
 import UkAmazingDeals from './UkAmazingDeals';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -109,6 +110,13 @@ export default function UkRecomd() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

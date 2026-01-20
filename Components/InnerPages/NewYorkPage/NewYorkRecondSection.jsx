@@ -18,6 +18,7 @@ import HotelBookingTips from './HotelBookingTips';
 import NewYorkAmazingDeals from './NewYorkAmazingDeals';
 import Blogs from '@/Components/HomePage/Blog/Blogs';
 import FaqSection from '@/Components/HomePage/Faq/FaqSection';
+import { useRouter } from 'next/navigation';
 // ********************************************************
 export default function NewYorkRecondSection() {
     /************************* ustate contetn *** */
@@ -106,6 +107,13 @@ export default function NewYorkRecondSection() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

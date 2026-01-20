@@ -18,6 +18,7 @@ import DubaiAmazingDeals from './DubaiAmazingDeals';
 import Blogs from '@/Components/HomePage/Blog/Blogs';
 import FaqSection from '@/Components/HomePage/Faq/FaqSection';
 import Footer from '@/component/Footer';
+import { useRouter } from 'next/navigation';
 
 export default function DubaiRecomdSection() {
     /************************* ustate contetn *** */
@@ -106,6 +107,13 @@ export default function DubaiRecomdSection() {
         }
 
         return stars;
+    };
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     return (
         <>

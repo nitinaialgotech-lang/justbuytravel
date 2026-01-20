@@ -17,6 +17,7 @@ import Footer from '@/component/Footer';
 import SaudiNearByPlaces from './SaudiNearByPlaces';
 import SaudiIconicPlaces from './SaudiIconicPlaces';
 import SaudiBookingTips from './SaudiBookingTips';
+import { useRouter } from 'next/navigation';
 
 // *************************************************************
 export default function SaudiRecomand() {
@@ -107,6 +108,15 @@ export default function SaudiRecomand() {
 
         return stars;
     };
+
+    /************************************************ route path  */
+    const router = useRouter();
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
+        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
+    };
+
     return (
         <>
             {/* ********************* style start ****** */}

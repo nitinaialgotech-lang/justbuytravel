@@ -18,6 +18,7 @@ import SanFrancNearBy from './SanFrancNearBy';
 import SanfracIconicPlaces from './SanfracIconicPlaces';
 import SanFraceBookingTips from './SanFraceBookingTips';
 import SanFranceAmazingDeals from './SanFranceAmazingDeals';
+import { useRouter } from 'next/navigation';
 export default function SanFrancRecomd() {
 
   /************************* ustate contetn *** */
@@ -106,6 +107,13 @@ export default function SanFrancRecomd() {
     }
 
     return stars;
+  };
+  /************************************************ route path  */
+  const router = useRouter();
+  const viewDetail = (id) => {
+    router.push(`/hoteldetail?hotel=${id}`);
+
+    console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
   };
   return (
     <>
