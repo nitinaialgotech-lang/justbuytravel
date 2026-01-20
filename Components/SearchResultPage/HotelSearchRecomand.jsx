@@ -140,12 +140,15 @@ export default function HotelSearchRecomand({ lat, long }) {
             {/* ************************ style end of shimmer */}
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
-                <div className="section_title relative ">
-                    <h2 className="mb-0">Recommended For You</h2>
-                    <h5>Handpicked experiences tailored to your interests</h5>
-                    <div className="title_icon absolute right-5   ">
-                        {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
-                    </div>
+                <div className="section_title relative flex item-center justify-between ">
+                    <span>
+                        <h2 className="mb-0">Recommended For You</h2>
+                        <h5>Handpicked experiences tailored to your interests</h5>
+                    </span>
+                    <span>
+                        view all
+                    </span>
+
                 </div>
                 {/* **************************** recomend carsd cord box */}
                 <div className="container">

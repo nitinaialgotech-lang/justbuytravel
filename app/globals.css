@@ -285,7 +285,20 @@ button {
   letter-spacing: 0%;
   vertical-align: middle;
 }
-
+.section_title > span > h2 {
+  font-family: var(--font-fam);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.8;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+.section_title > span > h5 {
+  font-weight: 400;
+  font-size: 17px;
+  margin-top: -10px;
+  color: rgba(115, 115, 115, 1);
+}
 .section_title > h5 {
   font-weight: 400;
   font-size: 17px;
@@ -1938,4 +1951,8 @@ span.rating-stars {
 }
 .package_card_box > .card_box {
   height: auto;
+}
+/* ********************************* hotel detail banner  */
+.hoteldetail_banner > .content {
+  padding-top: 20px;
 }
