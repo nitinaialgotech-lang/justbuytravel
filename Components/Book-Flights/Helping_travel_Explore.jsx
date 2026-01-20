@@ -45,7 +45,7 @@ export default function Helping_travel_Explore() {
     ]
     return (
         <>
-            <section className='helping_travel_section padding_top'>
+            <section className='helping_travel_section padding_top padding_bottom'>
                 <div className="container">
                     <div className="row">
                         <div className="helping_travel_section_title">

@@ -37,7 +37,7 @@ export default function Blogs() {
                     </h5>
                 </div>
                 {/* ********************** */}
-                <div className="container d-none d-lg-block">
+                <div className="d-none d-lg-block">
                     <div className="row">
 
                         {

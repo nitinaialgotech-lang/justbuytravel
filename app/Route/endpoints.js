@@ -105,7 +105,7 @@ export const searchText = async (text, limit = 50) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=${text}&maxResultCount=${limit}`)
 }
 export const searchHotel = async (text, limit = 50) => {
-    return await https_SearchCity.get(`/text-search.php?textQuery=hotels in ${text}&maxResultCount=${limit}`)
+    return await https_SearchCity.get(`/text-search.php?textQuery=hotels and tourist_attraction in ${text}&maxResultCount=${limit}`)
 }
 // ************ hotel around the world 
 export const TopHotelAroundWorld = async () => {
