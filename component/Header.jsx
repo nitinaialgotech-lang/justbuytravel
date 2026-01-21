@@ -168,7 +168,7 @@ export default function Header() {
                                                     <ul>
                                                         <li>
                                                             <Link
-                                                                href={"/hotels"}
+                                                                href={"/book-hotels"}
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
@@ -188,7 +188,7 @@ export default function Header() {
                                                         </li>
                                                         <li>
                                                             <Link
-                                                                href={"#"}
+                                                                href={"/book-flights"}
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
@@ -208,7 +208,7 @@ export default function Header() {
                                                         </li>
                                                         <li>
                                                             <Link
-                                                                href={"#"}
+                                                                href={"/book-cruises"}
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
@@ -228,7 +228,7 @@ export default function Header() {
                                                         </li>
                                                         <li>
                                                             <Link
-                                                                href={"#"}
+                                                                href={"/book-packages"}
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">

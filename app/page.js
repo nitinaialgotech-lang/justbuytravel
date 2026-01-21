@@ -1,18 +1,8 @@
-import Footer from "@/component/Footer";
-import Header from "@/component/Header";
-import Blogs from "@/Components/HomePage/Blog/Blogs";
-import DestinationSection from "@/Components/HomePage/DestinationSection/DestinationSection";
-import ExperienceExploreSection from "@/Components/HomePage/ExpereinceExploreSection/ExperienceExploreSection";
-import GetOfferSection from "@/Components/HomePage/GetOfferSection/GetOfferSection";
-import HomeBannerSection from "@/Components/HomePage/HomeBannerSection";
-import RecomendSection from "@/Components/HomePage/RecommendedSection/RecomendSection";
-import Searchinput from "@/Components/HomePage/Searchinput";
+
 // import SearchSection from "@/Components/HomePage/SearchSectionhhh";
+import IndexPage from "@/Components/HomePage/IndexPage/IndexPage";
 import "../style/responsive.css"
-import FaqSection from "@/Components/HomePage/Faq/FaqSection";
-import Trust_Guide_Section from "@/Components/Aboutus/Trust_Guide_Section";
-import Recomended from "@/Components/HomePage/RecommendedSection/Recomended";
-import QuickLinks from "@/Components/QuickLinks/QuickLinks";
+
 
 export const metadata = {
   title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
@@ -46,24 +36,14 @@ export default function Home() {
 
   return (
     <>
+
+
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <Header />
-      {/* <Searchinput /> */}
-      <HomeBannerSection />
-      {/* <RecomendSection /> */}
-      <Recomended />
-      <DestinationSection />
-      <GetOfferSection />
-      <ExperienceExploreSection />
-      <Trust_Guide_Section />
-      {/* <QuickLinks /> */}
-      <Blogs />
-      <FaqSection />
-
-      <Footer />
+      <IndexPage />
     </>
   )
 }

@@ -1,12 +1,14 @@
 import Header from '@/component/Header'
 import GlasGowBanner from '@/Components/InnerPages/GlasGow/GlasGowBanner'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export default function page() {
     return (
         <>
-            <Header />
-            <GlasGowBanner />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Header />
+                <GlasGowBanner />
+            </Suspense>
         </>
     )
 }

@@ -6,8 +6,10 @@ export default function page() {
     return (
 
         <>
-            <Header />
-            <SanFrancBanner />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Header />
+                <SanFrancBanner />
+            </Suspense>
         </>
     )
 }

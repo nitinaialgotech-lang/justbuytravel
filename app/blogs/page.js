@@ -42,9 +42,9 @@ export default function page() {
 
                 <Header />
             </div>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Blog_Detail_section />
-            </Suspense>
+
+            <Blog_Detail_section />
+
             <Footer />
 
         </>

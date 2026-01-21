@@ -12,13 +12,13 @@ import { useSearchParams } from 'next/navigation';
 
 export default function Blog_Detail_section() {
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["blog"],
         queryFn: () => Get_Blogs()
     })
 
 
-    console.log(data, "blog data");
+    console.log(data, "blog data..........................");
 
     const blog_slug = useSearchParams();
     const slug = blog_slug.get("detail")
@@ -96,7 +96,7 @@ export default function Blog_Detail_section() {
                             }
 
                             {/* **************************************** */}
-                            <Blog_Detail content={blog_content} blog_image={blog_img} />
+                            <Blog_Detail content={blog_content} blog_image={blog_img} load={isLoading} />
                         </div>
                         <div className='col-lg-4'>
                             <Blog_Right_Sidebar />

@@ -65,13 +65,14 @@ export default function SearchContentBox() {
     const searchQuery = useSearchParams();
 
     const lat = searchQuery.get("lat");
-    const long = searchQuery.get("long")
+    const long = searchQuery.get("long");
+    const name = searchQuery.get("name");
 
     const { data, isLoading } = useQuery({
         queryKey: ["gethotels", lat, long],
         queryFn: () => nearbyPlaces(lat, long)
     })
-    console.log(lat, long, data, "latlong data.config......................................kokkokokok");
+    console.log(lat, long, data, "latlong data.config......................................kokkokokok", name);
     const hotelData = data?.data?.places;
 
     console.log(hotelData, "?????????????????????????????????????????");
@@ -105,7 +106,7 @@ export default function SearchContentBox() {
     return (
         <>
             {/* ********************** recomand section show    */}
-            <HotelSearchRecomand lat={lat} long={long} />
+            <HotelSearchRecomand lat={lat} long={long} name={name} />
 
             {/* *************** swimmer effect ***************** */}
 

@@ -5,9 +5,10 @@ import React from 'react'
 export default function page() {
     return (
         <>
-            <Header />
-            <IreLandBanner />
-
+            <Suspense fallback={<div>Loading...</div>}>
+                <Header />
+                <IreLandBanner />
+            </Suspense>
         </>
     )
 }

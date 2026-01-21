@@ -898,9 +898,10 @@ button {
 }
 
 /* ************************************** Nbvlogh */
-.blog_card_box > .blog_card > .blog_showall_body > h4 {
+.blog_card_box > .blog_card > .blog_showall_body > h4 > a {
   cursor: pointer;
   color: var(--cl-bl);
+  text-decoration: none;
   font-size: 22px;
   font-weight: 700;
   line-height: 1.33;
@@ -1989,4 +1990,44 @@ span.rating-stars {
 /* ********************************* hotel detail banner  */
 .hoteldetail_banner > .content {
   padding-top: 20px;
+}
+/* ********************************** popup show  */
+.mobile_search_box form > .input {
+  border-radius: 10px;
+  padding: 10px 10px !important;
+  margin-top: 10px;
+}
+.form_padding {
+  padding: 10px 43px;
+}
+.popup_inner > .popup_logo {
+  height: 100%;
+}
+.popup_form {
+  height: 100%;
+}
+.popup {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--cl-brown);
+  background-color: #ffffff;
+}
+.popup_form > .popup_form_item .form_box > .head > h4 {
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.popup_form > .popup_form_item .form_box {
+  padding: 0px 20px;
+}
+.popup_form > .popup_form_item > .popup_header_close > button > svg {
+  width: 25px;
+  height: 25px;
+}
+.popup_form > .popup_form_item > .popup_header_close > button {
+  border-radius: 2px;
+}
+.popup-content {
+  background: none !important;
+  border: none !important;
 }

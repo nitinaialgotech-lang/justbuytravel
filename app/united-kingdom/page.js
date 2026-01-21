@@ -5,8 +5,10 @@ import React from 'react'
 export default function page() {
     return (
         <>
-            <Header />
-            <UkBanner />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Header />
+                <UkBanner />
+            </Suspense>
 
 
         </>

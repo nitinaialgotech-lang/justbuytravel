@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 
 
 // *************************************************************
-export default function HotelSearchRecomand({ lat, long }) {
+export default function HotelSearchRecomand({ lat, long, name }) {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
@@ -105,6 +105,10 @@ export default function HotelSearchRecomand({ lat, long }) {
 
         console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
+    // *************************  view al hotels 
+    const viewAllHotels = () => {
+        router.push(`/view-all-hotels?lat=${lat}&long=${long}&name=${name}`)
+    }
     return (
         <>
             {/* ********************* style start ****** */}
@@ -140,13 +144,13 @@ export default function HotelSearchRecomand({ lat, long }) {
             {/* ************************ style end of shimmer */}
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
-                <div className="section_title relative flex item-center justify-between ">
+                <div className="section_title relative flex items-center justify-between ">
                     <span>
                         <h2 className="mb-0">Recommended For You</h2>
                         <h5>Handpicked experiences tailored to your interests</h5>
                     </span>
-                    <span>
-                        view all
+                    <span className='font-semibold g_color'>
+                        <button className='button_bg2 me-2 mt-2' onClick={() => viewAllHotels()}>view all</button>
                     </span>
 
                 </div>
