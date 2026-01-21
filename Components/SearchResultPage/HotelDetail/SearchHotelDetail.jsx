@@ -24,6 +24,7 @@ import "swiper/css/effect-fade";
 import { EffectFade, Navigation, Pagination } from "swiper/modules";
 import Blogs from "@/Components/HomePage/Blog/Blogs";
 import Header from "@/component/Header";
+import HotelReviews from "./HotelReviews";
 
 export default function SearchHotelDetail() {
     const search_detail = useSearchParams();
@@ -93,6 +94,9 @@ export default function SearchHotelDetail() {
     const oneImage = HotelDetail?.photos?.slice(0, 1)?.map((item) => item?.name) || '';
     const longitude = HotelDetail?.location?.longitude;
     const latitude = HotelDetail?.location?.latitude;
+    const itemrating = HotelDetail?.rating
+    const ratingCount = HotelDetail?.userRatingCount
+    const userReviews = HotelDetail?.reviews
     // ****************************************** to fetch the detail of hotel api >>>>>>>>>>>>>>>>>>>>>>>>
     const locationName = (HotelDetail?.displayName?.text ?? HotelDetail?.displayName ?? "").toString().trim();
     const locationAddress = (HotelDetail?.formattedAddress?.text ?? HotelDetail?.formattedAddress ?? "").toString().trim();
@@ -167,65 +171,15 @@ export default function SearchHotelDetail() {
             <section className="hoteldetail ">
                 <div className="container">
                     <div className="row">
-
-
                         <div className="col-lg-12">
-                            <div className="hoteldetail_banner pt-5">
-                                <div className="content">
-                                    <span className="rating-stars" style={{ marginRight: 6 }}>
-                                        {/* {(() => {
-                                                    // Assume first review object for star rendering, fallback to 0
-                                                    // const rating = review?.[0]?.value || 0;
-                                                    // const fullStars = Math.floor(rating);
-                                                    // const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
-                                                    return Array.from({ length: 5 }).map((_, idx) => (
-                                                        <span key={idx}>
-                                                            {idx < fullStars ? (
-                                                                <i className="bi bi-star-fill"></i>
-                                                            ) : idx === fullStars && hasHalfStar ? (
-                                                                <i className="bi bi-star-half"></i>
-                                                            ) : (
-                                                                <i className="bi bi-star"></i>
-                                                            )}
-                                                        </span>
-                                                    ));
-                                                })()} */}
-                                    </span>
-                                    Review {HotelDetail?.rating} ( based on   reviews )
-                                    <h2 className="pb-4">{HotelDetail?.displayName?.text}</h2>
-                                </div>
+                            <div className="hoteldetail_banner">
+
                                 {/* Image Gallery */}
-                                {/* <div className="banner_img d-none d-lg-block">
-                                    <div className="row px-3">
-                                        <div className="col-lg-6 p-1">
-                                            <div className="image_head side_image_head">
-                                                <img src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`} alt="" />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6">
-                                            <div className="row">
-                                                {HotelDetail?.photos?.slice(1, 5)?.map((item, index) => {
-                                                    return (
 
-                                                        <>
-                                                            <div className="col-lg-6 p-1" key={index} >
-                                                                <div className="image_head">
-                                                                    <img src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`} alt="" />
-                                                                </div>
-                                                            </div>
-
-                                                        </>
-                                                    )
-
-                                                })}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> */}
                                 {/* ******************* desktop view wwwwwwwwwwwwwwwwwwwwww */}
                                 <div className="banner_img d-none d-lg-block">
                                     {isLoading ? (
-                                        <div className="row px-3">
+                                        <div className="row">
                                             <div className="col-lg-6 p-1">
                                                 <div className="image_head shimmer-container" style={{ minHeight: 410 }}>
                                                     <div className="shimmer" />
@@ -270,6 +224,38 @@ export default function SearchHotelDetail() {
                                             </div>
                                         </div>
                                     )}
+                                </div>
+
+                                <div className="content padding_top flex items-center justify-between ">
+                                    <div className="content_p">
+                                        <h2 className="m-0">{HotelDetail?.displayName?.text}</h2>
+                                        <p className="m-0"><span className="rating-stars" style={{ marginRight: 6 }}>
+                                            {(() => {
+                                                // Assume first review object for star rendering, fallback to 0
+                                                const rating = itemrating || 0;
+                                                const fullStars = Math.floor(rating);
+                                                const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
+                                                return Array.from({ length: 5 }).map((_, idx) => (
+                                                    <span key={idx}>
+                                                        {idx < fullStars ? (
+                                                            <i className="bi bi-star-fill g_color"></i>
+                                                        ) : idx === fullStars && hasHalfStar ? (
+                                                            <i className="bi bi-star-half g_color"></i>
+                                                        ) : (
+                                                            <i className="bi bi-star g_color"></i>
+                                                        )}
+                                                    </span>
+                                                ));
+                                            })()}
+                                        </span>
+                                            {HotelDetail?.rating} ( based on   reviews {ratingCount} )</p>
+                                    </div>
+                                    <div className="button_more">
+                                        <button className="button_bg2 m-0">
+                                            view detail
+                                        </button>
+
+                                    </div>
                                 </div>
 
                                 {/* **********************************    on  mobiloe view show cslider  */}
@@ -352,11 +338,12 @@ export default function SearchHotelDetail() {
             {/* ******************************************************** */}
             <div className="container">
                 <div className="row matrix_fix">
-                    <div className="col-lg-7 ">
-                        <div className=" my-5 content_box_detail  rounded-2xl border border-gray-300">
+                    <div className="col-lg-12 ">
+                        <div className=" content_box_detail  rounded-2xl border border-gray-300">
                             <AboutHotelDetail detail={hotelDescription} load={isLoading} />
 
                             <HotelFacilities hotelAmenties={hotelAmenties} load={isLoading} />
+                            <HotelReviews reviews={userReviews} />
 
                             {/* <NearByHotel places={near_by_places} /> */}
 

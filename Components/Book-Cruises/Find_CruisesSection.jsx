@@ -14,9 +14,35 @@ import {
 import "swiper/css/pagination";
 export default function Find_CruisesSection() {
     const [Active, setActive] = useState(true);
+    const image = [
+        {
+            img: "/justbuytravel_next/demo/cruise/cruise1.webp",
+            name: "australia"
+        },
+        {
+            img: "/justbuytravel_next/demo/cruise/cruise2.webp",
+            name: "Croatia"
+        },
+        {
+            img: "/justbuytravel_next/demo/cruise/cruise3.webp",
+            name: "Montenegro"
+        },
+        {
+            img: "/justbuytravel_next/demo/cruise/cruise4.webp",
+            name: "Great Britain"
+        },
+        {
+            img: "/justbuytravel_next/demo/cruise/cruise5.jpg",
+            name: "Hvar Croatia"
+        },
+        {
+            img: "/justbuytravel_next/demo/cruise/cruide6.jpg",
+            name: "dubai"
+        },
+    ]
     return (
         <>
-            <section className='find_cruisessection'>
+            <section className='find_cruisessection padding_bottom'>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -27,7 +53,7 @@ export default function Find_CruisesSection() {
                         </div>
                     </div>
                     {/* ************************ */}
-                    <div className="row relative">
+                    <div className=" relative">
                         <Swiper
                             slidesPerView={4}
                             spaceBetween={5}
@@ -38,15 +64,15 @@ export default function Find_CruisesSection() {
                             // pagination={{
                             //     clickable: true,
                             // }}
-                            modules={[Navigation, Autoplay, Pagination]}
+                            modules={[Navigation, Pagination]}
                             className="mySwiper"
                             // navigation={true}
                             onSwiper={(swiper) => setActive(swiper.isBeginning)}
                             onSlideChange={(swiper) => setActive(swiper.isBeginning)}
-                            autoplay={{
-                                delay: 3000,
-                                disableOnInteraction: false,
-                            }}
+                            // autoplay={{
+                            //     delay: 3000,
+                            //     disableOnInteraction: false,
+                            // }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,
@@ -78,55 +104,54 @@ export default function Find_CruisesSection() {
                         >
 
                             <>
-                                <SwiperSlide >
-                                    <div className="card_col">
-                                        <div
-                                            className="recommend_card_box   card_rounded  recomand_card_shadow  
+                                {
+                                    image?.map((item) => {
+                                        return (
+                                            <>
+                                                <SwiperSlide >
+                                                    <div className="card_col">
+                                                        <div
+                                                            className="recommend_card_box   card_rounded  recomand_card_shadow  
                                                         "
-                                        >
-                                            <div className="card_box pe-">
-                                                <div
-                                                    className="card_box_img card_rounded relative overflow-hidden"
-                                                    style={{
-                                                        minHeight: "250px",
-                                                        backgroundColor: "#f3f4f6",
-                                                    }}
-                                                >
-                                                    <img
-                                                        src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=`}
-                                                        className="card_rounded w-full h-full object-cover"
-                                                        alt={"Hotel image"}
-                                                    />
-                                                </div>
-                                                {/* *** */}
-                                                <div className="card_box_detail card_rounded flex flex-col z-1  relative">
-                                                    <h4 className="m-0 capitalize">
-                                                        {/* {item?.name} */}
-                                                    </h4>
-                                                    {/* ****** */}
+                                                        >
+                                                            <div className="card_box pe-">
+                                                                <div
+                                                                    className="card_box_img card_rounded relative overflow-hidden"
+                                                                    style={{
+                                                                        minHeight: "250px",
+                                                                        backgroundColor: "#f3f4f6",
+                                                                    }}
+                                                                >
+                                                                    <img
+                                                                        src={item?.img}
+                                                                        className="card_rounded w-full h-full object-cover"
+                                                                        alt={"Hotel image"}
+                                                                    />
+                                                                </div>
+                                                                {/* *** */}
+                                                                <div className="card_box_detail card_rounded flex flex-col z-1 find_cruise_detail  relative">
+                                                                    <h4 className="m-0 capitalize">
+                                                                        {item?.name}
+                                                                    </h4>
+                                                                    {/* ****** */}
 
-                                                    {/* ****************** */}
+                                                                    {/* ****************** */}
 
-                                                    {/* ******* */}
-                                                    <div className="price_book flex justify-between items-center">
-                                                        <div className="rating flex align-items-center gap-1">
+                                                                    {/* ******* */}
 
-                                                            <span className="ms-1">
 
-                                                            </span>
+                                                                    {/* *************** rating_list */}
+                                                                </div>
+                                                            </div>
+                                                            {/* *********** */}
                                                         </div>
-                                                        <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" >
-                                                            View Detail
-                                                        </button>
+                                                        {/* *********** */}
                                                     </div>
-                                                    {/* *************** rating_list */}
-                                                </div>
-                                            </div>
-                                            {/* *********** */}
-                                        </div>
-                                        {/* *********** */}
-                                    </div>
-                                </SwiperSlide>
+                                                </SwiperSlide>
+                                            </>
+                                        )
+                                    })
+                                }
                             </>
 
                         </Swiper>

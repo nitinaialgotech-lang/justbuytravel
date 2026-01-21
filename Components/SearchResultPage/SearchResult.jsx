@@ -56,6 +56,7 @@ export default function SearchResult() {
                     <nav aria-label="breadcrumb ">
                         <ol className="breadcrumb mb-2 padding_bottom ps-2 pb-md-0">
                             <li className="breadcrumb-item"><Link href="/">Home</Link></li>
+                            <li className="breadcrumb-item"><Link href="/">Hotels</Link></li>
                             <li className="breadcrumb-item active capitalize" aria-current="page">{city}</li>
                         </ol>
                     </nav>
