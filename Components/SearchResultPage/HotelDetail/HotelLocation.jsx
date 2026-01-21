@@ -1,57 +1,49 @@
 import Footer from "@/component/Footer";
 import React from "react";
 
+function ShimmerMap() {
+    return (
+        <div className="hotel_map">
+            <div
+                className="shimmer-map rounded-2xl"
+                style={{ width: "100%", height: "450px" }}
+            ></div>
+
+            {/* Shimmer CSS */}
+            <style jsx>{`
+                @keyframes shimmer {
+                    0% {
+                        background-position: -1000px 0;
+                    }
+                    100% {
+                        background-position: 1000px 0;
+                    }
+                }
+
+                .shimmer-map {
+                    position: relative;
+                    overflow: hidden;
+                    background-color: #e5e7eb;
+                }
+
+                .shimmer-map::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
+                    background-size: 1000px 100%;
+                    animation: shimmer 2s infinite;
+                }
+            `}</style>
+        </div>
+    );
+}
+
 export default function HotelLocation({ lat, long, load }) {
     console.log(load, ".........>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
-    const ShimmerMap = () => {
-        return (
-            <div className="hotel_map">
-                <div
-                    className="shimmer-map rounded-2xl"
-                    style={{ width: "100%", height: "450px" }}
-                >
-
-
-                </div>
-
-                {/* Shimmer CSS */}
-                <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            background-position: -1000px 0;
-          }
-          100% {
-            background-position: 1000px 0;
-          }
-        }
-
-        .shimmer-map {
-          position: relative;
-          overflow: hidden;
-          background-color: #e5e7eb;
-        }
-
-        .shimmer-map::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background: linear-gradient(
-            90deg,
-            #e5e7eb 0%,
-            #f3f4f6 50%,
-            #e5e7eb 100%
-          );
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-        }
-      `}</style>
-            </div>
-        );
-    };
 
     return (
         <>

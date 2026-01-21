@@ -10,6 +10,56 @@ import Link from "next/link";
 import HotelSearchRecomand from "./HotelSearchRecomand";
 import HotelSearchNearByLocation from "./HotelSearchNearByLocation";
 import HotelSearchIconicPlaces from "./HotelSearchIconicPlaces";
+
+const ShimmerCard = () => (
+    <div className="card_col">
+        <div className="recommend_card_box card_rounded shadow margin_lr margin_md-lr">
+            <div className="card_box ">
+                <div
+                    className="card_box_img card_rounded relative overflow-hidden shimmer-container"
+                    style={{ minHeight: "250px", backgroundColor: "#e5e7eb" }}
+                >
+                    <div className="shimmer"></div>
+                    <div className="rated_msg absolute top-5 flex justify-between items-center left-5 right-5">
+                        <div
+                            className="msg shimmer-text"
+                            style={{ width: "80px", height: "20px", borderRadius: "4px" }}
+                        ></div>
+                        <div
+                            className="msg_icon shimmer-icon"
+                            style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+                        ></div>
+                    </div>
+                </div>
+                <div className="card_box_detail px-4 py-5 card_rounded flex flex-col z-1 gap-2 relative">
+                    <div
+                        className="shimmer-text"
+                        style={{ width: "80%", height: "24px", borderRadius: "4px", marginBottom: "8px" }}
+                    ></div>
+                    <div className="time flex items-center gap-3 relative">
+                        <div className="icon flex items-center gap-1">
+                            <div className="shimmer-icon" style={{ width: "16px", height: "16px", borderRadius: "4px" }}></div>
+                            <div className="shimmer-text" style={{ width: "100px", height: "16px", borderRadius: "4px" }}></div>
+                        </div>
+                        <div className="guest flex items-center gap-1">
+                            <div className="shimmer-icon" style={{ width: "16px", height: "16px", borderRadius: "4px" }}></div>
+                            <div className="shimmer-text" style={{ width: "80px", height: "16px", borderRadius: "4px" }}></div>
+                        </div>
+                    </div>
+                    <div className="price_book flex mt-3 justify-between items-center">
+                        <div className="shimmer-text" style={{ width: "120px", height: "24px", borderRadius: "4px" }}></div>
+                        <div className="shimmer-button" style={{ width: "100px", height: "36px", borderRadius: "9999px" }}></div>
+                    </div>
+                    <div className="rating_list absolute flex items-center gap-1 right-10 shadow">
+                        <div className="shimmer-icon" style={{ width: "16px", height: "16px", borderRadius: "4px" }}></div>
+                        <div className="shimmer-text" style={{ width: "30px", height: "16px", borderRadius: "4px" }}></div>
+                        <div className="shimmer-text" style={{ width: "80px", height: "16px", borderRadius: "4px" }}></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+);
 export default function SearchContentBox() {
     // ********************************
     const searchQuery = useSearchParams();
@@ -44,48 +94,12 @@ export default function SearchContentBox() {
 
     // const location_code = data?.data?.hotels?.map((item) => item?.location_code);
     // ************************************** swimmer effect **************
-    const ShimmerCard = () => (
-        <div className="card_col">
-            <div className="recommend_card_box card_rounded shadow margin_lr margin_md-lr">
-                <div className="card_box ">
-                    <div className="card_box_img card_rounded relative overflow-hidden shimmer-container" style={{ minHeight: '250px', backgroundColor: '#e5e7eb' }}>
-                        <div className="shimmer"></div>
-                        <div className="rated_msg absolute top-5 flex justify-between items-center left-5 right-5">
-                            <div className="msg shimmer-text" style={{ width: '80px', height: '20px', borderRadius: '4px' }}></div>
-                            <div className="msg_icon shimmer-icon" style={{ width: '20px', height: '20px', borderRadius: '50%' }}></div>
-                        </div>
-                    </div>
-                    <div className="card_box_detail px-4 py-5 card_rounded flex flex-col z-1 gap-2 relative">
-                        <div className="shimmer-text" style={{ width: '80%', height: '24px', borderRadius: '4px', marginBottom: '8px' }}></div>
-                        <div className="time flex items-center gap-3 relative">
-                            <div className="icon flex items-center gap-1">
-                                <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
-                                <div className="shimmer-text" style={{ width: '100px', height: '16px', borderRadius: '4px' }}></div>
-                            </div>
-                            <div className="guest flex items-center gap-1">
-                                <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
-                                <div className="shimmer-text" style={{ width: '80px', height: '16px', borderRadius: '4px' }}></div>
-                            </div>
-                        </div>
-                        <div className="price_book flex mt-3 justify-between items-center">
-                            <div className="shimmer-text" style={{ width: '120px', height: '24px', borderRadius: '4px' }}></div>
-                            <div className="shimmer-button" style={{ width: '100px', height: '36px', borderRadius: '9999px' }}></div>
-                        </div>
-                        <div className="rating_list absolute flex items-center gap-1 right-10 shadow">
-                            <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
-                            <div className="shimmer-text" style={{ width: '30px', height: '16px', borderRadius: '4px' }}></div>
-                            <div className="shimmer-text" style={{ width: '80px', height: '16px', borderRadius: '4px' }}></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
     // ************************************* on load more button show 
     const itemPerPage = 6;
     const [visibleCount, setVisibleCount] = useState(itemPerPage);
     useEffect(() => {
-        setVisibleCount(itemPerPage);
+        const id = requestAnimationFrame(() => setVisibleCount(itemPerPage));
+        return () => cancelAnimationFrame(id);
     }, [hotelData]);
     return (
         <>
