@@ -1,15 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "../../style/searchresult.css";
+
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { GetAccommodationDetails, nearbyPlaces, SearchLocation } from "@/app/Route/endpoints";
-import ReactPaginate from "react-paginate";
-import { useRouter } from "next/navigation";
+import "../../../style/searchresult.css";
 import Link from "next/link";
-import HotelSearchRecomand from "./HotelSearchRecomand";
-import HotelSearchNearByLocation from "./HotelSearchNearByLocation";
-import HotelSearchIconicPlaces from "./HotelSearchIconicPlaces";
+import "../../../style/search.scss";
 
 export default function ViewAllHotels() {
     // ********************************
@@ -25,7 +22,9 @@ export default function ViewAllHotels() {
     console.log(lat, long, data, "latlong data.config......................................kokkokokok");
     const hotelData = data?.data?.places;
 
-    console.log(hotelData, "?????????????????????????????????????????");
+
+
+    console.log(hotelData, "?????????????????????????????????????????", data);
     // ************************************** swimmer effect **************
     const ShimmerCard = () => (
         <div className="card_col">
@@ -65,7 +64,7 @@ export default function ViewAllHotels() {
         </div>
     );
     // ************************************* on load more button show 
-    const itemPerPage = 6;
+    const itemPerPage = 9;
     const [visibleCount, setVisibleCount] = useState(itemPerPage);
     useEffect(() => {
         setVisibleCount(itemPerPage);
@@ -123,7 +122,7 @@ export default function ViewAllHotels() {
 
             {/* ********************* end of swimmer effect ********* */}
 
-            <section>
+            <section className="pt-3">
 
                 <div className="list-grid-product-wrap">
                     <div id="sidebar_filter_hotel" className="row gy-md-5 gy-4">
@@ -243,7 +242,7 @@ export default function ViewAllHotels() {
                                                     </div> */}
                                                         <div className="btn-and-price-area">
                                                             <Link
-                                                                href={`/hoteldetail?hotel=${item?.id}`}
+                                                                href={`/hoteldetail?hotel=${item?.id}&name=${item?.displayName?.text}&city=${item?.formattedAddress}`}
                                                                 className="primary-btn1"
                                                             // onClick={() =>
                                                             //     viewDetail(item?.hotel_identifier, item)

@@ -361,15 +361,16 @@ export default function Search() {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href={""} className={`${searchAll ? "" : "g_color"}`} onClick={(e) => { e.preventDefault(); setSearchAll(false) }}>
-                                                <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_hotel.webp" alt="" /> hotels
-                                            </Link>
-                                        </li>
-                                        <li>
                                             <Link href={""}>
                                                 <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_flight.webp" alt="" /> flights
                                             </Link>
                                         </li>
+                                        <li>
+                                            <Link href={""} className={`${searchAll ? "" : "g_color"}`} onClick={(e) => { e.preventDefault(); setSearchAll(false) }}>
+                                                <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_hotel.webp" alt="" /> hotels
+                                            </Link>
+                                        </li>
+
                                         <li>
                                             <Link href={""}>
                                                 <img className='icon_link' src="/justbuytravel_next/demo/header_icon/package-1.webp" alt="" /> Packages

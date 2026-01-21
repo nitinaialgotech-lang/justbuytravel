@@ -1,14 +1,15 @@
 import Header from '@/component/Header'
 import Book_CruisesBanner from '@/Components/Book-Cruises/Book_CruisesBanner'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export default function page() {
     return (
         <>
-            <Header />
-            <Book_CruisesBanner />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Header />
+                <Book_CruisesBanner />
 
-
+            </Suspense>
         </>
     )
 }

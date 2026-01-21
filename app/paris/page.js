@@ -1,13 +1,14 @@
 import Header from '@/component/Header'
 import ParisBanner from '@/Components/InnerPages/paris/ParisBanner'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export default function page() {
     return (
         <>
-
-            <Header />
-            <ParisBanner />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Header />
+                <ParisBanner />
+            </Suspense>
 
         </>
     )

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
-import { GetAccommodationDetails, GetHotel_Detail, HotelDetail } from "@/app/Route/endpoints";
+import { GetAccommodationDetails, GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName } from "@/app/Route/endpoints";
 import { useSearchParams } from "next/navigation";
 import AboutHotelDetail from "./AboutHotelDetail";
 import NearByHotel from "./NearByHotel";
@@ -12,10 +12,10 @@ import SearchSidebar from "../SearchSidebar";
 import Footer from "@/component/Footer";
 import HotelFacilities from "./HotelFacilities";
 import ImageGallery from "./ImageGallery";
-
+import { IoShareOutline } from "react-icons/io5";
 // Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { IoLocationOutline } from "react-icons/io5";
 // Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -25,13 +25,30 @@ import { EffectFade, Navigation, Pagination } from "swiper/modules";
 import Blogs from "@/Components/HomePage/Blog/Blogs";
 import Header from "@/component/Header";
 import HotelReviews from "./HotelReviews";
-
+import { TbWorld } from "react-icons/tb";
+import Link from "next/link";
+import { PiPhoneLight } from "react-icons/pi";
+import ViewPriceDetail from "./ViewPriceDetail";
 export default function SearchHotelDetail() {
     const search_detail = useSearchParams();
 
     const code = search_detail.get("hotel");
+    const namehotel = search_detail.get("name");
+    // const cityhotel = search_detail.get("city");
 
-    console.log(code, "code,,,,,,,,,,,,,,,,,");
+    const { data: hoteldata } = useQuery({
+        queryKey: ["hoteldata", namehotel],
+        queryFn: () => searchHotelName(namehotel)
+    })
+    console.log("code,,,,,,,,,,,,,,,,,", hoteldata?.data?.xotelo?.hotel_key, "ookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",);
+    const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
+    // **********************************************************
+    const { data: PriceData } = useQuery({
+        queryKey: ["pricedata", hotelKey],
+        queryFn: () => HotelCheckInCheckOut(hotelKey)
+    })
+
+    console.log("price,,,,,,,,,,,,,,,,,,,,", PriceData);
 
 
     // ****************************************************************************************************************
@@ -173,11 +190,86 @@ export default function SearchHotelDetail() {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="hoteldetail_banner">
+                                {/* ********************** header content  */}
+                                <div className="content padding_top  ">
+                                    <div className="content_p">
+                                        <div className="title flex items-center justify-between">
+                                            <h2 className="m-0">{HotelDetail?.displayName?.text}</h2>
+                                            <div className="icon flex gap-2 items-center pe-5">
+                                                <span>
+                                                    <img src="/justbuytravel_next/demo/hoteldetail/export.svg" width={18} alt="" />
+                                                </span>
+                                                <span>
+                                                    share
+                                                </span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div className="hotel_contact_info flex items-center justify-between">
+                                        <div className="hotel_contact_link">
+                                            <p className="m-0"><span className="rating-stars" style={{ marginRight: 6 }}>
+                                                {(() => {
+                                                    // Assume first review object for star rendering, fallback to 0
+                                                    const rating = itemrating || 0;
+                                                    const fullStars = Math.floor(rating);
+                                                    const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
+                                                    return Array.from({ length: 5 }).map((_, idx) => (
+                                                        <span key={idx}>
+                                                            {idx < fullStars ? (
+                                                                <i className="bi bi-star-fill g_color"></i>
+                                                            ) : idx === fullStars && hasHalfStar ? (
+                                                                <i className="bi bi-star-half g_color"></i>
+                                                            ) : (
+                                                                <i className="bi bi-star g_color"></i>
+                                                            )}
+                                                        </span>
+                                                    ));
+                                                })()}
+                                            </span>
+                                                {HotelDetail?.rating} ({ratingCount} reviews )</p>
+                                            <ul className="flex p-0 m-0">
+                                                <li>
+                                                    <span><img src="/justbuytravel_next/demo/hoteldetail/global.svg" width={20} alt="" /></span>
+                                                    <span><Link href={""}>visit hotel website</Link></span>
+                                                </li>
+                                                {/* ******* */}
+                                                <li>
+                                                    <span>
+                                                        <img src="/justbuytravel_next/demo/hoteldetail/location-minus.svg" width={20} alt="" />
+                                                    </span>
+                                                    <span>
+                                                        <Link href={""}>view location</Link>
+                                                    </span>
+                                                </li>
+                                                {/* ************ */}
+
+                                            </ul>
+
+                                        </div>
+                                        {/* ***************** */}
+                                        <div className="price_hotel flex  gap-3">
+                                            <div className="price">
+                                                <h4 className="m-0">
+                                                    33,457
+                                                </h4>
+                                                <p className="m-0">hotels.com</p>
+                                            </div>
+                                            <div className="price_view_detail">
+                                                <button className="hotel_detail_button text-white">
+                                                    view details
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* **************** end ************ */}
 
                                 {/* Image Gallery */}
 
                                 {/* ******************* desktop view wwwwwwwwwwwwwwwwwwwwww */}
-                                <div className="banner_img d-none d-lg-block">
+                                <div className="banner_img d-none d-lg-block ">
                                     {isLoading ? (
                                         <div className="row">
                                             <div className="col-lg-6 p-1">
@@ -198,8 +290,8 @@ export default function SearchHotelDetail() {
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="row px-3">
-                                            <div className="col-lg-6 p-1">
+                                        <div className="row ">
+                                            <div className="col-lg-8 p-1">
                                                 <div className="image_head side_image_head">
                                                     <img
                                                         src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`}
@@ -208,10 +300,10 @@ export default function SearchHotelDetail() {
                                                 </div>
                                             </div>
 
-                                            <div className="col-lg-6">
+                                            <div className="col-lg-4">
                                                 <div className="row">
-                                                    {HotelDetail?.photos?.slice(1, 5).map((item, index) => (
-                                                        <div className="col-lg-6 p-1" key={index}>
+                                                    {HotelDetail?.photos?.slice(1, 4).map((item, index) => (
+                                                        <div className="col-lg-12 p-1" key={index}>
                                                             <div className="image_head">
                                                                 <img
                                                                     src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
@@ -226,66 +318,9 @@ export default function SearchHotelDetail() {
                                     )}
                                 </div>
 
-                                <div className="content padding_top flex items-center justify-between ">
-                                    <div className="content_p">
-                                        <h2 className="m-0">{HotelDetail?.displayName?.text}</h2>
-                                        <p className="m-0"><span className="rating-stars" style={{ marginRight: 6 }}>
-                                            {(() => {
-                                                // Assume first review object for star rendering, fallback to 0
-                                                const rating = itemrating || 0;
-                                                const fullStars = Math.floor(rating);
-                                                const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
-                                                return Array.from({ length: 5 }).map((_, idx) => (
-                                                    <span key={idx}>
-                                                        {idx < fullStars ? (
-                                                            <i className="bi bi-star-fill g_color"></i>
-                                                        ) : idx === fullStars && hasHalfStar ? (
-                                                            <i className="bi bi-star-half g_color"></i>
-                                                        ) : (
-                                                            <i className="bi bi-star g_color"></i>
-                                                        )}
-                                                    </span>
-                                                ));
-                                            })()}
-                                        </span>
-                                            {HotelDetail?.rating} ( based on   reviews {ratingCount} )</p>
-                                    </div>
-                                    <div className="button_more">
-                                        <button className="button_bg2 m-0">
-                                            view detail
-                                        </button>
 
-                                    </div>
-                                </div>
 
-                                {/* **********************************    on  mobiloe view show cslider  */}
-                                {/* <div className="hotel_detail_slider d-block d-lg-none">
-                                    <div className="slider">
-                                        <Swiper
-                                            spaceBetween={30}
-                                            effect="fade"
-                                            navigation
-                                            modules={[Navigation, Pagination, EffectFade]}
-                                            className="mySwiper"
-                                            style={{ width: "100%", height: "100%" }}
-                                        >
-                                            {HotelDetail?.photos?.filter(Boolean)?.map((item, index) => {
-                                                return (
-                                                    <SwiperSlide key={index}>
-                                                        <div className="banner_img mobile_banner ">
-                                                            <img
-                                                                src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
-                                                                alt=""
-                                                                width={"100%"}
-                                                                className="card_rounded"
-                                                            />
-                                                        </div>
-                                                    </SwiperSlide>
-                                                );
-                                            })}
-                                        </Swiper>
-                                    </div>
-                                </div> */}
+
 
 
                                 {/* ********************** mobile viewwwwwwwwwwwwwwwwwwwww  */}
@@ -332,6 +367,9 @@ export default function SearchHotelDetail() {
                     </div>
                 </div>
             </section>
+            {/* ******************* */}
+
+            <ViewPriceDetail />
 
             {/* ************************************* on mobile view shoqw section */}
 

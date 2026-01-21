@@ -1,4 +1,4 @@
-import { https_api, https_blog, https_blog_category, https_hotels, https_SearchCity } from "./https"
+import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity } from "./https"
 
 // Helper function to disambiguate common city names
 const disambiguateCityName = (searchTerm) => {
@@ -107,7 +107,15 @@ export const searchText = async (text, limit = 50) => {
 export const searchHotel = async (text, limit = 50) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=hotels and tourist_attraction in ${text}&maxResultCount=${limit}`)
 }
-// ************ hotel around the world 
+/******************* testing hotel detail */
+export const searchHotelName = async (name) => {
+    return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`)
+}
+/********************************** check in check out apis >>>>>>>>>>>> */
+export const HotelCheckInCheckOut = async (hotelkey) => {
+    return await https_SearchCity.get(`/pricing.php?hotel_key=${hotelkey}&chk_in=2026-02-10&chk_out=2026-02-12`)
+}
+// ************ hotel around the world >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 export const TopHotelAroundWorld = async () => {
     return await https_SearchCity.get(`/top-hotels.php?includedType=lodging`)
 }
@@ -120,7 +128,7 @@ export const autoComplete = async (text, limit = 10) => {
 }
 export const nearbyPlaces = async (lat, lng) => {
     return await https_SearchCity.get(
-        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=10`
+        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=20`
     );
 };
 export const Restro = async (lat, lng) => {
