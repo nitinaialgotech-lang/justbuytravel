@@ -1,5 +1,6 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -158,7 +159,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryClientProviderWrapper>
-          <RouteChangeLoader />
+          <Suspense fallback={null}>
+            <RouteChangeLoader />
+          </Suspense>
           {children}
         </QueryClientProviderWrapper>
       </body>

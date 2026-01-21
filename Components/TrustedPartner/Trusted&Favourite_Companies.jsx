@@ -69,20 +69,13 @@ export default function Trusted_Favourite_Companies() {
                                     className="trust_section_swiper"
                                 >
                                     {/* ******************* */}
-                                    {
-                                        card?.map((item) => {
-                                            return (
-                                                <>
-                                                    <SwiperSlide>
-                                                        <div className="platform_img pb-5 pt-3">
-                                                            <img src={item?.img} alt="" />
-                                                        </div>
-                                                    </SwiperSlide>
-
-                                                </>
-                                            )
-                                        })
-                                    }
+                                    {card?.map((item, idx) => (
+                                        <SwiperSlide key={`${item?.img ?? "slide"}-${idx}`}>
+                                            <div className="platform_img pb-5 pt-3">
+                                                <img src={item?.img} alt="" />
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
                                 </Swiper>
                                 {/* ******************* */}
                                 <div className="plane_icon ">
