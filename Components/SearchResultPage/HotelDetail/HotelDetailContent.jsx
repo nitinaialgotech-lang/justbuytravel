@@ -4,57 +4,49 @@ import { IoCheckmarkOutline } from "react-icons/io5";
 import { getAssetPath } from "@/app/utils/assetPath";
 import { useSearchParams } from "next/navigation";
 
-export default function HotelDetailContent({ Pricing, load }) {
-    const searchParams = useSearchParams();
-    const ShimmerPriceCard = () => {
-        return (
-            <div className="hotel_price_detail">
-                {Array.from({ length: 3 }).map((_, i) => (
-                    <div
-                        className="hotel_price_card flex items-center justify-between border-t border-gray-300 p-4"
-                        key={i}
-                    >
-                        {/* Left: Title */}
-                        <div className="shimmer-text w-1/3 h-6 rounded-md"></div>
+function ShimmerPriceCard() {
+    return (
+        <div className="hotel_price_detail">
+            {Array.from({ length: 3 }).map((_, i) => (
+                <div
+                    className="hotel_price_card flex items-center justify-between border-t border-gray-300 p-4"
+                    key={i}
+                >
+                    {/* Left: Title */}
+                    <div className="shimmer-text w-1/3 h-6 rounded-md"></div>
 
-                        {/* Middle: Price */}
-                        <div className="shimmer-text w-1/6 h-6 rounded-md mx-4"></div>
+                    {/* Middle: Price */}
+                    <div className="shimmer-text w-1/6 h-6 rounded-md mx-4"></div>
 
-                        {/* Right: Button */}
-                        <div className="shimmer-button w-24 h-8 rounded-md"></div>
-                    </div>
-                ))}
+                    {/* Right: Button */}
+                    <div className="shimmer-button w-24 h-8 rounded-md"></div>
+                </div>
+            ))}
 
-                {/* Shimmer CSS */}
-                <style
-                    dangerouslySetInnerHTML={{
-                        __html: `
+            {/* Shimmer CSS */}
+            <style
+                dangerouslySetInnerHTML={{
+                    __html: `
         @keyframes shimmer {
-          0% {
-            background-position: -1000px 0;
-          }
-          100% {
-            background-position: 1000px 0;
-          }
+          0% { background-position: -1000px 0; }
+          100% { background-position: 1000px 0; }
         }
 
         .shimmer-text,
         .shimmer-button {
-          background: linear-gradient(
-            90deg,
-            #e5e7eb 0%,
-            #f3f4f6 50%,
-            #e5e7eb 100%
-          );
+          background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
           background-size: 1000px 100%;
           animation: shimmer 2s infinite;
         }
       `,
-                    }}
-                />
-            </div>
-        );
-    };
+                }}
+            />
+        </div>
+    );
+}
+
+export default function HotelDetailContent({ Pricing, load }) {
+    const searchParams = useSearchParams();
     // *********************************
     console.log(Pricing, "pricesssssssssssssssssssssssssssssssssssssss", load);
     // console.log(title_url, "title_urlsssssssssssssssssssssssssssssssssssss");

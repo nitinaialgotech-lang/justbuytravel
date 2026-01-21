@@ -1,11 +1,10 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import './ImageGallery.css'
 
 export default function ImageGallery({ images = [], hotelName = '' }) {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [validImages, setValidImages] = useState([]);
 
     // Helper function to get full resolution image URL from images_full
     const getImageUrl = (imageItem) => {
@@ -37,28 +36,24 @@ export default function ImageGallery({ images = [], hotelName = '' }) {
         return null;
     };
 
-    // Process images: extract full resolution URLs from images_full
-    useEffect(() => {
-        const processed = images
+    const validImages = useMemo(() => {
+        return images
             .map((img, index) => {
                 const url = getImageUrl(img);
                 return url ? { url, index } : null;
             })
-            .filter(img => img !== null && img.url && img.url.trim() !== '');
-        
-        setValidImages(processed);
-        
-        // Reset lightbox index if current index is out of bounds
-        setCurrentImageIndex(prev => {
-            if (prev >= processed.length && processed.length > 0) {
-                return 0;
-            }
-            return prev;
-        });
+            .filter((img) => img !== null && img.url && img.url.trim() !== '');
     }, [images]);
 
+    const clampIndex = (idx) => {
+        if (!validImages || validImages.length === 0) return 0;
+        if (idx < 0) return 0;
+        if (idx >= validImages.length) return validImages.length - 1;
+        return idx;
+    };
+
     const openLightbox = (index) => {
-        setCurrentImageIndex(index);
+        setCurrentImageIndex(clampIndex(index));
         setLightboxOpen(true);
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
     };
@@ -71,6 +66,7 @@ export default function ImageGallery({ images = [], hotelName = '' }) {
     const nextImage = (e) => {
         if (e) e.stopPropagation();
         setCurrentImageIndex((prev) => {
+            if (!validImages || validImages.length === 0) return 0;
             const nextIndex = (prev + 1) % validImages.length;
             return nextIndex;
         });
@@ -79,6 +75,7 @@ export default function ImageGallery({ images = [], hotelName = '' }) {
     const prevImage = (e) => {
         if (e) e.stopPropagation();
         setCurrentImageIndex((prev) => {
+            if (!validImages || validImages.length === 0) return 0;
             const prevIndex = (prev - 1 + validImages.length) % validImages.length;
             return prevIndex;
         });
@@ -95,10 +92,12 @@ export default function ImageGallery({ images = [], hotelName = '' }) {
             }
             if (e.key === 'ArrowRight') {
                 e.preventDefault();
+                if (!validImages || validImages.length === 0) return;
                 setCurrentImageIndex((prev) => (prev + 1) % validImages.length);
             }
             if (e.key === 'ArrowLeft') {
                 e.preventDefault();
+                if (!validImages || validImages.length === 0) return;
                 setCurrentImageIndex((prev) => (prev - 1 + validImages.length) % validImages.length);
             }
         };
@@ -111,6 +110,7 @@ export default function ImageGallery({ images = [], hotelName = '' }) {
         return null; // Don't render anything if no valid images
     }
 
+    const safeCurrentImageIndex = clampIndex(currentImageIndex);
     const firstImage = validImages[0];
     const remainingImages = validImages.slice(1);
     const totalImages = validImages.length;
@@ -201,12 +201,12 @@ export default function ImageGallery({ images = [], hotelName = '' }) {
                     </button>
                     <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
                         <img 
-                            key={currentImageIndex}
-                            src={validImages[currentImageIndex]?.url} 
-                            alt={`${hotelName} - Image ${currentImageIndex + 1}`}
+                            key={safeCurrentImageIndex}
+                            src={validImages[safeCurrentImageIndex]?.url} 
+                            alt={`${hotelName} - Image ${safeCurrentImageIndex + 1}`}
                         />
                         <div className="lightbox-counter">
-                            {currentImageIndex + 1} / {validImages.length}
+                            {safeCurrentImageIndex + 1} / {validImages.length}
                         </div>
                     </div>
                 </div>
