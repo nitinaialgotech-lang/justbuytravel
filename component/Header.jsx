@@ -47,15 +47,13 @@ export default function Header() {
                 <div className="container">
                     <Navbar expand="lg" className="">
                         <Container fluid className="p-0">
-                            <Navbar.Brand>
-                                <Link href={"/"}>
-                                    <div className="logo">
-                                        <img
-                                            src={"/justbuytravel_next/demo/logo/logo.png.webp"}
-                                            alt="Just Buy Travel - Your Trusted Travel Companion"
-                                        />
-                                    </div>
-                                </Link>
+                            <Navbar.Brand as={Link} href="/">
+                                <div className="logo">
+                                    <img
+                                        src={"/justbuytravel_next/demo/logo/logo.png.webp"}
+                                        alt="Just Buy Travel - Your Trusted Travel Companion"
+                                    />
+                                </div>
                             </Navbar.Brand>
                             {/* *********************** */}
                             <button onClick={handleShow} className="d-block d-lg-none">
@@ -70,7 +68,7 @@ export default function Header() {
                                     style={{ maxHeight: "100px" }}
                                     navbarScroll
                                 >
-                                    <Nav.Link className="capitalize" >
+                                    <Nav.Link as={Link} href="/book-hotels" className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -78,10 +76,10 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/book-hotels">Hotels</Link></span>
+                                        <span>Hotels</span>
 
                                     </Nav.Link>
-                                    <Nav.Link className="capitalize">
+                                    <Nav.Link as={Link} href="/book-flights" className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -89,9 +87,9 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/book-flights">Flights</Link></span>
+                                        <span>Flights</span>
                                     </Nav.Link>
-                                    <Nav.Link className="capitalize">
+                                    <Nav.Link as={Link} href="/book-cruises" className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -99,9 +97,9 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/book-cruises">Cruises</Link></span>
+                                        <span>Cruises</span>
                                     </Nav.Link>
-                                    <Nav.Link className="capitalize">
+                                    <Nav.Link as={Link} href="/book-packages" className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -109,11 +107,9 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/book-packages">Packages</Link></span>
+                                        <span>Packages</span>
                                     </Nav.Link>
-                                    <Nav.Link
-                                        className="capitalize"
-                                    >
+                                    <Nav.Link as={Link} href="/blog" className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -121,12 +117,9 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/blog">blogs</Link></span>
+                                        <span>blogs</span>
                                     </Nav.Link>
-                                    <Nav.Link
-
-                                        className="capitalize"
-                                    >
+                                    <Nav.Link as={Link} href="/aboutus" className="capitalize">
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -134,7 +127,7 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/aboutus">about us</Link></span>
+                                        <span>about us</span>
                                     </Nav.Link>
                                     {/* <div className="search_sign_button flex gap-2 items-center">
                                         <Link href={""} className='sign-in-button bg-color-black text-white' variant="outline-success">Subscriber</Link>

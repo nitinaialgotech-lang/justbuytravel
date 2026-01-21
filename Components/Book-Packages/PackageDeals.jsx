@@ -96,128 +96,120 @@ export default function PackageDeals() {
                                 id="swiper_sldie"
                             >
 
-                                <>
-                                    {
-                                        image?.map((item) => {
-                                            return (
-                                                <>
-                                                    <SwiperSlide >
-                                                        <div className="card_col">
-                                                            <div
-                                                                className="recommend_card_box package_card_box  card_rounded    
+                                {image?.map((item, idx) => (
+                                    <SwiperSlide key={`${item?.name ?? "package"}-${idx}`}>
+                                        <div className="card_col">
+                                            <div
+                                                className="recommend_card_box package_card_box  card_rounded    
                                                         "
-                                                            >
-                                                                <div className="card_box pe- recomand_card_shadow">
-                                                                    <div
-                                                                        className="card_box_img card_rounded relative overflow-hidden"
-                                                                        style={{
-                                                                            minHeight: "250px",
-                                                                            backgroundColor: "#f3f4f6",
-                                                                        }}
-                                                                    >
+                                            >
+                                                <div className="card_box pe- recomand_card_shadow">
+                                                    <div
+                                                        className="card_box_img card_rounded relative overflow-hidden"
+                                                        style={{
+                                                            minHeight: "250px",
+                                                            backgroundColor: "#f3f4f6",
+                                                        }}
+                                                    >
+                                                        <img
+                                                            src={item?.img}
+                                                            className="card_rounded w-full h-full object-cover"
+                                                            alt={"Hotel image"}
+                                                        />
+                                                    </div>
+                                                    {/* *** */}
+                                                    <div className="card_box_detail  card_rounded package_deals_card flex flex-col z-1   relative">
+                                                        <h4 className="m-0 capitalize">
+                                                            Noah Private Beach House + Flight
+                                                        </h4>
+                                                        <p className='m-0'>
+                                                            Himmafushi
+                                                        </p>
+                                                        <div className="package_detail">
+                                                            <ul className='p-0 m-0'>
+                                                                {/* ************* */}
+                                                                <li>
+
+                                                                    <span>
                                                                         <img
-                                                                            src={item?.img}
-                                                                            className="card_rounded w-full h-full object-cover"
-                                                                            alt={"Hotel image"}
+                                                                            className="icon_link"
+                                                                            src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
+                                                                            alt=""
                                                                         />
-                                                                    </div>
-                                                                    {/* *** */}
-                                                                    <div className="card_box_detail  card_rounded package_deals_card flex flex-col z-1   relative">
-                                                                        <h4 className="m-0 capitalize">
-                                                                            Noah Private Beach House + Flight
-                                                                        </h4>
-                                                                        <p className='m-0'>
-                                                                            Himmafushi
-                                                                        </p>
-                                                                        <div className="package_detail">
-                                                                            <ul className='p-0 m-0'>
-                                                                                {/* ************* */}
-                                                                                <li>
+                                                                    </span>
 
-                                                                                    <span>
-                                                                                        <img
-                                                                                            className="icon_link"
-                                                                                            src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
-                                                                                            alt=""
-                                                                                        />
-                                                                                    </span>
+                                                                    <span>
+                                                                        <p> 4.5 stars - 9.6/10 Exceptional (5)</p>
+                                                                    </span>
+                                                                </li>
+                                                                {/* ************* */}
+                                                                <li>
 
-                                                                                    <span>
-                                                                                        <p> 4.5 stars - 9.6/10 Exceptional (5)</p>
-                                                                                    </span>
-                                                                                </li>
-                                                                                {/* ************* */}
-                                                                                <li>
-
-                                                                                    <span>
-                                                                                        <img
-                                                                                            className="icon_link"
-                                                                                            src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
-                                                                                            alt=""
-                                                                                        />
-                                                                                    </span>
-                                                                                    <span>
-                                                                                        <p> Chandigarh (IXC) - Male (MLE)</p>
-                                                                                    </span>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        {/* **************************************************** */}
-                                                                        <div className="package_bundle">
-                                                                            <div className="bundle_bag">
-                                                                                <div className="bundle">
-                                                                                    <span>
-                                                                                        <GiSchoolBag />
-                                                                                    </span>
-                                                                                    <p className='m-0'>
-                                                                                        bunlde & save $231
-
-                                                                                    </p>
-                                                                                </div>
-
-
-                                                                            </div>
-                                                                            <div className="price flex items-end justify-end gap-1 mt-2">
-
-                                                                                <h6 className='m-0'>
-                                                                                    $809
-                                                                                </h6>
-
-                                                                                <h6 className='m-0'> 100</h6>
-
-
-                                                                            </div>
-                                                                            <p>
-                                                                                per traveler
-                                                                            </p>
-                                                                            <p>
-                                                                                Sun, Mar 1 - Sat, Mar 7 (6 nights)
-                                                                            </p>
-                                                                            <p>
-                                                                                Found 12 hours ago
-                                                                            </p>
-
-                                                                        </div>
-
-
-                                                                        {/* ****************** */}
-
-                                                                        {/* ******* */}
-
-
-                                                                        {/* *************** rating_list */}
-                                                                    </div>
-                                                                </div>
-                                                                {/* *********** */}
-                                                            </div>
-                                                            {/* *********** */}
+                                                                    <span>
+                                                                        <img
+                                                                            className="icon_link"
+                                                                            src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
+                                                                            alt=""
+                                                                        />
+                                                                    </span>
+                                                                    <span>
+                                                                        <p> Chandigarh (IXC) - Male (MLE)</p>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                    </SwiperSlide>
-                                                </>
-                                            )
-                                        })
-                                    }
-                                </>
+                                                        {/* **************************************************** */}
+                                                        <div className="package_bundle">
+                                                            <div className="bundle_bag">
+                                                                <div className="bundle">
+                                                                    <span>
+                                                                        <GiSchoolBag />
+                                                                    </span>
+                                                                    <p className='m-0'>
+                                                                        bunlde & save $231
+
+                                                                    </p>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div className="price flex items-end justify-end gap-1 mt-2">
+
+                                                                <h6 className='m-0'>
+                                                                    $809
+                                                                </h6>
+
+                                                                <h6 className='m-0'> 100</h6>
+
+
+                                                            </div>
+                                                            <p>
+                                                                per traveler
+                                                            </p>
+                                                            <p>
+                                                                Sun, Mar 1 - Sat, Mar 7 (6 nights)
+                                                            </p>
+                                                            <p>
+                                                                Found 12 hours ago
+                                                            </p>
+
+                                                        </div>
+
+
+                                                        {/* ****************** */}
+
+                                                        {/* ******* */}
+
+
+                                                        {/* *************** rating_list */}
+                                                    </div>
+                                                </div>
+                                                {/* *********** */}
+                                            </div>
+                                            {/* *********** */}
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
 
                             </Swiper>
                             {/*xxxxxxxx */}

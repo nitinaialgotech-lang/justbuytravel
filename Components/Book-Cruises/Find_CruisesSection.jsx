@@ -103,56 +103,48 @@ export default function Find_CruisesSection() {
                             id="swiper_sldie"
                         >
 
-                            <>
-                                {
-                                    image?.map((item) => {
-                                        return (
-                                            <>
-                                                <SwiperSlide >
-                                                    <div className="card_col">
-                                                        <div
-                                                            className="recommend_card_box   card_rounded  recomand_card_shadow  
+                            {image?.map((item, idx) => (
+                                <SwiperSlide key={`${item?.name ?? "region"}-${idx}`}>
+                                    <div className="card_col">
+                                        <div
+                                            className="recommend_card_box   card_rounded  recomand_card_shadow  
                                                         "
-                                                        >
-                                                            <div className="card_box pe-">
-                                                                <div
-                                                                    className="card_box_img card_rounded relative overflow-hidden"
-                                                                    style={{
-                                                                        minHeight: "250px",
-                                                                        backgroundColor: "#f3f4f6",
-                                                                    }}
-                                                                >
-                                                                    <img
-                                                                        src={item?.img}
-                                                                        className="card_rounded w-full h-full object-cover"
-                                                                        alt={"Hotel image"}
-                                                                    />
-                                                                </div>
-                                                                {/* *** */}
-                                                                <div className="card_box_detail card_rounded flex flex-col z-1 find_cruise_detail  relative">
-                                                                    <h4 className="m-0 capitalize">
-                                                                        {item?.name}
-                                                                    </h4>
-                                                                    {/* ****** */}
+                                        >
+                                            <div className="card_box pe-">
+                                                <div
+                                                    className="card_box_img card_rounded relative overflow-hidden"
+                                                    style={{
+                                                        minHeight: "250px",
+                                                        backgroundColor: "#f3f4f6",
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={item?.img}
+                                                        className="card_rounded w-full h-full object-cover"
+                                                        alt={"Hotel image"}
+                                                    />
+                                                </div>
+                                                {/* *** */}
+                                                <div className="card_box_detail card_rounded flex flex-col z-1 find_cruise_detail  relative">
+                                                    <h4 className="m-0 capitalize">
+                                                        {item?.name}
+                                                    </h4>
+                                                    {/* ****** */}
 
-                                                                    {/* ****************** */}
+                                                    {/* ****************** */}
 
-                                                                    {/* ******* */}
+                                                    {/* ******* */}
 
 
-                                                                    {/* *************** rating_list */}
-                                                                </div>
-                                                            </div>
-                                                            {/* *********** */}
-                                                        </div>
-                                                        {/* *********** */}
-                                                    </div>
-                                                </SwiperSlide>
-                                            </>
-                                        )
-                                    })
-                                }
-                            </>
+                                                    {/* *************** rating_list */}
+                                                </div>
+                                            </div>
+                                            {/* *********** */}
+                                        </div>
+                                        {/* *********** */}
+                                    </div>
+                                </SwiperSlide>
+                            ))}
 
                         </Swiper>
                         {/*xxxxxxxx */}
