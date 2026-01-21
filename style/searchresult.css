@@ -93,7 +93,9 @@
   z-index: -1;
 }
 .primary-btn1 > span {
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
   transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
   background-color: transparent;
   width: 100%;
@@ -108,7 +110,9 @@
   left: 0;
   opacity: 0;
   transform: translate(0, 100%);
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
   transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
   white-space: nowrap;
 }
@@ -123,7 +127,9 @@
   transform: translateY(110%);
   background-color: var(--cl-bl);
   overflow: hidden;
-  transition: opacity 0.5s, transform 0.5s;
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
   z-index: -1;
 }
 .primary-btn1:hover > span:nth-child(2) {
@@ -703,9 +709,12 @@
   -webkit-transform: scale(0.75) translateY(-21px);
   -ms-transform: scale(0.75) translateY(-21px);
   transform: scale(0.75) translateY(-21px);
-  -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25),
+  -webkit-transition:
+    all 0.2s cubic-bezier(0.5, 0, 0, 1.25),
     opacity 0.15s ease-out;
-  transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+  transition:
+    all 0.2s cubic-bezier(0.5, 0, 0, 1.25),
+    opacity 0.15s ease-out;
   z-index: 9;
 }
 
@@ -808,7 +817,7 @@
   position: absolute;
   top: 0;
   bottom: 50%;
-  content: "";
+  /* content: ""; */
   left: 0;
   right: 0;
   background: #2affb436;
@@ -822,13 +831,13 @@
   width: 100%;
   height: auto;
 }
-.hoteldetail_banner > .content > p {
+.hoteldetail_banner > .content > .content_p > p {
   display: flex;
   align-items: center;
   gap: 5px;
   margin-bottom: 15px;
 }
-.hoteldetail_banner > .content > h2 {
+.hoteldetail_banner > .content > .content_p > h2 {
   font-family: var(--font-fam);
   color: var(--cl-bl);
   font-size: 50px;
@@ -837,8 +846,7 @@
 .hoteldetail_banner > .banner_img {
   border-radius: 20px;
   background: #fff;
-  padding: 10px;
-  border: 1px solid var(--grey-cl);
+  /* border: 1px solid var(--grey-cl); */
 }
 .mobile_banner > img {
   height: 100%;
@@ -946,4 +954,22 @@
   min-height: 410px;
   object-fit: cover;
   max-height: 410px;
+}
+/* /***************************** */
+.review_box_section > .review_head .user_info > p {
+  font-weight: 400;
+  text-transform: capitalize;
+  font-size: 18px;
+  color: var(--bg-color);
+}
+.review_box_section > .review_head .user_info > p > span {
+  color: var(--cl-brown);
+  font-weight: 300;
+}
+.review_box_section > .content > p {
+  font-size: 17px;
+  color: var(--cl-brown);
+  font-weight: 300;
+  /* text-align: justify; */
+  margin-top: 10px;
 }

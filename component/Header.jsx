@@ -47,13 +47,15 @@ export default function Header() {
                 <div className="container">
                     <Navbar expand="lg" className="">
                         <Container fluid className="p-0">
-                            <Navbar.Brand href={"/justbuytravel_next/demo"}>
-                                <div className="logo">
-                                    <img
-                                        src={"/justbuytravel_next/demo/logo/logo.png.webp"}
-                                        alt="Just Buy Travel - Your Trusted Travel Companion"
-                                    />
-                                </div>
+                            <Navbar.Brand>
+                                <Link href={"/"}>
+                                    <div className="logo">
+                                        <img
+                                            src={"/justbuytravel_next/demo/logo/logo.png.webp"}
+                                            alt="Just Buy Travel - Your Trusted Travel Companion"
+                                        />
+                                    </div>
+                                </Link>
                             </Navbar.Brand>
                             {/* *********************** */}
                             <button onClick={handleShow} className="d-block d-lg-none">
@@ -68,7 +70,7 @@ export default function Header() {
                                     style={{ maxHeight: "100px" }}
                                     navbarScroll
                                 >
-                                    <Nav.Link className="capitalize" href="/book-hotels">
+                                    <Nav.Link className="capitalize" >
                                         <span>
                                             <img
                                                 className="icon_link"
@@ -107,7 +109,7 @@ export default function Header() {
                                                 alt=""
                                             />
                                         </span>
-                                        <span><Link href="/packages">Packages</Link></span>
+                                        <span><Link href="/book-packages">Packages</Link></span>
                                     </Nav.Link>
                                     <Nav.Link
                                         className="capitalize"

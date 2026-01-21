@@ -319,7 +319,20 @@ button {
   letter-spacing: 0%;
   vertical-align: middle;
 }
-
+.section_title > span > h2 {
+  font-family: var(--font-fam);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.8;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+.section_title > span > h5 {
+  font-weight: 400;
+  font-size: 17px;
+  margin-top: -10px;
+  color: rgba(115, 115, 115, 1);
+}
 .section_title > h5 {
   font-weight: 400;
   font-size: 17px;
@@ -1878,4 +1891,102 @@ span.rating-stars {
 /* ***************************** icominc places Hotels in p tag */
 .experience_explore_section > .card > .card-body > .hotel_card_detail > p {
   font-size: 12px;
+}
+/* ******************** */
+.recommend_card_box > .card_box > .find_cruise_detail {
+  text-align: center;
+  padding: 12px 18px;
+}
+.recommend_card_box > .card_box > .find_cruise_detail > h4 {
+  color: var(--bg-color) !important;
+}
+.recommend_card_box > .card_box > .package_deals_card > p {
+  font-size: 12px;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_detail
+  > ul
+  > li {
+  display: flex;
+  gap: 10px;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_detail
+  > ul
+  > li
+  > span {
+  font-size: 12px;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_detail
+  > ul
+  > li
+  > span:nth-child(1)
+  > img {
+  width: 12px;
+  height: auto;
+}
+.recommend_card_box > .card_box > .package_deals_card > .package_bundle {
+  text-align: end;
+}
+.recommend_card_box > .card_box > .package_deals_card > .package_bundle > p {
+  font-size: 12px !important;
+  margin-bottom: 0px;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_bundle
+  > .bundle_bag {
+  text-align: end;
+  display: flex;
+  justify-content: end;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_bundle
+  > .bundle_bag
+  > .bundle {
+  width: 70%;
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 5px;
+  justify-content: end;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  padding: 5px 5px;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_bundle
+  > .bundle_bag
+  > .bundle
+  > p {
+  color: #ffffff;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_bundle
+  > .bundle_bag
+  > .bundle
+  > span
+  > svg {
+  color: #ffffff !important;
+}
+.package_card_box > .card_box {
+  height: auto;
+}
+/* ********************************* hotel detail banner  */
+.hoteldetail_banner > .content {
+  padding-top: 20px;
 }

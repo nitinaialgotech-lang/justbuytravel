@@ -147,14 +147,7 @@ export default function Hotel_IconicPlaces() {
                                                         <div className="card_detail hotel_card_detail">
                                                             <h5 className="card-title m-0">{title}</h5>
                                                             <p className="m-0">{item?.address}</p>
-                                                            {/* <div className="rating flex align-items-center gap-1">
-                                                                {item?.rating
-                                                                    ? renderBootstrapStars(item?.rating)
-                                                                    : renderBootstrapStars(4)}
-                                                                {item?.rating && (
-                                                                    <span className="ms-1">{item?.rating}</span>
-                                                                )}
-                                                            </div> */}
+
                                                         </div>
                                                     </div>
                                                 </div>
