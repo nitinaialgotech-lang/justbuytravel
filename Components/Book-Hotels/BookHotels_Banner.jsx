@@ -7,7 +7,6 @@ import GuideHotel from './GuideHotel'
 import Blogs from '../HomePage/Blog/Blogs'
 import Trust_Guide_Section from '../Aboutus/Trust_Guide_Section'
 import FaqSection from '../HomePage/Faq/FaqSection'
-import TravelpayoutsHotelWidget from './TravelpayoutsHotelWidget'
 
 export default function BookHotels_Banner() {
   return (
@@ -34,16 +33,6 @@ export default function BookHotels_Banner() {
       </section>
 
       <Search />
-      <TravelpayoutsHotelWidget
-        title="Hotel deals (powered by our partners)"
-        subtitle="Quickly compare deals and sustainable stays."
-        params={{
-          border_radius: 14,
-          plain: true,
-          deals: true,
-          sustainable: true,
-        }}
-      />
       <TopHotels />
       <GuideHotel />
       <IconicPlaces />
