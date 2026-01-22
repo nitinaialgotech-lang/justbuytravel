@@ -30,6 +30,10 @@ import Link from "next/link";
 import { PiPhoneLight } from "react-icons/pi";
 import ViewPriceDetail from "./ViewPriceDetail";
 import HotelAllReview from "./HotelAllReview";
+import PopularHotelAroundWorld from "./PopularHotelAroundWorld";
+import HotelSearchNearByLocation from "../HotelSearchNearByLocation";
+import { FaQ } from "react-icons/fa6";
+import FaqSection from "@/Components/HomePage/Faq/FaqSection";
 export default function SearchHotelDetail() {
     const search_detail = useSearchParams();
 
@@ -323,6 +327,21 @@ export default function SearchHotelDetail() {
                                     </div>
                                 </div>
 
+                                {/* ****************************************** popup show >>>>>>>>>>>>>>> */}
+
+                                <div className="container">
+                                    <div className="popup_header">
+
+                                    </div>
+                                    <div className="row">
+
+
+                                        <div className="col-lg-4">
+
+                                        </div>
+                                    </div>
+                                </div>
+
 
 
 
@@ -377,6 +396,10 @@ export default function SearchHotelDetail() {
             <ViewPriceDetail PriceRate={PriceData} />
             <HotelAllReview reviews={userReviews} />
             <HotelLocation lat={latitude} long={longitude} load={isLoading} />
+            <PopularHotelAroundWorld lat={latitude} long={longitude} />
+            <HotelSearchNearByLocation lat={latitude} long={longitude} />
+            <Blogs />
+            <FaqSection />
             {/* ************************************* on mobile view shoqw section */}
 
             {/* ******************************************************** */}
