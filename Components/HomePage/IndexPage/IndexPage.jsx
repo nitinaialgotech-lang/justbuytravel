@@ -17,26 +17,24 @@ import { RxCross2 } from "react-icons/rx";
 import 'reactjs-popup/dist/index.css';
 import { useEffect, useState } from "react";
 export default function IndexPage() {
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
+    // useEffect(() => {
+    //     const lastShown = sessionStorage.getItem("popupLastShown");
+    //     const now = new Date().getTime();
+    //     const TEN_MINUTES = 10 * 60 * 1000;
 
-    useEffect(() => {
-        // Check sessionStorage for last popup timestamp
-        const lastShown = sessionStorage.getItem("popupLastShown");
-        const now = new Date().getTime();
-        const TEN_MINUTES = 10 * 60 * 1000;
 
-        // Show popup if never shown OR 10 minutes have passed
-        if (!lastShown || now - parseInt(lastShown) > TEN_MINUTES) {
-            setTimeout(() => {
-                setOpen(true);
-                sessionStorage.setItem("popupLastShown", now.toString());
-            }, 500); // optional delay
-        }
-    }, []);
+    //     if (!lastShown || now - parseInt(lastShown) > TEN_MINUTES) {
+    //         setTimeout(() => {
+    //             setOpen(true);
+    //             sessionStorage.setItem("popupLastShown", now.toString());
+    //         }, 500);
+    //     }
+    // }, []);
 
     return (
         <>
-            <Popup open={open} onClose={() => setOpen(false)}  >
+            {/* <Popup open={open} onClose={() => setOpen(false)}  >
                 <div className="container">
                     <div className="row justify-center">
                         <div className="col-lg-12">
@@ -49,7 +47,6 @@ export default function IndexPage() {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* **************** */}
                                     <div className="col-lg-6 ">
                                         <div className="popup_form relative flex items-center">
                                             <div className="popup_form_item">
@@ -64,14 +61,11 @@ export default function IndexPage() {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
-            </Popup>
+            </Popup> */}
             {/* *********** */}
 
             <Header />
