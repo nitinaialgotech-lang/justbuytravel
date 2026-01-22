@@ -11,11 +11,11 @@ export default function ViewPriceDetail({ PriceRate }) {
             img: "/justbuytravel_next/demo/logo/hoteldetail/Booking_com.png"
         },
         {
-            name: "expedia.com",
+            name: "expedia.com/",
             img: "/justbuytravel_next/demo/logo/hoteldetail/expedia_logo.svg"
         },
         {
-            name: "traveloka.com",
+            name: "traveloka.com/",
             img: "/justbuytravel_next/demo/logo/hoteldetail/travelok.svg"
         },
         {
@@ -26,66 +26,62 @@ export default function ViewPriceDetail({ PriceRate }) {
     const imgdata = bookingImg?.map((item) => item)
     return (
         <>
-
             <section className='padding_bottom'>
                 <div className="container">
                     <div className="row matrix_fix">
-                        <div className="col-lg-12 ">
-                            <div className=" content_box_detail view_price_detial_content rounded-2xl border border-gray-300 bg_grey2">
-                                <div className="view_price_title ">
-                                    <h4>
-                                        View prices for your travel dates
-                                    </h4>
+                        <div className="col-lg-12">
+                            <div className="content_box_detail view_price_detial_content rounded-2xl border border-gray-300 bg_grey2">
+                                <div className="view_price_title">
+                                    <h4>View prices for your travel dates</h4>
                                 </div>
-                                {/* ************************* */}
-                                {
-                                    hotelPrice?.map((item, i) => {
-                                        const matchedImg = bookingImg.find(
-                                            (img) => img.name === item?.name
-                                        );
+
+                                {hotelPrice
+                                    ?.filter(item => bookingImg.some(img => img.name === item.name)) // Only matched hotels
+                                    .map((item, i) => {
+                                        // Get the matched image
+                                        const matchedImg = bookingImg.find(img => img.name === item.name);
+
                                         return (
-                                            <>
-                                                <div className="view_price_box" key={i}>
-                                                    <div className="price_box">
-                                                        <div className="row items-center">
-                                                            {/* ************* */}
-                                                            <div className="col-lg-4">
-                                                                <div className="price_box_item ">
-                                                                    <div className="icon text-center flex ">
-                                                                        {matchedImg && (
-                                                                            <img src={matchedImg.img} alt="" width={120} height={120} />
-                                                                        )
-                                                                        }
+                                            <div className="view_price_box" key={i}>
+                                                <div className="price_box">
+                                                    <div className="row items-center">
 
-                                                                    </div>
+                                                        {/* Logo column */}
+                                                        <div className="col-lg-4">
+                                                            <div className="price_box_item">
+                                                                <div className="icon text-center flex">
+                                                                    <img
+                                                                        src={matchedImg.img}
+                                                                        alt={item.name}
+                                                                        width={120}
+                                                                        height={120}
+                                                                    />
                                                                 </div>
                                                             </div>
-
-                                                            {/* ********* col */}
-                                                            <div className="col-lg-4">
-                                                                <div className="price_box_price flex justify-center ">
-                                                                    <h4 className='m-0'>
-                                                                        ${item?.rate}
-                                                                    </h4>
-                                                                </div>
-                                                            </div>
-                                                            {/* ************ */}
-                                                            <div className="col-lg-4">
-                                                                <div className="price_box_button price_view_detail flex justify-end ">
-                                                                    <button className="hotel_detail_button text-white">
-                                                                        view details
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            {/* ************* */}
                                                         </div>
+
+                                                        {/* Price column */}
+                                                        <div className="col-lg-4">
+                                                            <div className="price_box_price flex justify-center">
+                                                                <h4>${item.rate}</h4>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Button column */}
+                                                        <div className="col-lg-4">
+                                                            <div className="price_box_button price_view_detail flex justify-end">
+                                                                <button className="hotel_detail_button text-white">
+                                                                    view details
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                            </>
-                                        )
-                                    })
-                                }
-                                {/* **************************************** */}
+                                            </div>
+                                        );
+                                    })}
+
 
                             </div>
                         </div>
