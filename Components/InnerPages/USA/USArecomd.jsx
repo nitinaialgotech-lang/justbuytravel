@@ -26,8 +26,8 @@ export default function USArecomd() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 38.7946;
-    const long = 106.5348;
+    const lat = 44.500000;
+    const long = -89.500000;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
         queryKey: ["lodgingnearby", lat, long],

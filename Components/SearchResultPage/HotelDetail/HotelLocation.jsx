@@ -52,8 +52,8 @@ export default function HotelLocation({ lat, long, load }) {
                     <div className="nearbyhotels rounded-2xl ">
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="nearby_hotel_heading about_hotel_detail ">
-                                    <h3>Location</h3>
+                                <div className=" section_title ">
+                                    <h2 className="m-0">Location</h2>
                                 </div>
                                 {/* *********************** */}
                                 {
