@@ -38,51 +38,51 @@ export default function HotelAllReview({ reviews }) {
                                         ? text
                                         : words.slice(0, 50).join(" ");
                                     return (
-                                        <>
 
 
 
-                                            <div className="review_box_section mb-3">
-                                                <div className="review_head flex justify-between ">
-                                                    <div className="user">
-                                                        <div className="user_img flex items-center gap-3">
-                                                            <span> <img src={item?.authorAttribution?.photoUri} width={48} height={48} alt="" /></span>
-                                                            <span>
-                                                                <h6 className='m-0'>
-                                                                    {item?.authorAttribution?.displayName}
-                                                                </h6>
-                                                            </span>
-                                                        </div>
-                                                        <div className="rating hotel_rating flex gap-2 items-center">
-                                                            <span>
-                                                                {renderBootstrapStars(4)}
-                                                            </span>
-                                                            <span>
-                                                                <p className='m-0'>
-                                                                    {moment(item?.publishTime).format("DD MMM YYYY hh:mm A")}
-                                                                </p>
-                                                            </span>
-                                                        </div>
+
+                                        <div className="review_box_section mb-3" key={index}>
+                                            <div className="review_head flex justify-between ">
+                                                <div className="user">
+                                                    <div className="user_img flex items-center gap-3">
+                                                        <span> <img src={item?.authorAttribution?.photoUri} width={48} height={48} alt="" /></span>
+                                                        <span>
+                                                            <h6 className='m-0'>
+                                                                {item?.authorAttribution?.displayName}
+                                                            </h6>
+                                                        </span>
                                                     </div>
-                                                    <div className="like_button">
-                                                        <img src="/justbuytravel_next/demo/review/like.png" alt="" />
+                                                    <div className="rating hotel_rating flex gap-2 items-center">
+                                                        <span>
+                                                            {renderBootstrapStars(4)}
+                                                        </span>
+                                                        <span>
+                                                            <p className='m-0'>
+                                                                {moment(item?.publishTime).format("DD MMM YYYY hh:mm A")}
+                                                            </p>
+                                                        </span>
                                                     </div>
-
                                                 </div>
-                                                {/* ********************** */}
-                                                <div className="review_content">
-                                                    <p className=''>
-                                                        {displayedText}
-                                                        {!isExpanded && isLongText && "..."}
-                                                    </p>
-
-                                                    <button onClick={() =>
-                                                        setExpandedIndex(isExpanded ? null : index)
-                                                    }> {isExpanded ? "Read less" : "Read more"}</button>
+                                                <div className="like_button">
+                                                    <img src="/justbuytravel_next/demo/review/like.png" alt="" />
                                                 </div>
+
                                             </div>
+                                            {/* ********************** */}
+                                            <div className="review_content">
+                                                <p className=''>
+                                                    {displayedText}
+                                                    {!isExpanded && isLongText && "..."}
+                                                </p>
 
-                                        </>
+                                                <button onClick={() =>
+                                                    setExpandedIndex(isExpanded ? null : index)
+                                                }> {isExpanded ? "Read less" : "Read more"}</button>
+                                            </div>
+                                        </div>
+
+
                                     )
                                 })
                             }
@@ -105,9 +105,8 @@ export default function HotelAllReview({ reviews }) {
                         <div className="col-lg-3">
                             <div className="review_banner padding_bottom ">
                                 <div className="banner_img ">
-                                    <img src="/justbuytravel_next/demo/review/banner.png" className='' alt="" />
+                                    <img src="/justbuytravel_next/demo/review/banner1.png" className='' alt="" />
                                 </div>
-
                             </div>
                         </div>
 
