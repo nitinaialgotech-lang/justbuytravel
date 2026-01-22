@@ -34,9 +34,11 @@ import PopularHotelAroundWorld from "./PopularHotelAroundWorld";
 import HotelSearchNearByLocation from "../HotelSearchNearByLocation";
 import { FaQ } from "react-icons/fa6";
 import FaqSection from "@/Components/HomePage/Faq/FaqSection";
+import 'reactjs-popup/dist/index.css';
+import Popup from "reactjs-popup";
 export default function SearchHotelDetail() {
     const search_detail = useSearchParams();
-
+    const [open, setOpen] = useState(false);
     const code = search_detail.get("hotel");
     const namehotel = search_detail.get("name");
     // const cityhotel = search_detail.get("city");
@@ -332,8 +334,9 @@ export default function SearchHotelDetail() {
                                                 <div className="col-lg-8 p-1">
                                                     <div className="image_head side_image_head">
                                                         <img
+                                                            style={{ cursor: "pointer" }}
                                                             src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`}
-                                                            alt=""
+                                                            alt="" onClick={() => setOpen(true)}
                                                         />
                                                     </div>
                                                 </div>
@@ -344,6 +347,8 @@ export default function SearchHotelDetail() {
                                                             <div className="col-lg-12 p-1" key={index}>
                                                                 <div className="image_head">
                                                                     <img
+                                                                        style={{ cursor: "pointer" }}
+                                                                        onClick={() => setOpen(true)}
                                                                         src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
                                                                         alt=""
                                                                     />
@@ -358,22 +363,153 @@ export default function SearchHotelDetail() {
                                 </div>
 
                                 {/* ****************************************** popup show >>>>>>>>>>>>>>> */}
+                                <Popup open={open} onClose={() => setOpen(false)} contentStyle={{ width: "100%" }}  >
 
-                                <div className="container">
-                                    <div className="popup_header">
+                                    <div className="container">
+                                        <div className="row ">
+                                            <div className="col-lg-12">
+                                                <div className="popup_header">
+                                                    <div className="header">
 
-                                    </div>
-                                    <div className="row">
+                                                        <div className="header-content   ">
+                                                            <div className="content_p flex justify-between w-full items-center">
+                                                                <div className="title">
+                                                                    <h2 className="m-0">{HotelDetail?.displayName?.text}</h2>
+                                                                    <p className="m-0"><span className="rating-stars" style={{ marginRight: 6 }}>
+                                                                        {(() => {
+                                                                            // Assume first review object for star rendering, fallback to 0
+                                                                            const rating = itemrating || 0;
+                                                                            const fullStars = Math.floor(rating);
+                                                                            const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
+                                                                            return Array.from({ length: 5 }).map((_, idx) => (
+                                                                                <span key={idx}>
+                                                                                    {idx < fullStars ? (
+                                                                                        <i className="bi bi-star-fill g_color"></i>
+                                                                                    ) : idx === fullStars && hasHalfStar ? (
+                                                                                        <i className="bi bi-star-half g_color"></i>
+                                                                                    ) : (
+                                                                                        <i className="bi bi-star g_color"></i>
+                                                                                    )}
+                                                                                </span>
+                                                                            ));
+                                                                        })()}
+                                                                    </span>
+                                                                        {HotelDetail?.rating} ({ratingCount} reviews )</p>
+
+                                                                </div>
+                                                                <div className="price_hotel flex items-center gap-3">
+                                                                    <div className="price">
+                                                                        <h4 className="m-0">
+                                                                            33,457
+                                                                        </h4>
+                                                                        <p className="m-0">hotels.com</p>
+                                                                    </div>
+                                                                    <div className="price_view_detail">
+                                                                        <button className="hotel_detail_button text-white">
+                                                                            view details
+                                                                        </button>
+                                                                    </div>
+                                                                    <div className="popup_header_close ">
+                                                                        <img src="/justbuytravel_next/demo/popup/add.png" style={{ cursor: "pointer" }} alt="" onClick={() => setOpen(false)} />
+                                                                    </div>
+                                                                </div>
+                                                                {/* ************ */}
+
+                                                            </div>
+
+                                                        </div>
+                                                        <hr className="m-0"></hr>
+                                                    </div>
+                                                    {/* ********************************************** */}
+                                                    <div className="row popup_padding">
+                                                        <div className="col-lg-3">
+                                                            <div className="popup_sidebar">
+                                                                <div className="item">
+                                                                    <div className="content_item flex flex-col gap-5">
+                                                                        {/* ***** */}
+                                                                        <div className="button">
+                                                                            <button className="text-capitalize">
+                                                                                back to album
+                                                                            </button>
+                                                                        </div>
+                                                                        {/* ***** */}
+                                                                        <h3 className="m-0">
+                                                                            Management
+                                                                        </h3>
+                                                                        <div className="content_detail">
+                                                                            <p className="m-0">
+                                                                                Deluxe King Park View
+                                                                            </p>
+                                                                            <p className="m-0">
+                                                                                Posted: October 2024
+                                                                            </p>
+                                                                        </div>
+                                                                        <Link href={""}>
+                                                                            View hotel websites
+                                                                        </Link>
+
+                                                                    </div>
+                                                                    {/* ********** */}
+                                                                    <div className="popup_banner" onClick={() => setOpen(false)} >
+                                                                        <img src="/justbuytravel_next/demo/popup/popupbanner.png" width={300} height={250} alt="" onClick={() => setOpen(false)} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {/* ****************** */}
+                                                        <div className="col-lg-9">
+                                                            <div className="popupsidebar">
+                                                                <div className="hotel_detail_slider popup_slider_item ">
+                                                                    {isLoading ? (
+                                                                        <div className="slider">
+                                                                            {Array.from({ length: 1 }).map((_, i) => (
+                                                                                <div
+                                                                                    key={i}
+                                                                                    className="shimmer-container"
+                                                                                    style={{ height: 220, marginBottom: 10 }}
+                                                                                >
+                                                                                    <div className="shimmer" />
+                                                                                </div>
+                                                                            ))}
+                                                                        </div>
+                                                                    ) : (
+                                                                        <Swiper
+                                                                            spaceBetween={30}
+                                                                            effect="fade"
+                                                                            navigation
+                                                                            modules={[Navigation, Pagination, EffectFade]}
+                                                                            className="mySwiper"
+                                                                        >
+                                                                            {HotelDetail?.photos?.map((item, index) => (
+                                                                                <SwiperSlide key={index}>
+                                                                                    <div className="banner_img mobile_banner popup_slider_img ">
+                                                                                        <img
+                                                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                                                            width="100%"
+                                                                                            className="card_rounded"
+                                                                                        />
+                                                                                    </div>
+                                                                                </SwiperSlide>
+                                                                            ))}
+                                                                        </Swiper>
+                                                                    )}
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
 
 
-                                        <div className="col-lg-4">
 
                                         </div>
                                     </div>
-                                </div>
 
 
-
+                                </Popup>
 
 
 
