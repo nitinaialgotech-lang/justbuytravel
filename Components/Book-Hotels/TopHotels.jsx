@@ -21,7 +21,6 @@ export default function TopHotels() {
         queryFn: () => TopHotelAroundWorld()
     })
     const Hotels = TopHotels?.data;
-    console.log(Hotels, "topHotrlssssssssss");
     /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (
@@ -98,8 +97,6 @@ export default function TopHotels() {
     const router = useRouter();
     const viewDetail = (id) => {
         router.push(`/hoteldetail?hotel=${id}`);
-
-        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
 
     return (
@@ -207,11 +204,10 @@ export default function TopHotels() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                            ? text.slice(0, maxLength) + "..."
-                                            : text;
-                                    };
-                                    console.log(image, "img............");
-                                    return (
+                                    ? text.slice(0, maxLength) + "..."
+                                    : text;
+                            };
+                            return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

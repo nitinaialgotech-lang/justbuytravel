@@ -81,7 +81,6 @@ export default function Searchinput() {
     enabled: searchContent.length > 0,
     staleTime: 30000, // Cache for 30 seconds
   });
-  console.log(autoCompleteData, "...................jggggggggggggggggggggggggNitin");
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -123,7 +122,6 @@ export default function Searchinput() {
     setSearchContent(place.displayName?.text || place.formattedAddress || "");
     setShowDropdown(false);
     // You can add navigation or search logic here
-    console.log("Selected place:", place);
   };
 
   const handleKeyDown = (e) => {
@@ -158,7 +156,6 @@ export default function Searchinput() {
             e.preventDefault();
             const trimmed = searchContent.trim();
             if (trimmed.length === 0) return;
-            console.log("Searching for:", trimmed);
             // Add your search navigation logic here
           }}
         >

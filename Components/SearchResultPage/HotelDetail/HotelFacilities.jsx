@@ -73,7 +73,6 @@ function ShimmerFacilities() {
 export default function HotelFacilities({ hotelAmenties = [], load }) {
     // If no amenities provided, show default static content
     const hasAmenities = hotelAmenties && hotelAmenties.length > 0;
-    console.log(hotelAmenties, ".................");
 
     return (
         <>

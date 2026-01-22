@@ -17,9 +17,6 @@ export default function ExpediaBanner() {
             <Script
                 src="https://creator.expediagroup.com/products/banners/assets/eg-affiliate-banners.js"
                 strategy="lazyOnload"   // ← changed from afterInteractive
-                onLoad={() => {
-                    console.log("Expedia banner script loaded");
-                }}
             />
         </>
     );

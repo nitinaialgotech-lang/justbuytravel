@@ -17,12 +17,8 @@ export default function Blog_Detail_section() {
         queryFn: () => Get_Blogs()
     })
 
-
-    console.log(data, "blog data..........................");
-
     const blog_slug = useSearchParams();
-    const slug = blog_slug.get("detail")
-    console.log(slug);
+    const slug = blog_slug.get("detail");
     // ***************************************
     const blog_content = data?.data?.map((item) => {
         if (item?.slug == slug) {
@@ -31,7 +27,6 @@ export default function Blog_Detail_section() {
         return null
     })
     // ***************************************
-    console.log(blog_content, "content");
     const blog_img = data?.data?.map((item) => {
         if (item?.slug == slug) {
             return item?.yoast_head_json?.og_image
@@ -50,8 +45,6 @@ export default function Blog_Detail_section() {
                                 data?.data?.map((item, i) => {
 
                                     if (item?.slug == slug) {
-                                        console.log(item, "......................item blog");
-
                                         return (
 
                                             <div className="title flex flex-col gap-2 padding_bottom" key={i}>

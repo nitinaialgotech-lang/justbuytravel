@@ -75,8 +75,6 @@ export default function Blog_detail({ content, blog_image, load }) {
                                 <div className="blog_img blog_pb">
                                     {
                                         blog_image?.map((item) => {
-                                            console.log(item, "item,,,,,,,,,,,,,,,,,,,,,,,");
-
                                             return (
                                                 <img src={item?.map((item) => item?.url)} alt="" className='rounded-2xl' />
                                             )

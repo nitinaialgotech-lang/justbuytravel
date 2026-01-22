@@ -34,8 +34,7 @@ const card = [
 export default function Trust_Guide_Section() {
 
 
-    const route = usePathname()
-    console.log(route, '.....................');
+    const route = usePathname();
     return (
         <section className={`trust_guide_section ${route == "/aboutus/" ? "" : "bg_grey"}  padding_top padding_bottom`}>
             <div className="container">

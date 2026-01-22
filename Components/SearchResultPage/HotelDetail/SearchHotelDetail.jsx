@@ -40,21 +40,17 @@ export default function SearchHotelDetail() {
     const code = search_detail.get("hotel");
     const namehotel = search_detail.get("name");
     // const cityhotel = search_detail.get("city");
-
-    const { data: hoteldata } = useQuery({
-        queryKey: ["hoteldata", namehotel],
-        queryFn: () => searchHotelName(namehotel)
-    })
-    console.log("code,,,,,,,,,,,,,,,,,", hoteldata?.data?.xotelo?.hotel_key, "ookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",);
-    const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
-    // ********************************************************** price data
-    const { data: PriceData } = useQuery({
-        queryKey: ["pricedata", hotelKey],
-        queryFn: () => HotelCheckInCheckOut(hotelKey)
-    })
-    console.log("price,,,,,,,,,,,,,,,,,,,,", PriceData);
-    const rate = PriceData?.data?.raw?.result?.rates
-    console.log(rate, "reatewwwwwwwwwwwwwwww");
+    
+    // Date state for pricing - default to today and 7 days later
+    const getTodayDate = () => new Date().toISOString().split('T')[0];
+    const getSevenDaysLater = () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+        return date.toISOString().split('T')[0];
+    };
+    
+    const [searchCheckin, setSearchCheckin] = useState(getTodayDate());
+    const [searchCheckout, setSearchCheckout] = useState(getSevenDaysLater());
 
     // ****************************************************************************************************************
     const ShimmerCard = () => (
@@ -107,11 +103,11 @@ export default function SearchHotelDetail() {
     )
     /************************************************************************** */
     const { data, isLoading } = useQuery({
-        queryKey: ["gethoteldetail"],
+        queryKey: ["gethoteldetail", code],
         queryFn: () => GetHotel_Detail(code),
-
+        enabled: Boolean(code),
+        retry: 1,
     })
-    console.log(data?.data, "data hotel detail ,........... chart ");
     const HotelDetail = data?.data;
     const oneImage = HotelDetail?.photos?.slice(0, 1)?.map((item) => item?.name) || '';
     const longitude = HotelDetail?.location?.longitude;
@@ -123,16 +119,51 @@ export default function SearchHotelDetail() {
     const locationName = (HotelDetail?.displayName?.text ?? HotelDetail?.displayName ?? "").toString().trim();
     const locationAddress = (HotelDetail?.formattedAddress?.text ?? HotelDetail?.formattedAddress ?? "").toString().trim();
 
+    // ********************************************************** Fetch hotel key for pricing
+    const { data: hoteldata } = useQuery({
+        queryKey: ["hoteldata", locationName],
+        queryFn: () => searchHotelName(locationName),
+        enabled: Boolean(locationName),
+        retry: 1,
+    })
+    const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
+    
+    // ********************************************************** price data
+    const { data: PriceData, refetch: refetchPrices, isLoading: isPriceLoading, isFetching: isPriceFetching } = useQuery({
+        queryKey: ["pricedata", hotelKey, searchCheckin, searchCheckout],
+        queryFn: () => {
+            return HotelCheckInCheckOut(hotelKey, searchCheckin, searchCheckout);
+        },
+        enabled: Boolean(hotelKey),
+        retry: 1,
+        cacheTime: 0, // Don't cache results
+        staleTime: 0, // Always consider data stale
+        refetchOnMount: true,
+        refetchOnWindowFocus: false,
+    })
+    const rate = PriceData?.data?.raw?.result?.rates;
+    
+    // Handler for date search from ViewPriceDetail component
+    const handleSearchDates = async (checkin, checkout) => {
+        // Update state
+        setSearchCheckin(checkin);
+        setSearchCheckout(checkout);
+        
+        // Force immediate refetch after state update
+        setTimeout(() => {
+            refetchPrices();
+        }, 100);
+    };
+
     const { data: accommodationData, } = useQuery({
         queryKey: ["getaccommodationprice", locationName, locationAddress],
         queryFn: ({ queryKey }) => {
-            const [name, address] = queryKey;
+            const [_, name, address] = queryKey;
             return GetAccommodationDetails(name, address);
         },
         enabled: Boolean(locationName) && Boolean(locationAddress),
         retry: 0,
     })
-    console.log(accommodationData, "accommodation data ,........... ooooooooooooooo ", locationName, locationAddress);
 
     // *****************************detail of apis
     const hotelDescription = accommodationData?.data?.data?.description;
@@ -140,7 +171,6 @@ export default function SearchHotelDetail() {
 
     const hotelAmenties = accommodationData?.data?.data?.amenities;
     const hotelPricing = accommodationData?.data?.data?.otaPricing;
-    console.log(hotelDescription, "hoteldetail?>>>>>>>>>>>>>>>>>>>>>>>>>", hotelAmenties, hotelPricing);
 
 
     return (
@@ -393,7 +423,16 @@ export default function SearchHotelDetail() {
             </section>
             {/* ******************* */}
 
-            <ViewPriceDetail PriceRate={PriceData} />
+            <ViewPriceDetail 
+                PriceRate={PriceData} 
+                hotelName={locationName}
+                hotelAddress={locationAddress}
+                hotelData={hoteldata?.data}
+                onSearchDates={handleSearchDates}
+                isLoadingPrices={isPriceLoading || isPriceFetching}
+                initialCheckin={searchCheckin}
+                initialCheckout={searchCheckout}
+            />
             <HotelAllReview reviews={userReviews} />
             <HotelLocation lat={latitude} long={longitude} load={isLoading} />
             <PopularHotelAroundWorld lat={latitude} long={longitude} />

@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import HotelDetailContent from "./HotelDetail/HotelDetailContent";
 
 export default function SearchSidebar({ hotelPricing, load }) {
-    console.log(hotelPricing, "oooooo");
-
-    // console.log(title_url_data, "title_url_data");
     return (
         <>
             <div className=" my-5  pb-10  package-sidebar-area card_md_margin">

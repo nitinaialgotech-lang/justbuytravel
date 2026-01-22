@@ -24,7 +24,6 @@ export default function HotelDetailNearByPlaces({ lat, long }) {
         queryFn: () => Restro(lat, long),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
-    console.log(nearbyPlaceslist, "...................nearbyPlaceslistNitin");
     return (
         <>
             <section className="experience_explore_section padding_bottom">

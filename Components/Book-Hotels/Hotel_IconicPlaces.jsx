@@ -66,7 +66,6 @@ export default function Hotel_IconicPlaces() {
         queryFn: () => TouristAttractionApi()
     })
     const TouristAttraction = touristAttraction?.data;
-    console.log(TouristAttraction, "tourrrrrrrrrrrrrrrrrrrrrrrrrr");
 
     return (
         <>

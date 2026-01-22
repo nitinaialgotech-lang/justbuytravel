@@ -45,7 +45,6 @@ export default function TokyoNearByPlaces({ lat, long }) {
         queryFn: () => Restro(lat, long),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
-    console.log(nearbyPlaceslist, "...................nearbyPlaceslistNitin");
     return (
         <>
 
