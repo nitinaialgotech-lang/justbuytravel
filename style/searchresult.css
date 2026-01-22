@@ -9,6 +9,7 @@
   --cl-brown: rgba(115, 115, 115, 1);
   --cl-bl: rgba(29, 31, 39, 1);
   --text-color: #525252;
+  --border: #e5eaf4;
   --font2: "Outfit";
 }
 .hotel-card {
@@ -1125,3 +1126,56 @@
 .review_banner > .banner_img > img {
   height: 100%;
 } */
+/* ******** popup */
+.popup_header {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background-color: #ffffff;
+  /* padding: 0px 50px 50px 50px; */
+}
+.popup_header > .header .header-content {
+  padding: 40px;
+}
+.popup_header > .header .header-content > .content_p > .title > h2 {
+  font-family: var(--font-fam);
+  color: #3a3f45;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.popup_padding {
+  padding: 40px;
+}
+
+.popup_header > .content > .content_p {
+  width: 100%;
+}
+.popup_sidebar > .item > .content_item > .button > button {
+  padding: 10px 17px;
+  border: 1px solid #3a3f45;
+  border-radius: 8px;
+  border-width: 1.5px;
+}
+.popup_slider_img > img {
+  width: 100%;
+  height: 100%;
+  min-height: 580px;
+  max-height: 580px;
+}
+.swiper-horizontal .swiper-button-prev,
+.swiper-horizontal ~ .swiper-button-prev,
+.swiper-horizontal .swiper-button-next {
+  background-color: var(--bg-color);
+  width: 35px;
+  height: 35px;
+  color: var(--background);
+  border-radius: 50%;
+  padding: 8px;
+}
+.popup_sidebar > .item > .popup_banner {
+  margin-top: 50px;
+}
+.price_view_detail > button {
+  border-radius: 8px !important;
+  padding: 8px 17px !important;
+}
