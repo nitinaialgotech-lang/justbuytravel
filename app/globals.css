@@ -227,6 +227,41 @@ button {
   /* box-shadow: 0 0 6px #dbdbdbd1; */
   border-radius: 10px;
 }
+
+/* ============================
+   Travelpayouts widget wrapper
+   (iframe content is controlled by provider; this styles the surrounding UI)
+   ============================ */
+.tpwgt-card {
+  background: #ffffff;
+  border: 1px solid rgba(18, 192, 129, 0.18);
+  border-radius: 14px;
+  box-shadow: 0px 0px 35px 2px rgb(0 0 0 / 5%);
+  padding: 18px;
+}
+
+.tpwgt-head {
+  margin-bottom: 12px;
+}
+
+.tpwgt-title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--color);
+}
+
+.tpwgt-subtitle {
+  margin: 6px 0 0 0;
+  color: var(--p-color);
+  font-size: 16px;
+}
+
+.tpwgt-mount {
+  width: 100%;
+  min-height: 120px;
+}
 .search_container > .search_container_box > .search_tab > .tab_link > ul {
   gap: 20px;
 }
