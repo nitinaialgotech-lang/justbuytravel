@@ -57,8 +57,6 @@ function ShimmerAboutHotel() {
 }
 
 export default function AboutHotelDetail({ detail, load }) {
-    console.log(detail, ".......................");
-
     return (
         <>
             <div className="section_about_hotel_detail ">

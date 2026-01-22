@@ -32,8 +32,7 @@ export default function SanFrancRecomd() {
     queryKey: ["lodgingnearby", lat, long],
     queryFn: () => nearbyPlaces(lat, long),
   });
-  const nearbyPlace = nearbyPlacesData?.data?.places;
-  console.log(nearbyPlace, "...........mmm", nearbyPlacesData);
+    const nearbyPlace = nearbyPlacesData?.data?.places;
 
   /***************** end of api calls ************* */
   /************************ shimmer effetct *****************/
@@ -112,8 +111,6 @@ export default function SanFrancRecomd() {
   const router = useRouter();
   const viewDetail = (id) => {
     router.push(`/hoteldetail?hotel=${id}`);
-
-    console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
   };
   return (
     <>
@@ -221,11 +218,10 @@ export default function SanFrancRecomd() {
                   const truncateText = (text, maxLength = 20) => {
                     if (!text) return "";
                     return text.length > maxLength
-                      ? text.slice(0, maxLength) + "..."
-                      : text;
-                  };
-                  console.log(image, "img............");
-                  return (
+                                  ? text.slice(0, maxLength) + "..."
+                                  : text;
+                          };
+                          return (
                     <>
                       <SwiperSlide key={i}>
                         <div className="card_col">

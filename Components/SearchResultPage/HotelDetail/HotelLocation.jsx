@@ -43,8 +43,6 @@ function ShimmerMap() {
 }
 
 export default function HotelLocation({ lat, long, load }) {
-    console.log(load, ".........>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
     return (
         <>
             <section className="padding_bottom">

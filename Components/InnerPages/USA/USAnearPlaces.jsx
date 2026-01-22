@@ -45,7 +45,6 @@ export default function USAnearPlaces({ lat, long }) {
         queryFn: () => Restro(lat, long),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
-    console.log(nearbyPlaceslist, "...................nearbyPlaceslistNitin");
     return (
         <>
             <section className="experience_explore_section padding_bottom">

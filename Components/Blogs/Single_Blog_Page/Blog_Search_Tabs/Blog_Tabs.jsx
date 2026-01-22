@@ -29,7 +29,6 @@ export default function Blog_Tabs() {
     queryFn: () => Get_Blog_data(categoryId, count),
     enabled: true,
   });
-  console.log(blog_data, ",,,,,,,,,,j", categoryId);
   // (*************************************************************** trim the wortds )
   // Helper: truncate first 30 words
   const truncateWords = (html, limit = 30) => {
@@ -136,7 +135,6 @@ export default function Blog_Tabs() {
 
                       ) : (
                         blog_data?.map((post) => {
-                          console.log(post, ";;;;;;;;;;;;;;;");
                           const text = post.excerpt.rendered?.replace(/<[^>]*>/g, "").split(" ");
                           const fullText = text?.slice(0, 30).join(" "); // first 50 words
 

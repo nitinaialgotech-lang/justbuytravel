@@ -34,7 +34,6 @@ export default function StaticRecomendSection() {
     const doSearch = async (query) => {
         try {
             const results = await SearchLocation(query);
-            console.log("Search results:", results);
         } catch (err) {
             console.error("Search error:", err);
         }
@@ -51,11 +50,9 @@ export default function StaticRecomendSection() {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
                     const { latitude, longitude } = position.coords;
-                    console.log(`Current location: ${latitude}, ${longitude}`);
                     const cityName = await reverseGeocode(latitude, longitude);
                     if (cityName) {
                         setLocation(cityName);
-                        console.log(`Location resolved to: ${cityName}`);
                         await doSearch(cityName);
                     } else {
                         const coordLocation = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;

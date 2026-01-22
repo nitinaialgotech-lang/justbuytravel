@@ -161,7 +161,6 @@ export default function ExperienceExploreSection() {
         enabled: coords.lat !== null && coords.lng !== null,
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
-    console.log(nearbyPlaceslist, "...................nearbyPlaceslistNitin");
     // ************************************* iconic places apis 
     const { data: iconicPlacesData } = useQuery({
         queryKey: ["iconicPlacesNearby", coords.lat, coords.lng],

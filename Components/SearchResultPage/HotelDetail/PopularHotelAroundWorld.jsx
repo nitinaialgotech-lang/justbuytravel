@@ -30,7 +30,6 @@ export default function PopularHotelAroundWorld({ lat, long }) {
         queryFn: () => nearbyPlaces(lat, long),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
-    console.log(nearbyPlace, "...........mmm", nearbyPlacesData);
 
     /***************** end of api calls ************* */
 
@@ -189,11 +188,10 @@ export default function PopularHotelAroundWorld({ lat, long }) {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                            ? text.slice(0, maxLength) + "..."
-                                            : text;
-                                    };
-                                    console.log(image, "img............");
-                                    return (
+                                        ? text.slice(0, maxLength) + "..."
+                                        : text;
+                                };
+                                return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

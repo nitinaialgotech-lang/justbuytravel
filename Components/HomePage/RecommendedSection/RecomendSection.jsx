@@ -66,7 +66,6 @@ export default function RecomendSection() {
                 { headers: { "User-Agent": "JustBuyTravel/1.0" } }
             );
             const data = await response.json();
-            console.log(data, "pkpkpkoooooooooooooooooool");
 
             if (data && data.address) {
                 const city = data.address.city || data.address.town || data.address.village;
@@ -83,7 +82,6 @@ export default function RecomendSection() {
     const doSearch = async (query) => {
         try {
             const results = await SearchLocation(query);
-            console.log("Search results:", results);
         } catch (err) {
             console.error("Search error:", err);
         }
@@ -125,9 +123,8 @@ export default function RecomendSection() {
             return;
         }
 
-        const success = async (position) => {
-            const { latitude, longitude } = position.coords;
-            console.log(`Current location: ${latitude}, ${longitude} .........................................................xxxxxxxxxxx`);
+        const success =                 async (position) => {
+                    const { latitude, longitude } = position.coords;
 
             try {
                 const cityName = await reverseGeocode(latitude, longitude);
@@ -274,23 +271,7 @@ export default function RecomendSection() {
         return extractedHotels;
     }, [data]);
 
-    console.log("isLoading:", isLoading, "locationFetching:", locationFetching);
-    console.log("RENDER - hotels:", hotels, "length:", hotels?.length);
 
-    // Debug: Log image URLs to help identify issues
-    useEffect(() => {
-        if (hotels) {
-            hotels.forEach((hotel, index) => {
-                console.log(`Hotel ${index + 1} (${hotel?.name || 'Unknown'}):`, {
-                    image_proxy: hotel?.image_proxy || 'N/A',
-                    image: hotel?.image || 'N/A',
-                    using: getImageUrl(hotel)
-                });
-            });
-        }
-    }, [hotels]);
-
-    console.log(hotels, "......................>>>> hotels");
     // ********************************************
     const router = useRouter()
 
@@ -303,10 +284,8 @@ export default function RecomendSection() {
         queryFn: () => SearchLocation(search),
         enabled: !!search
     })
-    console.log(GetSearch_data, "recomdddddddddddddddddddddddddddddddddddddddddd", search);
     const location_code = data?.data?.hotels?.map((item) => item?.location_code || []);
     const currency = data?.data?.currency || '';
-    console.log(currency, "currency.......................Nitin");
 
 
     // Shimmer skeleton component
@@ -455,7 +434,6 @@ export default function RecomendSection() {
                             const hasHotels = hotels && Array.isArray(hotels) && hotels.length > 0;
 
                             if (hasHotels) {
-                                console.log("RENDERING HOTELS, count:", hotels);
                                 return hotels.slice(0, 6).map((item, i) => {
                                     let titlecontent = item.name
                                     if (titlecontent?.length > 3) {
@@ -567,7 +545,6 @@ export default function RecomendSection() {
                                     )
                                 });
                             } else {
-                                console.log("RENDERING SHIMMER - no hotels available");
                                 return Array.from({ length: 6 }).map((_, i) => (
                                     <SwiperSlide key={`shimmer-${i}`}>
                                         <ShimmerCard />

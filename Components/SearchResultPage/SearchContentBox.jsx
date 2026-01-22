@@ -72,10 +72,7 @@ export default function SearchContentBox() {
         queryKey: ["gethotels", lat, long],
         queryFn: () => nearbyPlaces(lat, long)
     })
-    console.log(lat, long, data, "latlong data.config......................................kokkokokok", name);
     const hotelData = data?.data?.places;
-
-    console.log(hotelData, "?????????????????????????????????????????");
 
     // const searchQuery = useSearchParams();
 

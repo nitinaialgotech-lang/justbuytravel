@@ -244,7 +244,6 @@ export default function Search() {
         enabled: searchContent.length > 0,
         staleTime: 30000, // Cache for 30 seconds
     });
-    console.log(autoCompleteData, "...................jggggggggggggggggggggggggNitin");
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -283,7 +282,6 @@ export default function Search() {
     };
 
     const handleSelectPlace = (place) => {
-        console.log(place, "placeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
         setSearchContent(place.displayName?.text || place.formattedAddress || "");
         setShowDropdown(false);
@@ -294,7 +292,6 @@ export default function Search() {
             place?.location?.longitude || " "
         const id = place?.id
         // You can add navigation or search logic here
-        console.log("Selected placeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq:", place);
         // ************************************** searching hortel or search alll
         if (searchAll) {
 
@@ -332,13 +329,11 @@ export default function Search() {
 
     // Extract places from response - handle both direct response and nested data
     const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
-    console.log(places, "..................placess");
     const cityName = places?.map((item) => item?.displayName?.text)
     // (**************************** mrouter )
 
     const viewSearchAll = (lat, long) => {
         route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
-        console.log(lat, long, ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;llllll");
     }
     // **************************** hotel search
 
@@ -398,7 +393,6 @@ export default function Search() {
                                         e.preventDefault();
                                         const trimmed = searchContent.trim();
                                         if (trimmed.length === 0) return;
-                                        console.log("Searching for:", trimmed);
                                         // Add your search navigation logic here
                                     }}
                                 >
@@ -440,13 +434,11 @@ export default function Search() {
                                                 ) : places.length > 0 ? (
                                                     places.map((place, index) => {
                                                         const placeId = place.id || `place-${index}`;
-                                                        console.log(place, "map");
 
                                                         const photoUrl = getPhotoUrl(place);
                                                         const hasImageError = imageErrors[placeId];
                                                         const displayImage = photoUrl && !hasImageError ? photoUrl : 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
                                                         const image = place?.photos?.slice(0, 1)?.map((item) => item?.name);
-                                                        console.log(image);
 
 
 
@@ -556,11 +548,10 @@ export default function Search() {
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
                             <div className="mobile_search_box  d-block d-lg-none">
                                 <div className="mobole_boxs relative">
-                                    <form onSubmit={(e) => {
+                                    <form                                     onSubmit={(e) => {
                                         e.preventDefault();
                                         const trimmed = searchContent.trim();
                                         if (trimmed.length === 0) return;
-                                        console.log("Searching for:", trimmed);
                                         // Add your search navigation logic here
                                     }}>
                                         <input
@@ -591,13 +582,11 @@ export default function Search() {
                                                 ) : places.length > 0 ? (
                                                     places.map((place, index) => {
                                                         const placeId = place.id || `place-${index}`;
-                                                        console.log(place, "map");
 
                                                         const photoUrl = getPhotoUrl(place);
                                                         const hasImageError = imageErrors[placeId];
                                                         const displayImage = photoUrl && !hasImageError ? photoUrl : 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
                                                         const image = place?.photos?.slice(0, 1)?.map((item) => item?.name);
-                                                        console.log(image);
 
 
 

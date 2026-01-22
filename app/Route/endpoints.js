@@ -112,8 +112,20 @@ export const searchHotelName = async (name) => {
     return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`)
 }
 /********************************** check in check out apis >>>>>>>>>>>> */
-export const HotelCheckInCheckOut = async (hotelkey) => {
-    return await https_SearchCity.get(`/pricing.php?hotel_key=${hotelkey}&chk_in=2026-02-10&chk_out=2026-02-12`)
+export const HotelCheckInCheckOut = async (hotelkey, checkin, checkout) => {
+    // Default to 7 days if dates not provided
+    const defaultCheckin = checkin || new Date().toISOString().split('T')[0];
+    const defaultCheckout = checkout || (() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+        return date.toISOString().split('T')[0];
+    })();
+    
+    const url = `/pricing.php?hotel_key=${hotelkey}&chk_in=${defaultCheckin}&chk_out=${defaultCheckout}`;
+    
+    const response = await https_SearchCity.get(url);
+    
+    return response;
 }
 // ************ hotel around the world >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 export const TopHotelAroundWorld = async () => {

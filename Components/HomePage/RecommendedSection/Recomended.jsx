@@ -49,7 +49,6 @@ export default function Recomended() {
         enabled: coords.lat !== null && coords.lng !== null,
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
-    console.log(nearbyPlace, "...........mmm");
 
     // ***xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     const ShimmerCard = () => {
@@ -126,8 +125,6 @@ export default function Recomended() {
     const router = useRouter();
     const viewDetail = (id) => {
         router.push(`/hoteldetail?hotel=${id}`);
-
-        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
 
     return (
@@ -233,11 +230,10 @@ export default function Recomended() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                            ? text.slice(0, maxLength) + "..."
-                                            : text;
-                                    };
-                                    console.log(image, "img............");
-                                    return (
+                                        ? text.slice(0, maxLength) + "..."
+                                        : text;
+                                };
+                                return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

@@ -24,7 +24,6 @@ export default function HotelSearchRecomand({ lat, long, name }) {
         queryFn: () => nearbyPlaces(lat, long),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
-    console.log(nearbyPlace, "...........mmm", nearbyPlacesData);
 
     /***************** end of api calls ************* */
     /************************ shimmer effetct *****************/
@@ -102,8 +101,6 @@ export default function HotelSearchRecomand({ lat, long, name }) {
     const router = useRouter();
     const viewDetail = (id) => {
         router.push(`/hoteldetail?hotel=${id}`);
-
-        console.log(id, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiddddd");
     };
     // *************************  view al hotels 
     const viewAllHotels = () => {
@@ -218,11 +215,10 @@ export default function HotelSearchRecomand({ lat, long, name }) {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                            ? text.slice(0, maxLength) + "..."
-                                            : text;
-                                    };
-                                    console.log(image, "img............");
-                                    return (
+                                        ? text.slice(0, maxLength) + "..."
+                                        : text;
+                                };
+                                return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

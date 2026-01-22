@@ -33,7 +33,6 @@ export default function SearchSection() {
             }
             return "Unknown Location";
         } catch (error) {
-            console.error("Reverse geocoding error:", error);
             return "Unknown Location";
         }
     }, []);
@@ -51,7 +50,6 @@ export default function SearchSection() {
         const getLocation = async () => {
             if (typeof navigator === "undefined" || !navigator?.geolocation) {
                 setsearch("New York");
-                console.warn("Geolocation not available");
                 setLocationFetching(false);
                 return;
             }
@@ -68,13 +66,11 @@ export default function SearchSection() {
                 const { latitude, longitude } = position.coords;
                 const cityName = await reverseGeocode(latitude, longitude);
 
-                console.log(cityName, ".......");
                 setsearch(cityName);
 
 
 
             } catch (err) {
-                console.error("Geolocation error:", err);
                 setsearch("New York"); // fallback
             } finally {
                 setLocationFetching(false);
@@ -90,9 +86,7 @@ export default function SearchSection() {
         try {
 
             const results = await SearchLocation(query);
-            console.log("Search results:", results);
         } catch (err) {
-            console.error("Search error:", err);
         }
     }, []);
 
@@ -154,7 +148,6 @@ export default function SearchSection() {
                                 onSubmit={(e) => {
                                     e.preventDefault();
                                     const trimmed = (search || "").trim();
-                                    console.log("Searching:", trimmed);
                                     if (trimmed.length === 0) return;
                                     setsearch(trimmed);
 

@@ -2,8 +2,6 @@ import moment from 'moment';
 import React from 'react'
 
 export default function HotelReviews({ reviews }) {
-    console.log(reviews);
-
     return (
         <>
             <section className='review_section'>

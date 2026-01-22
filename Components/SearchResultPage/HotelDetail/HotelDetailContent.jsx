@@ -48,8 +48,6 @@ function ShimmerPriceCard() {
 export default function HotelDetailContent({ Pricing, load }) {
     const searchParams = useSearchParams();
     // *********************************
-    console.log(Pricing, "pricesssssssssssssssssssssssssssssssssssssss", load);
-    // console.log(title_url, "title_urlsssssssssssssssssssssssssssssssssssss");
     return (
         <>
             <div className="section_hoitel_detail_content ">
@@ -155,15 +153,13 @@ export default function HotelDetailContent({ Pricing, load }) {
                                                     const replaceAidInUrl = (url) => {
                                                         if (!url) return '';
 
-                                                        if (isGoogleUrl(url)) {
-                                                            console.warn('Google URL detected, skipping:', url);
-                                                            return '';
-                                                        }
+                                        if (isGoogleUrl(url)) {
+                                            return '';
+                                        }
 
-                                                        if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                                                            console.warn('Relative URL detected, skipping modification:', url);
-                                                            return '';
-                                                        }
+                                        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                                            return '';
+                                        }
 
                                                         let cleanUrl = url;
 
@@ -188,21 +184,11 @@ export default function HotelDetailContent({ Pricing, load }) {
                                             if (item?.bookingUrl && !isGoogleUrl(item?.bookingUrl)) {
                                                             if (isDirectWebsiteUrl(item?.bookingUrl, item?.title)) {
                                                 finalUrl = replaceAidInUrl(item?.bookingUrl);
-
-                                            console.log('Original URL (direct website):', item.url);
-                                            console.log('Modified URL:', finalUrl);
                                                             } else {
                                                 finalUrl = createUrlForLocation(item?.title, title_url);
-                                            console.log('URL not from direct website, created URL:', finalUrl);
                                                             }
                                                         } else {
-                                                            if (item?.bookingUrl && isGoogleUrl(item?.bookingUrl)) {
-                                                console.log('Google URL detected, creating direct URL instead:', item.url);
-                                                            } else {
-                                                console.log('URL missing, creating URL');
-                                                            }
                                             finalUrl = createUrlForLocation(item?.platform, title_url);
-                                            console.log('Created URL:', finalUrl);
                                                         }
 
                                             return (

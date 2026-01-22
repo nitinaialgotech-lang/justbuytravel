@@ -19,12 +19,7 @@ export default function ViewAllHotels() {
         queryKey: ["gethotels", lat, long],
         queryFn: () => nearbyPlaces(lat, long)
     })
-    console.log(lat, long, data, "latlong data.config......................................kokkokokok");
     const hotelData = data?.data?.places;
-
-
-
-    console.log(hotelData, "?????????????????????????????????????????", data);
     // ************************************** swimmer effect **************
     const ShimmerCard = () => (
         <div className="card_col">
