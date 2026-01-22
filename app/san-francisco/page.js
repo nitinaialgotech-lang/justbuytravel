@@ -1,6 +1,7 @@
 import Header from '@/component/Header'
 import SanFrancBanner from '@/Components/InnerPages/SanFransci/SanFrancBanner'
-import React from 'react'
+import {React, Suspense } from 'react'
+
 
 export default function page() {
     return (
