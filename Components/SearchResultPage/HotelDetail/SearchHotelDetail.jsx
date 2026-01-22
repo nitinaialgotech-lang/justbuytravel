@@ -29,6 +29,7 @@ import { TbWorld } from "react-icons/tb";
 import Link from "next/link";
 import { PiPhoneLight } from "react-icons/pi";
 import ViewPriceDetail from "./ViewPriceDetail";
+import HotelAllReview from "./HotelAllReview";
 export default function SearchHotelDetail() {
     const search_detail = useSearchParams();
 
@@ -42,14 +43,14 @@ export default function SearchHotelDetail() {
     })
     console.log("code,,,,,,,,,,,,,,,,,", hoteldata?.data?.xotelo?.hotel_key, "ookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",);
     const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
-    // **********************************************************
+    // ********************************************************** price data
     const { data: PriceData } = useQuery({
         queryKey: ["pricedata", hotelKey],
         queryFn: () => HotelCheckInCheckOut(hotelKey)
     })
-
     console.log("price,,,,,,,,,,,,,,,,,,,,", PriceData);
-
+    const rate = PriceData?.data?.raw?.result?.rates
+    console.log(rate, "reatewwwwwwwwwwwwwwww");
 
     // ****************************************************************************************************************
     const ShimmerCard = () => (
@@ -270,52 +271,56 @@ export default function SearchHotelDetail() {
 
                                 {/* ******************* desktop view wwwwwwwwwwwwwwwwwwwwww */}
                                 <div className="banner_img d-none d-lg-block ">
-                                    {isLoading ? (
-                                        <div className="row">
-                                            <div className="col-lg-6 p-1">
-                                                <div className="image_head shimmer-container" style={{ minHeight: 410 }}>
-                                                    <div className="shimmer" />
+                                    <div className="container">
+                                        {isLoading ? (
+
+                                            <div className="row">
+                                                <div className="col-lg-6 p-1">
+                                                    <div className="image_head shimmer-container" style={{ minHeight: 410 }}>
+                                                        <div className="shimmer" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <div className="row">
-                                                    {Array.from({ length: 4 }).map((_, i) => (
-                                                        <div className="col-lg-6 p-1" key={i}>
-                                                            <div className="image_head shimmer-container" style={{ minHeight: 200 }}>
-                                                                <div className="shimmer" />
+                                                <div className="col-lg-6">
+                                                    <div className="row">
+                                                        {Array.from({ length: 4 }).map((_, i) => (
+                                                            <div className="col-lg-6 p-1" key={i}>
+                                                                <div className="image_head shimmer-container" style={{ minHeight: 200 }}>
+                                                                    <div className="shimmer" />
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="row ">
-                                            <div className="col-lg-8 p-1">
-                                                <div className="image_head side_image_head">
-                                                    <img
-                                                        src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`}
-                                                        alt=""
-                                                    />
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="col-lg-4">
-                                                <div className="row">
-                                                    {HotelDetail?.photos?.slice(1, 4).map((item, index) => (
-                                                        <div className="col-lg-12 p-1" key={index}>
-                                                            <div className="image_head">
-                                                                <img
-                                                                    src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
-                                                                    alt=""
-                                                                />
+                                        ) : (
+                                            <div className="row ">
+                                                <div className="col-lg-8 p-1">
+                                                    <div className="image_head side_image_head">
+                                                        <img
+                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`}
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-lg-4">
+                                                    <div className="row">
+                                                        {HotelDetail?.photos?.slice(1, 4).map((item, index) => (
+                                                            <div className="col-lg-12 p-1" key={index}>
+                                                                <div className="image_head">
+                                                                    <img
+                                                                        src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                                        alt=""
+                                                                    />
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    ))}
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
 
 
@@ -369,12 +374,13 @@ export default function SearchHotelDetail() {
             </section>
             {/* ******************* */}
 
-            <ViewPriceDetail />
-
+            <ViewPriceDetail PriceRate={PriceData} />
+            <HotelAllReview reviews={userReviews} />
+            <HotelLocation lat={latitude} long={longitude} load={isLoading} />
             {/* ************************************* on mobile view shoqw section */}
 
             {/* ******************************************************** */}
-            <div className="container">
+            {/* <div className="container">
                 <div className="row matrix_fix">
                     <div className="col-lg-12 ">
                         <div className=" content_box_detail  rounded-2xl border border-gray-300">
@@ -383,7 +389,7 @@ export default function SearchHotelDetail() {
                             <HotelFacilities hotelAmenties={hotelAmenties} load={isLoading} />
                             <HotelReviews reviews={userReviews} />
 
-                            {/* <NearByHotel places={near_by_places} /> */}
+                            <NearByHotel places={near_by_places} />
 
                             <HotelLocation lat={latitude} long={longitude} load={isLoading} />
                         </div>
@@ -392,7 +398,7 @@ export default function SearchHotelDetail() {
                         <SearchSidebar hotelPricing={hotelPricing} load={isLoading} />
                     </div>
                 </div>
-            </div>
+            </div> */}
             <Footer />
         </>
     );

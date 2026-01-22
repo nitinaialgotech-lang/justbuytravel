@@ -15,11 +15,6 @@ export default function HotelReviews({ reviews }) {
                                     return (
                                         <>
 
-
-
-
-
-
                                             <div className="review_box_section">
                                                 <div className="review_head flex items-center gap-2">
                                                     <div className="usr_img">

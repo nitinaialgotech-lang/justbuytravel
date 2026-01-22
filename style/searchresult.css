@@ -9,6 +9,7 @@
   --cl-brown: rgba(115, 115, 115, 1);
   --cl-bl: rgba(29, 31, 39, 1);
   --text-color: #525252;
+  --font2: "Outfit";
 }
 .hotel-card {
   padding: 10px;
@@ -16,6 +17,9 @@
   border: 1px solid #e8e8e8;
   background-color: #fff;
   height: 100%;
+}
+.bg_grey2 {
+  background-color: #fafcff;
 }
 .hotel-card .hotel-content h5 a {
   color: var(--color);
@@ -865,95 +869,6 @@
   width: 95px;
   height: 100%;
 } */
-/* ************* start  */
-.hoteldetail_banner > .content {
-  padding-bottom: 20px;
-}
-.hotel_price_detail > .hotel_price_card > .bookign_price > h4 a {
-  font-family: var(--font-fam);
-  color: var(--cl-bl);
-  text-decoration: none;
-}
-.hotel_price_detail > .hotel_price_card > .booking_fees > p {
-  font-size: 14px;
-  font-family: var(--font-fam);
-  font-weight: 300;
-}
-.hoteldetail_banner
-  > .content
-  > .hotel_contact_info
-  > .hotel_contact_link
-  > ul
-  > li {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 10px;
-}
-.hoteldetail_banner > .content > .hotel_contact_info > .hotel_contact_link > P {
-  margin-top: 10px !important;
-}
-.hoteldetail_banner
-  > .content
-  > .hotel_contact_info
-  > .hotel_contact_link
-  > ul {
-  gap: 20px;
-}
-.hoteldetail_banner
-  > .content
-  > .hotel_contact_info
-  > .hotel_contact_link
-  > ul
-  > li
-  > span:nth-child(2)
-  > a {
-  text-transform: capitalize;
-  text-decoration: none;
-  color: var(--cl-brown);
-  font-size: 16px;
-}
-.hoteldetail_banner > .content > .hotel_contact_info > .price_hotel {
-  margin-top: 10px;
-}
-.hoteldetail_banner
-  > .content
-  > .hotel_contact_info
-  > .price_hotel
-  > .price
-  > h4 {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 0.9;
-}
-.hoteldetail_banner
-  > .content
-  > .hotel_contact_info
-  > .price_hotel
-  > .price
-  > p {
-  font-size: 13px;
-  text-transform: capitalize;
-  text-align: center;
-  color: #19191b;
-}
-.hotel_detail_button {
-  padding: 10px 10px;
-  background-color: var(--bg-color);
-  border-radius: 10px;
-}
-.view_price_detial_content {
-  padding: 30px;
-}
-.view_price_detial_content > .view_price_title > h4 {
-  font-weight: 600;
-  font-style: ☞;
-  font-size: 28px;
-  line-height: 140%;
-  letter-spacing: 0%;
-}
-.price_box_item {
-}
 /* ******************************************************************************  hotel detail section  about  */
 /* .about_hotel {
   padding: 15px;
@@ -1055,3 +970,158 @@
   /* text-align: justify; */
   margin-top: 10px;
 }
+
+/* ************* start  */
+.hoteldetail_banner > .content {
+  padding-bottom: 30px;
+}
+.hotel_price_detail > .hotel_price_card > .bookign_price > h4 a {
+  font-family: var(--font-fam);
+  color: var(--cl-bl);
+  text-decoration: none;
+}
+.hotel_price_detail > .hotel_price_card > .booking_fees > p {
+  font-size: 14px;
+  font-family: var(--font-fam);
+  font-weight: 300;
+}
+.hoteldetail_banner
+  > .content
+  > .hotel_contact_info
+  > .hotel_contact_link
+  > ul
+  > li {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+}
+.hoteldetail_banner > .content > .hotel_contact_info > .hotel_contact_link > P {
+  margin-top: 10px !important;
+}
+.hoteldetail_banner
+  > .content
+  > .hotel_contact_info
+  > .hotel_contact_link
+  > ul {
+  gap: 20px;
+}
+.hoteldetail_banner
+  > .content
+  > .hotel_contact_info
+  > .hotel_contact_link
+  > ul
+  > li
+  > span:nth-child(2)
+  > a {
+  text-transform: capitalize;
+  text-decoration: none;
+  color: var(--cl-brown);
+  font-size: 16px;
+}
+.hoteldetail_banner > .content > .hotel_contact_info > .price_hotel {
+  margin-top: 10px;
+}
+.hoteldetail_banner
+  > .content
+  > .hotel_contact_info
+  > .price_hotel
+  > .price
+  > h4 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 0.9;
+}
+.hoteldetail_banner
+  > .content
+  > .hotel_contact_info
+  > .price_hotel
+  > .price
+  > p {
+  font-size: 13px;
+  text-transform: capitalize;
+  text-align: center;
+  color: #19191b;
+}
+.hotel_detail_button {
+  padding: 10px 10px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+}
+.view_price_detial_content {
+  padding: 35px;
+}
+.view_price_detial_content > .view_price_title > h4 {
+  font-weight: 600;
+  font-family: var(--font-fam);
+  font-size: 28px;
+  line-height: 140%;
+  letter-spacing: 0%;
+  padding-bottom: 30px;
+}
+.content_box_detail > .view_price_box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #3a3f451a;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+.price_box_item > .icon > img {
+  /* width: 140px;
+  height: 60px; */
+}
+.price_box_price > h4 {
+  /* font-family: Averta-ExtraBold; */
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+.price_box_button > button {
+  border-radius: 8px;
+  padding: 8px 17px;
+}
+/* ******************* */
+.hotel_rating {
+  margin-top: 10px;
+}
+.hotel_rating > span > i {
+  font-size: 11px;
+}
+.hotel_rating > span > p {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font2);
+}
+.review_box_section {
+  border-radius: 12px;
+  border: 1px solid #e5eaf4;
+  opacity: 1;
+  padding: 32px;
+  gap: 16px;
+}
+.review_box_section > .review_head .user > .user_img > span > h6 {
+  font-size: 16px;
+  font-family: var(--font2);
+}
+.review_box_section > .review_content {
+  margin-top: 10px;
+}
+.review_box_section > .review_content > p {
+  font-family: var(--font2);
+  font-weight: 400;
+  font-size: 16px;
+
+  margin-bottom: 10px;
+  line-height: 24px;
+}
+.review_box_section > .review_content > button {
+  color: var(--cl-bl);
+  text-decoration: underline;
+}
+/* .review_banner > .banner_img,
+.review_banner {
+  height: 100%;
+}
+.review_banner > .banner_img > img {
+  height: 100%;
+} */
