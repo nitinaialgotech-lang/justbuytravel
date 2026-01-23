@@ -31,8 +31,8 @@ export default function PackageBanner() {
                     </div>
                 </div>
             </section>
-            <GuidePackage />
             <PackageDeals />
+            <GuidePackage />
             <Trust_Guide_Section />
             <Blogs />
             <FaqSection />

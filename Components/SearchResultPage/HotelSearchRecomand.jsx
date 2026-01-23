@@ -141,7 +141,7 @@ export default function HotelSearchRecomand({ lat, long, name }) {
             {/* ************************ style end of shimmer */}
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
-                <div className="section_title relative flex items-center justify-between ">
+                <div className="section_title relative flex items-center justify-between d-none d-lg-block">
                     <span>
                         <h2 className="mb-0">Recommended For You</h2>
                         <h5>Handpicked experiences tailored to your interests</h5>
@@ -151,6 +151,21 @@ export default function HotelSearchRecomand({ lat, long, name }) {
                     </span>
 
                 </div>
+                {/* ************************** mobile view show  */}
+                <div className="section_title  d-block d-lg-none">
+
+                    <h2 className="mb-0">Recommended For You</h2>
+                    <div className="section_title relative flex items-center justify-between">
+                        <span>
+                            <h5>Handpicked experiences tailored to your interests</h5>
+                        </span>
+                        <span className='font-semibold g_color'>
+                            <button className='button_bg2 me-2 mt-2' onClick={() => viewAllHotels()}>view all</button>
+                        </span>
+                    </div>
+                </div>
+
+
                 {/* **************************** recomend carsd cord box */}
                 <div className="container">
                     <div className="row relative">
@@ -215,10 +230,10 @@ export default function HotelSearchRecomand({ lat, long, name }) {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                        ? text.slice(0, maxLength) + "..."
-                                        : text;
-                                };
-                                return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

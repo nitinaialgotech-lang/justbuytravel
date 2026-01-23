@@ -1021,6 +1021,7 @@
 }
 .hoteldetail_banner > .content > .hotel_contact_info > .price_hotel {
   margin-top: 10px;
+  align-items: center;
 }
 .hoteldetail_banner
   > .content
@@ -1152,12 +1153,14 @@
   width: 100%;
 }
 .content > .content_p > .mobile_title > .mobile_top_bar {
-  padding: 0px 0px 20px 0px;
+  padding: 0px 0px 10px 0px;
 }
 .content > .content_p > .mobile_title > .mobile_top_bar > .back > svg {
   width: 30px;
   height: 30px;
+  fill: var(--cl-brown);
 }
+
 .popup_sidebar > .item > .content_item > .button > button {
   padding: 10px 17px;
   border: 1px solid #3a3f45;
@@ -1186,4 +1189,19 @@
 .price_view_detail > button {
   border-radius: 8px;
   padding: 8px 17px;
+}
+.pulse {
+  animation: pulseGlow 1s ease;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
