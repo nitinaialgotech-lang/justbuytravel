@@ -2060,9 +2060,7 @@ span.rating-stars {
 /* ************************************** quick Links >>>>>>>>xxxxxxxxxxxxxxxxxxxxxxxx */
 .quick_links {
   /* box-shadow: 0px 0px 35px 2px rgb(0 0 0 / 5%); */
-  padding: 30px;
-  border-radius: 10px;
-  border: 1px solid #b5b5b569;
+  padding: 0px;
 }
 .quick_links > .quick_link_box {
 }
@@ -2076,18 +2074,20 @@ span.rating-stars {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 .quick_links > .quick_link_box > .quick_link_items > ul > li > a {
   text-decoration: none;
+  font-size: 14px;
   color: var(--color);
 }
 .quick_links > .quick_link_box > .quick_link_items > ul > li > a:hover {
   color: var(--bg-color);
+  text-decoration: underline;
 }
 .quick_links > .quick_link_box > .quick_link_items > ul {
   flex-wrap: wrap;
-  gap: 22px;
+  column-gap: 15px;
   /* margin: 20px 0 0; */
   padding: 0;
   list-style: none;
@@ -2116,6 +2116,15 @@ span.rating-stars {
   > li {
   display: flex;
   gap: 10px;
+  align-items: center;
+}
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_detail
+  > ul
+  > li:nth-child(1) {
+  margin-bottom: 10px !important;
 }
 .recommend_card_box
   > .card_box

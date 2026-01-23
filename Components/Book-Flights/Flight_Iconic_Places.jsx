@@ -87,88 +87,91 @@ export default function Flight_Iconic_Places() {
 
                 {/* *************************************************** container for nmobilw view  */}
                 <div className="container  d-block d-lg-none">
-                    <div className="row">
-                        <Swiper
-                            slidesPerView={3}
-                            spaceBetween={15}
+                    <div className="row ">
+                        <div className="col-lg-12 relative">
+                            <Swiper
+                                slidesPerView={3}
+                                spaceBetween={15}
 
-                            navigation={{
-                                prevEl: "#iconic_place_prev",
-                                nextEl: "#iconic_place_next",
-                            }}
-                            loop={true}
-                            // autoplay={{
-                            //     delay: 3200,
-                            //     disableOnInteraction: false,
-                            // }}
+                                navigation={{
+                                    prevEl: "#iconic_place_prev",
+                                    nextEl: "#iconic_place_next",
+                                }}
+                                loop={true}
+                                autoplay={{
+                                    delay: 3200,
+                                    disableOnInteraction: false,
+                                }}
 
-                            // onSwiper={(swiper) => setIconicActive(swiper.isBeginning)}
-                            // onSlideChange={(swiper) => setIconicActive(swiper.isBeginning)}
-                            breakpoints={{
-                                320: {
-                                    slidesPerView: 1.5
+                                // onSwiper={(swiper) => setIconicActive(swiper.isBeginning)}
+                                // onSlideChange={(swiper) => setIconicActive(swiper.isBeginning)}
+                                breakpoints={{
+                                    320: {
+                                        slidesPerView: 1.5
 
-                                },
-                                375: {
-                                    slidesPerView: 1.5
+                                    },
+                                    375: {
+                                        slidesPerView: 1.5
 
-                                },
-                                425: {
-                                    slidesPerView: 1.5
+                                    },
+                                    425: {
+                                        slidesPerView: 1.5
 
-                                },
+                                    },
 
-                                768: {
-                                    slidesPerView: 1,
-                                },
-                                992: {
-                                    slidesPerView: 4,
-                                    spaceBetween: 24,
-                                },
-                            }}
-                            modules={[Pagination, Navigation]}
-                            className="mySwiper relative"
-                        >
-                            {
-                                card?.map((item, i) => {
-
-                                    return (
-
-                                        <SwiperSlide key={i}>
-                                            <div className="col-lg-3">
-                                                <div className="iconic_place_card relative">
-                                                    <div className="iconic_img">
-                                                        <img src={item?.img} alt="" />
-                                                    </div>
-                                                    <div className="content absolute">
-                                                        <p className='m-0'>
-                                                            {item?.title}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                {/* ********************************* */}
-                                            </div>
-                                        </SwiperSlide>
-                                    )
-                                })
-                            }
-                        </Swiper>
-                        <div className="button_swiper absolute" id='button_swiper'>
-                            <div className="buttons_icon relative">
+                                    768: {
+                                        slidesPerView: 1,
+                                    },
+                                    992: {
+                                        slidesPerView: 4,
+                                        spaceBetween: 24,
+                                    },
+                                }}
+                                modules={[Pagination, Navigation]}
+                                className="mySwiper relative"
+                            >
                                 {
-                                    !iconicIsActive && (
+                                    card?.map((item, i) => {
 
-                                        <button id='iconic_place_prev' className='absolute'>
-                                            <MdOutlineKeyboardArrowLeft size={30} />
-                                        </button>
-                                    )
+                                        return (
+
+                                            <SwiperSlide key={i}>
+                                                <div className="col-lg-3">
+                                                    <div className="iconic_place_card relative">
+                                                        <div className="iconic_img">
+                                                            <img src={item?.img} alt="" />
+                                                        </div>
+                                                        <div className="content absolute">
+                                                            <p className='m-0'>
+                                                                {item?.title}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    {/* ********************************* */}
+                                                </div>
+                                            </SwiperSlide>
+                                        )
+                                    })
                                 }
+                            </Swiper>
+                            {/* <div className="button_swiper absolute" id='button_swiper'>
+                                <div className="buttons_icon relative">
+                                    {
+                                        !iconicIsActive && (
+
+                                            <button id='iconic_place_prev' className='absolute'>
+                                                <MdOutlineKeyboardArrowLeft size={30} />
+                                            </button>
+                                        )
+                                    }
 
 
-                                <button id='iconic_place_next' className='absolute'>
-                                    <MdOutlineKeyboardArrowRight size={30} />
-                                </button>
-                            </div>
+                                    <button id='iconic_place_next' className='absolute'>
+                                        <MdOutlineKeyboardArrowRight size={30} />
+                                    </button>
+                                </div>
+                            </div> */}
+
                         </div>
                     </div>
 

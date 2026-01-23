@@ -4,11 +4,11 @@ import "../../style/responsive.css"
 export default function Book_Flight_Banner() {
     return (
         <>
-            <section className='book-flight-section page_banner_section padding_top'>
+            <section className='book-flight-section page_banner_section padding_top padding_top_0_md'>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="book-flight-title">
+                            <div className="book-flight-title d-none d-lg-block">
                                 <div className="banner_box">
                                     <div className="title text-center">
                                         <h2 className='capitalize'>
