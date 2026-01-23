@@ -1,5 +1,6 @@
 import SearchResult from '@/Components/SearchResultPage/SearchResult'
 import React, { Suspense } from 'react'
+import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
 
 export const metadata = {
     title: "Search Hotels, Flights & Travel Deals",
@@ -14,8 +15,8 @@ export const metadata = {
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/search/`,
     },
     robots: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
     },
 };
 
@@ -30,12 +31,22 @@ export default function page() {
         "url": `${siteUrl}/search/`
     };
 
+    const breadcrumbData = generateBreadcrumbStructuredData([
+        { name: 'Home', path: '/' },
+        { name: 'Search', path: '/search' }
+    ]);
+
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(searchPageSchema) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+            />
+            
             <Suspense fallback={<div>Loading...</div>}>
                 <SearchResult />
             </Suspense>

@@ -1,17 +1,39 @@
 import React from 'react'
 import Header from '@/component/Header'
 import Footer from '@/component/Footer'
+import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
+
 export const metadata = {
   title: "Privacy Policy | Just Buy Travel",
   description: "Read Just Buy Travel's privacy policy to understand how we collect, use, and protect your personal information when you use our travel services.",
+  keywords: "privacy policy, data protection, personal information, privacy rights, data security",
+  openGraph: {
+    title: "Privacy Policy | Just Buy Travel",
+    description: "Read Just Buy Travel's privacy policy to understand how we protect your personal information.",
+    type: "website",
+  },
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/privacy-policy`,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
 export default function PrivacyPolicyPage() {
+  const breadcrumbData = generateBreadcrumbStructuredData([
+    { name: 'Home', path: '/' },
+    { name: 'Privacy Policy', path: '/privacy-policy' }
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      
       <Header />
       <div className="container my-5">
 

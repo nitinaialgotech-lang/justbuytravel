@@ -2,18 +2,39 @@ import React from 'react'
 import Header from '@/component/Header'
 import Footer from '@/component/Footer'
 import Link from 'next/link';
+import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
 
 export const metadata = {
   title: "Terms and Conditions | Just Buy Travel",
   description: "Read Just Buy Travel's terms and conditions to understand the rules and regulations for using our travel services and website.",
+  keywords: "terms and conditions, terms of use, service terms, legal terms, user agreement",
+  openGraph: {
+    title: "Terms and Conditions | Just Buy Travel",
+    description: "Read Just Buy Travel's terms and conditions for using our travel services.",
+    type: "website",
+  },
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/term-and-conditions`,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
 export default function TermsAndConditionsPage() {
+  const breadcrumbData = generateBreadcrumbStructuredData([
+    { name: 'Home', path: '/' },
+    { name: 'Terms and Conditions', path: '/term-and-conditions' }
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      
       <Header />
       <div className="container termscondition_section">
 

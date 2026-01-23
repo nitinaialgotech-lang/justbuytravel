@@ -1,12 +1,27 @@
 import Header from '@/component/Header'
 import SanFrancBanner from '@/Components/InnerPages/SanFransci/SanFrancBanner'
 import {React, Suspense } from 'react'
+import { generateDestinationMetadata, generateBreadcrumbStructuredData } from '@/app/utils/seo'
+import { getDestinationMetadata } from '@/app/utils/destinationMetadata'
 
+const destination = 'san-francisco';
+const customData = getDestinationMetadata(destination);
+
+export const metadata = generateDestinationMetadata(destination, customData);
 
 export default function page() {
-    return (
+    const breadcrumbData = generateBreadcrumbStructuredData([
+        { name: 'Home', path: '/' },
+        { name: 'San Francisco', path: '/san-francisco' }
+    ]);
 
+    return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+            />
+            
             <Suspense fallback={<div>Loading...</div>}>
                 <Header />
                 <SanFrancBanner />
