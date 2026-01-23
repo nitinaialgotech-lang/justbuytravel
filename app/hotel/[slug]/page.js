@@ -4,6 +4,13 @@ import { GetHotel_Detail } from '@/app/Route/endpoints';
 import { generateHotelMetadata, generateHotelStructuredData, generateBreadcrumbStructuredData, createSlug } from '@/app/utils/seo';
 import "../../../style/responsive.css";
 
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+    return [{ slug: "placeholder" }];
+}
+
 // Generate dynamic metadata for each hotel
 export async function generateMetadata({ params, searchParams }) {
     try {
