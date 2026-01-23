@@ -30,8 +30,7 @@
     padding: 70px 0px 70px 0px;
   }
   .banner_box > .title > h2 {
-    font-size: 85px;
-
+    font-size: 85px !important;
     line-height: 80px;
   }
   .banner_box > .title > h5 {
@@ -154,8 +153,7 @@
     padding: 60px 0px 50px 0px;
   }
   .banner_box > .title > h2 {
-    font-size: 50px;
-
+    font-size: 50px !important;
     line-height: 1;
   }
   .banner_box > .title > h5 {
@@ -233,7 +231,9 @@
 
   /* Optional: animation only */
   .swiper-slide {
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
   }
 
   .swiper-slide-active {
@@ -684,6 +684,69 @@
   .hotel_tips_content > p {
     font-size: 18px;
   }
+  /********** review modal  */
+  .review-modal {
+    max-width: 90%;
+  }
+
+  .modal-content {
+    border-radius: 12px;
+  }
+  /* ****************** hotel ddetail page  */
+  .hoteldetail_banner > .content > .content_p > .title > h2 {
+    font-size: 25px !important;
+  }
+  .rating-stars i {
+    font-size: 13px;
+  }
+  .hoteldetail_banner
+    > .content
+    > .hotel_contact_info
+    > .hotel_contact_link
+    > P {
+    font-size: 14px;
+    margin-top: 0px !important;
+  }
+  .hotel_contact_info {
+    display: block;
+  }
+  .hoteldetail_banner
+    > .content
+    > .hotel_contact_info
+    > .hotel_contact_link
+    > ul
+    > li
+    > span:nth-child(2)
+    > a {
+    font-size: 14px !important;
+  }
+  .hoteldetail_banner
+    > .content
+    > .hotel_contact_info
+    > .hotel_contact_link
+    > ul
+    > li {
+    align-items: center;
+  }
+  .price_view_detail > button {
+    padding: 4px 14px !important;
+  }
+  .hoteldetail_banner
+    > .content
+    > .hotel_contact_info
+    > .price_hotel
+    > .price
+    > h4 {
+    font-size: 23px !important;
+  }
+  .hoteldetail_banner
+    > .content
+    > .hotel_contact_info
+    > .price_hotel
+    > .price
+    > p {
+    font-size: 12px;
+  }
 }
 /* ***************************************************************************************** */
 @media only screen and (max-width: 390px) {
@@ -714,7 +777,7 @@
 /* ******************************************************************************************* 375 */
 @media only screen and (max-width: 375px) {
   .banner_box > .title > h2 {
-    font-size: 45px;
+    font-size: 45px !important;
     line-height: 1;
   }
   .search_banner_box > .title > h2 {
@@ -734,7 +797,7 @@
     font-size: 28px;
   }
   .banner_box > .title > h2 {
-    font-size: 40px;
+    font-size: 40px !important;
     line-height: 1;
   }
   .navbar-brand > .logo > img {
