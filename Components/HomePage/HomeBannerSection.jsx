@@ -13,12 +13,14 @@ export default function
                             <div className="col-lg-12">
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
-                                        <h2 className='capitalize'>
-                                            Explore more <span>spend</span> less
-                                        </h2>
-                                        {/* <h5 className='capitalize'>
-                                            How can we help you travel better for less?
-                                        </h5> */}
+                                        <h1 className='capitalize'>
+                                        Travel <span>Research</span> Made Simple
+                                        </h1>
+                                        <div className="col-lg-9 m-auto">
+                                            <h2 className='supporting_text'>
+                                            Discover hotels, flights, holidays, and cruises with real insights and easy comparisons.
+                                            </h2>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

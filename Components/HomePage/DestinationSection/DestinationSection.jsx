@@ -36,14 +36,20 @@ export default function DestinationSection() {
     const [isDestinationActive, setDestinationActive] = useState(true);
     return (
         <>
-            <section className='destination_section container  padding_bottom '>
-                <div className="destination_title section_title ">
-                    <h2 className='mb-0'>
-                        Trending Destinations
-                    </h2>
-                    <h5 >
-                        The hottest places capturing travelers’ attention
-                    </h5>
+            <section className='destination_section padding_bottom '>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="destination_title section_title ">
+                                <h2 className='mb-0'>
+                                    Trending Destinations
+                                </h2>
+                                <h5 >
+                                    Discover popular destinations and book hotels online at the best prices worldwide.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {/* ************** */}
                 <div className="container">

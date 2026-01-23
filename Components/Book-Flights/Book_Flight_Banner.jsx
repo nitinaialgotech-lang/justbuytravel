@@ -1,6 +1,6 @@
 import React from 'react'
 import Search_flight_section from './Search_flight_section'
-
+import "../../style/responsive.css"
 export default function Book_Flight_Banner() {
     return (
         <>

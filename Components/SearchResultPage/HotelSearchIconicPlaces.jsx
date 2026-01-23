@@ -3,6 +3,7 @@ import { IconicPlaces } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,7 +16,7 @@ import {
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-export default function HotelSearchIconicPlaces({ lat, long }) {
+export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
@@ -65,13 +66,14 @@ export default function HotelSearchIconicPlaces({ lat, long }) {
         queryFn: () => IconicPlaces(lat, long)
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
-
     return (
         <>
             <section>
                 <div className="container padding_bottom">
                     <div className="explore_section section_title ">
-                        <h2 className="mb-0">Iconic Places</h2>
+                        <h2 className="mb-0">
+                            {locationName ? `Iconic Places near ${locationName}` : "Iconic Places"}
+                        </h2>
                         <h5>Where history, culture, and beauty come together</h5>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
@@ -123,10 +125,11 @@ export default function HotelSearchIconicPlaces({ lat, long }) {
                                     const title =
                                         item?.displayName?.text || item?.content || "Place";
                                     const imgName = item?.photos?.[0]?.name;
+                                    const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">
-                                                <div className="card  relative border-0 ">
+                                                <div className="card  relative border-0">
                                                     <img
                                                         src={
                                                             imgName
@@ -152,6 +155,16 @@ export default function HotelSearchIconicPlaces({ lat, long }) {
                                                                     <span className="ms-1">{item?.rating}</span>
                                                                 )}
                                                             </div>
+                                                            {placeId && (
+                                                                <div className="mt-2">
+                                                                    <Link
+                                                                        href={`/hoteldetail/?hotel=${placeId}`}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Detail
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

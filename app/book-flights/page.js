@@ -2,7 +2,6 @@ import Header from '@/component/Header'
 import Book_Flight_Banner from '@/Components/Book-Flights/Book_Flight_Banner'
 import Flight_Iconic_Places from '@/Components/Book-Flights/Flight_Iconic_Places'
 import React, { Suspense } from 'react'
-import "../../style/responsive.css"
 import Helping_travel_Explore from '@/Components/Book-Flights/Helping_travel_Explore'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
 

@@ -3,6 +3,7 @@ import { IconicPlaces, nearbyPlaces, Restro } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 import { getAssetPath } from "@/app/utils/assetPath";
 
 // Import Swiper styles
@@ -20,6 +21,7 @@ import {
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import ExpediaBanner from "./Banner";
 export default function ExperienceExploreSection() {
+    const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
     const fallbackIconicCards = [
         {
             img: "/justbuytravel_next/demo/iconic/iconic.jpg",
@@ -49,11 +51,11 @@ export default function ExperienceExploreSection() {
                 </>
             ),
             star: [
-                <IoStar />,
-                <IoStar />,
-                <IoStar />,
-                <IoStarHalf />,
-                <IoStarOutline />,
+                <IoStar key="star-1" />,
+                <IoStar key="star-2" />,
+                <IoStar key="star-3" />,
+                <IoStarHalf key="star-half" />,
+                <IoStarOutline key="star-outline" />,
             ],
         },
         {
@@ -65,11 +67,11 @@ export default function ExperienceExploreSection() {
                 </>
             ),
             star: [
-                <IoStar />,
-                <IoStar />,
-                <IoStar />,
-                <IoStarHalf />,
-                <IoStarOutline />,
+                <IoStar key="star-1" />,
+                <IoStar key="star-2" />,
+                <IoStar key="star-3" />,
+                <IoStarHalf key="star-half" />,
+                <IoStarOutline key="star-outline" />,
             ],
         },
         {
@@ -81,11 +83,11 @@ export default function ExperienceExploreSection() {
                 </>
             ),
             star: [
-                <IoStar />,
-                <IoStar />,
-                <IoStar />,
-                <IoStarHalf />,
-                <IoStarOutline />,
+                <IoStar key="star-1" />,
+                <IoStar key="star-2" />,
+                <IoStar key="star-3" />,
+                <IoStarHalf key="star-half" />,
+                <IoStarOutline key="star-outline" />,
             ],
         },
         {
@@ -97,11 +99,11 @@ export default function ExperienceExploreSection() {
                 </>
             ),
             star: [
-                <IoStar />,
-                <IoStar />,
-                <IoStar />,
-                <IoStarHalf />,
-                <IoStarOutline />,
+                <IoStar key="star-1" />,
+                <IoStar key="star-2" />,
+                <IoStar key="star-3" />,
+                <IoStarHalf key="star-half" />,
+                <IoStarOutline key="star-outline" />,
             ],
         },
     ];
@@ -109,12 +111,13 @@ export default function ExperienceExploreSection() {
     const [isBeginning, setIsBeginning] = useState(true);
     const [secondActive, setSecondActive] = useState(true);
     const [nearbyActive, setNearbyActive] = useState(true);
-    const [coords, setCoords] = useState({ lat: null, lng: null });
+    const [coords, setCoords] = useState(DEFAULT_COORDS);
     const [locationError, setLocationError] = useState(null);
 
     useEffect(() => {
         if (typeof window === "undefined" || !navigator?.geolocation) {
             setLocationError("Geolocation is not supported");
+            setCoords(DEFAULT_COORDS);
             return;
         }
 
@@ -128,6 +131,7 @@ export default function ExperienceExploreSection() {
             (err) => {
                 console.error("Geolocation error", err);
                 setLocationError(err.message || "Unable to fetch location");
+                setCoords(DEFAULT_COORDS);
             }
         );
     }, []);
@@ -228,16 +232,20 @@ export default function ExperienceExploreSection() {
                                 }}
                                 className="mySwiper relative"
                             >
-                                {nearbyPlaceslist?.map((item, i) => {
+                                {(nearbyPlaceslist.length ? nearbyPlaceslist : NearCard)?.map((item, i) => {
+                                    const title =
+                                        item?.displayName?.text || item?.content || "Place";
+                                    const imgName = item?.photos?.[0]?.name;
+                                    const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
                                                 <div className="card relative border-0">
                                                     <img
                                                         src={
-                                                            item?.photos?.[0]?.name
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item.photos[0].name}`
-                                                                : "/no-image.jpg"
+                                                            imgName
+                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
+                                                                : item?.img || "/no-image.jpg"
                                                         }
                                                         className="card-img-top card_rounded"
                                                         alt="Place"
@@ -245,12 +253,26 @@ export default function ExperienceExploreSection() {
                                                     <div className="card-body ps-0 flex justify-between">
                                                         <div className="card_detail">
                                                             <h5 className="card-title m-0">
-                                                                {item?.displayName?.text}
+                                                                {title}
                                                             </h5>
                                                             <div className="rating flex align-items-center gap-1">
-                                                                {renderBootstrapStars(item?.rating)}
-                                                                <span className="ms-1">{item?.rating}</span>
+                                                                {item?.star
+                                                                    ? item.star
+                                                                    : renderBootstrapStars(item?.rating)}
+                                                                {item?.rating && (
+                                                                    <span className="ms-1">{item?.rating}</span>
+                                                                )}
                                                             </div>
+                                                            {placeId && (
+                                                                <div className="mt-2">
+                                                                    <Link
+                                                                        href={`/hoteldetail/?hotel=${placeId}`}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Detail
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -340,6 +362,7 @@ export default function ExperienceExploreSection() {
                                 const title =
                                     item?.displayName?.text || item?.content || "Place";
                                 const imgName = item?.photos?.[0]?.name;
+                                const placeId = item?.id;
                                 return (
                                     <SwiperSlide key={i}>
                                         <div className="experience_explore_section ">
@@ -369,6 +392,16 @@ export default function ExperienceExploreSection() {
                                                                 <span className="ms-1">{item?.rating}</span>
                                                             )}
                                                         </div>
+                                                            {placeId && (
+                                                                <div className="mt-2">
+                                                                    <Link
+                                                                        href={`/hoteldetail/?hotel=${placeId}`}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Detail
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                     </div>
                                                 </div>
                                             </div>
