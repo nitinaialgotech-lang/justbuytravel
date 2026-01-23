@@ -4,6 +4,7 @@ import { Restro } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,7 +15,12 @@ import {
 } from "react-icons/md";
 import { Navigation, Pagination } from "swiper/modules";
 /******************* stqart function */
-export default function HotelSearchNearByLocation({ lat, long }) {
+export default function HotelSearchNearByLocation({
+    lat,
+    long,
+    locationName,
+    excludePlaceId,
+}) {
     /********************* states *************** */
     const [isBeginning, setIsBeginning] = useState(true);
     /* ********************************* */
@@ -45,13 +51,20 @@ export default function HotelSearchNearByLocation({ lat, long }) {
         queryFn: () => Restro(lat, long),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
+    const filteredNearbyPlaces = excludePlaceId
+        ? nearbyPlaceslist.filter((place) => place?.id !== excludePlaceId)
+        : nearbyPlaceslist;
     return (
         <>
-            <section className="experience_explore_section">
+            <section className="experience_explore_section padding_bottom">
                 <div className="container">
                     <div className="row">
                         <div className="explore_section section_title m">
-                            <h2 className="mb-0">Near By Loactions</h2>
+                            <h2 className="mb-0">
+                                {locationName
+                                    ? `Locations near ${locationName}`
+                                    : "Near By Loactions"}
+                            </h2>
                             <h5>Explore nearby destinations and hidden gems</h5>
                         </div>
                     </div>
@@ -104,7 +117,8 @@ export default function HotelSearchNearByLocation({ lat, long }) {
                                 }}
                                 className="mySwiper relative"
                             >
-                                {nearbyPlaceslist?.map((item, i) => {
+                                {filteredNearbyPlaces?.map((item, i) => {
+                                    const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
@@ -127,6 +141,16 @@ export default function HotelSearchNearByLocation({ lat, long }) {
                                                                 {renderBootstrapStars(item?.rating)}
                                                                 <span className="ms-1">{item?.rating}</span>
                                                             </div>
+                                                            {placeId && (
+                                                                <div className="mt-2">
+                                                                    <Link
+                                                                        href={`/hoteldetail/?hotel=${placeId}`}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Detail
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

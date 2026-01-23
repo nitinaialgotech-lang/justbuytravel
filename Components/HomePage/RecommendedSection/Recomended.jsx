@@ -19,13 +19,15 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 export default function Recomended() {
+    const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
     const [Active, setActive] = useState(true);
-    const [coords, setCoords] = useState({ lat: null, lng: null });
+    const [coords, setCoords] = useState(DEFAULT_COORDS);
     const [locationError, setLocationError] = useState(null);
 
     useEffect(() => {
         if (typeof window === "undefined" || !navigator?.geolocation) {
             setLocationError("Geolocation is not supported");
+            setCoords(DEFAULT_COORDS);
             return;
         }
 
@@ -39,6 +41,7 @@ export default function Recomended() {
             (err) => {
                 console.error("Geolocation error", err);
                 setLocationError(err.message || "Unable to fetch location");
+                setCoords(DEFAULT_COORDS);
             }
         );
     }, []);
@@ -160,8 +163,9 @@ export default function Recomended() {
             />
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
-                    <h2 className="mb-0">Recommended For You</h2>
-                    <h5>Handpicked experiences tailored to your interests</h5>
+                    <h2 className="mb-0">Recommended Hotels & Travel Deals for You</h2>
+                    <h5>Handpicked hotel stays based on popular destinations and top ratings
+                    </h5>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>

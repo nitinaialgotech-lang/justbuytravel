@@ -997,7 +997,7 @@
   margin-top: 10px;
 }
 .hoteldetail_banner > .content > .hotel_contact_info > .hotel_contact_link > P {
-  margin-top: 10px !important;
+  margin-top: 10px;
 }
 .hoteldetail_banner
   > .content
@@ -1030,6 +1030,7 @@
   > h4 {
   font-size: 28px;
   font-weight: 700;
+
   line-height: 0.9;
 }
 .hoteldetail_banner
@@ -1041,7 +1042,7 @@
   font-size: 13px;
   text-transform: capitalize;
   text-align: center;
-  color: #19191b;
+  color: var(--cl-bl);
 }
 .hotel_detail_button {
   padding: 10px 10px;
@@ -1150,6 +1151,13 @@
 .popup_header > .content > .content_p {
   width: 100%;
 }
+.content > .content_p > .mobile_title > .mobile_top_bar {
+  padding: 0px 0px 20px 0px;
+}
+.content > .content_p > .mobile_title > .mobile_top_bar > .back > svg {
+  width: 30px;
+  height: 30px;
+}
 .popup_sidebar > .item > .content_item > .button > button {
   padding: 10px 17px;
   border: 1px solid #3a3f45;
@@ -1176,6 +1184,6 @@
   margin-top: 50px;
 }
 .price_view_detail > button {
-  border-radius: 8px !important;
-  padding: 8px 17px !important;
+  border-radius: 8px;
+  padding: 8px 17px;
 }

@@ -32,17 +32,19 @@ import ViewPriceDetail from "./ViewPriceDetail";
 import HotelAllReview from "./HotelAllReview";
 import PopularHotelAroundWorld from "./PopularHotelAroundWorld";
 import HotelSearchNearByLocation from "../HotelSearchNearByLocation";
+import HotelSearchIconicPlaces from "../HotelSearchIconicPlaces";
 import { FaQ } from "react-icons/fa6";
 import FaqSection from "@/Components/HomePage/Faq/FaqSection";
 import 'reactjs-popup/dist/index.css';
 import Popup from "reactjs-popup";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 export default function SearchHotelDetail() {
     const search_detail = useSearchParams();
     const [open, setOpen] = useState(false);
     const code = search_detail.get("hotel");
     const namehotel = search_detail.get("name");
     // const cityhotel = search_detail.get("city");
-    
+
     // Date state for pricing - default to today and 7 days later
     const getTodayDate = () => new Date().toISOString().split('T')[0];
     const getSevenDaysLater = () => {
@@ -50,7 +52,7 @@ export default function SearchHotelDetail() {
         date.setDate(date.getDate() + 1);
         return date.toISOString().split('T')[0];
     };
-    
+
     const [searchCheckin, setSearchCheckin] = useState(getTodayDate());
     const [searchCheckout, setSearchCheckout] = useState(getSevenDaysLater());
 
@@ -129,7 +131,7 @@ export default function SearchHotelDetail() {
         retry: 1,
     })
     const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
-    
+
     // ********************************************************** price data
     const { data: PriceData, refetch: refetchPrices, isLoading: isPriceLoading, isFetching: isPriceFetching } = useQuery({
         queryKey: ["pricedata", hotelKey, searchCheckin, searchCheckout],
@@ -144,13 +146,13 @@ export default function SearchHotelDetail() {
         refetchOnWindowFocus: false,
     })
     const rate = PriceData?.data?.raw?.result?.rates;
-    
+
     // Handler for date search from ViewPriceDetail component
     const handleSearchDates = async (checkin, checkout) => {
         // Update state
         setSearchCheckin(checkin);
         setSearchCheckout(checkout);
-        
+
         // Force immediate refetch after state update
         setTimeout(() => {
             refetchPrices();
@@ -230,13 +232,35 @@ export default function SearchHotelDetail() {
                                 {/* ********************** header content  */}
                                 <div className="content padding_top  ">
                                     <div className="content_p">
+                                        {/* ****************** mobile show modall */}
+                                        <div className="mobile_title d-block d-lg-none ">
+                                            <div className="mobile_top_bar flex justify-between items-center">
+                                                <div className="back">
+                                                    <MdOutlineKeyboardArrowLeft />
+                                                </div>
+                                                <div className="mobile_share_icon">
+                                                    <div className="icon flex gap-2 items-center pe-5">
+                                                        <span>
+                                                            <img src="/justbuytravel_next/demo/hoteldetail/export.svg" width={18} alt="" />
+                                                        </span>
+                                                        <span className="text-black">
+                                                            share
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                        {/* ******************** end mobile view */}
                                         <div className="title flex items-center justify-between">
                                             <h2 className="m-0">{HotelDetail?.displayName?.text}</h2>
-                                            <div className="icon flex gap-2 items-center pe-5">
+                                            <div className="icon flex gap-2 items-center pe-5 d-none d-lg-block">
                                                 <span>
                                                     <img src="/justbuytravel_next/demo/hoteldetail/export.svg" width={18} alt="" />
                                                 </span>
-                                                <span>
+                                                <span className="">
                                                     share
                                                 </span>
                                             </div>
@@ -559,8 +583,8 @@ export default function SearchHotelDetail() {
             </section>
             {/* ******************* */}
 
-            <ViewPriceDetail 
-                PriceRate={PriceData} 
+            <ViewPriceDetail
+                PriceRate={PriceData}
                 hotelName={locationName}
                 hotelAddress={locationAddress}
                 hotelData={hoteldata?.data}
@@ -572,7 +596,17 @@ export default function SearchHotelDetail() {
             <HotelAllReview reviews={userReviews} />
             <HotelLocation lat={latitude} long={longitude} load={isLoading} />
             <PopularHotelAroundWorld lat={latitude} long={longitude} />
-            <HotelSearchNearByLocation lat={latitude} long={longitude} />
+            <HotelSearchNearByLocation
+                lat={latitude}
+                long={longitude}
+                locationName={locationName}
+                excludePlaceId={code}
+            />
+            <HotelSearchIconicPlaces
+                lat={latitude}
+                long={longitude}
+                locationName={locationName}
+            />
             <Blogs />
             <FaqSection />
             {/* ************************************* on mobile view shoqw section */}

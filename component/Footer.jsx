@@ -203,15 +203,36 @@ export default function Footer() {
                 </div>
                 <div className="follow_icon flex justify-center items-center gap-3">
                   <h5 className="m-0 capitalize">follow us</h5>
-                  <span>
-                    <IoLogoFacebook />
-                  </span>
-                  <span>
-                    <AiFillInstagram />
-                  </span>
-                  <span>
-                    <RiTwitterXLine />
-                  </span>
+                  <a
+                    href="https://www.facebook.com/people/Just-buy-Travel/61577152502232/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow us on Facebook"
+                  >
+                    <span>
+                      <IoLogoFacebook />
+                    </span>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/justbuytravel/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow us on Instagram"
+                  >
+                    <span>
+                      <AiFillInstagram />
+                    </span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/just-buy-travel/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow us on LinkedIn"
+                  >
+                    <span>
+                      <RiTwitterXLine />
+                    </span>
+                  </a>
                   <span></span>
                 </div>
               </div>

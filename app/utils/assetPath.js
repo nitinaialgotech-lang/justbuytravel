@@ -16,8 +16,9 @@ export const getAssetPath = (path) => {
 
   // Get basePath from environment variable or use the configured basePath
   // This should match the basePath in next.config.mjs
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/justbuytravel_next/demo';
-  // const basePath = process.env.NEXT_PUBLIC_BASE_PATH || 'http://localhost:3000';
+  const basePath =
+    process.env.NEXT_PUBLIC_BASE_PATH ||
+    (process.env.NODE_ENV === "production" ? "/justbuytravel_next/demo" : "");
 
   // If basePath is just '/', return the path as is
   if (basePath === '/' || !basePath) {

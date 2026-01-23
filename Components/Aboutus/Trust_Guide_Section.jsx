@@ -46,10 +46,13 @@ export default function Trust_Guide_Section() {
                                 Your Trusted Guide to the Best Travel Sites
                             </h2>
                             <p>
-                                Looking for the <span>best hotel booking site</span> that offers excellent rates and reliable options? JustBuyTravel lets you look at the best sites side by side to find the best place to stay for your trip.
+                                Looking for the best hotel booking websites to compare? Just Buy Travel helps you research and compare popular hotel platforms side by side, so you can choose the right option confidently.
                             </p>
                             <p>
-                                Can you help me find the <span>best site to book flights?</span> We’ve tried out and picked out trustworthy names that are also great values. This will make planning your trip easy and stress-free.
+                                Searching for flight comparison websites? We feature trusted travel platforms that allow travelers to explore routes, prices, and options before booking.
+                            </p>
+                            <p>
+                                Just Buy Travel is a travel research and comparison platform designed to help users explore hotels, flights, holiday packages, and cruises using trusted third-party travel websites.
                             </p>
                         </div>
                         <div className="booking_platform relative ">
