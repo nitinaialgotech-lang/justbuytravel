@@ -2033,3 +2033,14 @@ span.rating-stars {
   background: none !important;
   border: none !important;
 }
+
+/* ******************hotel detail review section mobile view section *********** */
+.mobile_review_box_section {
+  padding: 20px;
+}
+.mobile_review_box_section > .review_head .user > .user_img > span > h6 {
+  font-size: 13px;
+}
+.review-modal {
+  max-width: 600px; /* desktop */
+}

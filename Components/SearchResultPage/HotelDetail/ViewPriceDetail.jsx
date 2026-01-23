@@ -330,7 +330,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                 fontWeight: "400",
                                                                                 display: 'block'
                                                                             }}>
-                                                                                ${ratePerNight.toFixed(2)} × {nights} night{nights !== 1 ? 's' : ''}
+                                                                                ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
                                                                             </small>
                                                                             {tax > 0 && (
                                                                                 <small style={{

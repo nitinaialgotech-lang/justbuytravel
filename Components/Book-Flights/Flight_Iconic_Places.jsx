@@ -45,7 +45,7 @@ export default function Flight_Iconic_Places() {
 
                             <div className="iconic_place_items">
                                 <div className="container d-none d-lg-block">
-                                    <div className="row">
+                                    <div className="row relative">
                                         {
                                             card?.map((item, i) => {
                                                 return (
