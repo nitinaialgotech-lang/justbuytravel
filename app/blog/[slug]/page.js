@@ -90,7 +90,9 @@ export default async function BlogPostPage({ params }) {
             </>
         );
     } catch (error) {
-        console.error('Error loading blog:', error);
+        if (error?.digest !== "NEXT_HTTP_ERROR_FALLBACK;404") {
+            console.error('Error loading blog:', error);
+        }
         notFound();
     }
 }

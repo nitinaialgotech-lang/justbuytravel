@@ -1,7 +1,6 @@
 import { Get_Blogs } from './Route/endpoints';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 86400; // Revalidate once per day
+export const dynamic = 'force-static';
 
 export default async function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';

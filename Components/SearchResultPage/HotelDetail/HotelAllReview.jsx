@@ -23,7 +23,7 @@ export default function HotelAllReview({ reviews }) {
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false);
-        setActiveReview(null);
+        setModalReview(null);
     };
     const handleShow = (item) => {
         setModalReview(item);
@@ -178,9 +178,12 @@ export default function HotelAllReview({ reviews }) {
                                             ? text
                                             : words.slice(0, 18).join(" ");
 
+                                        const slideKey =
+                                            item?.authorAttribution?.displayName ||
+                                            item?.publishTime ||
+                                            `review-${index}`;
                                         return (
-                                            <>
-                                                <SwiperSlide >
+                                            <SwiperSlide key={slideKey}>
                                                     <div className="review_box_section mobile_review_box_section  " >
                                                         <div className="review_head flex justify-between ">
                                                             <div className="user">
@@ -220,7 +223,6 @@ export default function HotelAllReview({ reviews }) {
 
                                                     {/* *************  review xxxxxxxxxxxx */}
                                                 </SwiperSlide>
-                                            </>
                                         )
                                     })
                                 }

@@ -20,6 +20,11 @@ import { renderBootstrapStars } from '@/component/renderBootstrapStars';
 export default function PopularHotelAroundWorld({ lat, long }) {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
+    const router = useRouter();
+    const viewDetail = (id) => {
+        if (!id) return;
+        router.push(`/hoteldetail/?hotel=${id}`);
+    };
     /*********************** end stte ****** */
     /********************* apis calls *********** */
     // const lat = 44.500000;
