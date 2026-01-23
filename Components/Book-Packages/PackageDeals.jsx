@@ -36,7 +36,7 @@ export default function PackageDeals() {
     ]
     return (
         <>
-            <section className='package_section padding_bottom padding_top'>
+            <section className='package_section padding_bottom padding_top bg_grey'>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -103,7 +103,7 @@ export default function PackageDeals() {
                                                 className="recommend_card_box package_card_box  card_rounded    
                                                         "
                                             >
-                                                <div className="card_box pe- recomand_card_shadow">
+                                                <div className="card_box ">
                                                     <div
                                                         className="card_box_img card_rounded relative overflow-hidden"
                                                         style={{
@@ -139,7 +139,7 @@ export default function PackageDeals() {
                                                                     </span>
 
                                                                     <span>
-                                                                        <p> 4.5 stars - 9.6/10 Exceptional (5)</p>
+                                                                        <p className='m-0'> 4.5 stars - 9.6/10 Exceptional (5)</p>
                                                                     </span>
                                                                 </li>
                                                                 {/* ************* */}
@@ -153,7 +153,7 @@ export default function PackageDeals() {
                                                                         />
                                                                     </span>
                                                                     <span>
-                                                                        <p> Chandigarh (IXC) - Male (MLE)</p>
+                                                                        <p className='m-0'> Chandigarh (IXC) - Male (MLE)</p>
                                                                     </span>
                                                                 </li>
                                                             </ul>

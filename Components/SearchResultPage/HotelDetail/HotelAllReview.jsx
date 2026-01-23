@@ -29,6 +29,8 @@ export default function HotelAllReview({ reviews }) {
         setModalReview(item);
         setShow(true);
     }
+    console.log(reviews, "reviews");
+
     // ******************
     const [modalReview, setModalReview] = useState(null);
     const visibleReviews = showAll ? reviews : reviews?.slice(0, 3);
@@ -74,7 +76,7 @@ export default function HotelAllReview({ reviews }) {
                                                     </div>
                                                     <div className="rating hotel_rating flex gap-2 items-center">
                                                         <span>
-                                                            {renderBootstrapStars(4)}
+                                                            {renderBootstrapStars(item?.rating)}
                                                         </span>
                                                         <span>
                                                             <p className='m-0'>
@@ -123,10 +125,10 @@ export default function HotelAllReview({ reviews }) {
                                 slidesPerView={3}
                                 spaceBetween={15}
                                 // pagination={{ clickable: true }}
-                                navigation={{
-                                    prevEl: "#custom_prev",
-                                    nextEl: "#custom_next",
-                                }}
+                                // navigation={{
+                                //     prevEl: "#custom_prev",
+                                //     nextEl: "#custom_next",
+                                // }}
                                 loop={true}
                                 // autoplay={{
                                 //     delay: 3100,
@@ -192,7 +194,7 @@ export default function HotelAllReview({ reviews }) {
                                                                 </div>
                                                                 <div className="rating hotel_rating flex gap-2 items-center">
                                                                     <span>
-                                                                        {renderBootstrapStars(4)}
+                                                                        {renderBootstrapStars(item?.rating)}
                                                                     </span>
                                                                     <span>
                                                                         <p className='m-0'>
@@ -224,7 +226,7 @@ export default function HotelAllReview({ reviews }) {
                                 }
                             </Swiper >
 
-                            <div className="button_swiper2 absolute ">
+                            {/* <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">
                                     <button
                                         id="custom_prev"
@@ -243,7 +245,7 @@ export default function HotelAllReview({ reviews }) {
                                         <MdOutlineKeyboardArrowRight size={30} />
                                     </button>
                                 </div>
-                            </div>
+                            </div> */}
                             {/* *************  review xxxxxxxxxxxx */}
                             {/* ******************************* show modal **************** */}
                             <div className="container" >

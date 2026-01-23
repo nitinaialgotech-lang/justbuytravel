@@ -31,7 +31,7 @@
   }
   .banner_box > .title > h2 {
     font-size: 85px !important;
-    line-height: 80px;
+    line-height: 1.1;
   }
   .banner_box > .title > h5 {
     display: none;
@@ -153,8 +153,8 @@
     padding: 60px 0px 50px 0px;
   }
   .banner_box > .title > h2 {
-    font-size: 50px !important;
-    line-height: 1;
+    font-size: 32px !important;
+    line-height: 1.2 !important;
   }
   .banner_box > .title > h5 {
     display: none;
@@ -670,11 +670,11 @@
   }
   /************************************************* */
   .hotel_tips_title > .tips_title > h2 {
-    font-size: 35px;
-    padding: 10px 0px 0px 0px;
+    font-size: 25px;
+    padding: 20px 0px 0px 0px;
   }
   .hotel_tips_content {
-    padding: 20px 0px 0px 0px;
+    padding: 10px 0px 0px 0px;
   }
 
   .amazing_deals_title > h2 {
@@ -685,9 +685,6 @@
     font-size: 18px;
   }
   /********** review modal  */
-  .review-modal {
-    max-width: 90%;
-  }
 
   .modal-content {
     border-radius: 12px;
@@ -729,7 +726,10 @@
     align-items: center;
   }
   .price_view_detail > button {
-    padding: 4px 14px !important;
+    padding: 5px 16px !important;
+    font-size: 14px;
+    text-transform: capitalize;
+    text-align: center;
   }
   .hoteldetail_banner
     > .content
@@ -739,6 +739,9 @@
     > h4 {
     font-size: 23px !important;
   }
+  .hoteldetail_banner > .content > .hotel_contact_info > .price_hotel {
+    align-items: normal !important;
+  }
   .hoteldetail_banner
     > .content
     > .hotel_contact_info
@@ -746,6 +749,106 @@
     > .price
     > p {
     font-size: 12px;
+  }
+  .hoteldetail {
+    padding: 0px 0px 20px 0px !important;
+  }
+  .hoteldetail_banner > .content {
+    padding: 15px 10px 20px 10px;
+  }
+  .hotel_botom_margin {
+    margin-bottom: 10px !important;
+  }
+  .hoteldetail_banner
+    > .content
+    > .hotel_contact_info
+    > .hotel_contact_link
+    > ul
+    > li
+    > span:nth-child(1)
+    > img {
+    width: 15px;
+  }
+  .hoteldetail_banner
+    > .content
+    > .hotel_contact_info
+    > .hotel_contact_link
+    > ul
+    > li {
+    margin-top: 5px;
+  }
+  /* ****************** pricing in hotel details */
+  .price_box_item > .icon {
+    justify-content: center;
+  }
+  .text_detail > .info > .info_item {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .price_box_price > div > h4 {
+    margin-top: 10px !important;
+  }
+  .price_box_button {
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .mobile_price_detail > .hotel_detail_button {
+    padding: 4px 15px !important;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+  .view_price_detial_content {
+    padding: 20px !important;
+  }
+  .mobile_price_box > div > h4 {
+    margin-top: 0px !important;
+  }
+  .date_picker_section {
+    padding: 20px 0px !important;
+  }
+  .hotel_mobile_button {
+    margin-top: 10px !important;
+  }
+  .mobile_review_box_section {
+    padding: 20px !important;
+  }
+  /* ***************** flight page  */
+  .padding_top_0_md {
+    padding-top: 0px;
+  }
+  .recommend_card_box > .card_box > .package_deals_card > .package_bundle > p {
+    margin-bottom: 0;
+    text-align: start;
+  }
+  .recommend_card_box
+    > .card_box
+    > .package_deals_card
+    > .package_bundle
+    > .bundle_bag {
+    justify-content: start;
+  }
+  .recommend_card_box
+    > .card_box
+    > .package_deals_card
+    > .package_bundle
+    > .bundle_bag
+    > .bundle {
+    width: 100%;
+    justify-content: start;
+  }
+  .package_bundle > .price {
+    justify-content: start;
+  }
+  /* ******************** hotel abou t */
+  .section_title > .section_title > span:nth-child(1) {
+    width: 70%;
+    margin-top: 10px;
+  }
+  .section_title > .section_title > span:nth-child(2) > button {
+    border-radius: 5px !important;
+    padding: 5px 14px !important;
+    font-size: 14px !important;
+    margin: 0px !important;
   }
 }
 /* ***************************************************************************************** */

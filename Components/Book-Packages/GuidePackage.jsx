@@ -25,7 +25,7 @@ export default function GuidePackage() {
     ]
     return (
         <>
-            <section className='hotel_booking_tips_section padding_bottom padding_top bg_grey'>
+            <section className='hotel_booking_tips_section padding_bottom padding_top '>
                 <div className="container">
                     <div className="row items-center">
                         {/* ******  image */}

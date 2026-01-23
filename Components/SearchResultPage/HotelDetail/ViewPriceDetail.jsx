@@ -232,7 +232,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                             </div> */}
                                             <button
                                                 onClick={() => onSearchDates && onSearchDates(checkinDate, checkoutDate)}
-                                                className="hotel_detail_button text-white"
+                                                className="hotel_detail_button hotel_mobile_button text-white"
                                                 disabled={isLoadingPrices}
                                                 style={{
                                                     width: '100%',
@@ -301,108 +301,202 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                         if (matchedImg) {
 
                                             return (
-                                                <div className="view_price_box" key={`${item.name}-${item.rate}-${priceDataKey}`}>
-                                                    <div className="price_box">
-                                                        <div className="row items-center">
+                                                <>
+                                                    <div className="view_price_box d-none d-lg-block" key={`${item.name}-${item.rate}-${priceDataKey}`}>
+                                                        <div className="price_box">
+                                                            <div className="row items-center">
 
-                                                            {/* Logo column */}
-                                                            <div className="col-lg-3">
-                                                                <div className="price_box_item">
-                                                                    <div className="icon text-center flex">
-                                                                        <img
-                                                                            src={matchedImg.img}
-                                                                            alt={item.name}
-                                                                            width={120}
-                                                                            height={120}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            {/* **************** */}
-                                                            <div className="col-lg-3">
-                                                                <div className="text_detail">
-                                                                    <div className="info flex justify-center">
-                                                                        <div className="info_item">
-                                                                            <small style={{
-                                                                                fontSize: '16px',
-                                                                                color: '#888',
-                                                                                marginTop: '4px',
-                                                                                fontWeight: "400",
-                                                                                display: 'block'
-                                                                            }}>
-                                                                                ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
-                                                                            </small>
-                                                                            {tax > 0 && (
-                                                                                <small style={{
-                                                                                    fontSize: '16px',
-                                                                                    color: '#999',
-                                                                                    fontWeight: "400",
-                                                                                    marginTop: '2px',
-                                                                                    display: 'block',
-
-                                                                                }}>
-                                                                                    + ${tax.toFixed(2)} tax
-                                                                                </small>
-                                                                            )}
+                                                                {/* Logo column */}
+                                                                <div className="col-lg-3">
+                                                                    <div className="price_box_item">
+                                                                        <div className="icon text-center flex">
+                                                                            <img
+                                                                                src={matchedImg.img}
+                                                                                alt={item.name}
+                                                                                width={120}
+                                                                                height={120}
+                                                                            />
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                {/* **************** */}
+                                                                <div className="col-lg-3">
+                                                                    <div className="text_detail">
+                                                                        <div className="info flex justify-center">
+                                                                            <div className="info_item">
+                                                                                <small style={{
+                                                                                    fontSize: '16px',
+                                                                                    color: '#888',
+                                                                                    marginTop: '4px',
+                                                                                    fontWeight: "400",
+                                                                                    display: 'block'
+                                                                                }}>
+                                                                                    ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
+                                                                                </small>
+                                                                                {tax > 0 && (
+                                                                                    <small style={{
+                                                                                        fontSize: '16px',
+                                                                                        color: '#999',
+                                                                                        fontWeight: "400",
+                                                                                        marginTop: '2px',
+                                                                                        display: 'block',
 
-                                                            </div>
+                                                                                    }}>
+                                                                                        + ${tax.toFixed(2)} tax
+                                                                                    </small>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
-                                                            {/* Price column */}
-                                                            <div className="col-lg-3">
-                                                                <div className="price_box_price flex justify-center flex-column" style={{ position: 'relative', cursor: 'help' }}>
-                                                                    {(() => {
-                                                                        const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
-                                                                        const ratePerNight = Number(item.rate);
-                                                                        const totalBeforeTax = ratePerNight * nights;
-                                                                        const tax = Number(item.tax || 0);
-                                                                        const grandTotal = totalBeforeTax + tax;
-
-                                                                        return (
-                                                                            <>
-                                                                                <div
-                                                                                    style={{ textAlign: 'center' }}
-                                                                                    title={`Breakdown:\n${ratePerNight.toFixed(2)} per night × ${nights} nights = ${totalBeforeTax.toFixed(2)}\n+ Tax: ${tax.toFixed(2)}\n= Total: ${grandTotal.toFixed(2)}`}
-                                                                                >
-                                                                                    <h4 style={{ margin: 0, fontWeight: 'bold', color: '#2c3e50' }}>
-                                                                                        ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                                                                    </h4>
-
-                                                                                </div>
-                                                                            </>
-                                                                        );
-                                                                    })()}
                                                                 </div>
-                                                            </div>
 
-                                                            {/* Button column */}
-                                                            <div className="col-lg-3">
-                                                                <div className="price_box_button price_view_detail flex justify-end">
-                                                                    {finalLink ? (
-                                                                        <a
-                                                                            href={finalLink}
-                                                                            target="_blank"
-                                                                            rel="noopener noreferrer"
-                                                                            className="hotel_detail_button text-white"
-                                                                            style={{ textDecoration: 'none', display: 'inline-block' }}
-                                                                        >
-                                                                            view details
-                                                                        </a>
-                                                                    ) : (
-                                                                        <button
-                                                                            className="hotel_detail_button text-white"
-                                                                        >
-                                                                            view details
-                                                                        </button>
-                                                                    )}
+                                                                {/* Price column */}
+                                                                <div className="col-lg-3">
+                                                                    <div className="price_box_price flex justify-center flex-column" style={{ position: 'relative', cursor: 'help' }}>
+                                                                        {(() => {
+                                                                            const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
+                                                                            const ratePerNight = Number(item.rate);
+                                                                            const totalBeforeTax = ratePerNight * nights;
+                                                                            const tax = Number(item.tax || 0);
+                                                                            const grandTotal = totalBeforeTax + tax;
+
+                                                                            return (
+                                                                                <>
+                                                                                    <div
+                                                                                        style={{ textAlign: 'center' }}
+                                                                                        title={`Breakdown:\n${ratePerNight.toFixed(2)} per night × ${nights} nights = ${totalBeforeTax.toFixed(2)}\n+ Tax: ${tax.toFixed(2)}\n= Total: ${grandTotal.toFixed(2)}`}
+                                                                                    >
+                                                                                        <h4 style={{ margin: 0, fontWeight: 'bold', color: '#2c3e50' }}>
+                                                                                            ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                                                        </h4>
+
+                                                                                    </div>
+                                                                                </>
+                                                                            );
+                                                                        })()}
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
+                                                                {/* Button column */}
+                                                                <div className="col-lg-3">
+                                                                    <div className="price_box_button price_view_detail flex justify-end">
+                                                                        {finalLink ? (
+                                                                            <a
+                                                                                href={finalLink}
+                                                                                target="_blank"
+                                                                                rel="noopener noreferrer"
+                                                                                className="hotel_detail_button text-white"
+                                                                                style={{ textDecoration: 'none', display: 'inline-block' }}
+                                                                            >
+                                                                                view deals
+                                                                            </a>
+                                                                        ) : (
+                                                                            <button
+                                                                                className="hotel_detail_button text-white"
+                                                                            >
+                                                                                view deals
+                                                                            </button>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+
+
+                                                    {/* /*********************************************** mobile view show price detraik */}
+
+                                                    <div className="view_price_box d-block d-lg-none" key={`${item.name}-${item.rate}-${priceDataKey}`}>
+                                                        <div className="price_box">
+                                                            <div className="detail flex justify-between items-center">
+                                                                <div className="icon flex flex-col gap-0 ">
+                                                                    <img
+                                                                        src={matchedImg.img}
+                                                                        alt={item.name}
+                                                                        width={100}
+                                                                        height={100}
+                                                                    />
+                                                                    <div className="info_item">
+                                                                        <small style={{
+                                                                            fontSize: '13px',
+                                                                            color: '#888',
+                                                                            marginTop: '4px',
+                                                                            fontWeight: "400",
+                                                                            display: 'block'
+                                                                        }}>
+                                                                            ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
+                                                                        </small>
+                                                                        {tax > 0 && (
+                                                                            <small style={{
+                                                                                fontSize: '13px',
+                                                                                color: '#999',
+                                                                                fontWeight: "400",
+                                                                                display: 'block',
+
+                                                                            }}>
+                                                                                + ${tax.toFixed(2)} tax
+                                                                            </small>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                                {/* *************************** */}
+                                                                <div className="side_price_detail">
+                                                                    <div className="side_detail">
+                                                                        {/* ***** */}
+                                                                        <div className="price_box_price mobile_price_box flex justify-center flex-column m-0" style={{ position: 'relative', cursor: 'help' }}>
+                                                                            {(() => {
+                                                                                const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
+                                                                                const ratePerNight = Number(item.rate);
+                                                                                const totalBeforeTax = ratePerNight * nights;
+                                                                                const tax = Number(item.tax || 0);
+                                                                                const grandTotal = totalBeforeTax + tax;
+
+                                                                                return (
+                                                                                    <>
+                                                                                        <div
+                                                                                            style={{ textAlign: 'center' }}
+                                                                                            title={`Breakdown:\n${ratePerNight.toFixed(2)} per night × ${nights} nights = ${totalBeforeTax.toFixed(2)}\n+ Tax: ${tax.toFixed(2)}\n= Total: ${grandTotal.toFixed(2)}`}
+                                                                                        >
+                                                                                            <h4 style={{ margin: 0, fontWeight: 'bold', color: '#2c3e50' }} className='m-0'>
+                                                                                                ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                                                            </h4>
+
+                                                                                        </div>
+                                                                                    </>
+                                                                                );
+                                                                            })()}
+                                                                        </div>
+                                                                        {/* ****** */}
+                                                                        <div className="price_box_button price_view_detail mobile_price_detail flex justify-end">
+                                                                            {finalLink ? (
+                                                                                <a
+                                                                                    href={finalLink}
+                                                                                    target="_blank"
+                                                                                    rel="noopener noreferrer"
+                                                                                    className="hotel_detail_button text-white"
+                                                                                    style={{ textDecoration: 'none', display: 'inline-block' }}
+                                                                                >
+                                                                                    view deals
+                                                                                </a>
+                                                                            ) : (
+                                                                                <button
+                                                                                    className="hotel_detail_button text-white"
+                                                                                >
+                                                                                    view deals
+                                                                                </button>
+                                                                            )}
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                {/* ********* */}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
                                             );
                                         } else {
                                             return <div className="view_price_box" key={i}>
