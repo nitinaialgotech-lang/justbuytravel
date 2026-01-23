@@ -47,7 +47,7 @@ export default function HotelSearchNearByLocation({ lat, long }) {
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
     return (
         <>
-            <section className="experience_explore_section">
+            <section className="experience_explore_section padding_bottom">
                 <div className="container">
                     <div className="row">
                         <div className="explore_section section_title m">

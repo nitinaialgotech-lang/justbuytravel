@@ -14,6 +14,7 @@ import HotelFacilities from "./HotelFacilities";
 import ImageGallery from "./ImageGallery";
 import { IoShareOutline } from "react-icons/io5";
 // Swiper React components
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IoLocationOutline } from "react-icons/io5";
 // Swiper styles
@@ -175,7 +176,52 @@ export default function SearchHotelDetail() {
     const hotelAmenties = accommodationData?.data?.data?.amenities;
     const hotelPricing = accommodationData?.data?.data?.otaPricing;
 
+    // ********************************** auto scroll 
+    const priceSectionRef = useRef(null);
+    const [mounted, setMounted] = useState(false);
+    const slowScrollTo = (targetY, duration = 1200) => {
+        const startY = window.pageYOffset;
+        const distance = targetY - startY;
+        let startTime = null;
 
+        const easeInOutCubic = (t) =>
+            t < 0.5
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+        const animation = (currentTime) => {
+            if (!startTime) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            const ease = easeInOutCubic(progress);
+
+            window.scrollTo(0, startY + distance * ease);
+
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        };
+
+        requestAnimationFrame(animation);
+    };
+    // *************************************
+    const handleScrollToPrice = () => {
+        if (!priceSectionRef.current) return;
+        setTimeout(() => {
+            priceSectionRef.current?.classList.add("pulse");
+        }, 1500);
+
+        const headerOffset = 80; // sticky header height
+        const elementPosition =
+            priceSectionRef.current.getBoundingClientRect().top +
+            window.pageYOffset;
+
+        slowScrollTo(elementPosition - headerOffset, 1500); // 👈 slower = bigger number
+    };
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
     return (
         <>
             <Header />
@@ -220,9 +266,6 @@ export default function SearchHotelDetail() {
           overflow: hidden;
         }
       ` }} />
-
-
-
             <section className="hoteldetail ">
                 <div className="container">
                     <div className="row">
@@ -238,7 +281,7 @@ export default function SearchHotelDetail() {
                                                     <MdOutlineKeyboardArrowLeft />
                                                 </div>
                                                 <div className="mobile_share_icon">
-                                                    <div className="icon flex gap-2 items-center pe-5">
+                                                    <div className="icon flex gap-2 items-center ">
                                                         <span>
                                                             <img src="/justbuytravel_next/demo/hoteldetail/export.svg" width={18} alt="" />
                                                         </span>
@@ -254,8 +297,8 @@ export default function SearchHotelDetail() {
                                         </div>
                                         {/* ******************** end mobile view */}
                                         <div className="title flex items-center justify-between">
-                                            <h2 className="m-0">{HotelDetail?.displayName?.text}</h2>
-                                            <div className="icon flex gap-2 items-center pe-5 d-none d-lg-block">
+                                            <h2 className="m-0 hotel_botom_margin ">{HotelDetail?.displayName?.text}</h2>
+                                            <div className="icon flex gap-2 items-center d-none d-lg-block">
                                                 <span>
                                                     <img src="/justbuytravel_next/demo/hoteldetail/export.svg" width={18} alt="" />
                                                 </span>
@@ -268,7 +311,7 @@ export default function SearchHotelDetail() {
 
                                     </div>
                                     <div className="hotel_contact_info flex items-center justify-between">
-                                        <div className="hotel_contact_link">
+                                        <div className="hotel_contact_link hotel_botom_margin ">
                                             <p className="m-0"><span className="rating-stars" style={{ marginRight: 6 }}>
                                                 {(() => {
                                                     // Assume first review object for star rendering, fallback to 0
@@ -289,7 +332,7 @@ export default function SearchHotelDetail() {
                                                 })()}
                                             </span>
                                                 {HotelDetail?.rating} ({ratingCount} reviews )</p>
-                                            <ul className="flex p-0 m-0">
+                                            <ul className="flex p-0 m-0 hotel_botom_margin">
                                                 <li>
                                                     <span><img src="/justbuytravel_next/demo/hoteldetail/global.svg" width={20} alt="" /></span>
                                                     <span><Link href={""}>visit hotel website</Link></span>
@@ -317,8 +360,9 @@ export default function SearchHotelDetail() {
                                                 <p className="m-0">hotels.com</p>
                                             </div>
                                             <div className="price_view_detail">
-                                                <button className="hotel_detail_button text-white">
-                                                    view details
+                                                <button className="hotel_detail_button text-white" onClick={handleScrollToPrice
+                                                }>
+                                                    view Deals
                                                 </button>
                                             </div>
                                         </div>
@@ -581,17 +625,21 @@ export default function SearchHotelDetail() {
                 </div>
             </section>
             {/* ******************* */}
-
-            <ViewPriceDetail
-                PriceRate={PriceData}
-                hotelName={locationName}
-                hotelAddress={locationAddress}
-                hotelData={hoteldata?.data}
-                onSearchDates={handleSearchDates}
-                isLoadingPrices={isPriceLoading || isPriceFetching}
-                initialCheckin={searchCheckin}
-                initialCheckout={searchCheckout}
-            />
+            <div
+                ref={mounted ? priceSectionRef : null}
+                className={mounted ? "price-section" : undefined}
+            >
+                <ViewPriceDetail
+                    PriceRate={PriceData}
+                    hotelName={locationName}
+                    hotelAddress={locationAddress}
+                    hotelData={hoteldata?.data}
+                    onSearchDates={handleSearchDates}
+                    isLoadingPrices={isPriceLoading || isPriceFetching}
+                    initialCheckin={searchCheckin}
+                    initialCheckout={searchCheckout}
+                />
+            </div>
             <HotelAllReview reviews={userReviews} />
             <HotelLocation lat={latitude} long={longitude} load={isLoading} />
             <PopularHotelAroundWorld lat={latitude} long={longitude} />

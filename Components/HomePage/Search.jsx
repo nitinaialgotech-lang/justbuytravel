@@ -164,9 +164,11 @@ export default function Search() {
     // *********************************************** dropdown >>>>>>>>>...........................
     /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button  */
     const [searchAll, setSearchAll] = useState(true);
+    const [activeTab, setActiveTab] = useState("all");
     /********************* */
     /*********************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
     const [searchContent, setSearchContent] = useState("");
+    const [textContent, setContenttext] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [imageErrors, setImageErrors] = useState({});
@@ -351,23 +353,23 @@ export default function Search() {
                                 <div className="tab_link flex justify-between items-center">
                                     <ul className="flex items-center p-0">
                                         <li>
-                                            <Link href={""} className={`${searchAll ? "g_color" : ""}`} onClick={(e) => { e.preventDefault(); setSearchAll(true) }}>
+                                            <Link href={""} className={`${activeTab === "all" ? "g_color" : ""}`} onClick={(e) => { e.preventDefault(); setSearchAll(true); setActiveTab("all"); setContenttext("place to go,things to do,hotels...") }}>
                                                 <span> <FiSearch /></span> <span>search all</span>
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href={""}>
+                                            <Link href={""} className={`${activeTab === "flights" ? "g_color" : ""}`} onClick={(e) => { e.preventDefault(); setActiveTab("flights"); setContenttext("Flight, Travel ..") }}>
                                                 <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_flight.webp" alt="" /> flights
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href={""} className={`${searchAll ? "" : "g_color"}`} onClick={(e) => { e.preventDefault(); setSearchAll(false) }}>
+                                            <Link href={""} className={`${activeTab === "hotels" ? "g_color" : ""}`} onClick={(e) => { e.preventDefault(); setSearchAll(false); setActiveTab("hotels"); setContenttext("hotel name or destination") }}>
                                                 <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_hotel.webp" alt="" /> hotels
                                             </Link>
                                         </li>
 
                                         <li>
-                                            <Link href={""}>
+                                            <Link href={""} className={`${activeTab === "Packages" ? "g_color" : ""}`} onClick={(e) => { e.preventDefault(); setContenttext("attraction, activity or destination"); setActiveTab("Packages"); }}>
                                                 <img className='icon_link' src="/justbuytravel_next/demo/header_icon/package-1.webp" alt="" /> Packages
                                             </Link>
                                         </li>
@@ -409,8 +411,8 @@ export default function Search() {
                                             onFocus={() => {
                                                 if (places.length > 0) setShowDropdown(true);
                                             }}
-                                            className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-12"
-                                            placeholder="Search for hotels in a city..."
+                                            className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-12 capitalize"
+                                            placeholder={textContent || "Search for places, hotels, activities..."}
                                         />
                                         <button
                                             type="submit"
@@ -548,7 +550,7 @@ export default function Search() {
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
                             <div className="mobile_search_box  d-block d-lg-none">
                                 <div className="mobole_boxs relative">
-                                    <form                                     onSubmit={(e) => {
+                                    <form onSubmit={(e) => {
                                         e.preventDefault();
                                         const trimmed = searchContent.trim();
                                         if (trimmed.length === 0) return;
