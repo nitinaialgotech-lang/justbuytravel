@@ -21,10 +21,10 @@ export default function QuickLinks() {
                                     <div className="quick_link_items">
                                         {/* <h4>Asia Flights</h4> */}
                                         <ul className='p-0 flex capitalize'>
-                                            <li ><Link href={"/dubai"}>Hotel In Dubai</Link></li>
+                                            <li ><Link href={"/book-hotels-dubai"}>Hotel In Dubai</Link></li>
                                             {/* <li ><Link href={"/newyork"}>New York To London</Link></li> */}
-                                            <li ><Link href={"/australia"}>Hotel In Australia</Link></li>
-                                            <li ><Link href={"/canada"}>Hotel In Canada</Link></li>
+                                            <li ><Link href={"/hotels-in-australia"}>Hotel In Australia</Link></li>
+                                            <li ><Link href={"/hotels-in-canada"}>Hotel In Canada</Link></li>
                                             <li ><Link href={"/denmark"}>Hotel In Denmark</Link></li>
                                             <li ><Link href={"/glasgow"}>Hotel In glasgow</Link></li>
                                             <li ><Link href={"/goa"}>Hotel In goa</Link></li>

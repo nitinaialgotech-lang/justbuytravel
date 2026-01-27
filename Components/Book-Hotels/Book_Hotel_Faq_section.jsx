@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import './faq.css'
+import "../HomePage/Faq/faq.css"
 import { Accordion } from 'react-bootstrap'
 import { GoPlusCircle } from "react-icons/go"
 import { MdArrowOutward } from 'react-icons/md'
@@ -9,42 +9,43 @@ const DEFAULT_KEY = "0"
 
 const FAQS = [
     {
-        title: 'How does Just Buy Travel work as a travel research platform?',
+        title: 'How can I choose the right hotel for my trip?',
         content: <>
-            Just Buy Travel works as a travel research platform that helps users compare hotels, flights, holidays, and cruises using trusted third-party travel websites before making a booking decision
+            Choosing the right hotel becomes easier when you compare hotel prices online across multiple trusted travel platforms. This helps travelers understand price differences, locations, and available options before deciding where to stay.
+
         </>,
         key: "0"
     },
     {
-        title: 'Can I book hotels or flights directly on Just Buy Travel?',
+        title: ' What is the best way to plan hotel stays online?',
         content: <>
-            No. Just Buy Travel does not process hotel or flight bookings directly. We help users compare hotel booking sites and flight comparison websites, then redirect them to trusted platforms to complete the booking.
+            Planning hotel stays online works best when travelers research different platforms offering online hotel booking, allowing them to evaluate prices, features, and reliability before moving forward.
+
         </>,
         key: "1"
     },
     {
-        title: 'Which are the best hotel booking sites to compare on Just Buy Travel?',
-        content: 'Just Buy Travel compares popular and trusted hotel booking sites, allowing users to research hotel prices, availability, and options in one place before choosing the best platform.',
+        title: 'How can travelers save money on hotel stays?',
+        content: 'Travelers looking to save money should explore platforms that focus on cheap hotel booking online, which helps identify affordable accommodation options without compromising essential amenities.',
         key: "2"
     },
     {
-        title: 'Does Just Buy Travel show real hotel and flight prices?',
+        title: 'Is it possible to book hotels for international trips safely?',
         content: <>
-            Yes. Just Buy Travel displays hotel and flight prices provided by trusted travel websites. Final prices, availability, and taxes are confirmed on the partner website before booking.
+            Yes, many travelers rely on trusted platforms for international hotel booking, especially when planning trips abroad. Comparing reliable websites helps ensure secure and well-informed decisions.
         </>,
         key: "3"
     },
     {
-        title: 'Is Just Buy Travel suitable for worldwide and international travel research?',
+        title: 'How do I know which platform suits my travel needs best?',
         content: <>
-            Yes. Just Buy Travel supports worldwide travel research, helping users compare hotels and flights globally using the best online travel websites for international trips.
+            Understanding your travel requirements and researching multiple platforms helps identify the best hotel booking site based on destination, budget, and overall value.
 
         </>,
         key: "4"
     }
 ]
-
-export default function FaqSection() {
+export default function Book_Hotel_Faq_section() {
     const [activeKey, setActiveKey] = useState(DEFAULT_KEY)
     const [isDesktop, setIsDesktop] = useState(false)
 
@@ -76,7 +77,6 @@ export default function FaqSection() {
             setActiveKey(activeKey === key ? null : key)
         }
     }
-
     return (
         <section className="faq-wrapper  padding_bottom">
             <div className="container ">
@@ -84,10 +84,9 @@ export default function FaqSection() {
                     <h2 className='mb-0 capitalize'>
                         Frequently Asked Questions
                     </h2>
-                    <h5 >
+                    {/* <h5 >
                         Simple answers to help you plan your stay with ease.
-
-                    </h5>
+                    </h5> */}
                 </div>
                 <Accordion activeKey={activeKey}>
                     {FAQS.map((item) => (

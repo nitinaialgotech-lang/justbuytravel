@@ -14,11 +14,11 @@ export default function AustraliaBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Affordable Luxury Awaits in  <span> Australia</span>
+                                            Hotels in <span> Australia</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                                How can we help you travel better for less?
-                                                            </h5> */}
+                                        <h5 className='capitalize'>
+                                            Explore budget, luxury, and family-friendly hotels across Australia from trusted booking partners.
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

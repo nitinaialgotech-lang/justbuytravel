@@ -403,7 +403,7 @@ button {
 }
 
 .banner_box > .title > h1 {
-  font-size: 90px;
+  font-size: 70px;
   color: var(--color);
   font-weight: 900;
   line-height: 1;
@@ -2075,7 +2075,7 @@ span.rating-stars {
   padding: 50px 0px 0px 0px;
 }
 .hotel_tips_content > p {
-  font-size: 19px;
+  font-size: 16px;
   text-transform: capitalize;
   text-align: justify;
   font-weight: 300;
