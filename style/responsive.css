@@ -195,6 +195,11 @@
     font-size: 15px;
     text-decoration: none;
   }
+  .mobile_search_box > .form_search_expedia > iframe {
+    min-height: 305px;
+    height: 100%;
+  }
+
   .mobile_search_box form > .icon_search {
     top: 15%;
   }
@@ -870,6 +875,11 @@
 }
 /* ***************************************************************************************** */
 @media only screen and (max-width: 390px) {
+  /* ******************************************* mobilr  */
+  .mobile_search_box > .form_search_expedia > iframe {
+    min-height: 410px;
+    height: 100%;
+  }
   .search_banner_box > .title > h1,
   .search_banner_box > .title > h2 {
     font-size: 35px;
