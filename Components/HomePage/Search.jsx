@@ -492,7 +492,7 @@ export default function Search() {
                             </div>
                             {/* ********************* search input xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
                             <div className="search_box_input d-none d-lg-block">
-                                {localStorage.getItem("searchType") === "flight" ? (
+                                {searchType === "flight" ? (
                                     <Search_flight_section />
                                 ) : (
 
@@ -689,7 +689,7 @@ export default function Search() {
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
                             <div className="mobile_search_box  d-block d-lg-none">
                                 {
-                                    localStorage.getItem("searchType") === "flight" ? (
+                                    searchType === "flight" ? (
                                         <Search_flight_section />
                                     ) : (
                                         <div className="mobole_boxs relative">
