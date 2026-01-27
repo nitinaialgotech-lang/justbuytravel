@@ -7,6 +7,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import 'swiper/css/pagination';
+import Search_flight_section from './Search_flight_section';
 
 export default function Flight_Iconic_Places() {
     const [iconicIsActive, setIconicActive] = useState(true);
@@ -33,6 +34,7 @@ export default function Flight_Iconic_Places() {
         <>
             <section className='flight_iconic_places padding_bottom bg_grey padding_top'>
                 <div className="container">
+
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="iconic_place_title">
