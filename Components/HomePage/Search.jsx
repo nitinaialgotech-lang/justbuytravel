@@ -1,13 +1,19 @@
 "use client";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState, useRef, use, act } from "react";
+import React, { useCallback, useEffect, useState, useRef, use } from "react";
 import { FaHotel, FaUser } from "react-icons/fa";
 import { MdFlight } from "react-icons/md";
 import { FaCar } from "react-icons/fa6";
 import { GrBike } from "react-icons/gr";
 import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
-import { Dropdown_Get, Get_cityName, RestaurantApi, searchHotel, SearchLocation } from "@/app/Route/endpoints";
+import {
+    Dropdown_Get,
+    Get_cityName,
+    RestaurantApi,
+    searchHotel,
+    SearchLocation,
+} from "@/app/Route/endpoints";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DestinationSection from "./DestinationSection/DestinationSection";
@@ -16,7 +22,7 @@ import GetOfferSection from "./GetOfferSection/GetOfferSection";
 import ExperienceExploreSection from "./ExpereinceExploreSection/ExperienceExploreSection";
 import Footer from "@/component/Footer";
 import { FiSearch } from "react-icons/fi";
-import { autoComplete, searchText } from '@/app/Route/endpoints';
+import { autoComplete, searchText } from "@/app/Route/endpoints";
 import Search_flight_section from "../Book-Flights/Search_flight_section";
 export default function Search() {
     // const reverseGeocode = useCallback(async (lat, lng) => {
@@ -33,7 +39,6 @@ export default function Search() {
     //         const data = await response.json();
 
     //         console.log(data, "data of reverse unicode ");
-
 
     //         if (!data?.address) return null;
 
@@ -147,15 +152,38 @@ export default function Search() {
     //             maximumAge: 60000,
     //         }
     //     );
-    // }, [reverseGeocode, doSearch]); 
+    // }, [reverseGeocode, doSearch]);
     // **************************************************************************************
     // ********************************************************************************************************************
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pathname = usePathname();
     const query = searchParams.get("query") || "";
+    const [searchType, setSearchType] = useState(() => {
+        const storedType = localStorage.getItem("searchType");
+        if (storedType === "hotels" || storedType === "Restaurant" || storedType === "flight") {
+            return storedType;
+        }
+        localStorage.setItem("searchType", "all");
+        return "all";
+    });
+
     useEffect(() => {
+
+        // localStorage.removeItem("searchType");
         setSearchContent(query);
+
     }, [query]);
+    //    ******************************************* on crefresh local value change // 
+    useEffect(() => {
+
+        localStorage.setItem("searchType", "all");
+        setSearchType("all")
+
+    }, [])
+
+
+
 
     const route = useRouter();
     // const handleSearch = () => {
@@ -163,72 +191,11 @@ export default function Search() {
     //     router.push(`/search?query=${encodeURIComponent(searchContent)}`);
     // };
     // *********************************************** dropdown >>>>>>>>>...........................
-
-
-
-    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
+    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button  */
     const [searchAll, setSearchAll] = useState(true);
     const [activeTab, setActiveTab] = useState("all");
-    const [searchType, setSearchType] = useState("all");
-    const [searchUserType, setSearchUserType] = useState("");
-    const pathname = usePathname();
 
-    // ********************************
-
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-        const stored = window.localStorage.getItem("searchType");
-        if (stored) {
-            setSearchType(stored);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (pathname == "/") {
-            setActiveTab("all");
-            setSearchAll(true);
-            setContenttext("place to go, things to do, hotels...");
-            setSearchType("all");
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem("searchType", "all");
-            }
-        }
-
-        else if (pathname == "/book-flights/") {
-            setActiveTab("flights");
-            setSearchAll(false);
-            setContenttext("Flight, Travel ..");
-            setSearchType("flights");
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem("searchType", "flights");
-            }
-        }
-
-        else if (pathname == "/book-hotels/") {
-            setActiveTab("hotels");
-            setSearchAll(false);
-            setContenttext("hotel name or destination");
-            setSearchType("hotels");
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem("searchType", "hotels");
-            }
-        }
-
-        // else if (pathname == "/book-packages/") {
-        //     setActiveTab("Packages");
-        //     setSearchAll(false);
-        //     setContenttext("attraction, activity or destination");
-        //     setSearchType("Packages");
-        //     if (typeof window !== "undefined") {
-        //         window.localStorage.setItem("searchType", "Packages");
-        //     }
-        // }
-    }, [pathname]);
-
-
-
-    /********************* *********************************************************************************/
-
+    /********************* */
     /*********************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
     const [searchContent, setSearchContent] = useState("");
     const [textContent, setContenttext] = useState("");
@@ -279,13 +246,13 @@ export default function Search() {
 
     // Handle image load start
     const handleImageLoadStart = (placeId) => {
-        setImageLoading(prev => ({ ...prev, [placeId]: true }));
+        setImageLoading((prev) => ({ ...prev, [placeId]: true }));
     };
 
     // Handle image load success
     const handleImageLoad = (placeId) => {
-        setImageLoading(prev => ({ ...prev, [placeId]: false }));
-        setImageErrors(prev => {
+        setImageLoading((prev) => ({ ...prev, [placeId]: false }));
+        setImageErrors((prev) => {
             const newErrors = { ...prev };
             delete newErrors[placeId];
             return newErrors;
@@ -294,34 +261,30 @@ export default function Search() {
 
     // Handle image load error
     const handleImageError = (placeId, e) => {
-        setImageLoading(prev => ({ ...prev, [placeId]: false }));
-        setImageErrors(prev => ({ ...prev, [placeId]: true }));
-        e.target.src = 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
+        setImageLoading((prev) => ({ ...prev, [placeId]: false }));
+        setImageErrors((prev) => ({ ...prev, [placeId]: true }));
+        e.target.src =
+            "https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel";
         e.target.onerror = null; // Prevent infinite loop
     };
 
     // Fetch autocomplete results
     const { data: autoCompleteData, isLoading } = useQuery({
         queryKey: ["autoComplete", searchContent, searchAll],
-        queryFn: async () => {
-            if (!searchContent.trim()) return { places: [] };
-          
-            if (activeTab === "all") {
-              return await searchText(searchContent);
-            }
-          
-            if (activeTab === "hotels") {
-              return await searchHotel(searchContent);
-            }
-          
-            if (activeTab === "restaurants") {
-              return await RestaurantApi(searchContent);
-            }
-          
-            return { places: [] };
-          },
-          
+        queryFn: () => {
 
+
+            // searchAll ? searchText(searchContent) : searchHotel(searchContent),
+            if (localStorage.getItem("searchType") === "all") {
+                return searchText(searchContent);
+            }
+            else if (localStorage.getItem("searchType") === "hotels") {
+                return searchHotel(searchContent);
+            }
+            else if (localStorage.getItem("searchType") === "Restaurant") {
+                return RestaurantApi(searchContent)
+            }
+        },
         enabled: searchContent.length > 0,
         staleTime: 30000, // Cache for 30 seconds
     });
@@ -339,9 +302,9 @@ export default function Search() {
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
 
@@ -363,64 +326,76 @@ export default function Search() {
     };
 
     const handleSelectPlace = (place) => {
-
         setSearchContent(place.displayName?.text || place.formattedAddress || "");
         setShowDropdown(false);
-        const lat =
-            place?.location?.latitude || " "
+        const lat = place?.location?.latitude || " ";
 
-        const long =
-            place?.location?.longitude || " "
-        const id = place?.id
+        const long = place?.location?.longitude || " ";
+        const id = place?.id;
         // You can add navigation or search logic here
         // ************************************** searching hortel or search alll
-        if (searchAll) {
+        // if (searchAll) {
+        //     viewSearchAll(lat, long);
+        // } else {
+        //     ViewHotels(id);
+        // }
 
-            viewSearchAll(lat, long)
+        if (localStorage.getItem("searchType") === "all") {
+            viewSearchAll(lat, long);
         }
-        else {
-            ViewHotels(id)
+        else if (localStorage.getItem("searchType") === "hotels") {
+            ViewHotels(id);
         }
+        else if (localStorage.getItem("searchType") === "Restaurant") {
+            ViewHotels(id);
+        }
+
+
+
     };
-
-
-
-
     const handleKeyDown = (e) => {
+        const places =
+            autoCompleteData?.data?.places || autoCompleteData?.places || [];
 
-        const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
-
-        if (e.key === 'ArrowDown') {
+        if (e.key === "ArrowDown") {
             e.preventDefault();
-            setSelectedIndex((prev) =>
-                prev < places.length - 1 ? prev + 1 : prev
-            );
-        } else if (e.key === 'ArrowUp') {
+            setSelectedIndex((prev) => (prev < places.length - 1 ? prev + 1 : prev));
+        } else if (e.key === "ArrowUp") {
             e.preventDefault();
             setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
-        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+        } else if (e.key === "Enter" && selectedIndex >= 0) {
             e.preventDefault();
             // handleSelectPlace(places[selectedIndex])
-
-
-        } else if (e.key === 'Escape') {
+        } else if (e.key === "Escape") {
             setShowDropdown(false);
         }
     };
 
     // Extract places from response - handle both direct response and nested data
-    const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
-    const cityName = places?.map((item) => item?.displayName?.text)
+    const places =
+        autoCompleteData?.data?.places || autoCompleteData?.places || [];
+    const cityName = places?.map((item) => item?.displayName?.text);
     // (**************************** mrouter )
 
     const viewSearchAll = (lat, long) => {
-        route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
-    }
+        route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`);
+    };
     // **************************** hotel search
 
     const ViewHotels = (id) => {
         router.push(`/hoteldetail?hotel=${id}`);
-    }
+
+    };
+    // *********************************
+
+    const handleSearchTypeChange = (type) => {
+        localStorage.setItem("searchType", type);
+        setSearchType(type);
+    };
+
+
+
+
 
     return (
         <>
@@ -432,29 +407,91 @@ export default function Search() {
                                 <div className="tab_link flex justify-between items-center">
                                     <ul className="flex items-center p-0">
                                         <li>
-                                            <Link href={"/"} className={`${activeTab === "all" ? "g_color" : ""} cursor-pointer`} onClick={(e) => { setSearchAll(true); }}>
-                                                <span> <FiSearch /></span> <span>search all</span>
+                                            <Link
+                                                href={""}
+                                                className={`${localStorage.getItem("searchType") === "all" ? "g_color" : ""}`}
+                                                onClick={(e) => {
+                                                    setSearchAll(true);
+                                                    handleSearchTypeChange("all");
+
+                                                }}
+                                            >
+                                                <span>
+                                                    {" "}
+                                                    <FiSearch />
+                                                </span>{" "}
+                                                <span>search all</span>
                                             </Link>
                                         </li>
+
                                         <li>
-                                            <Link href={"/book-flights"} className={`${activeTab === "flights" ? "g_color" : ""} cursor-pointer`} >
-                                                <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_flight.webp" alt="" /> flights
+                                            <Link
+                                                href={"/book-flights"}
+                                                className={`${localStorage.getItem("searchType") === "flight" ? "g_color" : ""}`}
+                                                onClick={(e) => {
+                                                    handleSearchTypeChange("flight");
+                                                }}
+                                            >
+                                                <img
+                                                    className="icon_link"
+                                                    src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
+                                                    alt=""
+                                                />{" "}
+                                                flights
                                             </Link>
                                         </li>
+
                                         <li>
-                                            <Link href={"/book-hotels"} className={`${activeTab === "hotels" ? "g_color" : ""} cursor-pointer`} onClick={(e) => { setSearchAll(false); }}>
-                                                <img className='icon_link' src="/justbuytravel_next/demo/header_icon/icon_hotel.webp" alt="" /> hotels
+                                            <Link
+                                                href={""}
+                                                className={`${localStorage.getItem("searchType") === "hotels" ? "g_color" : ""}`}
+                                                onClick={(e) => {
+                                                    setSearchAll(false);
+                                                    handleSearchTypeChange("hotels");
+
+
+                                                }}
+                                            >
+                                                <img
+                                                    className="icon_link"
+                                                    src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
+                                                    alt=""
+                                                />{" "}
+                                                hotels
                                             </Link>
                                         </li>
-                                        {/* 
-                                        <li>
-                                            <Link href={"/book-packages"} className={`${activeTab === "Packages" ? "g_color" : ""} cursor-pointer`} >
-                                                <img className='icon_link' src="/justbuytravel_next/demo/header_icon/package-1.webp" alt="" /> Packages
+
+                                        {/* <li>
+                                            <Link
+                                                href={""}
+                                                className={`${localStorage.getItem("searchType") === "Packages" ? "g_color" : ""}`}
+                                                onClick={(e) => {
+
+                                                }}
+                                            >
+                                                <img
+                                                    className="icon_link"
+                                                    src="/justbuytravel_next/demo/header_icon/package-1.webp"
+                                                    alt=""
+                                                />{" "}
+                                                Packages
                                             </Link>
                                         </li> */}
                                         <li>
-                                            <Link href={""}>
-                                                <img src="/justbuytravel_next/demo/header_icon/restaurant_icon.svg" alt="" /> Restaurants
+                                            <Link
+                                                href={""}
+                                                className={`${localStorage.getItem("searchType") === "Restaurant" ? "g_color" : ""}`}
+                                                onClick={(e) => {
+                                                    setSearchAll(false);
+                                                    handleSearchTypeChange("Restaurant");
+                                                }}
+                                            >
+                                                <img
+                                                    className="icon_link"
+                                                    src="/justbuytravel_next/demo/header_icon/restaurant_icon.svg"
+                                                    alt=""
+                                                />{" "}
+                                                Restaurants
                                             </Link>
                                         </li>
                                     </ul>
@@ -467,188 +504,214 @@ export default function Search() {
                             </div>
                             {/* ********************* search input xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
 
-                            <div className="search_box_input d-none d-lg-block">
-
-                                {
-                                    searchType === "flights" ? (
-                                        <Search_flight_section />
-                                    ) : (
-                                        <>
-                                            <form
-                                                className="mx-auto"
-                                                onSubmit={(e) => {
-
-                                                    const trimmed = searchContent.trim();
-                                                    if (trimmed.length === 0) return;
-                                                    // Add your search navigation logic here
+                            {localStorage.getItem("searchType") == "flight" ? (
+                                <Search_flight_section />
+                            ) : (
+                                <div className="search_box_input d-none d-lg-block">
+                                    <form
+                                        className="mx-auto"
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                            const trimmed = searchContent.trim();
+                                            if (trimmed.length === 0) return;
+                                            // Add your search navigation logic here
+                                        }}
+                                    >
+                                        <div className="relative search_box">
+                                            <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none icon_search">
+                                                <CiSearch />
+                                            </div>
+                                            <input
+                                                ref={inputRef}
+                                                type="text"
+                                                value={searchContent}
+                                                onChange={handleInputChange}
+                                                onKeyDown={handleKeyDown}
+                                                onFocus={() => {
+                                                    if (places.length > 0) setShowDropdown(true);
                                                 }}
+                                                className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-12 capitalize"
+                                                placeholder={
+                                                    textContent ||
+                                                    "Search for places, hotels, activities..."
+                                                }
+                                            />
+                                            <button
+                                                type="submit"
+                                                className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs focus:outline-none button_bg2 text-white rounded search_full_button_padding "
                                             >
-                                                <div className="relative search_box">
-                                                    <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none icon_search">
-                                                        <CiSearch />
-                                                    </div>
-                                                    <input
-                                                        ref={inputRef}
-                                                        type="text"
-                                                        value={searchContent}
-                                                        onChange={handleInputChange}
-                                                        onKeyDown={handleKeyDown}
-                                                        onFocus={() => {
-                                                            if (places.length > 0) setShowDropdown(true);
-                                                        }}
-                                                        className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-12 capitalize"
-                                                        placeholder={textContent || "Search for places, hotels, activities..."}
-                                                    />
-                                                    <button
-                                                        type="submit"
-                                                        className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs focus:outline-none button_bg2 text-white rounded search_full_button_padding "
-                                                    >
-                                                        Search
-                                                    </button>
+                                                Search
+                                            </button>
 
-                                                    {/* ********************************* seachinf dropdown xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
-                                                    {/* Autocomplete Dropdown */}
-                                                    {showDropdown && (
-                                                        <div
-                                                            ref={dropdownRef}
-                                                            className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto"
-                                                        >
-                                                            {isLoading ? (
-                                                                <div className="px-4 py-6 text-center text-gray-500 text-sm">
-                                                                    <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
-                                                                    Loading hotels...
-                                                                </div>
-                                                            ) : places.length > 0 ? (
-                                                                places.map((place, index) => {
-                                                                    const placeId = place.id || `place-${index}`;
-
-                                                                    const photoUrl = getPhotoUrl(place);
-                                                                    const hasImageError = imageErrors[placeId];
-                                                                    const displayImage = photoUrl && !hasImageError ? photoUrl : 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
-                                                                    const image = place?.photos?.slice(0, 1)?.map((item) => item?.name);
-
-
-
-                                                                    return (
-                                                                        <div
-                                                                            key={placeId}
-                                                                            // onClick={() => handleSelectPlace(place)}
-                                                                            onMouseEnter={() => setSelectedIndex(index)}
-                                                                            onMouseDown={(e) => {
-                                                                                e.preventDefault();
-                                                                                handleSelectPlace(place);
-                                                                            }}
-                                                                            className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ${selectedIndex === index
-                                                                                ? 'bg-blue-50 border-l-4 border-blue-500'
-                                                                                : 'hover:bg-gray-50 border-l-4 border-transparent'
-                                                                                }`}
-                                                                        >
-                                                                            {/* Hotel Image */}
-                                                                            <div className="flex-shrink-0">
-                                                                                <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
-                                                                                    {imageLoading[placeId] && (
-                                                                                        <div className="absolute inset-0 flex items-center justify-center">
-                                                                                            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-                                                                                        </div>
-                                                                                    )}
-                                                                                    <img
-                                                                                        src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
-                                                                                        alt={place.displayName?.text || 'Hotel'}
-                                                                                        className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId] ? 'opacity-0' : 'opacity-100'
-                                                                                            }`}
-                                                                                        onLoadStart={() => handleImageLoadStart(placeId)}
-                                                                                        onLoad={() => handleImageLoad(placeId)}
-                                                                                        onError={(e) => handleImageError(placeId, e)}
-                                                                                        loading="lazy"
-
-                                                                                    />
-                                                                                </div>
-                                                                            </div>
-
-                                                                            {/* Hotel Info */}
-
-                                                                            <div className="flex-1 min-w-0" >
-                                                                                <div className="font-semibold text-gray-900 text-sm mb-1 truncate" >
-                                                                                    {place.displayName?.text || 'Hotel'}
-                                                                                </div>
-                                                                                {place.formattedAddress && (
-                                                                                    <div className="text-gray-600 text-xs mb-2 line-clamp-1">
-                                                                                        {place.formattedAddress}
-                                                                                    </div>
-                                                                                )}
-                                                                                {place.rating && (
-                                                                                    <div className="flex items-center gap-2">
-                                                                                        <div className="flex items-center gap-1">
-                                                                                            <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                                                                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                                                                            </svg>
-                                                                                            <span className="text-gray-800 text-xs font-medium">
-                                                                                                {place.rating.toFixed(1)}
-                                                                                            </span>
-                                                                                        </div>
-                                                                                        {place.userRatingCount && (
-                                                                                            <span className="text-gray-500 text-xs">
-                                                                                                ({place.userRatingCount.toLocaleString()} reviews)
-                                                                                            </span>
-                                                                                        )}
-                                                                                        {place.priceLevel !== undefined && (
-                                                                                            <span className="text-gray-500 text-xs ml-2">
-                                                                                                {place.priceLevel === 0 ? 'Free' : '$'.repeat(place.priceLevel)}
-                                                                                            </span>
-                                                                                        )}
-                                                                                    </div>
-                                                                                )}
-                                                                            </div>
-
-                                                                            {/* Arrow Icon */}
-                                                                            <div className="flex-shrink-0">
-                                                                                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                                                </svg>
-                                                                            </div>
-                                                                        </div>
-                                                                    );
-                                                                })
-                                                            ) : searchContent.length > 0 ? (
-                                                                <div className="px-4 py-6 text-center text-gray-500 text-sm">
-                                                                    <svg className="w-12 h-12 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                    </svg>
-                                                                    No hotels found for "{searchContent}"
-                                                                </div>
-                                                            ) : null}
+                                            {/* ********************************* seachinf dropdown xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
+                                            {/* Autocomplete Dropdown */}
+                                            {showDropdown && (
+                                                <div
+                                                    ref={dropdownRef}
+                                                    className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto"
+                                                >
+                                                    {isLoading ? (
+                                                        <div className="px-4 py-6 text-center text-gray-500 text-sm">
+                                                            <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
+                                                            Loading hotels...
                                                         </div>
-                                                    )}
+                                                    ) : places.length > 0 ? (
+                                                        places.map((place, index) => {
+                                                            const placeId = place.id || `place-${index}`;
+
+                                                            const photoUrl = getPhotoUrl(place);
+                                                            const hasImageError = imageErrors[placeId];
+                                                            const displayImage =
+                                                                photoUrl && !hasImageError
+                                                                    ? photoUrl
+                                                                    : "https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel";
+                                                            const image = place?.photos
+                                                                ?.slice(0, 1)
+                                                                ?.map((item) => item?.name);
+
+                                                            return (
+                                                                <div
+                                                                    key={placeId}
+                                                                    // onClick={() => handleSelectPlace(place)}
+                                                                    onMouseEnter={() => setSelectedIndex(index)}
+                                                                    onMouseDown={(e) => {
+                                                                        e.preventDefault();
+                                                                        handleSelectPlace(place);
+                                                                    }}
+                                                                    className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ${selectedIndex === index
+                                                                        ? "bg-blue-50 border-l-4 border-blue-500"
+                                                                        : "hover:bg-gray-50 border-l-4 border-transparent"
+                                                                        }`}
+                                                                >
+                                                                    {/* Hotel Image */}
+                                                                    <div className="flex-shrink-0">
+                                                                        <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
+                                                                            {imageLoading[placeId] && (
+                                                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                                                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+                                                                                </div>
+                                                                            )}
+                                                                            <img
+                                                                                src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                                alt={place.displayName?.text || "Hotel"}
+                                                                                className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId]
+                                                                                    ? "opacity-0"
+                                                                                    : "opacity-100"
+                                                                                    }`}
+                                                                                onLoadStart={() =>
+                                                                                    handleImageLoadStart(placeId)
+                                                                                }
+                                                                                onLoad={() => handleImageLoad(placeId)}
+                                                                                onError={(e) =>
+                                                                                    handleImageError(placeId, e)
+                                                                                }
+                                                                                loading="lazy"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {/* Hotel Info */}
+
+                                                                    <div className="flex-1 min-w-0">
+                                                                        <div className="font-semibold text-gray-900 text-sm mb-1 truncate">
+                                                                            {place.displayName?.text || "Hotel"}
+                                                                        </div>
+                                                                        {place.formattedAddress && (
+                                                                            <div className="text-gray-600 text-xs mb-2 line-clamp-1">
+                                                                                {place.formattedAddress}
+                                                                            </div>
+                                                                        )}
+                                                                        {place.rating && (
+                                                                            <div className="flex items-center gap-2">
+                                                                                <div className="flex items-center gap-1">
+                                                                                    <svg
+                                                                                        className="w-4 h-4 text-yellow-400 fill-current"
+                                                                                        viewBox="0 0 20 20"
+                                                                                    >
+                                                                                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                                                    </svg>
+                                                                                    <span className="text-gray-800 text-xs font-medium">
+                                                                                        {place.rating.toFixed(1)}
+                                                                                    </span>
+                                                                                </div>
+                                                                                {place.userRatingCount && (
+                                                                                    <span className="text-gray-500 text-xs">
+                                                                                        (
+                                                                                        {place.userRatingCount.toLocaleString()}{" "}
+                                                                                        reviews)
+                                                                                    </span>
+                                                                                )}
+                                                                                {place.priceLevel !== undefined && (
+                                                                                    <span className="text-gray-500 text-xs ml-2">
+                                                                                        {place.priceLevel === 0
+                                                                                            ? "Free"
+                                                                                            : "$".repeat(place.priceLevel)}
+                                                                                    </span>
+                                                                                )}
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+
+                                                                    {/* Arrow Icon */}
+                                                                    <div className="flex-shrink-0">
+                                                                        <svg
+                                                                            className="w-5 h-5 text-gray-400"
+                                                                            fill="none"
+                                                                            stroke="currentColor"
+                                                                            viewBox="0 0 24 24"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M9 5l7 7-7 7"
+                                                                            />
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        })
+                                                    ) : searchContent.length > 0 ? (
+                                                        <div className="px-4 py-6 text-center text-gray-500 text-sm">
+                                                            <svg
+                                                                className="w-12 h-12 mx-auto mb-2 text-gray-300"
+                                                                fill="none"
+                                                                stroke="currentColor"
+                                                                viewBox="0 0 24 24"
+                                                            >
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    strokeWidth={2}
+                                                                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                                />
+                                                            </svg>
+                                                            No hotels found for "{searchContent}"
+                                                        </div>
+                                                    ) : null}
                                                 </div>
-                                            </form>
-                                        </>
-                                    )
-                                }
-
-                            </div>
-
-
-
-
-
-
-
+                                            )}
+                                        </div>
+                                    </form>
+                                </div>
+                            )}
 
                             {/* **************************************** edning */}
 
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
                             <div className="mobile_search_box  d-block d-lg-none">
                                 <div className="mobole_boxs relative">
-                                    <form onSubmit={(e) => {
-                                        e.preventDefault();
-                                        const trimmed = searchContent.trim();
-                                        if (trimmed.length === 0) return;
-                                        // Add your search navigation logic here
-                                    }}>
+                                    <form
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                            const trimmed = searchContent.trim();
+                                            if (trimmed.length === 0) return;
+                                            // Add your search navigation logic here
+                                        }}
+                                    >
                                         <input
                                             type="text"
                                             ref={inputRef}
-
                                             value={searchContent}
                                             onChange={handleInputChange}
                                             onKeyDown={handleKeyDown}
@@ -676,10 +739,13 @@ export default function Search() {
 
                                                         const photoUrl = getPhotoUrl(place);
                                                         const hasImageError = imageErrors[placeId];
-                                                        const displayImage = photoUrl && !hasImageError ? photoUrl : 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
-                                                        const image = place?.photos?.slice(0, 1)?.map((item) => item?.name);
-
-
+                                                        const displayImage =
+                                                            photoUrl && !hasImageError
+                                                                ? photoUrl
+                                                                : "https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel";
+                                                        const image = place?.photos
+                                                            ?.slice(0, 1)
+                                                            ?.map((item) => item?.name);
 
                                                         return (
                                                             <div
@@ -687,8 +753,8 @@ export default function Search() {
                                                                 onClick={() => handleSelectPlace(place)}
                                                                 onMouseEnter={() => setSelectedIndex(index)}
                                                                 className={`flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200 ${selectedIndex === index
-                                                                    ? 'bg-blue-50 border-l-4 border-blue-500'
-                                                                    : 'hover:bg-gray-50 border-l-4 border-transparent '
+                                                                    ? "bg-blue-50 border-l-4 border-blue-500"
+                                                                    : "hover:bg-gray-50 border-l-4 border-transparent "
                                                                     }`}
                                                             >
                                                                 {/* Hotel Image */}
@@ -701,13 +767,18 @@ export default function Search() {
                                                                         )}
                                                                         <img
                                                                             src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
-                                                                            alt={place.displayName?.text || 'Hotel'}
-                                                                            className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId] ? 'opacity-0' : 'opacity-100'
+                                                                            alt={place.displayName?.text || "Hotel"}
+                                                                            className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId]
+                                                                                ? "opacity-0"
+                                                                                : "opacity-100"
                                                                                 }`}
-
-                                                                            onLoadStart={() => handleImageLoadStart(placeId)}
+                                                                            onLoadStart={() =>
+                                                                                handleImageLoadStart(placeId)
+                                                                            }
                                                                             onLoad={() => handleImageLoad(placeId)}
-                                                                            onError={(e) => handleImageError(placeId, e)}
+                                                                            onError={(e) =>
+                                                                                handleImageError(placeId, e)
+                                                                            }
                                                                             loading="lazy"
                                                                         />
                                                                     </div>
@@ -716,7 +787,7 @@ export default function Search() {
                                                                 {/* Hotel Info */}
                                                                 <div className="flex-1 min-w-0">
                                                                     <div className="font-semibold text-gray-900 text-sm mb-1 truncate">
-                                                                        {place.displayName?.text || 'Hotel'}
+                                                                        {place.displayName?.text || "Hotel"}
                                                                     </div>
                                                                     {place.formattedAddress && (
                                                                         <div className="text-gray-600 text-xs mb-2 line-clamp-1">
@@ -726,7 +797,10 @@ export default function Search() {
                                                                     {place.rating && (
                                                                         <div className="flex items-center gap-2">
                                                                             <div className="flex items-center gap-1">
-                                                                                <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                                                <svg
+                                                                                    className="w-4 h-4 text-yellow-400 fill-current"
+                                                                                    viewBox="0 0 20 20"
+                                                                                >
                                                                                     <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                                                                                 </svg>
                                                                                 <span className="text-gray-800 text-xs font-medium">
@@ -735,12 +809,16 @@ export default function Search() {
                                                                             </div>
                                                                             {place.userRatingCount && (
                                                                                 <span className="text-gray-500 text-xs">
-                                                                                    ({place.userRatingCount.toLocaleString()} reviews)
+                                                                                    (
+                                                                                    {place.userRatingCount.toLocaleString()}{" "}
+                                                                                    reviews)
                                                                                 </span>
                                                                             )}
                                                                             {place.priceLevel !== undefined && (
                                                                                 <span className="text-gray-500 text-xs ml-2">
-                                                                                    {place.priceLevel === 0 ? 'Free' : '$'.repeat(place.priceLevel)}
+                                                                                    {place.priceLevel === 0
+                                                                                        ? "Free"
+                                                                                        : "$".repeat(place.priceLevel)}
                                                                                 </span>
                                                                             )}
                                                                         </div>
@@ -749,8 +827,18 @@ export default function Search() {
 
                                                                 {/* Arrow Icon */}
                                                                 <div className="flex-shrink-0">
-                                                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                                    <svg
+                                                                        className="w-5 h-5 text-gray-400"
+                                                                        fill="none"
+                                                                        stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                    >
+                                                                        <path
+                                                                            strokeLinecap="round"
+                                                                            strokeLinejoin="round"
+                                                                            strokeWidth={2}
+                                                                            d="M9 5l7 7-7 7"
+                                                                        />
                                                                     </svg>
                                                                 </div>
                                                             </div>
@@ -758,8 +846,18 @@ export default function Search() {
                                                     })
                                                 ) : searchContent.length > 0 ? (
                                                     <div className="px-4 py-6 text-center text-gray-500 text-sm">
-                                                        <svg className="w-12 h-12 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        <svg
+                                                            className="w-12 h-12 mx-auto mb-2 text-gray-300"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                            />
                                                         </svg>
                                                         No hotels found for "{searchContent}"
                                                     </div>
@@ -768,37 +866,22 @@ export default function Search() {
                                         )}
                                         {/* *************************************************** mdropdown */}
 
-
-
-
-
-
                                         <div className="absolute start-0 flex items-center ps-4 pointer-events-none icon_search">
                                             <CiSearch />
                                         </div>
-                                        <button type="submit"
-
-                                            className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 w-full w-100  search_padding ">Search</button>
+                                        <button
+                                            type="submit"
+                                            className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 w-full w-100  search_padding "
+                                        >
+                                            Search
+                                        </button>
                                     </form>
-
-
-
-
-
-
-
                                 </div>
-
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </section>
         </>
-
-
     );
 }

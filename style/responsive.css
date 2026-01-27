@@ -10,7 +10,7 @@
   --cl-bl: rgba(29, 31, 39, 1);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   /* ***************** */
   .search_container > .search_container_box > .search_tab {
     padding: 0 !important;
@@ -97,11 +97,12 @@
   }
 }
 /* ************************************************************************************************************************ */
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 767px) {
   /* ********** */
   .search_container {
     box-shadow: none;
   }
+
   /* *************************************** */
   /* .button_bg2 {
     width: 100%;
@@ -161,7 +162,7 @@
   }
   .banner_box > .title > h1,
   .banner_box > .title > h2 {
-    font-size: 32px !important;
+    font-size: 46px !important;
     line-height: 1.2 !important;
   }
   .banner_box > .title > h5 {
@@ -393,7 +394,7 @@
     line-height: 20px;
   }
   .recommend_card_box > .card_box > .card_box_detail {
-    gap: 10px;
+    gap: 1px;
     padding: 20px 15px !important;
   }
   .recommend_card_box > .card_box > .card_box_detail > .price_book {
@@ -405,6 +406,7 @@
     height: auto;
   }
   .recomend_btn {
+    margin-top: 2px;
     font-size: 10px;
   }
   .recommend_card_box
@@ -860,6 +862,11 @@
     font-size: 14px !important;
     margin: 0px !important;
   }
+
+  /* *********** */
+  .supporting_text {
+    font-size: 24px !important;
+  }
 }
 /* ***************************************************************************************** */
 @media only screen and (max-width: 390px) {
@@ -882,7 +889,7 @@
   }
   /* ************* recomnd  */
   .recommend_card_box > .card_box > .card_box_detail > .price_book {
-    gap: 10px !important;
+    gap: 4px !important;
   }
   .recommend_card_box > .card_box > .card_box_detail {
     margin-top: -32%;
