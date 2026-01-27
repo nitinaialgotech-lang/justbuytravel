@@ -14,11 +14,12 @@ export default function DubaiBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> Dubai</span>
+                                            Hotels in <span> Dubai  </span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                       How can we help you travel better for less?
-                                                   </h5> */}
+                                        <h5 className='capitalize'>
+                                            Compare cheap, luxury & 5-star hotels in Dubai from trusted partners.
+
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

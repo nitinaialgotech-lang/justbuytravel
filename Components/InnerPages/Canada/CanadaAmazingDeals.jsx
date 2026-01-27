@@ -9,19 +9,25 @@ export default function CanadaAmazingDeals() {
                         <div className="col-lg-12">
                             <div className="amazing_deals_title">
                                 <h2>
-                                    Getting ready to visit Canada and searching for how to Get the Best Deal
+                                    Planning a Trip to Canada? How to Find the Right Hotel at the Right Price
                                 </h2>
                             </div>
                             <div className="hotel_tips_content amazing_deals_content ">
                                 <p>
-                                    Canada is a happening city with natural scenery. It showcases marvelous cultural and other unforgettable events. If you are going there for business purposes or fun, checking the right place to stay is key to a stress-free trip. At JustBuyTravel, we make it easier and faster to book a hotel in Canada. It will be very quick, simple, and secure.
+                                    Canada is a beautiful country with vibrant cities and a rich culture. Whether you're traveling to Canada for business, a vacation, or a short city break, choosing the right place to stay can make all the difference to your trip. A good hotel is a great way to relax, save time, and travel with confidence.
                                 </p>
                                 <p>
-                                    We will surely help you in finding a perfect place to stay all over the world.Will also ensure that it will fit in your budget and taste. From fancy stays in cities to quiet cool places in the country. Our platform links you to premium hotel booking sites in Canada, so you can look at different ads, read reviews from other guests, and find the best deals. We have special last minute hotel deals in Canada that will make sure you never pay too much, whether you book ahead of time or look for deals at the last minute.
+                                    We make it easy to find the best hotels in Canada based on your travel needs. From city stays to tranquil retreats, travelers can find options that match their budget and comfort level. Whether you're looking for cheap hotels in Canada or highly-rated properties in popular locations, comparing options in advance helps you avoid stress and overspending.
                                 </p>
 
                                 <p>
-                                    When you make a Canada hotel reservation through JustBuyTravel, your reservation is backed by partners you can trust. We take away the guessing by providing confirmed ads, clear prices, and a range of booking choices. We’ve put together a list of the best cheap hotel booking sites Canada so you don’t have to switch between tabs or worry about secret fees.
+                                    Many travelers prefer affordable hotels in Canada that offer clean rooms, good service, and easy access to transportation. These accommodations are ideal for short trips, business travel, and family vacations. For those seeking more luxury, luxury hotels in Canada offer premium amenities, fine dining, and central locations near major attractions.
+                                </p>
+                                <p>
+                                    Even if you're traveling on a budget, you can still find the best budget hotels in Canada by checking reviews on reliable platforms and comparing prices. Flexibility with travel dates can also help you find better deals. Some travelers may even find last-minute hotel deals in Canada, especially during off-peak travel times or outside of the peak season.
+                                </p>
+                                <p>
+                                    When you book through Just Buy Travel, your booking is supported by trusted partners. We help travelers compare verified listings, transparent pricing, and reliable booking options all in one place. This way, you can focus on planning your trip while we help you find a hotel that fits your plans and your budget.
                                 </p>
 
 

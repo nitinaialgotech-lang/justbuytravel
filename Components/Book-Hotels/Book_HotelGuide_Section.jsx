@@ -30,9 +30,7 @@ const card = [
 ]
 
 
-
-export default function Trust_Guide_Section() {
-
+export default function Book_Hotel_Guide_Section() {
     const navigate = useRouter();
     const route = usePathname();
     return (
@@ -53,8 +51,8 @@ export default function Trust_Guide_Section() {
 
                             </p>
                             {/* <p>
-                                Just Buy Travel is a travel research and comparison platform designed to help users explore hotels, flights, holiday packages, and cruises using trusted third-party travel websites.
-                            </p> */}
+                                   Just Buy Travel is a travel research and comparison platform designed to help users explore hotels, flights, holiday packages, and cruises using trusted third-party travel websites.
+                               </p> */}
                         </div>
                         <div className="booking_platform relative ">
                             {/* ******************* */}
@@ -122,4 +120,5 @@ export default function Trust_Guide_Section() {
 
         </section >
     )
+
 }

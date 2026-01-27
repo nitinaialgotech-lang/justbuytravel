@@ -109,9 +109,9 @@ export default function CanadaRecomd() {
     };
     // **************************
     const router = useRouter();
-  const viewDetail = (id) => {
-    router.push(`/hoteldetail?hotel=${id}`);
-  };
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+    };
     return (
         <>
             {/* ********************* style start ****** */}
@@ -149,7 +149,7 @@ export default function CanadaRecomd() {
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Recommended For You</h2>
-                    <h5>Handpicked experiences tailored to your interests</h5>
+                    <h5>Handpicked hotels based on location, reviews, and traveler preferences.</h5>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -218,10 +218,10 @@ export default function CanadaRecomd() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                  ? text.slice(0, maxLength) + "..."
-                                  : text;
-                          };
-                          return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

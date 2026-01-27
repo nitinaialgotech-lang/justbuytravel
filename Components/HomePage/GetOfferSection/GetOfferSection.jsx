@@ -14,21 +14,24 @@ export default function GetOfferSection() {
 
     const card = [
         {
-            title: " Snowboarding 30% Off – All Winter Spots!",
+            title: " Winter Travel Deals – Up to 30% Off",
+            text: "Book travel online and enjoy exclusive discounts on seasonal activities and experiences.",
             banner: "/justbuytravel_next/demo/home/offer/offer_banner1.webp",
             back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
             option1: "Safe & Verified Equipment",
             option2: "Breathtaking Views"
         },
         {
-            title: " Snowboarding 30% Off – All Winter Spots!",
+            title: " Winter Travel Deals – Up to 30% Off",
+            text: "Book travel online and enjoy exclusive discounts on seasonal activities and experiences.",
             banner: "/justbuytravel_next/demo/home/offer/offer_banner2.webp",
             back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
             option1: "Safe & Verified Equipment",
             option2: "Breathtaking Views"
         },
         {
-            title: " Snowboarding 30% Off – All Winter Spots!",
+            title: " Winter Travel Deals – Up to 30% Off",
+            text: "Book travel online and enjoy exclusive discounts on seasonal activities and experiences.",
             banner: "/justbuytravel_next/demo/home/offer/offer_banner3.webp",
             back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
             option2: "Breathtaking Views",
@@ -74,15 +77,15 @@ export default function GetOfferSection() {
                                                             {/* LEFT TEXT */}
                                                             <div className="px-16 slide-text flex flex-col gap-2 ">
                                                                 <div className="text">
-                                                                    <h2 className=" mb-4">
+                                                                    <h2 className=" mb-2">
                                                                         {
                                                                             item?.title
                                                                         }
 
                                                                     </h2>
-                                                                    {/* <p className="text-gray-600">
-                                                        Discover beautiful places and amazing landscapes.
-                                                    </p> */}
+                                                                    <p className="text-white font-semibold">
+                                                                        {item?.text}
+                                                                    </p>
                                                                 </div>
                                                                 {/* ***** */}
                                                                 <div className="text_point flex gap-3 items-center">
@@ -104,7 +107,7 @@ export default function GetOfferSection() {
                                                                     </p>
                                                                 </div>
                                                                 {/* ***** */}
-                                                                <div className="text_button mt-4">
+                                                                <div className="text_button mt-2">
                                                                     <button className="flex items-center  arrow_button  ">
                                                                         <span>view all activities </span>{" "}
                                                                         <span>

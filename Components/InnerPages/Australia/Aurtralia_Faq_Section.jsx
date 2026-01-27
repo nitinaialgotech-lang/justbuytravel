@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import './faq.css'
+import "../HomePage/Faq/faq.css"
 import { Accordion } from 'react-bootstrap'
 import { GoPlusCircle } from "react-icons/go"
 import { MdArrowOutward } from 'react-icons/md'
@@ -9,42 +9,48 @@ const DEFAULT_KEY = "0"
 
 const FAQS = [
     {
-        title: 'How does Just Buy Travel work as a travel research platform?',
+        title: 'What types of hotels can I find in Australia?',
         content: <>
-            Just Buy Travel works as a travel research platform that helps users compare hotels, flights, holidays, and cruises using trusted third-party travel websites before making a booking decision
+            Australia offers a wide range of hotels, including budget hotels, family-friendly stays, and luxury hotels. Travelers can choose options in city centers, coastal areas, and regional destinations.
+
+
         </>,
         key: "0"
     },
     {
-        title: 'Can I book hotels or flights directly on Just Buy Travel?',
+        title: 'Are there affordable hotels available across Australia?',
         content: <>
-            No. Just Buy Travel does not process hotel or flight bookings directly. We help users compare hotel booking sites and flight comparison websites, then redirect them to trusted platforms to complete the booking.
+            Yes, there are many affordable and budget hotels across Australia that provide clean rooms, good service, and convenient locations for different travel needs.
+
+
         </>,
         key: "1"
     },
     {
-        title: 'Which are the best hotel booking sites to compare on Just Buy Travel?',
-        content: 'Just Buy Travel compares popular and trusted hotel booking sites, allowing users to research hotel prices, availability, and options in one place before choosing the best platform.',
+        title: 'How can I find the best hotel deals in Australia?',
+        content: 'Comparing hotel prices online and checking different travel dates can help you find better hotel deals. Flexible travel plans often lead to better value.',
         key: "2"
     },
     {
-        title: 'Does Just Buy Travel show real hotel and flight prices?',
+        title: 'Are hotels in Australia suitable for family travel?',
         content: <>
-            Yes. Just Buy Travel displays hotel and flight prices provided by trusted travel websites. Final prices, availability, and taxes are confirmed on the partner website before booking.
+            Yes, many hotels in Australia offer family-friendly features such as larger rooms, convenient locations, and services designed for traveling with children.
         </>,
         key: "3"
     },
     {
-        title: 'Is Just Buy Travel suitable for worldwide and international travel research?',
+        title: 'Can I find last-minute hotel deals in Australia?',
         content: <>
-            Yes. Just Buy Travel supports worldwide travel research, helping users compare hotels and flights globally using the best online travel websites for international trips.
+            Yes, last-minute hotel deals are sometimes available, especially during off-peak travel periods or in less crowded destinations.
 
         </>,
         key: "4"
     }
 ]
 
-export default function FaqSection() {
+
+
+export default function Aurtralia_Faq_Section() {
     const [activeKey, setActiveKey] = useState(DEFAULT_KEY)
     const [isDesktop, setIsDesktop] = useState(false)
 
@@ -76,7 +82,6 @@ export default function FaqSection() {
             setActiveKey(activeKey === key ? null : key)
         }
     }
-
     return (
         <section className="faq-wrapper  padding_bottom">
             <div className="container ">
@@ -84,10 +89,9 @@ export default function FaqSection() {
                     <h2 className='mb-0 capitalize'>
                         Frequently Asked Questions
                     </h2>
-                    <h5 >
+                    {/* <h5 >
                         Simple answers to help you plan your stay with ease.
-
-                    </h5>
+                    </h5> */}
                 </div>
                 <Accordion activeKey={activeKey}>
                     {FAQS.map((item) => (

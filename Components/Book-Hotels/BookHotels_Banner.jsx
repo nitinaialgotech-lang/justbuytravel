@@ -5,8 +5,8 @@ import Footer from '@/component/Footer'
 import IconicPlaces from './Hotel_IconicPlaces'
 import GuideHotel from './GuideHotel'
 import Blogs from '../HomePage/Blog/Blogs'
-import Trust_Guide_Section from '../Aboutus/Trust_Guide_Section'
-import FaqSection from '../HomePage/Faq/FaqSection'
+import Book_Hotel_Guide_Section from './Book_HotelGuide_Section'
+import Book_Hotel_Faq_section from './Book_Hotel_Faq_section'
 
 export default function BookHotels_Banner() {
   return (
@@ -19,11 +19,13 @@ export default function BookHotels_Banner() {
                 <div className="banner_box home_banner">
                   <div className="title text-center">
                     <h1 className='capitalize'>
-                      Smart Hotel Booking with Trusted  <span> Guidance</span>
+                      {/* Smart Hotel Booking with Trusted  <span> Guidance</span> */}
+                      Compare and  <span>Book Hotels</span> Online Easily
                     </h1>
-                    {/* <h5 className='capitalize'>
-                                        JustBuyTravel explored <strong className='g_color'> hundreds of Flights </strong>  so you can book with <strong className='g_color'> clarity, ease, and confidence .</strong>Your Easy Way to Book Flights and Hotels
-                                    </h5> */}
+                    <h5 className='capitalize'>
+                      Compare hotel prices, <strong className='g_color'> find the best deals,</strong> and book hotels online securely with trusted travel platforms.
+
+                    </h5>
                   </div>
                 </div>
               </div>
@@ -37,9 +39,9 @@ export default function BookHotels_Banner() {
       <GuideHotel />
       <IconicPlaces />
 
-      <Trust_Guide_Section />
+      <Book_Hotel_Guide_Section />
       <Blogs />
-      <FaqSection />
+      <Book_Hotel_Faq_section />
 
 
       <Footer />

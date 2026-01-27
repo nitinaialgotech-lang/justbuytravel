@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import './faq.css'
+import "../HomePage/Faq/faq.css"
 import { Accordion } from 'react-bootstrap'
 import { GoPlusCircle } from "react-icons/go"
 import { MdArrowOutward } from 'react-icons/md'
@@ -9,42 +9,47 @@ const DEFAULT_KEY = "0"
 
 const FAQS = [
     {
-        title: 'How does Just Buy Travel work as a travel research platform?',
+        title: 'What types of hotels are available in Canada?',
         content: <>
-            Just Buy Travel works as a travel research platform that helps users compare hotels, flights, holidays, and cruises using trusted third-party travel websites before making a booking decision
+            Canada offers a wide range of accommodation options, including budget hotels, mid-range stays, and luxury hotels. Travelers can find hotels in major cities, popular tourist destinations, and quieter regions across the country.
+
         </>,
         key: "0"
     },
     {
-        title: 'Can I book hotels or flights directly on Just Buy Travel?',
+        title: 'Can I book hotels through your website?',
         content: <>
-            No. Just Buy Travel does not process hotel or flight bookings directly. We help users compare hotel booking sites and flight comparison websites, then redirect them to trusted platforms to complete the booking.
+            We do not process hotel bookings directly. Our platform helps you research and compare hotels using trusted hotel booking partners, allowing you to choose the best option before completing your booking on the partner’s website.
+
+
         </>,
         key: "1"
     },
     {
-        title: 'Which are the best hotel booking sites to compare on Just Buy Travel?',
-        content: 'Just Buy Travel compares popular and trusted hotel booking sites, allowing users to research hotel prices, availability, and options in one place before choosing the best platform.',
+        title: 'Are hotel prices the same on all booking websites?',
+        content: 'Hotel prices may vary across booking platforms due to special offers, availability, and cancellation policies. Comparing multiple hotel booking websites helps you find the best prices and deals for your stay.',
         key: "2"
     },
     {
-        title: 'Does Just Buy Travel show real hotel and flight prices?',
+        title: 'Is it safe to book hotels through partner websites?',
         content: <>
-            Yes. Just Buy Travel displays hotel and flight prices provided by trusted travel websites. Final prices, availability, and taxes are confirmed on the partner website before booking.
+            Yes, we work with trusted and well-known hotel booking platforms that follow secure payment and data protection standards. Always review hotel details, policies, and guest ratings before confirming your booking.
         </>,
         key: "3"
     },
     {
-        title: 'Is Just Buy Travel suitable for worldwide and international travel research?',
+        title: 'Are affordable hotels in Canada suitable for families?',
         content: <>
-            Yes. Just Buy Travel supports worldwide travel research, helping users compare hotels and flights globally using the best online travel websites for international trips.
+            Yes, many affordable hotels in Canada are family-friendly and offer spacious rooms, convenient locations, and essential amenities. These hotels are ideal for family vacations, short stays, and longer trips.
 
         </>,
         key: "4"
     }
 ]
 
-export default function FaqSection() {
+
+export default function Canada_Faq_Section() {
+
     const [activeKey, setActiveKey] = useState(DEFAULT_KEY)
     const [isDesktop, setIsDesktop] = useState(false)
 
@@ -76,7 +81,6 @@ export default function FaqSection() {
             setActiveKey(activeKey === key ? null : key)
         }
     }
-
     return (
         <section className="faq-wrapper  padding_bottom">
             <div className="container ">
@@ -86,7 +90,6 @@ export default function FaqSection() {
                     </h2>
                     <h5 >
                         Simple answers to help you plan your stay with ease.
-
                     </h5>
                 </div>
                 <Accordion activeKey={activeKey}>
@@ -125,4 +128,5 @@ export default function FaqSection() {
             </div>
         </section>
     )
+
 }

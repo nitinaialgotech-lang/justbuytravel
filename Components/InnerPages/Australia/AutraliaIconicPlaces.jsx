@@ -73,7 +73,7 @@ export default function AutraliaIconicPlaces({ lat, long }) {
                 <div className="container padding_bottom">
                     <div className="explore_section section_title ">
                         <h2 className="mb-0">Iconic Places</h2>
-                        <h5>Where history, culture, and beauty come together</h5>
+                        <h5>Find hotels near iconic landmarks and popular attractions.</h5>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 

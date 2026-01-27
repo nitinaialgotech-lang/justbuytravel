@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import './faq.css'
+import "../HomePage/Faq/faq.css"
 import { Accordion } from 'react-bootstrap'
 import { GoPlusCircle } from "react-icons/go"
 import { MdArrowOutward } from 'react-icons/md'
@@ -9,42 +9,53 @@ const DEFAULT_KEY = "0"
 
 const FAQS = [
     {
-        title: 'How does Just Buy Travel work as a travel research platform?',
+        title: 'What types of hotels are available in Dubai?',
         content: <>
-            Just Buy Travel works as a travel research platform that helps users compare hotels, flights, holidays, and cruises using trusted third-party travel websites before making a booking decision
+            Dubai offers a wide range of hotels, including budget hotels, luxury resorts, and 5-star hotels. Travelers can choose from city hotels, beachfront stays, and hotels near popular areas like Dubai Marina and Downtown Dubai.
+
+
         </>,
         key: "0"
     },
     {
-        title: 'Can I book hotels or flights directly on Just Buy Travel?',
+        title: 'How can I find the best hotels in Dubai?',
         content: <>
-            No. Just Buy Travel does not process hotel or flight bookings directly. We help users compare hotel booking sites and flight comparison websites, then redirect them to trusted platforms to complete the booking.
+            The best way to find hotels in Dubai is by comparing prices, locations, and guest reviews online. This helps you choose the right hotel based on your budget, travel plans, and preferred area.
+
+
         </>,
         key: "1"
     },
     {
-        title: 'Which are the best hotel booking sites to compare on Just Buy Travel?',
-        content: 'Just Buy Travel compares popular and trusted hotel booking sites, allowing users to research hotel prices, availability, and options in one place before choosing the best platform.',
+        title: 'How can travelers save money on hotel stays?',
+        content: 'Travelers looking to save money should explore platforms that focus on cheap hotel booking online, which helps identify affordable accommodation options without compromising essential amenities.',
         key: "2"
     },
     {
-        title: 'Does Just Buy Travel show real hotel and flight prices?',
+        title: 'Are there affordable and budget hotels in Dubai?',
         content: <>
-            Yes. Just Buy Travel displays hotel and flight prices provided by trusted travel websites. Final prices, availability, and taxes are confirmed on the partner website before booking.
+            Yes, there are many budget and cheap hotels in Dubai that provide pleasant stay at reasonable prices. These hotels are ideal for travelers who want good value without spending too much.
         </>,
         key: "3"
     },
     {
-        title: 'Is Just Buy Travel suitable for worldwide and international travel research?',
+        title: 'Which areas are the best places to stay in Dubai?',
         content: <>
-            Yes. Just Buy Travel supports worldwide travel research, helping users compare hotels and flights globally using the best online travel websites for international trips.
+            Popular places to stay in Dubai include areas near Dubai Mall for shopping, Dubai Marina for waterfront views, and central locations close to major attractions. Each area offers a different experience depending on your travel style.
 
         </>,
         key: "4"
+    },
+    {
+        title: 'Can I find last-minute hotel deals in Dubai?',
+        content: <>
+            Yes, travelers can often find last-minute hotel deals in Dubai, especially during off-peak seasons. Comparing hotel options online can help you find good offers even when booking close to your travel date.
+
+        </>,
+        key: "5"
     }
 ]
-
-export default function FaqSection() {
+export default function DubaiFaqSection() {
     const [activeKey, setActiveKey] = useState(DEFAULT_KEY)
     const [isDesktop, setIsDesktop] = useState(false)
 
@@ -76,7 +87,6 @@ export default function FaqSection() {
             setActiveKey(activeKey === key ? null : key)
         }
     }
-
     return (
         <section className="faq-wrapper  padding_bottom">
             <div className="container ">
@@ -84,10 +94,9 @@ export default function FaqSection() {
                     <h2 className='mb-0 capitalize'>
                         Frequently Asked Questions
                     </h2>
-                    <h5 >
+                    {/* <h5 >
                         Simple answers to help you plan your stay with ease.
-
-                    </h5>
+                    </h5> */}
                 </div>
                 <Accordion activeKey={activeKey}>
                     {FAQS.map((item) => (
