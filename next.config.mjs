@@ -5,6 +5,7 @@ const basePath =
 const nextConfig = {
   output: "export",
   basePath,
+  assetPrefix: '/justbuytravel_next/demo',
   images: {
     unoptimized: true,
   },
