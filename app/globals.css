@@ -2244,6 +2244,10 @@ span.rating-stars {
   padding-top: 20px;
 }
 /* ********************************** popup show  */
+.form_search_expedia > iframe {
+  min-height: 320px;
+  height: 100%;
+}
 .mobile_search_box form > .input {
   border-radius: 10px;
   padding: 10px 10px !important;

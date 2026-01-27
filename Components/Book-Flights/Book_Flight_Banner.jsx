@@ -5,11 +5,11 @@ import Search from '../HomePage/Search'
 export default function Book_Flight_Banner() {
     return (
         <>
-            <section className='book-flight-section page_banner_section  padding_top_0_md'>
+            <section className='book-flight-section page_banner_section d-none d-lg-block padding_top_0_md'>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="book-flight-title d-none d-lg-block">
+                            <div className="book-flight-title ">
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
@@ -21,7 +21,8 @@ export default function Book_Flight_Banner() {
                                     </div>
                                 </div>
                             </div>
-                            <Search />
+
+
 
 
                         </div>
@@ -29,6 +30,7 @@ export default function Book_Flight_Banner() {
                 </div>
 
             </section>
+            <Search />
         </>
     )
 }
