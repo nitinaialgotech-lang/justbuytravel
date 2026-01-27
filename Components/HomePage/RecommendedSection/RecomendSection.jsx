@@ -293,33 +293,33 @@ export default function RecomendSection() {
         <div className="card_col">
             <div className="recommend_card_box card_rounded shadow margin_lr margin_md-lr">
                 <div className="card_box pe-">
-                    <div className="card_box_img card_rounded relative overflow-hidden shimmer-container" style={{ minHeight: '250px', backgroundColor: '#e5e7eb' }}>
+                    <div className="card_box_img card_rounded relative overflow-hidden shimmer-container shimmer-min-250 shimmer-bg-light">
                         <div className="shimmer"></div>
                         <div className="rated_msg absolute top-5 flex justify-between items-center left-5 right-5">
-                            <div className="msg shimmer-text" style={{ width: '80px', height: '20px', borderRadius: '4px' }}></div>
-                            <div className="msg_icon shimmer-icon" style={{ width: '20px', height: '20px', borderRadius: '50%' }}></div>
+                            <div className="msg shimmer-text shimmer-80x20 shimmer-radius-4"></div>
+                            <div className="msg_icon shimmer-icon shimmer-icon-20"></div>
                         </div>
                     </div>
                     <div className="card_box_detail px-4 py-5 card_rounded flex flex-col z-1 gap-2 relative">
-                        <div className="shimmer-text" style={{ width: '80%', height: '24px', borderRadius: '4px', marginBottom: '8px' }}></div>
+                        <div className="shimmer-text shimmer-80p-24 shimmer-radius-4 mb-2"></div>
                         <div className="time flex items-center gap-3 relative">
                             <div className="icon flex items-center gap-1">
-                                <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
-                                <div className="shimmer-text" style={{ width: '100px', height: '16px', borderRadius: '4px' }}></div>
+                                <div className="shimmer-icon shimmer-square-16"></div>
+                                <div className="shimmer-text shimmer-100x16 shimmer-radius-4"></div>
                             </div>
                             <div className="guest flex items-center gap-1">
-                                <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
-                                <div className="shimmer-text" style={{ width: '80px', height: '16px', borderRadius: '4px' }}></div>
+                                <div className="shimmer-icon shimmer-square-16"></div>
+                                <div className="shimmer-text shimmer-80x16 shimmer-radius-4"></div>
                             </div>
                         </div>
                         <div className="price_book flex mt-3 justify-between items-center">
-                            <div className="shimmer-text" style={{ width: '120px', height: '24px', borderRadius: '4px' }}></div>
-                            <div className="shimmer-button" style={{ width: '100px', height: '36px', borderRadius: '9999px' }}></div>
+                            <div className="shimmer-text shimmer-120x24 shimmer-radius-4"></div>
+                            <div className="shimmer-button shimmer-btn-100x36"></div>
                         </div>
                         <div className="rating_list absolute flex items-center gap-1 right-10 shadow">
-                            <div className="shimmer-icon" style={{ width: '16px', height: '16px', borderRadius: '4px' }}></div>
-                            <div className="shimmer-text" style={{ width: '30px', height: '16px', borderRadius: '4px' }}></div>
-                            <div className="shimmer-text" style={{ width: '80px', height: '16px', borderRadius: '4px' }}></div>
+                            <div className="shimmer-icon shimmer-square-16"></div>
+                            <div className="shimmer-text shimmer-30x16 shimmer-radius-4"></div>
+                            <div className="shimmer-text shimmer-80x16 shimmer-radius-4"></div>
                         </div>
                     </div>
                 </div>
@@ -467,7 +467,7 @@ export default function RecomendSection() {
                                             <div className="recommend_card_box   card_rounded shadow margin_lr margin_md-lr ">
 
                                                 <div className="card_box pe-">
-                                                    <div className="card_box_img card_rounded relative overflow-hidden" style={{ minHeight: '250px', backgroundColor: '#f3f4f6' }}>
+                                                    <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                         {imageErrors[itemId] ? (
                                                             <div className="w-full h-full flex items-center justify-center bg-gray-200 card_rounded">
                                                                 <span className="text-gray-400 text-sm">Image not available</span>

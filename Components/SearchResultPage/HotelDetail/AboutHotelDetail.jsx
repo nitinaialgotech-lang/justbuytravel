@@ -1,6 +1,7 @@
 import React from "react";
 
 function ShimmerAboutHotel() {
+    const shimmerWidths = ["shimmer-width-90", "shimmer-width-80", "shimmer-width-70", "shimmer-width-60"];
     return (
         <div className="about_hotel rounded-2xl">
             <div className="row">
@@ -8,50 +9,19 @@ function ShimmerAboutHotel() {
                     <div className="about_hotel_detail">
                         {/* Shimmer for the heading */}
                         <div
-                            className="shimmer-text mb-4"
-                            style={{ width: "40%", height: "32px", borderRadius: "6px" }}
+                            className="shimmer-text mb-4 shimmer-text-40p-32"
                         ></div>
 
                         {/* Shimmer for paragraph lines */}
                         {Array.from({ length: 4 }).map((_, i) => (
                             <div
                                 key={i}
-                                className="shimmer-text mb-2"
-                                style={{ width: `${90 - i * 10}%`, height: "18px", borderRadius: "4px" }}
+                                className={`shimmer-text mb-2 shimmer-line-18 ${shimmerWidths[i]}`}
                             ></div>
                         ))}
                     </div>
                 </div>
             </div>
-
-            {/* Shimmer CSS */}
-            <style
-                dangerouslySetInnerHTML={{
-                    __html: `
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-        .shimmer-text {
-          display: inline-block;
-          position: relative;
-          overflow: hidden;
-          background-color: #e5e7eb;
-        }
-        .shimmer-text::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-        }
-      `,
-                }}
-            />
         </div>
     );
 }

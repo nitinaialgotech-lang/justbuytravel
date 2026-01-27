@@ -156,11 +156,3 @@ export const IconicPlaces = async (lat, lng) => {
 export const GetHotel_Detail = async (id) => {
     return await https_SearchCity.get(`/place-details.php?placeId=${id}`)
 }
-
-export const GetAccommodationDetails = async (name, address) => {
-    return await https_api.post(
-        `/get-prices.php`,
-        { name, address },
-        { headers: { "Content-Type": "application/json" } }
-    );
-};

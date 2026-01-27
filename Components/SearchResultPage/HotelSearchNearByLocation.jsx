@@ -49,6 +49,7 @@ export default function HotelSearchNearByLocation({
     const { data: nearbyRestaurantsData } = useQuery({
         queryKey: ["restaurantsNearby", lat, long],
         queryFn: () => Restro(lat, long),
+        enabled: lat != null && long != null,
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
     const filteredNearbyPlaces = excludePlaceId
