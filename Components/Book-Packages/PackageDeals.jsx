@@ -104,13 +104,7 @@ export default function PackageDeals() {
                                                         "
                                             >
                                                 <div className="card_box ">
-                                                    <div
-                                                        className="card_box_img card_rounded relative overflow-hidden"
-                                                        style={{
-                                                            minHeight: "250px",
-                                                            backgroundColor: "#f3f4f6",
-                                                        }}
-                                                    >
+                                                    <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                         <img
                                                             src={item?.img}
                                                             className="card_rounded w-full h-full object-cover"

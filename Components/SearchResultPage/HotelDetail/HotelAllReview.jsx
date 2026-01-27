@@ -29,7 +29,6 @@ export default function HotelAllReview({ reviews }) {
         setModalReview(item);
         setShow(true);
     }
-    console.log(reviews, "reviews");
 
     // ******************
     const [modalReview, setModalReview] = useState(null);

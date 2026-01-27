@@ -8,9 +8,9 @@ import Blog_Detail from '../Blog_Detail/Blog_Detail';
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { useQuery } from '@tanstack/react-query';
 import { Get_Blogs } from '@/app/Route/endpoints';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useParams } from 'next/navigation';
 
-export default function Blog_Detail_section() {
+export default function Blog_Detail_section({ initialSlug }) {
 
     const { data, isLoading } = useQuery({
         queryKey: ["blog"],
@@ -18,22 +18,12 @@ export default function Blog_Detail_section() {
     })
 
     const blog_slug = useSearchParams();
-    const slug = blog_slug.get("detail");
+    const params = useParams();
+    const slug = initialSlug || params?.slug || blog_slug.get("detail");
     // ***************************************
-    const blog_content = data?.data?.map((item) => {
-        if (item?.slug == slug) {
-            return item?.excerpt?.rendered
-        }
-        return null
-    })
-    // ***************************************
-    const blog_img = data?.data?.map((item) => {
-        if (item?.slug == slug) {
-            return item?.yoast_head_json?.og_image
-        }
-        return null
-    })
-
+    const selectedPost = data?.data?.find((item) => item?.slug === slug);
+    const blog_content = selectedPost?.content?.rendered || "";
+    const blog_img = selectedPost?.yoast_head_json?.og_image || [];
     return (
         <>
             <section className='Blog_Detail_section blog_pt blog_pb blog_pt'>
@@ -41,52 +31,48 @@ export default function Blog_Detail_section() {
                     <div className='row'>
                         <div className='col-lg-8 '>
 
-                            {
-                                data?.data?.map((item, i) => {
-
-                                    if (item?.slug == slug) {
-                                        return (
-
-                                            <div className="title flex flex-col gap-2 padding_bottom" key={i}>
-                                                {/* **************************************** */}
-                                                <div className='blog_section_left_bar'>
-                                                    <div className="breadcrumb m-0">
-                                                        <h4 className='flex '>Home <span className='g_color'><MdKeyboardDoubleArrowRight /></span>{item?.slug}  </h4>
-                                                    </div>
-                                                </div>
-                                                {/* **************************************** */}
-                                                <div className="blog_banner_box p-0">
-                                                    <div className="title">
-                                                        <h1 className='capitalize'>
-                                                            {item?.slug}
-                                                        </h1>
-
-                                                    </div>
-                                                </div>
-                                                {/* **************************************** */}
-                                                <div className="time_section flex gap-3 items-center ">
-                                                    <div className="month flex items-center gap-1">
-                                                        <span className='g_color'><SlCalender /></span>
-                                                        <span>December 17, 2025</span>
-                                                    </div>
-                                                    <div className="time flex items-center gap-1">
-                                                        <span className='g_color'>
-                                                            <FaRegUserCircle />
-                                                        </span>
-                                                        <span>
-                                                            Written by Sulagna B
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                        )
-                                    }
-                                    return null
-                                })
-                            }
+                            {selectedPost && (
+                                <div className="title flex flex-col gap-2 padding_bottom">
+                                    {/* **************************************** */}
+                                    <div className='blog_section_left_bar'>
+                                        <div className="breadcrumb m-0">
+                                            <h4 className='flex '>
+                                                Home <span className='g_color'><MdKeyboardDoubleArrowRight /></span>
+                                                <span dangerouslySetInnerHTML={{ __html: selectedPost?.title?.rendered || selectedPost?.slug || "" }} />
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    {/* **************************************** */}
+                                    <div className="blog_banner_box p-0">
+                                        <div className="title">
+                                            <h1 className='capitalize' dangerouslySetInnerHTML={{ __html: selectedPost?.title?.rendered || selectedPost?.slug || "" }} />
+                                        </div>
+                                    </div>
+                                    {/* **************************************** */}
+                                    <div className="time_section flex gap-3 items-center ">
+                                        <div className="month flex items-center gap-1">
+                                            <span className='g_color'><SlCalender /></span>
+                                            <span>
+                                                {selectedPost?.date
+                                                    ? new Date(selectedPost.date).toLocaleDateString("en-US", {
+                                                        year: "numeric",
+                                                        month: "long",
+                                                        day: "numeric",
+                                                    })
+                                                    : ""}
+                                            </span>
+                                        </div>
+                                        <div className="time flex items-center gap-1">
+                                            <span className='g_color'>
+                                                <FaRegUserCircle />
+                                            </span>
+                                            <span>
+                                                Written by {selectedPost?.yoast_head_json?.author || "JustBuyTravel"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
 
                             {/* **************************************** */}
                             <Blog_Detail content={blog_content} blog_image={blog_img} load={isLoading} />
