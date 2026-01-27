@@ -14,11 +14,14 @@ export default function
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                        Travel <span>Research</span> Made Simple
+                                            Travel <span>Decision</span> Made Smarter
+
+                                            {/* Your Complete travel Buying  <span>Guide</span> */}
                                         </h1>
                                         <div className="col-lg-9 m-auto">
                                             <h2 className='supporting_text'>
-                                            Discover hotels, flights, holidays, and cruises with real insights and easy comparisons.
+                                                {/* Discover hotels, flights, holidays, and cruises with real insights and easy comparisons. */}
+                                                Your guide to hotels, flights, and travel insights.
                                             </h2>
                                         </div>
                                     </div>

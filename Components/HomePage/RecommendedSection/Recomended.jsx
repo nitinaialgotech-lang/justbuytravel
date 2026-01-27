@@ -183,15 +183,15 @@ export default function Recomended() {
                             // pagination={{
                             //     clickable: true,
                             // }}
-                            modules={[Navigation, Autoplay, Pagination]}
+                            modules={[Navigation, Pagination]}
                             className="mySwiper"
                             // navigation={true}
                             onSwiper={(swiper) => setActive(swiper.isBeginning)}
                             onSlideChange={(swiper) => setActive(swiper.isBeginning)}
-                            autoplay={{
-                                delay: 3000,
-                                disableOnInteraction: false,
-                            }}
+                            // autoplay={{
+                            //     delay: 3000,
+                            //     disableOnInteraction: false,
+                            // }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,
@@ -234,10 +234,10 @@ export default function Recomended() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                        ? text.slice(0, maxLength) + "..."
-                                        : text;
-                                };
-                                return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

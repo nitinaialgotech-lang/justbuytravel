@@ -83,8 +83,8 @@ export const TopHotelAroundWorld = async () => {
 export const TouristAttractionApi = async () => {
     return await https_SearchCity.get(`/top-hotels.php?includedType=tourist_attraction`)
 }
-export const RestaurantApi = async () => {
-    return await https_SearchCity.get(`/top-hotels.php?includedType=restaurant`)
+export const RestaurantApi = async (text) => {
+    return await https_SearchCity.get(`/text-search.php?textQuery=${text}&includedType=restaurant`)
 }
 // *((((((((((((((((((((((()))))))))))))))))))))))
 export const autoComplete = async (text, limit = 10) => {
