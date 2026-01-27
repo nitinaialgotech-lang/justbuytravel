@@ -30,9 +30,9 @@ export default function SearchResult() {
                             <div className="col-lg-12">
                                 <div className="search_banner_box">
                                     <div className="title text-center">
-                                        <h2 className='capitalize'>
+                                        <h1 className='capitalize'>
                                             {city}  <span> hotels </span>
-                                        </h2>
+                                        </h1>
                                         {/* <h5 className='capitalize'>
 
                                             home / {city} hotels

@@ -13,9 +13,9 @@ export default function Blog_Page_Banner() {
               {/* ********************* */}
               <div className="banner_box home_banner">
                 <div className="title text-center">
-                  <h2 className="capitalize">
+                  <h1 className="capitalize">
                     Discover the <span> Latest Blog</span>
-                  </h2>
+                  </h1>
                   {/* <h5 className="capitalize">
                     <strong className="g_color"> JustBuyTravel</strong> Your
                     Easy Way to Book Flights and Hotels

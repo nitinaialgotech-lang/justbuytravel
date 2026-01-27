@@ -11,9 +11,9 @@ export default function Book_Flight_Banner() {
                             <div className="book-flight-title d-none d-lg-block">
                                 <div className="banner_box">
                                     <div className="title text-center">
-                                        <h2 className='capitalize'>
+                                        <h1 className='capitalize'>
                                             Quick Flights Booking with <span> Trusted Guidance</span>
-                                        </h2>
+                                        </h1>
                                         {/* <h5 className='capitalize'>
                                         JustBuyTravel explored <strong className='g_color'> hundreds of Flights </strong>  so you can book with <strong className='g_color'> clarity, ease, and confidence .</strong>Your Easy Way to Book Flights and Hotels
                                     </h5> */}

@@ -57,9 +57,9 @@ export default function Blog_Detail_section() {
                                                 {/* **************************************** */}
                                                 <div className="blog_banner_box p-0">
                                                     <div className="title">
-                                                        <h2 className='capitalize'>
+                                                        <h1 className='capitalize'>
                                                             {item?.slug}
-                                                        </h2>
+                                                        </h1>
 
                                                     </div>
                                                 </div>

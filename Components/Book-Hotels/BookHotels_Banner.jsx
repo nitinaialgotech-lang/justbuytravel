@@ -18,9 +18,9 @@ export default function BookHotels_Banner() {
               <div className="book_hotel_banner_section">
                 <div className="banner_box home_banner">
                   <div className="title text-center">
-                    <h2 className='capitalize'>
+                    <h1 className='capitalize'>
                       Smart Hotel Booking with Trusted  <span> Guidance</span>
-                    </h2>
+                    </h1>
                     {/* <h5 className='capitalize'>
                                         JustBuyTravel explored <strong className='g_color'> hundreds of Flights </strong>  so you can book with <strong className='g_color'> clarity, ease, and confidence .</strong>Your Easy Way to Book Flights and Hotels
                                     </h5> */}
