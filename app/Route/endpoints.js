@@ -1,58 +1,7 @@
 import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity } from "./https"
 
 // Helper function to disambiguate common city names
-const disambiguateCityName = (searchTerm) => {
-    const lowerSearch = searchTerm.toLowerCase().trim();
 
-    // Map of ambiguous city names to their most common location (with country)
-    const cityDisambiguation = {
-        'delhi': 'Delhi, India',
-        'new delhi': 'New Delhi, India',
-        'mumbai': 'Mumbai, India',
-        'bangalore': 'Bangalore, India',
-        'kolkata': 'Kolkata, India',
-        'chennai': 'Chennai, India',
-        'hyderabad': 'Hyderabad, India',
-        'pune': 'Pune, India',
-        'ahmedabad': 'Ahmedabad, India',
-        'jaipur': 'Jaipur, India',
-        'lucknow': 'Lucknow, India',
-        'kanpur': 'Kanpur, India',
-        'nagpur': 'Nagpur, India',
-        'indore': 'Indore, India',
-        'thane': 'Thane, India',
-        'bhopal': 'Bhopal, India',
-        'visakhapatnam': 'Visakhapatnam, India',
-        'patna': 'Patna, India',
-        'vadodara': 'Vadodara, India',
-        'ghaziabad': 'Ghaziabad, India',
-        'ludhiana': 'Ludhiana, India',
-        'agra': 'Agra, India',
-        'nashik': 'Nashik, India',
-        'faridabad': 'Faridabad, India',
-        'meerut': 'Meerut, India',
-        'rajkot': 'Rajkot, India',
-        'varanasi': 'Varanasi, India',
-        'srinagar': 'Srinagar, India',
-        'amritsar': 'Amritsar, India',
-        'chandigarh': 'Chandigarh, India',
-        'gurgaon': 'Gurgaon, India',
-        'noida': 'Noida, India',
-    };
-
-    // Check if the search term matches a known ambiguous city
-    if (cityDisambiguation[lowerSearch]) {
-        return cityDisambiguation[lowerSearch];
-    }
-
-    // If search already contains a comma, assume it's already specific enough
-    if (searchTerm.includes(',')) {
-        return searchTerm;
-    }
-
-    // Return original search term if no disambiguation needed
-    return searchTerm;
-};
 
 export const SearchLocation = async (search, address) => {
     return await https_api.get(`/search.php?city=${search}&full_address=${address}`)
@@ -120,11 +69,11 @@ export const HotelCheckInCheckOut = async (hotelkey, checkin, checkout) => {
         date.setDate(date.getDate() + 1);
         return date.toISOString().split('T')[0];
     })();
-    
+
     const url = `/pricing.php?hotel_key=${hotelkey}&chk_in=${defaultCheckin}&chk_out=${defaultCheckout}`;
-    
+
     const response = await https_SearchCity.get(url);
-    
+
     return response;
 }
 // ************ hotel around the world >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -133,6 +82,9 @@ export const TopHotelAroundWorld = async () => {
 }
 export const TouristAttractionApi = async () => {
     return await https_SearchCity.get(`/top-hotels.php?includedType=tourist_attraction`)
+}
+export const RestaurantApi = async () => {
+    return await https_SearchCity.get(`/top-hotels.php?includedType=restaurant`)
 }
 // *((((((((((((((((((((((()))))))))))))))))))))))
 export const autoComplete = async (text, limit = 10) => {

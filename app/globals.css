@@ -4,183 +4,219 @@
    Gilroy Font Family
    ============================ */
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-BlackItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-BlackItalic.woff') format('woff');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-BlackItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-ExtraBoldItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-ExtraBoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-ExtraBoldItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-ExtraBoldItalic.woff")
+      format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-Black.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-Black.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-Black.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-Bold.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-Bold.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-BoldItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-BoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-BoldItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-ExtraBold.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-ExtraBold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-ExtraBold.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-ExtraBold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-HeavyItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-HeavyItalic.woff') format('woff');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-HeavyItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-HeavyItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-Light.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-Light.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-Heavy.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-Heavy.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-Heavy.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-Heavy.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-MediumItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-MediumItalic.woff') format('woff');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-MediumItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-MediumItalic.woff")
+      format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-Medium.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-Medium.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-LightItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-LightItalic.woff') format('woff');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-LightItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-SemiBold.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-SemiBold.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-SemiBoldItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-SemiBoldItalic.woff') format('woff');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-SemiBoldItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-SemiBoldItalic.woff")
+      format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-Thin.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-Thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-Thin.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy-RegularItalic';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-RegularItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-RegularItalic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy-RegularItalic";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-RegularItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-RegularItalic.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-Regular.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-Regular.woff2") format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-ThinItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-ThinItalic.woff') format('woff');
-    font-weight: 100;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-ThinItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-UltraLight.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-UltraLight.woff') format('woff');
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-UltraLight.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-UltraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/justbuytravel_next/demo/fonts/Gilroy-UltraLightItalic.woff2') format('woff2'),
-        url('/justbuytravel_next/demo/fonts/Gilroy-UltraLightItalic.woff') format('woff');
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Gilroy";
+  src:
+    url("/justbuytravel_next/demo/fonts/Gilroy-UltraLightItalic.woff2")
+      format("woff2"),
+    url("/justbuytravel_next/demo/fonts/Gilroy-UltraLightItalic.woff")
+      format("woff");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
 }
 
 :root {
@@ -385,9 +421,7 @@ button {
 .banner_box > .title > h1 > span {
   color: var(--bg-color);
 }
-.supporting_text
-
-.banner_box > .title > h5 {
+.supporting_text .banner_box > .title > h5 {
   font-weight: 800;
   font-size: 33px;
   line-height: 100%;
@@ -433,6 +467,7 @@ button {
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
   text-decoration: none;
   color: var(--color);
   font-weight: 500;
@@ -529,7 +564,7 @@ button {
   font-weight: 500;
   font-size: 17px;
   color: var(--color);
- letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
 }
 
 .destination_box > .destination_img {
