@@ -10,7 +10,7 @@ import "../../../style/responsive.css";
 export async function generateStaticParams() {
     try {
         const response = await Get_Blogs();
-        const blogs = response?.data || [];
+        const blogs = response?.data || [] || {};
         
         return blogs.map((blog) => ({
             slug: blog.slug,

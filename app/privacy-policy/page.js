@@ -33,88 +33,58 @@ export default function PrivacyPolicyPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
       />
-      
+
       <Header />
-      <div className="container my-5">
-
-        <section className=" section_title privacy_title">
-          <h2 className='g_color'>Who we are</h2>
-          <p>Our website address is: <a className='g_color' href="https://justbuytravel.com/">https://justbuytravel.com/</a></p>
-        </section>
-
-        <section className="section_title privacy_content">
-          <h2>What personal data we collect and why we collect it</h2>
-
-          <h3>Comments</h3>
-          <p>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&apos;s IP address and browser user agent string to help spam detection.</p>
-          <p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: <a className='g_color' href="https://automattic.com/privacy/">https://automattic.com/privacy/</a>. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p>
-
-          <h3>Media</h3>
-          <p>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p>
-
-          <h3>Contact forms</h3>
-
-          <h3>Cookies</h3>
-          <p>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p>
-          <p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p>
-          <p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p>
-          <p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p>
-
-          <h3>Embedded content from other websites</h3>
-          <p>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p>
-          <p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p>
-
-          <h3>Analytics</h3>
-        </section>
-        {/* ************************************************ */}
-
-        <section className="section_title privacy_content">
-          <h2>Who we share your data with</h2>
-        </section>
-
-        <section className="section_title privacy_content">
-          <h2>How long we retain your data</h2>
-          <p>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>
-          <p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p>
-        </section>
-
-        <section className="section_title privacy_content">
-          <h2>What rights you have over your data</h2>
-          <p>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p>
-        </section>
-
-        <section className="section_title privacy_content">
-          <h2>Where we send your data</h2>
-          <p>Visitor comments may be checked through an automated spam detection service.</p>
-        </section>
-
-        <section className="section_title privacy_content">
-          <h2>Your contact information</h2>
-
-
-
-          <h2>Additional information</h2>
-
-
-
-          <h2>How we protect your data</h2>
-
-
-
-          <h2>What data breach procedures we have in place</h2>
-
-
-
-          <h2>What third parties we receive data from</h2>
-
-
-
-          <h2>What automated decision making and/or profiling we do with user data</h2>
-
-
-
-          <h2>Industry regulatory disclosure requirements</h2>
-        </section>
+      <div className='container privacy_policy policies_pages mt-4'>
+        <h1>Privacy Policy</h1>
+        <p>
+          <strong>At JustBuyTravel, your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you visit our website. By using JustBuyTravel, you agree to the practices described in this policy.</strong>
+        </p>
+        <h3>Information We Collect</h3>
+        <p>We do not require users to create accounts or provide personal details to browse our website. However, we may collect limited information in the following ways:</p>
+        <ul>
+          <li><strong>Non-personal information</strong> such as browser type, device information, IP address, pages visited, and referral sources.</li>
+          <li><strong>Cookies and tracking technologies</strong> to improve website performance, user experience, and analytics.</li>
+        </ul>
+        <p>We do not collect sensitive personal data such as payment details, identification numbers, or passwords.</p>
+        <h3>How We Use Your Information</h3>
+        <p>The information we collect is used to:</p>
+        <ul>
+          <li>Improve website functionality and content</li>
+          <li>Understand user behavior and preferences</li>
+          <li>Monitor website performance and traffic</li>
+          <li>Enhance security and prevent fraudulent activity</li>
+        </ul>
+        <p>We do not sell, trade, or rent user information to third parties.</p>
+        <h3>Affiliate Links and Third-Party Websites</h3>
+        <p>JustBuyTravel is a travel research and comparison platform. We may display affiliate links to third-party travel websites such as hotel, flight, holiday package, or cruise providers. When you click on these links, you are redirected to external websites.</p>
+        <p>Please note:</p>
+        <ul>
+          <li>We do not control third-party websites</li>
+          <li>Any bookings, transactions, or data shared on those websites are governed by their respective privacy policies</li>
+          <li>We are not responsible for the privacy practices of external websites</li>
+        </ul>
+        <h3>Cookies Policy</h3>
+        <p>We use cookies to:</p>
+        <ul>
+          <li>Analyze traffic and user interactions</li>
+          <li>Improve website performance</li>
+          <li>Provide a better browsing experience</li>
+        </ul>
+        <p>You can choose to disable cookies through your browser settings. However, some features of the website may not function properly if cookies are disabled.</p>
+        <h3>Third-Party Services</h3>
+        <p>We may use third-party services such as analytics tools to understand website usage. These services may collect non-personal data in accordance with their own privacy policies.</p>
+        <p>JustBuyTravel does not share personal user data with third parties.</p>
+        <h3>Data Security</h3>
+        <p>We take reasonable measures to protect website data from unauthorized access, misuse, or disclosure. However, no method of data transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+        <h3>Children’s Information</h3>
+        <p>JustBuyTravel does not knowingly collect personal information from children under the age of 13. If you believe that a child has provided personal data on our website, please contact us so we can take appropriate action.</p>
+        <h3>Your Consent</h3>
+        <p>By using our website, you consent to this Privacy Policy and agree to its terms.</p>
+        <h3>Updates to This Privacy Policy</h3>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. Any updates will be posted on this page with a revised effective date.</p>
+        <h3>Contact Us</h3>
+        <p>If you have any questions or concerns about this Privacy Policy, please contact us through our website.</p>
       </div>
       <Footer />
     </>
