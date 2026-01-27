@@ -2908,3 +2908,6 @@ span.rating-stars {
   color: #856404;
   font-size: 14px;
 }
+.elementor .elementor-hidden-tablet{
+  display: none;
+}

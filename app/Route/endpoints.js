@@ -84,7 +84,7 @@ export const TouristAttractionApi = async () => {
     return await https_SearchCity.get(`/top-hotels.php?includedType=tourist_attraction`)
 }
 export const RestaurantApi = async () => {
-    return await https_SearchCity.get(`/top-hotels.php?includedType=restaurant`)
+    return await https_SearchCity.get(`/text-search.php?includedType=restaurant`)
 }
 // *((((((((((((((((((((((()))))))))))))))))))))))
 export const autoComplete = async (text, limit = 10) => {

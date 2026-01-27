@@ -303,18 +303,24 @@ export default function Search() {
     // Fetch autocomplete results
     const { data: autoCompleteData, isLoading } = useQuery({
         queryKey: ["autoComplete", searchContent, searchAll],
-        queryFn: () => {
-            if (searchUserType === "searchall" && activeTab === "all") {
-                searchText(searchContent)
+        queryFn: async () => {
+            if (!searchContent.trim()) return { places: [] };
+          
+            if (activeTab === "all") {
+              return await searchText(searchContent);
             }
-            else if (searchUserType === "hotel" && activeTab === "hotels") {
-                searchHotel(searchContent)
+          
+            if (activeTab === "hotels") {
+              return await searchHotel(searchContent);
             }
-            else if (searchUserType === "restaurant" && activeTab === "restaurants") {
-                RestaurantApi()
+          
+            if (activeTab === "restaurants") {
+              return await RestaurantApi(searchContent);
             }
-
-        },
+          
+            return { places: [] };
+          },
+          
 
         enabled: searchContent.length > 0,
         staleTime: 30000, // Cache for 30 seconds
