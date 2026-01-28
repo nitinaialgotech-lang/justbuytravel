@@ -4,6 +4,7 @@ import { Restro } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { NearbyRestaurant } from '@/app/Route/endpoints';
 
 // Import Swiper styles
 import "swiper/css";
@@ -43,7 +44,7 @@ export default function NearByCanada({ lat, long }) {
     /********************************************  */
     const { data: nearbyRestaurantsData } = useQuery({
         queryKey: ["restaurantsNearby", lat, long],
-        queryFn: () => Restro(lat, long),
+        queryFn: () => NearbyRestaurant("Canada"),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
     return (

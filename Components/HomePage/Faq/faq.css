@@ -42,7 +42,7 @@
 
 .accordian_icon span svg {
   transition: 4s ease-in-out;
-  font-family: "Outfit", system-ui;
+  font-family: var(--font-fam);
   border-radius: 50%;
   font-size: 20px;
 }

@@ -1,23 +1,17 @@
 "use client";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState, useRef, use } from "react";
+import React, { useCallback, useEffect, useState, useRef, use, act } from "react";
 import { FaHotel, FaUser } from "react-icons/fa";
 import { MdFlight } from "react-icons/md";
 import { FaCar } from "react-icons/fa6";
 import { GrBike } from "react-icons/gr";
 import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
-import {
-    Dropdown_Get,
-    Get_cityName,
-    RestaurantApi,
-    searchHotel,
-    SearchLocation,
-} from "@/app/Route/endpoints";
+import { Dropdown_Get, Get_cityName, RestaurantApi, searchHotel, SearchLocation } from "@/app/Route/endpoints";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
-import { autoComplete, searchText } from "@/app/Route/endpoints";
+import { autoComplete, searchText } from '@/app/Route/endpoints';
 import Search_flight_section from "../Book-Flights/Search_flight_section";
 export default function Search() {
     // const reverseGeocode = useCallback(async (lat, lng) => {
@@ -34,6 +28,7 @@ export default function Search() {
     //         const data = await response.json();
 
     //         console.log(data, "data of reverse unicode ");
+
 
     //         if (!data?.address) return null;
 
@@ -147,12 +142,13 @@ export default function Search() {
     //             maximumAge: 60000,
     //         }
     //     );
-    // }, [reverseGeocode, doSearch]);
+    // }, [reverseGeocode, doSearch]); 
     // **************************************************************************************
     // ********************************************************************************************************************
     const router = useRouter();
-    const searchParams = useSearchParams();
     const pathname = usePathname();
+    const [activeTab, setActiveTab] = useState("all");
+    const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
     const [searchType, setSearchType] = useState("all");
 
@@ -180,10 +176,68 @@ export default function Search() {
     //     router.push(`/search?query=${encodeURIComponent(searchContent)}`);
     // };
     // *********************************************** dropdown >>>>>>>>>...........................
-    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button  */
+
+
+
+    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
     const [searchAll, setSearchAll] = useState(true);
 
-    /********************* */
+    // ********************************
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const stored = window.localStorage.getItem("searchType");
+        if (stored) {
+            setSearchType(stored);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (pathname == "/") {
+            setActiveTab("all");
+            setSearchAll(true);
+            setContenttext("place to go, things to do, hotels...");
+            setSearchType("all");
+            if (typeof window !== "undefined") {
+                window.localStorage.setItem("searchType", "all");
+            }
+        }
+
+        else if (pathname == "/book-flights/") {
+            setActiveTab("flights");
+            setSearchAll(false);
+            setContenttext("Flight, Travel ..");
+            setSearchType("flights");
+            if (typeof window !== "undefined") {
+                window.localStorage.setItem("searchType", "flights");
+            }
+        }
+
+        else if (pathname == "/book-hotels/") {
+            setActiveTab("hotels");
+            setSearchAll(false);
+            setContenttext("hotel name or destination");
+            setSearchType("hotels");
+            if (typeof window !== "undefined") {
+                window.localStorage.setItem("searchType", "hotels");
+            }
+        }
+
+        // else if (pathname == "/book-packages/") {
+        //     setActiveTab("Packages");
+        //     setSearchAll(false);
+        //     setContenttext("attraction, activity or destination");
+        //     setSearchType("Packages");
+        //     if (typeof window !== "undefined") {
+        //         window.localStorage.setItem("searchType", "Packages");
+        //     }
+        // }
+    }, [pathname]);
+
+
+
+    /********************* *********************************************************************************/
+
     /*********************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
     const [searchContent, setSearchContent] = useState("");
     const [textContent, setContenttext] = useState("");
@@ -234,13 +288,13 @@ export default function Search() {
 
     // Handle image load start
     const handleImageLoadStart = (placeId) => {
-        setImageLoading((prev) => ({ ...prev, [placeId]: true }));
+        setImageLoading(prev => ({ ...prev, [placeId]: true }));
     };
 
     // Handle image load success
     const handleImageLoad = (placeId) => {
-        setImageLoading((prev) => ({ ...prev, [placeId]: false }));
-        setImageErrors((prev) => {
+        setImageLoading(prev => ({ ...prev, [placeId]: false }));
+        setImageErrors(prev => {
             const newErrors = { ...prev };
             delete newErrors[placeId];
             return newErrors;
@@ -249,10 +303,9 @@ export default function Search() {
 
     // Handle image load error
     const handleImageError = (placeId, e) => {
-        setImageLoading((prev) => ({ ...prev, [placeId]: false }));
-        setImageErrors((prev) => ({ ...prev, [placeId]: true }));
-        e.target.src =
-            "https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel";
+        setImageLoading(prev => ({ ...prev, [placeId]: false }));
+        setImageErrors(prev => ({ ...prev, [placeId]: true }));
+        e.target.src = 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
         e.target.onerror = null; // Prevent infinite loop
     };
 
@@ -260,19 +313,18 @@ export default function Search() {
     const { data: autoCompleteData, isLoading } = useQuery({
         queryKey: ["autoComplete", searchContent, searchAll],
         queryFn: () => {
+            if (searchUserType === "searchall" && activeTab === "all") {
+                searchText(searchContent)
+            }
+            else if (searchUserType === "hotel" && activeTab === "hotels") {
+                searchHotel(searchContent)
+            }
+            else if (searchUserType === "restaurant" && activeTab === "restaurants") {
+                RestaurantApi()
+            }
 
-
-            // searchAll ? searchText(searchContent) : searchHotel(searchContent),
-            if (localStorage.getItem("searchType") === "all") {
-                return searchText(searchContent);
-            }
-            else if (localStorage.getItem("searchType") === "hotels") {
-                return searchHotel(searchContent);
-            }
-            else if (localStorage.getItem("searchType") === "Restaurant") {
-                return RestaurantApi(searchContent)
-            }
         },
+
         enabled: searchContent.length > 0,
         staleTime: 30000, // Cache for 30 seconds
     });
@@ -290,9 +342,9 @@ export default function Search() {
             }
         };
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
@@ -314,60 +366,59 @@ export default function Search() {
     };
 
     const handleSelectPlace = (place) => {
+
         setSearchContent(place.displayName?.text || place.formattedAddress || "");
         setShowDropdown(false);
-        const lat = place?.location?.latitude || " ";
+        const lat =
+            place?.location?.latitude || " "
 
-        const long = place?.location?.longitude || " ";
-        const id = place?.id;
+        const long =
+            place?.location?.longitude || " "
+        const id = place?.id
         // You can add navigation or search logic here
         // ************************************** searching hortel or search alll
-        // if (searchAll) {
-        //     viewSearchAll(lat, long);
-        // } else {
-        //     ViewHotels(id);
-        // }
+        if (searchAll) {
 
-        if (localStorage.getItem("searchType") === "all") {
-            viewSearchAll(lat, long);
+            viewSearchAll(lat, long)
         }
-        else if (localStorage.getItem("searchType") === "hotels") {
-            ViewHotels(id);
+        else {
+            ViewHotels(id)
         }
-        else if (localStorage.getItem("searchType") === "Restaurant") {
-            ViewHotels(id);
-        }
-
-
-
     };
+
+
+
+
     const handleKeyDown = (e) => {
         const places =
             autoCompleteData?.data?.places || autoCompleteData?.places || [];
 
         if (e.key === "ArrowDown") {
             e.preventDefault();
-            setSelectedIndex((prev) => (prev < places.length - 1 ? prev + 1 : prev));
-        } else if (e.key === "ArrowUp") {
+            setSelectedIndex((prev) =>
+                prev < places.length - 1 ? prev + 1 : prev
+            );
+        } else if (e.key === 'ArrowUp') {
             e.preventDefault();
             setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
-        } else if (e.key === "Enter" && selectedIndex >= 0) {
+        } else if (e.key === 'Enter' && selectedIndex >= 0) {
             e.preventDefault();
             // handleSelectPlace(places[selectedIndex])
-        } else if (e.key === "Escape") {
+
+
+        } else if (e.key === 'Escape') {
             setShowDropdown(false);
         }
     };
 
     // Extract places from response - handle both direct response and nested data
-    const places =
-        autoCompleteData?.data?.places || autoCompleteData?.places || [];
-    const cityName = places?.map((item) => item?.displayName?.text);
+    const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
+    const cityName = places?.map((item) => item?.displayName?.text)
     // (**************************** mrouter )
 
     const viewSearchAll = (lat, long) => {
-        route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`);
-    };
+        route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
+    }
     // **************************** hotel search
 
     const ViewHotels = (id) => {
@@ -397,8 +448,9 @@ export default function Search() {
                                         <li>
                                             <Link
                                                 href={""}
-                                                className={`${searchType === "all" ? "g_color" : ""}`}
+                                                className={`${activeTab === "all" ? "g_color" : ""}`}
                                                 onClick={(e) => {
+                                                    setActiveTab("all");
                                                     setSearchAll(true);
                                                     handleSearchTypeChange("all");
 
@@ -411,12 +463,12 @@ export default function Search() {
                                                 <span>searchAll</span>
                                             </Link>
                                         </li>
-
                                         <li>
                                             <Link
                                                 href={"/book-flights"}
-                                                className={`${searchType === "flight" ? "g_color" : ""}`}
+                                                className={`${activeTab === "flights" ? "g_color" : ""}`}
                                                 onClick={(e) => {
+                                                    setActiveTab("flights");
                                                     handleSearchTypeChange("flight");
                                                 }}
                                             >
@@ -428,12 +480,12 @@ export default function Search() {
                                                 flights
                                             </Link>
                                         </li>
-
                                         <li>
                                             <Link
                                                 href={""}
-                                                className={`${searchType === "hotels" ? "g_color" : ""}`}
+                                                className={`${activeTab === "hotels" ? "g_color" : ""}`}
                                                 onClick={(e) => {
+                                                    setActiveTab("hotels");
                                                     setSearchAll(false);
                                                     handleSearchTypeChange("hotels");
 
@@ -468,8 +520,9 @@ export default function Search() {
                                         <li>
                                             <Link
                                                 href={""}
-                                                className={`${searchType === "Restaurant" ? "g_color" : ""}`}
+                                                className={`${activeTab === "restaurants" ? "g_color" : ""}`}
                                                 onClick={(e) => {
+                                                    setActiveTab("restaurants");
                                                     setSearchAll(false);
                                                     handleSearchTypeChange("Restaurant");
                                                 }}
@@ -549,13 +602,10 @@ export default function Search() {
 
                                                             const photoUrl = getPhotoUrl(place);
                                                             const hasImageError = imageErrors[placeId];
-                                                            const displayImage =
-                                                                photoUrl && !hasImageError
-                                                                    ? photoUrl
-                                                                    : "https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel";
-                                                            const image = place?.photos
-                                                                ?.slice(0, 1)
-                                                                ?.map((item) => item?.name);
+                                                            const displayImage = photoUrl && !hasImageError ? photoUrl : 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
+                                                            const image = place?.photos?.slice(0, 1)?.map((item) => item?.name);
+
+
 
                                                             return (
                                                                 <div
@@ -567,8 +617,8 @@ export default function Search() {
                                                                         handleSelectPlace(place);
                                                                     }}
                                                                     className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ${selectedIndex === index
-                                                                        ? "bg-blue-50 border-l-4 border-blue-500"
-                                                                        : "hover:bg-gray-50 border-l-4 border-transparent"
+                                                                        ? 'bg-blue-50 border-l-4 border-blue-500'
+                                                                        : 'hover:bg-gray-50 border-l-4 border-transparent'
                                                                         }`}
                                                                 >
                                                                     {/* Hotel Image */}
@@ -581,28 +631,23 @@ export default function Search() {
                                                                             )}
                                                                             <img
                                                                                 src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
-                                                                                alt={place.displayName?.text || "Hotel"}
-                                                                                className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId]
-                                                                                    ? "opacity-0"
-                                                                                    : "opacity-100"
+                                                                                alt={place.displayName?.text || 'Hotel'}
+                                                                                className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId] ? 'opacity-0' : 'opacity-100'
                                                                                     }`}
-                                                                                onLoadStart={() =>
-                                                                                    handleImageLoadStart(placeId)
-                                                                                }
+                                                                                onLoadStart={() => handleImageLoadStart(placeId)}
                                                                                 onLoad={() => handleImageLoad(placeId)}
-                                                                                onError={(e) =>
-                                                                                    handleImageError(placeId, e)
-                                                                                }
+                                                                                onError={(e) => handleImageError(placeId, e)}
                                                                                 loading="lazy"
+
                                                                             />
                                                                         </div>
                                                                     </div>
 
                                                                     {/* Hotel Info */}
 
-                                                                    <div className="flex-1 min-w-0">
-                                                                        <div className="font-semibold text-gray-900 text-sm mb-1 truncate">
-                                                                            {place.displayName?.text || "Hotel"}
+                                                                    <div className="flex-1 min-w-0" >
+                                                                        <div className="font-semibold text-gray-900 text-sm mb-1 truncate" >
+                                                                            {place.displayName?.text || 'Hotel'}
                                                                         </div>
                                                                         {place.formattedAddress && (
                                                                             <div className="text-gray-600 text-xs mb-2 line-clamp-1">
@@ -612,10 +657,7 @@ export default function Search() {
                                                                         {place.rating && (
                                                                             <div className="flex items-center gap-2">
                                                                                 <div className="flex items-center gap-1">
-                                                                                    <svg
-                                                                                        className="w-4 h-4 text-yellow-400 fill-current"
-                                                                                        viewBox="0 0 20 20"
-                                                                                    >
+                                                                                    <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
                                                                                         <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                                                                                     </svg>
                                                                                     <span className="text-gray-800 text-xs font-medium">
@@ -624,16 +666,12 @@ export default function Search() {
                                                                                 </div>
                                                                                 {place.userRatingCount && (
                                                                                     <span className="text-gray-500 text-xs">
-                                                                                        (
-                                                                                        {place.userRatingCount.toLocaleString()}{" "}
-                                                                                        reviews)
+                                                                                        ({place.userRatingCount.toLocaleString()} reviews)
                                                                                     </span>
                                                                                 )}
                                                                                 {place.priceLevel !== undefined && (
                                                                                     <span className="text-gray-500 text-xs ml-2">
-                                                                                        {place.priceLevel === 0
-                                                                                            ? "Free"
-                                                                                            : "$".repeat(place.priceLevel)}
+                                                                                        {place.priceLevel === 0 ? 'Free' : '$'.repeat(place.priceLevel)}
                                                                                     </span>
                                                                                 )}
                                                                             </div>
@@ -872,10 +910,14 @@ export default function Search() {
                                     )
                                 }
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </section >
         </>
+
+
     );
 }

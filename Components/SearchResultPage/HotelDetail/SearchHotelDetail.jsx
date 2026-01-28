@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
-import { GetAccommodationDetails, GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName } from "@/app/Route/endpoints";
+import { GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName } from "@/app/Route/endpoints";
 import { useSearchParams } from "next/navigation";
 import AboutHotelDetail from "./AboutHotelDetail";
 import NearByHotel from "./NearByHotel";
@@ -63,11 +63,11 @@ export default function SearchHotelDetail() {
 
             <div className="content">
                 <p className="m-0 flex gap-2">
-                    <span className="shimmer-text" style={{ width: "120px", height: "20px" }}></span>
-                    <span className="shimmer-text" style={{ width: "80px", height: "20px" }}></span>
+                    <span className="shimmer-text shimmer-text-120x20"></span>
+                    <span className="shimmer-text shimmer-text-80x20"></span>
                 </p>
                 <h2 className="pb-4">
-                    <span className="shimmer-text" style={{ width: "60%", height: "40px", borderRadius: "4px" }}></span>
+                    <span className="shimmer-text shimmer-text-60p-40"></span>
                 </h2>
             </div>
 
@@ -75,7 +75,7 @@ export default function SearchHotelDetail() {
             <div className="banner_img d-none d-lg-block">
                 <div className="row px-3">
                     <div className="col-lg-6 p-1">
-                        <div className="image_head shimmer-container" style={{ minHeight: "250px" }}>
+                        <div className="image_head shimmer-container shimmer-min-250">
                             <div className="shimmer"></div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ export default function SearchHotelDetail() {
                         <div className="row">
                             {Array.from({ length: 4 }).map((_, i) => (
                                 <div className="col-lg-6 p-1" key={i}>
-                                    <div className="image_head shimmer-container" style={{ minHeight: "120px" }}>
+                                    <div className="image_head shimmer-container shimmer-min-120">
                                         <div className="shimmer"></div>
                                     </div>
                                 </div>
@@ -96,10 +96,10 @@ export default function SearchHotelDetail() {
 
             <div className="hotel_detail_slider d-block d-lg-none">
                 <div className="slider">
-                    <div className="shimmer-container" style={{ width: "100%", height: "200px", marginBottom: "10px" }}>
+                    <div className="shimmer-container shimmer-mobile-card">
                         <div className="shimmer"></div>
                     </div>
-                    <div className="shimmer-container" style={{ width: "100%", height: "200px", marginBottom: "10px" }}>
+                    <div className="shimmer-container shimmer-mobile-card">
                         <div className="shimmer"></div>
                     </div>
                 </div>
@@ -123,6 +123,9 @@ export default function SearchHotelDetail() {
     // ****************************************** to fetch the detail of hotel api >>>>>>>>>>>>>>>>>>>>>>>>
     const locationName = (HotelDetail?.displayName?.text ?? HotelDetail?.displayName ?? "").toString().trim();
     const locationAddress = (HotelDetail?.formattedAddress?.text ?? HotelDetail?.formattedAddress ?? "").toString().trim();
+    const isHotelLodging = Array.isArray(HotelDetail?.types)
+        ? HotelDetail.types.includes("lodging")
+        : false;
 
     // ********************************************************** Fetch hotel key for pricing
     const { data: hoteldata } = useQuery({
@@ -160,22 +163,9 @@ export default function SearchHotelDetail() {
         }, 100);
     };
 
-    const { data: accommodationData, } = useQuery({
-        queryKey: ["getaccommodationprice", locationName, locationAddress],
-        queryFn: ({ queryKey }) => {
-            const [_, name, address] = queryKey;
-            return GetAccommodationDetails(name, address);
-        },
-        enabled: Boolean(locationName) && Boolean(locationAddress),
-        retry: 0,
-    })
-
-    // *****************************detail of apis
-    const hotelDescription = accommodationData?.data?.data?.description;
-
-
-    const hotelAmenties = accommodationData?.data?.data?.amenities;
-    const hotelPricing = accommodationData?.data?.data?.otaPricing;
+    const hotelDescription = null;
+    const hotelAmenties = null;
+    const hotelPricing = null;
 
     // ********************************** auto scroll 
     const priceSectionRef = useRef(null);
@@ -313,7 +303,7 @@ export default function SearchHotelDetail() {
                                     </div>
                                     <div className="hotel_contact_info flex items-center justify-between">
                                         <div className="hotel_contact_link hotel_botom_margin ">
-                                            <p className="m-0"><span className="rating-stars" style={{ marginRight: 6 }}>
+                                            <p className="m-0"><span className="rating-stars">
                                                 {(() => {
                                                     // Assume first review object for star rendering, fallback to 0
                                                     const rating = itemrating || 0;
@@ -380,7 +370,7 @@ export default function SearchHotelDetail() {
 
                                             <div className="row">
                                                 <div className="col-lg-6 p-1">
-                                                    <div className="image_head shimmer-container" style={{ minHeight: 410 }}>
+                                                    <div className="image_head shimmer-container shimmer-min-410">
                                                         <div className="shimmer" />
                                                     </div>
                                                 </div>
@@ -388,7 +378,7 @@ export default function SearchHotelDetail() {
                                                     <div className="row">
                                                         {Array.from({ length: 4 }).map((_, i) => (
                                                             <div className="col-lg-6 p-1" key={i}>
-                                                                <div className="image_head shimmer-container" style={{ minHeight: 200 }}>
+                                                                <div className="image_head shimmer-container shimmer-min-200">
                                                                     <div className="shimmer" />
                                                                 </div>
                                                             </div>
@@ -402,7 +392,7 @@ export default function SearchHotelDetail() {
                                                 <div className="col-lg-8 p-1">
                                                     <div className="image_head side_image_head">
                                                         <img
-                                                            style={{ cursor: "pointer" }}
+                                                            className="cursor-pointer"
                                                             src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`}
                                                             alt="" onClick={() => setOpen(true)}
                                                         />
@@ -415,7 +405,7 @@ export default function SearchHotelDetail() {
                                                             <div className="col-lg-12 p-1" key={index}>
                                                                 <div className="image_head">
                                                                     <img
-                                                                        style={{ cursor: "pointer" }}
+                                                                        className="cursor-pointer"
                                                                         onClick={() => setOpen(true)}
                                                                         src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
                                                                         alt=""
@@ -431,7 +421,7 @@ export default function SearchHotelDetail() {
                                 </div>
 
                                 {/* ****************************************** popup show >>>>>>>>>>>>>>> */}
-                                <Popup open={open} onClose={() => setOpen(false)} contentStyle={{ width: "100%" }}  >
+                                <Popup open={open} onClose={() => setOpen(false)} className="popup-content-full">
 
                                     <div className="container">
                                         <div className="row ">
@@ -443,7 +433,7 @@ export default function SearchHotelDetail() {
                                                             <div className="content_p flex justify-between w-full items-center">
                                                                 <div className="title">
                                                                     <h2 className="m-0">{HotelDetail?.displayName?.text}</h2>
-                                                                    <p className="m-0"><span className="rating-stars" style={{ marginRight: 6 }}>
+                                                                    <p className="m-0"><span className="rating-stars">
                                                                         {(() => {
                                                                             // Assume first review object for star rendering, fallback to 0
                                                                             const rating = itemrating || 0;
@@ -478,7 +468,7 @@ export default function SearchHotelDetail() {
                                                                         </button>
                                                                     </div>
                                                                     <div className="popup_header_close ">
-                                                                        <img src="/justbuytravel_next/demo/popup/add.png" style={{ cursor: "pointer" }} alt="" onClick={() => setOpen(false)} />
+                                                                        <img src="/justbuytravel_next/demo/popup/add.png" className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
                                                                     </div>
                                                                 </div>
                                                                 {/* ************ */}
@@ -533,8 +523,7 @@ export default function SearchHotelDetail() {
                                                                             {Array.from({ length: 1 }).map((_, i) => (
                                                                                 <div
                                                                                     key={i}
-                                                                                    className="shimmer-container"
-                                                                                    style={{ height: 220, marginBottom: 10 }}
+                                                                                    className="shimmer-container shimmer-slide-220"
                                                                                 >
                                                                                     <div className="shimmer" />
                                                                                 </div>
@@ -588,8 +577,7 @@ export default function SearchHotelDetail() {
                                             {Array.from({ length: 1 }).map((_, i) => (
                                                 <div
                                                     key={i}
-                                                    className="shimmer-container"
-                                                    style={{ height: 220, marginBottom: 10 }}
+                                                    className="shimmer-container shimmer-slide-220"
                                                 >
                                                     <div className="shimmer" />
                                                 </div>
@@ -639,6 +627,7 @@ export default function SearchHotelDetail() {
                     isLoadingPrices={isPriceLoading || isPriceFetching}
                     initialCheckin={searchCheckin}
                     initialCheckout={searchCheckout}
+                    showPricing={isHotelLodging}
                 />
             </div>
             <HotelAllReview reviews={userReviews} />

@@ -63,7 +63,8 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
     // ************************************* iconic places apis 
     const { data: iconicPlacesData } = useQuery({
         queryKey: ["iconicPlacesNearby", lat, long],
-        queryFn: () => IconicPlaces(lat, long)
+        queryFn: () => IconicPlaces(lat, long),
+        enabled: lat != null && long != null,
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
     return (

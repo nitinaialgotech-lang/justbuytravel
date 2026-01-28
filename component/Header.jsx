@@ -65,7 +65,7 @@ export default function Header() {
                                 {/* ******** */}
                                 <Nav
                                     className="gap-4"
-                                    style={{ maxHeight: "100px" }}
+                                    className="gap-4 nav-max-height-100"
                                     navbarScroll
                                 >
                                     <Nav.Link as={Link} href="/book-hotels" className="capitalize">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { RiCheckboxCircleLine } from 'react-icons/ri'
 
-export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, hotelData, onSearchDates, isLoadingPrices, initialCheckin, initialCheckout }) {
+export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, hotelData, onSearchDates, isLoadingPrices, initialCheckin, initialCheckout, showPricing = true }) {
     const hotelPrice = PriceRate?.data?.raw?.result?.rates;
     const allRatesData = PriceRate?.data?.raw?.result; // This might have deep links
 
@@ -124,6 +124,10 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
         const finalLink = `${affiliateBase}&u=${encodeURIComponent(hotelUrl)}`;
         return finalLink;
     }
+    if (!showPricing) {
+        return null;
+    }
+
     return (
         <>
             <section className='padding_bottom'>
@@ -132,26 +136,14 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                         <div className="col-lg-12">
                             <div className="content_box_detail view_price_detial_content rounded-2xl border border-gray-300 bg_grey2">
                                 <div className="view_price_title">
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
-                                        <h4 style={{ margin: 0, fontWeight: " 500" }}>View prices for your travel dates</h4>
+                                    <div className="view-price-title-row">
+                                        <h4 className="view-price-title">View prices for your travel dates</h4>
                                         {/* {!isLoadingPrices && hotelPrice && hotelPrice.length > 0 && (
-                                            <small style={{
-                                                fontSize: '12px',
-                                                color: '#888',
-                                                fontStyle: 'italic'
-                                            }}>
-                                                Last updated: {lastUpdated.toLocaleTimeString()}
-                                            </small>
+                                            <small>Last updated: {lastUpdated.toLocaleTimeString()}</small>
                                         )} */}
                                     </div>
                                     {/* {!isLoadingPrices && hotelPrice && hotelPrice.length > 0 && (
-                                        <p style={{
-                                            fontSize: '14px',
-                                            color: '#666',
-                                            marginTop: '8px',
-                                            marginBottom: '0',
-                                            fontWeight: 'normal'
-                                        }}>
+                                        <p>
                                             📅 {new Date(checkinDate).toLocaleDateString()} → {new Date(checkoutDate).toLocaleDateString()}
                                             ({Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24))} nights)
                                         </p>
@@ -159,70 +151,36 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                 </div>
 
                                 {/* Date Picker Section */}
-                                <div className="date_picker_section" style={{
-                                    padding: '20px',
-                                    marginBottom: '20px',
-                                    backgroundColor: '#f8f9fa',
-                                    borderRadius: '8px'
-                                }}>
+                                <div className="date_picker_section view-price-date-section">
                                     <div className="row">
                                         <div className="col-lg-5 col-md-5 mb-3 mb-lg-0">
-                                            <label htmlFor="checkin" style={{
-                                                display: 'block',
-                                                marginBottom: '8px',
-                                                fontWeight: '600',
-                                                fontSize: '14px',
-                                                color: '#333'
-                                            }}>
+                                            <label htmlFor="checkin" className="view-price-label">
                                                 Check-in Date
                                             </label>
                                             <input
                                                 type="date"
                                                 id="checkin"
-                                                className="form-control"
+                                                className="form-control view-price-input"
                                                 value={checkinDate}
                                                 onChange={(e) => setCheckinDate(e.target.value)}
                                                 min={getTodayDate()}
-                                                style={{
-                                                    padding: '10px',
-                                                    fontSize: '16px',
-                                                    border: '2px solid #ddd',
-                                                    borderRadius: '6px'
-                                                }}
                                             />
                                         </div>
                                         <div className="col-lg-5 col-md-5 mb-3 mb-lg-0">
-                                            <label htmlFor="checkout" style={{
-                                                display: 'block',
-                                                marginBottom: '8px',
-                                                fontWeight: '600',
-                                                fontSize: '14px',
-                                                color: '#333'
-                                            }}>
+                                            <label htmlFor="checkout" className="view-price-label">
                                                 Check-out Date
                                             </label>
                                             <input
                                                 type="date"
                                                 id="checkout"
-                                                className="form-control"
+                                                className="form-control view-price-input"
                                                 value={checkoutDate}
                                                 onChange={(e) => setCheckoutDate(e.target.value)}
                                                 min={checkinDate}
-                                                style={{
-                                                    padding: '10px',
-                                                    fontSize: '16px',
-                                                    border: '2px solid #ddd',
-                                                    borderRadius: '6px'
-                                                }}
                                             />
                                         </div>
                                         <div className="col-lg-2 col-md-2">
-                                            {/* <div style={{
-                                                padding: '5px 0px 7px 0px',
-                                                fontSize: '14px',
-                                                color: '#666',
-
-                                            }}>
+                                            {/* <div>
                                                 {(() => {
                                                     const checkin = new Date(checkinDate);
                                                     const checkout = new Date(checkoutDate);
@@ -232,18 +190,8 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                             </div> */}
                                             <button
                                                 onClick={() => onSearchDates && onSearchDates(checkinDate, checkoutDate)}
-                                                className="hotel_detail_button hotel_mobile_button text-white"
+                                                className="hotel_detail_button hotel_mobile_button text-white view-price-search-button"
                                                 disabled={isLoadingPrices}
-                                                style={{
-                                                    width: '100%',
-                                                    padding: '10px 15px',
-                                                    fontSize: '14px',
-                                                    fontWeight: '600',
-                                                    border: 'none',
-                                                    marginTop: "32px",
-                                                    cursor: isLoadingPrices ? 'not-allowed' : 'pointer',
-                                                    opacity: isLoadingPrices ? 0.6 : 1
-                                                }}
                                             >
                                                 {isLoadingPrices ? 'Searching...' : 'Search Prices'}
                                             </button>
@@ -253,33 +201,11 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
 
                                 {/* Loading State */}
                                 {isLoadingPrices && (
-                                    <div style={{
-                                        padding: '40px 20px',
-                                        textAlign: 'center',
-                                        backgroundColor: '#f8f9fa',
-                                        borderRadius: '8px',
-                                        marginBottom: '20px'
-                                    }}>
-                                        <div style={{
-                                            display: 'inline-block',
-                                            width: '40px',
-                                            height: '40px',
-                                            border: '4px solid #f3f3f3',
-                                            borderTop: '4px solid #3498db',
-                                            borderRadius: '50%',
-                                            animation: 'spin 1s linear infinite'
-                                        }}></div>
-                                        <p style={{ marginTop: '15px', color: '#666', fontSize: '16px' }}>
+                                    <div className="view-price-loading">
+                                        <div className="view-price-spinner"></div>
+                                        <p className="view-price-loading-text">
                                             Fetching prices for your selected dates...
                                         </p>
-                                        <style dangerouslySetInnerHTML={{
-                                            __html: `
-                                                @keyframes spin {
-                                                    0% { transform: rotate(0deg); }
-                                                    100% { transform: rotate(360deg); }
-                                                }
-                                            `
-                                        }} />
                                     </div>
                                 )}
 
@@ -301,8 +227,8 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                         if (matchedImg) {
 
                                             return (
-                                                <>
-                                                    <div className="view_price_box d-none d-lg-block" key={`${item.name}-${item.rate}-${priceDataKey}`}>
+                                                <React.Fragment key={`${item.name}-${item.rate}-${priceDataKey}`}>
+                                                    <div className="view_price_box d-none d-lg-block">
                                                         <div className="price_box">
                                                             <div className="row items-center">
 
@@ -324,24 +250,11 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                     <div className="text_detail">
                                                                         <div className="info flex justify-center">
                                                                             <div className="info_item">
-                                                                                <small style={{
-                                                                                    fontSize: '16px',
-                                                                                    color: '#888',
-                                                                                    marginTop: '4px',
-                                                                                    fontWeight: "400",
-                                                                                    display: 'block'
-                                                                                }}>
+                                                                                <small className="view-price-rate-note">
                                                                                     ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
                                                                                 </small>
                                                                                 {tax > 0 && (
-                                                                                    <small style={{
-                                                                                        fontSize: '16px',
-                                                                                        color: '#999',
-                                                                                        fontWeight: "400",
-                                                                                        marginTop: '2px',
-                                                                                        display: 'block',
-
-                                                                                    }}>
+                                                                                    <small className="view-price-tax-note">
                                                                                         + ${tax.toFixed(2)} tax
                                                                                     </small>
                                                                                 )}
@@ -353,7 +266,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
 
                                                                 {/* Price column */}
                                                                 <div className="col-lg-3">
-                                                                    <div className="price_box_price flex justify-center flex-column" style={{ position: 'relative', cursor: 'help' }}>
+                                                                <div className="price_box_price flex justify-center flex-column view-price-box-price">
                                                                         {(() => {
                                                                             const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
                                                                             const ratePerNight = Number(item.rate);
@@ -364,10 +277,10 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                             return (
                                                                                 <>
                                                                                     <div
-                                                                                        style={{ textAlign: 'center' }}
+                                                                                        className="view-price-total-wrap"
                                                                                         title={`Breakdown:\n${ratePerNight.toFixed(2)} per night × ${nights} nights = ${totalBeforeTax.toFixed(2)}\n+ Tax: ${tax.toFixed(2)}\n= Total: ${grandTotal.toFixed(2)}`}
                                                                                     >
-                                                                                        <h4 style={{ margin: 0, fontWeight: 'bold', color: '#2c3e50' }}>
+                                                                                        <h4 className="view-price-total-amount">
                                                                                             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                                                         </h4>
 
@@ -386,8 +299,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                 href={finalLink}
                                                                                 target="_blank"
                                                                                 rel="noopener noreferrer"
-                                                                                className="hotel_detail_button text-white"
-                                                                                style={{ textDecoration: 'none', display: 'inline-block' }}
+                                                                                className="hotel_detail_button text-white view-price-link"
                                                                             >
                                                                                 view deals
                                                                             </a>
@@ -408,7 +320,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
 
                                                     {/* /*********************************************** mobile view show price detraik */}
 
-                                                    <div className="view_price_box d-block d-lg-none" key={`${item.name}-${item.rate}-${priceDataKey}`}>
+                                                    <div className="view_price_box d-block d-lg-none">
                                                         <div className="price_box">
                                                             <div className="detail flex justify-between items-center">
                                                                 <div className="icon flex flex-col gap-0 ">
@@ -419,23 +331,11 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                         height={100}
                                                                     />
                                                                     <div className="info_item">
-                                                                        <small style={{
-                                                                            fontSize: '13px',
-                                                                            color: '#888',
-                                                                            marginTop: '4px',
-                                                                            fontWeight: "400",
-                                                                            display: 'block'
-                                                                        }}>
+                                                                        <small className="view-price-rate-note-sm">
                                                                             ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
                                                                         </small>
                                                                         {tax > 0 && (
-                                                                            <small style={{
-                                                                                fontSize: '13px',
-                                                                                color: '#999',
-                                                                                fontWeight: "400",
-                                                                                display: 'block',
-
-                                                                            }}>
+                                                                            <small className="view-price-tax-note-sm">
                                                                                 + ${tax.toFixed(2)} tax
                                                                             </small>
                                                                         )}
@@ -445,7 +345,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                 <div className="side_price_detail">
                                                                     <div className="side_detail">
                                                                         {/* ***** */}
-                                                                        <div className="price_box_price mobile_price_box flex justify-center flex-column m-0" style={{ position: 'relative', cursor: 'help' }}>
+                                                                        <div className="price_box_price mobile_price_box flex justify-center flex-column m-0 view-price-box-price">
                                                                             {(() => {
                                                                                 const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
                                                                                 const ratePerNight = Number(item.rate);
@@ -456,10 +356,10 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                 return (
                                                                                     <>
                                                                                         <div
-                                                                                            style={{ textAlign: 'center' }}
+                                                                                            className="view-price-total-wrap"
                                                                                             title={`Breakdown:\n${ratePerNight.toFixed(2)} per night × ${nights} nights = ${totalBeforeTax.toFixed(2)}\n+ Tax: ${tax.toFixed(2)}\n= Total: ${grandTotal.toFixed(2)}`}
                                                                                         >
-                                                                                            <h4 style={{ margin: 0, fontWeight: 'bold', color: '#2c3e50' }} className='m-0'>
+                                                                                            <h4 className="view-price-total-amount m-0">
                                                                                                 ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                                                             </h4>
 
@@ -475,8 +375,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                     href={finalLink}
                                                                                     target="_blank"
                                                                                     rel="noopener noreferrer"
-                                                                                    className="hotel_detail_button text-white"
-                                                                                    style={{ textDecoration: 'none', display: 'inline-block' }}
+                                                                                    className="hotel_detail_button text-white view-price-link"
                                                                                 >
                                                                                     view deals
                                                                                 </a>
@@ -496,10 +395,10 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </>
+                                                </React.Fragment>
                                             );
                                         } else {
-                                            return <div className="view_price_box" key={i}>
+                                            return <div className="view_price_box" key={`price-fallback-${i}`}>
                                                 <div className="price_box">
                                                     <div className="row items-center">
 
@@ -536,18 +435,11 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
 
                                 {/* No Prices Available Message */}
                                 {!isLoadingPrices && (!hotelPrice || hotelPrice.length === 0) && (
-                                    <div style={{
-                                        padding: '40px 20px',
-                                        textAlign: 'center',
-                                        backgroundColor: '#fff3cd',
-                                        borderRadius: '8px',
-                                        marginBottom: '20px',
-                                        border: '1px solid #ffc107'
-                                    }}>
-                                        <p style={{ margin: 0, color: '#856404', fontSize: '16px' }}>
+                                    <div className="view-price-no-data">
+                                        <p className="view-price-no-data-title">
                                             ⚠️ No pricing data available for the selected dates.
                                         </p>
-                                        <p style={{ margin: '10px 0 0 0', color: '#856404', fontSize: '14px' }}>
+                                        <p className="view-price-no-data-sub">
                                             Try selecting different check-in and check-out dates.
                                         </p>
                                     </div>

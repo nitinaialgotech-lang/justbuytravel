@@ -2,6 +2,14 @@ import React from "react";
 import { RiCheckboxCircleLine } from "react-icons/ri";
 
 function ShimmerFacilities() {
+    const shimmerWidths = [
+        "shimmer-width-80",
+        "shimmer-width-75",
+        "shimmer-width-70",
+        "shimmer-width-65",
+        "shimmer-width-60",
+        "shimmer-width-55",
+    ];
     return (
         <div className="facilities_section">
             <div className="hotel_detail_page">
@@ -9,8 +17,7 @@ function ShimmerFacilities() {
                     <div className="single-facilities">
                         {/* Optional shimmer heading */}
                         <div
-                            className="shimmer-text mb-4"
-                            style={{ width: "25%", height: "20px", borderRadius: "6px" }}
+                            className="shimmer-text mb-4 shimmer-text-25p-20"
                         ></div>
 
                         {/* Shimmer list */}
@@ -19,13 +26,11 @@ function ShimmerFacilities() {
                                 <li key={i} className="flex items-center gap-2">
                                     {/* Icon placeholder */}
                                     <div
-                                        className="shimmer-icon"
-                                        style={{ width: "16px", height: "16px", borderRadius: "50%" }}
+                                        className="shimmer-icon shimmer-icon-16"
                                     ></div>
                                     {/* Text placeholder */}
                                     <div
-                                        className="shimmer-text"
-                                        style={{ width: `${80 - i * 5}%`, height: "16px", borderRadius: "4px" }}
+                                        className={`shimmer-text shimmer-line-16 ${shimmerWidths[i]}`}
                                     ></div>
                                 </li>
                             ))}
@@ -33,39 +38,6 @@ function ShimmerFacilities() {
                     </div>
                 </div>
             </div>
-
-            {/* Shimmer CSS */}
-            <style
-                dangerouslySetInnerHTML={{
-                    __html: `
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-
-        .shimmer-text,
-        .shimmer-icon {
-          display: inline-block;
-          position: relative;
-          overflow: hidden;
-          background-color: #e5e7eb;
-        }
-
-        .shimmer-text::before,
-        .shimmer-icon::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-        }
-      `,
-                }}
-            />
         </div>
     );
 }
