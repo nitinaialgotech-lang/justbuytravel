@@ -50,8 +50,7 @@ export default function Footer() {
                   </div>
                   <div className="footer_title">
                     <p>
-                      Dive into local recommendations for a truly authentic
-                      experience.
+                      We provide authentic travel guides, destination information, local experiences, travel news, expert tips, and smart suggestions to help travelers plan better trips.
                     </p>
                   </div>
                   <div className="footer_location">

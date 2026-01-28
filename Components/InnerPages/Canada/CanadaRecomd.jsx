@@ -19,20 +19,22 @@ import IconicPlaceInCanada from './IconicPlaceInCanada';
 import CanadaBookingTips from './CanadaBookingTips';
 import CanadaAmazingDeals from './CanadaAmazingDeals';
 import { useRouter } from 'next/navigation';
+import { searchHotel1 } from '@/app/Route/endpoints';
 export default function CanadaRecomd() {
 
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 56.1304;
-    const long = -106.3468;
+    const lat = 43.6548;
+    const long = 79.3884;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
         queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryFn: () => searchHotel1("Canada"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
+    console.log(nearbyPlace,"nearbyPlace");
 
     /***************** end of api calls ************* */
     /************************ shimmer effetct *****************/
@@ -96,16 +98,16 @@ export default function CanadaRecomd() {
     };
     // **************************
     const router = useRouter();
-  const viewDetail = (id) => {
-    router.push(`/hoteldetail?hotel=${id}`);
-  };
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+    };
     return (
         <>
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Recommended For You</h2>
-                    <h5>Handpicked experiences tailored to your interests</h5>
+                    <h5>Handpicked hotels based on location, reviews, and traveler preferences.</h5>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -174,10 +176,10 @@ export default function CanadaRecomd() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                  ? text.slice(0, maxLength) + "..."
-                                  : text;
-                          };
-                          return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">

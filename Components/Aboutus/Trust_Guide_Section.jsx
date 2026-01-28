@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const card = [
     {
@@ -33,7 +33,7 @@ const card = [
 
 export default function Trust_Guide_Section() {
 
-
+    const navigate = useRouter();
     const route = usePathname();
     return (
         <section className={`trust_guide_section ${route == "/aboutus/" ? "" : "bg_grey"}  padding_top padding_bottom`}>
@@ -43,17 +43,18 @@ export default function Trust_Guide_Section() {
                         {/* title */}
                         <div className="section_title trust_guide_content">
                             <h2>
-                                Your Trusted Guide to the Best Travel Sites
+                                Reliable Travel Websites for Comparison & Planning
                             </h2>
-                            <p>
-                                Looking for the best hotel booking websites to compare? Just Buy Travel helps you research and compare popular hotel platforms side by side, so you can choose the right option confidently.
+                            <p className='g_color fw-semibold'>
+                                As your travel guide, we help you avoid scams and travel with confidence.
                             </p>
                             <p>
-                                Searching for flight comparison websites? We feature trusted travel platforms that allow travelers to explore routes, prices, and options before booking.
+                                Over the years, we’ve explored and evaluated many travel companies while planning real trips worldwide. Some delivered excellent experiences, while others didn’t meet expectations. Based on careful research, we’ve curated trusted travel brands that help you book hotels, flights, holiday packages, and cruises with transparency, ease, and peace of mind for smarter, informed travel decisions.
+
                             </p>
-                            <p>
+                            {/* <p>
                                 Just Buy Travel is a travel research and comparison platform designed to help users explore hotels, flights, holiday packages, and cruises using trusted third-party travel websites.
-                            </p>
+                            </p> */}
                         </div>
                         <div className="booking_platform relative ">
                             {/* ******************* */}

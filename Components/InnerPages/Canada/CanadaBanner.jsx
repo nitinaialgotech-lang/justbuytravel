@@ -14,11 +14,11 @@ export default function CanadaBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Looking to easily book a hotel in <span> Canada?</span>
+                                            Hotels in <span> Canada</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                            How can we help you travel better for less?
-                                                        </h5> */}
+                                        <h5 className='capitalize'>
+                                            Best places to stay in Canada for every budget, from affordable hotels to luxury stays.
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

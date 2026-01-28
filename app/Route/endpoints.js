@@ -56,6 +56,15 @@ export const searchText = async (text, limit = 50) => {
 export const searchHotel = async (text, limit = 50) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=hotels and tourist_attraction in ${text}&maxResultCount=${limit}`)
 }
+export const searchHotel1 = async (text, limit = 50) => {
+    return await https_SearchCity.get(`/text-search.php?textQuery=hotels in ${text}&maxResultCount=${limit}&includedTypes=lodging`)
+}
+export const searchTouristAttraction = async (text, limit = 50) => {
+    return await https_SearchCity.get(`/text-search.php?textQuery=tourist_attraction in ${text}&maxResultCount=${limit}`)
+}   
+export const NearbyRestaurant = async (text, limit = 50) => {
+    return await https_SearchCity.get(`/text-search.php?textQuery=Restaurant in ${text}&maxResultCount=${limit}&includedTypes=restaurant`)
+}
 /******************* testing hotel detail */
 export const searchHotelName = async (name) => {
     return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`)
@@ -95,11 +104,13 @@ export const nearbyPlaces = async (lat, lng) => {
         `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=20`
     );
 };
+
 export const Restro = async (lat, lng) => {
     return await https_SearchCity.get(
         `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=restaurant&radius=10000&maxResultCount=10`
     );
 };
+
 export const IconicPlaces = async (lat, lng) => {
     return await https_SearchCity.get(
         `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=tourist_attraction&radius=10000&maxResultCount=10`

@@ -158,11 +158,13 @@ export default function CanadaBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Are you looking for one of the top- rated<span className='g_color font-semibold'> hotel booking websites in Canada?</span> Or are you planning a city tour? We are here to help you out by comparing the premium and<span className='g_color font-semibold'> cheap hotel sites in Canada</span> to find the perfect stay at the lowest price.
+                                    Are you looking for top-rated hotel booking websites in Canada or planning a city tour? We’re here to help you find the right stay at the best possible price. By comparing trusted and affordable hotel booking platforms, Just Buy Travel makes it easier to choose hotels that match your budget and travel plans.
+
 
                                 </p>
                                 <p>
-                                    Explore hidden methods for getting<span className='g_color font-semibold'>hotel discounts in Canada</span>  and staying inside your trip budget. From analysing Canada hotel prices to booking smartly via reputable sites, JustBuyTravel makes it simple to get comfort without compromising.
+                                    Discover smart ways to access hotel discounts in Canada while staying within your trip budget. From analyzing hotel prices across major Canadian cities to booking through reliable platforms, Just Buy Travel helps travelers enjoy comfort, convenience, and value—without compromising on quality.
+
                                 </p>
 
 

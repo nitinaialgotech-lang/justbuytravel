@@ -158,31 +158,36 @@ export default function GuideHotel() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
 
+                                <h5 className='g_color fw-semibold m-0'>Personalized Hotel Recommendations</h5>
                                 <p>
-                                    <span className='g_color font-semibold'>Personalized Recommendations</span>
-                                    <br></br>
-                                    Get personalised hotel recommendations based on your preferences, budget, and previous journeys, making it simple to find hotels online that actually suit you.
+                                    Get tailored hotel suggestions based on your preferences, budget, and travel history. We help you explore hotel booking sites, compare options, and find stays that truly match your needs.
+
                                 </p>
+                                <h5 className='g_color fw-semibold'>Smart Hotel Research Experience</h5>
                                 <p>
-                                    <span className='g_color font-semibold'>Easy Booking Experience</span>
-                                    <br></br>
-                                    Enjoy fast, safe reservations with rapid confirmation – no hassles, just easy vacation planning.
+
+                                    Enjoy a smooth and stress-free way to research hotels online. Compare amenities, locations, guest ratings, and pricing across trusted platforms before making a booking decision.
                                 </p>
+                                {/* ******** */}
+                                <h5 className='g_color fw-semibold'>Transparent Hotel Deals Online</h5>
                                 <p>
-                                    <span className='g_color font-semibold'>Best Price Guarantee</span>
-                                    <br></br>
-                                    We provide exceptional discounts on luxury stays, assuring the best hotel deals worldwide at the lowest costs.
+
+                                    Discover hotel deals online with clear pricing and no surprises. We highlight value-for-money options so you can confidently choose from cheap hotel booking online opportunities worldwide.
+
                                 </p>
+                                <h5 className='g_color fw-semibold'>Trusted by Global Travelers</h5>
                                 <p>
-                                    <span className='g_color font-semibold'>Trusted by Thousands</span>
-                                    <br></br>
-                                    Many tourists trust our expert picks and exclusive access to the best hotel booking site for value and service.
+
+                                    Travelers rely on our guidance to identify reliable hotel reservation online options and trusted travel platforms, helping them make informed choices every time.
+
                                 </p>
+                                <h5 className='g_color fw-semibold'>Easily Compare Hotel Prices Online</h5>
                                 <p>
-                                    <span className='g_color font-semibold'>Easily compare hotel prices</span>
-                                    <br></br>
-                                    Easily compare hotel prices from 100+ sites and take advantage of exclusive online hotel deals.
+
+                                    Quickly compare hotel prices online across multiple travel websites to find competitive rates, book budget hotels, and explore cheap hotels booking worldwide with confidence.
+
                                 </p>
+
 
 
 

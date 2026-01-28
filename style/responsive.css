@@ -162,7 +162,7 @@
   }
   .banner_box > .title > h1,
   .banner_box > .title > h2 {
-    font-size: 46px !important;
+    font-size: 32px !important;
     line-height: 1.2 !important;
   }
   .banner_box > .title > h5 {
@@ -870,7 +870,7 @@
 
   /* *********** */
   .supporting_text {
-    font-size: 24px !important;
+    font-size: 14px !important;
   }
 }
 /* ***************************************************************************************** */
@@ -909,7 +909,7 @@
 @media only screen and (max-width: 375px) {
   .banner_box > .title > h1,
   .banner_box > .title > h2 {
-    font-size: 45px !important;
+    font-size: 312px !important;
     line-height: 1;
   }
   .search_banner_box > .title > h1,
