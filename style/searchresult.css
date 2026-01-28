@@ -10,7 +10,7 @@
   --cl-bl: rgba(29, 31, 39, 1);
   --text-color: #525252;
   --border: #e5eaf4;
-  --font2: "Outfit";
+  --font2: var(--font-fam);
 }
 .hotel-card {
   padding: 10px;
@@ -587,7 +587,7 @@
 
 .hotel-grid-top-area .selector-and-list-grid-area .filter-btn span {
   color: var(--title-color);
-  font-family: var(--font-roboto);
+  font-family: var(--font-fam);
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
@@ -733,7 +733,7 @@
 }
 .nice-select .list .option {
   color: var(--text-color);
-  font-family: var(--font-roboto);
+  font-family: var(--font-fam);
   font-size: 14px;
   font-weight: 500;
   border-bottom: 1px solid var(--borders-color);

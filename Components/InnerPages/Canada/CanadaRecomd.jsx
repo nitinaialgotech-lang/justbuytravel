@@ -19,22 +19,21 @@ import IconicPlaceInCanada from './IconicPlaceInCanada';
 import CanadaBookingTips from './CanadaBookingTips';
 import CanadaAmazingDeals from './CanadaAmazingDeals';
 import { useRouter } from 'next/navigation';
+import { searchHotel1 } from '@/app/Route/endpoints';
 export default function CanadaRecomd() {
 
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 52.321945;
-    const long = -106.584167;
+    const lat = 56.1304;
+    const long = -106.3468;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
         queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryFn: () => searchHotel1("Canada"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
-    console.log(nearbyPlace, "............pk");
-
 
     /***************** end of api calls ************* */
     /************************ shimmer effetct *****************/
@@ -45,40 +44,27 @@ export default function CanadaRecomd() {
                     <div className="card_box">
                         {/* IMAGE */}
                         <div
-                            className="card_box_img card_rounded relative overflow-hidden shimmer-bg"
-                            style={{ minHeight: "250px" }}
+                            className="card_box_img card_rounded relative overflow-hidden shimmer-bg shimmer-min-250"
                         />
 
                         {/* DETAILS */}
                         <div className="card_box_detail card_rounded relative">
                             {/* TITLE */}
-                            <div
-                                className="shimmer-bg shimmer-rounded"
-                                style={{ width: "75%", height: "18px" }}
-                            />
+                            <div className="shimmer-bg shimmer-rounded shimmer-75x18" />
 
                             {/* SPACING */}
-                            <div style={{ height: "10px" }} />
+                            <div className="shimmer-spacer-10" />
 
                             {/* RATING + BUTTON */}
                             <div className="price_book flex justify-between items-center">
                                 {/* RATING */}
                                 <div className="flex gap-1 items-center">
-                                    <div
-                                        className="shimmer-bg shimmer-rounded"
-                                        style={{ width: "60px", height: "14px" }}
-                                    />
-                                    <div
-                                        className="shimmer-bg shimmer-rounded"
-                                        style={{ width: "40px", height: "14px" }}
-                                    />
+                                    <div className="shimmer-bg shimmer-rounded shimmer-60x14" />
+                                    <div className="shimmer-bg shimmer-rounded shimmer-40x14" />
                                 </div>
 
                                 {/* BUTTON */}
-                                <div
-                                    className="shimmer-bg shimmer-rounded"
-                                    style={{ width: "90px", height: "28px" }}
-                                />
+                                <div className="shimmer-bg shimmer-rounded shimmer-90x28" />
                             </div>
                         </div>
                     </div>
@@ -116,37 +102,6 @@ export default function CanadaRecomd() {
     };
     return (
         <>
-            {/* ********************* style start ****** */}
-            <style
-                dangerouslySetInnerHTML={{
-                    __html: `
-                @keyframes shimmer {
-                    0% {
-                        background-position: -1000px 0;
-                    }
-                    100% {
-                        background-position: 1000px 0;
-                    }
-                }
-               .shimmer-bg {
-  background: linear-gradient(
-    90deg,
-    #e5e7eb 0%,
-    #f3f4f6 50%,
-    #e5e7eb 100%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 1.6s infinite linear;
-}
-
-.shimmer-rounded {
-  border-radius: 8px;
-}
-
-            `
-                }}
-            />
-            {/* ************************ style end of shimmer */}
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
@@ -232,13 +187,7 @@ export default function CanadaRecomd() {
                                                         "
                                                     >
                                                         <div className="card_box pe-">
-                                                            <div
-                                                                className="card_box_img card_rounded relative overflow-hidden"
-                                                                style={{
-                                                                    minHeight: "250px",
-                                                                    backgroundColor: "#f3f4f6",
-                                                                }}
-                                                            >
+                                                            <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                                 <img
                                                                     src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
                                                                     className="card_rounded w-full h-full object-cover"

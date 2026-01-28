@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 
 
 const BlogDetailsShimmer = () => {
@@ -11,8 +12,7 @@ const BlogDetailsShimmer = () => {
                         {/* Image Shimmer */}
                         <div className="blog_img blog_pb">
                             <div
-                                className="shimmer-bg rounded-2xl"
-                                style={{ width: "100%", height: "420px" }}
+                                className="shimmer-bg rounded-2xl shimmer-100p-420"
                             />
                         </div>
 
@@ -23,12 +23,7 @@ const BlogDetailsShimmer = () => {
                             {Array.from({ length: 8 }).map((_, i) => (
                                 <div
                                     key={i}
-                                    className="shimmer-line mb-3"
-                                    style={{
-                                        width:
-                                            i === 7 ? "60%" : "100%",
-                                        height: "16px",
-                                    }}
+                                    className={`shimmer-line mb-3 ${i === 7 ? "shimmer-60p-16" : "shimmer-100p-16"}`}
                                 />
                             ))}
 
@@ -41,29 +36,29 @@ const BlogDetailsShimmer = () => {
 };
 
 export default function Blog_detail({ content, blog_image, load }) {
+    useEffect(() => {
+        const root = document.querySelector(".blog_content");
+        if (!root) return;
+
+        const handleToggle = (event) => {
+            const target = event.target;
+            if (!(target instanceof HTMLDetailsElement)) return;
+            if (!target.open) return;
+
+            const allDetails = root.querySelectorAll("details");
+            allDetails.forEach((detail) => {
+                if (detail !== target) detail.open = false;
+            });
+        };
+
+        root.addEventListener("toggle", handleToggle, true);
+        return () => {
+            root.removeEventListener("toggle", handleToggle, true);
+        };
+    }, []);
+
     return (
         <>
-            <style dangerouslySetInnerHTML={{
-                __html: `
-    @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-
-    .shimmer-bg,
-    .shimmer-line {
-      background: linear-gradient(
-        90deg,
-        #e5e7eb 0%,
-        #f3f4f6 50%,
-        #e5e7eb 100%
-      );
-      background-size: 1000px 100%;
-      animation: shimmer 1.8s infinite linear;
-      border-radius: 8px;
-    }
-  `
-            }} />
             {/* ***************************** */}
             {load ? (
                 <BlogDetailsShimmer />
@@ -73,25 +68,20 @@ export default function Blog_detail({ content, blog_image, load }) {
                         <div className="row">
                             <div className="col-lg-12 p-0">
                                 <div className="blog_img blog_pb">
-                                    {
-                                        blog_image?.map((item) => {
-                                            return (
-                                                <img src={item?.map((item) => item?.url)} alt="" className='rounded-2xl' />
-                                            )
-                                        })
-                                    }
+                                    {Array.isArray(blog_image) &&
+                                        blog_image.map((item, index) => (
+                                            <img
+                                                key={`blog-image-${item?.url || index}`}
+                                                src={item?.url}
+                                                alt=""
+                                                className="rounded-2xl"
+                                            />
+                                        ))}
                                 </div>
-                                <div className="blog_content blog_pb " >
-                                    {
-                                        content?.map((item, i) => {
-                                            return (
-
-                                                <p dangerouslySetInnerHTML={{ __html: item }} key={i}>
-
-                                                </p>
-                                            )
-                                        })
-                                    }
+                                <div
+                                    className="blog_content blog_pb "
+                                    dangerouslySetInnerHTML={{ __html: content }}
+                                >
                                     {/* ******************* */}
                                     {/* <div className="blog_title blog_pb ">
                                     <h2 className='mb-0 '>

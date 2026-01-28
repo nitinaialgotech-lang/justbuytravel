@@ -44,30 +44,30 @@ export default function Blog_Tabs() {
           <div className="blog_card shimmer-wrapper">
 
             {/* Image */}
-            <div className="blog_card_img shimmer-bg" style={{ height: "220px" }} />
+            <div className="blog_card_img shimmer-bg shimmer-h-220" />
 
             {/* Body */}
             <div className="blog_card_body p-3">
 
               {/* Category + Date */}
               <div className="flex justify-between items-center mb-3">
-                <div className="shimmer-line" style={{ width: "90px", height: "26px" }} />
-                <div className="shimmer-line" style={{ width: "110px", height: "16px" }} />
+                <div className="shimmer-line shimmer-90x26" />
+                <div className="shimmer-line shimmer-110x16" />
               </div>
 
               {/* Title */}
-              <div className="shimmer-line mb-2" style={{ width: "100%", height: "22px" }} />
-              <div className="shimmer-line mb-3" style={{ width: "80%", height: "22px" }} />
+              <div className="shimmer-line shimmer-100p-22 mb-2" />
+              <div className="shimmer-line shimmer-80p-22 mb-3" />
 
               {/* Content */}
-              <div className="shimmer-line mb-2" style={{ width: "100%", height: "14px" }} />
-              <div className="shimmer-line mb-2" style={{ width: "95%", height: "14px" }} />
-              <div className="shimmer-line mb-4" style={{ width: "85%", height: "14px" }} />
+              <div className="shimmer-line shimmer-100p-14 mb-2" />
+              <div className="shimmer-line shimmer-95p-14 mb-2" />
+              <div className="shimmer-line shimmer-85p-14 mb-4" />
 
               {/* Author */}
               <div className="flex items-center gap-2">
                 <div className="shimmer-circle" />
-                <div className="shimmer-line" style={{ width: "80px", height: "14px" }} />
+                <div className="shimmer-line shimmer-80x14" />
               </div>
 
             </div>
@@ -82,36 +82,6 @@ export default function Blog_Tabs() {
   return (
 
     <>
-      <style dangerouslySetInnerHTML={{
-        __html: `
-    @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-
-    .shimmer-bg,
-    .shimmer-line,
-    .shimmer-circle {
-      background: linear-gradient(
-        90deg,
-        #e5e7eb 0%,
-        #f3f4f6 50%,
-        #e5e7eb 100%
-      );
-      background-size: 1000px 100%;
-      animation: shimmer 1.8s infinite linear;
-      border-radius: 6px;
-    }
-
-    .shimmer-circle {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-    }
-  `
-      }} />
-
-
       <section>
         <div className="container">
           <div className="row justify-center">
@@ -156,7 +126,7 @@ export default function Blog_Tabs() {
 
                                   <div className="blog_card_body blog_showall_body">
                                     <h4 className="m-0">
-                                      <Link href={`/blogs?detail=${post?.slug}`}>
+                                      <Link href={`/blogs/${post?.slug}`}>
                                         {post?.title?.rendered}
                                       </Link>
                                     </h4>
@@ -222,7 +192,7 @@ export default function Blog_Tabs() {
                                                 {/* ****************************** */}
                                                 <div className="blog_card_heading">
                                                   <h4 className="m-0">
-                                                    <Link href={`/blogs?detail=${item?.slug}`}>
+                                                    <Link href={`/blogs/${item?.slug}`}>
                                                       {item?.title?.rendered}
                                                     </Link>
                                                   </h4>

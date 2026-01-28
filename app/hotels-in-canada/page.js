@@ -12,7 +12,7 @@ export const metadata = generateDestinationMetadata(destination, customData);
 export default function page() {
     const breadcrumbData = generateBreadcrumbStructuredData([
         { name: 'Home', path: '/' },
-        { name: 'Canada', path: '/canada' }
+        { name: 'Hotels in Canada', path: '/hotels-in-canada' }
     ]);
 
     return (
@@ -22,7 +22,7 @@ export default function page() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
             
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense>
                 <Header />
                 <CanadaBanner />
             </Suspense>
