@@ -72,8 +72,8 @@ export default function Hotel_IconicPlaces() {
             <section className=" padding_bottom padding_top">
                 <div className="container ">
                     <div className="explore_section section_title ">
-                        <h2 className="mb-0">Iconic Places Around The World</h2>
-                        <h5>Where history, culture, and beauty come together</h5>
+                        <h2 className="mb-0">Iconic Destinations Around the World</h2>
+                        <h5>Explore breathtaking locations rich in history, culture, and natural beauty.</h5>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 

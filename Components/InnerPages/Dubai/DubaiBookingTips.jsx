@@ -148,7 +148,7 @@ export default function DubaiBookingTips() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        Hotels in Dubai – Unlock Exclusive Deals & Save Over 50% on Luxury Stays!
+                                        Hotels in Dubai – Find the Best Place to Stay
                                     </h2>
                                 </div>
 
@@ -158,17 +158,26 @@ export default function DubaiBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    <span className='g_color font-semibold'> Hotels in Dubai </span> offer the perfect mix of luxury, comfort, and convenience. Whether you’re looking for<span className='g_color font-semibold'> good hotels in Dubai </span>or extravagant <span className='g_color font-semibold'>Dubai hotels 5 star</span> , you’ll find world-class accommodations to suit every need. From stunning<span className='g_color font-semibold'> five-star hotels in Dubai</span> to stylish <span className='g_color font-semibold'> hotels in Dubai downtown</span>, there’s something for every traveler.
+                                    Finding the <span className='g_color font-semibold'> best hotels in Dubai </span> does not have to be difficult. With many options available online, travelers can  <span className='g_color font-semibold'> compare  prices, locations, and reviews before they book hotels in Dubai.</span> This helps you save time and avoid paying more than needed.
+                                </p>
+                                <p>If you are planning your trip in advance, you may find great rates on <span className='g_color font-semibold'> 5 star hotels in Dubai </span> as well as comfortable budget hotels in Dubai. Travelers booking closer to their travel date can also find last minute hotel deals in Dubai, especially during off-peak seasons.
+
                                 </p>
                                 <p>
-                                    For a lavish stay, choose <span className='g_color font-semibold'> five-star hotels in Dubai </span> with premium amenities and breathtaking views. If you prefer a central location,<span className='g_color font-semibold'> hotels in Dubai downtown</span> keep you close to top attractions. No matter your preference,<span className='g_color font-semibold'> good hotels in Dubai </span>ensure a memorable stay!
+                                    Dubai hotel booking online allows you to explore different areas of the city with ease. From the busy streets near Downtown to the relaxed atmosphere of<span className='g_color font-semibold'>Dubai Marina, </span> each area offers a unique stay experience. Reading guest reviews and comparing hotel features can help you choose the best place to stay in Dubai.
+
+                                </p>
+
+                                <p>
+                                    With the right planning, you can <span className='g_color font-semibold'>enjoy a comfortable stay, stay within your budget, </span> and make the most of your time in this vibrant city.
+
                                 </p>
 
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
         </>
     )

@@ -148,7 +148,7 @@ export default function AustraliaBookingTips() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        Where to Stay in Australia: Smart Hotel Reservation Tips
+                                        Choosing the best budget hotels in Australia for a Comfortable Stay
                                     </h2>
                                 </div>
 
@@ -158,16 +158,14 @@ export default function AustraliaBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    The Best<span className='g_color font-semibold'> Hotel Booking Websites in Australia?</span> Finding the appropriate hotel in Australia may be simple and economical, whether you’re planning ahead or looking for<span className='g_color font-semibold'> last minute hotels Australia.</span> With so many alternatives,<span className='g_color font-semibold'> compare Australia hotel prices</span> and choose a place that fits your price range and needs.
+                                    Australia offers many hotel options that suit different travel needs, budgets, and locations. From busy city centers to quiet coastal towns, travelers can find  hotels in Australia that fit their plans with ease. Whether visiting for work, leisure, or a family holiday, choosing the right stay creates a smoother experience.
                                 </p>
                                 <p>
-                                    Australian accommodations vary from seaside resorts to cosy city stays. Make the most of your booking by using trustworthy sites with verified ratings and the latest<span className='g_color font-semibold'> hotel deals in Australia.</span> Plan a spontaneous trip? You can easily save money without compromising comfort with last-minute hotel booking deals.
+                                    Many travelers search for the best budget hotels in Australia  to balance comfort and cost. These hotels often provide clean rooms, helpful service, and easy access to transport and local attractions. They work well for short trips, longer stays, and value-focused travelers.
                                 </p>
                                 <p>
-                                    Cheap and luxury hotels, as well as friendly motels, are all open for you to choose from. You can easily select the<span className='g_color font-semibold'>  hotel booking sites in Australia,</span> like those having positive user testimonials, original photos, and easy cancellation policies.
+                                    Those seeking higher comfort can explore the top hotels in Australia  with modern facilities and quality service.Booking hotels in Australia online makes it easy to compare prices and guest reviews. When travelers reserve hotels online, they can choose confidently and avoid surprises.
                                 </p>
-
-
                             </div>
                         </div>
                     </div>

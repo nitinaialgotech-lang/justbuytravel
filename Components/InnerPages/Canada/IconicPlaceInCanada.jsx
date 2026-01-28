@@ -3,6 +3,7 @@ import { IconicPlaces } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { searchTouristAttraction } from '@/app/Route/endpoints';
 
 // Import Swiper styles
 import "swiper/css";
@@ -64,7 +65,7 @@ export default function IconicPlaceInCanada({ lat, long }) {
     // ************************************* iconic places apis 
     const { data: iconicPlacesData } = useQuery({
         queryKey: ["iconicPlacesNearby", lat, long],
-        queryFn: () => IconicPlaces(lat, long)
+        queryFn: () => searchTouristAttraction("Canada"),
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
 
@@ -74,7 +75,7 @@ export default function IconicPlaceInCanada({ lat, long }) {
                 <div className="container padding_bottom">
                     <div className="explore_section section_title ">
                         <h2 className="mb-0">Iconic Places</h2>
-                        <h5>Where history, culture, and beauty come together</h5>
+                        <h5>Find hotels near iconic landmarks and popular attractions.</h5>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 

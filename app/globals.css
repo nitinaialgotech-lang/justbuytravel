@@ -397,7 +397,7 @@ button {
   position: relative;
 }
 
-.banner_box>.title>h1 {
+.banner_box > .title > h1 {
   font-size: 70px;
   color: var(--color);
   font-weight: 900;
@@ -2104,8 +2104,8 @@ span.rating-stars {
   padding: 50px 0px 0px 0px;
 }
 
-.hotel_tips_content>p {
-  font-size: 19px;
+.hotel_tips_content > p {
+  font-size: 16px;
   text-transform: capitalize;
   text-align: justify;
   font-weight: 300;

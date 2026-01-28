@@ -92,7 +92,8 @@ export default function TopHotels() {
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Popular Hotels Around The World</h2>
-                    <h5>Let our experts guide you every step of the way in booking the perfect hotel!</h5>
+                    <h5>Explore popular hotels worldwide with trusted guidance and easy price comparisons.
+                    </h5>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -161,10 +162,10 @@ export default function TopHotels() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                    ? text.slice(0, maxLength) + "..."
-                                    : text;
-                            };
-                            return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
