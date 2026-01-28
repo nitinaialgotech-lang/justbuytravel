@@ -83,6 +83,7 @@ export default function Blog_Tabs() {
 
     <>
       <section>
+      <h2>Total Blogs: {blog_data?.totalPages || 0}</h2>
         <div className="container">
           <div className="row justify-center">
             <div className="col-lg-12">
@@ -104,7 +105,7 @@ export default function Blog_Tabs() {
 
 
                       ) : (
-                        blog_data?.map((post) => {
+                        blog_data?.posts?.map((post) => {
                           const text = post.excerpt.rendered?.replace(/<[^>]*>/g, "").split(" ");
                           const fullText = text?.slice(0, 30).join(" "); // first 50 words
 
@@ -112,6 +113,7 @@ export default function Blog_Tabs() {
 
 
                             <div className="col-lg-4" key={post.id}>
+                              
                               <div className="blog_card_box mb-10">
                                 <div className="blog_card">
                                   <div className="blog_card_img">
@@ -156,13 +158,12 @@ export default function Blog_Tabs() {
                             <div className="container">
                               <div className="row">
                                 {
-                                  isLoading ?
-                                    (
-                                      Array.from({ length: 6 }).map((_, i) => (
-                                        <BlogShimmerCard key={i} />
-                                      ))
-                                    ) :
-                                    blog_data?.map((item) => {
+                                  isLoading ? (
+                                    Array.from({ length: 6 }).map((_, i) => (
+                                      <BlogShimmerCard key={i} />
+                                    ))
+                                  ) : (
+                                    blog_data?.posts?.map((item) => {
                                       const date_it = item?.date;
                                       const formatted = moment(date_it).format("MMMM D, YYYY");
 
@@ -214,8 +215,9 @@ export default function Blog_Tabs() {
                                           </div>
                                         </div>
                                       );
-                                    })}
-                              </div>
+                                    })
+                                  )}
+                                </div>
                             </div>
                           </Tab>
                           // *************************************
