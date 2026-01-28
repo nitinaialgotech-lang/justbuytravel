@@ -1,10 +1,7 @@
 "use client";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState, useRef, use, act } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaHotel, FaUser } from "react-icons/fa";
-import { MdFlight } from "react-icons/md";
-import { FaCar } from "react-icons/fa6";
-import { GrBike } from "react-icons/gr";
 import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
 import { Dropdown_Get, Get_cityName, RestaurantApi, searchHotel, SearchLocation } from "@/app/Route/endpoints";
@@ -147,106 +144,78 @@ export default function Search() {
     // ********************************************************************************************************************
     const router = useRouter();
     const pathname = usePathname();
-    const [activeTab, setActiveTab] = useState("all");
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
-    const [searchType, setSearchType] = useState("all");
-
-    useEffect(() => {
-        // localStorage.removeItem("searchType");
-        // localStorage.setItem("searchType", "all");
-        setSearchContent(query);
-    }, [query]);
-    //    ******************************************* on crefresh local value change // 
-
-
-    useEffect(() => {
-        if (pathname === "/") {
-            localStorage.setItem("searchType", "all");
-            setSearchType("all");
-        } else {
-            const stored = localStorage.getItem("searchType");
-            if (stored) setSearchType(stored);
-        }
-    }, [pathname]);
-
-    const route = useRouter();
-    // const handleSearch = () => {
-    //     if (!searchContent.trim()) return;
-    //     router.push(`/search?query=${encodeURIComponent(searchContent)}`);
-    // };
-    // *********************************************** dropdown >>>>>>>>>...........................
-
-
-
-    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
-    const [searchAll, setSearchAll] = useState(true);
-
-    // ********************************
-
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-        const stored = window.localStorage.getItem("searchType");
-        if (stored) {
-            setSearchType(stored);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (pathname == "/") {
-            setActiveTab("all");
-            setSearchAll(true);
-            setContenttext("place to go, things to do, hotels...");
-            setSearchType("all");
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem("searchType", "all");
-            }
-        }
-
-        else if (pathname == "/book-flights/") {
-            setActiveTab("flights");
-            setSearchAll(false);
-            setContenttext("Flight, Travel ..");
-            setSearchType("flights");
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem("searchType", "flights");
-            }
-        }
-
-        else if (pathname == "/book-hotels/") {
-            setActiveTab("hotels");
-            setSearchAll(false);
-            setContenttext("hotel name or destination");
-            setSearchType("hotels");
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem("searchType", "hotels");
-            }
-        }
-
-        // else if (pathname == "/book-packages/") {
-        //     setActiveTab("Packages");
-        //     setSearchAll(false);
-        //     setContenttext("attraction, activity or destination");
-        //     setSearchType("Packages");
-        //     if (typeof window !== "undefined") {
-        //         window.localStorage.setItem("searchType", "Packages");
-        //     }
-        // }
-    }, [pathname]);
-
-
-
-    /********************* *********************************************************************************/
-
-    /*********************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
-    const [searchContent, setSearchContent] = useState("");
-    const [textContent, setContenttext] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [imageErrors, setImageErrors] = useState({});
     const [imageLoading, setImageLoading] = useState({});
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
+    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
+    const [searchAll, setSearchAll] = useState(true);
+    const [searchType, setSearchType] = useState("all");
+    const [searchContent, setSearchContent] = useState("");
+    const [activeTab, setActiveTab] = useState("all");
+    const [textContent, setContenttext] = useState("");
+    useEffect(() => {
+        setSearchContent(query);
+    }, [query]);
+    //    ******************************************* on crefresh local value change // 
+    const reset = () => {
+        setActiveTab("all");
+        setSearchType("all");
+        setSearchAll(true);
+        setSearchContent("");
+        setContenttext("place to go, things to do, hotels...");
+    }
+
+    const route = useRouter();
+    useEffect(() => {
+        window.addEventListener("reset-search", reset);
+        return () => window.removeEventListener("reset-search", reset);
+    }, []);
+
+
+    console.log(route, "............");
+
+
+    // const handleSearch = () => {
+    //     if (!searchContent.trim()) return;
+    //     router.push(`/search?query=${encodeURIComponent(searchContent)}`);
+    // };
+
+
+    // ********************************
+
+    // useEffect(() => {
+    //     if (pathname == "/") {
+    //         setContenttext("place to go, things to do, hotels...");
+    //         setSearchType("all");
+
+    //     }
+
+    //     else if (pathname == "/book-flights/") {
+    //         setActiveTab("flights");
+    //         setSearchAll(false);
+    //         setSearchType("flights");
+
+    //     }
+
+    //     else if (pathname == "/book-hotels/") {
+
+    //         setContenttext("hotel name or destination");
+    //         setSearchType("hotels");
+
+    //     }
+
+    // }, [pathname]);
+
+
+
+    /********************* *********************************************************************************/
+
+
 
     // Helper function to get photo URL from Google Places API response
     const getPhotoUrl = (place) => {
@@ -313,14 +282,14 @@ export default function Search() {
     const { data: autoCompleteData, isLoading } = useQuery({
         queryKey: ["autoComplete", searchContent, searchAll],
         queryFn: () => {
-            if (searchUserType === "searchall" && activeTab === "all") {
-                searchText(searchContent)
+            if (searchType == "all" || activeTab == "all") {
+                return searchText(searchContent)
             }
-            else if (searchUserType === "hotel" && activeTab === "hotels") {
-                searchHotel(searchContent)
+            else if (searchType == "hotels" || activeTab == "hotels") {
+                return searchHotel(searchContent)
             }
-            else if (searchUserType === "restaurant" && activeTab === "restaurants") {
-                RestaurantApi()
+            else if (searchType == "restaurants" || activeTab == "restaurants") {
+                return RestaurantApi(searchContent)
             }
 
         },
@@ -429,7 +398,7 @@ export default function Search() {
 
     const handleSearchTypeChange = (type) => {
         setSearchType(type);
-        localStorage.setItem("searchType", type);
+        // localStorage.setItem("searchType", searchType);
     };
 
 
@@ -442,66 +411,75 @@ export default function Search() {
                 <div className="container">
                     <div className="search_container ">
                         <div className="search_container_box  rounded-2xl  w-full">
-                            <div className="search_tab">
-                                <div className="tab_link flex justify-between items-center">
-                                    <ul className="flex items-center p-0">
-                                        <li>
-                                            <Link
-                                                href={""}
-                                                className={`${activeTab === "all" ? "g_color" : ""}`}
-                                                onClick={(e) => {
-                                                    setActiveTab("all");
-                                                    setSearchAll(true);
-                                                    handleSearchTypeChange("all");
+                            {
+                                pathname !== "/book-flights/" ? (
 
-                                                }}
-                                            >
-                                                <span>
-                                                    {" "}
-                                                    <FiSearch />
-                                                </span>{" "}
-                                                <span>searchAll</span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                href={"/book-flights"}
-                                                className={`${activeTab === "flights" ? "g_color" : ""}`}
-                                                onClick={(e) => {
-                                                    setActiveTab("flights");
-                                                    handleSearchTypeChange("flight");
-                                                }}
-                                            >
-                                                <img
-                                                    className="icon_link"
-                                                    src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
-                                                    alt=""
-                                                />{" "}
-                                                flights
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                href={""}
-                                                className={`${activeTab === "hotels" ? "g_color" : ""}`}
-                                                onClick={(e) => {
-                                                    setActiveTab("hotels");
-                                                    setSearchAll(false);
-                                                    handleSearchTypeChange("hotels");
+                                    <div className="search_tab">
+                                        <div className="tab_link flex justify-between items-center">
+                                            <ul className="flex items-center p-0">
+                                                <li>
+                                                    <Link
+                                                        href={""}
+                                                        className={`${activeTab == "all" ? "g_color" : ""}`}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            setActiveTab("all");
+                                                            setSearchAll(true);
+                                                            setContenttext("place to go, things to do, hotels...");
+                                                            handleSearchTypeChange("all");
+
+                                                        }}
+                                                    >
+                                                        <span>
+                                                            {" "}
+                                                            <FiSearch />
+                                                        </span>{" "}
+                                                        <span>searchAll </span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link
+                                                        href={""}
+                                                        className={`${activeTab == "flights" ? "g_color" : ""}`}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            setActiveTab("flights");
+
+                                                            handleSearchTypeChange("flights");
+                                                        }}
+                                                    >
+                                                        <img
+                                                            className="icon_link"
+                                                            src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
+                                                            alt=""
+                                                        />{" "}
+                                                        flights
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link
+                                                        href={""}
+                                                        className={`${activeTab == "hotels" ? "g_color" : ""}`}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            setActiveTab("hotels");
+                                                            setSearchAll(false);
+                                                            setContenttext("hotel name or destination");
+                                                            handleSearchTypeChange("hotels");
 
 
-                                                }}
-                                            >
-                                                <img
-                                                    className="icon_link"
-                                                    src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
-                                                    alt=""
-                                                />{" "}
-                                                hotels
-                                            </Link>
-                                        </li>
+                                                        }}
+                                                    >
+                                                        <img
+                                                            className="icon_link"
+                                                            src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
+                                                            alt=""
+                                                        />{" "}
+                                                        hotels
+                                                    </Link>
+                                                </li>
 
-                                        {/* <li>
+                                                {/* <li>
                                             <Link
                                                 href={""}
                                                 className={`${searchType === "Packages" ? "g_color" : ""}`}
@@ -517,35 +495,38 @@ export default function Search() {
                                                 Packages
                                             </Link>
                                         </li> */}
-                                        <li>
-                                            <Link
-                                                href={""}
-                                                className={`${activeTab === "restaurants" ? "g_color" : ""}`}
-                                                onClick={(e) => {
-                                                    setActiveTab("restaurants");
-                                                    setSearchAll(false);
-                                                    handleSearchTypeChange("Restaurant");
-                                                }}
-                                            >
-                                                <img
-                                                    className="icon_link"
-                                                    src="/justbuytravel_next/demo/header_icon/restaurant_icon.svg"
-                                                    alt=""
-                                                />{" "}
-                                                Restaurants
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                    <div className="help_info">
-                                        <p className="flex items-center gap-2">
-                                            <FaUser /> need some help ?
-                                        </p>
+                                                <li>
+                                                    <Link
+                                                        href={""}
+                                                        className={`${activeTab === "restaurants" ? "g_color" : ""}`}
+                                                        onClick={(e) => {
+                                                            setActiveTab("restaurants");
+                                                            setSearchAll(false);
+                                                            handleSearchTypeChange("restaurants");
+                                                            setContenttext("Search restaurants near you");
+                                                        }}
+                                                    >
+                                                        <img
+                                                            className="icon_link"
+                                                            src="/justbuytravel_next/demo/header_icon/restaurant_icon.svg"
+                                                            alt=""
+                                                        />{" "}
+                                                        Restaurants
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                            <div className="help_info">
+                                                <p className="flex items-center gap-2">
+                                                    <FaUser /> need some help ?
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                ) : " "
+                            }
                             {/* ********************* search input xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
                             <div className="search_box_input d-none d-lg-block">
-                                {searchType === "flight" ? (
+                                {searchType === "flights" || pathname == "/book-flights/" ? (
                                     <Search_flight_section />
                                 ) : (
 
@@ -727,7 +708,7 @@ export default function Search() {
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
                             <div className="mobile_search_box  d-block d-lg-none">
                                 {
-                                    searchType === "flight" ? (
+                                    searchType === "flights" ? (
                                         <Search_flight_section />
                                     ) : (
                                         <div className="mobole_boxs relative">
@@ -749,7 +730,7 @@ export default function Search() {
                                                         if (places.length > 0) setShowDropdown(true);
                                                     }}
                                                     className="block relative w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
-                                                    placeholder="Places to go, things to do, hotels..."
+                                                    placeholder={textContent}
                                                 />
 
                                                 {/* **************** */}

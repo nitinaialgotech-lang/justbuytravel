@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -25,12 +25,12 @@ export default function IreLandRecond() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 53.7798;
-    const long = 7.3055;
+    // const lat = 53.7798;
+    // const long = 7.3055;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryKey: ["lodgingnearby", "Ireland"],
+        queryFn: () => searchHotel1("Ireland"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
@@ -97,9 +97,9 @@ export default function IreLandRecond() {
     // *
     /************************************************ route path  */
     const router = useRouter();
-  const viewDetail = (id) => {
-    router.push(`/hoteldetail?hotel=${id}`);
-  };
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+    };
     return (
 
         <>
@@ -176,10 +176,10 @@ export default function IreLandRecond() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                  ? text.slice(0, maxLength) + "..."
-                                  : text;
-                          };
-                          return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
@@ -252,8 +252,8 @@ export default function IreLandRecond() {
                     </div>
                 </div>
             </section>
-            <NearByIreland lat={lat} long={long} />
-            <IconicPlaceInIreland lat={lat} long={long} />
+            <NearByIreland />
+            <IconicPlaceInIreland />
             <IreLandBookingTips />
             <IreLandAmazingDeals />
             <Blogs />

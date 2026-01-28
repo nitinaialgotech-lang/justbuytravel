@@ -1,5 +1,5 @@
 "use client"
-import { IconicPlaces } from "@/app/Route/endpoints";
+import { IconicPlaces, searchTouristAttraction } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,7 +16,7 @@ import {
 import { Navigation, Pagination } from "swiper/modules";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
-export default function SanfracIconicPlaces({ lat, long }) {
+export default function SanfracIconicPlaces() {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
@@ -62,8 +62,8 @@ export default function SanfracIconicPlaces({ lat, long }) {
     };
     // ************************************* iconic places apis 
     const { data: iconicPlacesData } = useQuery({
-        queryKey: ["iconicPlacesNearby", lat, long],
-        queryFn: () => IconicPlaces(lat, long)
+        queryKey: ["iconicPlacesNearby", "San Francisco"],
+        queryFn: () => searchTouristAttraction("San Francisco")
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
 

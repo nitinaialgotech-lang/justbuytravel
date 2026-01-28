@@ -16,9 +16,10 @@ export default function DenMarkBanner() {
                                         <h1 className='capitalize'>
                                             Book Hotel in<span> Denmark</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                       How can we help you travel better for less?
-                                                   </h5> */}
+                                        <h5 className='capitalize'>
+                                            Explore Denmark hotel options, compare locations, prices, and guest reviews to find the right stay for your trip.
+
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

@@ -22,7 +22,7 @@ import { useCurrency } from "@/context/CurrencyContext";
 import { CURRENCY_LABELS } from "@/context/CurrencyContext";
 import "../app/globals.css";
 import "../style/responsive.css";
-import {HotelIcon, FlightIcon, CruiseIcon} from "./icons";
+import { HotelIcon, FlightIcon, CruiseIcon } from "./icons";
 
 export default function Header() {
     const { currency, setCurrency, supportedCurrencies } = useCurrency();
@@ -53,7 +53,7 @@ export default function Header() {
                 <div className="container">
                     <Navbar expand="lg" className="">
                         <Container fluid className="p-0">
-                            <Navbar.Brand as={Link} href="/">
+                            <Navbar.Brand as={Link} href="/" onClick={() => window.dispatchEvent(new Event("reset-search"))}>
                                 <div className="logo">
                                     <img
                                         src={"/justbuytravel_next/demo/logo/logo.png.webp"}
@@ -277,6 +277,28 @@ export default function Header() {
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
+                                                                    <NavDropdown title={<><IoPricetag className="me-1" />{(CURRENCY_LABELS[currency]?.symbol || currency)} {currency}</>} id="currency-dropdown" className="lang-currency-dropdown">
+                                                                        {supportedCurrencies.map((code) => (
+                                                                            <NavDropdown.Item key={code} onClick={() => setCurrency(code)} active={currency === code}>
+                                                                                {CURRENCY_LABELS[code]?.symbol} {code} – {CURRENCY_LABELS[code]?.name}
+                                                                            </NavDropdown.Item>
+                                                                        ))}
+                                                                    </NavDropdown>
+                                                                </span>
+
+
+                                                                {" "}
+                                                                {/* <span>
+                                  <FiPlus />
+                                </span> */}
+                                                            </Link>
+                                                        </li>
+                                                        <li className="">
+                                                            <Link
+                                                                href={"/aboutus"}
+                                                                className="flex justify-between items-center"
+                                                            >
+                                                                <span className="flex gap-2 items-center capitalize">
                                                                     <span>
                                                                         <img
                                                                             className="icon_link"
@@ -291,7 +313,6 @@ export default function Header() {
                                 </span> */}
                                                             </Link>
                                                         </li>
-
                                                         <div className="button_nav  text-center px-2 py-2 rounded">
                                                             <Link href={"#"} className=''>
                                                                 Subscriber</Link>

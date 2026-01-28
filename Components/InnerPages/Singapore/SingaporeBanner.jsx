@@ -13,7 +13,7 @@ export default function SingaporeBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> Sinapore</span>
+                                            Book Hotel in<span> Singapore</span>
                                         </h1>
                                         {/* <h5 className='capitalize'>
                                                How can we help you travel better for less?

@@ -13,7 +13,7 @@ export default function NewYorkBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> New York</span>
+                                            Hotels in<span> New York</span>
                                         </h1>
                                         {/* <h5 className='capitalize'>
                                             How can we help you travel better for less?

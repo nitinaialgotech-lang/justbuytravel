@@ -6,20 +6,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-
 import Blogs from '@/Components/HomePage/Blog/Blogs';
-import FaqSection from '@/Components/HomePage/Faq/FaqSection';
 import Footer from '@/component/Footer';
 import NearByDenMark from './NearByDenMark';
 import IconicPlacesInDenMark from './IconicPlacesInDenMark';
 import DenMarkBookingTips from './DenMarkBookingTips';
 import DenMarkAmazingDeals from './DenMarkAmazingDeals';
 import { useRouter } from 'next/navigation';
+import DenMarkFaqSection from './DenMarkFaqSection';
 
 export default function DenMarkRecomd() {
 
@@ -27,12 +26,12 @@ export default function DenMarkRecomd() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 56.2639;
-    const long = 9.5018;
+    // const lat = 56.2639;
+    // const long = 9.5018;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryKey: ["lodgingnearby", "Denmark"],
+        queryFn: () => searchHotel1("Denmark"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
@@ -176,10 +175,10 @@ export default function DenMarkRecomd() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                    ? text.slice(0, maxLength) + "..."
-                                    : text;
-                            };
-                            return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
@@ -252,13 +251,13 @@ export default function DenMarkRecomd() {
                     </div>
                 </div>
             </section>
-            <NearByDenMark lat={lat} long={long} />
-            <IconicPlacesInDenMark lat={lat} long={long} />
+            <NearByDenMark />
+            <IconicPlacesInDenMark />
             <DenMarkBookingTips />
             <DenMarkAmazingDeals />
 
             <Blogs />
-            <FaqSection />
+            <DenMarkFaqSection />
             <Footer />
 
         </>

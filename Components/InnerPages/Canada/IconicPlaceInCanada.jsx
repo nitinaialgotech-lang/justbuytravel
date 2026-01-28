@@ -18,7 +18,7 @@ import { Navigation, Pagination } from "swiper/modules";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 
-export default function IconicPlaceInCanada({ lat, long }) {
+export default function IconicPlaceInCanada() {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
@@ -64,7 +64,7 @@ export default function IconicPlaceInCanada({ lat, long }) {
     };
     // ************************************* iconic places apis 
     const { data: iconicPlacesData } = useQuery({
-        queryKey: ["iconicPlacesNearby", lat, long],
+        queryKey: ["iconicPlacesNearby", "canada"], // ["iconicPlacesNearby", lat, long]
         queryFn: () => searchTouristAttraction("Canada"),
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];

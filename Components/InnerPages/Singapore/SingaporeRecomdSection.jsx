@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -26,12 +26,12 @@ export default function SingaporeRecomdSection() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 1.3521;
-    const long = 103.8198;
+    // const lat = 1.3521;
+    // const long = 103.8198;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryKey: ["lodgingnearby", "Singapore"],
+        queryFn: () => searchHotel1("Singapore"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
@@ -175,10 +175,10 @@ export default function SingaporeRecomdSection() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                    ? text.slice(0, maxLength) + "..."
-                                    : text;
-                            };
-                            return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
@@ -251,8 +251,8 @@ export default function SingaporeRecomdSection() {
                     </div>
                 </div>
             </section>
-            <NearByPlacesInSingapore lat={lat} long={long} />
-            <IconicPlacesSingapore lat={lat} long={long} />
+            <NearByPlacesInSingapore />
+            <IconicPlacesSingapore />
             <SingaporeBookingTips />
             <SingaporeAmazingDeals />
             <Blogs />

@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -26,12 +26,12 @@ export default function ParisRecomd() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 48.8575;
-    const long = 2.3514;
+    // const lat = 48.8575;
+    // const long = 2.3514;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryKey: ["lodgingnearby", "Paris"],
+        queryFn: () => searchHotel1("Paris"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
@@ -175,10 +175,10 @@ export default function ParisRecomd() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                    ? text.slice(0, maxLength) + "..."
-                                    : text;
-                            };
-                            return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
@@ -251,8 +251,8 @@ export default function ParisRecomd() {
                     </div>
                 </div>
             </section>
-            <NearByParis lat={lat} long={long} />
-            <IconicPlacesInParis lat={lat} long={long} />
+            <NearByParis />
+            <IconicPlacesInParis />
 
             <ParisBookingTips />
             <ParisAmazingDeals />

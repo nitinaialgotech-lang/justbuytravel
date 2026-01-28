@@ -4,11 +4,26 @@ import DubaiBanner from '@/Components/InnerPages/Dubai/DubaiBanner'
 import { generateDestinationMetadata, generateBreadcrumbStructuredData } from '@/app/utils/seo'
 import { getDestinationMetadata } from '@/app/utils/destinationMetadata'
 
-const destination = 'dubai';
-const customData = getDestinationMetadata(destination);
+// *********************************************************
+export const metadata = {
+    title: "Book Hotels in Dubai | Compare Cheap & Luxury Hotel Deals |  Just Buy Travel ",
+    description:
+        " Looking for book hotels in Dubai? Compare budget, luxury & 5-star hotels and find the best deals from trusted booking partners online.  ",
+    keywords:
+        "",
+    openGraph: {
+        title: "Book Hotels in Dubai | Compare Cheap & Luxury Hotel Deals |  Just Buy Travel ",
+        description:
+            " Looking for book hotels in Dubai? Compare budget, luxury & 5-star hotels and find the best deals from trusted booking partners online.  ",
+        type: "website",
+    },
+    alternates: {
+        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com',
+    },
+    robots: { index: false, follow: false },
+};
 
-export const metadata = generateDestinationMetadata(destination, customData);
-
+// ******************************************************
 export default function page() {
     const breadcrumbData = generateBreadcrumbStructuredData([
         { name: 'Home', path: '/' },
@@ -21,7 +36,7 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
-            
+
             <Header />
             <Suspense fallback={<div>Loading...</div>}>
                 <DubaiBanner />

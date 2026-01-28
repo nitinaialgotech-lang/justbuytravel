@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
@@ -25,14 +25,14 @@ export default function SanFrancRecomd() {
   const [Active, setActive] = useState(true);
   /*********************** end stte ****** */
   /********************* apis calls *********** */
-  const lat = 37.7749;
-  const long = -122.4194;
+  // const lat = 37.7749;
+  // const long = -122.4194;
 
   const { data: nearbyPlacesData, isLoading } = useQuery({
-    queryKey: ["lodgingnearby", lat, long],
-    queryFn: () => nearbyPlaces(lat, long),
+    queryKey: ["lodgingnearby", "San Francisco"],
+    queryFn: () => searchHotel1("San Francisco"),
   });
-    const nearbyPlace = nearbyPlacesData?.data?.places;
+  const nearbyPlace = nearbyPlacesData?.data?.places;
 
   /***************** end of api calls ************* */
   /************************ shimmer effetct *****************/
@@ -42,28 +42,28 @@ export default function SanFrancRecomd() {
         <div className="recommend_card_box card_rounded recomand_card_shadow margin_lr">
           <div className="card_box">
             {/* IMAGE */}
-                        <div
-                            className="card_box_img card_rounded relative overflow-hidden shimmer-bg shimmer-min-250"
-                        />
+            <div
+              className="card_box_img card_rounded relative overflow-hidden shimmer-bg shimmer-min-250"
+            />
 
             {/* DETAILS */}
             <div className="card_box_detail card_rounded relative">
               {/* TITLE */}
-                            <div className="shimmer-bg shimmer-rounded shimmer-75x18" />
+              <div className="shimmer-bg shimmer-rounded shimmer-75x18" />
 
               {/* SPACING */}
-                            <div className="shimmer-spacer-10" />
+              <div className="shimmer-spacer-10" />
 
               {/* RATING + BUTTON */}
               <div className="price_book flex justify-between items-center">
                 {/* RATING */}
                 <div className="flex gap-1 items-center">
-                                    <div className="shimmer-bg shimmer-rounded shimmer-60x14" />
-                                    <div className="shimmer-bg shimmer-rounded shimmer-40x14" />
+                  <div className="shimmer-bg shimmer-rounded shimmer-60x14" />
+                  <div className="shimmer-bg shimmer-rounded shimmer-40x14" />
                 </div>
 
                 {/* BUTTON */}
-                                <div className="shimmer-bg shimmer-rounded shimmer-90x28" />
+                <div className="shimmer-bg shimmer-rounded shimmer-90x28" />
               </div>
             </div>
           </div>
@@ -174,10 +174,10 @@ export default function SanFrancRecomd() {
                   const truncateText = (text, maxLength = 20) => {
                     if (!text) return "";
                     return text.length > maxLength
-                                  ? text.slice(0, maxLength) + "..."
-                                  : text;
-                          };
-                          return (
+                      ? text.slice(0, maxLength) + "..."
+                      : text;
+                  };
+                  return (
                     <>
                       <SwiperSlide key={i}>
                         <div className="card_col">
@@ -186,7 +186,7 @@ export default function SanFrancRecomd() {
                                                          "
                           >
                             <div className="card_box pe-">
-                                                            <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
+                              <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                 <img
                                   src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
                                   className="card_rounded w-full h-full object-cover"
@@ -250,8 +250,8 @@ export default function SanFrancRecomd() {
           </div>
         </div>
       </section>
-      <SanFrancNearBy lat={lat} long={long} />
-      <SanfracIconicPlaces lat={lat} long={long} />
+      <SanFrancNearBy />
+      <SanfracIconicPlaces />
       <SanFraceBookingTips />
       <SanFranceAmazingDeals />
 

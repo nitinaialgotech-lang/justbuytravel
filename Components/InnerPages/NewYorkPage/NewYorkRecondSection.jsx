@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -25,12 +25,12 @@ export default function NewYorkRecondSection() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 40.7128;
-    const long = -74.0060;
+    // const lat = 40.7128;
+    // const long = -74.0060;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryKey: ["lodgingnearby", "New York"],
+        queryFn: () => searchHotel1("New York"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
@@ -96,9 +96,9 @@ export default function NewYorkRecondSection() {
     };
     /************************************************ route path  */
     const router = useRouter();
-  const viewDetail = (id) => {
-    router.push(`/hoteldetail?hotel=${id}`);
-  };
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+    };
     return (
         <>
             {/* ******************** section start ********************** */}
@@ -174,10 +174,10 @@ export default function NewYorkRecondSection() {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                  ? text.slice(0, maxLength) + "..."
-                                  : text;
-                          };
-                          return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
@@ -251,8 +251,8 @@ export default function NewYorkRecondSection() {
                 </div>
             </section>
             {/* ****************************  components */}
-            <NearByPlacesInNewYork lat={lat} long={long} />
-            <IconicPlacesNewYork lat={lat} long={long} />
+            <NearByPlacesInNewYork />
+            <IconicPlacesNewYork />
             <HotelBookingTips />
 
             <NewYorkAmazingDeals />

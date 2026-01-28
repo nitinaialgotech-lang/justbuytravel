@@ -51,7 +51,7 @@ export default function SaudiNearByPlaces({ lat, long }) {
                 <div className="container">
                     <div className="row">
                         <div className="explore_section section_title m">
-                            <h2 className="mb-0">Near By Loactions</h2>
+                            <h2 className="mb-0">Near By Locations</h2>
                             <h5>Explore nearby destinations and hidden gems</h5>
                         </div>
                     </div>

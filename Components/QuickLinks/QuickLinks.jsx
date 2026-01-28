@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import React from 'react'
-import { IoAirplane } from "react-icons/io5";
 export default function QuickLinks() {
     return (
 
@@ -25,15 +23,15 @@ export default function QuickLinks() {
                                             {/* <li ><Link href={"/newyork"}>New York To London</Link></li> */}
                                             <li ><Link href={"/hotels-in-australia"}>Hotel In Australia</Link></li>
                                             <li ><Link href={"/hotels-in-canada"}>Hotel In Canada</Link></li>
-                                            <li ><Link href={"/denmark"}>Hotel In Denmark</Link></li>
-                                            <li ><Link href={"/glasgow"}>Hotel In glasgow</Link></li>
-                                            <li ><Link href={"/goa"}>Hotel In goa</Link></li>
-                                            <li ><Link href={"/ireland"}>Hotel In ireland</Link></li>
+                                            <li ><Link href={"/hotels-in-denmark"}>Hotel In Denmark</Link></li>
+                                            <li ><Link href={"/hotels-in-glasgow"}>Hotel In glasgow</Link></li>
+                                            <li ><Link href={"/hotels-in-goa"}>Hotel In goa</Link></li>
+                                            <li ><Link href={"/hotels-in-ireland"}>Hotel In ireland</Link></li>
                                             <li ><Link href={"/manchester"}>Hotel In menchester</Link></li>
-                                            <li ><Link href={"/newyork"}>Hotel In new york</Link></li>
+                                            <li ><Link href={"/hotels-in-New-York"}>Hotel In new york</Link></li>
                                             <li ><Link href={"/paris"}>Hotel In paris</Link></li>
                                             <li ><Link href={"/san-francisco"}>Hotel In san-francisco</Link></li>
-                                            <li ><Link href={"/saudi-to-india"}>Hotel In saudi to india</Link></li>
+                                            <li ><Link href={"/united-kingdom"}>Hotel In united-kingdom</Link></li>
                                             <li ><Link href={"/singapore"}>Hotel In singapore</Link></li>
                                             <li ><Link href={"/sydney"}>Hotel In sydney</Link></li>
                                             <li ><Link href={"/tokyo"}>Hotel In tokyo</Link></li>

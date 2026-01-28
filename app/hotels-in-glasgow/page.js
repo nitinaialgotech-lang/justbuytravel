@@ -7,7 +7,7 @@ export const metadata = {
     description:
         " Find the best hotels in Glasgow with Just Buy Travel. Explore luxury and family stays, compare prices, and book top hotel deals across trusted platforms.",
     keywords:
-        "terms and conditions, terms of use, service terms, legal terms, user agreement",
+        "",
     openGraph: {
         title: "Hotels in Glasgow | Luxury & Family Stays | Just Buy Travel ",
         description:

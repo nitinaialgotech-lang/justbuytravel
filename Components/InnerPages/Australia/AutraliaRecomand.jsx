@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -25,12 +25,12 @@ export default function AutraliaRecomand() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = -26.657233599999998;
-    const long = 153.09212929999998;
+    // const lat = -26.657233599999998;
+    // const long = 153.09212929999998;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryKey: ["lodgingnearby", "australia"],  // ["lodgingnearby", lat, long]
+        queryFn: () => searchHotel1("Australia"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
@@ -249,8 +249,8 @@ export default function AutraliaRecomand() {
                     </div>
                 </div>
             </section>
-            <AustraliaNearByPlaces lat={lat} long={long} />
-            <AutraliaIconicPlaces lat={lat} long={long} />
+            <AustraliaNearByPlaces />
+            <AutraliaIconicPlaces />
             <AustraliaBookingTips />
             <AustraliaAmazingDeals />
 

@@ -3,12 +3,13 @@ import { Get_Blog_category, Get_Blog_data } from "@/app/Route/endpoints";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import Link from "next/link";
-import { useEffect } from "react";
+import ReactDOM from 'react-dom';
 import { useState } from "react";
 import { Tab } from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
 import { FaRegUserCircle } from "react-icons/fa";
-
+import ReactPaginate from "react-paginate";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 export default function Blog_Tabs() {
 
   const [activeKey, setActiveKey] = useState("showall"); // default tab
@@ -28,7 +29,11 @@ export default function Blog_Tabs() {
     queryKey: ["blog_data", categoryId, count],
     queryFn: () => Get_Blog_data(categoryId, count),
     enabled: true,
+    keepPreviousData: true,
   });
+
+  console.log(blog_data, "data,..............", categories, ".......categories............");
+
   // (*************************************************************** trim the wortds )
   // Helper: truncate first 30 words
   const truncateWords = (html, limit = 30) => {
@@ -36,6 +41,15 @@ export default function Blog_Tabs() {
     const words = text.split(/\s+/).slice(0, limit).join(" ");
     return words + (text.split(/\s+/).length > limit ? "..." : "");
   };
+  // ****************************************  pagination ...............................................................
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    // ReactPaginate gives 0-based index
+    const pageNumber = event.selected + 1;
+    setcount(pageNumber);
+  };
+  // ******************................................ end og pagination ...........................................................
   // **************************************** shmmmer effect 
   const BlogShimmerCard = () => {
     return (
@@ -77,13 +91,12 @@ export default function Blog_Tabs() {
     );
   };
 
-
+  const TotalPages = blog_data?.totalPages || 0;
 
   return (
 
     <>
       <section>
-      <h2>Total Blogs: {blog_data?.totalPages || 0}</h2>
         <div className="container">
           <div className="row justify-center">
             <div className="col-lg-12">
@@ -102,49 +115,106 @@ export default function Blog_Tabs() {
                         Array.from({ length: 6 }).map((_, i) => (
                           <BlogShimmerCard key={i} />
                         ))
-
-
                       ) : (
-                        blog_data?.posts?.map((post) => {
-                          const text = post.excerpt.rendered?.replace(/<[^>]*>/g, "").split(" ");
-                          const fullText = text?.slice(0, 30).join(" "); // first 50 words
-
+                        blog_data?.posts?.map((item) => {
+                          const text = item.excerpt.rendered
+                            ?.replace(/<[^>]*>/g, "")
+                            .split(" ");
+                          const fullText = text.slice(0, 30).join(" ");
+                          const cat_name = item?.name;
+                          const date_it = item?.date;
+                          const formatted = moment(date_it).format("MMMM D, YYYY");
                           return (
+                            // <div className="col-lg-4" key={post.id}>
+                            //   <div className="blog_card_box mb-10">
+                            //     <div className="blog_card">
+                            //       <div className="blog_card_img">
+                            //         <img
+                            //           src={
+                            //             post?.yoast_head_json?.og_image?.[0]?.url ||
+                            //             "/default-image.webp"
+                            //           }
+                            //           alt=""
+                            //         />
+                            //       </div>
+
+                            //       <div className="blog_card_body blog_showall_body">
+                            //         <h4>
+                            //           <Link href={`/blogs/${post.slug}`}>
+                            //             {post.title.rendered}
+                            //           </Link>
+                            //         </h4>
+
+                            //         <div
+                            //           dangerouslySetInnerHTML={{
+                            //             __html:
+                            //               fullText + (text.length > 30 ? "..." : ""),
+                            //           }}
+                            //         />
+                            //       </div>
+                            //     </div>
+                            //   </div>
+                            // </div>
 
 
-                            <div className="col-lg-4" key={post.id}>
-                              
+
+
+                            <div className="col-lg-4" key={item.id}>
+
                               <div className="blog_card_box mb-10">
                                 <div className="blog_card">
+                                  {/* ****************************** */}
                                   <div className="blog_card_img">
                                     <img
-                                      src={
-                                        post?.yoast_head_json?.og_image?.[0]?.url ||
-                                        "/default-image.webp"
-                                      }
+                                      src={item?.yoast_head_json?.og_image?.[0]?.url}
                                       alt=""
                                     />
                                   </div>
-
-                                  <div className="blog_card_body blog_showall_body">
-                                    <h4 className="m-0">
-                                      <Link href={`/blogs/${post?.slug}`}>
-                                        {post?.title?.rendered}
-                                      </Link>
-                                    </h4>
+                                  {/* ****************************** */}
+                                  <div className="blog_card_body">
+                                    <div className="card_body_blog_time flex justify-between items-center">
+                                      {/* <button className="button_bg2 px-3 py-1 bg-dark text-light">
+                                        {item?.name} ,,,,
+                                      </button> */}
+                                      <p className="m-0 g_color">{formatted}</p>
+                                    </div>
+                                    {/* ****************************** */}
+                                    <div className="blog_card_heading">
+                                      <h4 className="m-0">
+                                        <Link href={`/blogs/${item?.slug}`}>
+                                          {item?.title?.rendered}
+                                        </Link>
+                                      </h4>
+                                    </div>
+                                    {/* ****************************** */}
                                     <div
                                       className="blog_card_content text-justify"
                                       dangerouslySetInnerHTML={{ __html: fullText + (text.length > 30 ? "..." : "") }}
                                     />
+
+                                    <div className="blog_card_user flex items-center gap-2">
+                                      <span className='g_color'>
+                                        <FaRegUserCircle />
+                                      </span>
+                                      <span className="g_color capitalize">Sulagna</span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          )
+
+
+
+
+
+
+
+                          );
                         })
                       )}
                     </div>
                   </Tab>
+
 
                   {/* ************************** ********************************************************************************************/}
                   {
@@ -158,11 +228,12 @@ export default function Blog_Tabs() {
                             <div className="container">
                               <div className="row">
                                 {
-                                  isLoading ? (
-                                    Array.from({ length: 6 }).map((_, i) => (
-                                      <BlogShimmerCard key={i} />
-                                    ))
-                                  ) : (
+                                  isLoading ?
+                                    (
+                                      Array.from({ length: 6 }).map((_, i) => (
+                                        <BlogShimmerCard key={i} />
+                                      ))
+                                    ) :
                                     blog_data?.posts?.map((item) => {
                                       const date_it = item?.date;
                                       const formatted = moment(date_it).format("MMMM D, YYYY");
@@ -215,9 +286,8 @@ export default function Blog_Tabs() {
                                           </div>
                                         </div>
                                       );
-                                    })
-                                  )}
-                                </div>
+                                    })}
+                              </div>
                             </div>
                           </Tab>
                           // *************************************
@@ -229,10 +299,42 @@ export default function Blog_Tabs() {
 
                 {/* ********************************** yav b more button ........... */}
                 <div className="loadmore text-center flex justify-center padding_bottom ">
-                  <button className="button_bg2" type="button" onClick={() => setcount(count + 1)}>
+                  {/* <button className="button_bg2" type="button" onClick={() => setcount(count + 1)}>
                     {isLoading ? <p className="m-0">..Loading</p> : <p className="m-0">Load More</p>}
-                  </button>
+                  </button> */}
+
+                  <div className="pagination_section">
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel={
+                        <span className="paginate-icon">
+                          <MdOutlineKeyboardArrowRight />
+                        </span>
+                      }
+                      previousLabel={
+                        <span className="paginate-icon">
+                          <MdOutlineKeyboardArrowLeft />
+                        </span>
+                      }
+                      onPageChange={handlePageClick}
+                      pageCount={TotalPages}
+                      pageRangeDisplayed={2}   // desktop visible range
+                      marginPagesDisplayed={1}
+                      forcePage={count - 1}
+                      containerClassName="pagination"
+                      activeClassName="selected"
+                      disabledClassName="disabled"
+                      pageClassName={isLoading ? 'page-loading' : ''}
+                    />
+                  </div>
                 </div>
+
+
+
+
+
+
+
               </div>
               {/* **************** */}
             </div>

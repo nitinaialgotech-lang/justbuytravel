@@ -9,31 +9,31 @@ export default function IreLandAmazingDeals() {
                     <div className="col-lg-12">
                         <div className="amazing_deals_title">
                             <h2>
-                                Unlock Top Hotel Vouchers and Weekend Breaks in Ireland
+                                Find the Best Hotels in Ireland for Every Budget and Travel Style
                             </h2>
                         </div>
                         <div className="hotel_tips_content amazing_deals_content ">
                             <p>
-                                Ireland is a wonderful and top rated destination to look around, Because of its rich history and stunning beautiful surroundings. It’s mainly important to check out the perfect spot for your vacation. If you’re exploring the Wild Atlantic Way’s rocky cliffs, walking through Dublin’s cobbled streets, or just spending the weekend in a calm town in the countryside. JustBuyTravel makes it easy to book a hotel in Ireland that fits your price and wants.
+                                Ireland is a highly loved travel destination, known for its rich history, dramatic coastlines, and warm local culture. From vibrant cities to peaceful countryside towns, the country offers something for every type of traveller. Choosing the right accommodation plays a key role in shaping your experience, whether you are planning a sightseeing holiday, a business trip, or a relaxing getaway.
                             </p>
                             <p>
-                                You can use our site to find the best places to stay all over the country. There are cheap places to stay in towns and fancy resorts in the country that we work with to get you the best deals and places to stay. Do not miss our special hotel breaks in Ireland if you want to take a short trip over the weekend. People who want to get away in comfort and style, like couples, families, or single people, will love them.
+                                Travellers searching for the best hotels in Ireland will find a wide range of choices across the country. Major cities such as Dublin, Cork, and Galway offer modern hotels close to attractions, dining areas, and transport hubs. These locations suit visitors who prefer convenience and easy access to city life.
                             </p>
                             <p>
-                                Do you really want to get amazing deals on your trip? Please use our hotel vouchers in Ireland, which give extra savings on certain locations. These coupons are great for travellers who want to save money on lodging while still getting a good experience. JustBuyTravel has a lot of ways to save money on travel without giving up comfort, whether you book early or look for deals at the last minute.
+                                For budget-conscious travellers, cheap hotels are available in many popular destinations. These stays often provide clean rooms, basic amenities, and practical locations, making them ideal for short visits, solo trips, or frequent travellers. Many visitors also choose affordable hotels in Ireland that offer a balance between comfort, price, and location, especially for longer stays or family travel.
                             </p>
                             <p>
-                                One of the most common concerns is the whole cost of a vacation. That’s why we provide a real-time tool to compare hotel prices in Ireland across several booking sites. All of your options will be shown in one place, allowing you to safely compare rates, read guest reviews, and book at the lowest price.
+                                Those who prefer premium comfort can enjoy luxury hotels in Ireland, which feature elegant interiors, attentive service, and scenic surroundings. These hotels are often located near iconic landmarks, coastal views, or historic settings, offering a more refined travel experience.
                             </p>
                             <p>
-                                For easy hotel bookings, JustBuyTravel is the best place to go. We save you time and effort by putting together all the best ads from trustworthy sites in one simple platform. You can trust us to make your hotel reservation easy, safe, and stress-free, no matter where you’re going—Galway, Cork, Limerick, or anywhere else.
+                                Seasonal offers and promotions allow travellers to benefit from Ireland hotel deals, helping manage accommodation costs during peak or off-peak travel periods. These deals are useful for city breaks, romantic trips, or flexible travel plans.
                             </p>
                             <p>
-                                Don’t waste time looking at different websites; start your trip right now with <span className='g_color font-semibold'>JustBuyTravel.</span>
+                                In western Ireland, travellers often choose boutique hotels in Galway, Ireland, known for their local charm, personalised service, and unique character. These stays appeal to visitors who value authenticity and a more intimate atmosphere.
 
                             </p>
                             <p>
-                                Take advantage of deals and coupons to book great hotel stays that fit any budget or way of life. We want you to enjoy your stay as much as possible, so we offer great deals, checked ads, and different ways to book.
+                                Just Buy Travel works with trusted booking partners to provide verified listings, transparent pricing, and genuine guest reviews. This approach helps travellers compare options confidently and plan their stay in Ireland without hidden charges or uncertainty, ensuring a smooth and enjoyable travel experience from start to finish.
                             </p>
 
                         </div>

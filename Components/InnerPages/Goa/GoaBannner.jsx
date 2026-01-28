@@ -14,11 +14,11 @@ export default function GoaBannner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> Goa</span>
+                                            Hotels in<span> Goa</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                          How can we help you travel better for less?
-                                                      </h5> */}
+                                        <h5 className='capitalize'>
+                                            Enjoy your Goa trip with hotels close to beaches, markets, and nightlife, chosen for comfort and value.
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
