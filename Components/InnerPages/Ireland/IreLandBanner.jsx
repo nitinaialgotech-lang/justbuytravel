@@ -15,11 +15,11 @@ export default function IreLandBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> Ireland</span>
+                                            Hotels in<span> Ireland</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                              How can we help you travel better for less?
-                                                          </h5> */}
+                                        <h5 className='capitalize'>
+                                            Trusted hotel insights across Ireland, helping travellers understand locations, pricing ranges, and stay options before booking elsewhere.
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

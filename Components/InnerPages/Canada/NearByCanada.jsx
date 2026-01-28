@@ -16,7 +16,7 @@ import {
 import { Navigation, Pagination } from "swiper/modules";
 /******************* stqart function */
 
-export default function NearByCanada({ lat, long }) {
+export default function NearByCanada() {
     /********************* states *************** */
     const [isBeginning, setIsBeginning] = useState(true);
     /* ********************************* */
@@ -43,7 +43,7 @@ export default function NearByCanada({ lat, long }) {
     };
     /********************************************  */
     const { data: nearbyRestaurantsData } = useQuery({
-        queryKey: ["restaurantsNearby", lat, long],
+        queryKey: ["restaurantsNearby", "canada"], // ["restaurantsNearby", lat, long]
         queryFn: () => NearbyRestaurant("Canada"),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
@@ -53,7 +53,7 @@ export default function NearByCanada({ lat, long }) {
                 <div className="container">
                     <div className="row">
                         <div className="explore_section section_title m">
-                            <h2 className="mb-0">Near By Loactions</h2>
+                            <h2 className="mb-0">Near By Locations</h2>
                             <h5>Explore hotels in nearby areas to find the perfect place to stay.</h5>
                         </div>
                     </div>

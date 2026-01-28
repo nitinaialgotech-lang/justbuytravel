@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Restro } from "@/app/Route/endpoints";
+import { NearbyRestaurant, Restro } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,7 +14,7 @@ import {
 } from "react-icons/md";
 import { Navigation, Pagination } from "swiper/modules";
 
-export default function USAnearPlaces({ lat, long }) {
+export default function USAnearPlaces() {
     /********************* states *************** */
     const [isBeginning, setIsBeginning] = useState(true);
     /* ********************************* */
@@ -41,8 +41,8 @@ export default function USAnearPlaces({ lat, long }) {
     };
     /********************************************  */
     const { data: nearbyRestaurantsData } = useQuery({
-        queryKey: ["restaurantsNearby", lat, long],
-        queryFn: () => Restro(lat, long),
+        queryKey: ["restaurantsNearby", "USA"],
+        queryFn: () => NearbyRestaurant("USA"),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
     return (
@@ -51,7 +51,7 @@ export default function USAnearPlaces({ lat, long }) {
                 <div className="container">
                     <div className="row">
                         <div className="explore_section section_title m">
-                            <h2 className="mb-0">Near By Loactions</h2>
+                            <h2 className="mb-0">Near By Locations</h2>
                             <h5>Explore nearby destinations and hidden gems</h5>
                         </div>
                     </div>

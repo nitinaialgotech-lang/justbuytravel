@@ -26,11 +26,11 @@ export default function CanadaRecomd() {
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 56.1304;
-    const long = -106.3468;
+    // const lat = 56.1304;
+    // const long = -106.3468;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
+        queryKey: ["lodgingnearby", "canada"],  // ["lodgingnearby", lat, long]
         queryFn: () => searchHotel1("Canada"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
@@ -261,8 +261,8 @@ export default function CanadaRecomd() {
 
 
 
-            <NearByCanada lat={lat} long={long} />
-            <IconicPlaceInCanada lat={lat} long={long} />
+            <NearByCanada />
+            <IconicPlaceInCanada />
             <CanadaBookingTips />
             <CanadaAmazingDeals />
 

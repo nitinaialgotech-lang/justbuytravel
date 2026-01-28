@@ -157,7 +157,7 @@ export default function HotelBookingTips() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        Where to Stay in New York Hotel Booking Tips
+                                        Where to Stay in New York – Hotel Booking Tips for the Best Deals
                                     </h2>
                                 </div>
 
@@ -167,17 +167,13 @@ export default function HotelBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Planning a trip to New York and searching for the perfect stay? With the right guidance, finding comfortable and affordable rooms is simple. Whether you prefer the energy of city life or the calm of quiet neighborhoods, Singapore offers a range of stays to match every traveler’s style and budget.
+                                    Planning a trip to New York and looking for the right place to stay? With the right New York hotel booking tips, finding comfortable and affordable accommodation becomes easy. Whether you prefer staying near major attractions or in quieter neighborhoods, there are plenty of options for New York hotel booking that suit every travel style and budget.
+
                                 </p>
                                 <p>
-                                    Explore exceptional <span className='g_color font-semibold'>last minute hotel deals New York</span> that both boutique establishments and reputable chains provide, ensuring a reliable experience for visitors to New York. Unique places such as Orchard Road, Marina Bay, and Little India provide both amazing experiences and memorable moments.
+                                    Travelers can compare amenities, locations, and prices to discover the best hotels in New York without compromising on comfort. Exploring last minute hotel deals in New York can also help you save more, especially during peak travel seasons. By choosing trusted platforms, you can find affordable hotels in New York while ensuring a smooth and secure booking experience.
                                 </p>
-                                <p>
-                                    Now check out their amenities, locations, and fare pricing to ensure the most profitable hotel cost in Singapore.A variety of hotels provide seasonal packages as per their traveler needs.
-                                </p>
-                                <p>
-                                    JustBuyTravel Share  you to find a <span className='g_color font-semibold'>New York hotel booking lowest price</span> options while keeping high standards of quality. Share an easy booking process and connect with the value for your New York tour.
-                                </p>
+
                             </div>
                         </div>
                     </div>

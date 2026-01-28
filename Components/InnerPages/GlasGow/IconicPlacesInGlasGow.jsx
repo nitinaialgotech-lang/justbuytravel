@@ -1,5 +1,5 @@
 "use client"
-import { IconicPlaces } from "@/app/Route/endpoints";
+import { IconicPlaces, searchTouristAttraction } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -64,8 +64,8 @@ export default function IconicPlacesInGlasGow({ lat, long }) {
     };
     // ************************************* iconic places apis 
     const { data: iconicPlacesData } = useQuery({
-        queryKey: ["iconicPlacesNearby", lat, long],
-        queryFn: () => IconicPlaces(lat, long)
+        queryKey: ["iconicPlacesNearby", "Glasgow"], // ["iconicPlacesNearby", lat, long]
+        queryFn: () => searchTouristAttraction("Glasgow"),
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
 

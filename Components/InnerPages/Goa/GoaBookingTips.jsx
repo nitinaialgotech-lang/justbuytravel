@@ -148,7 +148,7 @@ export default function GoaBookingTips() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        Accommodation Options in Goa Top Hotel Offers & Cost-Saving Strategies
+                                        Hotel Stays in Goa: Smart Ways to Save and Choose the Right Location
                                     </h2>
                                 </div>
 
@@ -158,16 +158,17 @@ export default function GoaBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Are you in the process of organizing a trip and seeking the ideal accommodation? Locating<span className='g_color font-semibold'> cheap rooms in Goa</span> is easier, with appropriate assistance. Goa delivers many options that suit your tastes, if you enjoy the vitality of urban life or the peace of subtler neighborhoods, all while adapting to different budgets.
+                                    Planning a trip to Goa becomes easier when you choose accommodation that matches your budget and travel style. Whether you prefer lively areas close to markets and nightlife or quieter neighbourhoods near the coast, Goa offers hotel options suited to different needs and budgets.
+
                                 </p>
                                 <p>
-                                    Explore exceptional<span className='g_color font-semibold'> last minute hotel deals Goa</span> that both boutique establishments and reputable chains provide, ensuring a reliable experience for visitors to Goa. Unique places such as Orchard Road, Marina Bay, and Little India provide both amazing experiences and memorable moments.
+                                    Travellers can often save money by checking last-minute hotel deals offered by both boutique properties and well-known hotel brands. These options help visitors enjoy comfortable stays without paying more than necessary, especially during off-peak travel periods.
                                 </p>
                                 <p>
-                                    Now check out their amenities, locations, and fare pricing to ensure the most profitable hotel cost in Goa.A variety of hotels provide seasonal packages as per their traveler needs.
+                                    Before confirming a stay, it helps to review hotel amenities, locations, and pricing details. Many hotels provide seasonal offers and flexible packages based on traveller demand, making it easier to find value-driven options.
                                 </p>
                                 <p>
-                                    JustBuyTravel allows you to find a<span className='g_color font-semibold'> Goa hotel booking lowest price</span> options while keeping high standards of quality. Share an easy booking process and connect with the value for your Goa tour.
+                                    Just Buy Travel works with trusted booking partners to display verified listings, transparent prices, and flexible booking choices. This allows travellers to compare options confidently and select the right hotel location while keeping overall travel costs under control.
                                 </p>
 
                             </div>

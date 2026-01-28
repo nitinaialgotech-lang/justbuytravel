@@ -148,7 +148,7 @@ export default function GlasGowBookingTips() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        Find the Best Late Booking Hotels Glasgow – Book Cheap Hotel Glasgow with Ease
+                                        Choose a Comfortable City Stay with Best Hotels in Glasgow for Your Trip
                                     </h2>
                                 </div>
 
@@ -158,11 +158,11 @@ export default function GlasGowBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Discover top tips on where to stay and how to<span className='g_color font-semibold'> book cheap hotel Glasgow</span> without missing out. Whether it’s last-minute or early planning, secure great deals on late<span className='g_color font-semibold'> booking hotels Glasgow</span> today.
+                                    Glasgow offers a mix of historic landmarks, local culture, and friendly neighbourhoods. The place you choose to stay can affect how smoothly your trip goes, whether you arrive for business meetings or a relaxing break.  Many travellers focus on location, comfort, and value when they book hotels in Glasgow, as the right choice helps them save time and enjoy the city more comfortably.
 
                                 </p>
                                 <p>
-                                    With our simple search and immediate confirmation, you may save significantly on<span className='g_color font-semibold'>late booking hotels  Glasgow.</span>  When you book cheap hotel in Glasgow with us, you can expect to enjoy pleasant accommodations at exceptional pricing.
+                                    A smooth Glasgow hotel booking process helps visitors review prices, policies, and guest feedback before confirming plans. Staying near transport links and attractions makes travel easier and saves time. The best hotels in Glasgow often provide comfortable rooms, helpful services, and convenient access to city highlights. Planning ahead and checking verified listings helps reduce stress and ensures a relaxed, enjoyable stay across the city.
                                 </p>
 
 

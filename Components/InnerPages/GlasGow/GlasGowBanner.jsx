@@ -14,11 +14,11 @@ export default function GlasGowBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> Glasgow</span>
+                                            Hotels in<span> Glasgow</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                           How can we help you travel better for less?
-                                                       </h5> */}
+                                        <h5 className='capitalize'>
+                                            Plan your Glasgow stay easily by exploring hotels, reviews, and price options in one place with Just Buy Travel
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

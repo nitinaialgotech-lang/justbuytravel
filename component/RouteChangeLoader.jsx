@@ -8,6 +8,7 @@ export default function RouteChangeLoader() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
 
+
   useEffect(() => {
     // Hide when navigation completes (URL changes)
     const id = requestAnimationFrame(() => setLoading(false));

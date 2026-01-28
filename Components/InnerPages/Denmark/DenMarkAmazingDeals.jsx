@@ -10,15 +10,21 @@ export default function DenMarkAmazingDeals() {
                         <div className="col-lg-12">
                             <div className="amazing_deals_title">
                                 <h2>
-                                    Comfort and Savings – Book Your Hotel in Denmark only with JustBuyTravel
+                                    Comfortable Stays and Smart Savings for Your Denmark Trip.
                                 </h2>
                             </div>
                             <div className="hotel_tips_content amazing_deals_content ">
                                 <p>
-                                    Denmark is one of the most famous and the top rated places to visit in Europe. Thus it has a great blend of latest and modern charm, historical beauty, and quiet coastal living. To find the correct and comfortable place to stay, to make  your trip more memorable.  If you are exploring the busy Copenhagen streets  or the magical town of  Odense. This is where JustBuyTravel comes in. They can help you easily with the<span className='g_color font-semibold'>  hotel booking Denmark </span> process with great deals and a simple booking process.
+                                    Denmark is a popular travel destination known for its beautiful cities, coastal scenery, and relaxed lifestyle. Choosing the right place to stay plays an important role in enjoying your trip, whether you are visiting Copenhagen, Odense, or smaller towns across the country. A well-located hotel can save time, reduce travel stress, and help you experience the destination more comfortably.
                                 </p>
                                 <p>
-                                    No matter your earnings or style, our platform is designed in such a way as to give you a choice of a variety of hotels that people in Denmark love. From cozy short stays to luxurious apartments and resorts. With trustworthy ads and exact prices, JustBuyTravel makes sure you get the best<span className='g_color font-semibold'> hotel booking Denmark</span>  deal when you’re preparing for your dream holiday.
+                                    Many travelers begin their search by exploring cheap hotels in Denmark when planning short trips or city breaks. These options often offer clean rooms, basic amenities, and easy access to public transport, making them practical for sightseeing-focused visits. Others prefer affordable hotels in Denmark, which provide a balance of comfort, location, and value, making them suitable for longer stays, business trips, or family travel.
+                                </p>
+                                <p>
+                                    For visitors who value premium comfort and high-quality service, luxury hotels in Denmark offer modern facilities, elegant interiors, and locations close to major attractions. These stays are ideal for travelers seeking a more refined experience.
+                                </p>
+                                <p>
+                                    Some travelers also take advantage of last minute hotels in Denmark, especially during quieter travel periods. By comparing verified listings, locations, and guest reviews, travelers can confidently choose accommodation that fits their plans and enjoy a smooth, memorable stay across Denmark.
                                 </p>
 
 

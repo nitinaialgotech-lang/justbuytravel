@@ -10,28 +10,23 @@ export default function GoaAmazingDeals() {
                         <div className="col-lg-12">
                             <div className="amazing_deals_title">
                                 <h2>
-                                    Unlock Amazing Hotel Deals in Goa with Your Ultimate Booking Guide
+                                    Smart Tips to Find Great Hotel Deals in Goa Without Overpaying
                                 </h2>
                             </div>
                             <div className="hotel_tips_content amazing_deals_content ">
                                 <p>
-                                    For a better trip, make sure you stay in the right place.You can check out or do many things in Goa.. You should learn how to<span className='g_color font-semibold'> book hotel deals Goa</span> and that will save your time and money. You are coming here for any purpose like for fun or work , you always know how to find cheap rooms in Goa or luxurious rooms at a cheaper price
+                                    For a better trip, choosing the right place to stay in Goa matters. Whether you travel for work, relaxation, or a short holiday, planning accommodation in advance helps save both time and money. Goa offers many stay options, from simple rooms to premium resorts, suited to different travel needs.
                                 </p>
                                 <p>
-                                    To  <span className='g_color font-semibold'>  book a hotel Goa </span>, it’s important to use the right site. Websites you can trust compare hotel prices in Goa in a clear way so you can quickly see which one is the best deal. There is a hotel reserve for all the travellers, where you are rich or middle income group, it doesn’t matter as you will find everything here for everyone.
+                                    When planning your stay, it is useful to look for hotels in Goa near beach if you want easy access to the sea. Some travellers prefer beachfront hotels in Goa for direct views and a peaceful atmosphere. Visitors looking for premium comfort often choose 5 star and luxury hotels in Goa, which offer high service standards and modern amenities.
                                 </p>
                                 <p>
-                                    Keep monitoring the<span className='g_color font-semibold'> hotel offers Goa. </span>The Goa hotels also provide regular deals and some occasional offers also provide<span className='g_color font-semibold'> last minute hotel deals Goa</span>, early bird discounts. They also have various packages that also contain food and sight tours  with the stay. These<span className='g_color font-semibold'> last minute hotels Goa</span> deals will save you a lot of money.
+                                    Budget-conscious travellers can still find comfort by selecting cheap hotels in Goa that provide clean rooms and convenient locations. Party lovers and explorers usually prefer hotels in North Goa near beach, while families often feel more relaxed in hotels in South Goa for families, where surroundings are quieter and more spacious. For short trips or quick arrivals, hotels in Goa near airport offer added convenience.
                                 </p>
                                 <p>
-                                    Making plans ahead of time is very helpful. If you book early in Goa, you can lock in lower prices and make sure you get the hotel you want before it gets full on busy dates. Also, a lot of hotels now offer open canceling policies that make it easy to change your plans. Be careful to look around different areas of Goa if you’re trying to get the<span className='g_color font-semibold'>best deals on hotel rooms.</span>  Marina Bay offers stunning coastal views, while Orchard Road is a great place to shop and party. Goa offers a wide variety of accommodation options, each with its price point.
+                                    Booking early helps secure better prices, while flexible plans may allow access to seasonal offers. By using hotel comparison tools, checking guest reviews, and understanding cancellation policies, travellers can make informed choices. With the right planning, your time in Goa can stay fun, simple, and well within budget.
                                 </p>
-                                <p>
-                                    <span className='g_color font-semibold'>Hotel rooms in Goa</span> might be expensive, but reserving in advance can get you great service and maybe even a discount. To guarantee a fantastic stay in Goa, make use of tools that let you compare hotels, read reviews written by previous visitors, and search for exclusive hotel offers.
-                                </p>
-                                <p>
-                                    In the end, your time in Goa should be fun and easy. You can have all of that without spending too much if you plan and book your stay well. Start your search right now to find the<span className='g_color font-semibold'> best hotel deals in Goa</span> that were made just for you.
-                                </p>
+
 
                             </div>
                         </div>

@@ -160,13 +160,13 @@ export default function IreLandBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Are you planning a trip to Ireland? Ireland has hotels for every tourist, from rural to urban. Check out the premium and luxurious  hotels and  resorts. You can compare prices, and get the best deals with JustBuyTravel in a few clicks.
+                                    Are you planning a trip to Ireland? The country offers a wide range of places to stay, from lively city hotels to peaceful countryside retreats. Whether you prefer a comfortable budget stay or a luxury resort, choosing the right hotel can make your trip more enjoyable.
                                 </p>
                                 <p>
-                                    Do you need to <span className='g_color font-semibold'> book a hotel in Ireland?</span> Our site’s real-time assistant helps you to book the best and amazing places to stay. It mainly depends on how you like to travel, you can choose from a variety of<span className='g_color font-semibold'> hotel breaks in Ireland.</span>
+                                    Finding and comparing hotels in Ireland becomes easier when you review prices, locations, and guest feedback in one place. Travelers can <span className='g_color font-semibold'>book hotels in Ireland </span>based on travel style, trip length, and preferred location, making planning more flexible and stress-free.
                                 </p>
                                 <p>
-                                    You can pick our special<span className='g_color font-semibold'>  hotel vouchers in Ireland</span> to save even more. Our deals are good for all kinds of vacation packages, from romantic weekend breaks to trips with the whole family and friends. Now enjoy the plan that fits your needs, people you can trust, and no secret fees.
+                                    Many visitors also look for hotel deals or vouchers in Ireland to manage travel costs better. These options can suit different trips, including short city breaks, romantic weekends, and family holidays. By using trusted booking partners and clear pricing information, travelers can plan their stay with confidence and avoid unexpected charges.
                                 </p>
 
 

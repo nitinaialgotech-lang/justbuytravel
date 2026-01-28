@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -19,18 +19,19 @@ import Blogs from '@/Components/HomePage/Blog/Blogs';
 import FaqSection from '@/Components/HomePage/Faq/FaqSection';
 import Footer from '@/component/Footer';
 import { useRouter } from 'next/navigation';
+import { renderBootstrapStars } from '@/component/renderBootstrapStars';
 
 export default function DubaiRecomdSection() {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     /********************* apis calls *********** */
-    const lat = 25.2048;
-    const long = 55.2708;
+    // const lat = 25.2048;
+    // const long = 55.2708;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
+        queryKey: ["lodgingnearby", "Dubai"],
+        queryFn: () => searchHotel1("Dubai"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
@@ -73,27 +74,7 @@ export default function DubaiRecomdSection() {
     };
     /*********************** end of shimmer effect ************* */
     // *****************************************************************************************
-    const renderBootstrapStars = (rating) => {
-        const stars = [];
-        const value = Number(rating) || 0;
-        const maxStars = 5;
-        const fullStars = Math.floor(value);
-        const hasHalfStar = value - fullStars >= 0.5;
 
-        for (let i = 0; i < Math.min(fullStars, maxStars); i++) {
-            stars.push(<i key={`full-${i}`} className="bi bi-star-fill"></i>);
-        }
-
-        if (hasHalfStar && stars.length < maxStars) {
-            stars.push(<i key="half" className="bi bi-star-half"></i>);
-        }
-
-        while (stars.length < maxStars) {
-            stars.push(<i key={`empty-${stars.length}`} className="bi bi-star"></i>);
-        }
-
-        return stars;
-    };
     /************************************************ route path  */
     const router = useRouter();
     const viewDetail = (id) => {
@@ -250,8 +231,8 @@ export default function DubaiRecomdSection() {
                     </div>
                 </div>
             </section>
-            <DubaiNearByPlaces lat={lat} long={long} />
-            <IconicPlacesInDubai lat={lat} long={long} />
+            <DubaiNearByPlaces />
+            <IconicPlacesInDubai />
             <DubaiBookingTips />
             <DubaiAmazingDeals />
             <Blogs />
