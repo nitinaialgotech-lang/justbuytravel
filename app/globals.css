@@ -2975,3 +2975,11 @@ span.rating-stars {
   color: var(--bg-color);
   text-decoration: none;
 }
+.lang-currency-dropdown a{
+  display: flex;
+  align-items: center;
+}
+.navbar_link_item svg{
+  width: 20px;
+  height: 20px;
+}

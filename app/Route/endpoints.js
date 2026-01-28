@@ -15,8 +15,19 @@ export const HotelDetail = async (hotel_id, code) => {
 }
 
 export const Get_Blogs = async () => {
-    return await https_blog.get("/posts")
-}
+    const res = await https_blog.get("/posts", {
+        params: {
+            per_page: 10, // or 1 if you only want count
+        },
+    });
+
+    return {
+        posts: res.data,
+        totalPosts: Number(res.headers["x-wp-total"]),
+        totalPages: Number(res.headers["x-wp-totalpages"]),
+    };
+};
+
 
 export const Get_Blog_category = async () => {
     return await https_blog.get("/categories?per_page=20")
@@ -32,13 +43,20 @@ export const Get_Blog_data = async (id, page) => {
     if (!id) {
         // Fetch All Posts
         const response = await https_blog.get(`/posts?page=${page}`);
-        return response?.data;
+        return {
+            posts: response.data,
+            totalPosts: Number(response.headers["x-wp-total"]),
+            totalPages: Number(response.headers["x-wp-totalpages"]),
+        }
     }
-
 
     // Fetch by Category
     const response = await https_blog.get(`/posts?categories=${id}`);
-    return response.data;
+    return {
+        posts: response.data,
+        totalPosts: Number(response.headers["x-wp-total"]),
+        totalPages: Number(response.headers["x-wp-totalpages"]),
+    }
 };
 
 export const Dropdown_Get = async (data) => {
@@ -61,12 +79,12 @@ export const searchHotel1 = async (text, limit = 50) => {
 }
 export const searchTouristAttraction = async (text, limit = 50) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=tourist_attraction in ${text}&maxResultCount=${limit}`)
-}   
+}
 export const NearbyRestaurant = async (text, limit = 50) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=Restaurant in ${text}&maxResultCount=${limit}&includedTypes=restaurant`)
 }
 /******************* testing hotel detail */
-export const searchHotelName = async (name) => {
+export const searchHotelName = async (name, address) => {
     return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`)
 }
 /********************************** check in check out apis >>>>>>>>>>>> */
@@ -85,7 +103,6 @@ export const HotelCheckInCheckOut = async (hotelkey, checkin, checkout) => {
 
     return response;
 }
-// ************ hotel around the world >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 export const TopHotelAroundWorld = async () => {
     return await https_SearchCity.get(`/top-hotels.php?includedType=lodging`)
 }
@@ -95,7 +112,6 @@ export const TouristAttractionApi = async () => {
 export const RestaurantApi = async (text) => {
     return await https_SearchCity.get(`/text-search.php?textQuery=${text}&includedType=restaurant`)
 }
-// *((((((((((((((((((((((()))))))))))))))))))))))
 export const autoComplete = async (text, limit = 10) => {
     return await https_SearchCity.get(`/autocomplete.php?input=${text}&maxResultCount=${limit}`)
 }
