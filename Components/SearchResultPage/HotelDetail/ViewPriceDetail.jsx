@@ -1,7 +1,10 @@
+"use client";
 import React, { useState, useEffect } from 'react'
 import { RiCheckboxCircleLine } from 'react-icons/ri'
+import { useCurrency } from "@/context/CurrencyContext";
 
 export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, hotelData, onSearchDates, isLoadingPrices, initialCheckin, initialCheckout, showPricing = true }) {
+    const { formatPrice } = useCurrency();
     const hotelPrice = PriceRate?.data?.raw?.result?.rates;
     const allRatesData = PriceRate?.data?.raw?.result; // This might have deep links
 
@@ -47,70 +50,73 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
     const priceDataKey = `${checkinDate}-${checkoutDate}-${hotelPrice?.length || 0}-${JSON.stringify(hotelPrice?.map(p => p.rate))}`;
 
     const bookingImg = [
-        {
-            name: "Booking.com",
-            img: "/justbuytravel_next/demo/logo/hoteldetail/Booking_com.png",
-            affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84"
-        },
-        {
-            name: "expedia.com/",
-            img: "/justbuytravel_next/demo/logo/hoteldetail/expedia_logo.svg",
-            affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8645&campaign_id=594"
-        },
-        {
-            name: "traveloka.com/",
-            img: "/justbuytravel_next/demo/logo/hoteldetail/travelok.svg",
-            affiliateBase: ""
-        },
-        {
-            name: "Trip.com",
-            img: "/justbuytravel_next/demo/logo/hoteldetail/tripcom.webp",
-            affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8626&campaign_id=121"
-        },
-    ]
+        { name: "Booking.com", img: "/justbuytravel_next/demo/logo/hoteldetail/Booking_com.png", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84" },
+        { name: "expedia.com", img: "/justbuytravel_next/demo/logo/hoteldetail/expedia_logo.svg", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8645&campaign_id=594" },
+        { name: "traveloka.com", img: "/justbuytravel_next/demo/logo/hoteldetail/travelok.svg", affiliateBase: "" },
+        { name: "Trip.com", img: "/justbuytravel_next/demo/logo/hoteldetail/tripcom.webp", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8626&campaign_id=121" },
+    ];
 
-    // Helper function to construct booking site URLs
-    const constructBookingUrl = (siteName, hotelName, hotelData, priceRateItem, checkin, checkout) => {
-        if (!hotelName) return null;
+    const normalizeProviderName = (s) => (s || "").toLowerCase().replace(/\/+$/, "").replace(/^www\./, "").trim();
 
-        // PRIORITY 1: Check the current rate item itself for deep links
-        if (priceRateItem?.deep_link || priceRateItem?.url || priceRateItem?.link || priceRateItem?.booking_url) {
-            const deepLink = priceRateItem.deep_link || priceRateItem.url || priceRateItem.link || priceRateItem.booking_url;
-            return deepLink;
+    const findProviderConfig = (providerName) =>
+        bookingImg.find((img) => normalizeProviderName(img.name) === normalizeProviderName(providerName)) ||
+        bookingImg.find((img) => normalizeProviderName(providerName).includes(normalizeProviderName(img.name))) ||
+        bookingImg.find((img) => normalizeProviderName(img.name).includes(normalizeProviderName(providerName)));
+
+    // Full address for search: "Rome Cavalieri, A Waldorf Astoria Hotel, Rome, Lazio, Italy" (not truncated)
+    const fullAddress = [hotelName, hotelAddress].filter(Boolean).join(", ").trim() || hotelName || hotelAddress || "";
+
+    // Helper function to construct booking site URLs (only use Google as last resort for unknown brands)
+    const constructBookingUrl = (siteName, hotelData, priceRateItem, checkin, checkout) => {
+        if (!fullAddress) return null;
+
+        // PRIORITY 1: Use deep_link from the current rate item when present (API’s direct booking link)
+        const itemLink = priceRateItem?.deep_link || priceRateItem?.url || priceRateItem?.link || priceRateItem?.booking_url;
+        if (itemLink && typeof itemLink === "string" && (itemLink.startsWith("http://") || itemLink.startsWith("https://"))) {
+            return itemLink;
         }
 
-        // PRIORITY 2: Check if hotelData.xotelo has specific URLs for each site
+        // PRIORITY 2: hotelData.xotelo.rates – match by normalized name
         if (hotelData?.xotelo?.rates) {
-            const siteData = hotelData.xotelo.rates.find(r => r.name === siteName);
-            if (siteData?.deep_link || siteData?.url || siteData?.link) {
-                const deepLink = siteData.deep_link || siteData.url || siteData.link;
-                return deepLink;
+            const n = normalizeProviderName(siteName);
+            const siteData = hotelData.xotelo.rates.find((r) => normalizeProviderName(r?.name) === n || (r?.name && normalizeProviderName(r.name).includes(n)));
+            const xotelLink = siteData?.deep_link || siteData?.url || siteData?.link;
+            if (xotelLink && typeof xotelLink === "string" && (xotelLink.startsWith("http://") || xotelLink.startsWith("https://"))) {
+                return xotelLink;
             }
         }
 
-        // PRIORITY 3: Check allRatesData for deep links
-        if (allRatesData?.rates) {
-            const rateData = allRatesData.rates.find(r => r.name === siteName);
-            if (rateData?.deep_link || rateData?.url || rateData?.link) {
-                const deepLink = rateData.deep_link || rateData.url || rateData.link;
-                return deepLink;
+        // PRIORITY 3: allRatesData.rates – match by normalized name
+        const ratesArr = allRatesData?.rates || hotelPrice;
+        if (Array.isArray(ratesArr)) {
+            const n = normalizeProviderName(siteName);
+            const rateData = ratesArr.find((r) => normalizeProviderName(r?.name) === n || (r?.name && normalizeProviderName(r.name).includes(n)));
+            const rateLink = rateData?.deep_link || rateData?.url || rateData?.link;
+            if (rateLink && typeof rateLink === "string" && (rateLink.startsWith("http://") || rateLink.startsWith("https://"))) {
+                return rateLink;
             }
         }
 
-        // FALLBACK: construct search URLs for each booking site using selected dates
-        const encodedHotel = encodeURIComponent(hotelName);
+        // FALLBACK: build search URLs for known brands (avoid sending users to Google for these)
+        // Pass full address like "Rome Cavalieri, A Waldorf Astoria Hotel, Rome, Lazio, Italy"; encode as %20/%2C (not +)
+        const encodedHotel = encodeURIComponent(fullAddress);
+        const site = (siteName || "").toLowerCase().trim();
+        const los = Math.max(1, Math.ceil((new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24)));
 
-        switch (siteName) {
-            case "Booking.com":
-                return `https://www.booking.com/searchresults.html?ss=${encodedHotel}&checkin=${checkin}&checkout=${checkout}`;
-            case "expedia.com/":
-                return `https://www.expedia.com/Hotel-Search?destination=${encodedHotel}&startDate=${checkin}&endDate=${checkout}`;
-            case "Trip.com":
-                // Trip.com uses a specific format with searchWord and destName
-                return `https://www.trip.com/hotels/list?searchWord=${encodedHotel}&destName=${encodedHotel}&searchType=H&checkin=${checkin}&checkout=${checkout}&crn=1&adult=2&curr=USD&locale=en-US`;
-            default:
-                return null;
-        }
+        // Trip.com/Vio: pass full address as "Rome Cavalieri, A Waldorf Astoria Hotel, Rome, Lazio, Italy" (encoded as %20/%2C)
+        const buildTripComUrl = () =>
+            `https://www.trip.com/hotels/list?flexType=1&destName=${encodedHotel}&searchWord=${encodedHotel}&searchType=H&checkin=${checkin}&checkout=${checkout}&crn=1&adult=2&curr=USD&locale=en-US&old=1`;
+
+        if (site.includes("booking") && !site.includes("dot")) return `https://www.booking.com/searchresults.html?ss=${encodedHotel}&checkin=${checkin}&checkout=${checkout}`;
+        if (site.includes("expedia")) return `https://www.expedia.com/Hotel-Search?destination=${encodedHotel}&startDate=${checkin}&endDate=${checkout}`;
+        if (site.includes("trip.com") || (site.includes("trip") && !site.includes("tripadvisor"))) return buildTripComUrl();
+        if (site.includes("vio")) return buildTripComUrl();
+        if (site.includes("agoda")) return `https://www.agoda.com/search?textToSearch=${encodedHotel}&checkIn=${checkin}&checkOut=${checkout}&los=${los}&room=1&adults=2`;
+        if (site.includes("hotels.com") || (site.includes("hotels") && site.includes(".com"))) return `https://www.hotels.com/search.do?destination=${encodedHotel}&checkIn=${checkin}&checkOut=${checkout}`;
+        if (site.includes("traveloka")) return `https://www.traveloka.com/en-id/hotel/search?q=${encodedHotel}&checkin=${checkin}&checkout=${checkout}`;
+        if (site.includes("tripadvisor")) return `https://www.tripadvisor.com/Hotels?q=${encodedHotel}`;
+
+        return `https://www.google.com/search?q=hotel+${encodedHotel}+${encodeURIComponent(siteName || "")}`;
     }
 
     // Helper function to build affiliate link with specific hotel URL
@@ -209,53 +215,52 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                     </div>
                                 )}
 
-                                {!isLoadingPrices && hotelPrice
-                                    ?.filter(item => bookingImg.some(img => img.name === item.name)) // Only matched hotels
+                                {!isLoadingPrices && (hotelPrice || [])
+                                    .filter(item => item?.name != null)
                                     .map((item, i) => {
-                                        // Get the matched image
-                                        const matchedImg = bookingImg.find(img => img.name === item.name);
-                                        const hotelUrl = constructBookingUrl(item.name, hotelName, hotelData, item, checkinDate, checkoutDate);
-                                        const finalLink = buildAffiliateLink(matchedImg?.affiliateBase, hotelUrl);
+                                        const matchedImg = findProviderConfig(item.name);
+                                        const hotelUrl = constructBookingUrl(item.name, hotelData, item, checkinDate, checkoutDate);
+                                        const finalLink = matchedImg?.affiliateBase ? buildAffiliateLink(matchedImg.affiliateBase, hotelUrl) : hotelUrl;
 
-                                        // Calculate pricing breakdown
+                                        // Calculate pricing breakdown (support rate as number or { amount } from API)
                                         const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
-                                        const ratePerNight = Number(item.rate);
+                                        const ratePerNight = Number(typeof item.rate === "object" && item.rate != null ? item.rate.amount : item.rate);
                                         const totalBeforeTax = ratePerNight * nights;
                                         const tax = Number(item.tax || 0);
                                         const grandTotal = totalBeforeTax + tax;
 
-                                        if (matchedImg) {
+                                        const displayImg = matchedImg?.img;
+                                        const logoAlt = item.name;
 
-                                            return (
-                                                <React.Fragment key={`${item.name}-${item.rate}-${priceDataKey}`}>
-                                                    <div className="view_price_box d-none d-lg-block">
-                                                        <div className="price_box">
-                                                            <div className="row items-center">
+                                        return (
+                                            <React.Fragment key={`${item.name}-${i}-${priceDataKey}`}>
+                                                <div className="view_price_box d-none d-lg-block">
+                                                    <div className="price_box">
+                                                        <div className="row items-center">
 
-                                                                {/* Logo column */}
-                                                                <div className="col-lg-3">
-                                                                    <div className="price_box_item">
-                                                                        <div className="icon text-center flex">
-                                                                            <img
-                                                                                src={matchedImg.img}
-                                                                                alt={item.name}
-                                                                                width={120}
-                                                                                height={120}
-                                                                            />
-                                                                        </div>
+                                                            {/* Logo / provider name column */}
+                                                            <div className="col-lg-3">
+                                                                <div className="price_box_item">
+                                                                    <div className="icon text-center flex">
+                                                                        {displayImg ? (
+                                                                            <img src={displayImg} alt={logoAlt} width={120} height={120} />
+                                                                        ) : (
+                                                                            <span className="text-dark fw-semibold" style={{ fontSize: "1rem" }}>{item.name}</span>
+                                                                        )}
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                                 {/* **************** */}
                                                                 <div className="col-lg-3">
                                                                     <div className="text_detail">
                                                                         <div className="info flex justify-center">
                                                                             <div className="info_item">
                                                                                 <small className="view-price-rate-note">
-                                                                                    ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
+                                                                                    {formatPrice(ratePerNight)} / {nights} night{nights !== 1 ? 's' : ''}
                                                                                 </small>
                                                                                 {tax > 0 && (
                                                                                     <small className="view-price-tax-note">
-                                                                                        + ${tax.toFixed(2)} tax
+                                                                                        + {formatPrice(tax)} tax
                                                                                     </small>
                                                                                 )}
                                                                             </div>
@@ -278,10 +283,10 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                 <>
                                                                                     <div
                                                                                         className="view-price-total-wrap"
-                                                                                        title={`Breakdown:\n${ratePerNight.toFixed(2)} per night × ${nights} nights = ${totalBeforeTax.toFixed(2)}\n+ Tax: ${tax.toFixed(2)}\n= Total: ${grandTotal.toFixed(2)}`}
+                                                                                        title={`${formatPrice(ratePerNight)} per night × ${nights} = ${formatPrice(totalBeforeTax)}\n+ Tax: ${formatPrice(tax)}\n= ${formatPrice(grandTotal)}`}
                                                                                     >
                                                                                         <h4 className="view-price-total-amount">
-                                                                                            ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                                                            {formatPrice(grandTotal)}
                                                                                         </h4>
 
                                                                                     </div>
@@ -301,13 +306,13 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                 rel="noopener noreferrer"
                                                                                 className="hotel_detail_button text-white view-price-link"
                                                                             >
-                                                                                view deals
+                                                                                View deals
                                                                             </a>
                                                                         ) : (
                                                                             <button
                                                                                 className="hotel_detail_button text-white"
                                                                             >
-                                                                                view deals
+                                                                                View deals
                                                                             </button>
                                                                         )}
                                                                     </div>
@@ -324,19 +329,18 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                         <div className="price_box">
                                                             <div className="detail flex justify-between items-center">
                                                                 <div className="icon flex flex-col gap-0 ">
-                                                                    <img
-                                                                        src={matchedImg.img}
-                                                                        alt={item.name}
-                                                                        width={100}
-                                                                        height={100}
-                                                                    />
+                                                                    {displayImg ? (
+                                                                        <img src={displayImg} alt={item.name} width={100} height={100} />
+                                                                    ) : (
+                                                                        <span className="text-dark fw-semibold">{item.name}</span>
+                                                                    )}
                                                                     <div className="info_item">
                                                                         <small className="view-price-rate-note-sm">
-                                                                            ${ratePerNight.toFixed(2)} / {nights} night{nights !== 1 ? 's' : ''}
+                                                                            {formatPrice(ratePerNight)} / {nights} night{nights !== 1 ? 's' : ''}
                                                                         </small>
                                                                         {tax > 0 && (
                                                                             <small className="view-price-tax-note-sm">
-                                                                                + ${tax.toFixed(2)} tax
+                                                                                + {formatPrice(tax)} tax
                                                                             </small>
                                                                         )}
                                                                     </div>
@@ -357,10 +361,10 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                     <>
                                                                                         <div
                                                                                             className="view-price-total-wrap"
-                                                                                            title={`Breakdown:\n${ratePerNight.toFixed(2)} per night × ${nights} nights = ${totalBeforeTax.toFixed(2)}\n+ Tax: ${tax.toFixed(2)}\n= Total: ${grandTotal.toFixed(2)}`}
+                                                                                            title={`${formatPrice(ratePerNight)} per night × ${nights} = ${formatPrice(totalBeforeTax)}\n+ Tax: ${formatPrice(tax)}\n= ${formatPrice(grandTotal)}`}
                                                                                         >
                                                                                             <h4 className="view-price-total-amount m-0">
-                                                                                                ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                                                                {formatPrice(grandTotal)}
                                                                                             </h4>
 
                                                                                         </div>
@@ -377,13 +381,13 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                     rel="noopener noreferrer"
                                                                                     className="hotel_detail_button text-white view-price-link"
                                                                                 >
-                                                                                    view deals
+                                                                                    View deals
                                                                                 </a>
                                                                             ) : (
                                                                                 <button
                                                                                     className="hotel_detail_button text-white"
                                                                                 >
-                                                                                    view deals
+                                                                                    View deals
                                                                                 </button>
                                                                             )}
                                                                         </div>
@@ -397,40 +401,6 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                     </div>
                                                 </React.Fragment>
                                             );
-                                        } else {
-                                            return <div className="view_price_box" key={`price-fallback-${i}`}>
-                                                <div className="price_box">
-                                                    <div className="row items-center">
-
-                                                        {/* Logo column */}
-                                                        <div className="col-lg-4">
-                                                            <div className="price_box_item">
-                                                                <div className="icon text-center flex">
-                                                                    <span className="text-muted">{item.name}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        {/* Price column */}
-                                                        <div className="col-lg-4">
-                                                            <div className="price_box_price flex justify-center">
-                                                                <h4>Price Not Available</h4>
-                                                            </div>
-                                                        </div>
-
-                                                        {/* Button column */}
-                                                        <div className="col-lg-4">
-                                                            <div className="price_box_button price_view_detail flex justify-end">
-                                                                <button className="hotel_detail_button text-white" disabled>
-                                                                    view details
-                                                                </button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
                                     })}
 
                                 {/* No Prices Available Message */}

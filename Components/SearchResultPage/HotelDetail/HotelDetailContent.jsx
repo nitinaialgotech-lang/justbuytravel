@@ -263,7 +263,7 @@ export default function HotelDetailContent({ Pricing, load }) {
                                                                             rel="noopener noreferrer"
                                                                             className="button_bg bg-color-green color_bl"
                                                                         >
-                                                                            View Details
+                                                                            View Deal
                                                                         </a>
                                                                     </td>
                                                                 </tr>
