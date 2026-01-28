@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
@@ -39,7 +39,10 @@ import FaqSection from "@/Components/HomePage/Faq/FaqSection";
 import 'reactjs-popup/dist/index.css';
 import Popup from "reactjs-popup";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { useCurrency } from "@/context/CurrencyContext";
+
 export default function SearchHotelDetail() {
+    const { formatPrice } = useCurrency();
     const search_detail = useSearchParams();
     const [open, setOpen] = useState(false);
     const code = search_detail.get("hotel");
@@ -130,10 +133,11 @@ export default function SearchHotelDetail() {
     // ********************************************************** Fetch hotel key for pricing
     const { data: hoteldata } = useQuery({
         queryKey: ["hoteldata", locationName],
-        queryFn: () => searchHotelName(locationName),
+        queryFn: () => searchHotelName(locationName,locationAddress),
         enabled: Boolean(locationName),
         retry: 1,
     })
+    console.log(data,"hoteldataaaa");
     const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
 
     // ********************************************************** price data
@@ -150,6 +154,24 @@ export default function SearchHotelDetail() {
         refetchOnWindowFocus: false,
     })
     const rate = PriceData?.data?.raw?.result?.rates;
+
+    // Best price from API (lowest total in USD). rates[].rate is per-night number; support rate.amount if API varies.
+    const { bestPriceUsd, bestProvider } = useMemo(() => {
+        const rates = rate || [];
+        if (rates.length === 0) return { bestPriceUsd: null, bestProvider: null };
+        const nights = Math.max(1, Math.ceil((new Date(searchCheckout) - new Date(searchCheckin)) / (1000 * 60 * 60 * 24)));
+        let minTotal = Infinity;
+        let provider = null;
+        for (const r of rates) {
+            const rateNum = typeof r?.rate === "number" ? r.rate : r?.rate?.amount;
+            const total = (Number(rateNum) || 0) * nights + (Number(r?.tax) || 0);
+            if (total < minTotal && total > 0) {
+                minTotal = total;
+                provider = r?.name ?? null;
+            }
+        }
+        return { bestPriceUsd: minTotal === Infinity ? null : minTotal, bestProvider: provider };
+    }, [rate, searchCheckin, searchCheckout]);
 
     // Handler for date search from ViewPriceDetail component
     const handleSearchDates = async (checkin, checkout) => {
@@ -346,14 +368,13 @@ export default function SearchHotelDetail() {
                                         <div className="price_hotel flex  gap-3">
                                             <div className="price">
                                                 <h4 className="m-0">
-                                                    33,457
+                                                    {bestPriceUsd != null ? formatPrice(bestPriceUsd) : "—"}
                                                 </h4>
-                                                <p className="m-0">hotels.com</p>
+                                                <p className="m-0">{bestProvider || "Best price"}</p>
                                             </div>
                                             <div className="price_view_detail">
-                                                <button className="hotel_detail_button text-white" onClick={handleScrollToPrice
-                                                }>
-                                                    view Deals
+                                                <button className="hotel_detail_button text-white" onClick={handleScrollToPrice}>
+                                                    View Deals
                                                 </button>
                                             </div>
                                         </div>
@@ -458,13 +479,13 @@ export default function SearchHotelDetail() {
                                                                 <div className="price_hotel flex items-center gap-3">
                                                                     <div className="price">
                                                                         <h4 className="m-0">
-                                                                            33,457
+                                                                            {bestPriceUsd != null ? formatPrice(bestPriceUsd) : "—"}
                                                                         </h4>
-                                                                        <p className="m-0">hotels.com</p>
+                                                                        <p className="m-0">{bestProvider || "Best price"}</p>
                                                                     </div>
                                                                     <div className="price_view_detail">
-                                                                        <button className="hotel_detail_button text-white">
-                                                                            view details
+                                                                        <button className="hotel_detail_button text-white" onClick={() => { handleScrollToPrice(); setOpen(false); }}>
+                                                                            View details
                                                                         </button>
                                                                     </div>
                                                                     <div className="popup_header_close ">

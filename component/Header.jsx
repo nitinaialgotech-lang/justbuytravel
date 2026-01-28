@@ -15,11 +15,17 @@ import { IoIosDocument } from "react-icons/io";
 import { HiOutlineSearch } from "react-icons/hi";
 import { CgMenuRightAlt } from "react-icons/cg";
 import { FiPlus } from "react-icons/fi";
+import { IoPricetag } from "react-icons/io5";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { getAssetPath } from "../app/utils/assetPath";
+import { useCurrency } from "@/context/CurrencyContext";
+import { CURRENCY_LABELS } from "@/context/CurrencyContext";
 import "../app/globals.css";
 import "../style/responsive.css";
+import {HotelIcon, FlightIcon, CruiseIcon} from "./icons";
+
 export default function Header() {
+    const { currency, setCurrency, supportedCurrencies } = useCurrency();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [show, setShow] = useState(false);
     const [navOpen, setNavOpen] = useState(false);
@@ -64,38 +70,35 @@ export default function Header() {
                             <Navbar.Collapse className="justify-end navbar_link_item">
                                 {/* ******** */}
                                 <Nav
-                                    className="gap-4"
                                     className="gap-4 nav-max-height-100"
                                     navbarScroll
                                 >
                                     <Nav.Link as={Link} href="/book-hotels" className="capitalize">
                                         <span>
-                                            <img
+                                            {/* <img
                                                 className="icon_link"
                                                 src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
                                                 alt=""
-                                            />
+                                            /> */}
+                                            <HotelIcon />
                                         </span>
                                         <span>Hotels</span>
 
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/book-flights" className="capitalize">
                                         <span>
-                                            <img
+                                            {/* <img
                                                 className="icon_link"
                                                 src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
                                                 alt=""
-                                            />
+                                            /> */}
+                                            <FlightIcon />
                                         </span>
                                         <span>Flights</span>
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/book-cruises" className="capitalize">
                                         <span>
-                                            <img
-                                                className="icon_link"
-                                                src="/justbuytravel_next/demo/header_icon/icon_cruises.webp"
-                                                alt=""
-                                            />
+                                            <CruiseIcon />
                                         </span>
                                         <span>Cruises</span>
                                     </Nav.Link>
@@ -129,9 +132,15 @@ export default function Header() {
                                         </span>
                                         <span>about us</span>
                                     </Nav.Link>
-                                    {/* <div className="search_sign_button flex gap-2 items-center">
-                                        <Link href={""} className='sign-in-button bg-color-black text-white' variant="outline-success">Subscriber</Link>
-                                    </div> */}
+                                    <div className="d-flex align-items-center gap-2">
+                                        <NavDropdown title={<><IoPricetag className="me-1" />{(CURRENCY_LABELS[currency]?.symbol || currency)} {currency}</>} id="currency-dropdown" className="lang-currency-dropdown">
+                                            {supportedCurrencies.map((code) => (
+                                                <NavDropdown.Item key={code} onClick={() => setCurrency(code)} active={currency === code}>
+                                                    {CURRENCY_LABELS[code]?.symbol} {code} – {CURRENCY_LABELS[code]?.name}
+                                                </NavDropdown.Item>
+                                            ))}
+                                        </NavDropdown>
+                                    </div>
                                 </Nav>
                                 {/* ******** */}
                             </Navbar.Collapse>
@@ -213,11 +222,7 @@ export default function Header() {
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
-                                                                        <img
-                                                                            className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/icon_cruises.webp"
-                                                                            alt=""
-                                                                        />
+                                                                        <CruiseIcon />
                                                                     </span>
                                                                     <span>cruises</span>
                                                                 </span>{" "}
