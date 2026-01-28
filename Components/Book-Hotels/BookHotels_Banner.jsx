@@ -36,8 +36,8 @@ export default function BookHotels_Banner() {
 
       <Search />
       <TopHotels />
-      <GuideHotel />
       <IconicPlaces />
+      <GuideHotel />
 
       <Book_Hotel_Guide_Section />
       <Blogs />

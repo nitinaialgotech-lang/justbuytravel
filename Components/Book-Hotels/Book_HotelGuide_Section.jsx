@@ -34,7 +34,7 @@ export default function Book_Hotel_Guide_Section() {
     const navigate = useRouter();
     const route = usePathname();
     return (
-        <section className={`trust_guide_section ${route == "/aboutus/" ? "" : "bg_grey"}  padding_top padding_bottom`}>
+        <section className={`trust_guide_section ${route == "/aboutus/" || route == "/book-hotels/" ? "" : "bg_grey"}  padding_top padding_bottom`}>
             <div className="container">
                 <div className="row justify-center">
                     <div className="col-lg-12">
