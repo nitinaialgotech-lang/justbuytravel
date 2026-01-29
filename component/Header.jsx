@@ -271,26 +271,7 @@ export default function Header() {
                                 </span> */}
                                                             </Link>
                                                         </li>
-                                                        <li className="">
-                                                            <Link
-                                                                href={"/aboutus"}
-                                                                className="flex justify-between items-center"
-                                                            >
-                                                                <span className="flex gap-2 items-center capitalize">
-                                                                    <NavDropdown title={<><IoPricetag className="me-1" />{(CURRENCY_LABELS[currency]?.symbol || currency)} {currency}</>} id="currency-dropdown" className="lang-currency-dropdown">
-                                                                        {supportedCurrencies.map((code) => (
-                                                                            <NavDropdown.Item key={code} onClick={() => setCurrency(code)} active={currency === code}>
-                                                                                {CURRENCY_LABELS[code]?.symbol} {code} – {CURRENCY_LABELS[code]?.name}
-                                                                            </NavDropdown.Item>
-                                                                        ))}
-                                                                    </NavDropdown>
-                                                                </span>
-                                                                {" "}
-                                                                {/* <span>
-                                  <FiPlus />
-                                </span> */}
-                                                            </Link>
-                                                        </li>
+
                                                         <li className="">
                                                             <Link
                                                                 href={"/aboutus"}
@@ -306,6 +287,26 @@ export default function Header() {
                                                                     </span>
                                                                     <span>about us</span>
                                                                 </span>{" "}
+                                                                {/* <span>
+                                  <FiPlus />
+                                </span> */}
+                                                            </Link>
+                                                        </li>
+                                                        <li className="">
+                                                            <Link
+                                                                href={"/aboutus"}
+                                                                className="flex justify-between items-center"
+                                                            >
+                                                                <span className="flex gap-2 items-center capitalize">
+                                                                    <NavDropdown title={<><IoPricetag className="me-1" />{(CURRENCY_LABELS[currency]?.symbol || currency)} {currency}</>} id="currency-dropdown" className="lang-currency-dropdown">
+                                                                        {supportedCurrencies.map((code) => (
+                                                                            <NavDropdown.Item key={code} onClick={() => setCurrency(code)} active={currency === code}>
+                                                                                {CURRENCY_LABELS[code]?.symbol} {code} – {CURRENCY_LABELS[code]?.name}
+                                                                            </NavDropdown.Item>
+                                                                        ))}
+                                                                    </NavDropdown>
+                                                                </span>
+                                                                {" "}
                                                                 {/* <span>
                                   <FiPlus />
                                 </span> */}

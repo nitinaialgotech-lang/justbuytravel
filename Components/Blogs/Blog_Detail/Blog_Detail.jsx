@@ -37,8 +37,6 @@ const BlogDetailsShimmer = () => {
 
 export default function Blog_detail({ content, blog_image, load }) {
     useEffect(() => {
-        let observer;
-
         const initAccordion = () => {
             const accordions = document.querySelectorAll(".e-n-accordion");
             if (!accordions.length) return;
@@ -48,23 +46,16 @@ export default function Blog_detail({ content, blog_image, load }) {
 
                 items.forEach((item) => {
                     const content = item.querySelector('div[role="region"]');
+                    const icon = item.querySelector(".accordion-icon"); // Your plus/minus element
+
                     if (!content) return;
 
-                    // Inject icon dynamically if not present
-                    let icon = item.querySelector(".accordion-icon");
-                    const header = item.querySelector(".accordion-header") || item.firstElementChild;
-                    if (!icon && header) {
-                        icon = document.createElement("span");
-                        icon.className = "accordion-icon";
-                        icon.textContent = "+"; // initial closed icon
-                        header.appendChild(icon);
-                    }
-
-                    // Initial closed state
+                    // Initial state
                     gsap.set(content, { height: 0, opacity: 0, overflow: "hidden" });
-                    if (icon) icon.textContent = "+";
+                    if (icon) icon.textContent = "+"; // Closed icon
 
                     const openItem = () => {
+                        // Close all others
                         items.forEach((i) => {
                             const c = i.querySelector('div[role="region"]');
                             const ic = i.querySelector(".accordion-icon");
@@ -74,35 +65,30 @@ export default function Blog_detail({ content, blog_image, load }) {
                             }
                         });
 
+                        // Open this one
                         gsap.to(content, { height: content.scrollHeight, opacity: 1, duration: 0.6, ease: "power3.out" });
-                        if (icon) icon.textContent = "−";
+                        if (icon) icon.textContent = "−"; // Open icon
                     };
 
                     const closeItem = () => {
                         gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: "power3.inOut" });
-                        if (icon) icon.textContent = "+";
+                        if (icon) icon.textContent = "+"; // Closed icon
                     };
 
-                    // Attach hover events
                     item.addEventListener("mouseenter", openItem);
                     item.addEventListener("mouseleave", closeItem);
 
+                    // Save listeners for cleanup
                     item._accordionListeners = { openItem, closeItem };
                 });
             });
         };
 
-        // Initialize once
         initAccordion();
 
-        // Observe WordPress content dynamically
-        const contentContainer = document.querySelector(".blog_content");
-        if (contentContainer) {
-            observer = new MutationObserver(() => initAccordion());
-            observer.observe(contentContainer, { childList: true, subtree: true });
-        }
+        const observer = new MutationObserver(() => initAccordion());
+        observer.observe(document.body, { childList: true, subtree: true });
 
-        // Cleanup
         return () => {
             const accordions = document.querySelectorAll(".e-n-accordion");
             accordions.forEach((accordion) => {
@@ -114,9 +100,9 @@ export default function Blog_detail({ content, blog_image, load }) {
                     }
                 });
             });
-            if (observer) observer.disconnect();
+            observer.disconnect();
         };
-    }, [content]); // re-run whenever WordPress content changes
+    }, []);
     return (
         <>
             {/* ***************************** */}

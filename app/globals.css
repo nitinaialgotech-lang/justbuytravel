@@ -3235,24 +3235,7 @@ span.rating-stars {
 .e-n-accordion-item.open .icon {
   transform: rotate(45deg);
 } */
-/* .e-n-accordion-item .icon::after {
-  content: "+";
-}
 
-.e-n-accordion-item.open .icon::after {
-  content: "-";
-} */
 .blog_content details[open] > div[role="region"] {
   padding: 0px 20px;
-}
-.e-n-accordion-item {
-  position: relative;
-  cursor: pointer;
-}
-
-.accordion-icon {
-  float: right;
-  font-weight: bold;
-  font-size: 1.2rem;
-  user-select: none;
 }
