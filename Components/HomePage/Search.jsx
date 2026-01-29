@@ -690,7 +690,7 @@ export default function Search() {
                             {/* **************************************** edning */}
 
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
-                            <div className="mobile_search_box  d-block d-lg-none">
+                            <div className={`${searchType === "flights" || pathname == "/book-flights/" ? "p-0" : ""}mobile_search_box  d-block d-lg-none`}>
                                 {
                                     searchType === "flights" || pathname == "/book-flights/" ? (
                                         <Search_flight_section />
