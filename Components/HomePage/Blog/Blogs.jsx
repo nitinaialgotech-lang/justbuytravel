@@ -41,7 +41,7 @@ export default function Blogs() {
                     <div className="row">
 
                         {
-                            data?.data?.slice(1, 5).map((item, i) => {
+                            data?.posts?.slice(1, 5).map((item, i) => {
                                 return (
 
                                     <div className="col-12 col-md-6 col-lg-3" key={i}>
@@ -120,7 +120,7 @@ export default function Blogs() {
                             className="mySwiper relative"
                         >
                             {
-                                data?.data?.map((item, i) => {
+                                data?.posts?.map((item, i) => {
 
                                     return (
 

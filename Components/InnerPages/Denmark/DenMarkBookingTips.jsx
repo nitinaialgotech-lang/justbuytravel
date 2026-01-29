@@ -161,11 +161,12 @@ export default function DenMarkBookingTips() {
                                     Finding the right place to stay can make a big difference when planning a trip. From lively city centres to peaceful coastal towns, travellers can choose accommodation based on comfort, location, and budget. Selecting the right area helps keep Denmark hotel booking simple and stress-free.
                                 </p>
                                 <p>
-                                    Travellers who want to book hotels in Denmark often look for locations with easy access to transport, attractions, and dining. Smaller towns are a good choice for those who prefer quieter surroundings. By comparing prices, locations, and guest reviews, it becomes easier to identify the best hotels in
+                                    Travellers who want to book hotels in Denmark often look for locations with easy access to transport, attractions, and dining. Smaller towns are a good choice for those who prefer quieter surroundings. By comparing prices, locations, and guest reviews, it becomes easier to identify the best hotels in Denmark without overspending. Just Buy Travel helps travellers compare trusted listings and make confident booking decisions for a smooth and enjoyable stay.
                                 </p>
-                                <p>
-                                    Denmark without overspending. Just Buy Travel helps travellers compare trusted listings and make confident booking decisions for a smooth and enjoyable stay.
-                                </p>
+
+
+
+
 
 
                             </div>
