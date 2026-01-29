@@ -10,40 +10,25 @@ export default function ParisAmazingDeals() {
                         <div className="col-lg-12">
                             <div className="amazing_deals_title">
                                 <h2>
-                                    Save Big on Paris Hotels Get Travel Tips & Book Budget Stays with Ease.
+                                    Save More on Paris Stays with Smart Hotel Choices and Trusted Tips
                                 </h2>
                             </div>
                             <div className="hotel_tips_content amazing_deals_content ">
                                 <p>
-                                    Finding great places to stay in Paris doesn’t mean you have to settle for less. Whether you’re flying in for a weekend escape, a business meeting, or finally ticking off your dream of strolling across Tower Bridge — there’s a perfect stay waiting for every kind of traveler.
-                                    And the best part? You don’t have to stretch your budget to find it.
+                                    Choosing the right place to stay in Paris does not mean paying more than necessary. Whether you are visiting for a weekend getaway, business travel, or a long-planned holiday, the city offers options for every travel style and budget. The key is choosing accommodation that matches your plans, preferred location, and comfort level without adding stress to your trip.
                                 </p>
                                 <p>
-                                    Over the years, we’ve seen travelers face the same challenge
+                                    Many travellers choose to <span className='g_color fw-semibold'> book hotels in Paris</span>  that balance comfort, location, and fair pricing. From stylish boutique stays to well-known luxury hotels in Paris, understanding what each area offers helps travellers make better choices. Central neighbourhoods provide easy access to attractions, dining, and transport, while quieter districts suit those who prefer a relaxed pace. Areas close to landmarks remain popular, especially hotels near Eiffel Tower Paris, for their convenience and classic city experience.
                                 </p>
                                 <p>
-                                    <span className='g_color font-semibold'> “Where can I book a good hotel in Paris that’s affordable, safe, and well-located?”</span>
-                                    <br />
-                                    That’s exactly why we built a platform focused on what really matters — value, trust, and ease.
+                                    Travellers focused on savings often benefit from Paris hotel deals, which vary based on season, demand, and travel flexibility. Booking during quieter periods or staying slightly outside major tourist zones can lead to better value without sacrificing comfort. There are also best affordable hotels in Paris that offer clean rooms, reliable service, and easy access to public transport, making them ideal for short stays and extended visits alike.
                                 </p>
                                 <p>
-                                    If you’re planning a spontaneous trip or booking well in advance, we’ll help you discover stays that fit your needs — from cozy boutique hotels to clean, comfortable rooms and hidden gems ideal for solo travelers or quick overnight visits.
+                                    Review verified listings and recent guest feedback before choosing a stay to set clear expectations. Compare amenities, cancellation policies, and location details to plan confidently and avoid surprises.
                                 </p>
                                 <p>
-                                    For those last-minute planners searching for a room in Paris today or just exploring flexible stays, we’ve made the process smooth and hassle-free — no stress, no confusion.
+                                    So whether you’re planning ahead or going with the flow, we’re here to help you find a place in Paris you’ll enjoy — and a price you’ll feel good about.
                                 </p>
-                                <p>
-                                    Today’s travelers are smart — they don’t fall for flashy ads or fake discounts.
-                                    <br />
-                                    We understand that, because we’ve been there too. That’s why we only showcase verified hotels with real guest reviews and clear, upfront pricing.
-                                </p>
-                                <p>
-                                    Because in Paris, it’s not just about where you stay — it’s about staying smart.
-                                </p>
-                                <p>So whether you’re planning ahead or going with the flow, we’re here to help you find a place in Paris you’ll enjoy — and a price you’ll feel good about.</p>
-
-
-
                             </div>
                         </div>
                     </div>

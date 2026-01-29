@@ -2007,6 +2007,9 @@ button {
 .iconic_place_card img {
   transition: transform 0.4s ease;
   width: 100%;
+  min-height: 220px;
+  max-height: 220px;
+  object-fit: cover;
 }
 
 .iconic_place_card:hover img {
@@ -2435,6 +2438,7 @@ span.rating-stars {
 .popup-content {
   background: none !important;
   border: none !important;
+  width: 100% !important;
 }
 
 /* ******************hotel detail review section mobile view section *********** */

@@ -58,8 +58,8 @@ export default function Find_CruisesSection() {
                             slidesPerView={4}
                             spaceBetween={5}
                             navigation={{
-                                prevEl: "#recomand_prev",
-                                nextEl: "#recomand_next",
+                                prevEl: "#recomand_prev1",
+                                nextEl: "#recomand_next1",
                             }}
                             // pagination={{
                             //     clickable: true,
@@ -73,6 +73,7 @@ export default function Find_CruisesSection() {
                             //     delay: 3000,
                             //     disableOnInteraction: false,
                             // }}
+                            loop={true}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,
@@ -145,7 +146,7 @@ export default function Find_CruisesSection() {
                         <div className="button_swiper2 absolute ">
                             <div className="buttons_icon relative">
                                 <button
-                                    id="recomand_prev"
+                                    id="recomand_prev1"
                                     aria-label="Previous"
                                     className={`absolute ${Active ? "d-none pointer-events-none" : ""
                                         }`}
@@ -154,7 +155,7 @@ export default function Find_CruisesSection() {
                                 </button>
 
                                 <button
-                                    id="recomand_next"
+                                    id="recomand_next1"
                                     aria-label="Next"
                                     className="absolute"
                                 >

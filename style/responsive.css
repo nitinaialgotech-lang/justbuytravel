@@ -652,6 +652,30 @@
     right: -7%;
     transform: translateY(-50%);
   }
+  /* **************************** hotel in cruises recomd  */
+  #recomand_prev1 > svg,
+  #recomand_next1 > svg {
+    fill: var(--background);
+    stroke-opacity: 1;
+    width: 30px;
+    height: 30px;
+  }
+  #recomand_prev1,
+  #recomand_next1 {
+    background-color: var(--bg-color);
+    font-size: 30px;
+    border-radius: 50%;
+  }
+  #recomand_prev1 {
+    top: 50%;
+    left: -3% !important;
+    transform: translateY(-50%);
+  }
+
+  #recomand_next1 {
+    right: -3%;
+    transform: translateY(-50%);
+  }
   /* ***************************************** */
   #custom_prev > svg,
   #custom_next > svg {

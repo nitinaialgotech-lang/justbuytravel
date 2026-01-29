@@ -73,9 +73,9 @@ export default function IndexPage() {
             <HomeBannerSection />
             {/* <RecomendSection /> */}
             <Recomended />
-            <DestinationSection />
-            <GetOfferSection />
             <ExperienceExploreSection />
+
+            <DestinationSection />
             <Trust_Guide_Section />
             {/* <QuickLinks /> */}
             <Blogs />

@@ -26,6 +26,52 @@ export default function page() {
         { name: 'Home', path: '/' },
         { name: 'Ireland', path: '/ireland' }
     ]);
+    const FaqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Which hotels in Ireland allow pets?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Many hotels in Ireland welcome pets, particularly countryside lodges, coastal stays, and selected city hotels. Pet policies vary by property, so travellers should review individual hotel rules before booking."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are the best family-friendly hotels in Ireland?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Family-friendly hotels in Ireland typically offer spacious rooms, practical amenities, and locations close to attractions. These hotels are available in cities, coastal areas, and popular travel regions."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are there budget-friendly hotels available across Ireland?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, travellers can find budget and affordable hotels throughout Ireland. These options provide essential comfort, convenient locations, and value for both short and longer stays."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I find hotels in Ireland suitable for countryside stays?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ireland offers many countryside hotels and rural accommodations, ideal for travellers looking for scenic views, peaceful locations, and a relaxed travel experience."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How can I compare hotels in Ireland before booking?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Hotels in Ireland can be compared by reviewing location details, price ranges, amenities, and guest feedback through trusted hotel comparison platforms before booking with partners."
+                }
+            }
+        ]
+    }
 
     return (
         <>
@@ -33,8 +79,12 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}
+            />
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <Header />
                 <IreLandBanner />
             </Suspense>

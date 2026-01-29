@@ -12,13 +12,13 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import Blogs from '@/Components/HomePage/Blog/Blogs';
-import FaqSection from '@/Components/HomePage/Faq/FaqSection';
 import Footer from '@/component/Footer';
 import ParisBookingTips from './ParisBookingTips';
 import NearByParis from './NearByParis';
 import IconicPlacesInParis from './IconicPlacesInParis';
 import ParisAmazingDeals from './ParisAmazingDeals';
 import { useRouter } from 'next/navigation';
+import ParisFaqSection from './ParisFaqSection';
 
 
 export default function ParisRecomd() {
@@ -258,7 +258,7 @@ export default function ParisRecomd() {
             <ParisAmazingDeals />
 
             <Blogs />
-            <FaqSection />
+            <ParisFaqSection />
             <Footer />
 
         </>

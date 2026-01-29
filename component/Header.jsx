@@ -22,13 +22,18 @@ import { useCurrency } from "@/context/CurrencyContext";
 import { CURRENCY_LABELS } from "@/context/CurrencyContext";
 import "../app/globals.css";
 import "../style/responsive.css";
-import { HotelIcon, FlightIcon, CruiseIcon, PackagesIcon, HeaderBlogIcon, HeaderAboutUsIcon } from "./icons";
-import { useRouter } from "next/navigation";
-
-
+import {
+    HotelIcon,
+    FlightIcon,
+    CruiseIcon,
+    PackagesIcon,
+    HeaderBlogIcon,
+    HeaderAboutUsIcon,
+} from "./icons";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
-    const pathnamne = useRouter()
+    const pathnamne = usePathname();
     const { currency, setCurrency, supportedCurrencies } = useCurrency();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [show, setShow] = useState(false);
@@ -50,6 +55,8 @@ export default function Header() {
             setServicesOpen(false);
         }, 150); // 150ms delay
     }
+    console.log(pathnamne, "....pathname");
+
     return (
         <>
             {/* ************************************************************************************************************ */}
@@ -57,7 +64,11 @@ export default function Header() {
                 <div className="container">
                     <Navbar expand="lg" className="">
                         <Container fluid className="p-0">
-                            <Navbar.Brand as={Link} href="/" onClick={() => window.dispatchEvent(new Event("reset-search"))}>
+                            <Navbar.Brand
+                                as={Link}
+                                href="/"
+                                onClick={() => window.dispatchEvent(new Event("reset-search"))}
+                            >
                                 <div className="logo">
                                     <img
                                         src={"/justbuytravel_next/demo/logo/logo.png.webp"}
@@ -73,62 +84,93 @@ export default function Header() {
                             {/* ************************ */}
                             <Navbar.Collapse className="justify-end navbar_link_item">
                                 {/* ******** */}
-                                <Nav
-                                    className="gap-4 nav-max-height-100"
-                                    navbarScroll
-                                >
-                                    <Nav.Link as={Link} href="/book-hotels" className="capitalize">
+                                <Nav className="gap-4 nav-max-height-100" navbarScroll>
+                                    <Nav.Link
+                                        as={Link}
+                                        href="/book-hotels"
+                                        className="capitalize"
+                                    >
                                         <span className="g_color">
                                             {/* <img
                                                 className="icon_link"
                                                 src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
                                                 alt=""
                                             /> */}
-                                            <HotelIcon />
+                                            <HotelIcon color={`${pathnamne == "/book-hotels/" ? "#12c081" : "#1D1F27"} `} />
                                         </span>
-                                        <span className={`${pathnamne == "/justbuytravel_next/demo/" ? "g_color" : ""}`}>Hotels</span>
-
+                                        <span
+                                            className={`${pathnamne == "/book-hotels/" ? "g_color" : ""} `}
+                                        >
+                                            Hotels
+                                        </span>
                                     </Nav.Link>
-                                    <Nav.Link as={Link} href="/book-flights" className="capitalize">
+                                    <Nav.Link
+                                        as={Link}
+                                        href="/book-flights"
+                                        className="capitalize"
+                                    >
                                         <span>
                                             {/* <img
                                                 className="icon_link"
                                                 src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
                                                 alt=""
                                             /> */}
-                                            <FlightIcon />
+                                            <FlightIcon color={`${pathnamne == "/book-flights/" ? "#12c081" : "#1D1F27"} `} />
                                         </span>
-                                        <span>Flights</span>
+                                        <span className={`${pathnamne == "/book-flights/" ? "g_color" : ""} `}>Flights</span>
                                     </Nav.Link>
-                                    <Nav.Link as={Link} href="/book-cruises " className="capitalize">
+                                    <Nav.Link
+                                        as={Link}
+                                        href="/book-cruises"
+                                        className="capitalize"
+                                    >
                                         <span>
-                                            <CruiseIcon />
+                                            <CruiseIcon color={`${pathnamne == "/book-cruises/" ? "#12c081" : "#1D1F27"} `} />
                                         </span>
-                                        <span>Cruises</span>
+                                        <span className={`${pathnamne === "/book-cruises/" ? "g_color" : " "}`}>Cruises</span>
                                     </Nav.Link>
-                                    <Nav.Link as={Link} href="/book-packages" className="capitalize">
+                                    <Nav.Link
+                                        as={Link}
+                                        href="/book-packages"
+                                        className="capitalize"
+                                    >
                                         <span>
-                                            <PackagesIcon />
+                                            <PackagesIcon color={`${pathnamne == "/book-packages/" ? "#12c081" : "#1D1F27"} `} />
                                         </span>
                                         <span>Packages</span>
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/blog" className="capitalize">
                                         <span>
-                                            <HeaderBlogIcon />
+                                            <HeaderBlogIcon color={`${pathnamne == "/blog/" ? "#12c081" : "#1D1F27"} `} />
                                         </span>
-                                        <span>blogs</span>
+                                        <span className={`${pathnamne == "/blog/" ? "g_color" : ""} `}>blogs</span>
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/aboutus" className="capitalize">
                                         <span>
-                                            <HeaderAboutUsIcon />
+                                            <HeaderAboutUsIcon color={`${pathnamne == "/aboutus/" ? "#12c081" : "#1D1F27"} `} />
                                         </span>
-                                        <span>about us</span>
+                                        <span className={`${pathnamne == "/aboutus/" ? "g_color" : ""} `}>about us</span>
                                     </Nav.Link>
                                     <div className="d-flex align-items-center gap-2">
-                                        <NavDropdown title={<><IoPricetag className="me-1" />{(CURRENCY_LABELS[currency]?.symbol || currency)} {currency}</>} id="currency-dropdown" className="lang-currency-dropdown">
+                                        <NavDropdown
+                                            title={
+                                                <>
+                                                    <IoPricetag className="me-1" />
+                                                    {CURRENCY_LABELS[currency]?.symbol || currency}{" "}
+                                                    {currency}
+                                                </>
+                                            }
+                                            id="currency-dropdown"
+                                            className="lang-currency-dropdown"
+                                        >
                                             {supportedCurrencies.map((code) => (
-                                                <NavDropdown.Item key={code} onClick={() => setCurrency(code)} active={currency === code}>
-                                                    {CURRENCY_LABELS[code]?.symbol} {code} – {CURRENCY_LABELS[code]?.name}
+                                                <NavDropdown.Item
+                                                    key={code}
+                                                    onClick={() => setCurrency(code)}
+                                                    active={currency === code}
+                                                >
+                                                    {CURRENCY_LABELS[code]?.symbol} {code} –{" "}
+                                                    {CURRENCY_LABELS[code]?.name}
                                                 </NavDropdown.Item>
                                             ))}
                                         </NavDropdown>
@@ -247,7 +289,6 @@ export default function Header() {
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
                                                                         <HeaderBlogIcon />
-
                                                                     </span>
                                                                     <span>blogs</span>
                                                                 </span>{" "}
@@ -265,7 +306,6 @@ export default function Header() {
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
                                                                         <HeaderAboutUsIcon />
-
                                                                     </span>
                                                                     <span>about us</span>
                                                                 </span>{" "}
@@ -280,23 +320,39 @@ export default function Header() {
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
-                                                                    <NavDropdown title={<><IoPricetag className="me-1" />{(CURRENCY_LABELS[currency]?.symbol || currency)} {currency}</>} id="currency-dropdown" className="lang-currency-dropdown">
+                                                                    <NavDropdown
+                                                                        title={
+                                                                            <>
+                                                                                <IoPricetag className="me-1" />
+                                                                                {CURRENCY_LABELS[currency]?.symbol ||
+                                                                                    currency}{" "}
+                                                                                {currency}
+                                                                            </>
+                                                                        }
+                                                                        id="currency-dropdown"
+                                                                        className="lang-currency-dropdown"
+                                                                    >
                                                                         {supportedCurrencies.map((code) => (
-                                                                            <NavDropdown.Item key={code} onClick={() => setCurrency(code)} active={currency === code}>
-                                                                                {CURRENCY_LABELS[code]?.symbol} {code} – {CURRENCY_LABELS[code]?.name}
+                                                                            <NavDropdown.Item
+                                                                                key={code}
+                                                                                onClick={() => setCurrency(code)}
+                                                                                active={currency === code}
+                                                                            >
+                                                                                {CURRENCY_LABELS[code]?.symbol} {code} –{" "}
+                                                                                {CURRENCY_LABELS[code]?.name}
                                                                             </NavDropdown.Item>
                                                                         ))}
                                                                     </NavDropdown>
-                                                                </span>
-                                                                {" "}
+                                                                </span>{" "}
                                                                 {/* <span>
                                   <FiPlus />
                                 </span> */}
                                                             </Link>
                                                         </li>
                                                         <div className="button_nav  text-center px-2 py-2 rounded">
-                                                            <Link href={"#"} className=''>
-                                                                Subscriber</Link>
+                                                            <Link href={"#"} className="">
+                                                                Subscriber
+                                                            </Link>
                                                         </div>
                                                     </ul>
                                                 </div>

@@ -29,6 +29,53 @@ export default function page() {
         { name: 'Home', path: '/' },
         { name: 'Dubai', path: '/dubai' }
     ]);
+    const FaqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What types of hotels are available in Dubai?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Dubai offers a wide range of hotels, including budget hotels, luxury resorts, and 5-star hotels. Travelers can choose from city hotels, beachfront stays, and hotels near popular areas like Dubai Marina and Downtown Dubai."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How can I find the best hotels in Dubai?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The best way to find hotels in Dubai is by comparing prices, locations, and guest reviews online. This helps travelers choose the right hotel based on budget, travel plans, and preferred area."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are there affordable and budget hotels in Dubai?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, there are many budget and cheap hotels in Dubai that provide comfortable stays at reasonable prices. These hotels are ideal for travelers who want good value without spending too much."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which areas are the best places to stay in Dubai?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Popular places to stay in Dubai include areas near Dubai Mall for shopping, Dubai Marina for waterfront views, and central locations close to major attractions. Each area offers a different experience depending on travel style."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I find last-minute hotel deals in Dubai?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, travelers can often find last-minute hotel deals in Dubai, especially during off-peak seasons. Comparing hotel options online can help find good offers even when booking close to the travel date."
+                }
+            }
+        ]
+    }
+
 
     return (
         <>
@@ -36,9 +83,13 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}
+            />
 
             <Header />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <DubaiBanner />
             </Suspense>
         </>

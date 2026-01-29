@@ -27,14 +27,66 @@ export default function page() {
         { name: 'Glasgow', path: '/glasgow' }
     ]);
 
+
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Can I book hotels or flights directly on Just Buy Travel?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text":
+                        "No. Just Buy Travel does not process hotel or flight bookings directly. We help users compare hotel booking sites and flight comparison websites, then redirect them to trusted platforms to complete the booking."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which are the best hotel booking sites to compare on Just Buy Travel?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text":
+                        "Just Buy Travel compares popular and trusted hotel booking sites, allowing users to research hotel prices, availability, and options in one place."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Just Buy Travel show real hotel and flight prices?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text":
+                        "Yes. Just Buy Travel displays hotel and flight prices provided by trusted travel websites. Final prices, availability, and taxes are confirmed on the partner website before booking."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is Just Buy Travel suitable for worldwide and international travel research?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text":
+                        "Yes. Just Buy Travel supports worldwide travel research, helping users compare hotels and flights globally using the best online travel websites."
+                }
+            }
+        ]
+    }
+
+
+
+
+
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense>
                 <Header />
                 <GlasGowBanner />
             </Suspense>

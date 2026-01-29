@@ -9,31 +9,26 @@ export default function SanFranceAmazingDeals() {
                         <div className="col-lg-12">
                             <div className="amazing_deals_title">
                                 <h2>
-                                    Save Big on Glasgow Hotels – Book Cheap Stays with JustBuyTravel
+                                    Save on Affordable San Francisco Hotels with Just Buy Travel
                                 </h2>
                             </div>
                             <div className="hotel_tips_content amazing_deals_content ">
                                 <p>
-                                    Getting ready to visit Glasgow? Whether you are making a plan for work purposes, fun, or a weekend escape, finding a good hotel or a resort can make all the difference. We present a variety of options to suit every price and style at JustBuyTravel. Thus making it easy for you to book cheap hotel Glasgow.
+                                    Are you planning a trip to San Francisco? Whether you're traveling for business, pleasure, or a weekend getaway, finding the right hotel or resort can make all the difference. There are many affordable hotels in San Francisco that offer comfort, good locations, and easy access to transport. Choosing a hotel that fits your budget helps you enjoy the city without unnecessary spending or stress.
                                 </p>
                                 <p>
-                                    Our cheap Glasgow city hotels list is great for you if you want to save money without giving up comfort. Glasgow is a lively city where you can explore a lot. You can check out some museums, galleries and historical sites. Or can check some of the top market areas and enjoy the city’s vibrant nightlife. You can see the best of the city without much expense if you stay in a cheap hotel nearby.
+                                    San Francisco is full of famous landmarks, cultural spots, shopping streets, and dining options. From exploring busy downtown areas to relaxing near the waterfront, every neighbourhood has something unique to offer. Travellers who arrive late or have early flights often prefer hotels near San Francisco airport, while others enjoy staying closer to popular attractions and public transport routes.
                                 </p>
                                 <p>
-                                    When you book hotel in Glasgow through JustBuyTravel, you can see real-time availability and compare prices. You can compare hotels, read real guest reviews, and book the room you want right away on our platform, which is very easy to use. For a short work trip, we can help you find a cozy single room. For a family-friendly hotel with great services, we can also help.
+                                    Just Buy Travel makes it simple to compare hotel options in one place. When you book hotels in San Francisco, you can check real-time availability, compare prices, and read genuine guest reviews before making a decision. This helps you avoid hidden costs and choose a stay that meets your needs, whether you are travelling alone, with family, or for work.
                                 </p>
                                 <p>
-                                    One big worry when booking a hotel is that there might be secret fees or rules that are hard to understand. Being honest is very important to JustBuyTravel. We work with trusted and premium hotels that have clear prices and easy booking terms. It’s clearly stated that there will be no extra fees or charges while booking with us.Not only does JustBuyTravel provide cheap hotel options, late booking hotels glasgow, but it also includes many deals and advice. This may lead to avoiding expensive travel experiences rather than saving time and money. If you’re searching for some top last minute deals Glasgow hotels or planning a trip in advance. Our experts’ tips will make sure you get the most excellent value for your money. Glasgow is a great place to live; thus, it has a lot of culture and a good mood. When you book hotel in Glasgow with JustBuyTravel, you’ll be near all the views and activities you want to enjoy. From the incredible designs in the City Centre to the artsy feel of the West End. The preference for cheap Glasgow city hotels also lets you relax and appreciate your stay without worrying about the expense.
+                                    Some visitors look for stylish stays with modern services, while others prefer practical hotels that focus on value. From budget-friendly choices to some of the best hotels in San Francisco, the city offers options for every travel style. Supportive features like free Wi-Fi, comfortable rooms, and convenient locations can make your trip smoother.
                                 </p>
                                 <p>
-                                    It doesn’t have to be tough or costly to book cheap hotel Glasgow. JustBuyTravel makes it uncomplicated to book a hotel room and gives you a dedicated, quick way to do it. Our platform provides you the confidence to find a good place to stay, whether you’re trekking by yourself, with family, or for work.
+                                    Just Buy Travel offers clear pricing and trusted listings to help you plan with confidence. A well-chosen hotel allows you to focus on exploring San Francisco and enjoying everything the city offers.
                                 </p>
-                                <p>
-                                    <span className='g_color font-semibold'>Go on an adventure in Glasgow right now</span>
-                                </p>
-                                <p>
-                                    Use JustBuyTravel to look at cheap hotel choices and book a hotel in Glasgow in a safe and easy way. Great prices, reliable service, and a lot of hotels mean that your next trip to Glasgow will be both fun and cheap.
-                                </p>
+
 
 
                             </div>

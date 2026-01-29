@@ -15,11 +15,11 @@ export default function SanFrancBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> San Francisco</span>
+                                            Hotels in<span> San Francisco</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                               How can we help you travel better for less?
-                                                           </h5> */}
+                                        <h5 className='capitalize'>
+                                            Search, compare, and find hotels in San Francisco featuring budget options and luxury accommodations near top locations.
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

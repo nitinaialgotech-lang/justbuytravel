@@ -20,6 +20,7 @@ import {
 // import required modules
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import ExpediaBanner from "./Banner";
+import GetOfferSection from "../GetOfferSection/GetOfferSection";
 export default function ExperienceExploreSection() {
     const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
     const fallbackIconicCards = [
@@ -179,7 +180,7 @@ export default function ExperienceExploreSection() {
                 <div className="container">
                     <div className="row">
                         <div className="explore_section section_title m">
-                            <h2 className="mb-0">Near By Loactions</h2>
+                            <h2 className="mb-0">Near By Locations</h2>
                             <h5>Explore nearby destinations and hidden gems</h5>
                         </div>
                     </div>
@@ -308,6 +309,15 @@ export default function ExperienceExploreSection() {
 
             {/* ********************************************************************************************************************** section two big cities .........>>>>>>>>>>>>>>>>>> */}
 
+
+            <GetOfferSection />
+
+
+
+
+
+            {/* **************************************************************************************** */}
+
             <div className="container padding_bottom">
                 <div className="explore_section section_title ">
                     <h2 className="mb-0">Iconic Places</h2>
@@ -392,16 +402,16 @@ export default function ExperienceExploreSection() {
                                                                 <span className="ms-1">{item?.rating}</span>
                                                             )}
                                                         </div>
-                                                            {placeId && (
-                                                                <div className="mt-2">
-                                                                    <Link
-                                                                        href={`/hoteldetail/?hotel=${placeId}`}
-                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                                                    >
-                                                                        View Detail
-                                                                    </Link>
-                                                                </div>
-                                                            )}
+                                                        {placeId && (
+                                                            <div className="mt-2">
+                                                                <Link
+                                                                    href={`/hoteldetail/?hotel=${placeId}`}
+                                                                    className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                >
+                                                                    View Detail
+                                                                </Link>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
