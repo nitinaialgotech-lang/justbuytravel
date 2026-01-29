@@ -102,7 +102,19 @@
   .search_container {
     box-shadow: none;
   }
-
+  .search_container > .search_container_box > .search_tab > .tab_link > ul {
+    gap: 20px;
+  }
+  .search_container
+    > .search_container_box
+    > .search_tab
+    > .tab_link
+    > ul
+    > li
+    > a
+    > span:nth-child(2) {
+    font-size: 17px;
+  }
   /* *************************************** */
   /* .button_bg2 {
     width: 100%;
@@ -355,6 +367,17 @@
     position: relative;
     align-items: center;
     background-color: transparent;
+  }
+  .mega_menu_item
+    > .mega_menu_link
+    > ul
+    > li
+    > a
+    > span
+    > span:nth-child(1)
+    svg {
+    width: 20px;
+    height: 20px;
   }
   .button_nav {
     background-color: var(--bg-color);
@@ -873,11 +896,18 @@
     font-size: 14px !important;
   }
 }
+/* ********************* pixel 7 ........ */
+@media only screen and (max-width: 412px) {
+  .mobile_search_box > .form_search_expedia > iframe {
+    min-height: 375px;
+    height: 100%;
+  }
+}
 /* ***************************************************************************************** */
 @media only screen and (max-width: 390px) {
   /* ******************************************* mobilr  */
   .mobile_search_box > .form_search_expedia > iframe {
-    min-height: 410px;
+    min-height: 375px;
     height: 100%;
   }
   .search_banner_box > .title > h1,
@@ -907,9 +937,13 @@
 }
 /* ******************************************************************************************* 375 */
 @media only screen and (max-width: 375px) {
+  .mobile_search_box > .form_search_expedia > iframe {
+    min-height: 410px;
+    height: 100%;
+  }
   .banner_box > .title > h1,
   .banner_box > .title > h2 {
-    font-size: 312px !important;
+    font-size: 32px !important;
     line-height: 1;
   }
   .search_banner_box > .title > h1,

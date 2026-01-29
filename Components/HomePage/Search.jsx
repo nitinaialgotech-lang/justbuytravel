@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
 import { autoComplete, searchText } from '@/app/Route/endpoints';
 import Search_flight_section from "../Book-Flights/Search_flight_section";
+import HotelIcon, { FlightIcon } from "@/component/icons";
+import { MdOutlineRestaurantMenu } from "react-icons/md";
 export default function Search() {
     // const reverseGeocode = useCallback(async (lat, lng) => {
     //     try {
@@ -167,7 +169,7 @@ export default function Search() {
         setSearchType("all");
         setSearchAll(true);
         setSearchContent("");
-        setContenttext("place to go, things to do, hotels...");
+        setContenttext("Search for places, hotels, activities...");
     }
 
     const route = useRouter();
@@ -420,12 +422,12 @@ export default function Search() {
                                                 <li>
                                                     <Link
                                                         href={""}
-                                                        className={`${activeTab == "all" ? "g_color" : ""}`}
+                                                        className={`${activeTab == "all" ? "g_color" : ""} justify-center items-center`}
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             setActiveTab("all");
                                                             setSearchAll(true);
-                                                            setContenttext("place to go, things to do, hotels...");
+                                                            setContenttext("Search for places, hotels, activities...");
                                                             handleSearchTypeChange("all");
 
                                                         }}
@@ -440,78 +442,60 @@ export default function Search() {
                                                 <li>
                                                     <Link
                                                         href={""}
-                                                        className={`${activeTab == "flights" ? "g_color" : ""}`}
+                                                        className={`${activeTab == "flights" ? "g_color" : ""} justify-center items-center`}
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             setActiveTab("flights");
-
                                                             handleSearchTypeChange("flights");
                                                         }}
                                                     >
-                                                        <img
-                                                            className="icon_link"
-                                                            src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
-                                                            alt=""
-                                                        />{" "}
-                                                        flights
+                                                        <span>
+                                                            <FlightIcon />
+                                                        </span>{" "}
+                                                        <span>
+                                                            flights
+                                                        </span>
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link
                                                         href={""}
-                                                        className={`${activeTab == "hotels" ? "g_color" : ""}`}
+                                                        className={`${activeTab == "hotels" ? "g_color" : ""} justify-center items-center`}
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             setActiveTab("hotels");
                                                             setSearchAll(false);
-                                                            setContenttext("hotel name or destination");
+                                                            setContenttext("Hotel Name or Destination");
                                                             handleSearchTypeChange("hotels");
 
 
                                                         }}
                                                     >
-                                                        <img
-                                                            className="icon_link"
-                                                            src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
-                                                            alt=""
-                                                        />{" "}
-                                                        hotels
+                                                        <span>
+                                                            <HotelIcon /></span>{" "}
+                                                        <span>
+                                                            hotels
+                                                        </span>
                                                     </Link>
                                                 </li>
-
-                                                {/* <li>
-                                            <Link
-                                                href={""}
-                                                className={`${searchType === "Packages" ? "g_color" : ""}`}
-                                                onClick={(e) => {
-
-                                                }}
-                                            >
-                                                <img
-                                                    className="icon_link"
-                                                    src="/justbuytravel_next/demo/header_icon/package-1.webp"
-                                                    alt=""
-                                                />{" "}
-                                                Packages
-                                            </Link>
-                                        </li> */}
                                                 <li>
                                                     <Link
                                                         href={""}
-                                                        className={`${activeTab === "restaurants" ? "g_color" : ""}`}
+                                                        className={`${activeTab === "restaurants" ? "g_color" : ""} justify-center items-center`}
                                                         onClick={(e) => {
                                                             setActiveTab("restaurants");
                                                             setSearchAll(false);
                                                             handleSearchTypeChange("restaurants");
-                                                            setContenttext("Search restaurants near you");
+                                                            setContenttext("Search Restaurants Near You");
                                                         }}
                                                     >
-                                                        <img
-                                                            className="icon_link"
-                                                            src="/justbuytravel_next/demo/header_icon/restaurant_icon.svg"
-                                                            alt=""
-                                                        />{" "}
-                                                        Restaurants
+                                                        <span>
+                                                            <MdOutlineRestaurantMenu /></span>{" "}
+                                                        <span>
+                                                            <p className="m-0">
+                                                                Restaurants
+                                                            </p>
+                                                        </span>
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -708,7 +692,7 @@ export default function Search() {
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
                             <div className="mobile_search_box  d-block d-lg-none">
                                 {
-                                    searchType === "flights" ? (
+                                    searchType === "flights" || pathname == "/book-flights/" ? (
                                         <Search_flight_section />
                                     ) : (
                                         <div className="mobole_boxs relative">
@@ -730,7 +714,8 @@ export default function Search() {
                                                         if (places.length > 0) setShowDropdown(true);
                                                     }}
                                                     className="block relative w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
-                                                    placeholder={textContent}
+                                                    placeholder={textContent ||
+                                                        "Search for places, hotels, activities..."}
                                                 />
 
                                                 {/* **************** */}

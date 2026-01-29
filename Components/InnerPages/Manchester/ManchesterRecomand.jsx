@@ -19,6 +19,7 @@ import ManchesterNearByPlaces from "./ManchesterNearByPlaces";
 import ManchesterIconicPlaces from "./ManchesterIconicPlaces";
 import ManchesterAmazingDeals from "./ManchesterAmazingDeals";
 import { useRouter } from "next/navigation";
+import ManchesterFaqSection from "./ManchesterFaqSection";
 
 export default function ManchesterRecomand() {
     /************************* ustate contetn *** */
@@ -260,7 +261,7 @@ export default function ManchesterRecomand() {
             <ManchesterAmazingDeals />
 
             <Blogs />
-            <FaqSection />
+            <ManchesterFaqSection />
             <Footer />
         </>
     );

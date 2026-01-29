@@ -148,7 +148,7 @@ export default function ManchesterBookingTips() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        Top Places to Stay in Manchester: Easy and Cheap Hotel Bookings
+                                        Travel Smarter with the Best Hotels in Manchester for Every Type of Stay
                                     </h2>
                                 </div>
 
@@ -158,12 +158,20 @@ export default function ManchesterBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Manchester is a place with lots of culture, life, and events that you’ll never forget. This site makes it easy to<span className='g_color font-semibold'> book a room in Manchester,</span> whether you’re going for a sports game, work, or a weekend getaway. You can<span className='g_color font-semibold'>  book cheap hotels in Manchester</span> through JustBuyTravel without giving up comfort or location. Would you rather plan ahead? You can<span className='g_color font-semibold'>  book hotels in Manchester online</span> at any time, and there are options for people travelling alone, with a partner, or with their whole family. Get help from JustBuyTravel to find the best deal on your trip, no matter how long or short it is.
+                                    Manchester is a city full of culture, sports, music, and year-round events. Choosing from the best hotels in Manchester can make your stay more comfortable, whether you are visiting for work, attending a major event, or planning a short city break. The right accommodation helps save time, reduce travel stress, and improve your overall experience.
+
                                 </p>
                                 <p>
-                                    No more guesses or paying too much. It only takes a few clicks on our platform to book a hotel room in Manchester that fits your trip, price, and way of life.
-                                </p>
+                                    Travellers searching for cheap hotels in Manchester can find practical stays that offer comfort, good locations, and easy access to public transport. These options suit short visits, solo travellers, and budget-focused trips without compromising convenience.
 
+                                </p>
+                                <p>
+                                    For guests who prefer a premium experience, luxury hotels in Manchester provide modern amenities, refined interiors, and central locations near popular attractions. These hotels suit business travel, couples, and visitors who value higher service standards.
+
+                                </p>
+                                <p>
+                                    By reviewing verified listings, locations, and pricing details in one place, travellers can plan confidently and choose accommodation that aligns with their travel goals and personal preferences.
+                                </p>
 
 
                             </div>

@@ -15,11 +15,12 @@ export default function ManchesterBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Affordable Luxury Awaits in  <span> Australia</span>
+                                            Hotels in  <span> Australia</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                                    How can we help you travel better for less?
-                                                                </h5> */}
+                                        <h5 className='capitalize'>
+                                            Helping travellers choose the right hotels in  Manchester with clarity, confidence, reliable insights, transparent pricing, and trusted information.
+
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

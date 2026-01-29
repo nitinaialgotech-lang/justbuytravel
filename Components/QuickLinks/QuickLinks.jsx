@@ -27,7 +27,7 @@ export default function QuickLinks() {
                                             <li ><Link href={"/hotels-in-glasgow"}>Hotel In glasgow</Link></li>
                                             <li ><Link href={"/hotels-in-goa"}>Hotel In goa</Link></li>
                                             <li ><Link href={"/hotels-in-ireland"}>Hotel In ireland</Link></li>
-                                            <li ><Link href={"/manchester"}>Hotel In menchester</Link></li>
+                                            <li ><Link href={"/hotels-in-manchester"}>Hotel In menchester</Link></li>
                                             <li ><Link href={"/hotels-in-New-York"}>Hotel In new york</Link></li>
                                             <li ><Link href={"/paris"}>Hotel In paris</Link></li>
                                             <li ><Link href={"/san-francisco"}>Hotel In san-francisco</Link></li>

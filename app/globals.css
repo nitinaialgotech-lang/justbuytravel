@@ -472,6 +472,7 @@ button {
 
 .search_container > .search_container_box > .search_tab > .tab_link > ul {
   gap: 20px;
+  margin-bottom: 10px !important;
 }
 
 .search_container
@@ -482,8 +483,8 @@ button {
   > li
   > a {
   display: flex;
-  align-items: center;
-  gap: 5px;
+  align-items: center !important;
+  gap: 2px;
   cursor: pointer;
   text-decoration: none;
   color: var(--color);
@@ -491,6 +492,31 @@ button {
   text-transform: capitalize;
 }
 
+.search_container
+  > .search_container_box
+  > .search_tab
+  > .tab_link
+  > ul
+  > li
+  > a
+  > span:nth-child(2) {
+  font-weight: 500;
+  margin-top: 5px;
+  font-family: var(--font-fam);
+  font-size: 17px;
+}
+
+.search_container
+  > .search_container_box
+  > .search_tab
+  > .tab_link
+  > ul
+  > li
+  > a
+  > span:nth-child(1)
+  > svg {
+  width: 17px;
+}
 .search_container
   > .search_container_box
   > .search_tab
@@ -3087,7 +3113,14 @@ span.rating-stars {
   width: 20px;
   height: 20px;
 }
-
+.navbar_link_item > .navbar-nav > a:hover > span > svg > path,
+.navbar_link_item > .navbar-nav > a:hover,
+.navbar_link_item > .navbar-nav > a:hover > span > svg > g > path,
+.lang-currency-dropdown > a:hover > svg,
+.lang-currency-dropdown > a:hover {
+  fill: var(--bg-color);
+  color: var(--bg-color);
+}
 /* ***************************************** pagination csss ............. */
 .pagination {
   display: flex;

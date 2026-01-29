@@ -22,9 +22,13 @@ import { useCurrency } from "@/context/CurrencyContext";
 import { CURRENCY_LABELS } from "@/context/CurrencyContext";
 import "../app/globals.css";
 import "../style/responsive.css";
-import { HotelIcon, FlightIcon, CruiseIcon } from "./icons";
+import { HotelIcon, FlightIcon, CruiseIcon, PackagesIcon, HeaderBlogIcon, HeaderAboutUsIcon } from "./icons";
+import { useRouter } from "next/navigation";
+
+
 
 export default function Header() {
+    const pathnamne = useRouter()
     const { currency, setCurrency, supportedCurrencies } = useCurrency();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [show, setShow] = useState(false);
@@ -74,7 +78,7 @@ export default function Header() {
                                     navbarScroll
                                 >
                                     <Nav.Link as={Link} href="/book-hotels" className="capitalize">
-                                        <span>
+                                        <span className="g_color">
                                             {/* <img
                                                 className="icon_link"
                                                 src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
@@ -82,7 +86,7 @@ export default function Header() {
                                             /> */}
                                             <HotelIcon />
                                         </span>
-                                        <span>Hotels</span>
+                                        <span className={`${pathnamne == "/justbuytravel_next/demo/" ? "g_color" : ""}`}>Hotels</span>
 
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/book-flights" className="capitalize">
@@ -96,7 +100,7 @@ export default function Header() {
                                         </span>
                                         <span>Flights</span>
                                     </Nav.Link>
-                                    <Nav.Link as={Link} href="/book-cruises" className="capitalize">
+                                    <Nav.Link as={Link} href="/book-cruises " className="capitalize">
                                         <span>
                                             <CruiseIcon />
                                         </span>
@@ -104,31 +108,19 @@ export default function Header() {
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/book-packages" className="capitalize">
                                         <span>
-                                            <img
-                                                className="icon_link"
-                                                src="/justbuytravel_next/demo/header_icon/package-1.webp"
-                                                alt=""
-                                            />
+                                            <PackagesIcon />
                                         </span>
                                         <span>Packages</span>
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/blog" className="capitalize">
                                         <span>
-                                            <img
-                                                className="icon_link"
-                                                src="/justbuytravel_next/demo/header_icon/icon_blog.webp"
-                                                alt=""
-                                            />
+                                            <HeaderBlogIcon />
                                         </span>
                                         <span>blogs</span>
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/aboutus" className="capitalize">
                                         <span>
-                                            <img
-                                                className="icon_link"
-                                                src="/justbuytravel_next/demo/header_icon/icon_about.webp"
-                                                alt=""
-                                            />
+                                            <HeaderAboutUsIcon />
                                         </span>
                                         <span>about us</span>
                                     </Nav.Link>
@@ -238,11 +230,7 @@ export default function Header() {
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
-                                                                        <img
-                                                                            className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/package-1.webp"
-                                                                            alt=""
-                                                                        />
+                                                                        <PackagesIcon />
                                                                     </span>
                                                                     <span>Packages</span>
                                                                 </span>{" "}
@@ -258,11 +246,8 @@ export default function Header() {
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
-                                                                        <img
-                                                                            className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/icon_blog.webp"
-                                                                            alt=""
-                                                                        />
+                                                                        <HeaderBlogIcon />
+
                                                                     </span>
                                                                     <span>blogs</span>
                                                                 </span>{" "}
@@ -279,11 +264,8 @@ export default function Header() {
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
-                                                                        <img
-                                                                            className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/icon_about.webp"
-                                                                            alt=""
-                                                                        />
+                                                                        <HeaderAboutUsIcon />
+
                                                                     </span>
                                                                     <span>about us</span>
                                                                 </span>{" "}
