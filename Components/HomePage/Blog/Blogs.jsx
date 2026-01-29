@@ -18,6 +18,8 @@ export default function Blogs() {
         queryFn: () => Get_Blogs()
 
     })
+    console.log(data?.posts,"blog");
+    
     if (isLoading) return <div className='pt-20 pb-20 text-center'>
         <h4>
             Blog is Loading .....

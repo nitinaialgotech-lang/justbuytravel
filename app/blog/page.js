@@ -7,7 +7,6 @@ export default function page() {
         <>
             <Header />
             <Blog_Page_Banner />
-
         </>
     )
 }

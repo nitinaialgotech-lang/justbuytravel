@@ -7,8 +7,6 @@ import {
 } from "@/app/utils/seo";
 import { getDestinationMetadata } from "@/app/utils/destinationMetadata";
 
-const destination = "denmark";
-const customData = getDestinationMetadata(destination);
 // *********************************************************
 export const metadata = {
     title: "Hotels in Denmark | Cheap & luxury hotels | Just Buy Travel ",

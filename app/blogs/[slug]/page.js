@@ -9,16 +9,16 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
     try {
         const response = await Get_Blogs();
-        const blogs = response?.data || [];
+        const blogs = response?.posts || [];
         
         return blogs.map((blog) => ({ slug: blog.slug }));
     } catch (error) {
         console.error('Error generating blog params:', error);
-        return [{ slug: 'placeholder' }];
+        return [];
     }
 }
-export default function BlogDetailPage({ params }) {
-    const { slug } = params || {};
+export default async function BlogDetailPage({ params }) {
+    const { slug } = await params;
 
     return (
         <>

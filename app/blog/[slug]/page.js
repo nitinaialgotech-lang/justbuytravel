@@ -6,11 +6,10 @@ import { Get_Blogs } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
 import "../../../style/responsive.css";
 
-// Generate static params for static generation
 export async function generateStaticParams() {
     try {
         const response = await Get_Blogs();
-        const blogs = response?.data || [] || {};
+        const blogs = response?.posts || [];
         
         return blogs.map((blog) => ({
             slug: blog.slug,
@@ -21,12 +20,11 @@ export async function generateStaticParams() {
     }
 }
 
-// Generate dynamic metadata for each blog post
 export async function generateMetadata({ params }) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
         const response = await Get_Blogs();
-        const blogs = response?.data || [];
+        const blogs = response?.posts || [];
         
         const blog = blogs.find(b => b.slug === slug);
         
@@ -48,11 +46,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BlogPostPage({ params }) {
-    const { slug } = params;
+    const { slug } = await params;
     
     try {
         const response = await Get_Blogs();
-        const blogs = response?.data || [];
+        const blogs = response?.posts || [];
         const blog = blogs.find(b => b.slug === slug);
         
         if (!blog) {

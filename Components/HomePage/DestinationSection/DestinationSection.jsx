@@ -79,9 +79,8 @@ export default function DestinationSection() {
 
 
                     {/* ************************************************ onscroll the page scroller    */}
-
-                    <div className="row relative">
-                        <div className=" d-block d-lg-none">
+                    <div className='row relative'>
+                        <div className="d-block d-lg-none  ">
                             <Swiper
                                 slidesPerView={3}
                                 spaceBetween={15}
