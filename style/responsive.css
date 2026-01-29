@@ -103,7 +103,7 @@
     box-shadow: none;
   }
   .search_container > .search_container_box > .search_tab > .tab_link > ul {
-    gap: 20px;
+    gap: 15px;
   }
   .search_container
     > .search_container_box
@@ -901,6 +901,9 @@
   .mobile_search_box > .form_search_expedia > iframe {
     min-height: 375px;
     height: 100%;
+  }
+  .search_container > .search_container_box > .search_tab > .tab_link > ul {
+    gap: 0px;
   }
 }
 /* ***************************************************************************************** */

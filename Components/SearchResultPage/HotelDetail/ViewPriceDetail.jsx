@@ -52,6 +52,8 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
     const bookingImg = [
         { name: "Booking.com", img: "/justbuytravel_next/demo/logo/hoteldetail/Booking_com.png", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84" },
         { name: "expedia.com", img: "/justbuytravel_next/demo/logo/hoteldetail/expedia_logo.svg", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8645&campaign_id=594" },
+        { name: "agoda.com", img: "/justbuytravel_next/demo/logo/hoteldetail/Agoda.png", affiliateBase: "" },
+        { name: "vio.com", img: "/justbuytravel_next/demo/logo/hoteldetail/vio_com.png", affiliateBase: "" },
         { name: "traveloka.com", img: "/justbuytravel_next/demo/logo/hoteldetail/travelok.svg", affiliateBase: "" },
         { name: "Trip.com", img: "/justbuytravel_next/demo/logo/hoteldetail/tripcom.webp", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8626&campaign_id=121" },
     ];
@@ -250,28 +252,106 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                {/* **************** */}
-                                                                <div className="col-lg-3">
-                                                                    <div className="text_detail">
-                                                                        <div className="info flex justify-center">
-                                                                            <div className="info_item">
-                                                                                <small className="view-price-rate-note">
-                                                                                    {formatPrice(ratePerNight)} / {nights} night{nights !== 1 ? 's' : ''}
+                                                            {/* **************** */}
+                                                            <div className="col-lg-3">
+                                                                <div className="text_detail">
+                                                                    <div className="info flex justify-center">
+                                                                        <div className="info_item">
+                                                                            <small className="view-price-rate-note">
+                                                                                {formatPrice(ratePerNight)} / {nights} night{nights !== 1 ? 's' : ''}
+                                                                            </small>
+                                                                            {tax > 0 && (
+                                                                                <small className="view-price-tax-note">
+                                                                                    + {formatPrice(tax)} tax
                                                                                 </small>
-                                                                                {tax > 0 && (
-                                                                                    <small className="view-price-tax-note">
-                                                                                        + {formatPrice(tax)} tax
-                                                                                    </small>
-                                                                                )}
-                                                                            </div>
+                                                                            )}
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
 
-                                                                {/* Price column */}
-                                                                <div className="col-lg-3">
+                                                            </div>
+
+                                                            {/* Price column */}
+                                                            <div className="col-lg-3">
                                                                 <div className="price_box_price flex justify-center flex-column view-price-box-price">
+                                                                    {(() => {
+                                                                        const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
+                                                                        const ratePerNight = Number(item.rate);
+                                                                        const totalBeforeTax = ratePerNight * nights;
+                                                                        const tax = Number(item.tax || 0);
+                                                                        const grandTotal = totalBeforeTax + tax;
+
+                                                                        return (
+                                                                            <>
+                                                                                <div
+                                                                                    className="view-price-total-wrap"
+                                                                                    title={`${formatPrice(ratePerNight)} per night × ${nights} = ${formatPrice(totalBeforeTax)}\n+ Tax: ${formatPrice(tax)}\n= ${formatPrice(grandTotal)}`}
+                                                                                >
+                                                                                    <h4 className="view-price-total-amount">
+                                                                                        {formatPrice(grandTotal)}
+                                                                                    </h4>
+
+                                                                                </div>
+                                                                            </>
+                                                                        );
+                                                                    })()}
+                                                                </div>
+                                                            </div>
+
+                                                            {/* Button column */}
+                                                            <div className="col-lg-3">
+                                                                <div className="price_box_button price_view_detail flex justify-end">
+                                                                    {finalLink ? (
+                                                                        <a
+                                                                            href={finalLink}
+                                                                            target="_blank"
+                                                                            rel="noopener noreferrer"
+                                                                            className="hotel_detail_button text-white view-price-link"
+                                                                        >
+                                                                            View deals
+                                                                        </a>
+                                                                    ) : (
+                                                                        <button
+                                                                            className="hotel_detail_button text-white"
+                                                                        >
+                                                                            View deals
+                                                                        </button>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                {/* /*********************************************** mobile view show price detraik */}
+
+                                                <div className="view_price_box d-block d-lg-none">
+                                                    <div className="price_box">
+                                                        <div className="detail flex justify-between items-center">
+                                                            <div className="icon flex flex-col gap-0 ">
+                                                                {displayImg ? (
+                                                                    <img src={displayImg} alt={item.name} width={100} height={100} />
+                                                                ) : (
+                                                                    <span className="text-dark fw-semibold">{item.name}</span>
+                                                                )}
+                                                                <div className="info_item">
+                                                                    <small className="view-price-rate-note-sm">
+                                                                        {formatPrice(ratePerNight)} / {nights} night{nights !== 1 ? 's' : ''}
+                                                                    </small>
+                                                                    {tax > 0 && (
+                                                                        <small className="view-price-tax-note-sm">
+                                                                            + {formatPrice(tax)} tax
+                                                                        </small>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            {/* *************************** */}
+                                                            <div className="side_price_detail">
+                                                                <div className="side_detail">
+                                                                    {/* ***** */}
+                                                                    <div className="price_box_price mobile_price_box flex justify-center flex-column m-0 view-price-box-price">
                                                                         {(() => {
                                                                             const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
                                                                             const ratePerNight = Number(item.rate);
@@ -285,7 +365,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                                         className="view-price-total-wrap"
                                                                                         title={`${formatPrice(ratePerNight)} per night × ${nights} = ${formatPrice(totalBeforeTax)}\n+ Tax: ${formatPrice(tax)}\n= ${formatPrice(grandTotal)}`}
                                                                                     >
-                                                                                        <h4 className="view-price-total-amount">
+                                                                                        <h4 className="view-price-total-amount m-0">
                                                                                             {formatPrice(grandTotal)}
                                                                                         </h4>
 
@@ -294,11 +374,8 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                             );
                                                                         })()}
                                                                     </div>
-                                                                </div>
-
-                                                                {/* Button column */}
-                                                                <div className="col-lg-3">
-                                                                    <div className="price_box_button price_view_detail flex justify-end">
+                                                                    {/* ****** */}
+                                                                    <div className="price_box_button price_view_detail mobile_price_detail flex justify-end">
                                                                         {finalLink ? (
                                                                             <a
                                                                                 href={finalLink}
@@ -316,91 +393,16 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                             </button>
                                                                         )}
                                                                     </div>
+
                                                                 </div>
 
                                                             </div>
+                                                            {/* ********* */}
                                                         </div>
                                                     </div>
-
-
-                                                    {/* /*********************************************** mobile view show price detraik */}
-
-                                                    <div className="view_price_box d-block d-lg-none">
-                                                        <div className="price_box">
-                                                            <div className="detail flex justify-between items-center">
-                                                                <div className="icon flex flex-col gap-0 ">
-                                                                    {displayImg ? (
-                                                                        <img src={displayImg} alt={item.name} width={100} height={100} />
-                                                                    ) : (
-                                                                        <span className="text-dark fw-semibold">{item.name}</span>
-                                                                    )}
-                                                                    <div className="info_item">
-                                                                        <small className="view-price-rate-note-sm">
-                                                                            {formatPrice(ratePerNight)} / {nights} night{nights !== 1 ? 's' : ''}
-                                                                        </small>
-                                                                        {tax > 0 && (
-                                                                            <small className="view-price-tax-note-sm">
-                                                                                + {formatPrice(tax)} tax
-                                                                            </small>
-                                                                        )}
-                                                                    </div>
-                                                                </div>
-                                                                {/* *************************** */}
-                                                                <div className="side_price_detail">
-                                                                    <div className="side_detail">
-                                                                        {/* ***** */}
-                                                                        <div className="price_box_price mobile_price_box flex justify-center flex-column m-0 view-price-box-price">
-                                                                            {(() => {
-                                                                                const nights = Math.ceil((new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24));
-                                                                                const ratePerNight = Number(item.rate);
-                                                                                const totalBeforeTax = ratePerNight * nights;
-                                                                                const tax = Number(item.tax || 0);
-                                                                                const grandTotal = totalBeforeTax + tax;
-
-                                                                                return (
-                                                                                    <>
-                                                                                        <div
-                                                                                            className="view-price-total-wrap"
-                                                                                            title={`${formatPrice(ratePerNight)} per night × ${nights} = ${formatPrice(totalBeforeTax)}\n+ Tax: ${formatPrice(tax)}\n= ${formatPrice(grandTotal)}`}
-                                                                                        >
-                                                                                            <h4 className="view-price-total-amount m-0">
-                                                                                                {formatPrice(grandTotal)}
-                                                                                            </h4>
-
-                                                                                        </div>
-                                                                                    </>
-                                                                                );
-                                                                            })()}
-                                                                        </div>
-                                                                        {/* ****** */}
-                                                                        <div className="price_box_button price_view_detail mobile_price_detail flex justify-end">
-                                                                            {finalLink ? (
-                                                                                <a
-                                                                                    href={finalLink}
-                                                                                    target="_blank"
-                                                                                    rel="noopener noreferrer"
-                                                                                    className="hotel_detail_button text-white view-price-link"
-                                                                                >
-                                                                                    View deals
-                                                                                </a>
-                                                                            ) : (
-                                                                                <button
-                                                                                    className="hotel_detail_button text-white"
-                                                                                >
-                                                                                    View deals
-                                                                                </button>
-                                                                            )}
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                                {/* ********* */}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </React.Fragment>
-                                            );
+                                                </div>
+                                            </React.Fragment>
+                                        );
                                     })}
 
                                 {/* No Prices Available Message */}
