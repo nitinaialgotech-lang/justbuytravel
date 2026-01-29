@@ -3209,21 +3209,50 @@ span.rating-stars {
   font-weight: 300 !important;
 }
 /******************************* animation wth accordian ********************/
-.e-n-accordion-item > div[role="region"] {
+/* .e-n-accordion-item > div[role="region"] {
   display: grid;
   grid-template-rows: 0fr;
   overflow: hidden;
-  transition: grid-template-rows 0.35s ease opacity 0.25s ease !important;
   opacity: 0;
+  transition:
+    grid-template-rows 10s ease,
+    opacity 5s ease;
 }
 
-/* open state */
 .e-n-accordion-item[open] > div[role="region"] {
   grid-template-rows: 1fr;
   opacity: 1;
 }
 
-/* inner content */
 .e-n-accordion-item > div[role="region"] > * {
   overflow: hidden;
+} */
+/* .e-n-accordion-item .icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.e-n-accordion-item.open .icon {
+  transform: rotate(45deg);
+} */
+/* .e-n-accordion-item .icon::after {
+  content: "+";
+}
+
+.e-n-accordion-item.open .icon::after {
+  content: "-";
+} */
+.blog_content details[open] > div[role="region"] {
+  padding: 0px 20px;
+}
+.e-n-accordion-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.accordion-icon {
+  float: right;
+  font-weight: bold;
+  font-size: 1.2rem;
+  user-select: none;
 }
