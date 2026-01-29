@@ -10,7 +10,7 @@ export async function generateStaticParams() {
     try {
         const response = await Get_Blogs();
         const blogs = response?.posts || [];
-        
+
         return blogs.map((blog) => ({ slug: blog.slug }));
     } catch (error) {
         console.error('Error generating blog params:', error);
@@ -22,9 +22,8 @@ export default async function BlogDetailPage({ params }) {
 
     return (
         <>
-            <div className='container blog'>
-                <Header />
-            </div>
+            <Header />
+
             <Blog_Detail_section initialSlug={slug} />
             <Footer />
         </>

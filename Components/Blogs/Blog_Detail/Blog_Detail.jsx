@@ -36,26 +36,68 @@ const BlogDetailsShimmer = () => {
 };
 
 export default function Blog_detail({ content, blog_image, load }) {
+    // useEffect(() => {
+    //     const root = document.querySelector(".blog_content");
+    //     if (!root) return;
+
+    //     const handleToggle = (event) => {
+    //         const target = event.target;
+    //         if (!(target instanceof HTMLDetailsElement)) return;
+    //         if (!target.open) return;
+
+    //         const allDetails = root.querySelectorAll("details");
+    //         allDetails.forEach((detail) => {
+    //             if (detail !== target) detail.open = false;
+    //         });
+    //     };
+
+    //     root.addEventListener("toggle", handleToggle, true);
+    //     return () => {
+    //         root.removeEventListener("toggle", handleToggle, true);
+    //     };
+    // }, []);
+
+    // ***************
     useEffect(() => {
-        const root = document.querySelector(".blog_content");
-        if (!root) return;
 
-        const handleToggle = (event) => {
-            const target = event.target;
-            if (!(target instanceof HTMLDetailsElement)) return;
-            if (!target.open) return;
 
-            const allDetails = root.querySelectorAll("details");
-            allDetails.forEach((detail) => {
-                if (detail !== target) detail.open = false;
+        let hoverTimer = null;
+
+        const accordions = document.querySelectorAll('.e-n-accordion');
+
+        accordions.forEach((accordion) => {
+            const items = accordion.querySelectorAll('.e-n-accordion-item');
+
+            items.forEach((item) => {
+                item.addEventListener('mouseenter', () => {
+                    clearTimeout(hoverTimer);
+
+                    hoverTimer = setTimeout(() => {
+                        items.forEach(i => i.removeAttribute('open'));
+                        item.setAttribute('open', 'true');
+                    }, 10000);
+                });
+            });
+
+            accordion.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimer);
+                items.forEach(i => i.removeAttribute('open'));
+            });
+        });
+
+        return () => {
+            clearTimeout(hoverTimer);
+
+            accordions.forEach((accordion) => {
+                const items = accordion.querySelectorAll('.e-n-accordion-item');
+                items.forEach((item) => {
+                    item.replaceWith(item.cloneNode(true));
+                });
             });
         };
-
-        root.addEventListener("toggle", handleToggle, true);
-        return () => {
-            root.removeEventListener("toggle", handleToggle, true);
-        };
     }, []);
+
+
 
     return (
         <>
@@ -63,42 +105,43 @@ export default function Blog_detail({ content, blog_image, load }) {
             {load ? (
                 <BlogDetailsShimmer />
             ) : (
-                <section >
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12 p-0">
-                                <div className="blog_img blog_pb">
-                                    {Array.isArray(blog_image) &&
-                                        blog_image.map((item, index) => (
-                                            <img
-                                                key={`blog-image-${item?.url || index}`}
-                                                src={item?.url}
-                                                alt=""
-                                                className="rounded-2xl"
-                                            />
-                                        ))}
-                                </div>
-                                <div
-                                    className="blog_content blog_pb "
-                                    dangerouslySetInnerHTML={{ __html: content }}
-                                >
-                                    {/* ******************* */}
-                                    {/* <div className="blog_title blog_pb ">
+
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12 p-0">
+                            <div className="blog_img blog_pb">
+                                {Array.isArray(blog_image) &&
+                                    blog_image.map((item, index) => (
+                                        <img
+                                            key={`blog-image-${item?.url || index}`}
+                                            src={item?.url}
+                                            alt=""
+                                            className="rounded-2xl"
+                                        />
+                                    ))}
+                            </div>
+                            <div
+                                className="blog_content blog_pb "
+                                dangerouslySetInnerHTML={{ __html: content }}
+                            >
+                                {/* ******************* */}
+
+                                {/* <div className="blog_title blog_pb ">
                                     <h2 className='mb-0 '>
                                         Why Seoul Is a Dream Destination for Kpop Fans
                                     </h2>
 
                                 </div> */}
-                                    {/* ******************* */}
-                                    {/* <div className="blog_img blog_pb">
+                                {/* ******************* */}
+                                {/* <div className="blog_img blog_pb">
                                     <img src="/justbuytravel_next/demo/blog/Budget-Travel.webp" alt="" className='rounded-2xl' />
                                 </div> */}
-                                    {/* ******************* */}
-                                </div>
+                                {/* ******************* */}
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
+
             )
             }
 

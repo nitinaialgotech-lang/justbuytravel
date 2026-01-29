@@ -9,7 +9,7 @@ export default function Blog_Right_Sidebar() {
         queryFn: () => Get_Blogs(),
     })
 
-    const posts = data?.data || []
+    const posts = data?.posts || []
     const recentPosts = posts.slice(0, 4)
 
     return (

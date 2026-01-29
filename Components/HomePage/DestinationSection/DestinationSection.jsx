@@ -54,30 +54,31 @@ export default function DestinationSection() {
                 {/* ************** */}
                 <div className="container">
                     {/* ******************** */}
+                    <div className="d-none d-lg-block">
+                        <div className="row  relative ">
 
-                    <div className="row  d-none d-lg-block ">
-                        {
-                            card?.map((item, k) => {
-                                return (
-                                    <div className="col-12 col-lg-3 " key={k}>
-                                        <div className="destination_box">
-                                            <div className="destination_img  ">
-                                                <img src={item?.img} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
-                                                <div className="destination_name">
-                                                    <h5>
-                                                        {item?.name}
-                                                    </h5>
+
+
+                            {
+                                card?.map((item, k) => {
+                                    return (
+                                        <div className="col-12 col-lg-3 " key={k}>
+                                            <div className="destination_box">
+                                                <div className="destination_img  ">
+                                                    <img src={item?.img} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
+                                                    <div className="destination_name">
+                                                        <h5>
+                                                            {item?.name}
+                                                        </h5>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
-
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-
-
                     {/* ************************************************ onscroll the page scroller    */}
                     <div className='row relative'>
                         <div className="d-block d-lg-none  ">

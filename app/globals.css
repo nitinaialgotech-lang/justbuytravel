@@ -3150,3 +3150,80 @@ span.rating-stars {
 .lang-currency-dropdown > .dropdown-menu > .active {
   background-color: var(--bg-color);
 }
+/* ******************************************   blog section  */
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .elementor-element
+  > .elementor-widget-container
+  > ul {
+  padding-left: 20px !important;
+}
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .elementor-element
+  > .elementor-widget-container
+  > ul
+  > li {
+  list-style: square;
+}
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .elementor-element
+  > .elementor-widget-container
+  > ul
+  > li
+  > p {
+  margin-bottom: 5px;
+}
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .elementor-element
+  > .elementor-widget-container
+  > img {
+  border-radius: 20px;
+}
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .elementor-element
+  > .elementor-widget-container
+  > p
+  > span {
+  text-align: justify;
+
+  line-height: 1.8;
+}
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .elementor-element
+  > .elementor-widget-container
+  > p {
+  color: var(--color) !important;
+  font-size: 16px;
+
+  font-weight: 300 !important;
+}
+/******************************* animation wth accordian ********************/
+.e-n-accordion-item > div[role="region"] {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.35s ease opacity 0.25s ease !important;
+  opacity: 0;
+}
+
+/* open state */
+.e-n-accordion-item[open] > div[role="region"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* inner content */
+.e-n-accordion-item > div[role="region"] > * {
+  overflow: hidden;
+}
