@@ -79,8 +79,8 @@ export default function DestinationSection() {
                         </div>
                     </div>
                     {/* ************************************************ onscroll the page scroller    */}
-                    <div className='d-block d-lg-none'>
-                        <div className="row relative">
+                    <div className='row relative'>
+                        <div className="d-block d-lg-none  ">
                             <Swiper
                                 slidesPerView={3}
                                 spaceBetween={15}
@@ -164,7 +164,6 @@ export default function DestinationSection() {
                                     </button>
                                 </div>
                             </div>
-
                         </div>
 
                     </div>

@@ -18,6 +18,8 @@ export default function Blogs() {
         queryFn: () => Get_Blogs()
 
     })
+    console.log(data?.posts,"blog");
+    
     if (isLoading) return <div className='pt-20 pb-20 text-center'>
         <h4>
             Blog is Loading .....
@@ -41,7 +43,7 @@ export default function Blogs() {
                     <div className="row">
 
                         {
-                            data?.data?.slice(1, 5).map((item, i) => {
+                            data?.posts?.slice(1, 5).map((item, i) => {
                                 return (
 
                                     <div className="col-12 col-md-6 col-lg-3" key={i}>
