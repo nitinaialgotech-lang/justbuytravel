@@ -265,7 +265,7 @@ export default function ExperienceExploreSection() {
                                                                 )}
                                                             </div>
                                                             {placeId && (
-                                                                <div className="mt-2">
+                                                                <div className="">
                                                                     <Link
                                                                         href={`/hoteldetail/?hotel=${placeId}`}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
@@ -403,7 +403,7 @@ export default function ExperienceExploreSection() {
                                                             )}
                                                         </div>
                                                         {placeId && (
-                                                            <div className="mt-2">
+                                                            <div className="">
                                                                 <Link
                                                                     href={`/hoteldetail/?hotel=${placeId}`}
                                                                     className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"

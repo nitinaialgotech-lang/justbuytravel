@@ -230,6 +230,7 @@
   --cl-brown: rgba(115, 115, 115, 1);
   --cl-bl: rgba(29, 31, 39, 1);
   --p-color: #575757;
+  --shadow: 0px 0px 35px 2px rgb(0 0 0 / 5%);
 }
 
 body {
@@ -583,7 +584,7 @@ button {
 
 /* **************************** destination  */
 .section_title {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .section_title > h2 {
@@ -591,6 +592,7 @@ button {
   font-weight: 700;
   font-size: 40px;
   letter-spacing: 0%;
+  line-height: 35px;
   vertical-align: middle;
 }
 
@@ -598,23 +600,19 @@ button {
   font-family: var(--font-fam);
   font-weight: 700;
   font-size: 40px;
-  line-height: 1.8;
+  line-height: 35px;
   letter-spacing: 0%;
   vertical-align: middle;
 }
 
+.section_title > h5,
 .section_title > span > h5 {
   font-weight: 500;
   font-size: 17px;
   color: var(--color);
   letter-spacing: 0.5px;
-}
-
-.section_title > h5 {
-  font-weight: 500;
-  font-size: 17px;
-  color: var(--color);
-  letter-spacing: 0.5px;
+  line-height: 1.8;
+  margin-bottom: 0;
 }
 
 .destination_box > .destination_img {
@@ -685,6 +683,7 @@ button {
   margin-left: 10px;
   margin-right: 10px;
   position: relative;
+  box-shadow: var(--shadow);
 }
 
 .recommend_card_box > .card_box > .card_box_detail > .price_book > .rating > i {
@@ -719,11 +718,15 @@ button {
 }
 
 .recomend_btn {
-  font-size: 11px;
-  padding: 4px 10px;
   border-radius: 5px;
-  min-width: 90px;
-  max-width: 90px;
+  width: 100%;
+  height: 100%;
+  max-width: 98px;
+  font-size: 12px;
+  padding: 0;
+  min-height: 30px;
+  height: 100%;
+  color: #ffff !important;
 }
 
 /* ************ time */
@@ -939,6 +942,9 @@ button {
 }
 
 /* ***********************************************************************   experience explore section */
+.experience_explore_section > .card > .card-body {
+  padding: 16px 16px 0px 10px;
+}
 .experience_explore_section > .card > img {
   width: 100%;
   height: 100%;
@@ -946,10 +952,15 @@ button {
   max-height: 200px;
   object-fit: cover;
 }
-
+.experience_explore_section > .card > .card-body > .card_detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .experience_explore_section > .card > .card-body > .card_detail > h5 {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .experience_explore_section > .card > .card-body > .card_detail > p {
@@ -961,10 +972,21 @@ button {
   font-weight: 500;
   color: var(--bg-color);
 }
-
-.experience_explore_section > .card > .card-body > .rating > span {
-  font-size: 14px;
-  color: var(--bg-color);
+.experience_explore_section > .card > .card-body > .card_detail > .rating {
+  line-height: 0;
+}
+.experience_explore_section > .card > .card-body > .card_detail > .rating > i {
+  font-size: 12px;
+  font-weight: 700;
+}
+.experience_explore_section
+  > .card
+  > .card-body
+  > .card_detail
+  > .rating
+  > span {
+  font-size: 12px;
+  color: var(--cl-bl);
 }
 
 .card > .heart_icon > span {
@@ -1134,12 +1156,12 @@ button {
   height: 100%;
 }
 
-.recomand_card_shadow {
+/* .recomand_card_shadow {
   box-shadow: 0 0 35px 2px #0000000d;
-}
+} */
 
 #swiper_sldie > .swiper-wrapper {
-  padding: 0 0 20px 0px;
+  padding: 0 0 5px 0px;
 }
 
 .swiper-pagination-bullet-active {
