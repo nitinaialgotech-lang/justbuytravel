@@ -44,9 +44,9 @@ export default function DestinationSection() {
                                 <h2 className='mb-0'>
                                     Trending Destinations
                                 </h2>
-                                <h5 >
+                                <p>
                                     Discover popular destinations and book hotels online at the best prices worldwide.
-                                </h5>
+                                </p>
                             </div>
                         </div>
                     </div>

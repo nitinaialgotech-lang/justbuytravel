@@ -34,9 +34,9 @@ export default function Blogs() {
                     <h2 className='mb-0 capitalize'>
                         From the blog
                     </h2>
-                    <h5 >
+                    <p>
                         Whatever you're into, we’ve got it
-                    </h5>
+                    </p>
                 </div>
                 {/* ********************** */}
                 <div className="d-none d-lg-block">

@@ -1,16 +1,19 @@
 
 // import SearchSection from "@/Components/HomePage/SearchSectionhhh";
+
 import IndexPage from "@/Components/HomePage/IndexPage/IndexPage";
 import "../style/responsive.css"
+import { Provider } from "react-redux";
+import store from "@/Components/Redux/Store";
 
 
 export const metadata = {
-  title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
-  description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place. Find the best travel deals and book your perfect vacation.",
+  title: "Smart Travel Planning for Hotels & Flights | Just Buy Travel",
+  description: "Plan smart trips with verified hotel and flight options. Compare prices, read genuine reviews, and book with confidence for every trip with Just Buy Travel",
   keywords: "travel deals, hotel reviews, travel booking, vacation packages, destination guides, travel tips, hotel comparison, travel offers, cheap flights, travel destinations",
   openGraph: {
-    title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
-    description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
+    title: "Smart Travel Planning for Hotels & Flights | Just Buy Travel",
+    description: "Plan smart trips with verified hotel and flight options. Compare prices, read genuine reviews, and book with confidence for every trip with Just Buy Travel",
     type: "website",
   },
   alternates: {
@@ -43,7 +46,10 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+
+
       <IndexPage />
+
     </>
   )
 }

@@ -1,5 +1,4 @@
 "use client"
-
 import Footer from "@/component/Footer";
 import Header from "@/component/Header";
 import Blogs from "@/Components/HomePage/Blog/Blogs";
@@ -16,6 +15,7 @@ import PopUpForm from "@/component/PopUpForm";
 import { RxCross2 } from "react-icons/rx";
 import 'reactjs-popup/dist/index.css';
 import { useEffect, useState } from "react";
+import store from "@/Components/Redux/Store";
 export default function IndexPage() {
     // const [open, setOpen] = useState(false);
     // useEffect(() => {
@@ -74,14 +74,13 @@ export default function IndexPage() {
             {/* <RecomendSection /> */}
             <Recomended />
             <ExperienceExploreSection />
-
             <DestinationSection />
             <Trust_Guide_Section />
             {/* <QuickLinks /> */}
             <Blogs />
             <FaqSection />
-
             <Footer />
+
         </>
     )
 }

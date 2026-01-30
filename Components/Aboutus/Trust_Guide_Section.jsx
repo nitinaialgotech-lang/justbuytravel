@@ -15,6 +15,12 @@ const card = [
     {
         img: "/justbuytravel_next/demo/aboutus/Expida.webp"
     },
+    {
+        img: "/justbuytravel_next/demo/logo/hoteldetail/tripcom.webp"
+    },
+    // {
+    //     img: "/justbuytravel_next/demo/aboutus/Expida.webp"
+    // },
     // {
     //     img: "/demo/aboutus/google.png"
     // },
@@ -43,7 +49,7 @@ export default function Trust_Guide_Section() {
                         {/* title */}
                         <div className="section_title trust_guide_content">
                             <h2>
-                                Reliable Travel Websites for Comparison & Planning
+                                Our Trusted and Recommended Travel Companies
                             </h2>
                             <p className='g_color fw-semibold'>
                                 As your travel guide, we help you avoid scams and travel with confidence.
@@ -68,15 +74,15 @@ export default function Trust_Guide_Section() {
                                 }}
                                 breakpoints={{
                                     320: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
                                     375: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
                                     425: {
-                                        slidesPerView: 2
+                                        slidesPerView: 1.5
 
                                     },
 

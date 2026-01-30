@@ -122,8 +122,8 @@ export default function Recomended() {
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Recommended Hotels & Travel Deals for You</h2>
-                    <h5>Handpicked hotel stays based on popular destinations and top ratings
-                    </h5>
+                    <p>Handpicked hotel stays based on popular destinations and top ratings
+                    </p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>

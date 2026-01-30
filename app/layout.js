@@ -7,6 +7,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { QueryClientProviderWrapper } from "./QueryClientProvider";
 import RouteChangeLoader from "@/component/RouteChangeLoader";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -156,12 +157,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
         <QueryClientProviderWrapper>
           <Suspense fallback={null}>
             <RouteChangeLoader />
           </Suspense>
           {children}
         </QueryClientProviderWrapper>
+
       </body>
 
     </html>

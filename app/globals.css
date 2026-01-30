@@ -296,6 +296,9 @@ span,
 button {
   font-family: var(--font-fam);
 }
+/* p {
+  font-family: "outfit";
+} */
 
 .margin_lr {
   margin-right: 15px;
@@ -365,7 +368,7 @@ button {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-weight: 500;
+  font-weight: 600;
   font-style: medium;
   cursor: pointer;
   font-family: var(--font-fam);
@@ -406,7 +409,7 @@ button {
 }
 
 .home_banner > .title {
-  padding: 100px 0px 60px 0px;
+  padding: 100px 0px 50px 0px;
 }
 
 .banner_box > .title {
@@ -415,7 +418,7 @@ button {
 }
 
 .banner_box > .title > h1 {
-  font-size: 70px;
+  font-size: 86px;
   color: var(--color);
   font-weight: 900;
   line-height: 1;
@@ -501,8 +504,7 @@ button {
   > li
   > a
   > span:nth-child(2) {
-  font-weight: 500;
-  margin-top: 5px;
+  font-weight: 600;
   font-family: var(--font-fam);
   font-size: 17px;
 }
@@ -584,7 +586,7 @@ button {
 
 /* **************************** destination  */
 .section_title {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .section_title > h2 {
@@ -615,6 +617,17 @@ button {
   margin-bottom: 0;
 }
 
+/* ************** new p tag styling ******** */
+.section_title > p,
+.section_title > span > p {
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--color);
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+  margin-bottom: 0;
+}
 .destination_box > .destination_img {
   position: relative;
 }
@@ -956,6 +969,8 @@ button {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
+  height: 100%;
 }
 .experience_explore_section > .card > .card-body > .card_detail > h5 {
   font-size: 16px;
@@ -1433,7 +1448,7 @@ button {
   height: fit-content;
   margin: 0 20px;
   position: sticky;
-  top: 20px;
+  top: 110px;
 }
 
 .time_section > .time,
@@ -1564,9 +1579,8 @@ button {
 }
 
 .trust_guide_content > p {
-  font-size: 18px;
-  line-height: 1.8;
-  text-align: justify;
+  font-size: 17px;
+  line-height: 1.5;
   font-weight: 300;
   color: var(--color);
 }
@@ -2809,7 +2823,6 @@ span.rating-stars {
 
 .card-img-250 {
   min-height: 250px;
-  background-color: #f3f4f6;
 }
 
 .iframe-borderless {

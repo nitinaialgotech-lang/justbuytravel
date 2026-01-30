@@ -13,19 +13,15 @@ export default function
                             <div className="col-lg-12">
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
-                                        <h1 className='capitalize'>
-                                            {/* Travel <span>Decision</span> Made Smarter */}
-                                            Complete <span> Travel Solutions </span> to Compare Hotels & Flights
+                                        <h1 className=''>
+                                            Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights
 
-                                            {/* Your Complete travel Buying  <span>Guide</span> */}
+
                                         </h1>
                                         <div className="col-lg-9 m-auto">
-                                            <h2 className='supporting_text'>
-                                                {/* Discover hotels, flights, holidays, and cruises with real insights and easy comparisons. */}
-                                                {/* Your guide to hotels, flights, and travel insights. */}
-
-                                                Compare hotels, flights and holidays in one place for smarter travel decisions.
-                                            </h2>
+                                            <p className='supporting_text'>
+                                                Plan trips confidently with verified hotel and flight options from trusted travel partners.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

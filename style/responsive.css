@@ -39,7 +39,7 @@
   }
   .destination_box > .destination_img {
     position: relative;
-    margin-top: 15px;
+    /* margin-top: 15px; */
   }
   /* ********* swiper  */
   .swiper-slide .slide-text > .text > h2 {
@@ -217,12 +217,25 @@
   }
   .section_title > h2 {
     font-size: clamp(22px, 4.8vw, 32px);
-    font-weight: 800;
-    line-height: 1.2;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
   }
   .section_title > h5 {
+    font-size: 15px;
+    line-height: 1.2;
     margin-top: 5px;
-    font-size: clamp(12px, 3.2vw, 15px);
+  }
+  .section_title > p {
+    font-size: 15px;
+    line-height: 1.2;
+    margin-top: 0px;
+  }
+  .trust_guide_content > p {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: var(--color);
   }
   /* ***************************** explorere ............. */
   .experience_explore_section > .card > .card-body > .card_detail {
@@ -415,7 +428,7 @@
   .recommend_card_box > .card_box > .card_box_detail > h4 {
     font-size: 15px;
     font-family: var(--font-fam);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.2;
     max-width: 20ch;
   }
@@ -927,9 +940,6 @@
   .mobile_search_box > .form_search_expedia > iframe {
     min-height: 375px;
     height: 100%;
-  }
-  .search_container > .search_container_box > .search_tab > .tab_link > ul {
-    gap: 0px;
   }
 }
 /* ***************************************************************************************** */

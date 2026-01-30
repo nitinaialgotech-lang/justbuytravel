@@ -38,7 +38,7 @@ export default function Footer() {
       <QuickLinks />
       <section className="footer_section padding_top">
         <footer className="footer">
-          <div className="container pt-20  ">
+          <div className="container ">
             <div className="row items-center">
               <div className="col-lg-4">
                 <div className="footer_detail">

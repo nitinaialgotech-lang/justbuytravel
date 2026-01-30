@@ -154,6 +154,8 @@ export default function Search() {
     const [imageLoading, setImageLoading] = useState({});
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
+    // *******************************
+
     /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
     const [searchAll, setSearchAll] = useState(true);
     const [searchType, setSearchType] = useState("all");
@@ -169,7 +171,7 @@ export default function Search() {
         setSearchType("all");
         setSearchAll(true);
         setSearchContent("");
-        setContenttext("Search for places, hotels, activities...");
+        setContenttext("Search places and hotels");
     }
 
     const route = useRouter();
@@ -427,7 +429,7 @@ export default function Search() {
                                                             e.preventDefault();
                                                             setActiveTab("all");
                                                             setSearchAll(true);
-                                                            setContenttext("Search for places, hotels, activities...");
+                                                            setContenttext("Search places and hotels");
                                                             handleSearchTypeChange("all");
 
                                                         }}
@@ -465,7 +467,7 @@ export default function Search() {
                                                             e.preventDefault();
                                                             setActiveTab("hotels");
                                                             setSearchAll(false);
-                                                            setContenttext("Hotel Name or Destination");
+                                                            setContenttext("Search hotels by name or city");
                                                             handleSearchTypeChange("hotels");
 
 
@@ -486,7 +488,7 @@ export default function Search() {
                                                             setActiveTab("restaurants");
                                                             setSearchAll(false);
                                                             handleSearchTypeChange("restaurants");
-                                                            setContenttext("Search Restaurants Near You");
+                                                            setContenttext("Search restaurants or cuisine");
                                                         }}
                                                     >
                                                         <span>
@@ -539,7 +541,7 @@ export default function Search() {
                                                 className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-12 capitalize"
                                                 placeholder={
                                                     textContent ||
-                                                    "Search for places, hotels, activities..."
+                                                    "Search places and hotels"
                                                 }
                                             />
                                             <button
@@ -715,7 +717,7 @@ export default function Search() {
                                                     }}
                                                     className="block relative w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
                                                     placeholder={textContent ||
-                                                        "Search for places, hotels, activities..."}
+                                                        "Search places and hotels"}
                                                 />
 
                                                 {/* **************** */}

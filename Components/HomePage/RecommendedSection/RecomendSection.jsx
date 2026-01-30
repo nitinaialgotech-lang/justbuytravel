@@ -123,8 +123,8 @@ export default function RecomendSection() {
             return;
         }
 
-        const success =                 async (position) => {
-                    const { latitude, longitude } = position.coords;
+        const success = async (position) => {
+            const { latitude, longitude } = position.coords;
 
             try {
                 const cityName = await reverseGeocode(latitude, longitude);
@@ -378,9 +378,9 @@ export default function RecomendSection() {
                     <h2 className='mb-0'>
                         Recommended For You
                     </h2>
-                    <h5 >
+                    <p>
                         Handpicked experiences tailored to your interests
-                    </h5>
+                    </p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
