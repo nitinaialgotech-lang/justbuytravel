@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { QueryClientProviderWrapper } from "./QueryClientProvider";
 import RouteChangeLoader from "@/component/RouteChangeLoader";
+import ReduxProvider from "./ReduxProvider";
+
 
 
 const geistSans = Geist({
@@ -49,9 +51,9 @@ export const metadata = {
     telephone: false,
   },
   icons: {
-    icon: `/justbuytravel_next/demo/logo/cropped-Frame.png`,
-    shortcut: `/justbuytravel_next/demo/logo/cropped-Frame.png`,
-    apple: `/justbuytravel_next/demo/logo/cropped-Frame.png`,
+    icon: `/justbuytravel_next/demo/logo/Fav.svg`,
+    shortcut: `/justbuytravel_next/demo/logo/Fav.svg`,
+    apple: `/justbuytravel_next/demo/logo/Fav.svg`,
   },
   manifest: `${basePath}/manifest.json`,
   openGraph: {
@@ -63,9 +65,10 @@ export const metadata = {
     description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
     images: [
       {
-        url: `/justbuytravel_next/demo/logo/cropped-Frame.png`,
+        url: `/justbuytravel_next/demo/logo/Fav.svg`,
         width: 1200,
         height: 630,
+
         alt: "Just Buy Travel - Your Trusted Travel Companion",
       },
     ],
@@ -74,7 +77,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
     description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
-    images: [`/justbuytravel_next/demo/logo/cropped-Frame.png`],
+    images: [`/justbuytravel_next/demo/logo/Fav.svg              `],
     creator: "@justbuytravel",
   },
   robots: {
@@ -109,7 +112,7 @@ export default function RootLayout({ children }) {
     "@type": "TravelAgency",
     "name": "Just Buy Travel",
     "url": siteUrl,
-    "logo": `/justbuytravel_next/demo/logo/cropped-Frame.png`,
+    "logo": `/justbuytravel_next/demo/logo/Fav.svg`,
     "description": "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
     "sameAs": [
       // Add your social media links here
@@ -158,12 +161,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
 
-        <QueryClientProviderWrapper>
-          <Suspense fallback={null}>
-            <RouteChangeLoader />
-          </Suspense>
+        <ReduxProvider>
           {children}
-        </QueryClientProviderWrapper>
+        </ReduxProvider>
 
       </body>
 

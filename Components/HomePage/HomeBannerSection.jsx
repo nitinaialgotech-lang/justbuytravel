@@ -1,8 +1,10 @@
 import { Suspense } from 'react';
 import Search from './Search';
 import SearchSection from './SearchSection';
+import { useSelector } from 'react-redux';
 export default function
     HomeBannerSection() {
+    const bannerData = useSelector((state) => state.user.SelectAll || <>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>)
     return (
         <>
             <section className='mp-s mp-e'>
@@ -13,16 +15,14 @@ export default function
                             <div className="col-lg-12">
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
-                                        <h1 className=''>
-                                            Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights
-
-
+                                        <h1 className='capitalize'>
+                                            {bannerData}
                                         </h1>
-                                        <div className="col-lg-9 m-auto">
+                                        {/* <div className="col-lg-9 m-auto">
                                             <p className='supporting_text'>
                                                 Plan trips confidently with verified hotel and flight options from trusted travel partners.
                                             </p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

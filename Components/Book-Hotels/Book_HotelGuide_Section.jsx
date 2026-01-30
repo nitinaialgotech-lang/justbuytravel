@@ -41,7 +41,7 @@ export default function Book_Hotel_Guide_Section() {
                         {/* title */}
                         <div className="section_title trust_guide_content">
                             <h2>
-                                Reliable Travel Websites for Comparison & Planning
+                                Our Trusted and Recommended Travel Companies
                             </h2>
                             <p className='g_color fw-semibold'>
                                 As your travel guide, we help you avoid scams and travel with confidence.

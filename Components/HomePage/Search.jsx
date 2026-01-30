@@ -12,6 +12,8 @@ import { autoComplete, searchText } from '@/app/Route/endpoints';
 import Search_flight_section from "../Book-Flights/Search_flight_section";
 import HotelIcon, { FlightIcon } from "@/component/icons";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { SetSelectAll } from "../Redux/Reducer";
 export default function Search() {
     // const reverseGeocode = useCallback(async (lat, lng) => {
     //     try {
@@ -155,7 +157,7 @@ export default function Search() {
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
     // *******************************
-
+    const dispatch = useDispatch();
     /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
     const [searchAll, setSearchAll] = useState(true);
     const [searchType, setSearchType] = useState("all");
@@ -431,6 +433,8 @@ export default function Search() {
                                                             setSearchAll(true);
                                                             setContenttext("Search places and hotels");
                                                             handleSearchTypeChange("all");
+                                                            dispatch(SetSelectAll(<>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>))
+
 
                                                         }}
                                                     >
@@ -449,6 +453,8 @@ export default function Search() {
                                                             e.preventDefault();
                                                             setActiveTab("flights");
                                                             handleSearchTypeChange("flights");
+                                                            dispatch(SetSelectAll(<>Smart <span>Flight</span> Finder</>))
+
                                                         }}
                                                     >
                                                         <span>
@@ -469,6 +475,7 @@ export default function Search() {
                                                             setSearchAll(false);
                                                             setContenttext("Search hotels by name or city");
                                                             handleSearchTypeChange("hotels");
+                                                            dispatch(SetSelectAll(<>Search Comfortable <span>Stays</span> </>))
 
 
                                                         }}
@@ -489,6 +496,7 @@ export default function Search() {
                                                             setSearchAll(false);
                                                             handleSearchTypeChange("restaurants");
                                                             setContenttext("Search restaurants or cuisine");
+                                                            dispatch(SetSelectAll(<>Great Places <span>To eat</span></>))
                                                         }}
                                                     >
                                                         <span>

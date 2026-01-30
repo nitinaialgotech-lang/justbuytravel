@@ -35,208 +35,195 @@ export default function Footer() {
   return (
     <>
 
+
       <QuickLinks />
-      <section className="footer_section padding_top">
+      <section className="footer_section padding_top ">
         <footer className="footer">
           <div className="container ">
-            <div className="row items-center">
-              <div className="col-lg-4">
-                <div className="footer_detail">
+            <div className="row items-center justify-center ">
+              <div className="col-lg-8">
+                <div className="footer_content flex flex-col">
                   <div className="footer_logo">
-                    <img
-                      src={"/justbuytravel_next/demo/footer/icon/footer_logo.webp"}
-                      alt="Just Buy Travel Logo"
-                    />
+                    <div className="logo text-center flex justify-center">
+                      <img
+                        src={"/justbuytravel_next/demo/footer/icon/footer_logo.webp"}
+                        alt="Just Buy Travel Logo"
+                      />
+                    </div>
                   </div>
-                  <div className="footer_title">
-                    <p>
-                      We provide authentic travel guides, destination information, local experiences, travel news, expert tips, and smart suggestions to help travelers plan better trips.
+                  {/* ************* */}
+                  <div className="footer_desc">
+                    <p className="">
+                      <span>
+                        We offer
+                      </span> unforgettable experiences <span>to the world’s most stunning destinations. Let us guide you through </span>seamless adventures, <span>creating memories that last a</span> lifetime.
                     </p>
                   </div>
-                  <div className="footer_location">
-                    <ul className="p-0">
-                      <li className="flex gap-3 items-center">
-                        <span>
-                          <MdLocationPin />
-                        </span>{" "}
-                        4517 Washington Ave. Manchester, Kentucky 39495
+                </div>
+              </div>
+              {/* ****************************** icon  */}
+              <div className="col-lg-12">
+                <div className="icon_box">
+                  <div className="icon_row flex items-center  ">
+                    <div className="before">
+                      <img
+                        src={"/justbuytravel_next/demo/footer/icon/left_line.png"}
+                        alt="Just Buy Travel Logo"
+                      />
+                    </div>
+                    {/* *************** */}
+                    <div className="iocn">
+                      {/* **************************** */}
+                      <ul class="example-2 m-0 p-0" id="icon_footer">
+                        <li class="icon-content">
+                          <a
+                            href=""
+                            aria-label="LinkedIn"
+                            data-social="linkedin"
+                          >
+                            <div class="filled"></div>
+                            <IoLogoFacebook />
+                          </a>
+
+                        </li>
+                        <li class="icon-content">
+                          <a href="" aria-label="GitHub" data-social="github">
+                            <div class="filled"></div>
+                            <RiTwitterXLine />
+                          </a>
+
+                        </li>
+                        <li class="icon-content">
+                          <a
+                            href=""
+                            aria-label="Instagram"
+                            data-social="instagram"
+                          >
+                            <div class="filled"></div>
+                            <AiFillInstagram />
+                          </a>
+
+                        </li>
+                        <li class="icon-content">
+                          <a href="" aria-label="Youtube" data-social="youtube">
+                            <div class="filled"></div>
+                            <TbMailFilled />
+                          </a>
+
+                        </li>
+                      </ul>
+
+                    </div>
+                    {/* (************) */}
+                    <div className="before">
+                      <img
+                        src={"/justbuytravel_next/demo/footer/icon/right_line.svg"}
+                        alt="Just Buy Travel Logo"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-8">
+                <div className="footer_links">
+                  <div className="link">
+                    <ul className="flex justify-between items-center">
+                      <li>
+                        <Link href={""}>  about us</Link>
                       </li>
-                      {/* <li className='flex gap-3'><span><LuClock4 /></span> Hours: 8:00 - 17:00, Mon - Sat</li> */}
-                      <li className="flex gap-3 items-center">
-                        <span>
-                          <TbMailFilled />
-                        </span>{" "}
-                        support@justbuytravel.com
+                      <li className="dot">
+                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                      </li>
+                      <li>
+                        <Link href={""}> Contact Us</Link>
+                      </li>
+                      <li className="dot">
+                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                      </li>
+                      <li>
+                        <Link href={""}> Privacy Policy</Link>
+                      </li>
+                      <li className="dot">
+                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                      </li>
+                      <li>
+                        <Link href={""}>Terms and Conditions</Link>
+                      </li>
+                      <li className="dot">
+                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                      </li>
+                      <li>
+                        <Link href={""}> Disclaimer</Link>
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-1"></div>
-              <div className="col-lg-2">
-                <div className="footer_link">
-                  <div className="link_title">
-                    <h5>Comapny</h5>
-                  </div>
-                  <ul className="p-0">
-                    <li>
-                      <Link href={"/aboutus"}>About Us </Link>
-                    </li>
-                    <li>
-                      <Link href={""}>Blog</Link>
-                    </li>
-                    <li>
-                      <Link href={"/privacy-policy"}>Privacy Policy</Link>
-                    </li>
-                    <li>
-                      <Link href={"/term-and-conditions"}>
-                        Terms and Conditions{" "}
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-lg-2">
-                <div className="footer_link">
-                  <div className="link_title ">
-                    <h5 className="ps-4">Services</h5>
-                  </div>
-                  <ul className="ps-4">
-                    <li>
-                      <Link href={""}>Hotels</Link>
-                    </li>
-                    <li>
-                      <Link href={""}>Flights</Link>
-                    </li>
-                    <li>
-                      <Link href={""}>Cruises</Link>
-                    </li>
-                    <li>
-                      <Link href={""}>Thing to do</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-lg-3">
-                <div className="footer_newslatter">
-                  <div className="link_title ">
-                    <h5 className=" text-white">NewsLatter</h5>
-                  </div>
-                  <div className="news_latter_input mt-3">
-                    <input
-                      type="text"
-                      placeholder="Enter You Mail"
-                      className="w-full text-gray-400 border  p-3"
-                    />
-                  </div>
-                  <div className="news_later_button text-center">
-                    <button className="w-full p-3 text-black mt-3  text-center button_bg2">
-                      Subscribe
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
-            {/* ************************************* footer contact info */}
-            {/* <div className="footer_contact_info pt-10 ">
-              <div className="row items-center border rounded-3xl p-3">
-                <div className="col-lg-4">
-                  <div className="footer_contact_detail ps-5 pe-5">
-                    <div className="contact flex items-center gap-2">
-                      <div className="icon">
-                        <img
-                          src={"/justbuytravel_next/demo/footer/icon/help.svg_fill.png"}
-                          alt="Customer Support Help Icon"
-                        />
-                      </div>
-                      <div className="call_us">
-                        <p className="m-0">Need help? Call us</p>
-                        <h5>1-800-222-8888</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 border-l-2 ">
-                  <div className="footer_contact_detail ps-5 pe-5">
-                    <div className="join_us flex items-center gap-2">
-                      <div className="icon">
-                        <img
-                          src={"/justbuytravel_next/demo/footer/icon/join.svg.png"}
-                          alt="Join Affiliate Program Icon"
-                        />
-                      </div>
-                      <div className="content">
-                        <h5>Join Travila Affiliate Program Today !</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 border-l-2">
-                  <div className="footer_contact_detail ps-5 pe-5">
-                    <div className="send_msg flex items-center gap-2">
-                      <div className="icon">
-                        <img
-                          src={"/justbuytravel_next/demo/footer/icon/msg.svg.png"}
-                          alt="Send Message Icon"
-                        />
-                      </div>
-                      <div className="content">
-                        <h5>Send us a message</h5>
-                        <p className="m-0">
-                          Contact our agents about your booking, and we'll reply
-                          as soon as possible.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-            {/* ******************************************************************** botton ooter */}
-            <div className="bottom_footer">
-              <div className="reserved_section flex justify-between items-center py-10">
-                <div className="content">
-                  <p className="m-0">
-                    © 2025 Justbuytravel.com. All rights reserved.
-                  </p>
-                </div>
-                <div className="follow_icon flex justify-center items-center gap-3">
-                  <h5 className="m-0 capitalize">follow us</h5>
-                  <a
-                    href="https://www.facebook.com/people/Just-buy-Travel/61577152502232/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Follow us on Facebook"
-                  >
-                    <span>
-                      <IoLogoFacebook />
-                    </span>
-                  </a>
-                  <a
-                    href="https://www.instagram.com/justbuytravel/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Follow us on Instagram"
-                  >
-                    <span>
-                      <AiFillInstagram />
-                    </span>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/just-buy-travel/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Follow us on LinkedIn"
-                  >
-                    <span>
-                      <RiTwitterXLine />
-                    </span>
-                  </a>
-                  <span></span>
-                </div>
-              </div>
+
+
+
+
+
+          </div>
+          {/* ********************************* nav_link in bottom ***********************************I */}
+
+
+          <div className="footer_bottom_link ">
+            <div className="link">
+              <ul className="flex justify-between items-center p-0 m-0">
+                <li>
+                  <Link href={""}>  Home</Link>
+                </li>
+                <li className="dot">
+                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                </li>
+                <li>
+                  <Link href={""}> Flight</Link>
+                </li>
+                <li className="dot">
+                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                </li>
+                <li>
+                  <Link href={""}> Cars</Link>
+                </li>
+                <li className="dot">
+                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                </li>
+                <li>
+                  <Link href={""}>Bike Rental</Link>
+                </li>
+                <li className="dot">
+                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                </li>
+                <li>
+                  <Link href={""}> About</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="mail_link">
+              <ul className="m-0 p-0">
+                <li>
+                  <Link href={""}>
+                    <strong className="g_color">@</strong>  support@justbuytravel.com
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
+          {/* ****************************** bottom footer */}
+          <div className="botom_footer">
+            <div className="web_address">
+              <p className="m-0">
+                @2025 justbuytravel. All rights reserved
+              </p>
+            </div>
+          </div>
+
+
+          {/* ******************************************************************** botton ooter */}
+
+
         </footer>
       </section>
 

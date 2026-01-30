@@ -7,6 +7,7 @@ import GuideHotel from './GuideHotel'
 import Blogs from '../HomePage/Blog/Blogs'
 import Book_Hotel_Guide_Section from './Book_HotelGuide_Section'
 import Book_Hotel_Faq_section from './Book_Hotel_Faq_section'
+import Trust_Guide_Section from '../Aboutus/Trust_Guide_Section'
 
 export default function BookHotels_Banner() {
   return (
@@ -38,8 +39,8 @@ export default function BookHotels_Banner() {
       <TopHotels />
       <IconicPlaces />
       <GuideHotel />
-
-      <Book_Hotel_Guide_Section />
+      <Trust_Guide_Section />
+      {/* <Book_Hotel_Guide_Section /> */}
       <Blogs />
       <Book_Hotel_Faq_section />
 
