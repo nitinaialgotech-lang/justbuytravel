@@ -1492,7 +1492,68 @@ button {
   background-size: 16%;
   pointer-events: none;
 } */
+.detail_about {
+  background-color: rgba(255, 255, 255, 0.9);
+  /* backdrop-filter: blur(104px); */
+  border-radius: 16px;
+  box-shadow: 0px 2px 28.1px 0px rgba(143, 170, 188, 0.18);
 
+  padding: 40px;
+  margin-top: -5%;
+  z-index: 111111;
+  /* display: revert; */
+  display: rela;
+  position: relative;
+}
+.sky_blue {
+  background-color: rgba(214, 225, 244, 1);
+}
+.sky_yellow {
+  background-color: rgba(244, 227, 201, 1);
+}
+.sky_green {
+  background-color: rgba(216, 237, 214, 1);
+}
+.sky_red {
+  background-color: rgba(230, 217, 240, 1);
+}
+.break_point {
+  padding: 30px 0px;
+}
+.about_review_section > .head_line > h2 {
+  padding: 30px 0px;
+}
+.box_content_box {
+  width: 100%;
+  height: 180px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.box_content_box > .content > h2 {
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+.box_content_box > .content > p {
+  font-weight: 600;
+  font-style: Medium;
+  font-size: 22px;
+  line-height: 18px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+.bit_content > img {
+  border-radius: 16px;
+}
+.bit_content > .content {
+  left: 2%;
+  right: 15%;
+}
+/* ******************** */
 .trust_guide_section {
   /* padding: 50px 0px; */
 }
