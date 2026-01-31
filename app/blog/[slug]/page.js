@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
 import Blog_Right_Sidebar from '@/Components/Blogs/Blog_Right_Section/Blog_Right_Sidebar';
-import { Get_Blogs } from '@/app/Route/endpoints';
+import { Get_Blogs, Get_Blog_category } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
 import { SlCalender } from 'react-icons/sl';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -61,6 +62,11 @@ export default async function BlogPostPage({ params }) {
             notFound();
         }
 
+        const categoriesRes = await Get_Blog_category();
+        const categories = categoriesRes?.data || [];
+        const firstCategoryId = blog?.categories?.[0];
+        const categoryForBreadcrumb = categories.find((c) => Number(c.id) === Number(firstCategoryId));
+
         const blogContent = blog?.content?.rendered || '';
         const blogImage = blog?.yoast_head_json?.og_image || [];
         
@@ -94,10 +100,13 @@ export default async function BlogPostPage({ params }) {
                                 <div className="title flex flex-col gap-2 padding_bottom">
                                     <div className="blog_section_left_bar">
                                         <div className="breadcrumb m-0">
-                                            <h4 className="flex ">
-                                                Home <span className="g_color"><MdKeyboardDoubleArrowRight /></span>
-                                                <span dangerouslySetInnerHTML={{ __html: blog.title?.rendered || blog.slug || '' }} />
-                                            </h4>
+                                            <p className="flex flex-wrap items-center gap-1 m-0">
+                                                <Link href="/" className="g_color_hover">Home</Link>
+                                                <span className="g_color"><MdKeyboardDoubleArrowRight /></span>
+                                                <Link href={`/blog?category=${categoryForBreadcrumb?.slug || ''}`} className="g_color_hover">{categoryForBreadcrumb?.name || 'Blog'}</Link>
+                                                <span className="g_color"><MdKeyboardDoubleArrowRight /></span>
+                                                <span className="breadcrumb_current" dangerouslySetInnerHTML={{ __html: blog.title?.rendered || blog.slug || '' }} />
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="blog_banner_box p-0">

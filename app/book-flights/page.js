@@ -47,9 +47,9 @@ export default function page() {
             <Suspense >
                 <Header />
                 <Book_Flight_Banner />
-                <Popular_Flight_Hotel_section />
+                {/* <Popular_Flight_Hotel_section /> */}
                 <Iconic_Flight_Hotel_section />
-                {/* <Flight_Iconic_Places /> */}
+                <Flight_Iconic_Places />
                 {/* <Helping_travel_Explore /> */}
                 {/* <Flight_Hotel_Guide_Section /> */}
                 <Trust_Guide_Section />

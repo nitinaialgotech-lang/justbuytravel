@@ -477,7 +477,7 @@ export default function Search() {
                                                             setSearchAll(false);
                                                             setContenttext("Search hotels by name or city");
                                                             handleSearchTypeChange("hotels");
-                                                            dispatch(SetSelectAll(<>Search Comfortable <span>Stays</span> </>))
+                                                            dispatch(SetSelectAll("hotels"))
 
 
                                                         }}

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
@@ -86,6 +87,7 @@ export default async function BlogDetailWithCategoryPage({ params }) {
 
     const blogContent = blog?.content?.rendered || '';
     const blogImage = blog?.yoast_head_json?.og_image || [];
+    const categoryForBreadcrumb = categories.find((c) => (c.slug || '').toLowerCase() === categorySlugLower);
 
     const blogStructuredData = generateBlogStructuredData(blog, slug);
     const breadcrumbData = generateBreadcrumbStructuredData([
@@ -116,10 +118,13 @@ export default async function BlogDetailWithCategoryPage({ params }) {
                 <div className="title flex flex-col gap-2 padding_bottom">
                   <div className="blog_section_left_bar">
                     <div className="breadcrumb m-0">
-                      <h4 className="flex ">
-                        Home <span className="g_color"><MdKeyboardDoubleArrowRight /></span>
-                        <span dangerouslySetInnerHTML={{ __html: blog.title?.rendered || blog.slug || '' }} />
-                      </h4>
+                      <p className="flex flex-wrap items-center gap-1 m-0">
+                        <Link href="/" className="g_color_hover">Home</Link>
+                        <span className="g_color"><MdKeyboardDoubleArrowRight /></span>
+                        <Link href={`/blog?category=${categorySlug}`} className="g_color_hover">{categoryForBreadcrumb?.name || 'Blog'}</Link>
+                        <span className="g_color"><MdKeyboardDoubleArrowRight /></span>
+                        <span className="breadcrumb_current" dangerouslySetInnerHTML={{ __html: blog.title?.rendered || blog.slug || '' }} />
+                      </p>
                     </div>
                   </div>
                   <div className="blog_banner_box p-0">

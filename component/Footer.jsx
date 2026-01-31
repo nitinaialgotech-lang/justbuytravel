@@ -135,7 +135,7 @@ export default function Footer() {
               {/* (************) */}
               <div className="after">
                 <img
-                  src={"/justbuytravel_next/demo/footer/icon/Line22.png"}
+                  src={getAssetPath("/footer/icon/Line22.png")}
                   alt="Just Buy Travel Logo"
                 />
               </div>

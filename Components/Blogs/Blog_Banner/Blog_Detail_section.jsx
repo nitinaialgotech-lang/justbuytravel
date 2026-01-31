@@ -1,13 +1,14 @@
 
 "use client"
 import React from 'react'
+import Link from 'next/link'
 import { SlCalender } from "react-icons/sl";
 import { FaRegUserCircle } from "react-icons/fa";
 import Blog_Right_Sidebar from '../Blog_Right_Section/Blog_Right_Sidebar';
 import Blog_Detail from '../Blog_Detail/Blog_Detail';
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { useQuery } from '@tanstack/react-query';
-import { Get_Blogs } from '@/app/Route/endpoints';
+import { Get_Blogs, Get_Blog_category } from '@/app/Route/endpoints';
 import { useSearchParams, useParams } from 'next/navigation';
 
 export default function Blog_Detail_section({ initialSlug }) {
@@ -16,12 +17,19 @@ export default function Blog_Detail_section({ initialSlug }) {
         queryKey: ["blog"],
         queryFn: () => Get_Blogs()
     })
+    const { data: categoriesData } = useQuery({
+        queryKey: ["blog_category"],
+        queryFn: () => Get_Blog_category()
+    })
 
     const blog_slug = useSearchParams();
     const params = useParams();
     const slug = initialSlug || params?.slug || blog_slug.get("detail");
     // ***************************************
     const selectedPost = data?.posts?.find((item) => item?.slug === slug);
+    const categories = categoriesData?.data || [];
+    const firstCategoryId = selectedPost?.categories?.[0];
+    const category = categories.find((c) => Number(c.id) === Number(firstCategoryId));
     const blog_content = selectedPost?.content?.rendered || "";
     const blog_img = selectedPost?.yoast_head_json?.og_image || [];
 
@@ -39,10 +47,13 @@ export default function Blog_Detail_section({ initialSlug }) {
                                     {/* **************************************** */}
                                     <div className='blog_section_left_bar'>
                                         <div className="breadcrumb m-0">
-                                            <h4 className='flex '>
-                                                Home <span className='g_color'><MdKeyboardDoubleArrowRight /></span>
-                                                <span dangerouslySetInnerHTML={{ __html: selectedPost?.title?.rendered || selectedPost?.slug || "" }} />
-                                            </h4>
+                                            <p className='flex flex-wrap items-center gap-1 m-0'>
+                                                <Link href="/" className="g_color_hover">Home</Link>
+                                                <span className='g_color'><MdKeyboardDoubleArrowRight /></span>
+                                                <Link href={`/blog?category=${category?.slug || ''}`} className="g_color_hover">{category?.name || "Blog"}</Link>
+                                                <span className='g_color'><MdKeyboardDoubleArrowRight /></span>
+                                                <span className="breadcrumb_current" dangerouslySetInnerHTML={{ __html: selectedPost?.title?.rendered || selectedPost?.slug || "" }} />
+                                            </p>
                                         </div>
                                     </div>
                                     {/* **************************************** */}

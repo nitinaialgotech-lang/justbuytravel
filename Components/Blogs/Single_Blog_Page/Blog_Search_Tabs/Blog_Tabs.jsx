@@ -3,14 +3,18 @@ import { Get_Blog_category, Get_Blog_data } from "@/app/Route/endpoints";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import ReactDOM from 'react-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tab } from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
 import { FaRegUserCircle } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 export default function Blog_Tabs() {
+
+  const searchParams = useSearchParams();
+  const categorySlugFromUrl = searchParams.get("category");
 
   const [activeKey, setActiveKey] = useState("showall"); // default tab
 
@@ -20,7 +24,15 @@ export default function Blog_Tabs() {
   })
   const [count, setcount] = useState(1)
 
-
+  // When landing with ?category=slug, switch to that category tab
+  useEffect(() => {
+    if (!categorySlugFromUrl || !categories?.data?.length) return;
+    const cat = categories.data.find((c) => (c.slug || "").toLowerCase() === categorySlugFromUrl.toLowerCase());
+    if (cat) {
+      setActiveKey(String(cat.id));
+      setcount(1);
+    }
+  }, [categorySlugFromUrl, categories?.data]);
 
   // Convert tab key to categoryId (showall = fetch all)
   const categoryId = activeKey === "showall" ? null : Number(activeKey);
@@ -227,7 +239,7 @@ export default function Blog_Tabs() {
                   {/* ************************** ********************************************************************************************/}
                   {
                     categories?.data?.map((item, i) => {
-                      if (item?.name == "Travel" || item?.name == "Flight" || item?.name == "Hotel" || item?.name == "Travel Tips" || item?.name == "Adventure" || item?.name == "Travel Tips") {
+                      if (item?.name == "Travel" || item?.name == "Flight" || item?.name == "Hotel" || item?.name == "Travel Tips" || item?.name == "Adventure" || item?.name == "Travel News") {
                         const cat_name = item?.name;
                         const cat_slug = item?.slug;
                         return (
