@@ -16,10 +16,10 @@ export default function DubaiBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in <span> Dubai  </span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Compare cheap, luxury & 5-star hotels in Dubai from trusted partners.
 
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

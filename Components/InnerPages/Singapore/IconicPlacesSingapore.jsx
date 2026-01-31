@@ -73,7 +73,7 @@ export default function IconicPlacesSingapore() {
                 <div className="container padding_bottom">
                     <div className="explore_section section_title ">
                         <h2 className="mb-0">Iconic Places</h2>
-                        <h5>Where history, culture, and beauty come together</h5>
+                        <p>Where history, culture, and beauty come together</p>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 

@@ -11,7 +11,7 @@ export default function QuickLinks() {
                         <div className="col-lg-12">
                             {/* ********** links */}
                             <div className="section_title relative m-0 ">
-                                <h2 className="mb-0">Quick Links</h2>
+                                <h2 className="mb-2">Quick Links</h2>
                             </div>
                             <div className="quick_links ">
                                 {/* *********************************************** */}

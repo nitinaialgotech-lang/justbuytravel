@@ -16,9 +16,9 @@ export default function GlasGowBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in<span> Glasgow</span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Plan your Glasgow stay easily by exploring hotels, reviews, and price options in one place with Just Buy Travel
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

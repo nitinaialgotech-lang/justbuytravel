@@ -413,7 +413,7 @@ export default function Search() {
 
     return (
         <>
-            <section className={`Search_section padding_bottom ${pathname == "/book-flights/" ? "padding_top" : " "}`}>
+            <section className={`Search_section  ${pathname == "/book-flights/" ? "padding_top padding_b70" : "padding_bottom"}`}>
                 <div className="container">
                     <div className="search_container ">
                         <div className="search_container_box  rounded-2xl  w-full">

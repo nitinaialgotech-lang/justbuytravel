@@ -106,7 +106,7 @@ export default function CanadaRecomd() {
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Recommended For You</h2>
-                    <h5>Handpicked hotels based on location, reviews, and traveler preferences.</h5>
+                    <p>Handpicked hotels based on location, reviews, and traveler preferences.</p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>

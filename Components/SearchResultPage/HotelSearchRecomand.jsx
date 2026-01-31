@@ -97,23 +97,26 @@ export default function HotelSearchRecomand({ lat, long, name }) {
         <>
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
-                <div className="section_title relative flex items-center justify-between d-none d-lg-block">
-                    <span>
-                        <h2 className="mb-0">Recommended For You</h2>
-                        <h5>Handpicked experiences tailored to your interests</h5>
-                    </span>
-                    <span className='font-semibold g_color'>
-                        <button className='button_bg2 me-2 mt-2' onClick={() => viewAllHotels()}>view all</button>
-                    </span>
+                <div className="d-none d-lg-block">
+                    <div className="section_title relative flex items-center justify-between">
+                        <span>
+                            <h2 className="mb-0">Recommended For You</h2>
+                            <p>Handpicked experiences tailored to your interests</p>
+                        </span>
+                        <span className='font-semibold g_color'>
+                            <button className='button_bg2 me-2 mt-2' onClick={() => viewAllHotels()}>view all</button>
+                        </span>
 
+                    </div>
                 </div>
+
                 {/* ************************** mobile view show  */}
                 <div className="section_title  d-block d-lg-none">
 
                     <h2 className="mb-0">Recommended For You</h2>
                     <div className="section_title relative flex items-center justify-between">
                         <span>
-                            <h5>Handpicked experiences tailored to your interests</h5>
+                            <p>Handpicked experiences tailored to your interests</p>
                         </span>
                         <span className='font-semibold g_color'>
                             <button className='button_bg2 me-2 mt-2' onClick={() => viewAllHotels()}>view all</button>

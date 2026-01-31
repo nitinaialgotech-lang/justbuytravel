@@ -73,7 +73,7 @@ export default function Hotel_IconicPlaces() {
                 <div className="container ">
                     <div className="explore_section section_title ">
                         <h2 className="mb-0">Iconic Destinations Around the World</h2>
-                        <h5>Explore breathtaking locations rich in history, culture, and natural beauty.</h5>
+                        <p>Explore breathtaking locations rich in history, culture, and natural beauty.</p>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 

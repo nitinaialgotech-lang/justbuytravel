@@ -53,7 +53,7 @@ export default function GoaNearByPlaces() {
                     <div className="row">
                         <div className="explore_section section_title m">
                             <h2 className="mb-0">Near By Locations</h2>
-                            <h5>Explore nearby destinations and hidden gems</h5>
+                            <p>Explore nearby destinations and hidden gems</p>
                         </div>
                     </div>
 

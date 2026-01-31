@@ -107,7 +107,7 @@ export default function ManchesterRecomand() {
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Recommended For You</h2>
-                    <h5>Handpicked experiences tailored to your interests</h5>
+                    <p>Handpicked experiences tailored to your interests</p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>

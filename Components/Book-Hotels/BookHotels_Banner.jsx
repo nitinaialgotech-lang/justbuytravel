@@ -23,10 +23,10 @@ export default function BookHotels_Banner() {
                       {/* Smart Hotel Booking with Trusted  <span> Guidance</span> */}
                       Compare and  <span>Book Hotels</span> Online Easily
                     </h1>
-                    <h5 className='capitalize'>
+                    <p className='capitalize'>
                       Compare hotel prices, <strong className='g_color'> find the best deals,</strong> and book hotels online securely with trusted travel platforms.
 
-                    </h5>
+                    </p>
                   </div>
                 </div>
               </div>

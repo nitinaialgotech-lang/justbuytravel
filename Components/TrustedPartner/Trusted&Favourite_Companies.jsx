@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { usePathname } from 'next/navigation';
 export default function Trusted_Favourite_Companies() {
     const card = [
         {
@@ -14,9 +15,10 @@ export default function Trusted_Favourite_Companies() {
             img: "/justbuytravel_next/demo/aboutus/Expida.webp"
         },
     ]
+    const pathname = usePathname();
     return (
         <>
-            <section className='padding_bottom padding_top bg_grey'>
+            <section className={`padding_bottom padding_top   bg_grey`}>
                 <div className="container">
                     <div className="row justify-center">
                         <div className="col-lg-12">

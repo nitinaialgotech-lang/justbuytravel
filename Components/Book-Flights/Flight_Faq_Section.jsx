@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import './faq.css'
+import "../HomePage/Faq/faq.css"
 import { Accordion } from 'react-bootstrap'
 import { GoPlusCircle } from "react-icons/go"
 import { MdArrowOutward } from 'react-icons/md'
@@ -9,42 +9,42 @@ const DEFAULT_KEY = "0"
 
 const FAQS = [
     {
-        title: 'How does Just Buy Travel work as a travel research platform?',
+        title: 'How do I book flights with JustBuyTravel?',
         content: <>
-            Just Buy Travel works as a travel research platform that helps users compare hotels, flights, holidays, and cruises using trusted third-party travel websites before making a booking decision
+            You can book airline tickets quickly by comparing choices and pricing from several sources.
+
         </>,
         key: "0"
     },
     {
-        title: 'Can I book hotels or flights directly on Just Buy Travel?',
+        title: 'May I book international flights?',
         content: <>
-            No. Just Buy Travel does not process hotel or flight bookings directly. We help users compare hotel booking sites and flight comparison websites, then redirect them to trusted platforms to complete the booking.
+            Absolutely! We specialise in cheap local and international flight bookings.
         </>,
         key: "1"
     },
     {
-        title: 'Which are the best hotel booking sites to compare on Just Buy Travel?',
-        content: 'Just Buy Travel compares popular and trusted hotel booking sites, allowing users to research hotel prices, availability, and options in one place before choosing the best platform.',
+        title: 'How can I get the greatest deals?',
+        content: 'JustBuyTravel provides affordable air tickets, the best flight offers today, and special flight booking deals.',
         key: "2"
     },
     {
-        title: 'Does Just Buy Travel show real hotel and flight prices?',
+        title: 'Will I receive a booking confirmation?',
         content: <>
-            Yes. Just Buy Travel displays hotel and flight prices provided by trusted travel websites. Final prices, availability, and taxes are confirmed on the partner website before booking.
+            Yes, after you book airline tickets, your travel partner will email you an immediate confirmation.
         </>,
         key: "3"
     },
     {
-        title: 'Is Just Buy Travel suitable for worldwide and international travel research?',
+        title: 'Are there any other miscellaneous charges?',
         content: <>
-            Yes. Just Buy Travel supports worldwide travel research, helping users compare hotels and flights globally using the best online travel websites for international trips.
+            Yes, after you book airline tickets, your travel partner will email you an immediate confirmation.
 
         </>,
         key: "4"
     }
 ]
-
-export default function FaqSection() {
+export default function Flight_Faq_Section() {
     const [activeKey, setActiveKey] = useState(DEFAULT_KEY)
     const [isDesktop, setIsDesktop] = useState(false)
 
@@ -76,18 +76,16 @@ export default function FaqSection() {
             setActiveKey(activeKey === key ? null : key)
         }
     }
-
     return (
-        <section className="faq-wrapper  padding_bottom">
+        <section className="faq-wrapper padding_top  ">
             <div className="container ">
                 <div className="section_title ">
                     <h2 className='mb-0 capitalize'>
                         Frequently Asked Questions
                     </h2>
-                    <p>
+                    {/* <h5 >
                         Simple answers to help you plan your stay with ease.
-
-                    </p>
+                    </h5> */}
                 </div>
                 <Accordion activeKey={activeKey}>
                     {FAQS.map((item) => (

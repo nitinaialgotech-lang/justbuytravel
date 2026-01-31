@@ -16,9 +16,9 @@ export default function ParisBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in<span> Paris</span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Compare hotels in Paris offering stylish rooms, central locations, fair prices, and hassle-free booking for travelers worldwide.
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

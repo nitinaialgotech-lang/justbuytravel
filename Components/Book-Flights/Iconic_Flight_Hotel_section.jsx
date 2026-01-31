@@ -1,5 +1,5 @@
 "use client"
-import { IconicPlaces } from "@/app/Route/endpoints";
+import { IconicPlaces, TouristAttraction, TouristAttractionApi } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,8 +15,7 @@ import {
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-
-export default function SaudiIconicPlaces({ lat, long }) {
+export default function Iconic_Flight_Hotel_section() {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
@@ -60,20 +59,20 @@ export default function SaudiIconicPlaces({ lat, long }) {
 
         return stars;
     };
-    // ************************************* iconic places apis 
-    const { data: iconicPlacesData } = useQuery({
-        queryKey: ["iconicPlacesNearby", lat, long],
-        queryFn: () => IconicPlaces(lat, long)
-    });
-    const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
+    // ****************************** apis 
+    const { data: touristAttraction } = useQuery({
+        queryKey: ["touristattraction"],
+        queryFn: () => TouristAttractionApi()
+    })
+    const TouristAttraction = touristAttraction?.data;
 
     return (
         <>
-            <section>
-                <div className="container padding_bottom">
+            <section className=" padding_bottom ">
+                <div className="container ">
                     <div className="explore_section section_title ">
-                        <h2 className="mb-0">Iconic Places</h2>
-                        <p>Where history, culture, and beauty come together</p>
+                        <h2 className="mb-0">Iconic Destinations Around the World</h2>
+                        <p>Explore breathtaking locations rich in history, culture, and natural beauty.</p>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -117,12 +116,12 @@ export default function SaudiIconicPlaces({ lat, long }) {
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper relative"
                             >
-                                {(iconicPlacesList.length
-                                    ? iconicPlacesList
+                                {(TouristAttraction?.length
+                                    ? TouristAttraction
                                     : fallbackIconicCards
                                 ).map((item, i) => {
                                     const title =
-                                        item?.displayName?.text || item?.content || "Place";
+                                        item?.name || "Place";
                                     const imgName = item?.photos?.[0]?.name;
                                     return (
                                         <SwiperSlide key={i}>
@@ -137,22 +136,16 @@ export default function SaudiIconicPlaces({ lat, long }) {
                                                         className=" card_rounded "
                                                         alt={title}
                                                     />
-                                                    <div className="heart_icon absolute top-2 right-4">
+                                                    {/* <div className="heart_icon absolute top-2 right-4">
                                                         <span>
                                                             <FaRegHeart />
                                                         </span>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="card-body ps-0 flex justify-between ">
-                                                        <div className="card_detail">
+                                                        <div className="card_detail hotel_card_detail">
                                                             <h5 className="card-title m-0">{title}</h5>
-                                                            <div className="rating flex align-items-center gap-1">
-                                                                {item?.rating
-                                                                    ? renderBootstrapStars(item?.rating)
-                                                                    : renderBootstrapStars(4)}
-                                                                {item?.rating && (
-                                                                    <span className="ms-1">{item?.rating}</span>
-                                                                )}
-                                                            </div>
+                                                            <p className="m-0">{item?.address}</p>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,7 +178,6 @@ export default function SaudiIconicPlaces({ lat, long }) {
                     </div>
                 </div>
             </section>
-
 
         </>
     )

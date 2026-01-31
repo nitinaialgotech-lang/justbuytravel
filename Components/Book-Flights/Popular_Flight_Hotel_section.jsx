@@ -1,41 +1,26 @@
+
 "use client"
+import { TopHotelAroundWorld } from '@/app/Route/endpoints'
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
-import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import NearByPlacesInSingapore from './NearByPlacesInSingapore';
-import IconicPlacesSingapore from './IconicPlacesSingapore';
-import SingaporeBookingTips from './SingaporeBookingTips';
-import SingaporeAmazingDeals from './SingaporeAmazingDeals';
-import Blogs from '@/Components/HomePage/Blog/Blogs';
-import FaqSection from '@/Components/HomePage/Faq/FaqSection';
-import Footer from '@/component/Footer';
-import { useRouter } from 'next/navigation';
-
-// ********************************************************
-export default function SingaporeRecomdSection() {
+import "swiper/css/pagination";
+export default function Popular_Flight_Hotel_section() {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
-    /*********************** end stte ****** */
-    /********************* apis calls *********** */
-    // const lat = 1.3521;
-    // const long = 103.8198;
-
-    const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", "Singapore"],
-        queryFn: () => searchHotel1("Singapore"),
-    });
-    const nearbyPlace = nearbyPlacesData?.data?.places;
-
-    /***************** end of api calls ************* */
+    const { data: TopHotels, isLoading } = useQuery({
+        queryKey: ["tophotels"],
+        queryFn: () => TopHotelAroundWorld()
+    })
+    const Hotels = TopHotels?.data;
     /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (
@@ -95,18 +80,20 @@ export default function SingaporeRecomdSection() {
 
         return stars;
     };
-    /************************************************ route path  */
+    // **************************
     const router = useRouter();
     const viewDetail = (id) => {
         router.push(`/hoteldetail?hotel=${id}`);
     };
+
     return (
         <>
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
-                    <h2 className="mb-0">Recommended For You</h2>
-                    <p>Handpicked experiences tailored to your interests</p>
+                    <h2 className="mb-0">Popular Hotels Around The World</h2>
+                    <p>Explore popular hotels worldwide with trusted guidance and easy price comparisons.
+                    </p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -168,7 +155,7 @@ export default function SingaporeRecomdSection() {
                                         <ShimmerCard />
                                     </SwiperSlide>
                                 ))
-                                : nearbyPlace?.map((item, i) => {
+                                : Hotels?.map((item, i) => {
                                     const image = item?.photos
                                         ?.slice(0, 1)
                                         ?.map((item) => item?.name);
@@ -197,7 +184,7 @@ export default function SingaporeRecomdSection() {
                                                             {/* *** */}
                                                             <div className="card_box_detail card_rounded flex flex-col z-1  relative">
                                                                 <h4 className="m-0 capitalize">
-                                                                    {item?.displayName?.text}
+                                                                    {item?.name}
                                                                 </h4>
                                                                 {/* ****** */}
 
@@ -251,15 +238,10 @@ export default function SingaporeRecomdSection() {
                     </div>
                 </div>
             </section>
-            <NearByPlacesInSingapore />
-            <IconicPlacesSingapore />
-            <SingaporeBookingTips />
-            <SingaporeAmazingDeals />
-            <Blogs />
-            <FaqSection />
-            <Footer />
+
+
+
         </>
-
-
     )
+
 }
