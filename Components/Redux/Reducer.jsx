@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const counterSlice = createSlice({
     name: "user",
     initialState: {
-        SelectAll: "",
+        SelectAll: "all",
 
     },
     reducers: {

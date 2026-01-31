@@ -38,10 +38,8 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
             />
-            <div className='container blog'>
 
                 <Header />
-            </div>
 
             <Blog_Detail_section />
 

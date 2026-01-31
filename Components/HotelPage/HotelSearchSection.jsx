@@ -37,8 +37,6 @@ export default function () {
                                     <form>
                                         <input
                                             type="text"
-                                            // value={location}
-                                            //   onChange={(e) => setSearchContent(e.target.value)}
                                             className="block relative w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"
                                             placeholder="Places to go, things to do, hotels..."
                                         />

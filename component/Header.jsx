@@ -55,7 +55,13 @@ export default function Header() {
             setServicesOpen(false);
         }, 150); // 150ms delay
     }
-    console.log(pathnamne, "....pathname");
+    const pathname = pathnamne ?? "";
+    const isBookHotels = pathname.includes("book-hotels");
+    const isBookFlights = pathname.includes("book-flights");
+    const isBookCruises = pathname.includes("book-cruises");
+    const isBookPackages = pathname.includes("book-packages");
+    const isBlog = pathname.includes("/blog");
+    const isAboutUs = pathname.includes("aboutus");
 
     return (
         <>
@@ -88,68 +94,56 @@ export default function Header() {
                                     <Nav.Link
                                         as={Link}
                                         href="/book-hotels"
-                                        className={`capitalize `}
+                                        className={`capitalize ${isBookHotels ? "g_color" : ""}`}
                                     >
-                                        <span className="g_color">
-                                            {/* <img
-                                                className="icon_link"
-                                                src={getAssetPath("/header_icon/icon_hotel.webp")}
-                                                alt=""
-                                            /> */}
-                                            <HotelIcon color={`${pathnamne == "/book-hotels/" ? "#12c081" : "#1D1F27"} `} />
+                                        <span>
+                                            <HotelIcon color={isBookHotels ? undefined : "#1D1F27"} />
                                         </span>
-                                        <span
-                                            className={`${pathnamne == "/book-hotels/" ? "g_color  " : ""} `}
-                                        >
+                                        <span className={isBookHotels ? "g_color" : ""}>
                                             Hotels
                                         </span>
                                     </Nav.Link>
                                     <Nav.Link
                                         as={Link}
                                         href="/book-flights"
-                                        className="capitalize"
+                                        className={`capitalize ${isBookFlights ? "g_color" : ""}`}
                                     >
                                         <span>
-                                            {/* <img
-                                                className="icon_link"
-                                                src={getAssetPath("/header_icon/icon_flight.webp")}
-                                                alt=""
-                                            /> */}
-                                            <FlightIcon color={`${pathnamne == "/book-flights/" ? "#12c081" : "#1D1F27"} `} />
+                                            <FlightIcon color={isBookFlights ? undefined : "#1D1F27"} />
                                         </span>
-                                        <span className={`${pathnamne == "/book-flights/" ? "g_color" : ""} `}>Flights</span>
+                                        <span className={isBookFlights ? "g_color" : ""}>Flights</span>
                                     </Nav.Link>
                                     <Nav.Link
                                         as={Link}
                                         href="/book-cruises"
-                                        className="capitalize"
+                                        className={`capitalize ${isBookCruises ? "g_color" : ""}`}
                                     >
                                         <span>
-                                            <CruiseIcon color={`${pathnamne == "/book-cruises/" ? "#12c081" : "#1D1F27"} `} />
+                                            <CruiseIcon color={isBookCruises ? undefined : "#1D1F27"} />
                                         </span>
-                                        <span className={`${pathnamne === "/book-cruises/" ? "g_color" : " "}`}>Cruises</span>
+                                        <span className={isBookCruises ? "g_color" : ""}>Cruises</span>
                                     </Nav.Link>
                                     <Nav.Link
                                         as={Link}
                                         href="/book-packages"
-                                        className="capitalize"
+                                        className={`capitalize ${isBookPackages ? "g_color" : ""}`}
                                     >
                                         <span>
-                                            <PackagesIcon color={`${pathnamne == "/book-packages/" ? "#12c081" : "#1D1F27"} `} />
+                                            <PackagesIcon color={isBookPackages ? undefined : "#1D1F27"} />
                                         </span>
-                                        <span>Packages</span>
+                                        <span className={isBookPackages ? "g_color" : ""}>Packages</span>
                                     </Nav.Link>
-                                    <Nav.Link as={Link} href="/blog" className="capitalize">
+                                    <Nav.Link as={Link} href="/blog" className={`capitalize ${isBlog ? "g_color" : ""}`}>
                                         <span>
-                                            <HeaderBlogIcon color={`${pathnamne == "/blog/" ? "#12c081" : "#1D1F27"} `} />
+                                            <HeaderBlogIcon color={isBlog ? undefined : "#1D1F27"} />
                                         </span>
-                                        <span className={`${pathnamne == "/blog/" ? "g_color" : ""} `}>blogs</span>
+                                        <span className={isBlog ? "g_color" : ""}>blogs</span>
                                     </Nav.Link>
-                                    <Nav.Link as={Link} href="/aboutus" className="capitalize">
+                                    <Nav.Link as={Link} href="/aboutus" className={`capitalize ${isAboutUs ? "g_color" : ""}`}>
                                         <span>
-                                            <HeaderAboutUsIcon color={`${pathnamne == "/aboutus/" ? "#12c081" : "#1D1F27"} `} />
+                                            <HeaderAboutUsIcon color={isAboutUs ? undefined : "#1D1F27"} />
                                         </span>
-                                        <span className={`${pathnamne == "/aboutus/" ? "g_color" : ""} `}>about us</span>
+                                        <span className={isAboutUs ? "g_color" : ""}>about us</span>
                                     </Nav.Link>
                                     <div className="d-flex align-items-center gap-2">
                                         <NavDropdown
@@ -212,7 +206,7 @@ export default function Header() {
                                                         <li>
                                                             <Link
                                                                 href={"/book-hotels"}
-                                                                className="flex justify-between items-center"
+                                                                className={`flex justify-between items-center ${isBookHotels ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
@@ -223,16 +217,13 @@ export default function Header() {
                                                                         />
                                                                     </span>
                                                                     <span>Hotels</span>
-                                                                </span>{" "}
-                                                                {/* <span>
-                                  <FiPlus />
-                                </span> */}
+                                                                </span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link
                                                                 href={"/book-flights"}
-                                                                className="flex justify-between items-center"
+                                                                className={`flex justify-between items-center ${isBookFlights ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
@@ -243,75 +234,60 @@ export default function Header() {
                                                                         />
                                                                     </span>
                                                                     <span>Flights</span>
-                                                                </span>{" "}
-                                                                {/* <span>
-                                  <FiPlus />
-                                </span> */}
+                                                                </span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link
                                                                 href={"/book-cruises"}
-                                                                className="flex justify-between items-center"
+                                                                className={`flex justify-between items-center ${isBookCruises ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
                                                                         <CruiseIcon />
                                                                     </span>
                                                                     <span>cruises</span>
-                                                                </span>{" "}
-                                                                {/* <span>
-                                  <FiPlus />
-                                </span> */}
+                                                                </span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link
                                                                 href={"/book-packages"}
-                                                                className="flex justify-between items-center"
+                                                                className={`flex justify-between items-center ${isBookPackages ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
                                                                         <PackagesIcon />
                                                                     </span>
                                                                     <span>Packages</span>
-                                                                </span>{" "}
-                                                                {/* <span>
-                                  <FiPlus />
-                                </span> */}
+                                                                </span>
                                                             </Link>
                                                         </li>
                                                         <li>
                                                             <Link
                                                                 href={"/blog"}
-                                                                className="flex justify-between items-center"
+                                                                className={`flex justify-between items-center ${isBlog ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
                                                                         <HeaderBlogIcon />
                                                                     </span>
                                                                     <span>blogs</span>
-                                                                </span>{" "}
-                                                                {/* <span>
-                                  <FiPlus />
-                                </span> */}
+                                                                </span>
                                                             </Link>
                                                         </li>
 
                                                         <li className="">
                                                             <Link
                                                                 href={"/aboutus"}
-                                                                className="flex justify-between items-center"
+                                                                className={`flex justify-between items-center ${isAboutUs ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
                                                                     <span>
                                                                         <HeaderAboutUsIcon />
                                                                     </span>
                                                                     <span>about us</span>
-                                                                </span>{" "}
-                                                                {/* <span>
-                                  <FiPlus />
-                                </span> */}
+                                                                </span>
                                                             </Link>
                                                         </li>
                                                         <li className="">

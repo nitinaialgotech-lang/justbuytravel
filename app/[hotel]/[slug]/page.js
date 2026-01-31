@@ -107,9 +107,7 @@ export default async function BlogDetailWithCategoryPage({ params }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
         />
 
-        <div className="container blog">
           <Header />
-        </div>
 
         <section className="Blog_Detail_section blog_pt blog_pb blog_pt">
           <div className="container">

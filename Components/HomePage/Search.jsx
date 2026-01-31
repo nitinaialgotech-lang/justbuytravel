@@ -14,13 +14,14 @@ import HotelIcon, { FlightIcon } from "@/component/icons";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { SetSelectAll } from "../Redux/Reducer";
-import { createHotelSlug } from "@/app/utils/seo";
 export default function Search() {
 
     // **************************************************************************************
     // ********************************************************************************************************************
     const router = useRouter();
     const pathname = usePathname();
+    const isBookFlightsPage = pathname?.includes("book-flights") ?? false;
+    const isBookHotelsPage = pathname?.includes("book-hotels") ?? false;
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
     const [showDropdown, setShowDropdown] = useState(false);
@@ -32,11 +33,11 @@ export default function Search() {
     // *******************************
     const dispatch = useDispatch();
     /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
-    const [searchAll, setSearchAll] = useState(true);
-    const [searchType, setSearchType] = useState("all");
+    const [searchAll, setSearchAll] = useState(!isBookHotelsPage);
+    const [searchType, setSearchType] = useState(isBookHotelsPage ? "hotels" : "all");
     const [searchContent, setSearchContent] = useState("");
-    const [activeTab, setActiveTab] = useState("all");
-    const [textContent, setContenttext] = useState("");
+    const [activeTab, setActiveTab] = useState(isBookHotelsPage ? "hotels" : "all");
+    const [textContent, setContenttext] = useState(isBookHotelsPage ? "Search hotels by name or city" : "");
     useEffect(() => {
         setSearchContent(query);
     }, [query]);
@@ -67,28 +68,20 @@ export default function Search() {
 
     // ********************************
 
-    // useEffect(() => {
-    //     if (pathname == "/") {
-    //         setContenttext("place to go, things to do, hotels...");
-    //         setSearchType("all");
-
-    //     }
-
-    //     else if (pathname == "/book-flights/") {
-    //         setActiveTab("flights");
-    //         setSearchAll(false);
-    //         setSearchType("flights");
-
-    //     }
-
-    //     else if (pathname == "/book-hotels/") {
-
-    //         setContenttext("hotel name or destination");
-    //         setSearchType("hotels");
-
-    //     }
-
-    // }, [pathname]);
+    useEffect(() => {
+        if (isBookFlightsPage) {
+            setActiveTab("flights");
+            setSearchAll(false);
+            setSearchType("flights");
+            dispatch(SetSelectAll("flights"));
+        } else if (isBookHotelsPage) {
+            setContenttext("Search hotels by name or city");
+            setSearchType("hotels");
+            setActiveTab("hotels");
+            setSearchAll(false);
+            dispatch(SetSelectAll("hotels"));
+        }
+    }, [pathname]);
 
 
 
@@ -230,7 +223,7 @@ export default function Search() {
             viewSearchAll(lat, long)
         }
         else {
-            ViewHotels(id, place?.displayName?.text)
+            ViewHotels(id)
         }
     };
 
@@ -269,10 +262,9 @@ export default function Search() {
     }
     // **************************** hotel search
 
-    const ViewHotels = (id, name) => {
-        if (!id) return;
-        const slug = createHotelSlug(name, id);
-        router.push(`/${slug}`);
+    const ViewHotels = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
+
     };
     // *********************************
 
@@ -287,12 +279,12 @@ export default function Search() {
 
     return (
         <>
-            <section className={`Search_section  ${pathname == "/book-flights/" ? "padding_topf50 padding_b70" : "padding_bottom"}`}>
+            <section className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"}`}>
                 <div className="container">
                     <div className="search_container ">
                         <div className="search_container_box  rounded-2xl  w-full">
                             {
-                                pathname !== "/book-flights/" ? (
+                                !isBookFlightsPage ? (
 
                                     <div className="search_tab">
                                         <div className="tab_link flex justify-between items-center">
@@ -307,7 +299,7 @@ export default function Search() {
                                                             setSearchAll(true);
                                                             setContenttext("Search places and hotels");
                                                             handleSearchTypeChange("all");
-                                                            dispatch(SetSelectAll(<>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>))
+                                                            dispatch(SetSelectAll("all"))
 
 
                                                         }}
@@ -327,7 +319,7 @@ export default function Search() {
                                                             e.preventDefault();
                                                             setActiveTab("flights");
                                                             handleSearchTypeChange("flights");
-                                                            dispatch(SetSelectAll(<>Smart <span>Flight</span> Finder</>))
+                                                            dispatch(SetSelectAll("flights"))
 
                                                         }}
                                                     >
@@ -370,7 +362,7 @@ export default function Search() {
                                                             setSearchAll(false);
                                                             handleSearchTypeChange("restaurants");
                                                             setContenttext("Search restaurants or cuisine");
-                                                            dispatch(SetSelectAll(<>Great Places <span>To eat</span></>))
+                                                            dispatch(SetSelectAll("restaurants"))
                                                         }}
                                                     >
                                                         <span>
@@ -394,7 +386,7 @@ export default function Search() {
                             }
                             {/* ********************* search input xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
                             <div className="search_box_input d-none d-lg-block">
-                                {searchType === "flights" || pathname == "/book-flights/" ? (
+                                {searchType === "flights" || isBookFlightsPage ? (
                                     <Search_flight_section />
                                 ) : (
 
@@ -574,9 +566,9 @@ export default function Search() {
                             {/* **************************************** edning */}
 
                             {/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx **********************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on mobile vooiw show form  */}
-                            <div className={`${searchType === "flights" || pathname == "/book-flights/" ? "p-0" : ""}mobile_search_box  d-block d-lg-none`}>
+                            <div className={`${searchType === "flights" || isBookFlightsPage ? "p-0" : ""}mobile_search_box  d-block d-lg-none`}>
                                 {
-                                    searchType === "flights" || pathname == "/book-flights/" ? (
+                                    searchType === "flights" || isBookFlightsPage ? (
                                         <Search_flight_section />
                                     ) : (
                                         <div className="mobole_boxs relative">

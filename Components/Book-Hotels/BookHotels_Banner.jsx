@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Search from '../HomePage/Search'
 import TopHotels from './TopHotels'
@@ -8,8 +9,21 @@ import Blogs from '../HomePage/Blog/Blogs'
 import Book_Hotel_Guide_Section from './Book_HotelGuide_Section'
 import Book_Hotel_Faq_section from './Book_Hotel_Faq_section'
 import Trust_Guide_Section from '../Aboutus/Trust_Guide_Section'
+import { useSelector } from 'react-redux'
+
+const BANNER_TITLES = {
+  all: <>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>,
+  flights: <>Smart <span>Flight</span> Finder</>,
+  hotels: <>Search Comfortable <span>Stays</span> </>,
+  restaurants: <>Great Places <span>To eat</span></>,
+}
+
+const DEFAULT_BANNER_TITLE = <>Compare and  <span>Book Hotels</span> Online Easily</>
 
 export default function BookHotels_Banner() {
+  const selectAllKey = useSelector((state) => state.user.SelectAll)
+  const bannerData = (selectAllKey && BANNER_TITLES[selectAllKey]) || DEFAULT_BANNER_TITLE
+
   return (
     <>
       <section>
@@ -20,8 +34,7 @@ export default function BookHotels_Banner() {
                 <div className="banner_box home_banner">
                   <div className="title text-center">
                     <h1 className='capitalize'>
-                      {/* Smart Hotel Booking with Trusted  <span> Guidance</span> */}
-                      Compare and  <span>Book Hotels</span> Online Easily
+                      {bannerData}
                     </h1>
                     <p className='capitalize'>
                       Compare hotel prices, <strong className=''> find the best deals,</strong> and book hotels online securely with trusted travel platforms.

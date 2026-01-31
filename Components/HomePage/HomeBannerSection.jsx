@@ -2,9 +2,20 @@ import { Suspense } from 'react';
 import Search from './Search';
 import SearchSection from './SearchSection';
 import { useSelector } from 'react-redux';
+
+const BANNER_TITLES = {
+    all: <>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>,
+    flights: <>Smart <span>Flight</span> Finder</>,
+    hotels: <>Search Comfortable <span>Stays</span> </>,
+    restaurants: <>Great Places <span>To eat</span></>,
+};
+
+const DEFAULT_BANNER_TITLE = <>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>;
+
 export default function
     HomeBannerSection() {
-    const bannerData = useSelector((state) => state.user.SelectAll || <>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>)
+    const selectAllKey = useSelector((state) => state.user.SelectAll);
+    const bannerData = (selectAllKey && BANNER_TITLES[selectAllKey]) || DEFAULT_BANNER_TITLE;
     return (
         <>
             <section className='mp-s mp-e'>
