@@ -1,7 +1,9 @@
 "use client"
 import { IconicPlaces, TouristAttraction, TouristAttractionApi } from "@/app/Route/endpoints";
 import { getAssetPath } from "@/app/utils/assetPath";
+import { createHotelSlug } from "@/app/utils/seo";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -123,8 +125,9 @@ export default function Hotel_IconicPlaces() {
                                     : fallbackIconicCards
                                 ).map((item, i) => {
                                     const title =
-                                        item?.name || "Place";
+                                        item?.name || item?.displayName?.text || item?.content || "Place";
                                     const imgName = item?.photos?.[0]?.name;
+                                    const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">
@@ -146,8 +149,17 @@ export default function Hotel_IconicPlaces() {
                                                     <div className="card-body ps-0 flex justify-between ">
                                                         <div className="card_detail hotel_card_detail">
                                                             <h5 className="card-title m-0">{title}</h5>
-                                                            <p className="m-0">{item?.address}</p>
-
+                                                            {/* <p className="m-0">{item?.address}</p> */}
+                                                            {placeId && (
+                                                                <div className="mt-2">
+                                                                    <Link
+                                                                        href={`/${createHotelSlug(title, placeId)}`}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Details
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

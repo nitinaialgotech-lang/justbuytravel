@@ -1,23 +1,31 @@
 import Header from '@/component/Header'
 import SanFrancBanner from '@/Components/InnerPages/SanFransci/SanFrancBanner'
 import { React, Suspense } from 'react'
-import { generateDestinationMetadata, generateBreadcrumbStructuredData } from '@/app/utils/seo'
-import { getDestinationMetadata } from '@/app/utils/destinationMetadata'
+import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
+const canonicalUrl = `${siteUrl}/hotels-in-san-francisco`;
 
 export const metadata = {
-    title: "Hotels in San Francisco | Cheap & Luxury | Just Buy Travel ",
+    title: "Hotels in San Francisco | Cheap & Luxury",
     description:
-        " Choose from affordable and premium hotels in San Francisco with reliable listings, central locations, and easy booking options. Visit the website now.",
-    keywords:
-        "",
+        "Choose from affordable and premium hotels in San Francisco with reliable listings, central locations, and easy booking options. Visit the website now.",
+    keywords: [
+        "hotels in San Francisco",
+        "San Francisco hotels",
+        "cheap hotels San Francisco",
+        "luxury hotels San Francisco",
+        "San Francisco accommodation",
+    ],
     openGraph: {
-        title: "Hotels in San Francisco | Cheap & Luxury | Just Buy Travel ",
+        title: "Hotels in San Francisco | Cheap & Luxury | Just Buy Travel",
         description:
-            " Choose from affordable and premium hotels in San Francisco with reliable listings, central locations, and easy booking options. Visit the website now.",
+            "Choose from affordable and premium hotels in San Francisco with reliable listings, central locations, and easy booking options. Visit the website now.",
         type: "website",
+        url: canonicalUrl,
     },
     alternates: {
-        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com',
+        canonical: canonicalUrl,
     },
     robots: { index: false, follow: false },
 };

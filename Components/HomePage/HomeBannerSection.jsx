@@ -4,9 +4,9 @@ import SearchSection from './SearchSection';
 import { useSelector } from 'react-redux';
 
 const BANNER_TITLES = {
-    all: <>Smarter <span> Travel Planning </span> for  Hotels <span>&</span> Flights</>,
-    flights: <>Smart <span>Flight</span> Finder</>,
-    hotels: <>Search Comfortable <span>Stays</span> </>,
+    all: <>Smart Travel <span>Planning</span></>,
+    flights: <>Smart <span>Flight</span> Deals</>,
+    hotels: <>Explore Best <span>Stays</span> </>,
     restaurants: <>Great Places <span>To eat</span></>,
 };
 
