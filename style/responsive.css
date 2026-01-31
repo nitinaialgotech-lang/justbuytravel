@@ -934,8 +934,59 @@
   .supporting_text {
     font-size: 14px !important;
   }
+  /* ********************************* footer    */
+  .footer_content > .footer_desc > p {
+    font-size: 13px;
+    text-align: center;
+    line-height: 24px;
+  }
+  /* *************** first  */
+  .footer_links > .link > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  .footer_links > .link > ul > .dot {
+    display: flex;
+    justify-content: center;
+  }
+  .footer_links > .link > ul > li {
+    width: 100%;
+    text-align: center;
+  }
+  /* **************** */
+  .footer_bottom_link > .link > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  .footer_bottom_link > .link > ul > li {
+    width: 100% !important;
+    text-align: center;
+  }
+  .footer_bottom_link > .link > ul > .dot {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer_bottom_link {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px;
+  }
+  .mail_link {
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+  }
+  .mail_link > ul .md_mail {
+    padding: 16px 48px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.47);
+    border-radius: 8px;
+  }
 }
-/* ********************* pixel 7 ........ */
+/* ********************* pixel ................................................7 ........ */
 @media only screen and (max-width: 412px) {
   .mobile_search_box > .form_search_expedia > iframe {
     min-height: 375px;

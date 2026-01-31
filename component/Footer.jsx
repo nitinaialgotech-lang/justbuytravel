@@ -37,7 +37,15 @@ export default function Footer() {
 
 
       <QuickLinks />
-      <section className="footer_section padding_top ">
+      <section className="footer_section padding_top relative ">
+        <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
+          <div className="left_img ">
+            <img src="/justbuytravel_next/demo/footer/icon/left_img.svg" alt="" />
+          </div>
+          <div className="right_img">
+            <img src="/justbuytravel_next/demo/footer/icon/right_img.svg" alt="" />
+          </div>
+        </div>
         <footer className="footer">
           <div className="container ">
             <div className="row items-center justify-center ">
@@ -61,73 +69,79 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-              {/* ****************************** icon  */}
-              <div className="col-lg-12">
-                <div className="icon_box">
-                  <div className="icon_row flex items-center  ">
-                    <div className="before">
-                      <img
-                        src={"/justbuytravel_next/demo/footer/icon/left_line.png"}
-                        alt="Just Buy Travel Logo"
-                      />
-                    </div>
-                    {/* *************** */}
-                    <div className="iocn">
-                      {/* **************************** */}
-                      <ul class="example-2 m-0 p-0" id="icon_footer">
-                        <li class="icon-content">
-                          <a
-                            href=""
-                            aria-label="LinkedIn"
-                            data-social="linkedin"
-                          >
-                            <div class="filled"></div>
-                            <IoLogoFacebook />
-                          </a>
+            </div>
+          </div>
+          {/* ****************** icons with full width  */}
 
-                        </li>
-                        <li class="icon-content">
-                          <a href="" aria-label="GitHub" data-social="github">
-                            <div class="filled"></div>
-                            <RiTwitterXLine />
-                          </a>
-
-                        </li>
-                        <li class="icon-content">
-                          <a
-                            href=""
-                            aria-label="Instagram"
-                            data-social="instagram"
-                          >
-                            <div class="filled"></div>
-                            <AiFillInstagram />
-                          </a>
-
-                        </li>
-                        <li class="icon-content">
-                          <a href="" aria-label="Youtube" data-social="youtube">
-                            <div class="filled"></div>
-                            <TbMailFilled />
-                          </a>
-
-                        </li>
-                      </ul>
-
-                    </div>
-                    {/* (************) */}
-                    <div className="before">
-                      <img
-                        src={"/justbuytravel_next/demo/footer/icon/right_line.svg"}
-                        alt="Just Buy Travel Logo"
-                      />
-                    </div>
-                  </div>
-                </div>
+          <div className="icon_box">
+            <div className="icon_row flex items-center  relative ">
+              <div className="before">
+                <img
+                  src={"/justbuytravel_next/demo/footer/icon/left_line.png"}
+                  alt="Just Buy Travel Logo"
+                />
               </div>
+              {/* *************** */}
+              <div className="iocn">
+                {/* **************************** */}
+                <ul class="example-2 m-0 p-0" id="icon_footer">
+                  <li class="icon-content">
+                    <a
+                      href=""
+                      aria-label="LinkedIn"
+                      data-social="linkedin"
+                    >
+                      <div class="filled"></div>
+                      <IoLogoFacebook />
+                    </a>
+
+                  </li>
+                  <li class="icon-content">
+                    <a href="" aria-label="GitHub" data-social="github">
+                      <div class="filled"></div>
+                      <RiTwitterXLine />
+                    </a>
+
+                  </li>
+                  <li class="icon-content">
+                    <a
+                      href=""
+                      aria-label="Instagram"
+                      data-social="instagram"
+                    >
+                      <div class="filled"></div>
+                      <AiFillInstagram />
+                    </a>
+
+                  </li>
+                  <li class="icon-content">
+                    <a href="" aria-label="Youtube" data-social="youtube">
+                      <div class="filled"></div>
+                      <TbMailFilled />
+                    </a>
+
+                  </li>
+                </ul>
+
+              </div>
+              {/* (************) */}
+              <div className="after">
+                <img
+                  src={"/justbuytravel_next/demo/footer/icon/right_line.svg"}
+                  alt="Just Buy Travel Logo"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="container">
+            <div className="row items-center justify-center">
+              {/* ****************************** icon  */}
+              {/* ****************** links */}
               <div className="col-lg-8">
                 <div className="footer_links">
                   <div className="link">
-                    <ul className="flex justify-between items-center">
+                    <ul className="flex p-0 items-center">
                       <li>
                         <Link href={""}>  about us</Link>
                       </li>
@@ -160,18 +174,13 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-
-
-
-
-
           </div>
           {/* ********************************* nav_link in bottom ***********************************I */}
 
 
           <div className="footer_bottom_link ">
             <div className="link">
-              <ul className="flex justify-between items-center p-0 m-0">
+              <ul className="flex  items-center p-0 m-0">
                 <li>
                   <Link href={""}>  Home</Link>
                 </li>
@@ -203,7 +212,7 @@ export default function Footer() {
             </div>
             <div className="mail_link">
               <ul className="m-0 p-0">
-                <li>
+                <li className="md_mail">
                   <Link href={""}>
                     <strong className="g_color">@</strong>  support@justbuytravel.com
                   </Link>
