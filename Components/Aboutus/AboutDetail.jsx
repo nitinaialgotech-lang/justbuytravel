@@ -4,7 +4,7 @@ export default function AboutDetail() {
     return (
         <section className='padding_bottom bg_grey pt-5'>
             <div className="container">
-                <div className="row justify-center">
+                {/* <div className="row justify-center">
                     <div className="col-lg-5">
                         <div className="about_img">
                             <img src="/justbuytravel_next/demo/aboutus/aboutImg.webp" alt="" />
@@ -30,6 +30,21 @@ export default function AboutDetail() {
                                     Read More
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                </div> */}
+
+                <div className="col-lg-12">
+                    <div className="detail_about">
+                        {/* ********** */}
+                        <div className="about_content">
+                            <p>
+                                JustBuyTravel is a premier digital travel platform dedicated to helping travelers explore the world for less. By offering exceptional value deals across a vast global network of hotels, holiday properties, flights, and curated activities, we make dream vacations a reality. Whether through our website, JustBuyTravel ensures a seamless experience with 24/7 dedicated customer support. Committed to leveraging modern technology, our team is focused on making every journey easier, more affordable, and completely hassle-free.
+                            </p>
+                        </div>
+                        {/* ************ */}
+                        <div className="break_point">
+
                         </div>
                     </div>
                 </div>

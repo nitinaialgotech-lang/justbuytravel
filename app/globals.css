@@ -1471,16 +1471,17 @@ button {
 /* ************************** about us page  */
 .about_section {
   position: relative;
-  background-image: url(https://justbuytravel.com/wp-content/uploads/2025/07/landing-top-img-1.png);
+  background-image: url("/justbuytravel_next/demo/aboutus/about_banner.png");
   background-position: top left;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .about_content {
   padding: 10px;
 }
 
-.about_section::before {
+/* .about_section::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -1490,7 +1491,7 @@ button {
   background-position: 100% 0;
   background-size: 16%;
   pointer-events: none;
-}
+} */
 
 .trust_guide_section {
   /* padding: 50px 0px; */
@@ -1976,16 +1977,23 @@ button {
 }
 
 /* *********************  helping _trave;l */
+.travel_explore_card > .travel_explore_img {
+  width: 100%;
+  height: 300px;
+}
 .travel_explore_card > .travel_explore_img > img {
   border-radius: 10px;
   width: 100%;
+  object-fit: cover;
   height: 100%;
 }
-
+.travel_explore_card .travel_explore_body {
+  padding: 0px 0px 0px 6px;
+}
 .travel_explore_card .travel_explore_body > h4 {
   font-size: 20px;
   font-weight: 600;
-  padding: 15px 0px;
+  padding: 8px 0px;
   text-transform: capitalize;
 }
 

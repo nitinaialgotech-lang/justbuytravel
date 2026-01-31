@@ -19,24 +19,44 @@ export default function Iconic_Flight_Hotel_section() {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
-    const fallbackIconicCards = [
+    const card = [
         {
-            img: "/justbuytravel_next/demo/iconic/iconic.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
+            name: " Bankok",
+            img: "/justbuytravel_next/demo/flights/places/new/bankok.jpg",
+            date: "Feb 2 - Mar 27 · Round-trip"
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic4.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
+            img: "/justbuytravel_next/demo/flights/places/new/kathmandu1.jpg",
+            name: " Kathmandu",
+            date: "Feb 2 - Mar 27 · Round-trip"
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic6.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025",
+            img: "/justbuytravel_next/demo/flights/places/new/london.jpg",
+            name: " london",
+            date: "Feb 2 - Mar 27 · Round-trip"
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic7.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
+            img: "/justbuytravel_next/demo/flights/places/new/melbourne.jpg",
+            name: " melbourne",
+            date: "Feb 2 - Mar 27 · Round-trip"
         },
-    ];
+        {
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
+            img: "/justbuytravel_next/demo/flights/places/new/sydney.jpg",
+            name: " sydney",
+            date: "Feb 2 - Mar 27 · Round-trip"
+        },
+        {
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
+            img: "/justbuytravel_next/demo/flights/places/new/toronto1.jpg",
+            name: " tornto",
+            date: "Feb 2 - Mar 27 · Round-trip"
+        },
+    ]
     /************************************ */
     const renderBootstrapStars = (rating) => {
         const stars = [];
@@ -71,7 +91,7 @@ export default function Iconic_Flight_Hotel_section() {
             <section className=" padding_bottom ">
                 <div className="container ">
                     <div className="explore_section section_title ">
-                        <h2 className="mb-0">Iconic Destinations Around the World</h2>
+                        <h2 className="mb-0 capitalize">Popular flights near you</h2>
                         <p>Explore breathtaking locations rich in history, culture, and natural beauty.</p>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
@@ -116,43 +136,38 @@ export default function Iconic_Flight_Hotel_section() {
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper relative"
                             >
-                                {(TouristAttraction?.length
-                                    ? TouristAttraction
-                                    : fallbackIconicCards
-                                ).map((item, i) => {
-                                    const title =
-                                        item?.name || "Place";
-                                    const imgName = item?.photos?.[0]?.name;
-                                    return (
-                                        <SwiperSlide key={i}>
-                                            <div className="experience_explore_section ">
-                                                <div className="card  relative border-0 ">
-                                                    <img
-                                                        src={
-                                                            imgName
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : item?.img || "/no-image.jpg"
-                                                        }
-                                                        className=" card_rounded "
-                                                        alt={title}
-                                                    />
-                                                    {/* <div className="heart_icon absolute top-2 right-4">
+                                {
+                                    card?.map((item, i) => {
+                                        const title = item?.name || "Place";
+
+                                        return (
+                                            <SwiperSlide key={i}>
+                                                <div className="experience_explore_section ">
+                                                    <div className="card  relative border-0 ">
+                                                        <img
+                                                            src={
+                                                                item?.img || "/no-image.jpg"
+                                                            }
+                                                            className=" card_rounded "
+                                                            alt={title}
+                                                        />
+                                                        {/* <div className="heart_icon absolute top-2 right-4">
                                                         <span>
                                                             <FaRegHeart />
                                                         </span>
                                                     </div> */}
-                                                    <div className="card-body ps-0 flex justify-between ">
-                                                        <div className="card_detail hotel_card_detail">
-                                                            <h5 className="card-title m-0">{title}</h5>
-                                                            <p className="m-0">{item?.address}</p>
+                                                        <div className="card-body ps-0 flex justify-between ">
+                                                            <div className="card_detail hotel_card_detail">
+                                                                <h5 className="card-title m-0 capitalize">{title}</h5>
+                                                                <p className="m-0 p-0">{item?.date}</p>
 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
-                                })}
+                                            </SwiperSlide>
+                                        );
+                                    })}
                             </Swiper>
                             <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">

@@ -14,27 +14,27 @@ export default function Helping_travel_Explore() {
     const card = [
         {
             img: "/justbuytravel_next/demo/flights/places/germany.jpg",
-            title: "Autralia to singapur"
+            title: "Germany"
         },
         {
             img: "/justbuytravel_next/demo/flights/places/nepal.jpg",
-            title: "Autralia to singapur"
+            title: "Nepal"
         },
         {
             img: "/justbuytravel_next/demo/flights/places/japan.jpg",
-            title: "Autralia to singapur"
+            title: "Japan"
         },
         {
             img: "/justbuytravel_next/demo/flights/places/qatar.jpg",
-            title: "Autralia to singapur"
+            title: "Qatar"
         },
         {
             img: "/justbuytravel_next/demo/flights/places/srilanka.jpg",
-            title: "Autralia to singapur"
+            title: "Srilanka"
         },
         {
             img: "/justbuytravel_next/demo/flights/places/thialand.jpg",
-            title: "Autralia to singapur"
+            title: "Thialand"
         },
         // {
         //     img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
@@ -43,22 +43,22 @@ export default function Helping_travel_Explore() {
     ]
     return (
         <>
-            <section className='helping_travel_section padding_top padding_bottom'>
+            <section className='helping_travel_section  padding_bottom'>
                 <div className="container">
                     <div className="row">
                         <div className="helping_travel_section_title">
 
                             <div className="section_title">
-                                <h2>
+                                <h2 className='m-0'>
                                     Plan Smart, Travel Easy
                                 </h2>
-                                <h3>
+                                <p >
                                     Helping travelers explore more while spending less — that’s our goal.
-                                </h3>
+                                </p>
                             </div>
                         </div>
                         {/* *****************  ection slider i */}
-                        <div className="travel_section_box relative">
+                        <div className="travel_section_box relative pt-2">
                             <Swiper
                                 slidesPerView={4}
                                 spaceBetween={20}
@@ -73,15 +73,15 @@ export default function Helping_travel_Explore() {
 
                                 breakpoints={{
                                     320: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
                                     375: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
                                     425: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
 
@@ -109,7 +109,7 @@ export default function Helping_travel_Explore() {
                                                         <h4 className='m-0'>
                                                             {item?.title}
                                                         </h4>
-                                                        <button className='button_bg2'>
+                                                        <button className='button_bg2 recomend_btn'>
                                                             Book Flights
                                                         </button>
 
