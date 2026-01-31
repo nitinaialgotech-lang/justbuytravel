@@ -4,6 +4,14 @@ import Flight_Iconic_Places from '@/Components/Book-Flights/Flight_Iconic_Places
 import React, { Suspense } from 'react'
 import Helping_travel_Explore from '@/Components/Book-Flights/Helping_travel_Explore'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
+import Popular_Flight_Hotel_section from '@/Components/Book-Flights/Popular_Flight_Hotel_section'
+import Iconic_Flight_Hotel_section from '@/Components/Book-Flights/Iconic_Flight_Hotel_section'
+import Trusted_Favourite_Companies from '@/Components/TrustedPartner/Trusted&Favourite_Companies'
+import Blogs from '@/Components/HomePage/Blog/Blogs'
+import Footer from '@/component/Footer'
+import Flight_Faq_Section from '@/Components/Book-Flights/Flight_Faq_Section'
+import Flight_Hotel_Guide_Section from '@/Components/Book-Flights/Flight_Hotel_Guide_Section'
+import Trust_Guide_Section from '@/Components/Aboutus/Trust_Guide_Section'
 
 export const metadata = {
     title: "Book Flights - Compare & Save on Airfare",
@@ -35,12 +43,22 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
-            
-            <Suspense fallback={<div>Loading...</div>}>
+
+            <Suspense >
                 <Header />
                 <Book_Flight_Banner />
-                <Flight_Iconic_Places />
-                <Helping_travel_Explore />
+                <Popular_Flight_Hotel_section />
+                <Iconic_Flight_Hotel_section />
+                {/* <Flight_Iconic_Places /> */}
+                {/* <Helping_travel_Explore /> */}
+                {/* <Flight_Hotel_Guide_Section /> */}
+                <Trust_Guide_Section />
+                <Flight_Faq_Section />
+
+                <Blogs />
+
+
+                <Footer />
             </Suspense>
         </>
     )

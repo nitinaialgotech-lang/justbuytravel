@@ -17,9 +17,9 @@ export default function SanFrancBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in<span> San Francisco</span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Search, compare, and find hotels in San Francisco featuring budget options and luxury accommodations near top locations.
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

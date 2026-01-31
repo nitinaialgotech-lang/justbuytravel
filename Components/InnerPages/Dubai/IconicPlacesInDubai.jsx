@@ -75,7 +75,7 @@ export default function IconicPlacesInDubai() {
                 <div className="container padding_bottom">
                     <div className="explore_section section_title ">
                         <h2 className="mb-0">Iconic Places</h2>
-                        <h5>Find hotels near iconic landmarks and popular attractions.</h5>
+                        <p>Find hotels near iconic landmarks and popular attractions.</p>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 

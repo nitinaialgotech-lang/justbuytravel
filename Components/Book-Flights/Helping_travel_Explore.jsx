@@ -7,9 +7,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import 'swiper/css/pagination';
-import Trusted_Favourite_Companies from '../TrustedPartner/Trusted&Favourite_Companies';
-import Blogs from '../HomePage/Blog/Blogs';
-import Footer from '@/component/Footer';
+
 
 
 export default function Helping_travel_Explore() {
@@ -142,12 +140,7 @@ export default function Helping_travel_Explore() {
             </section>
 
 
-            <Trusted_Favourite_Companies />
 
-            <Blogs />
-
-
-            <Footer />
 
 
         </>

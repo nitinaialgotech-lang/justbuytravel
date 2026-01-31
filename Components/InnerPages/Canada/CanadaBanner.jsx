@@ -16,9 +16,9 @@ export default function CanadaBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in <span> Canada</span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Best places to stay in Canada for every budget, from affordable hotels to luxury stays.
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

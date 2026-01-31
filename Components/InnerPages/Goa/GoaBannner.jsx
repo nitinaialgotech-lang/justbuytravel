@@ -16,9 +16,9 @@ export default function GoaBannner() {
                                         <h1 className='capitalize'>
                                             Hotels in<span> Goa</span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Enjoy your Goa trip with hotels close to beaches, markets, and nightlife, chosen for comfort and value.
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -56,7 +56,7 @@ export default function AustraliaNearByPlaces() {
                     <div className="row">
                         <div className="explore_section section_title m">
                             <h2 className="mb-0">Near By Locations</h2>
-                            <h5>Explore hotels in nearby areas to find the perfect place to stay.</h5>
+                            <p>Explore hotels in nearby areas to find the perfect place to stay.</p>
                         </div>
                     </div>
 

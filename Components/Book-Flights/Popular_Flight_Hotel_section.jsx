@@ -1,42 +1,26 @@
+
 "use client"
+import { TopHotelAroundWorld } from '@/app/Route/endpoints'
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
-import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import Blogs from '@/Components/HomePage/Blog/Blogs';
-import Footer from '@/component/Footer';
-import ParisBookingTips from './ParisBookingTips';
-import NearByParis from './NearByParis';
-import IconicPlacesInParis from './IconicPlacesInParis';
-import ParisAmazingDeals from './ParisAmazingDeals';
-import { useRouter } from 'next/navigation';
-import ParisFaqSection from './ParisFaqSection';
-import { createHotelSlug } from "@/app/utils/seo";
-
-
-export default function ParisRecomd() {
+import "swiper/css/pagination";
+export default function Popular_Flight_Hotel_section() {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
-    /*********************** end stte ****** */
-    /********************* apis calls *********** */
-    // const lat = 48.8575;
-    // const long = 2.3514;
-
-    const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", "Paris"],
-        queryFn: () => searchHotel1("Paris"),
-    });
-    const nearbyPlace = nearbyPlacesData?.data?.places;
-
-    /***************** end of api calls ************* */
+    const { data: TopHotels, isLoading } = useQuery({
+        queryKey: ["tophotels"],
+        queryFn: () => TopHotelAroundWorld()
+    })
+    const Hotels = TopHotels?.data;
     /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (
@@ -96,20 +80,20 @@ export default function ParisRecomd() {
 
         return stars;
     };
-    /************************************************ route path  */
+    // **************************
     const router = useRouter();
-    const viewDetail = (id, name) => {
-        if (!id) return;
-        const slug = createHotelSlug(name, id);
-        router.push(`/${slug}`);
+    const viewDetail = (id) => {
+        router.push(`/hoteldetail?hotel=${id}`);
     };
+
     return (
         <>
             {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
-                    <h2 className="mb-0">Recommended For You</h2>
-                    <p>Handpicked experiences tailored to your interests</p>
+                    <h2 className="mb-0">Popular Hotels Around The World</h2>
+                    <p>Explore popular hotels worldwide with trusted guidance and easy price comparisons.
+                    </p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -171,7 +155,7 @@ export default function ParisRecomd() {
                                         <ShimmerCard />
                                     </SwiperSlide>
                                 ))
-                                : nearbyPlace?.map((item, i) => {
+                                : Hotels?.map((item, i) => {
                                     const image = item?.photos
                                         ?.slice(0, 1)
                                         ?.map((item) => item?.name);
@@ -200,7 +184,7 @@ export default function ParisRecomd() {
                                                             {/* *** */}
                                                             <div className="card_box_detail card_rounded flex flex-col z-1  relative">
                                                                 <h4 className="m-0 capitalize">
-                                                                    {item?.displayName?.text}
+                                                                    {item?.name}
                                                                 </h4>
                                                                 {/* ****** */}
 
@@ -214,7 +198,7 @@ export default function ParisRecomd() {
                                                                             {item?.rating} ({item?.userRatingCount})
                                                                         </span>
                                                                     </div>
-                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
+                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id)}>
                                                                         View Detail
                                                                     </button>
                                                                 </div>
@@ -254,16 +238,10 @@ export default function ParisRecomd() {
                     </div>
                 </div>
             </section>
-            <NearByParis />
-            <IconicPlacesInParis />
 
-            <ParisBookingTips />
-            <ParisAmazingDeals />
 
-            <Blogs />
-            <ParisFaqSection />
-            <Footer />
 
         </>
     )
+
 }

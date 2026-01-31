@@ -16,9 +16,9 @@ export default function AustraliaBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in <span> Australia</span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Explore budget, luxury, and family-friendly hotels across Australia from trusted booking partners.
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

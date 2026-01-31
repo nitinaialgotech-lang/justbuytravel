@@ -17,9 +17,9 @@ export default function IreLandBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in<span> Ireland</span>
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Trusted hotel insights across Ireland, helping travellers understand locations, pricing ranges, and stay options before booking elsewhere.
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -16,16 +16,15 @@ export default function Book_Flight_Banner() {
                                             {/* Quick Flights Booking with <span> Trusted Guidance</span> */}
                                             Book Flights Online  <span> via Trusted</span>  Partners
                                         </h1>
-                                        <h5 className='capitalize'>
+                                        <p className='capitalize'>
                                             Access verified flight listings, transparent prices, and secure booking options through trusted global airline partners.
-                                        </h5>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </section>
             <Search />
         </>

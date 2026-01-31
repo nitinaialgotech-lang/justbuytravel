@@ -1,11 +1,8 @@
 "use client"
-import { IconicPlaces, searchTouristAttraction } from "@/app/Route/endpoints";
-import { getAssetPath } from "@/app/utils/assetPath";
+import { IconicPlaces, TouristAttraction, TouristAttractionApi } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Link from "next/link";
-import { createHotelSlug } from "@/app/utils/seo";
 
 // Import Swiper styles
 import "swiper/css";
@@ -18,27 +15,25 @@ import {
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-
-
-export default function IconicPlaceInSydney() {
+export default function Iconic_Flight_Hotel_section() {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
     const fallbackIconicCards = [
         {
-            img: "/iconic/iconic.jpg",
+            img: "/justbuytravel_next/demo/iconic/iconic.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/iconic/iconic4.jpg",
+            img: "/justbuytravel_next/demo/iconic/iconic4.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/iconic/iconic6.jpg",
+            img: "/justbuytravel_next/demo/iconic/iconic6.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/iconic/iconic7.jpg",
+            img: "/justbuytravel_next/demo/iconic/iconic7.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
     ];
@@ -64,20 +59,20 @@ export default function IconicPlaceInSydney() {
 
         return stars;
     };
-    // ************************************* iconic places apis 
-    const { data: iconicPlacesData } = useQuery({
-        queryKey: ["iconicPlacesNearby", "Sydney"],
-        queryFn: () => searchTouristAttraction("Sydney")
-    });
-    const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
+    // ****************************** apis 
+    const { data: touristAttraction } = useQuery({
+        queryKey: ["touristattraction"],
+        queryFn: () => TouristAttractionApi()
+    })
+    const TouristAttraction = touristAttraction?.data;
 
     return (
         <>
-            <section>
-                <div className="container padding_bottom">
+            <section className=" padding_bottom ">
+                <div className="container ">
                     <div className="explore_section section_title ">
-                        <h2 className="mb-0">Iconic Places</h2>
-                        <p>Where history, culture, and beauty come together</p>
+                        <h2 className="mb-0">Iconic Destinations Around the World</h2>
+                        <p>Explore breathtaking locations rich in history, culture, and natural beauty.</p>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -121,14 +116,13 @@ export default function IconicPlaceInSydney() {
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper relative"
                             >
-                                {(iconicPlacesList.length
-                                    ? iconicPlacesList
+                                {(TouristAttraction?.length
+                                    ? TouristAttraction
                                     : fallbackIconicCards
                                 ).map((item, i) => {
                                     const title =
-                                        item?.displayName?.text || item?.content || "Place";
+                                        item?.name || "Place";
                                     const imgName = item?.photos?.[0]?.name;
-                                    const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">
@@ -137,37 +131,21 @@ export default function IconicPlaceInSydney() {
                                                         src={
                                                             imgName
                                                                 ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : getAssetPath(item?.img || "/no-image.jpg")
+                                                                : item?.img || "/no-image.jpg"
                                                         }
                                                         className=" card_rounded "
                                                         alt={title}
                                                     />
-                                                    <div className="heart_icon absolute top-2 right-4">
+                                                    {/* <div className="heart_icon absolute top-2 right-4">
                                                         <span>
                                                             <FaRegHeart />
                                                         </span>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="card-body ps-0 flex justify-between ">
-                                                        <div className="card_detail">
+                                                        <div className="card_detail hotel_card_detail">
                                                             <h5 className="card-title m-0">{title}</h5>
-                                                            <div className="rating flex align-items-center gap-1">
-                                                                {item?.rating
-                                                                    ? renderBootstrapStars(item?.rating)
-                                                                    : renderBootstrapStars(4)}
-                                                                {item?.rating && (
-                                                                    <span className="ms-1">{item?.rating}</span>
-                                                                )}
-                                                            </div>
-                                                            {placeId && (
-                                                                <div className="mt-2">
-                                                                    <Link
-                                                                        href={`/${createHotelSlug(title, placeId)}`}
-                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                                                    >
-                                                                        View Details
-                                                                    </Link>
-                                                                </div>
-                                                            )}
+                                                            <p className="m-0">{item?.address}</p>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -200,7 +178,6 @@ export default function IconicPlaceInSydney() {
                     </div>
                 </div>
             </section>
-
 
         </>
     )

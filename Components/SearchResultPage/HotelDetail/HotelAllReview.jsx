@@ -43,9 +43,9 @@ export default function HotelAllReview({ reviews }) {
                             <h2 className='m-0'>
                                 Trailers Reviews
                             </h2>
-                            <h5>
+                            <p>
                                 Voices of satisfaction from our premium community.
-                            </h5>
+                            </p>
                         </div>
                         {/* ******************** */}
 
@@ -217,12 +217,12 @@ export default function HotelAllReview({ reviews }) {
                                                                 {!isExpanded && isLongText && "..."}
                                                             </p>
 
-                                                            <button onClick={() => handleShow(item)}> {"Read more"}</button>
-                                                        </div>
+                                                        <button onClick={() => handleShow(item)}> {"Read more"}</button>
                                                     </div>
+                                                </div>
 
-                                                    {/* *************  review xxxxxxxxxxxx */}
-                                                </SwiperSlide>
+                                                {/* *************  review xxxxxxxxxxxx */}
+                                            </SwiperSlide>
                                         )
                                     })
                                 }

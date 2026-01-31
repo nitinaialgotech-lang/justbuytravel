@@ -10,6 +10,8 @@ import { AiFillInstagram } from "react-icons/ai";
 import { RiTwitterXLine } from "react-icons/ri";
 import { getAssetPath } from "../app/utils/assetPath";
 import QuickLinks from "@/Components/QuickLinks/QuickLinks";
+import FlightQuickLinks from "@/Components/QuickLinks/FlightQuickLinks";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
   // ***************************************
@@ -32,11 +34,17 @@ export default function Footer() {
     }
   };
   // ***************************************
+  const pathname = usePathname();
+  console.log(pathname, ",,,,,,.");
+
   return (
     <>
+      {pathname == "/book-flights/" ?
+        <FlightQuickLinks />
+        :
+        <QuickLinks />
+      }
 
-
-      <QuickLinks />
       <section className="footer_section padding_top relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
           <div className="left_img ">
@@ -74,7 +82,7 @@ export default function Footer() {
           {/* ****************** icons with full width  */}
 
           <div className="icon_box">
-            <div className="icon_row flex items-center  relative ">
+            <div className="icon_row flex items-center justify-between relative ">
               <div className="before">
                 <img
                   src={getAssetPath("/footer/icon/left_line.png")}
@@ -127,7 +135,7 @@ export default function Footer() {
               {/* (************) */}
               <div className="after">
                 <img
-                  src={getAssetPath("/footer/icon/right_line.svg")}
+                  src={"/justbuytravel_next/demo/footer/icon/Line22.png"}
                   alt="Just Buy Travel Logo"
                 />
               </div>
@@ -213,8 +221,8 @@ export default function Footer() {
             <div className="mail_link">
               <ul className="m-0 p-0">
                 <li className="md_mail">
-                  <Link href={""}>
-                    <strong className="g_color">@</strong>  support@justbuytravel.com
+                  <Link href={""} className="flex items-center gap-1">
+                    <strong className="g_color"><TbMailFilled /></strong>  support@justbuytravel.com
                   </Link>
                 </li>
               </ul>

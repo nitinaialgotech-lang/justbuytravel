@@ -82,7 +82,7 @@ export default function PopularHotelAroundWorld({ lat, long }) {
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
                     <h2 className="mb-0">Popular Hotels Around the World</h2>
-                    <h5>Voices of satisfaction from our premium community</h5>
+                    <p>Voices of satisfaction from our premium community</p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -151,10 +151,10 @@ export default function PopularHotelAroundWorld({ lat, long }) {
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
-                                        ? text.slice(0, maxLength) + "..."
-                                        : text;
-                                };
-                                return (
+                                            ? text.slice(0, maxLength) + "..."
+                                            : text;
+                                    };
+                                    return (
                                         <>
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
