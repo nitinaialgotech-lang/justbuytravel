@@ -39,7 +39,7 @@ export default function Footer() {
 
   return (
     <>
-      {pathname == "/book-flights/" ?
+      {pathname == "/book-flights" ?
         <FlightQuickLinks />
         :
         <QuickLinks />
@@ -151,31 +151,31 @@ export default function Footer() {
                   <div className="link">
                     <ul className="flex p-0 items-center">
                       <li>
-                        <Link href={""}>  about us</Link>
+                        <Link href={"/aboutus"}>  About us</Link>
                       </li>
                       <li className="dot">
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
-                        <Link href={""}> Contact Us</Link>
+                        <Link href={"/contactus"}> Contact Us</Link>
                       </li>
                       <li className="dot">
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
-                        <Link href={""}> Privacy Policy</Link>
+                        <Link href={"/privacy-policy"}> Privacy Policy</Link>
                       </li>
                       <li className="dot">
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
-                        <Link href={""}>Terms and Conditions</Link>
+                        <Link href={"/term-and-conditions"}>Terms and Conditions</Link>
                       </li>
                       <li className="dot">
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
-                        <Link href={""}> Disclaimer</Link>
+                        <Link href={"/disclaimer"}> Disclaimer</Link>
                       </li>
                     </ul>
                   </div>
@@ -196,25 +196,37 @@ export default function Footer() {
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={""}> Flight</Link>
+                  <Link href={"/book-hotels"}> Hotels</Link>
                 </li>
                 <li className="dot">
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={""}> Cars</Link>
+                  <Link href={"/book-flights"}> Flight</Link>
                 </li>
                 <li className="dot">
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={""}>Bike Rental</Link>
+                  <Link href={"/book-cruises"}>Cruises</Link>
                 </li>
                 <li className="dot">
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={""}> About</Link>
+                  <Link href={"/book-packages"}>Packages</Link>
+                </li>
+                <li className="dot">
+                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                </li>
+                <li>
+                  <Link href={"/blog"}>Blogs</Link>
+                </li>
+                <li className="dot">
+                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                </li>
+                <li>
+                  <Link href={"/aboutus"}> About</Link>
                 </li>
               </ul>
             </div>

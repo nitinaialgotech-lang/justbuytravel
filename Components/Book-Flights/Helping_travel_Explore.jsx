@@ -14,32 +14,34 @@ export default function Helping_travel_Explore() {
     const [isAtBeginning, setIsAtBeginning] = useState(true)
     const card = [
         {
-            img: "/travelexplore/london-bridge.webp",
-            title: "Autralia to singapur"
+            img: "/flights/places/germany.jpg",
+            title: "Germany",
+            link: "https://expedia.tpx.lu/Gnv93jRp",
         },
         {
-            img: "/travelexplore/singapore-garden.webp",
-            title: "Autralia to singapur"
+            img: "/flights/places/nepal.jpg",
+            title: "Nepal",
+            link: "https://expedia.tpx.lu/F3tBsraP",
         },
         {
-            img: "/travelexplore/london-bridge.webp",
-            title: "Autralia to singapur"
+            img: "/flights/places/japan.jpg",
+            title: "Japan",
+            link: "https://expedia.tpx.lu/6UTBGNfs",
         },
         {
-            img: "/travelexplore/singapore-garden.webp",
-            title: "Autralia to singapur"
+            img: "/flights/places/qatar.jpg",
+            title: "Qatar",
+            link: "https://expedia.tpx.lu/EILHdNu7",
         },
         {
-            img: "/travelexplore/london-bridge.webp",
-            title: "Autralia to singapur"
+            img: "/flights/places/srilanka.jpg",
+            title: "Srilanka",
+            link: "https://expedia.tpx.lu/qWqH4JB7",
         },
         {
-            img: "/travelexplore/london-bridge.webp",
-            title: "Autralia to singapur"
-        },
-        {
-            img: "/travelexplore/london-bridge.webp",
-            title: "Autralia to singapur"
+            img: "/flights/places/thialand.jpg",
+            title: "Thialand",
+            link: "https://expedia.tpx.lu/trVIyNP7",
         },
         // {
         //     img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
@@ -48,22 +50,22 @@ export default function Helping_travel_Explore() {
     ]
     return (
         <>
-            <section className='helping_travel_section padding_top padding_bottom'>
+            <section className='helping_travel_section  padding_bottom'>
                 <div className="container">
                     <div className="row">
                         <div className="helping_travel_section_title">
 
                             <div className="section_title">
-                                <h2>
+                                <h2 className='m-0'>
                                     Plan Smart, Travel Easy
                                 </h2>
-                                <h3>
+                                <p >
                                     Helping travelers explore more while spending less — that’s our goal.
-                                </h3>
+                                </p>
                             </div>
                         </div>
                         {/* *****************  ection slider i */}
-                        <div className="travel_section_box relative">
+                        <div className="travel_section_box relative pt-2">
                             <Swiper
                                 slidesPerView={4}
                                 spaceBetween={20}
@@ -78,15 +80,15 @@ export default function Helping_travel_Explore() {
 
                                 breakpoints={{
                                     320: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
                                     375: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
                                     425: {
-                                        slidesPerView: 1
+                                        slidesPerView: 1.5
 
                                     },
 
@@ -114,7 +116,7 @@ export default function Helping_travel_Explore() {
                                                         <h4 className='m-0'>
                                                             {item?.title}
                                                         </h4>
-                                                        <button className='button_bg2'>
+                                                        <button className='button_bg2 recomend_btn' onClick={() => window.open(item?.link, '_blank')}>
                                                             Book Flights
                                                         </button>
 

@@ -15,19 +15,27 @@ export default function Flight_Iconic_Places() {
     const card = [
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
-            img: "/flights/ico2.jpg"
+            img: "/flights/places/new/bankok.jpg"
         },
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
-            img: "/flights/ico4.jpg"
+            img: "/flights/places/new/kathmandu1.jpg"
         },
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025",
-            img: "/flights/ico5.jpg"
+            img: "/flights/places/new/london.jpg"
         },
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
-            img: "/flights/ico1.jpg"
+            img: "/flights/places/new/melbourne.jpg"
+        },
+        {
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
+            img: "/flights/places/new/sydney.jpg"
+        },
+        {
+            title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
+            img: "/flights/places/new/tornto1.jpg"
         },
     ]
 

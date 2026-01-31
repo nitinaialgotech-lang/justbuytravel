@@ -17,27 +17,23 @@ export default function FlightQuickLinks() {
                                 <div className="quick_link_items">
                                     {/* <h4>Asia Flights</h4> */}
                                     <ul className='p-0 flex capitalize'>
-                                        <li ><Link href={"/book-hotels-dubai"}> Dubai Flight</Link></li>
-                                        {/* <li ><Link href={"/newyork"}>New York To London</Link></li> */}
-                                        <li ><Link href={"/hotels-in-australia"}> Australia Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-canada"}> Canada Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-denmark"}> Denmark Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-glasgow"}> glasgow Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-goa"}> goa Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-ireland"}> ireland Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-manchester"}> menchester Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-New-York"}> new york Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-paris"}> paris Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-san-francisco"}> san-francisco Flight</Link></li>
-                                        <li ><Link href={"/hotels-in-uk"}> united-kingdom Flight</Link></li>
-                                        <li ><Link href={"/singapore"}> singapore Flight</Link></li>
-                                        <li ><Link href={"/sydney"}> sydney Flight</Link></li>
-                                        <li ><Link href={"/tokyo"}> tokyo Flight</Link></li>
-                                        <li ><Link href={"/usa"}> usa Flight</Link></li>
-
-
-
-
+                                        <li ><Link href="https://booking.tpx.lu/Bv7yjVYW"> Dubai Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/43aXKObz">London Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/zq0vtDIT"> Australia Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/XaaklYe1"> Canada Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/uOvSVRTb"> Denmark Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/ssoJb8XY"> Glasgow Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/2pMmP4fE"> Goa Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/fqxoIB4J"> Ireland Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/1OmiH8s2"> Menchester Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/FUU52yPG"> New york Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/KkWbGc5Z"> Paris Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/0XpzXkIF"> San-francisco Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/zH7lmRUV"> United-kingdom Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/48690FgK"> Singapore Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/QzcTVT3k"> Sydney Flight</Link></li>
+                                        <li ><Link href="https://booking.tpx.lu/SdK3bsvc"> Tokyo Flight</Link></li>
+                                        <li ><Link href="https://expedia.tpx.lu/RWq9Vgmd"> USA Flight</Link></li>
                                     </ul>
                                 </div>
                                 <hr></hr>

@@ -119,6 +119,10 @@
     font-size: 17px;
   }
   /* *************************************** */
+  .travel_explore_card > .travel_explore_img {
+    width: 100%;
+    height: 280px;
+  }
   /* .button_bg2 {
     width: 100%;
   } */
