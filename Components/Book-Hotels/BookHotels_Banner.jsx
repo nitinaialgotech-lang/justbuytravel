@@ -24,7 +24,7 @@ export default function BookHotels_Banner() {
                       Compare and  <span>Book Hotels</span> Online Easily
                     </h1>
                     <p className='capitalize'>
-                      Compare hotel prices, <strong className='g_color'> find the best deals,</strong> and book hotels online securely with trusted travel platforms.
+                      Compare hotel prices, <strong className=''> find the best deals,</strong> and book hotels online securely with trusted travel platforms.
 
                     </p>
                   </div>
