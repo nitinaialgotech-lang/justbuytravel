@@ -1471,7 +1471,7 @@ button {
 /* ************************** about us page  */
 .about_section {
   position: relative;
-  background-image: url("/justbuytravel_next/demo/aboutus/about_banner.png");
+  background-image: url("/aboutus/about_banner.png");
   background-position: top left;
   background-repeat: no-repeat;
   background-size: cover;

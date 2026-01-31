@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath"
 
 export default function AboutDetail() {
     return (
@@ -46,7 +47,7 @@ export default function AboutDetail() {
                         {/* ************ */}
                         <div className="break_point flex justify-center">
                             <div className="icon">
-                                <img src="/justbuytravel_next/demo/aboutus/vector.png" alt="" />
+                                <img src={getAssetPath("/aboutus/vector.png")} alt="" />
                             </div>
                         </div>
                         {/* ********** */}
@@ -131,7 +132,7 @@ export default function AboutDetail() {
                     <div className="row">
                         <div className="col-lg-5">
                             <div className="bit_content relative">
-                                <img src="bit1.png" alt="" className='relative' />
+                                <img src={getAssetPath("/aboutus/bit1.png")} alt="" className='relative' />
                                 <div className="content absolute ">
                                     <p className=''>
                                         What exactly does Justbuytravel offer?
@@ -148,7 +149,7 @@ export default function AboutDetail() {
 
 
                             <div className="bit_content relative right_h mrt-20">
-                                <img src="bit2.png" alt="" className='relative' />
+                                <img src={getAssetPath("/aboutus/bit2.png")} alt="" className='relative' />
                                 <div className="content absolute ">
 
                                     <h2>
@@ -162,7 +163,7 @@ export default function AboutDetail() {
 
 
                             <div className="bit_content relative right_h mt-4">
-                                <img src="bit3.png" alt="" className='relative' />
+                                <img src={getAssetPath("/aboutus/bit3.png")} alt="" className='relative' />
                                 <div className="content absolute bottom-7">
 
                                     <h2>
