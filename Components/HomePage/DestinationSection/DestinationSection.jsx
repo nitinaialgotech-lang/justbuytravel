@@ -13,22 +13,10 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { getAssetPath } from '../../../app/utils/assetPath';
 
 const card = [
-    {
-        name: "food",
-        img: "/justbuytravel_next/demo/home/destination/food.webp"
-    },
-    {
-        name: "outdoors",
-        img: "/justbuytravel_next/demo/home/destination/outdoor.webp"
-    },
-    {
-        name: "culture",
-        img: "/justbuytravel_next/demo/home/destination/culture.webp"
-    },
-    {
-        name: "water",
-        img: "/justbuytravel_next/demo/home/destination/water.jpg"
-    }
+    { name: "food", img: "/home/destination/food.webp" },
+    { name: "outdoors", img: "/home/destination/outdoor.webp" },
+    { name: "culture", img: "/home/destination/culture.webp" },
+    { name: "water", img: "/home/destination/water.jpg" }
 ]
 // ****************
 
@@ -65,7 +53,7 @@ export default function DestinationSection() {
                                         <div className="col-12 col-lg-3 " key={k}>
                                             <div className="destination_box">
                                                 <div className="destination_img  ">
-                                                    <img src={item?.img} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
+                                                    <img src={getAssetPath(item?.img)} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
                                                     <div className="destination_name">
                                                         <h5>
                                                             {item?.name}
@@ -133,7 +121,7 @@ export default function DestinationSection() {
                                                 <SwiperSlide key={i}>
                                                     <div className="destination_box">
                                                         <div className="destination_img  ">
-                                                            <img src={item?.img} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
+                                                            <img src={getAssetPath(item?.img)} className='card_rounded' alt={`${item?.name || 'Destination'} travel destination image`} />
                                                             <div className="destination_name">
                                                                 <h5>
                                                                     {item?.name}

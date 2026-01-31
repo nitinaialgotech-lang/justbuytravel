@@ -71,7 +71,7 @@ export default function Header() {
                             >
                                 <div className="logo">
                                     <img
-                                        src={"/justbuytravel_next/demo/logo/logo.png.webp"}
+                                        src={getAssetPath("/logo/logo.png.webp")}
                                         alt="Just Buy Travel - Your Trusted Travel Companion"
                                     />
                                 </div>
@@ -93,7 +93,7 @@ export default function Header() {
                                         <span className="g_color">
                                             {/* <img
                                                 className="icon_link"
-                                                src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
+                                                src={getAssetPath("/header_icon/icon_hotel.webp")}
                                                 alt=""
                                             /> */}
                                             <HotelIcon color={`${pathnamne == "/book-hotels/" ? "#12c081" : "#1D1F27"} `} />
@@ -112,7 +112,7 @@ export default function Header() {
                                         <span>
                                             {/* <img
                                                 className="icon_link"
-                                                src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
+                                                src={getAssetPath("/header_icon/icon_flight.webp")}
                                                 alt=""
                                             /> */}
                                             <FlightIcon color={`${pathnamne == "/book-flights/" ? "#12c081" : "#1D1F27"} `} />
@@ -192,7 +192,7 @@ export default function Header() {
                             <Offcanvas.Title>
                                 <div className="logo">
                                     <img
-                                        src={"/justbuytravel_next/demo/logo/logo.png.webp"}
+                                        src={getAssetPath("/logo/logo.png.webp")}
                                         width={100}
                                         height={"auto"}
                                         alt="Just Buy Travel - Your Trusted Travel Companion"
@@ -218,7 +218,7 @@ export default function Header() {
                                                                     <span>
                                                                         <img
                                                                             className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
+                                                                            src={getAssetPath("/header_icon/icon_hotel.webp")}
                                                                             alt=""
                                                                         />
                                                                     </span>
@@ -238,7 +238,7 @@ export default function Header() {
                                                                     <span>
                                                                         <img
                                                                             className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
+                                                                            src={getAssetPath("/header_icon/icon_flight.webp")}
                                                                             alt=""
                                                                         />
                                                                     </span>

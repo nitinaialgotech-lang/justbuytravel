@@ -5,6 +5,8 @@ import { NearbyRestaurant, Restro } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
+import { createHotelSlug } from "@/app/utils/seo";
 
 // Import Swiper styles
 import "swiper/css";
@@ -107,6 +109,7 @@ export default function NearByPlacesInNewYork() {
                                 className="mySwiper relative"
                             >
                                 {nearbyPlaceslist?.map((item, i) => {
+                                    const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
@@ -129,6 +132,16 @@ export default function NearByPlacesInNewYork() {
                                                                 {renderBootstrapStars(item?.rating)}
                                                                 <span className="ms-1">{item?.rating}</span>
                                                             </div>
+                                                            {placeId && (
+                                                                <div className="mt-2">
+                                                                    <Link
+                                                                        href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, placeId)}`}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Details
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

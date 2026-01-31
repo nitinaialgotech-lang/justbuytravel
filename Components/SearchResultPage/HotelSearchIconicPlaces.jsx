@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { createHotelSlug } from "@/app/utils/seo";
+import { getAssetPath } from "@/app/utils/assetPath";
 
 // Import Swiper styles
 import "swiper/css";
@@ -21,22 +23,10 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
     const fallbackIconicCards = [
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic4.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic6.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic7.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
+        { img: "/iconic/iconic.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
+        { img: "/iconic/iconic4.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
+        { img: "/iconic/iconic6.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
+        { img: "/iconic/iconic7.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
     ];
     /************************************ */
     const renderBootstrapStars = (rating) => {
@@ -72,10 +62,8 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
             <section>
                 <div className="container padding_bottom">
                     <div className="explore_section section_title ">
-                        <h2 className="mb-0">
-                            {locationName ? `Iconic Places near ${locationName}` : "Iconic Places"}
-                        </h2>
-                        <h5>Where history, culture, and beauty come together</h5>
+                        <h2 className="mb-0">Iconic Places</h2>
+                        <p>Where history, culture, and beauty come together</p>
                     </div>
                     {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -135,7 +123,7 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
                                                         src={
                                                             imgName
                                                                 ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : item?.img || "/no-image.jpg"
+                                                                : getAssetPath(item?.img || "/no-image.jpg")
                                                         }
                                                         className=" card_rounded "
                                                         alt={title}
@@ -159,7 +147,7 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
                                                             {placeId && (
                                                                 <div className="mt-2">
                                                                     <Link
-                                                                        href={`/hoteldetail/?hotel=${placeId}`}
+                                                                        href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, placeId)}`}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                     >
                                                                         View Detail

@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,16 +13,16 @@ export default function SaudiBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
         {
-            img: "/justbuytravel_next/demo/innerpages/saudi/saud4.jpg"
+            img: "/innerpages/saudi/saud4.jpg"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/saudi/saud1.jpg"
+            img: "/innerpages/saudi/saud1.jpg"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/saudi/saud2.jpg"
+            img: "/innerpages/saudi/saud2.jpg"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/saudi/saud3.jpg"
+            img: "/innerpages/saudi/saud3.jpg"
         },
     ]
     return (
@@ -37,23 +38,23 @@ export default function SaudiBookingTips() {
                                 <div className="row ">
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/saudi/saud4.jpg" alt="" />
+                                            <img src={getAssetPath("/innerpages/saudi/saud4.jpg")} alt="" />
                                         </div>
 
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/saudi/saud1.jpg" alt="" />
+                                            <img src={getAssetPath("/innerpages/saudi/saud1.jpg")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6  mt-4">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/saudi/saud2.jpg" alt="" />
+                                            <img src={getAssetPath("/innerpages/saudi/saud2.jpg")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 mt-4 ">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/saudi/saud3.jpg" alt="" />
+                                            <img src={getAssetPath("/innerpages/saudi/saud3.jpg")} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +109,7 @@ export default function SaudiBookingTips() {
 
                                                             <div className="col-lg-6">
                                                                 <div className="hotel_tips_img">
-                                                                    <img src={item?.img} alt="" />
+                                                                    <img src={getAssetPath(item?.img)} alt="" />
                                                                 </div>
 
                                                             </div>

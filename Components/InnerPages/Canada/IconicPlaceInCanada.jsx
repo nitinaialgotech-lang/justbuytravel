@@ -1,9 +1,12 @@
 "use client"
 import { IconicPlaces } from "@/app/Route/endpoints";
+import { getAssetPath } from "@/app/utils/assetPath";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { searchTouristAttraction } from '@/app/Route/endpoints';
+import Link from "next/link";
+import { createHotelSlug } from "@/app/utils/seo";
 
 // Import Swiper styles
 import "swiper/css";
@@ -24,19 +27,19 @@ export default function IconicPlaceInCanada() {
     // ****************** state end *****
     const fallbackIconicCards = [
         {
-            img: "/justbuytravel_next/demo/iconic/iconic.jpg",
+            img: "/iconic/iconic.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic4.jpg",
+            img: "/iconic/iconic4.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic6.jpg",
+            img: "/iconic/iconic6.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic7.jpg",
+            img: "/iconic/iconic7.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
     ];
@@ -126,6 +129,7 @@ export default function IconicPlaceInCanada() {
                                     const title =
                                         item?.displayName?.text || item?.content || "Place";
                                     const imgName = item?.photos?.[0]?.name;
+                                    const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">
@@ -134,7 +138,7 @@ export default function IconicPlaceInCanada() {
                                                         src={
                                                             imgName
                                                                 ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : item?.img || "/no-image.jpg"
+                                                                : getAssetPath(item?.img || "/no-image.jpg")
                                                         }
                                                         className=" card_rounded "
                                                         alt={title}
@@ -155,6 +159,16 @@ export default function IconicPlaceInCanada() {
                                                                     <span className="ms-1">{item?.rating}</span>
                                                                 )}
                                                             </div>
+                                                            {placeId && (
+                                                                <div className="mt-2">
+                                                                    <Link
+                                                                        href={`/${createHotelSlug(title, placeId)}`}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Details
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -40,10 +40,10 @@ export default function Footer() {
       <section className="footer_section padding_top relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
           <div className="left_img ">
-            <img src="/justbuytravel_next/demo/footer/icon/left_img.svg" alt="" />
+            <img src={getAssetPath("/footer/icon/left_img.svg")} alt="" />
           </div>
           <div className="right_img">
-            <img src="/justbuytravel_next/demo/footer/icon/right_img.svg" alt="" />
+            <img src={getAssetPath("/footer/icon/right_img.svg")} alt="" />
           </div>
         </div>
         <footer className="footer">
@@ -54,7 +54,7 @@ export default function Footer() {
                   <div className="footer_logo">
                     <div className="logo text-center flex justify-center">
                       <img
-                        src={"/justbuytravel_next/demo/footer/icon/footer_logo.webp"}
+                        src={getAssetPath("/footer/icon/footer_logo.webp")}
                         alt="Just Buy Travel Logo"
                       />
                     </div>
@@ -77,46 +77,46 @@ export default function Footer() {
             <div className="icon_row flex items-center  relative ">
               <div className="before">
                 <img
-                  src={"/justbuytravel_next/demo/footer/icon/left_line.png"}
+                  src={getAssetPath("/footer/icon/left_line.png")}
                   alt="Just Buy Travel Logo"
                 />
               </div>
               {/* *************** */}
               <div className="iocn">
                 {/* **************************** */}
-                <ul class="example-2 m-0 p-0" id="icon_footer">
-                  <li class="icon-content">
+                <ul className="example-2 m-0 p-0" id="icon_footer">
+                  <li className="icon-content">
                     <a
                       href=""
                       aria-label="LinkedIn"
                       data-social="linkedin"
                     >
-                      <div class="filled"></div>
+                      <div className="filled"></div>
                       <IoLogoFacebook />
                     </a>
 
                   </li>
-                  <li class="icon-content">
+                  <li className="icon-content">
                     <a href="" aria-label="GitHub" data-social="github">
-                      <div class="filled"></div>
+                      <div className="filled"></div>
                       <RiTwitterXLine />
                     </a>
 
                   </li>
-                  <li class="icon-content">
+                  <li className="icon-content">
                     <a
                       href=""
                       aria-label="Instagram"
                       data-social="instagram"
                     >
-                      <div class="filled"></div>
+                      <div className="filled"></div>
                       <AiFillInstagram />
                     </a>
 
                   </li>
-                  <li class="icon-content">
+                  <li className="icon-content">
                     <a href="" aria-label="Youtube" data-social="youtube">
-                      <div class="filled"></div>
+                      <div className="filled"></div>
                       <TbMailFilled />
                     </a>
 
@@ -127,7 +127,7 @@ export default function Footer() {
               {/* (************) */}
               <div className="after">
                 <img
-                  src={"/justbuytravel_next/demo/footer/icon/right_line.svg"}
+                  src={getAssetPath("/footer/icon/right_line.svg")}
                   alt="Just Buy Travel Logo"
                 />
               </div>
@@ -146,25 +146,25 @@ export default function Footer() {
                         <Link href={""}>  about us</Link>
                       </li>
                       <li className="dot">
-                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
                         <Link href={""}> Contact Us</Link>
                       </li>
                       <li className="dot">
-                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
                         <Link href={""}> Privacy Policy</Link>
                       </li>
                       <li className="dot">
-                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
                         <Link href={""}>Terms and Conditions</Link>
                       </li>
                       <li className="dot">
-                        <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
                         <Link href={""}> Disclaimer</Link>
@@ -185,25 +185,25 @@ export default function Footer() {
                   <Link href={""}>  Home</Link>
                 </li>
                 <li className="dot">
-                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
                   <Link href={""}> Flight</Link>
                 </li>
                 <li className="dot">
-                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
                   <Link href={""}> Cars</Link>
                 </li>
                 <li className="dot">
-                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
                   <Link href={""}>Bike Rental</Link>
                 </li>
                 <li className="dot">
-                  <img src="/justbuytravel_next/demo/footer/icon/Ellipse.svg" alt="" />
+                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
                   <Link href={""}> About</Link>

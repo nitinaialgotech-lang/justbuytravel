@@ -16,6 +16,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { createHotelSlug } from "@/app/utils/seo";
 export default function RecomendSection() {
     const [search, setSearch] = useState("");
     const [locationName, setLocationName] = useState("");
@@ -275,8 +276,10 @@ export default function RecomendSection() {
     // ********************************************
     const router = useRouter()
 
-    const viewDetails = (code, id) => {
-        router.push(`/hoteldetail?code=${code}&id=${id}`)
+    const viewDetails = (name, id) => {
+        if (!id) return;
+        const slug = createHotelSlug(name, id);
+        router.push(`/${slug}`);
     }
 
     const { data: GetSearch_data } = useQuery({
@@ -523,7 +526,7 @@ export default function RecomendSection() {
                                                             <h5 className='m-0'>
                                                                 {displayPrice}.00 <span>/ person</span>
                                                             </h5>
-                                                            <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(location_code, item?.hotel_identifier)}>
+                                                            <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(item?.name, item?.hotel_identifier)}>
                                                                 Book Now
                                                             </button>
 

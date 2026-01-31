@@ -7,6 +7,7 @@ import { GetAccommodationDetails, nearbyPlaces, SearchLocation } from "@/app/Rou
 import "../../../style/searchresult.css";
 import Link from "next/link";
 import "../../../style/search.scss";
+import { createHotelSlug } from "@/app/utils/seo";
 
 export default function ViewAllHotels() {
     // ********************************
@@ -190,11 +191,8 @@ export default function ViewAllHotels() {
                                                     </div> */}
                                                         <div className="btn-and-price-area">
                                                             <Link
-                                                                href={`/hoteldetail?hotel=${item?.id}&name=${item?.displayName?.text}&city=${item?.formattedAddress}`}
+                                                                href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, item?.id)}`}
                                                                 className="primary-btn1"
-                                                            // onClick={() =>
-                                                            //     viewDetail(item?.hotel_identifier, item)
-                                                            // }
                                                             >
                                                                 <span>
                                                                     Book Now{" "}

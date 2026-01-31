@@ -28,6 +28,14 @@ export const Get_Blogs = async () => {
     };
 };
 
+/** Fetch a single post by slug (for blog detail pages - works for any post, not just first 10) */
+export const Get_Blog_By_Slug = async (slug) => {
+    const res = await https_blog.get("/posts", {
+        params: { slug, per_page: 1 },
+    });
+    const post = Array.isArray(res.data) && res.data.length > 0 ? res.data[0] : null;
+    return post;
+};
 
 export const Get_Blog_category = async () => {
     return await https_blog.get("/categories?per_page=20")

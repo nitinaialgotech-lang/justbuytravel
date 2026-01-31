@@ -2,8 +2,12 @@ import { notFound } from 'next/navigation';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
+import Blog_Right_Sidebar from '@/Components/Blogs/Blog_Right_Section/Blog_Right_Sidebar';
 import { Get_Blogs } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
+import { SlCalender } from 'react-icons/sl';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import "../../../style/responsive.css";
 
 export async function generateStaticParams() {
@@ -56,8 +60,9 @@ export default async function BlogPostPage({ params }) {
         if (!blog) {
             notFound();
         }
-        
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
+
+        const blogContent = blog?.content?.rendered || '';
+        const blogImage = blog?.yoast_head_json?.og_image || [];
         
         // Generate structured data
         const blogStructuredData = generateBlogStructuredData(blog, slug);
@@ -81,8 +86,56 @@ export default async function BlogPostPage({ params }) {
                 <div className='container blog'>
                     <Header />
                 </div>
-                
-                <Blog_Detail blog={blog} />
+
+                <section className="Blog_Detail_section blog_pt blog_pb blog_pt">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-8">
+                                <div className="title flex flex-col gap-2 padding_bottom">
+                                    <div className="blog_section_left_bar">
+                                        <div className="breadcrumb m-0">
+                                            <h4 className="flex ">
+                                                Home <span className="g_color"><MdKeyboardDoubleArrowRight /></span>
+                                                <span dangerouslySetInnerHTML={{ __html: blog.title?.rendered || blog.slug || '' }} />
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div className="blog_banner_box p-0">
+                                        <div className="title">
+                                            <h1 className="capitalize" dangerouslySetInnerHTML={{ __html: blog.title?.rendered || blog.slug || '' }} />
+                                        </div>
+                                    </div>
+                                    <div className="time_section flex gap-3 items-center ">
+                                        <div className="month flex items-center gap-1">
+                                            <span className="g_color"><SlCalender /></span>
+                                            <span>
+                                                {blog?.date
+                                                    ? new Date(blog.date).toLocaleDateString('en-US', {
+                                                        year: 'numeric',
+                                                        month: 'long',
+                                                        day: 'numeric',
+                                                    })
+                                                    : ''}
+                                            </span>
+                                        </div>
+                                        <div className="time flex items-center gap-1">
+                                            <span className="g_color">
+                                                <FaRegUserCircle />
+                                            </span>
+                                            <span>
+                                                Written by {blog?.yoast_head_json?.author || 'JustBuyTravel'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <Blog_Detail content={blogContent} blog_image={blogImage} load={false} />
+                            </div>
+                            <div className="col-lg-4">
+                                <Blog_Right_Sidebar />
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 
                 <Footer />
             </>

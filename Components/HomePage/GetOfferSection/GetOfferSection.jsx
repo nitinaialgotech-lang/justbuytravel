@@ -2,6 +2,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
+import { getAssetPath } from "@/app/utils/assetPath";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -16,24 +17,24 @@ export default function GetOfferSection() {
         {
             title: " Winter Travel Deals – Up to 30% Off",
             text: "Book travel online and enjoy exclusive discounts on seasonal activities and experiences.",
-            banner: "/justbuytravel_next/demo/home/offer/offer_banner1.webp",
-            back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
+            banner: "/home/offer/offer_banner1.webp",
+            back_img: "/home/offer/offer-banner-img-shape.png",
             option1: "Safe & Verified Equipment",
             option2: "Breathtaking Views"
         },
         {
             title: " Winter Travel Deals – Up to 30% Off",
             text: "Book travel online and enjoy exclusive discounts on seasonal activities and experiences.",
-            banner: "/justbuytravel_next/demo/home/offer/offer_banner2.webp",
-            back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
+            banner: "/home/offer/offer_banner2.webp",
+            back_img: "/home/offer/offer-banner-img-shape.png",
             option1: "Safe & Verified Equipment",
             option2: "Breathtaking Views"
         },
         {
             title: " Winter Travel Deals – Up to 30% Off",
             text: "Book travel online and enjoy exclusive discounts on seasonal activities and experiences.",
-            banner: "/justbuytravel_next/demo/home/offer/offer_banner3.webp",
-            back_img: "/justbuytravel_next/demo/home/offer/offer-banner-img-shape.png",
+            banner: "/home/offer/offer_banner3.webp",
+            back_img: "/home/offer/offer-banner-img-shape.png",
             option2: "Breathtaking Views",
             option1: "Safe & Verified Equipment",
         }
@@ -121,14 +122,14 @@ export default function GetOfferSection() {
                                                             <div className="banner_image relative order-first order-lg-last ">
                                                                 <div className="swiper_inner_img">
                                                                     <img
-                                                                        src={item.banner}
+                                                                        src={getAssetPath(item.banner)}
                                                                         className="w-full object-cover card_rounded"
                                                                         alt=""
                                                                     />
                                                                 </div>
 
                                                                 <img className="d-none d-lg-block"
-                                                                    src={item?.back_img}
+                                                                    src={getAssetPath(item?.back_img)}
                                                                     alt=""
                                                                 />
                                                             </div>

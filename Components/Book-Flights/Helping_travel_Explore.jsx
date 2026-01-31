@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 // Import Swiper styles
@@ -15,31 +16,31 @@ export default function Helping_travel_Explore() {
     const [isAtBeginning, setIsAtBeginning] = useState(true)
     const card = [
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/travelexplore/london-bridge.webp",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/singapore-garden.webp",
+            img: "/travelexplore/singapore-garden.webp",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/travelexplore/london-bridge.webp",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/singapore-garden.webp",
+            img: "/travelexplore/singapore-garden.webp",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/travelexplore/london-bridge.webp",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/travelexplore/london-bridge.webp",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/travelexplore/london-bridge.webp",
             title: "Autralia to singapur"
         },
     ]
@@ -105,7 +106,7 @@ export default function Helping_travel_Explore() {
                                             <SwiperSlide key={i} className='relative'>
                                                 <div className="travel_explore_card relative">
                                                     <div className="travel_explore_img">
-                                                        <img src={item?.img} alt="" />
+                                                        <img src={getAssetPath(item?.img)} alt="" />
                                                     </div>
                                                     <div className="travel_explore_body ">
                                                         <h4 className='m-0'>

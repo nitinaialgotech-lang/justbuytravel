@@ -1,5 +1,6 @@
 "use client"
 import { TopHotelAroundWorld } from '@/app/Route/endpoints'
+import { getAssetPath } from "@/app/utils/assetPath";
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -16,27 +17,27 @@ export default function Find_CruisesSection() {
     const [Active, setActive] = useState(true);
     const image = [
         {
-            img: "/justbuytravel_next/demo/cruise/cruise1.webp",
+            img: "/cruise/cruise1.webp",
             name: "australia"
         },
         {
-            img: "/justbuytravel_next/demo/cruise/cruise2.webp",
+            img: "/cruise/cruise2.webp",
             name: "Croatia"
         },
         {
-            img: "/justbuytravel_next/demo/cruise/cruise3.webp",
+            img: "/cruise/cruise3.webp",
             name: "Montenegro"
         },
         {
-            img: "/justbuytravel_next/demo/cruise/cruise4.webp",
+            img: "/cruise/cruise4.webp",
             name: "Great Britain"
         },
         {
-            img: "/justbuytravel_next/demo/cruise/cruise5.jpg",
+            img: "/cruise/cruise5.jpg",
             name: "Hvar Croatia"
         },
         {
-            img: "/justbuytravel_next/demo/cruise/cruide6.jpg",
+            img: "/cruise/cruide6.jpg",
             name: "dubai"
         },
     ]
@@ -114,7 +115,7 @@ export default function Find_CruisesSection() {
                                             <div className="card_box pe-">
                                                 <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                     <img
-                                                        src={item?.img}
+                                                        src={getAssetPath(item?.img)}
                                                         className="card_rounded w-full h-full object-cover"
                                                         alt={"Hotel image"}
                                                     />

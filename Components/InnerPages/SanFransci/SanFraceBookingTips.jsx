@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,16 +12,16 @@ export default function SanFraceBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
         {
-            img: "/justbuytravel_next/demo/innerpages/australia/as4.webp"
+            img: "/innerpages/australia/as4.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/australia/as1.webp"
+            img: "/innerpages/australia/as1.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/australia/as2.webp"
+            img: "/innerpages/australia/as2.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/australia/as3.webp"
+            img: "/innerpages/australia/as3.webp"
         },
     ]
     return (
@@ -36,23 +37,23 @@ export default function SanFraceBookingTips() {
                                 <div className="row ">
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/australia/as4.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/australia/as4.webp")} alt="" />
                                         </div>
 
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/australia/as1.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/australia/as1.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6  mt-4">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/australia/as2.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/australia/as2.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 mt-4 ">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/australia/as3.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/australia/as3.webp")} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +108,7 @@ export default function SanFraceBookingTips() {
 
                                                             <div className="col-lg-6">
                                                                 <div className="hotel_tips_img">
-                                                                    <img src={item?.img} alt="" />
+                                                                    <img src={getAssetPath(item?.img)} alt="" />
                                                                 </div>
 
                                                             </div>

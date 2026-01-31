@@ -18,6 +18,7 @@ import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import { createHotelSlug } from "@/app/utils/seo";
 export default function Recomended() {
     const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
     const [Active, setActive] = useState(true);
@@ -113,8 +114,10 @@ export default function Recomended() {
     };
     // **********************************************************
     const router = useRouter();
-    const viewDetail = (id) => {
-        router.push(`/hoteldetail?hotel=${id}`);
+    const viewDetail = (id, name) => {
+        if (!id) return;
+        const slug = createHotelSlug(name, id);
+        router.push(`/${slug}`);
     };
 
     return (
@@ -230,7 +233,7 @@ export default function Recomended() {
                                                                     </div>
                                                                     <button
                                                                         className="button_bg2  rounded-full bg-color-green color_bl recomend_btn"
-                                                                        onClick={() => viewDetail(item?.id)}
+                                                                        onClick={() => viewDetail(item?.id, item?.displayName?.text)}
                                                                     >
                                                                         View Detail
                                                                     </button>

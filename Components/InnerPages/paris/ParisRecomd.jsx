@@ -19,6 +19,7 @@ import IconicPlacesInParis from './IconicPlacesInParis';
 import ParisAmazingDeals from './ParisAmazingDeals';
 import { useRouter } from 'next/navigation';
 import ParisFaqSection from './ParisFaqSection';
+import { createHotelSlug } from "@/app/utils/seo";
 
 
 export default function ParisRecomd() {
@@ -97,8 +98,10 @@ export default function ParisRecomd() {
     };
     /************************************************ route path  */
     const router = useRouter();
-    const viewDetail = (id) => {
-        router.push(`/hoteldetail?hotel=${id}`);
+    const viewDetail = (id, name) => {
+        if (!id) return;
+        const slug = createHotelSlug(name, id);
+        router.push(`/${slug}`);
     };
     return (
         <>
@@ -211,7 +214,7 @@ export default function ParisRecomd() {
                                                                             {item?.rating} ({item?.userRatingCount})
                                                                         </span>
                                                                     </div>
-                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id)}>
+                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
                                                                         View Detail
                                                                     </button>
                                                                 </div>

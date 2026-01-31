@@ -20,6 +20,7 @@ import ManchesterIconicPlaces from "./ManchesterIconicPlaces";
 import ManchesterAmazingDeals from "./ManchesterAmazingDeals";
 import { useRouter } from "next/navigation";
 import ManchesterFaqSection from "./ManchesterFaqSection";
+import { createHotelSlug } from "@/app/utils/seo";
 
 export default function ManchesterRecomand() {
     /************************* ustate contetn *** */
@@ -98,8 +99,10 @@ export default function ManchesterRecomand() {
     // **********
     /************************************************ route path  */
     const router = useRouter();
-    const viewDetail = (id) => {
-        router.push(`/hoteldetail?hotel=${id}`);
+    const viewDetail = (id, name) => {
+        if (!id) return;
+        const slug = createHotelSlug(name, id);
+        router.push(`/${slug}`);
     };
     return (
         <>
@@ -214,7 +217,7 @@ export default function ManchesterRecomand() {
                                                                     </div>
                                                                     <button
                                                                         className="button_bg2  rounded-full bg-color-green color_bl recomend_btn"
-                                                                        onClick={() => viewDetail(item?.id)}
+                                                                        onClick={() => viewDetail(item?.id, item?.displayName?.text)}
                                                                     >
                                                                         View Detail
                                                                     </button>

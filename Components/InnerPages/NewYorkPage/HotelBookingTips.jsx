@@ -1,6 +1,7 @@
 
 "use client"
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -17,16 +18,16 @@ export default function HotelBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
         {
-            img: "/justbuytravel_next/demo/innerpages/newyork/n_img.jpg"
+            img: "/innerpages/newyork/n_img.jpg"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/newyork/n_img2.webp"
+            img: "/innerpages/newyork/n_img2.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/newyork/n_img3.webp"
+            img: "/innerpages/newyork/n_img3.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/newyork/n_img4.webp"
+            img: "/innerpages/newyork/n_img4.webp"
         },
     ]
     return (
@@ -42,23 +43,23 @@ export default function HotelBookingTips() {
                                 <div className="row ">
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/newyork/n_img.jpg" alt="" />
+                                            <img src={getAssetPath("/innerpages/newyork/n_img.jpg")} alt="" />
                                         </div>
 
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/newyork/n_img2.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/newyork/n_img2.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6  mt-4">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/newyork/n_img2.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/newyork/n_img2.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 mt-4 ">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/newyork/n_img2.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/newyork/n_img2.webp")} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +114,7 @@ export default function HotelBookingTips() {
 
                                                             <div className="col-lg-6">
                                                                 <div className="hotel_tips_img">
-                                                                    <img src={item?.img} alt="" />
+                                                                    <img src={getAssetPath(item?.img)} alt="" />
                                                                 </div>
 
                                                             </div>

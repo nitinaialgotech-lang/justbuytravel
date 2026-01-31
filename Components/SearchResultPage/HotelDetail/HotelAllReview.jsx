@@ -3,6 +3,7 @@ import { renderBootstrapStars } from '@/component/renderBootstrapStars'
 import moment from 'moment'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -85,7 +86,7 @@ export default function HotelAllReview({ reviews }) {
                                                     </div>
                                                 </div>
                                                 <div className="like_button">
-                                                    <img src="/justbuytravel_next/demo/review/like.png" alt="" />
+                                                    <img src={getAssetPath("/review/like.png")} alt="" />
                                                 </div>
                                             </div>
                                             {/* ********************** */}
@@ -206,7 +207,7 @@ export default function HotelAllReview({ reviews }) {
                                                                 </div>
                                                             </div>
                                                             <div className="like_button">
-                                                                <img src="/justbuytravel_next/demo/review/like.png" alt="" />
+                                                                <img src={getAssetPath("/review/like.png")} alt="" />
                                                             </div>
                                                         </div>
                                                         {/* ********************** */}
@@ -290,7 +291,7 @@ export default function HotelAllReview({ reviews }) {
                                     <Modal.Footer>
                                         <button className='border px-2 py-2 rounded'>
                                             <div className="like_button flex gap-2">
-                                                <img src="/justbuytravel_next/demo/review/like.png" alt="" />
+                                                <img src={getAssetPath("/review/like.png")} alt="" />
                                             </div>
                                         </button>
                                     </Modal.Footer>
@@ -303,7 +304,7 @@ export default function HotelAllReview({ reviews }) {
                         <div className="col-lg-3 d-none d-lg-block">
                             <div className="review_banner padding_bottom ">
                                 <div className="banner_img ">
-                                    <img src="/justbuytravel_next/demo/review/banner1.png" className='' alt="" />
+                                    <img src={getAssetPath("/review/banner1.png")} className='' alt="" />
                                 </div>
                             </div>
                         </div>

@@ -14,6 +14,7 @@ import HotelIcon, { FlightIcon } from "@/component/icons";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { SetSelectAll } from "../Redux/Reducer";
+import { createHotelSlug } from "@/app/utils/seo";
 export default function Search() {
     // const reverseGeocode = useCallback(async (lat, lng) => {
     //     try {
@@ -357,7 +358,7 @@ export default function Search() {
             viewSearchAll(lat, long)
         }
         else {
-            ViewHotels(id)
+            ViewHotels(id, place?.displayName?.text)
         }
     };
 
@@ -396,9 +397,10 @@ export default function Search() {
     }
     // **************************** hotel search
 
-    const ViewHotels = (id) => {
-        router.push(`/hoteldetail?hotel=${id}`);
-
+    const ViewHotels = (id, name) => {
+        if (!id) return;
+        const slug = createHotelSlug(name, id);
+        router.push(`/${slug}`);
     };
     // *********************************
 

@@ -1,5 +1,6 @@
 "use client"
 import { IconicPlaces, TouristAttraction, TouristAttractionApi } from "@/app/Route/endpoints";
+import { getAssetPath } from "@/app/utils/assetPath";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,19 +23,19 @@ export default function Hotel_IconicPlaces() {
     // ****************** state end *****
     const fallbackIconicCards = [
         {
-            img: "/justbuytravel_next/demo/iconic/iconic.jpg",
+            img: "/iconic/iconic.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic4.jpg",
+            img: "/iconic/iconic4.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic6.jpg",
+            img: "/iconic/iconic6.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
         {
-            img: "/justbuytravel_next/demo/iconic/iconic7.jpg",
+            img: "/iconic/iconic7.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
         },
     ];
@@ -132,7 +133,7 @@ export default function Hotel_IconicPlaces() {
                                                         src={
                                                             imgName
                                                                 ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : item?.img || "/no-image.jpg"
+                                                                : getAssetPath(item?.img || "/no-image.jpg")
                                                         }
                                                         className=" card_rounded "
                                                         alt={title}

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { RiCheckboxCircleLine } from 'react-icons/ri'
 import { useCurrency } from "@/context/CurrencyContext";
+import { getAssetPath } from "@/app/utils/assetPath";
 
 export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, hotelData, onSearchDates, isLoadingPrices, initialCheckin, initialCheckout, showPricing = true }) {
     const { formatPrice } = useCurrency();
@@ -50,12 +51,12 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
     const priceDataKey = `${checkinDate}-${checkoutDate}-${hotelPrice?.length || 0}-${JSON.stringify(hotelPrice?.map(p => p.rate))}`;
 
     const bookingImg = [
-        { name: "Booking.com", img: "/justbuytravel_next/demo/logo/hoteldetail/Booking_com.png", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84" },
-        { name: "expedia.com", img: "/justbuytravel_next/demo/logo/hoteldetail/expedia_logo.svg", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8645&campaign_id=594" },
-        { name: "agoda.com", img: "/justbuytravel_next/demo/logo/hoteldetail/Agoda.png", affiliateBase: "" },
-        { name: "vio.com", img: "/justbuytravel_next/demo/logo/hoteldetail/vio_com.png", affiliateBase: "" },
-        { name: "traveloka.com", img: "/justbuytravel_next/demo/logo/hoteldetail/travelok.svg", affiliateBase: "" },
-        { name: "Trip.com", img: "/justbuytravel_next/demo/logo/hoteldetail/tripcom.webp", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8626&campaign_id=121" },
+        { name: "Booking.com", img: "/logo/hoteldetail/Booking_com.png", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84" },
+        { name: "expedia.com", img: "/logo/hoteldetail/expedia_logo.svg", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8645&campaign_id=594" },
+        { name: "agoda.com", img: "/logo/hoteldetail/Agoda.png", affiliateBase: "" },
+        { name: "vio.com", img: "/logo/hoteldetail/vio_com.png", affiliateBase: "" },
+        { name: "traveloka.com", img: "/logo/hoteldetail/travelok.svg", affiliateBase: "" },
+        { name: "Trip.com", img: "/logo/hoteldetail/tripcom.webp", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8626&campaign_id=121" },
     ];
 
     const normalizeProviderName = (s) => (s || "").toLowerCase().replace(/\/+$/, "").replace(/^www\./, "").trim();
@@ -245,7 +246,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                                 <div className="price_box_item">
                                                                     <div className="icon text-center flex">
                                                                         {displayImg ? (
-                                                                            <img src={displayImg} alt={logoAlt} width={120} height={120} />
+                                                                            <img src={getAssetPath(displayImg)} alt={logoAlt} width={120} height={120} />
                                                                         ) : (
                                                                             <span className="text-dark fw-semibold" style={{ fontSize: "1rem" }}>{item.name}</span>
                                                                         )}
@@ -332,7 +333,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                                         <div className="detail flex justify-between items-center">
                                                             <div className="icon flex flex-col gap-0 ">
                                                                 {displayImg ? (
-                                                                    <img src={displayImg} alt={item.name} width={100} height={100} />
+                                                                    <img src={getAssetPath(displayImg)} alt={item.name} width={100} height={100} />
                                                                 ) : (
                                                                     <span className="text-dark fw-semibold">{item.name}</span>
                                                                 )}

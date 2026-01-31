@@ -13,6 +13,7 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { useRouter } from 'next/navigation';
+import { createHotelSlug } from "@/app/utils/seo";
 
 import { renderBootstrapStars } from '@/component/renderBootstrapStars';
 
@@ -21,9 +22,10 @@ export default function PopularHotelAroundWorld({ lat, long }) {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
     const router = useRouter();
-    const viewDetail = (id) => {
+    const viewDetail = (id, name) => {
         if (!id) return;
-        router.push(`/hoteldetail/?hotel=${id}`);
+        const slug = createHotelSlug(name, id);
+        router.push(`/${slug}`);
     };
     /*********************** end stte ****** */
     /********************* apis calls *********** */
@@ -185,7 +187,7 @@ export default function PopularHotelAroundWorld({ lat, long }) {
                                                                             {item?.rating} ({item?.userRatingCount})
                                                                         </span>
                                                                     </div>
-                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id)}>
+                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
                                                                         View Detail
                                                                     </button>
                                                                 </div>

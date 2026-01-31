@@ -1,7 +1,9 @@
+"use client"
 import Link from 'next/link'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Get_Blogs } from '@/app/Route/endpoints'
+import { getAssetPath } from '@/app/utils/assetPath'
 
 export default function Blog_Right_Sidebar() {
     const { data, isLoading } = useQuery({
@@ -39,7 +41,7 @@ export default function Blog_Right_Sidebar() {
                             const title = post?.title?.rendered || post?.slug || "Post"
                             const imageUrl =
                                 post?.yoast_head_json?.og_image?.[0]?.url ||
-                                "/justbuytravel_next/demo/blog/Budget-Travel.webp"
+                                getAssetPath("/blog/Budget-Travel.webp")
                             const date = post?.date
                                 ? new Date(post.date).toLocaleDateString("en-US", {
                                     year: "numeric",

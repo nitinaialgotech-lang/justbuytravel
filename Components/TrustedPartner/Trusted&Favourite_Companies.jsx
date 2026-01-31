@@ -1,18 +1,15 @@
 "use client"
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
 export default function Trusted_Favourite_Companies() {
     const card = [
-        {
-            img: "/justbuytravel_next/demo/aboutus/booking.webp"
-        },
-        {
-            img: "/justbuytravel_next/demo/aboutus/Expida.webp"
-        },
+        { img: "/aboutus/booking.webp" },
+        { img: "/aboutus/Expida.webp" },
     ]
     return (
         <>
@@ -72,7 +69,7 @@ export default function Trusted_Favourite_Companies() {
                                     {card?.map((item, idx) => (
                                         <SwiperSlide key={`${item?.img ?? "slide"}-${idx}`}>
                                             <div className="platform_img pb-5 pt-3">
-                                                <img src={item?.img} alt="" />
+                                                <img src={getAssetPath(item?.img)} alt="" />
                                             </div>
                                         </SwiperSlide>
                                     ))}

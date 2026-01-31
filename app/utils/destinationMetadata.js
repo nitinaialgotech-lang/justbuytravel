@@ -3,7 +3,7 @@
  * Customize SEO content for each destination page
  */
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/justbuytravel_next/demo';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const destinationData = {
     'usa': {

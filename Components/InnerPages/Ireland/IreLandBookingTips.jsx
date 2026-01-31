@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,16 +13,16 @@ export default function IreLandBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
         {
-            img: "/justbuytravel_next/demo/innerpages/ireland/ir1.webp"
+            img: "/innerpages/ireland/ir1.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/ireland/ir2.webp"
+            img: "/innerpages/ireland/ir2.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/ireland/ir3.webp"
+            img: "/innerpages/ireland/ir3.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/ireland/ir4.webp"
+            img: "/innerpages/ireland/ir4.webp"
         },
     ]
     return (
@@ -38,23 +39,23 @@ export default function IreLandBookingTips() {
                                 <div className="row ">
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/ireland/ir1.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/ireland/ir1.webp")} alt="" />
                                         </div>
 
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/ireland/ir2.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/ireland/ir2.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6  mt-4">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/ireland/ir3.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/ireland/ir3.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 mt-4 ">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/ireland/ir4.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/ireland/ir4.webp")} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +110,7 @@ export default function IreLandBookingTips() {
 
                                                             <div className="col-lg-6">
                                                                 <div className="hotel_tips_img">
-                                                                    <img src={item?.img} alt="" />
+                                                                    <img src={getAssetPath(item?.img)} alt="" />
                                                                 </div>
 
                                                             </div>

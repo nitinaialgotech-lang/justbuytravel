@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
@@ -10,10 +11,10 @@ import { usePathname, useRouter } from 'next/navigation';
 
 const card = [
     {
-        img: "/justbuytravel_next/demo/aboutus/booking.webp"
+        img: "/aboutus/booking.webp"
     },
     {
-        img: "/justbuytravel_next/demo/aboutus/Expida.webp"
+        img: "/aboutus/Expida.webp"
     },
     // {
     //     img: "/demo/aboutus/google.png"
@@ -96,7 +97,7 @@ export default function Book_Hotel_Guide_Section() {
 
                                             <SwiperSlide>
                                                 <div className="platform_img pb-4 pt-3">
-                                                    <img src={item?.img} alt="" />
+                                                    <img src={getAssetPath(item?.img)} alt="" />
                                                 </div>
                                             </SwiperSlide>
 

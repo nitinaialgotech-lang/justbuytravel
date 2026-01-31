@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,16 +12,16 @@ export default function GoaBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
         {
-            img: "/justbuytravel_next/demo/innerpages/goa/g_img.webp"
+            img: "/innerpages/goa/g_img.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/goa/g_img2.webp"
+            img: "/innerpages/goa/g_img2.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/goa/g_img3.webp"
+            img: "/innerpages/goa/g_img3.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/goa/g_img4.webp"
+            img: "/innerpages/goa/g_img4.webp"
         },
     ]
     return (
@@ -36,23 +37,23 @@ export default function GoaBookingTips() {
                                 <div className="row ">
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/goa/g_img.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/goa/g_img.webp")} alt="" />
                                         </div>
 
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/goa/g_img2.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/goa/g_img2.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6  mt-4">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/goa/g_img3.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/goa/g_img3.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 mt-4 ">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/goa/g_img4.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/goa/g_img4.webp")} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +108,7 @@ export default function GoaBookingTips() {
 
                                                             <div className="col-lg-6">
                                                                 <div className="hotel_tips_img">
-                                                                    <img src={item?.img} alt="" />
+                                                                    <img src={getAssetPath(item?.img)} alt="" />
                                                                 </div>
 
                                                             </div>

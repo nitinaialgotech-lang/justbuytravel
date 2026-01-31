@@ -1,5 +1,6 @@
 "use client"
 import { TopHotelAroundWorld } from '@/app/Route/endpoints'
+import { getAssetPath } from "@/app/utils/assetPath";
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -17,19 +18,19 @@ export default function PackageDeals() {
     const [Active, setActive] = useState(true);
     const image = [
         {
-            img: "/justbuytravel_next/demo/package/package1.webp",
+            img: "/package/package1.webp",
             name: "australia"
         },
         {
-            img: "/justbuytravel_next/demo/package/package2.avif",
+            img: "/package/package2.avif",
             name: "Croatia"
         },
         {
-            img: "/justbuytravel_next/demo/package/package3.avif",
+            img: "/package/package3.avif",
             name: "Montenegro"
         },
         {
-            img: "/justbuytravel_next/demo/package/package4.avif",
+            img: "/package/package4.avif",
             name: "Great Britain"
         },
 
@@ -106,7 +107,7 @@ export default function PackageDeals() {
                                                 <div className="card_box ">
                                                     <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                         <img
-                                                            src={item?.img}
+                                                            src={getAssetPath(item?.img)}
                                                             className="card_rounded w-full h-full object-cover"
                                                             alt={"Hotel image"}
                                                         />
@@ -127,7 +128,7 @@ export default function PackageDeals() {
                                                                     <span>
                                                                         <img
                                                                             className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/icon_hotel.webp"
+                                                                            src={getAssetPath("/header_icon/icon_hotel.webp")}
                                                                             alt=""
                                                                         />
                                                                     </span>
@@ -142,7 +143,7 @@ export default function PackageDeals() {
                                                                     <span>
                                                                         <img
                                                                             className="icon_link"
-                                                                            src="/justbuytravel_next/demo/header_icon/icon_flight.webp"
+                                                                            src={getAssetPath("/header_icon/icon_flight.webp")}
                                                                             alt=""
                                                                         />
                                                                     </span>

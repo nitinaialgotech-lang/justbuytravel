@@ -19,6 +19,7 @@ import SanfracIconicPlaces from './SanfracIconicPlaces';
 import SanFraceBookingTips from './SanFraceBookingTips';
 import SanFranceAmazingDeals from './SanFranceAmazingDeals';
 import { useRouter } from 'next/navigation';
+import { createHotelSlug } from "@/app/utils/seo";
 export default function SanFrancRecomd() {
 
   /************************* ustate contetn *** */
@@ -96,8 +97,10 @@ export default function SanFrancRecomd() {
   };
   /************************************************ route path  */
   const router = useRouter();
-  const viewDetail = (id) => {
-    router.push(`/hoteldetail?hotel=${id}`);
+  const viewDetail = (id, name) => {
+    if (!id) return;
+    const slug = createHotelSlug(name, id);
+    router.push(`/${slug}`);
   };
   return (
     <>
@@ -210,7 +213,7 @@ export default function SanFrancRecomd() {
                                       {item?.rating} ({item?.userRatingCount})
                                     </span>
                                   </div>
-                                  <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id)}>
+                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
                                     View Detail
                                   </button>
                                 </div>

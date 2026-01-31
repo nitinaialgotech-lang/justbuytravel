@@ -93,6 +93,14 @@ export default function Blog_Tabs() {
 
   const TotalPages = blog_data?.totalPages || 0;
 
+  // For "Show all" tab: use post's first category in URL when available (category/slug instead of blogs/slug)
+  const getPostHref = (post) => {
+    const catId = post?.categories?.[0];
+    const cat = categories?.data?.find((c) => c.id === catId);
+    const catSlug = cat?.slug;
+    return catSlug ? `/${catSlug}/${post?.slug}` : `/blogs/${post?.slug}`;
+  };
+
   return (
 
     <>
@@ -181,7 +189,7 @@ export default function Blog_Tabs() {
                                     {/* ****************************** */}
                                     <div className="blog_card_heading">
                                       <h4 className="m-0">
-                                        <Link href={`/blogs/${item?.slug}`}>
+                                        <Link href={getPostHref(item)}>
                                           {item?.title?.rendered}
                                         </Link>
                                       </h4>
@@ -221,6 +229,7 @@ export default function Blog_Tabs() {
                     categories?.data?.map((item, i) => {
                       if (item?.name == "Travel" || item?.name == "Flight" || item?.name == "Hotel" || item?.name == "Travel Tips" || item?.name == "Adventure" || item?.name == "Travel Tips") {
                         const cat_name = item?.name;
+                        const cat_slug = item?.slug;
                         return (
 
                           <Tab eventKey={item?.id} title={item?.name} key={i}
@@ -234,22 +243,22 @@ export default function Blog_Tabs() {
                                         <BlogShimmerCard key={i} />
                                       ))
                                     ) :
-                                    blog_data?.posts?.map((item) => {
-                                      const date_it = item?.date;
+                                    blog_data?.posts?.map((post) => {
+                                      const date_it = post?.date;
                                       const formatted = moment(date_it).format("MMMM D, YYYY");
 
                                       // Get plain text words from excerpt
-                                      const text = item.excerpt.rendered?.replace(/<[^>]*>/g, "").split(" ");
+                                      const text = post.excerpt.rendered?.replace(/<[^>]*>/g, "").split(" ");
                                       const fullText = text?.slice(0, 30).join(" "); // first 50 words
                                       // *************************************
                                       return (
-                                        <div className="col-lg-4" key={item.id}>
+                                        <div className="col-lg-4" key={post.id}>
                                           <div className="blog_card_box mb-10">
                                             <div className="blog_card">
                                               {/* ****************************** */}
                                               <div className="blog_card_img">
                                                 <img
-                                                  src={item?.yoast_head_json?.og_image?.[0]?.url}
+                                                  src={post?.yoast_head_json?.og_image?.[0]?.url}
                                                   alt=""
                                                 />
                                               </div>
@@ -264,8 +273,8 @@ export default function Blog_Tabs() {
                                                 {/* ****************************** */}
                                                 <div className="blog_card_heading">
                                                   <h4 className="m-0">
-                                                    <Link href={`/blogs/${item?.slug}`}>
-                                                      {item?.title?.rendered}
+                                                    <Link href={cat_slug ? `/${cat_slug}/${post?.slug}` : `/blogs/${post?.slug}`}>
+                                                      {post?.title?.rendered}
                                                     </Link>
                                                   </h4>
                                                 </div>

@@ -14,11 +14,9 @@ export const getAssetPath = (path) => {
   // Remove leading slash if present to avoid double slashes
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
 
-  // Get basePath from environment variable or use the configured basePath
-  // This should match the basePath in next.config.mjs
-  const basePath =
-    process.env.NEXT_PUBLIC_BASE_PATH ||
-    (process.env.NODE_ENV === "production" ? "/justbuytravel_next/demo" : "");
+  // Get basePath from environment variable - must match next.config.mjs basePath
+  // Set NEXT_PUBLIC_BASE_PATH when deploying to a subpath (e.g. /justbuytravel_next/demo); leave unset for root
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   // If basePath is just '/', return the path as is
   if (basePath === '/' || !basePath) {

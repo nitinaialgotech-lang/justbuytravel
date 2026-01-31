@@ -1,6 +1,7 @@
 "use client"
 import Footer from "@/component/Footer";
 import Header from "@/component/Header";
+import { getAssetPath } from "@/app/utils/assetPath";
 import Blogs from "@/Components/HomePage/Blog/Blogs";
 import DestinationSection from "@/Components/HomePage/DestinationSection/DestinationSection";
 import ExperienceExploreSection from "@/Components/HomePage/ExpereinceExploreSection/ExperienceExploreSection";
@@ -43,7 +44,7 @@ export default function IndexPage() {
                                     <div className="col-lg-6 p-0">
                                         <div className="popup_inner">
                                             <div className="popup_logo">
-                                                <img src="/justbuytravel_next/demo/popup/popup_logo.webp" alt="" width={800} height={800} />
+                                                <img src={getAssetPath("/popup/popup_logo.webp")} alt="" width={800} height={800} />
                                             </div>
                                         </div>
                                     </div>

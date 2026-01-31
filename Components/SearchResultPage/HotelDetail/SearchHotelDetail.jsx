@@ -4,7 +4,7 @@ import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
 import { GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName } from "@/app/Route/endpoints";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import AboutHotelDetail from "./AboutHotelDetail";
 import NearByHotel from "./NearByHotel";
 import HotelLocation from "./HotelLocation";
@@ -40,13 +40,21 @@ import 'reactjs-popup/dist/index.css';
 import Popup from "reactjs-popup";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useCurrency } from "@/context/CurrencyContext";
+import { getHotelIdFromSlug } from "@/app/utils/seo";
+import { getAssetPath } from "@/app/utils/assetPath";
 
 export default function SearchHotelDetail() {
     const { formatPrice } = useCurrency();
     const search_detail = useSearchParams();
+    const params = useParams();
     const [open, setOpen] = useState(false);
-    const code = search_detail.get("hotel");
-    const namehotel = search_detail.get("name");
+    const slugParam = params?.hotel || params?.slug;
+    const codeFromSlug = getHotelIdFromSlug(slugParam);
+    const codeFromQuery =
+        search_detail.get("hotel") ||
+        search_detail.get("id") ||
+        search_detail.get("code");
+    const code = codeFromQuery || codeFromSlug;
     // const cityhotel = search_detail.get("city");
 
     // Date state for pricing - default to today and 7 days later
@@ -296,7 +304,7 @@ export default function SearchHotelDetail() {
                                                 <div className="mobile_share_icon">
                                                     <div className="icon flex gap-2 items-center ">
                                                         <span>
-                                                            <img src="/justbuytravel_next/demo/hoteldetail/export.svg" width={18} alt="" />
+                                                            <img src={getAssetPath("/hoteldetail/export.svg")} width={18} alt="" />
                                                         </span>
                                                         <span className="text-black">
                                                             share
@@ -313,7 +321,7 @@ export default function SearchHotelDetail() {
                                             <h2 className="m-0 hotel_botom_margin ">{HotelDetail?.displayName?.text}</h2>
                                             <div className="icon flex gap-2 items-center d-none d-lg-block">
                                                 <span>
-                                                    <img src="/justbuytravel_next/demo/hoteldetail/export.svg" width={18} alt="" />
+                                                    <img src={getAssetPath("/hoteldetail/export.svg")} width={18} alt="" />
                                                 </span>
                                                 <span className="">
                                                     share
@@ -347,13 +355,13 @@ export default function SearchHotelDetail() {
                                                 {HotelDetail?.rating} ({ratingCount} reviews )</p>
                                             <ul className="flex p-0 m-0 hotel_botom_margin">
                                                 <li>
-                                                    <span><img src="/justbuytravel_next/demo/hoteldetail/global.svg" width={20} alt="" /></span>
+                                                    <span><img src={getAssetPath("/hoteldetail/global.svg")} width={20} alt="" /></span>
                                                     <span><Link href={""}>visit hotel website</Link></span>
                                                 </li>
                                                 {/* ******* */}
                                                 <li>
                                                     <span>
-                                                        <img src="/justbuytravel_next/demo/hoteldetail/location-minus.svg" width={20} alt="" />
+                                                        <img src={getAssetPath("/hoteldetail/location-minus.svg")} width={20} alt="" />
                                                     </span>
                                                     <span>
                                                         <Link href={""}>view location</Link>
@@ -489,7 +497,7 @@ export default function SearchHotelDetail() {
                                                                         </button>
                                                                     </div>
                                                                     <div className="popup_header_close ">
-                                                                        <img src="/justbuytravel_next/demo/popup/add.png" className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
+                                                                        <img src={getAssetPath("/popup/add.png")} className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
                                                                     </div>
                                                                 </div>
                                                                 {/* ************ */}
@@ -530,7 +538,7 @@ export default function SearchHotelDetail() {
                                                                     </div>
                                                                     {/* ********** */}
                                                                     <div className="popup_banner" onClick={() => setOpen(false)} >
-                                                                        <img src="/justbuytravel_next/demo/popup/popupbanner.png" width={300} height={250} alt="" onClick={() => setOpen(false)} />
+                                                                        <img src={getAssetPath("/popup/popupbanner.png")} width={300} height={250} alt="" onClick={() => setOpen(false)} />
                                                                     </div>
                                                                 </div>
                                                             </div>

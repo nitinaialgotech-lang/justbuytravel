@@ -5,7 +5,7 @@
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
 const siteName = 'Just Buy Travel';
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/justbuytravel_next/demo';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || 'https://goldenrod-woodcock-914779.hostingersite.com/';
 
 /**
  * Generate metadata for blog posts
@@ -94,8 +94,8 @@ export function generateHotelMetadata(hotel) {
         ? `https://places.googleapis.com/v1/${photos[0].name}/media?maxHeightPx=1200&key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}`
         : `${basePath}/logo/cropped-Frame.png`;
     
-    const slug = hotel?.id || createSlug(name);
-    const canonicalUrl = `${siteUrl}/hotel/${slug}`;
+    const slug = createHotelSlug(name, hotel?.id || '');
+    const canonicalUrl = `${siteUrl}/${slug}`;
 
     const priceRange = hotel?.priceLevel ? '$'.repeat(hotel.priceLevel) : null;
 
@@ -328,6 +328,47 @@ export function createSlug(text) {
         .replace(/\s+/g, '-')
         .replace(/--+/g, '-')
         .trim();
+}
+
+/**
+ * Create a hotel detail slug that ends with the place ID
+ */
+export function createHotelSlug(name, id) {
+    const safeId = id ? String(id).trim() : '';
+    const safeName = name ? createSlug(String(name)) : '';
+    if (!safeName) return safeId;
+    if (!safeId) return safeName;
+    return `${safeName}-${safeId}`;
+}
+
+/**
+ * Extract place ID from a hotel slug
+ * Google Place IDs start with "ChIJ" and are typically 27 characters long
+ * The ID is always at the end of the slug after the last hyphen
+ */
+export function getHotelIdFromSlug(slug) {
+    if (!slug) return null;
+    const slugStr = String(slug).trim();
+    
+    // Google Place IDs start with "ChIJ" - find the position where the ID starts
+    const chijIndex = slugStr.lastIndexOf('ChIJ');
+    if (chijIndex !== -1) {
+        // Extract everything from "ChIJ" to the end
+        return slugStr.substring(chijIndex);
+    }
+    
+    // Fallback: if no "ChIJ" found, try to extract the last segment
+    // This handles cases where the ID might be at the end
+    const parts = slugStr.split('-');
+    if (parts.length > 0) {
+        const lastPart = parts[parts.length - 1];
+        // If the last part looks like a Place ID (starts with Ch and is long enough)
+        if (lastPart && lastPart.length >= 20 && /^[A-Za-z0-9_-]+$/.test(lastPart)) {
+            return lastPart;
+        }
+    }
+    
+    return null;
 }
 
 /**

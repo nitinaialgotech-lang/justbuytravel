@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { createHotelSlug } from "@/app/utils/seo";
 import { getAssetPath } from "@/app/utils/assetPath";
 
 // Import Swiper styles
@@ -24,27 +25,15 @@ import GetOfferSection from "../GetOfferSection/GetOfferSection";
 export default function ExperienceExploreSection() {
     const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
     const fallbackIconicCards = [
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic4.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic6.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/justbuytravel_next/demo/iconic/iconic7.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
+        { img: "/iconic/iconic.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
+        { img: "/iconic/iconic4.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
+        { img: "/iconic/iconic6.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
+        { img: "/iconic/iconic7.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
     ];
 
     const NearCard = [
         {
-            img: "/justbuytravel_next/demo/near/near.jpg",
+            img: "/near/near.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
             info: (
                 <>
@@ -60,7 +49,7 @@ export default function ExperienceExploreSection() {
             ],
         },
         {
-            img: "/justbuytravel_next/demo/near/near1.jpg",
+            img: "/near/near1.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
             info: (
                 <>
@@ -76,7 +65,7 @@ export default function ExperienceExploreSection() {
             ],
         },
         {
-            img: "/justbuytravel_next/demo/near/near2.jpg",
+            img: "/near/near2.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
             info: (
                 <>
@@ -92,7 +81,7 @@ export default function ExperienceExploreSection() {
             ],
         },
         {
-            img: "/justbuytravel_next/demo/near/near3.jpg",
+            img: "/near/near3.jpg",
             content: "Half-Day Railway Market and Floating Market Tour in Thailand",
             info: (
                 <>
@@ -246,7 +235,7 @@ export default function ExperienceExploreSection() {
                                                         src={
                                                             imgName
                                                                 ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : item?.img || "/no-image.jpg"
+                                                                : getAssetPath(item?.img || "/no-image.jpg")
                                                         }
                                                         className="card-img-top card_rounded"
                                                         alt="Place"
@@ -267,7 +256,7 @@ export default function ExperienceExploreSection() {
                                                             {placeId && (
                                                                 <div className="">
                                                                     <Link
-                                                                        href={`/hoteldetail/?hotel=${placeId}`}
+                                                                        href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, placeId)}`}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                     >
                                                                         View Detail
@@ -381,7 +370,7 @@ export default function ExperienceExploreSection() {
                                                     src={
                                                         imgName
                                                             ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                            : item?.img || "/no-image.jpg"
+                                                            : getAssetPath(item?.img || "/no-image.jpg")
                                                     }
                                                     className=" card_rounded "
                                                     alt={title}
@@ -405,7 +394,7 @@ export default function ExperienceExploreSection() {
                                                         {placeId && (
                                                             <div className="">
                                                                 <Link
-                                                                    href={`/hoteldetail/?hotel=${placeId}`}
+                                                                    href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, placeId)}`}
                                                                     className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                 >
                                                                     View Detail

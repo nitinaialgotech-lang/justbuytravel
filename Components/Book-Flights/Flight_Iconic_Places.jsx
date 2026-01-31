@@ -1,5 +1,6 @@
 "use client"
 import Link from 'next/link'
+import { getAssetPath } from "@/app/utils/assetPath";
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
@@ -14,19 +15,19 @@ export default function Flight_Iconic_Places() {
     const card = [
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
-            img: "/justbuytravel_next/demo/flights/ico2.jpg"
+            img: "/flights/ico2.jpg"
         },
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
-            img: "/justbuytravel_next/demo/flights/ico4.jpg"
+            img: "/flights/ico4.jpg"
         },
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025",
-            img: "/justbuytravel_next/demo/flights/ico5.jpg"
+            img: "/flights/ico5.jpg"
         },
         {
             title: "Overwater Villas in the Maldives: The Ultimate Hotels to Book in 2025		",
-            img: "/justbuytravel_next/demo/flights/ico1.jpg"
+            img: "/flights/ico1.jpg"
         },
     ]
 
@@ -56,7 +57,7 @@ export default function Flight_Iconic_Places() {
                                                     <div className="col-lg-3" key={i}>
                                                         <div className="iconic_place_card relative">
                                                             <div className="iconic_img">
-                                                                <img src={item?.img} alt="" />
+                                                                <img src={getAssetPath(item?.img)} alt="" />
                                                             </div>
                                                             <div className="content absolute">
                                                                 <p className='m-0'>
@@ -141,7 +142,7 @@ export default function Flight_Iconic_Places() {
                                                 <div className="col-lg-3">
                                                     <div className="iconic_place_card relative">
                                                         <div className="iconic_img">
-                                                            <img src={item?.img} alt="" />
+                                                            <img src={getAssetPath(item?.img)} alt="" />
                                                         </div>
                                                         <div className="content absolute">
                                                             <p className='m-0'>

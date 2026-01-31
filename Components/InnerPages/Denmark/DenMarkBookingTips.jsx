@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,16 +12,16 @@ export default function DenMarkBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
         {
-            img: "/justbuytravel_next/demo/innerpages/denmark/dn4.webp"
+            img: "/innerpages/denmark/dn4.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/denmark/dn1.webp"
+            img: "/innerpages/denmark/dn1.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/denmark/dn2.webp"
+            img: "/innerpages/denmark/dn2.webp"
         },
         {
-            img: "/justbuytravel_next/demo/innerpages/denmark/dn3.webp"
+            img: "/innerpages/denmark/dn3.webp"
         },
     ]
     return (
@@ -36,23 +37,23 @@ export default function DenMarkBookingTips() {
                                 <div className="row ">
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/denmark/dn4.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn4.webp")} alt="" />
                                         </div>
 
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/denmark/dn1.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn1.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6  mt-4">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/denmark/dn2.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn2.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 mt-4 ">
                                         <div className="hotel_tips_img">
-                                            <img src="/justbuytravel_next/demo/innerpages/denmark/dn3.webp" alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn3.webp")} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +108,7 @@ export default function DenMarkBookingTips() {
 
                                                             <div className="col-lg-6">
                                                                 <div className="hotel_tips_img">
-                                                                    <img src={item?.img} alt="" />
+                                                                    <img src={getAssetPath(item?.img)} alt="" />
                                                                 </div>
 
                                                             </div>
