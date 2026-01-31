@@ -73,7 +73,7 @@ export default function AboutDetail() {
                                     </div>
                                     {/* ************************* */}
                                     <div className="col-lg-6">
-                                        <div className="box_content_box sky_yellow">
+                                        <div className="box_content_box sky_yellow mrt-20">
                                             <div className="content">
                                                 <h2 className='p-0 m-0'>
                                                     1M+
@@ -129,11 +129,11 @@ export default function AboutDetail() {
                     </div>
 
                     <div className="row">
-                        <div className="col-lg-6">
+                        <div className="col-lg-5">
                             <div className="bit_content relative">
                                 <img src="bit1.png" alt="" className='relative' />
-                                <div className="content absolute bottom-5">
-                                    <p>
+                                <div className="content absolute ">
+                                    <p className=''>
                                         What exactly does Justbuytravel offer?
                                     </p>
                                     <h2>
@@ -143,12 +143,37 @@ export default function AboutDetail() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-6">
-                            <div className="row">
-                                <div className="col-lg-12"></div>
+                        <div className="col-lg-7">
 
+
+
+                            <div className="bit_content relative right_h mrt-20">
+                                <img src="bit2.png" alt="" className='relative' />
+                                <div className="content absolute ">
+
+                                    <h2>
+                                        Book a memreable moment with your travel buddy!
+                                    </h2>
+                                    <Link href={""}>Check Now</Link>
+                                </div>
+                            </div>
+
+                            {/* ************* */}
+
+
+                            <div className="bit_content relative right_h mt-4">
+                                <img src="bit3.png" alt="" className='relative' />
+                                <div className="content absolute bottom-7">
+
+                                    <h2>
+                                        Luxury hotels at affordable prices
+                                    </h2>
+                                    <Link href={""}>Check Now</Link>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

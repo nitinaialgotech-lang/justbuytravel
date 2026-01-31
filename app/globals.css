@@ -1500,7 +1500,7 @@ button {
 
   padding: 40px;
   margin-top: -5%;
-  z-index: 111111;
+  z-index: 1;
   /* display: revert; */
   display: rela;
   position: relative;
@@ -1546,12 +1546,50 @@ button {
   letter-spacing: 0%;
   vertical-align: middle;
 }
+.bit_content {
+  height: 100%;
+}
 .bit_content > img {
   border-radius: 16px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .bit_content > .content {
-  left: 2%;
+  left: 6%;
   right: 15%;
+  bottom: 5%;
+}
+.right_h {
+  height: 350px;
+}
+.bit_content > .content > p {
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 1);
+  line-height: 18px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+.bit_content > .content > h2 {
+  font-weight: 600 !important;
+  font-size: 42px !important;
+  color: rgba(255, 255, 255, 1);
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+.bit_content > .content > a {
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 15px;
+  line-height: 90%;
+  letter-spacing: 0%;
+  color: rgba(255, 255, 255, 1);
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 14%;
+  text-decoration-skip-ink: auto;
 }
 /* ******************** */
 .trust_guide_section {
