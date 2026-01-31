@@ -88,7 +88,7 @@ export default function Header() {
                                     <Nav.Link
                                         as={Link}
                                         href="/book-hotels"
-                                        className="capitalize"
+                                        className={`capitalize `}
                                     >
                                         <span className="g_color">
                                             {/* <img
@@ -99,7 +99,7 @@ export default function Header() {
                                             <HotelIcon color={`${pathnamne == "/book-hotels/" ? "#12c081" : "#1D1F27"} `} />
                                         </span>
                                         <span
-                                            className={`${pathnamne == "/book-hotels/" ? "g_color" : ""} `}
+                                            className={`${pathnamne == "/book-hotels/" ? "g_color  " : ""} `}
                                         >
                                             Hotels
                                         </span>

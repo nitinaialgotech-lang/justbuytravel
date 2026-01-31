@@ -16,135 +16,7 @@ import { useDispatch } from "react-redux";
 import { SetSelectAll } from "../Redux/Reducer";
 import { createHotelSlug } from "@/app/utils/seo";
 export default function Search() {
-    // const reverseGeocode = useCallback(async (lat, lng) => {
-    //     try {
-    //         const response = await fetch(
-    //             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`,
-    //             {
-    //                 headers: {
-    //                     "User-Agent": "JustBuyTravel/1.0 (contact@justbuytravel.com)"
-    //                 }
-    //             }
-    //         );
 
-    //         const data = await response.json();
-
-    //         console.log(data, "data of reverse unicode ");
-
-
-    //         if (!data?.address) return null;
-
-    //         const address = data.address;
-
-    //         const city =
-    //             address.city ||
-    //             address.town ||
-    //             address.village ||
-    //             address.suburb ||
-    //             address.neighbourhood ||
-    //             address.borough ||
-    //             address.municipality ||
-    //             address.county ||
-    //             address.state;
-
-    //         return city || null;
-    //     } catch (error) {
-    //         console.error("Reverse geocoding error:", error);
-    //         return null;
-    //     }
-    // }, []);
-    // **********************************
-    // ***************************************************************************************
-    // const doSearch = useCallback(async (locOverride) => {
-    //     try {
-    //         if (!API_BASE) {
-    //             console.log("API_BASE is not configured, skipping background search");
-    //             return;
-    //         }
-
-    //         const params = new URLSearchParams({
-    //             location: locOverride || location,
-    //             adults: adults.toString(),
-    //             num: "100"
-    //         });
-    //         if (checkin) params.append("checkin", checkin);
-    //         if (checkout) params.append("checkout", checkout);
-
-    //         const apiUrl = `${API_BASE}/hotels.php?location=${params.toString()}`;
-    //         console.log("Fetching from:", apiUrl);
-
-    //         const res = await fetch(apiUrl)
-    //         console.log(res, "response >>>>>");
-
-    //         // Check if response is OK
-    //         if (!res.ok) {
-    //             const errorText = await res.text();
-    //             console.error("HTTP error response:", errorText.substring(0, 200));
-    //             throw new Error(`HTTP error! status: ${res.status}`);
-    //         }
-
-    //         // Read response as text first to check if it's HTML
-    //         const responseText = await res.text();
-
-    //         // Check if response is HTML (error page)
-    //         if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
-    //             console.error("Server returned HTML instead of JSON:", responseText.substring(0, 200));
-    //             throw new Error("Server returned HTML error page instead of JSON");
-    //         }
-
-    //         // Try to parse as JSON
-    //         let json;
-    //         try {
-    //             json = JSON.parse(responseText);
-    //         } catch (parseError) {
-    //             console.error("Failed to parse JSON response:", responseText.substring(0, 500));
-    //             throw new Error(`Invalid JSON response: ${parseError.message}`);
-    //         }
-
-    //         if (!json.success) {
-    //             throw new Error(json.message || "Failed to fetch hotels");
-    //         }
-    //     } catch (err) {
-    //         console.error("doSearch error:", err);
-    //     }
-    // }, [location, adults, checkin, checkout, API_BASE]);
-    // Geolocation effect: Run once on mount
-    // useEffect(() => {
-    //     // *****************************************************************************************************************
-    //     navigator.geolocation.getCurrentPosition(
-    //         async (position) => {
-    //             const { latitude, longitude } = position.coords;
-    //             console.log(`Current location: ${latitude}, ${longitude}`);
-    //             const cityName = await reverseGeocode(latitude, longitude);
-    //             console.log(cityName, "....cityname");
-
-    //             if (cityName) {
-    //                 setLocation(cityName);
-    //                 setSearchContent(cityName); // Auto-fill the search input
-    //                 console.log(`Location resolved to: ${cityName}`);
-
-    //                 await doSearch(cityName);
-    //             } else {
-    //                 const coordLocation = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
-    //                 setLocation(coordLocation);
-    //                 setSearchContent(coordLocation); // Fallback to coords in input
-    //                 await doSearch(coordLocation);
-    //             }
-    //             setIsLoadingLocation(false);
-    //         },
-    //         (err) => {
-    //             setLocation(" ");    /**************** change from nreew york  */
-    //             setSearchContent(" ");
-    //             doSearch(" ");
-    //             setIsLoadingLocation(false);
-    //         },
-    //         {
-    //             enableHighAccuracy: true,
-    //             timeout: 10000,
-    //             maximumAge: 60000,
-    //         }
-    //     );
-    // }, [reverseGeocode, doSearch]); 
     // **************************************************************************************
     // ********************************************************************************************************************
     const router = useRouter();
@@ -415,7 +287,7 @@ export default function Search() {
 
     return (
         <>
-            <section className={`Search_section  ${pathname == "/book-flights/" ? "padding_top padding_b70" : "padding_bottom"}`}>
+            <section className={`Search_section  ${pathname == "/book-flights/" ? "padding_topf50 padding_b70" : "padding_bottom"}`}>
                 <div className="container">
                     <div className="search_container ">
                         <div className="search_container_box  rounded-2xl  w-full">
