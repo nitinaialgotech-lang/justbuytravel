@@ -17,23 +17,23 @@ export default function FlightQuickLinks() {
                                 <div className="quick_link_items">
                                     {/* <h4>Asia Flights</h4> */}
                                     <ul className='p-0 flex capitalize'>
-                                        <li ><Link href={"/book-hotels-dubai"}>Flight For Dubai</Link></li>
+                                        <li ><Link href={"/book-hotels-dubai"}> Dubai Flight</Link></li>
                                         {/* <li ><Link href={"/newyork"}>New York To London</Link></li> */}
-                                        <li ><Link href={"/hotels-in-australia"}>Flight For Australia</Link></li>
-                                        <li ><Link href={"/hotels-in-canada"}>Flight For Canada</Link></li>
-                                        <li ><Link href={"/hotels-in-denmark"}>Flight For Denmark</Link></li>
-                                        <li ><Link href={"/hotels-in-glasgow"}>Flight For glasgow</Link></li>
-                                        <li ><Link href={"/hotels-in-goa"}>Flight For goa</Link></li>
-                                        <li ><Link href={"/hotels-in-ireland"}>Flight For ireland</Link></li>
-                                        <li ><Link href={"/hotels-in-manchester"}>Flight For menchester</Link></li>
-                                        <li ><Link href={"/hotels-in-New-York"}>Flight For new york</Link></li>
-                                        <li ><Link href={"/hotels-in-paris"}>Flight For paris</Link></li>
-                                        <li ><Link href={"/hotels-in-san-francisco"}>Flight For san-francisco</Link></li>
-                                        <li ><Link href={"/hotels-in-uk"}>Flight For united-kingdom</Link></li>
-                                        <li ><Link href={"/singapore"}>Flight For singapore</Link></li>
-                                        <li ><Link href={"/sydney"}>Flight For sydney</Link></li>
-                                        <li ><Link href={"/tokyo"}>Flight For tokyo</Link></li>
-                                        <li ><Link href={"/usa"}>Flight For usa</Link></li>
+                                        <li ><Link href={"/hotels-in-australia"}> Australia Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-canada"}> Canada Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-denmark"}> Denmark Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-glasgow"}> glasgow Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-goa"}> goa Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-ireland"}> ireland Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-manchester"}> menchester Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-New-York"}> new york Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-paris"}> paris Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-san-francisco"}> san-francisco Flight</Link></li>
+                                        <li ><Link href={"/hotels-in-uk"}> united-kingdom Flight</Link></li>
+                                        <li ><Link href={"/singapore"}> singapore Flight</Link></li>
+                                        <li ><Link href={"/sydney"}> sydney Flight</Link></li>
+                                        <li ><Link href={"/tokyo"}> tokyo Flight</Link></li>
+                                        <li ><Link href={"/usa"}> usa Flight</Link></li>
 
 
 

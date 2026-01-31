@@ -19,23 +19,23 @@ export default function QuickLinks() {
                                     <div className="quick_link_items">
                                         {/* <h4>Asia Flights</h4> */}
                                         <ul className='p-0 flex capitalize'>
-                                            <li ><Link href={"/book-hotels-dubai"}>Hotel In Dubai</Link></li>
+                                            <li ><Link href={"/book-hotels-dubai"}> Dubai Hotel</Link></li>
                                             {/* <li ><Link href={"/newyork"}>New York To London</Link></li> */}
-                                            <li ><Link href={"/hotels-in-australia"}>Hotel In Australia</Link></li>
-                                            <li ><Link href={"/hotels-in-canada"}>Hotel In Canada</Link></li>
-                                            <li ><Link href={"/hotels-in-denmark"}>Hotel In Denmark</Link></li>
-                                            <li ><Link href={"/hotels-in-glasgow"}>Hotel In glasgow</Link></li>
-                                            <li ><Link href={"/hotels-in-goa"}>Hotel In goa</Link></li>
-                                            <li ><Link href={"/hotels-in-ireland"}>Hotel In ireland</Link></li>
-                                            <li ><Link href={"/hotels-in-manchester"}>Hotel In menchester</Link></li>
-                                            <li ><Link href={"/hotels-in-New-York"}>Hotel In new york</Link></li>
-                                            <li ><Link href={"/hotels-in-paris"}>Hotel In paris</Link></li>
-                                            <li ><Link href={"/hotels-in-san-francisco"}>Hotel In san-francisco</Link></li>
-                                            <li ><Link href={"/hotels-in-uk"}>Hotel In united-kingdom</Link></li>
-                                            <li ><Link href={"/singapore"}>Hotel In singapore</Link></li>
-                                            <li ><Link href={"/sydney"}>Hotel In sydney</Link></li>
-                                            <li ><Link href={"/tokyo"}>Hotel In tokyo</Link></li>
-                                            <li ><Link href={"/usa"}>Hotel In usa</Link></li>
+                                            <li ><Link href={"/hotels-in-australia"}> Australia Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-canada"}> Canada Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-denmark"}> Denmark Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-glasgow"}> glasgow Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-goa"}> goa Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-ireland"}> ireland Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-manchester"}> menchester Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-New-York"}> new york Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-paris"}> paris Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-san-francisco"}> san-francisco Hotel</Link></li>
+                                            <li ><Link href={"/hotels-in-uk"}> united-kingdom Hotel</Link></li>
+                                            <li ><Link href={"/singapore"}> singapore Hotel</Link></li>
+                                            <li ><Link href={"/sydney"}> sydney Hotel</Link></li>
+                                            <li ><Link href={"/tokyo"}> tokyo Hotel</Link></li>
+                                            <li ><Link href={"/usa"}> usa Hotel</Link></li>
 
 
 

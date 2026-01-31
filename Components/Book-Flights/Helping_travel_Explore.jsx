@@ -13,33 +13,33 @@ export default function Helping_travel_Explore() {
     const [isAtBeginning, setIsAtBeginning] = useState(true)
     const card = [
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/justbuytravel_next/demo/flights/places/germany.jpg",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/singapore-garden.webp",
+            img: "/justbuytravel_next/demo/flights/places/nepal.jpg",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/justbuytravel_next/demo/flights/places/japan.jpg",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/singapore-garden.webp",
+            img: "/justbuytravel_next/demo/flights/places/qatar.jpg",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/justbuytravel_next/demo/flights/places/srilanka.jpg",
             title: "Autralia to singapur"
         },
         {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+            img: "/justbuytravel_next/demo/flights/places/thialand.jpg",
             title: "Autralia to singapur"
         },
-        {
-            img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
-            title: "Autralia to singapur"
-        },
+        // {
+        //     img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+        //     title: "Autralia to singapur"
+        // },
     ]
     return (
         <>

@@ -539,7 +539,7 @@ button {
   /* 👈 stronger */
   text-underline-offset: 5px;
 }
-
+/* **hover  */
 .search_container
   > .search_container_box
   > .search_tab
@@ -549,7 +549,44 @@ button {
   > a:hover {
   color: var(--bg-color);
 }
-
+.search_container
+  > .search_container_box
+  > .search_tab
+  > .tab_link
+  > ul
+  > li
+  > a:hover
+  > span:nth-child(1)
+  > svg {
+  color: var(--bg-color);
+}
+.search_container
+  > .search_container_box
+  > .search_tab
+  > .tab_link
+  > ul
+  > li
+  > a:hover
+  > .hover_icon
+  > svg
+  > path {
+  fill: var(--bg-color);
+}
+.search_container
+  > .search_container_box
+  > .search_tab
+  > .tab_link
+  > ul
+  > li
+  > a:hover
+  > .hover_icon
+  > svg
+  > g
+  > path {
+  color: var(--bg-color);
+  fill: var(--bg-color);
+}
+/* ***xxxxx */
 .search_box_input > form > .search_box > div > svg {
   font-size: 18px;
 }
@@ -3287,8 +3324,8 @@ span.rating-stars {
 .example-2 .icon-content a svg {
   position: relative;
   z-index: 1;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   fill: #fff;
 }
 .example-2 .icon-content a:hover {

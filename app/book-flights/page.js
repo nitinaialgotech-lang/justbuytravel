@@ -50,7 +50,7 @@ export default function page() {
                 <Popular_Flight_Hotel_section />
                 <Iconic_Flight_Hotel_section />
                 {/* <Flight_Iconic_Places /> */}
-                {/* <Helping_travel_Explore /> */}
+                <Helping_travel_Explore />
                 {/* <Flight_Hotel_Guide_Section /> */}
                 <Trust_Guide_Section />
                 <Flight_Faq_Section />

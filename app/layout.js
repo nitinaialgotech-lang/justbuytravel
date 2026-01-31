@@ -51,9 +51,9 @@ export const metadata = {
     telephone: false,
   },
   icons: {
-    icon: `/justbuytravel_next/demo/logo/Fav.svg`,
-    shortcut: `/justbuytravel_next/demo/logo/Fav.svg`,
-    apple: `/justbuytravel_next/demo/logo/Fav.svg`,
+    icon: `/justbuytravel_next/demo/logo/Fav.webp`,
+    shortcut: `/justbuytravel_next/demo/logo/Fav.webp`,
+    apple: `/justbuytravel_next/demo/logo/Fav.webp`,
   },
   manifest: `${basePath}/manifest.json`,
   openGraph: {
@@ -65,7 +65,7 @@ export const metadata = {
     description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
     images: [
       {
-        url: `/justbuytravel_next/demo/logo/Fav.svg`,
+        url: `/justbuytravel_next/demo/logo/Fav.webp`,
         width: 1200,
         height: 630,
 
@@ -77,7 +77,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
     description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
-    images: [`/justbuytravel_next/demo/logo/Fav.svg              `],
+    images: [`/justbuytravel_next/demo/logo/Fav.webp              `],
     creator: "@justbuytravel",
   },
   robots: {
@@ -112,7 +112,7 @@ export default function RootLayout({ children }) {
     "@type": "TravelAgency",
     "name": "Just Buy Travel",
     "url": siteUrl,
-    "logo": `/justbuytravel_next/demo/logo/Fav.svg`,
+    "logo": `/justbuytravel_next/demo/logo/Fav.webp`,
     "description": "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
     "sameAs": [
       // Add your social media links here
