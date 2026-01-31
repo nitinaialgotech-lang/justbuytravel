@@ -12,7 +12,7 @@ import { getAssetPath } from "../app/utils/assetPath";
 import QuickLinks from "@/Components/QuickLinks/QuickLinks";
 import FlightQuickLinks from "@/Components/QuickLinks/FlightQuickLinks";
 import { usePathname } from "next/navigation";
-
+import { FaLinkedin } from "react-icons/fa6";
 export default function Footer() {
   // ***************************************
   const [visible, setVisible] = useState(false);
@@ -94,39 +94,39 @@ export default function Footer() {
                 {/* **************************** */}
                 <ul className="example-2 m-0 p-0" id="icon_footer">
                   <li className="icon-content">
-                    <a
-                      href=""
-                      aria-label="LinkedIn"
-                      data-social="linkedin"
+                    <Link
+                      href="https://www.facebook.com/people/Just-buy-Travel/61577152502232/"
+                      aria-label="Facebookk"
+                      data-social="Facebook"
                     >
                       <div className="filled"></div>
                       <IoLogoFacebook />
-                    </a>
+                    </Link>
 
                   </li>
                   <li className="icon-content">
-                    <a href="" aria-label="GitHub" data-social="github">
+                    <Link href="" aria-label="GitHub" data-social="github">
                       <div className="filled"></div>
                       <RiTwitterXLine />
-                    </a>
+                    </Link>
 
                   </li>
                   <li className="icon-content">
-                    <a
-                      href=""
+                    <Link
+                      href="https://www.instagram.com/justbuytravel/"
                       aria-label="Instagram"
                       data-social="instagram"
                     >
                       <div className="filled"></div>
                       <AiFillInstagram />
-                    </a>
+                    </Link>
 
                   </li>
                   <li className="icon-content">
-                    <a href="" aria-label="Youtube" data-social="youtube">
+                    <Link href="https://www.linkedin.com/company/just-buy-travel/" aria-label="Linkdin" data-social="Linkdin">
                       <div className="filled"></div>
-                      <TbMailFilled />
-                    </a>
+                      <FaLinkedin />
+                    </Link>
 
                   </li>
                 </ul>

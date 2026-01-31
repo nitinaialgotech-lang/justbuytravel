@@ -323,8 +323,8 @@ export default function Search() {
 
                                                         }}
                                                     >
-                                                        <span>
-                                                            <FlightIcon />
+                                                        <span className="hover_icon">
+                                                            <FlightIcon color={`${activeTab == "flights" ? "#12c081" : "#1D1F27"} `} />
                                                         </span>{" "}
                                                         <span>
                                                             flights
@@ -341,13 +341,13 @@ export default function Search() {
                                                             setSearchAll(false);
                                                             setContenttext("Search hotels by name or city");
                                                             handleSearchTypeChange("hotels");
-                                                            dispatch(SetSelectAll("hotels"))
+                                                            dispatch(SetSelectAll(<>Discover Comfortable <span>Stays</span> </>))
 
 
                                                         }}
                                                     >
-                                                        <span>
-                                                            <HotelIcon /></span>{" "}
+                                                        <span className="hover_icon">
+                                                            <HotelIcon color={`${activeTab == "hotels" ? "#12c081" : "#1D1F27"} `} /></span>{" "}
                                                         <span>
                                                             hotels
                                                         </span>

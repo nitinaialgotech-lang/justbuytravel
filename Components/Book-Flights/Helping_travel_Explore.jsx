@@ -41,6 +41,10 @@ export default function Helping_travel_Explore() {
             img: "/travelexplore/london-bridge.webp",
             title: "Autralia to singapur"
         },
+        // {
+        //     img: "/justbuytravel_next/demo/travelexplore/london-bridge.webp",
+        //     title: "Autralia to singapur"
+        // },
     ]
     return (
         <>
