@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function AboutDetail() {
     return (
-        <section className='padding_bottom bg_grey pt-5'>
+        <section className='padding_bottom bg_grey '>
             <div className="container">
                 {/* <div className="row justify-center">
                     <div className="col-lg-5">
@@ -35,7 +36,7 @@ export default function AboutDetail() {
                 </div> */}
 
                 <div className="col-lg-12">
-                    <div className="detail_about">
+                    <div className="detail_about text-center">
                         {/* ********** */}
                         <div className="about_content">
                             <p>
@@ -43,9 +44,136 @@ export default function AboutDetail() {
                             </p>
                         </div>
                         {/* ************ */}
-                        <div className="break_point">
+                        <div className="break_point flex justify-center">
+                            <div className="icon">
+                                <img src="/justbuytravel_next/demo/aboutus/vector.png" alt="" />
+                            </div>
+                        </div>
+                        {/* ********** */}
+                        <div className="about_review_section">
+                            <div className="head_line section_title">
+                                <h2>
+                                    Globally recognised and growing every day
+                                </h2>
+                            </div>
+                            <div className="box_content ">
+                                <div className="row">
+                                    {/* ************************* */}
+                                    <div className="col-lg-6">
+                                        <div className="box_content_box sky_blue">
+                                            <div className="content">
+                                                <h2 className='p-0 m-0'>
+                                                    24/7
+                                                </h2>
+                                                <p>
+                                                    Customer Support
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* ************************* */}
+                                    <div className="col-lg-6">
+                                        <div className="box_content_box sky_yellow mrt-20">
+                                            <div className="content">
+                                                <h2 className='p-0 m-0'>
+                                                    1M+
+                                                </h2>
+                                                <p>
+                                                    Real traveler reviews
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* ************************* */}
+                                    <div className="col-lg-6 mt-4">
+                                        <div className="box_content_box sky_green">
+                                            <div className="content">
+                                                <h2 className='p-0 m-0'>
+                                                    100+
+                                                </h2>
+                                                <p>
+                                                    Countries with accommodation
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* ************************* */}
+                                    <div className="col-lg-6 mt-4">
+                                        <div className="box_content_box sky_red">
+                                            <div className="content">
+                                                <h2 className='p-0 m-0'>
+                                                    1k+
+                                                </h2>
+                                                <p>
+                                                    Hotels and homes worldwide
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* ************************* */}
+                                </div>
+
+                            </div>
 
                         </div>
+                    </div>
+                </div>
+                {/* ********************************* a bit more about us ..................... */}
+
+                <div className="bitmore_section padding_top">
+
+                    <div className="section_title">
+                        <h2 className='m-0 p-0'>
+                            A bit more about us...
+                        </h2>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-5">
+                            <div className="bit_content relative">
+                                <img src="bit1.png" alt="" className='relative' />
+                                <div className="content absolute ">
+                                    <p className=''>
+                                        What exactly does Justbuytravel offer?
+                                    </p>
+                                    <h2>
+                                        Flights, and more at affordable prices
+                                    </h2>
+                                    <Link href={""}>Check Now</Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-7">
+
+
+
+                            <div className="bit_content relative right_h mrt-20">
+                                <img src="bit2.png" alt="" className='relative' />
+                                <div className="content absolute ">
+
+                                    <h2>
+                                        Book a memreable moment with your travel buddy!
+                                    </h2>
+                                    <Link href={""}>Check Now</Link>
+                                </div>
+                            </div>
+
+                            {/* ************* */}
+
+
+                            <div className="bit_content relative right_h mt-4">
+                                <img src="bit3.png" alt="" className='relative' />
+                                <div className="content absolute bottom-7">
+
+                                    <h2>
+                                        Luxury hotels at affordable prices
+                                    </h2>
+                                    <Link href={""}>Check Now</Link>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

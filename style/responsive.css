@@ -608,8 +608,22 @@
     padding: 0px 20px 0px 20px !important;
   }
   .about_section {
-    background-image: none;
     padding: 0;
+  }
+  .bit_content > .content > p {
+    margin-bottom: 0px;
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .mrt-20 {
+    margin-top: 25px;
+  }
+  .bit_content > .content > h2 {
+    font-size: 32px !important;
+    line-height: 1.2;
+  }
+  .detail_about {
+    margin-top: -15%;
   }
   .about_content {
     margin-top: 20px;

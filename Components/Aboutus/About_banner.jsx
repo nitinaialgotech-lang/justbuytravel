@@ -23,9 +23,6 @@ export default function About_banner() {
                     </div>
                 </div>
             </section>
-
-
-
             <AboutDetail />
 
             <Trust_Guide_Section />
