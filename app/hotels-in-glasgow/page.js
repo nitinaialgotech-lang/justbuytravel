@@ -1,7 +1,5 @@
 import Header from '@/component/Header'
 import GlasGowBanner from '@/Components/InnerPages/GlasGow/GlasGowBanner'
-import React, { Suspense } from 'react'
-import { generateDestinationMetadata, generateBreadcrumbStructuredData } from '@/app/utils/seo'
 export const metadata = {
     title: "Hotels in Glasgow | Luxury & Family Stays | Just Buy Travel ",
     description:
@@ -15,17 +13,13 @@ export const metadata = {
         type: "website",
     },
     alternates: {
-        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com',
+        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com/hotels-in-glasgow',
     },
-    robots: { index: false, follow: false },
+    robots: { index: true, follow: true },
 };
 
 
 export default function page() {
-    const breadcrumbData = generateBreadcrumbStructuredData([
-        { name: 'Home', path: '/' },
-        { name: 'Glasgow', path: '/glasgow' }
-    ]);
 
 
     const faqSchema = {
@@ -77,10 +71,6 @@ export default function page() {
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

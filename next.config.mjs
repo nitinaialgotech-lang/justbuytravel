@@ -6,11 +6,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: 'https://justbuytravel.com/',
-        permanent: true,
-      },
-      {
         source: '/book-hotel',
         destination: 'https://justbuytravel.com/book-hotels-online/',
         permanent: true,

@@ -7,6 +7,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
 import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
+import DubaiFaqSection from './DubaiFaqSection';
+
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -16,7 +18,6 @@ import IconicPlacesInDubai from './IconicPlacesInDubai';
 import DubaiBookingTips from './DubaiBookingTips';
 import DubaiAmazingDeals from './DubaiAmazingDeals';
 import Blogs from '@/Components/HomePage/Blog/Blogs';
-import FaqSection from '@/Components/HomePage/Faq/FaqSection';
 import Footer from '@/component/Footer';
 import { useRouter } from 'next/navigation';
 import { renderBootstrapStars } from '@/component/renderBootstrapStars';
@@ -239,7 +240,7 @@ export default function DubaiRecomdSection() {
             <DubaiBookingTips />
             <DubaiAmazingDeals />
             <Blogs />
-            <FaqSection />
+            <DubaiFaqSection />
             <Footer />
 
 

@@ -1,8 +1,6 @@
 import Header from '@/component/Header'
 import ManchesterBanner from '@/Components/InnerPages/Manchester/ManchesterBanner'
 import React, { Suspense } from 'react'
-import { generateDestinationMetadata, generateBreadcrumbStructuredData } from '@/app/utils/seo'
-import { getDestinationMetadata } from '@/app/utils/destinationMetadata'
 export const metadata = {
     title: "Hotels in Manchester | Luxury & Budget Stays | Just Buy Travel  ",
     description:
@@ -16,17 +14,13 @@ export const metadata = {
         type: "website",
     },
     alternates: {
-        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com',
+        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com/hotels-in-manchester',
     },
-    robots: { index: false, follow: false },
+    robots: { index: true, follow: true },
 };
 
 
 export default function page() {
-    const breadcrumbData = generateBreadcrumbStructuredData([
-        { name: 'Home', path: '/' },
-        { name: 'Manchester', path: '/manchester' }
-    ]);
     const FaqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -77,10 +71,6 @@ export default function page() {
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}

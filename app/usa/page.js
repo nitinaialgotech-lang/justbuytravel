@@ -1,28 +1,29 @@
 import Header from '@/component/Header'
 import UsaBanner from '@/Components/InnerPages/USA/UsaBanner'
 import React, { Suspense } from 'react'
-import { generateDestinationMetadata, generateBreadcrumbStructuredData } from '@/app/utils/seo'
-import { getDestinationMetadata } from '@/app/utils/destinationMetadata'
 
-const destination = 'usa';
-const customData = getDestinationMetadata(destination);
-
-export const metadata = generateDestinationMetadata(destination, customData);
-
+export const metadata = {
+    title: "Hotels in USA | Best hotels in USA | Just Buy Travel",
+    description:
+        "Explore hotels in USA, from luxury stays to affordable options. Compare the best hotels in USA and plan your trip with Just Buy Travel. ",
+    keywords:
+        "hotels in USA",
+    openGraph: {
+        title: "Hotels in USA | Best hotels in USA | Just Buy Travel",
+        description:
+            "Explore hotels in USA, from luxury stays to affordable options. Compare the best hotels in USA and plan your trip with Just Buy Travel. ",
+        type: "website",
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/usa`,
+    },
+    alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/usa`,
+    },
+    robots: { index: false, follow: false },
+};  
 export default function page() {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
-    
-    const breadcrumbData = generateBreadcrumbStructuredData([
-        { name: 'Home', path: '/' },
-        { name: 'USA', path: '/usa' }
-    ]);
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-            />
             
             <Suspense fallback={<div>Loading...</div>}>
                 <Header />

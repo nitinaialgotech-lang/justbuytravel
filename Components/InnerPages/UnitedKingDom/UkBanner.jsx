@@ -14,11 +14,11 @@ export default function UkBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> United KingDom</span>
+                                            Book Hotel in<span> UK</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                                               How can we help you travel better for less?
-                                                           </h5> */}
+                                        <p className='capitalize'>
+                                            Helping travelers choose the best hotels in the UK with transparent pricing, verified stays, and reliable information.
+                                        </p>
                                     </div>
                                 </div>
                             </div>

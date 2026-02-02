@@ -18,8 +18,8 @@ export const metadata = {
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/aboutus`,
     },
     robots: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
     },
 };
 

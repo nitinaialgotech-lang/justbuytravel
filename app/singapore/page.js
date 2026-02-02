@@ -2,27 +2,29 @@ import Header from '@/component/Header'
 import SingaporeBanner from '@/Components/InnerPages/Singapore/SingaporeBanner'
 import SingaporeRecomdSection from '@/Components/InnerPages/Singapore/SingaporeRecomdSection'
 import React, { Suspense } from 'react'
-import { generateDestinationMetadata, generateBreadcrumbStructuredData } from '@/app/utils/seo'
-import { getDestinationMetadata } from '@/app/utils/destinationMetadata'
 
-const destination = 'singapore';
-const customData = getDestinationMetadata(destination);
-
-export const metadata = generateDestinationMetadata(destination, customData);
+export const metadata = {
+    title: "Hotels in Singapore | Best hotels in Singapore | Just Buy Travel",
+    description:
+        "Explore hotels in Singapore, from luxury stays to affordable options. Compare the best hotels in Singapore and plan your trip with Just Buy Travel. ",
+    keywords:
+        "hotels in Singapore",
+    openGraph: {
+        title: "Hotels in Singapore | Best hotels in Singapore | Just Buy Travel",
+        description:
+            "Explore hotels in Singapore, from luxury stays to affordable options. Compare the best hotels in Singapore and plan your trip with Just Buy Travel. ",
+        type: "website",
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/singapore`,
+    },
+    alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/singapore`,
+    },
+    robots: { index: false, follow: false },
+};
 
 export default function page() {
-    const breadcrumbData = generateBreadcrumbStructuredData([
-        { name: 'Home', path: '/' },
-        { name: 'Singapore', path: '/singapore' }
-    ]);
-
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-            />
-            
             <Suspense fallback={<div>Loading...</div>}>
                 <Header />
                 <SingaporeBanner />

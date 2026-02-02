@@ -1,7 +1,6 @@
 import Header from '@/component/Header'
 import SanFrancBanner from '@/Components/InnerPages/SanFransci/SanFrancBanner'
 import { React, Suspense } from 'react'
-import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
 const canonicalUrl = `${siteUrl}/hotels-in-san-francisco`;
@@ -27,13 +26,9 @@ export const metadata = {
     alternates: {
         canonical: canonicalUrl,
     },
-    robots: { index: false, follow: false },
+    robots: { index: true, follow: true },
 };
 export default function page() {
-    const breadcrumbData = generateBreadcrumbStructuredData([
-        { name: 'Home', path: '/' },
-        { name: 'San Francisco', path: '/san-francisco' }
-    ]);
     const FaqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -84,10 +79,6 @@ export default function page() {
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}

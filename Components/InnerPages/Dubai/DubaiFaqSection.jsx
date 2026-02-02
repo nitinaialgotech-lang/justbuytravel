@@ -1,9 +1,9 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import "../HomePage/Faq/faq.css"
 import { Accordion } from 'react-bootstrap'
 import { GoPlusCircle } from "react-icons/go"
 import { MdArrowOutward } from 'react-icons/md'
+import "../../HomePage/Faq/faq.css"
 
 const DEFAULT_KEY = "0"
 
@@ -122,7 +122,6 @@ export default function DubaiFaqSection() {
                                     </div>
                                 </div>
                             </Accordion.Header>
-
                             <Accordion.Body>
                                 <div className="accordion_body">
                                     <p>{item.content}</p>

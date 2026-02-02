@@ -23,7 +23,7 @@ export const metadata = {
         type: "website",
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/book-flights`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/flights`,
     },
     robots: {
         index: true,
@@ -32,18 +32,9 @@ export const metadata = {
 };
 
 export default function page() {
-    const breadcrumbData = generateBreadcrumbStructuredData([
-        { name: 'Home', path: '/' },
-        { name: 'Book Flights', path: '/book-flights' }
-    ]);
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-            />
-
             <Suspense >
                 <Header />
                 <Book_Flight_Banner />

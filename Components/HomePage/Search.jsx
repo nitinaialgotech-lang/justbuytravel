@@ -30,9 +30,7 @@ export default function Search() {
     const [imageLoading, setImageLoading] = useState({});
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
-    // *******************************
     const dispatch = useDispatch();
-    /*********************xxxxxxxxxxxxxxxxxxxxxxxx  search or hotels button**************************  */
     const [searchAll, setSearchAll] = useState(!isBookHotelsPage);
     const [searchType, setSearchType] = useState(isBookHotelsPage ? "hotels" : "all");
     const [searchContent, setSearchContent] = useState("");

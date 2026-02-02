@@ -1,7 +1,6 @@
 import Header from '@/component/Header'
 import BookHotels_Banner from '@/Components/Book-Hotels/BookHotels_Banner'
 import React, { Suspense } from 'react'
-import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
 
 export const metadata = {
     title: "Book Hotels Online | Hotel Deals Online | Just Buy Travel",
@@ -13,7 +12,7 @@ export const metadata = {
         type: "website",
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/book-hotels`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/book-hotels-online`,
     },
     robots: {
         index: true,
@@ -22,10 +21,6 @@ export const metadata = {
 };
 
 export default function page() {
-    const breadcrumbData = generateBreadcrumbStructuredData([
-        { name: 'Home', path: '/' },
-        { name: 'Book Hotels', path: '/book-hotels' }
-    ]);
     const FaqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -76,10 +71,6 @@ export default function page() {
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}

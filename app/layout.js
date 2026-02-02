@@ -4,11 +4,23 @@ import { Suspense } from "react";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { QueryClientProviderWrapper } from "./QueryClientProvider";
-import RouteChangeLoader from "@/component/RouteChangeLoader";
 import ReduxProvider from "./ReduxProvider";
 
+const metadata = {
+  title: "Just Buy Travel",
+  description: "Just Buy Travel is a travel agency that helps you find the best hotels and flights for your trip.",
+  keywords: "travel, hotels, flights, packages, deals, discounts, travel agency, travel booking, travel planning",
+  icons: {
+    icon: "/favicon.ico",
+  },
+  manifest: "/manifest.json",
+  openGraph: {
+    title: "Just Buy Travel",
+    description: "Just Buy Travel is a travel agency that helps you find the best hotels and flights for your trip.",
+  },
+};
 
+export { metadata };
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +46,7 @@ export default function RootLayout({ children }) {
     "@type": "TravelAgency",
     "name": "Just Buy Travel",
     "url": siteUrl,
-    "logo": `${layoutBasePath}/logo/Fav.webp`,
+    "logo": `${layoutBasePath}/android-chrome-192x192.png`,
     "description": "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
     "sameAs": [
       // Add your social media links here

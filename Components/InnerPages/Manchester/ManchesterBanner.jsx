@@ -15,7 +15,7 @@ export default function ManchesterBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Hotels in  <span> Australia</span>
+                                            Hotels in  <span> Manchester</span>
                                         </h1>
                                         <p className='capitalize'>
                                             Helping travellers choose the right hotels in  Manchester with clarity, confidence, reliable insights, transparent pricing, and trusted information.
