@@ -101,6 +101,12 @@
 }
 /* ************************************************************************************************************************ */
 @media only screen and (max-width: 767px) {
+  .bottom_images{
+      display: none;
+  }
+  .no-found-page h1{
+    font-size: 32px;
+}
   /* ********** */
   .search_container {
     box-shadow: none;

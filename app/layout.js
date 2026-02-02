@@ -23,85 +23,7 @@ const geistMono = Geist_Mono({
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
 
-export const metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
-    template: "%s | Just Buy Travel"
-  },
-  description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place. Find the best travel deals and book your perfect vacation.",
-  keywords: [
-    "travel deals",
-    "hotel reviews",
-    "travel booking",
-    "vacation packages",
-    "destination guides",
-    "travel tips",
-    "hotel comparison",
-    "travel offers",
-    "cheap flights",
-    "travel destinations"
-  ],
-  authors: [{ name: "Just Buy Travel" }],
-  creator: "Just Buy Travel",
-  publisher: "Just Buy Travel",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  icons: {
-    icon: `${basePath}/logo/Fav.svg`,
-    shortcut: `${basePath}/logo/Fav.svg`,
-    apple: `${basePath}/logo/Fav.svg`,
-  },
-  manifest: `${basePath}/manifest.json`,
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteUrl,
-    siteName: "Just Buy Travel",
-    title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
-    description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
-    images: [
-      {
-        url: `${basePath}/logo/Fav.svg`,
-        width: 1200,
-        height: 630,
 
-        alt: "Just Buy Travel - Your Trusted Travel Companion",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Just Buy Travel: Trusted Reviews, Travel Deals & Destination Ideas",
-    description: "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
-    images: [`${basePath}/logo/Fav.svg`],
-    creator: "@justbuytravel",
-  },
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  verification: {
-    // Add your verification codes here when available
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
-    // bing: "your-bing-verification-code",
-  },
-  alternates: {
-    canonical: siteUrl,
-  },
-  category: "Travel",
-};
 
 export default function RootLayout({ children }) {
   const layoutBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -112,7 +34,7 @@ export default function RootLayout({ children }) {
     "@type": "TravelAgency",
     "name": "Just Buy Travel",
     "url": siteUrl,
-    "logo": `${layoutBasePath}/logo/Fav.svg`,
+    "logo": `${layoutBasePath}/logo/Fav.webp`,
     "description": "Travel made easy with Just Buy Travel. Explore honest reviews, best hotel offers, tours, attractions & dining deals—all in one place.",
     "sameAs": [
       // Add your social media links here

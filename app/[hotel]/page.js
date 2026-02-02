@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import SearchHotelDetail from '@/Components/SearchResultPage/HotelDetail/SearchHotelDetail';
 import { GetHotel_Detail } from '@/app/Route/endpoints';
 import {
@@ -52,14 +53,14 @@ export default async function HotelDetailPage({ params }) {
         const resolvedParams = await params;
         const hotelId = getHotelIdFromSlug(resolvedParams?.hotel);
         if (!hotelId) {
-            return <SearchHotelDetail />;
+            notFound();
         }
 
         const response = await GetHotel_Detail(hotelId);
         const hotel = response?.data;
 
         if (!hotel) {
-            return <SearchHotelDetail />;
+            notFound();
         }
 
         const hotelName = hotel?.displayName?.text || hotel?.name || 'Hotel';
@@ -85,6 +86,9 @@ export default async function HotelDetailPage({ params }) {
             </>
         );
     } catch (error) {
+        if (error?.digest === 'NEXT_HTTP_ERROR_FALLBACK;404') {
+            throw error;
+        }
         console.error('Error loading hotel:', error);
         return <SearchHotelDetail />;
     }

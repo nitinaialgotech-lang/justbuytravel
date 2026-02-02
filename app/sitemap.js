@@ -26,27 +26,9 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/search`,
-      lastModified: new Date(),
-      changeFrequency: 'hourly',
-      priority: 0.9,
-    },
-    {
       url: `${baseUrl}/blogs`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/hotels`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/view-all-hotels`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
       priority: 0.8,
     },
     {
@@ -74,12 +56,6 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/faq`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
       url: `${baseUrl}/privacy-policy`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
@@ -93,19 +69,7 @@ export default async function sitemap() {
     },
   ];
 
-  // Destination pages
-  const destinations = [
-    'usa', 'dubai', 'paris', 'tokyo', 'singapore', 'sydney', 'newyork',
-    'goa', 'canada', 'australia', 'denmark', 'ireland', 'united-kingdom',
-    'manchester', 'glasgow', 'san-francisco', 'saudi-to-india'
-  ];
 
-  const destinationPages = destinations.map(destination => ({
-    url: `${baseUrl}/${destination}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.8,
-  }));
 
   // Fetch dynamic blog posts
   let blogPages = [];
@@ -125,7 +89,6 @@ export default async function sitemap() {
 
   return [
     ...staticPages,
-    ...destinationPages,
     ...blogPages,
   ];
 }
