@@ -13,7 +13,7 @@ export default function PackageBanner() {
         <>
 
 
-            <section className='about_section page_banner_section relative'>
+            <section className='about_section inner_page_banner_section relative'>
                 <div className="container">
                     <div className="row justify-center">
                         <div className="col-lg-12">

@@ -155,6 +155,23 @@ export default function PackageDeals() {
                                                         </div>
                                                         {/* **************************************************** */}
                                                         <div className="package_bundle">
+
+                                                            <div className="price flex items-end justify-start gap-1 mt-2">
+
+                                                                <h6 className='m-0'>
+                                                                    $809
+                                                                </h6>
+                                                                <h6 className='m-0'> 100</h6>
+                                                            </div>
+                                                            <p>
+                                                                per traveler
+                                                            </p>
+                                                            <p>
+                                                                Sun, Mar 1 - Sat, Mar 7 (6 nights)
+                                                            </p>
+                                                            <p>
+                                                                Found 12 hours ago
+                                                            </p>
                                                             <div className="bundle_bag">
                                                                 <div className="bundle">
                                                                     <span>
@@ -168,25 +185,6 @@ export default function PackageDeals() {
 
 
                                                             </div>
-                                                            <div className="price flex items-end justify-end gap-1 mt-2">
-
-                                                                <h6 className='m-0'>
-                                                                    $809
-                                                                </h6>
-
-                                                                <h6 className='m-0'> 100</h6>
-
-
-                                                            </div>
-                                                            <p>
-                                                                per traveler
-                                                            </p>
-                                                            <p>
-                                                                Sun, Mar 1 - Sat, Mar 7 (6 nights)
-                                                            </p>
-                                                            <p>
-                                                                Found 12 hours ago
-                                                            </p>
 
                                                         </div>
 
