@@ -3,24 +3,94 @@ import React, { useEffect, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { GetAccommodationDetails, nearbyPlaces, SearchLocation } from "@/app/Route/endpoints";
+import { nearbyPlaces, TopHotelAroundWorld } from "@/app/Route/endpoints";
 import "../../../style/searchresult.css";
 import Link from "next/link";
 import "../../../style/search.scss";
 import { createHotelSlug } from "@/app/utils/seo";
 
 export default function ViewAllHotels() {
-    // ********************************
     const searchQuery = useSearchParams();
-
     const lat = searchQuery.get("lat");
-    const long = searchQuery.get("long")
+    const long = searchQuery.get("long");
+    const hasUrlCoords = lat != null && lat !== "" && long != null && long !== "";
 
-    const { data, isLoading } = useQuery({
-        queryKey: ["gethotels", lat, long],
-        queryFn: () => nearbyPlaces(lat, long)
-    })
-    const hotelData = data?.data?.places;
+    const [userCoords, setUserCoords] = useState(null);
+    const [geoAttempted, setGeoAttempted] = useState(false);
+
+    useEffect(() => {
+        if (hasUrlCoords) return;
+        if (typeof window === "undefined" || !navigator?.geolocation) {
+            setGeoAttempted(true);
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                setUserCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+                setGeoAttempted(true);
+            },
+            () => {
+                setGeoAttempted(true);
+            },
+            { timeout: 10000, maximumAge: 300000 }
+        );
+    }, [hasUrlCoords]);
+
+    const effectiveLat = hasUrlCoords ? lat : userCoords?.lat;
+    const effectiveLng = hasUrlCoords ? long : userCoords?.lng;
+    const hasCoords = effectiveLat != null && effectiveLng != null;
+
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: ["gethotels", effectiveLat, effectiveLng],
+        queryFn: () => nearbyPlaces(effectiveLat, effectiveLng, 60),
+        enabled: hasCoords,
+    });
+
+    const [accumulatedPlaces, setAccumulatedPlaces] = useState([]);
+    const [nextPageToken, setNextPageToken] = useState(null);
+    const [loadingMore, setLoadingMore] = useState(false);
+
+    useEffect(() => {
+        if (!hasCoords || !data?.data) return;
+        const places = data.data.places ?? [];
+        const token = data.data.nextPageToken ?? data.data.next_page_token ?? null;
+        setAccumulatedPlaces(places);
+        setNextPageToken(token);
+    }, [hasCoords, data]);
+
+    useEffect(() => {
+        if (!hasCoords) return;
+        setAccumulatedPlaces([]);
+        setNextPageToken(null);
+    }, [effectiveLat, effectiveLng]);
+
+    const { data: topData, isLoading: topLoading, isError: topError } = useQuery({
+        queryKey: ["tophotels"],
+        queryFn: () => TopHotelAroundWorld(),
+        enabled: !hasCoords && geoAttempted,
+    });
+
+    const topPlacesRaw = topData?.data;
+    const topPlacesList = Array.isArray(topPlacesRaw) ? topPlacesRaw : (topPlacesRaw?.places ?? []);
+    const hotelData = hasCoords ? accumulatedPlaces : topPlacesList;
+    const isLoadingHotels = hasCoords ? isLoading : topLoading;
+    const isErrorHotels = hasCoords ? isError : topError;
+
+    const loadMoreNearby = async () => {
+        if (!nextPageToken || loadingMore || !effectiveLat || !effectiveLng) return;
+        setLoadingMore(true);
+        try {
+            const res = await nearbyPlaces(effectiveLat, effectiveLng, 20, nextPageToken);
+            const body = res?.data ?? {};
+            const newPlaces = body.places ?? [];
+            const newToken = body.nextPageToken ?? body.next_page_token ?? null;
+            setAccumulatedPlaces((prev) => [...prev, ...newPlaces]);
+            setNextPageToken(newToken);
+            setVisibleCount((prev) => prev + loadMoreCount);
+        } finally {
+            setLoadingMore(false);
+        }
+    };
     // ************************************** swimmer effect **************
     const ShimmerCard = () => (
         <div className="card_col">
@@ -60,10 +130,11 @@ export default function ViewAllHotels() {
         </div>
     );
     // ************************************* on load more button show 
-    const itemPerPage = 9;
-    const [visibleCount, setVisibleCount] = useState(itemPerPage);
+    const initialCount = 10;
+    const loadMoreCount = 10; // number of hotels to add per "Load More" click
+    const [visibleCount, setVisibleCount] = useState(initialCount);
     useEffect(() => {
-        setVisibleCount(itemPerPage);
+        setVisibleCount(initialCount);
     }, [hotelData]);
     return (
         <>
@@ -77,9 +148,17 @@ export default function ViewAllHotels() {
                     <div id="sidebar_filter_hotel" className="row gy-md-5 gy-4">
                         {/* ***************************** shimmer show  */}
 
-                        {
-
-                            isLoading ? Array.from({ length: itemPerPage }).map((_, i) => (
+                        {!hasUrlCoords && !geoAttempted ? (
+                            <div className="col-12 text-center py-10">
+                                <p className="text-gray-600 mb-2">Getting your location...</p>
+                                <p className="text-sm text-gray-500">We&apos;ll show nearby hotels. If location is unavailable, we&apos;ll show world&apos;s top hotels.</p>
+                                <div className="row gy-md-5 gy-4 mt-2">
+                                    {Array.from({ length: initialCount }).map((_, i) => (
+                                        <div key={`shimmer-${i}`} className="col-md-4"><ShimmerCard /></div>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : isLoadingHotels ? Array.from({ length: initialCount }).map((_, i) => (
 
                                 <div
                                     className="col-md-4 item wow animate fadeInDown"
@@ -88,10 +167,17 @@ export default function ViewAllHotels() {
                                     key={`shimmer-${i}`}>
 
                                     <ShimmerCard />
-                                </div>)) :
-
-
-                                hotelData?.slice(0, visibleCount)?.map((item, i) => {
+                                </div>)) : isErrorHotels ? (
+                            <div className="col-12 text-center py-10">
+                                <p className="text-red-600 mb-2">Unable to load hotels.</p>
+                                <p className="text-sm text-gray-500">{hasCoords ? (error?.message || "Please try again later or search for a different location.") : "Could not load world&apos;s top hotels. Try searching for a location above."}</p>
+                            </div>
+                        ) : hotelData.length === 0 ? (
+                            <div className="col-12 text-center py-10">
+                                <p className="text-gray-600">{hasCoords ? "No hotels found for this location." : "No hotels available. Try searching for a location above."}</p>
+                            </div>
+                        ) : (
+                                hotelData.slice(0, visibleCount).map((item, i) => {
 
                                     const image = item?.photos
                                         ?.slice(0, 1)
@@ -110,7 +196,7 @@ export default function ViewAllHotels() {
                                                 className="col-md-4 item wow animate fadeInDown"
                                                 data-wow-delay="200ms"
                                                 data-wow-duration="1500ms"
-                                                key={i}
+                                                key={item?.id ?? i}
                                             >
                                                 <div className="hotel-card">
                                                     <div className="hotel-img-wrap">
@@ -131,7 +217,7 @@ export default function ViewAllHotels() {
                                                                 <div className="rating-stars">
                                                                     <ul>
                                                                         {(() => {
-                                                                            const rating = item?.reviews?.value || 0;
+                                                                            const rating = item?.reviews?.value ?? item?.rating ?? 0;
                                                                             const fullStars = Math.floor(rating);
                                                                             const hasHalfStar = rating - fullStars >= 0.5 && rating - fullStars < 1;
                                                                             return Array.from({ length: 5 }).map((_, idx) => (
@@ -152,7 +238,7 @@ export default function ViewAllHotels() {
                                                             </div>
                                                         </div>
                                                         <h5>
-                                                            <a href="#">{truncateText(item?.displayName?.text, 30)}   </a>
+                                                            <a href="#">{truncateText(item?.displayName?.text || item?.name, 30)}   </a>
                                                         </h5>
 
                                                         {/* <ul className="hotel-feature-list">
@@ -191,7 +277,7 @@ export default function ViewAllHotels() {
                                                     </div> */}
                                                         <div className="btn-and-price-area">
                                                             <Link
-                                                                href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, item?.id)}`}
+                                                                href={`/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.name, item?.id)}`}
                                                                 className="primary-btn1"
                                                             >
                                                                 <span>
@@ -395,23 +481,27 @@ export default function ViewAllHotels() {
                                             </div>
                                         </>
                                     );
-
-
-
-
-                                })}
+                                })
+                        )}
 
 
 
 
                         {/* ***************************************************************************** pagination >>>>>>>>>>>>>>>>>>> */}
                         <div className="pagination_wrapper text-center flex justify-center mb-10">
-                            {visibleCount < hotelData?.length && (
+                            {Array.isArray(hotelData) && (visibleCount < hotelData.length || (hasCoords && nextPageToken)) && (
                                 <button
-                                    className="px-3 py-2 rounded bg-color-green text-black font-semibold"
-                                    onClick={() => setVisibleCount(prev => prev + itemPerPage)}
+                                    className="px-3 py-2 rounded bg-color-green text-black font-semibold disabled:opacity-70"
+                                    disabled={loadingMore}
+                                    onClick={() => {
+                                        if (visibleCount + loadMoreCount <= hotelData.length) {
+                                            setVisibleCount((prev) => prev + loadMoreCount);
+                                        } else if (hasCoords && nextPageToken) {
+                                            loadMoreNearby();
+                                        }
+                                    }}
                                 >
-                                    Load More
+                                    {loadingMore ? "Loading more..." : "Load More"}
                                 </button>
                             )}
                         </div>

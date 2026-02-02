@@ -123,10 +123,12 @@ export const RestaurantApi = async (text) => {
 export const autoComplete = async (text, limit = 10) => {
     return await https_SearchCity.get(`/autocomplete.php?input=${text}&maxResultCount=${limit}`)
 }
-export const nearbyPlaces = async (lat, lng) => {
-    return await https_SearchCity.get(
-        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=20`
-    );
+export const nearbyPlaces = async (lat, lng, maxResultCount = 20, pageToken = null) => {
+    let url = `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=${maxResultCount}`;
+    if (pageToken) {
+        url += `&pageToken=${encodeURIComponent(pageToken)}`;
+    }
+    return await https_SearchCity.get(url);
 };
 
 export const Restro = async (lat, lng) => {

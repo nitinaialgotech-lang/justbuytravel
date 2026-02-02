@@ -19,7 +19,7 @@ export default function ViewAllHotelBanner() {
                                 <div className="search_banner_box">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            <span>{city}  </span>hotels
+                                            {city ? <><span>{city}  </span>hotels</> : "Top Hotels"}
                                         </h1>
                                         {/* <h5 className='capitalize'>
 
@@ -44,7 +44,7 @@ export default function ViewAllHotelBanner() {
                         <ol className="breadcrumb mb-2 padding_bottom ps-2 pb-md-0">
                             <li className="breadcrumb-item"><Link href="/">Home</Link></li>
                             <li className="breadcrumb-item"><Link href="/">All Hotels</Link></li>
-                            <li className="breadcrumb-item active capitalize" aria-current="page">{city}</li>
+                            <li className="breadcrumb-item active capitalize" aria-current="page">{city || "Top Hotels"}</li>
                         </ol>
                     </nav>
                 </div>
