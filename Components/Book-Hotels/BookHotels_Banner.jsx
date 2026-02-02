@@ -12,13 +12,13 @@ import Trust_Guide_Section from '../Aboutus/Trust_Guide_Section'
 import { useSelector } from 'react-redux'
 
 const BANNER_TITLES = {
-    all: <>Smart Travel <span>Planning</span></>,
-    flights: <>Smart <span>Flight</span> Deals</>,
-    hotels: <>Explore Best <span>Stays</span> </>,
-    restaurants: <>Great Places <span>To eat</span></>,
+  all: <>Smart Travel <span>Planning</span></>,
+  flights: <>Smart <span>Flight</span> Deals</>,
+  hotels: <>Explore Best <span>Stays</span> </>,
+  restaurants: <>Great Places <span>To eat</span></>,
 }
 
-const DEFAULT_BANNER_TITLE = <>Compare and  <span>Book Hotels</span> Online Easily</>
+const DEFAULT_BANNER_TITLE = <>Compare &  <span>Book Hotels</span> Online Easily</>
 
 export default function BookHotels_Banner() {
   const selectAllKey = useSelector((state) => state.user.SelectAll)
@@ -30,11 +30,11 @@ export default function BookHotels_Banner() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <div className="book_hotel_banner_section">
+              <div className="book_hotel_banner_section book-flight-title">
                 <div className="banner_box home_banner">
                   <div className="title text-center">
                     <h1 className='capitalize'>
-                      {bannerData}
+                      {DEFAULT_BANNER_TITLE}
                     </h1>
                     <p className='capitalize'>
                       Compare hotel prices, <strong className=''> find the best deals,</strong> and book hotels online securely with trusted travel platforms.

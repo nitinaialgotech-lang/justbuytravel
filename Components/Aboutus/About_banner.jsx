@@ -11,8 +11,8 @@ export default function About_banner() {
                         <div className="col-lg-12">
                             <div className="banner_box about_us_banner">
                                 <div className="title text-center">
-                                    <h1 className='capitalize text-light'>
-                                        <span>About</span> Justbuytravel
+                                    <h1 className=' text-light'>
+                                        <span>At</span> Just<span>buy</span>travel
                                     </h1>
                                     {/* <p className='capitalize'>
                                         <strong className='g_color'> JustBuyTravel</strong> Your Easy Way to Book Flights and Hotels
