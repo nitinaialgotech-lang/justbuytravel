@@ -94,10 +94,10 @@
     > a {
     white-space: nowrap;
   }
-  .page_banner_section {
+  /* .page_banner_section {
     min-height: 250px;
     height: 100%;
-  }
+  } */
 }
 /* ************************************************************************************************************************ */
 @media only screen and (max-width: 767px) {
@@ -624,11 +624,22 @@
   .mrt-20 {
     margin-top: 25px;
   }
-  .bit_content > .content > h2 {
-    font-size: 32px !important;
-    line-height: 1.2;
-  }
   /***************************************************** about us */
+  .bit_content > .content > h2 {
+    font-size: 30px !important;
+    line-height: 1.1;
+  }
+  .experience_section > .about_experience_items > .about_experience_box > h4 {
+    font-size: 16px;
+  }
+  .box_content_box > .content > p {
+    font-size: 16px;
+  }
+  .experience_about_trailer > .card > img {
+    width: 100%;
+    min-height: 250px;
+    max-height: 250px;
+  }
   .experience_section > .about_experience_items > .about_experience_box {
     width: 115px;
     height: 115px;
@@ -640,24 +651,37 @@
     font-size: 15px;
     line-height: 20px;
   }
+  .bitmore_section > .section_title {
+    padding: 0 0 0px;
+  }
   .experience_section > .about_experience_items {
     padding: 20px 0;
   }
   .detail_about {
     margin-top: -15%;
   }
-  .about_content {
-    margin-top: 20px;
-  }
 
   .booking_platform > .plane_icon {
     display: none !important;
   }
-  /* .about_content > .section_title > p {
-    line-height: normal;
-  } */
+  .about_section {
+    background-position: center;
+  }
+  .break_point,
+  .about_review_section > .head_line > h2 {
+    padding: 10px 0;
+  }
+  .page_banner_section {
+    padding: 20px 0 75px !important;
+  }
   .platform_img {
     padding: 0;
+  }
+  .detail_about {
+    padding: 27px;
+  }
+  .detail_about > .about_content > p {
+    text-align: justify !important;
   }
   /* (((((((((((((((((((((((((((( single apge  */
   .tab_head > ul {

@@ -7,8 +7,8 @@ export default function AboutExperience() {
                 <div className="container">
                     <div className="row">
                         <div className="about_section_title text-center">
-                            <h2>
-                                A Trusted Voice in The Conversation between Travelers andexperience
+                            <h2 className='capitalize'>
+                                A Trusted Voice in The Conversation between Travelers and experience
                             </h2>
                             <p>
                                 we sitat theintersectionof people-powered travel guidanceand the businessesthat bringthe experienceto life.
@@ -38,7 +38,7 @@ export default function AboutExperience() {
                                     {/* ****************************** arrow icon  */}
                                     <div className="about_experience_box sky_lighblue ">
                                         <h4 className='m-0 p-0'>
-                                            Consumer
+                                            Business
                                         </h4>
                                     </div>
                                 </div>
