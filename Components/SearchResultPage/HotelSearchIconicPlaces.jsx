@@ -60,7 +60,7 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
     return (
         <>
             <section>
-                <div className="container padding_bottom">
+                <div className="container ">
                     <div className="explore_section section_title ">
                         <h2 className="mb-0">Iconic Places</h2>
                         <p>Where history, culture, and beauty come together</p>

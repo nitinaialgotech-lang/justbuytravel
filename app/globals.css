@@ -1395,15 +1395,10 @@ button {
   justify-content: center;
   align-items: center;
 }
-
-/* ************************** about us page  */
-.about_section {
-  position: relative;
-  background-image: url("/aboutus/about_banner.png");
-  background-position: top left;
-  background-repeat: no-repeat;
-  background-size: cover;
+.inner_page_banner_section {
+  padding: 140px 0px 140px 0px !important;
 }
+/* ************************** about us page  */
 
 /* .about_content {
   padding: 10px;
@@ -1537,6 +1532,23 @@ button {
 /* *************************************** */
 .experience_section > .about_experience_items {
   padding: 40px 0px;
+}
+.about_section {
+  position: relative;
+}
+.about_banner_img {
+  background-image: url("/aboutus/about_banner.png");
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.about_banner_img:before {
+  width: 100%;
+  height: 100%;
+  background-color: #000000a6;
+  content: "";
+  position: absolute;
+  bottom: 0;
 }
 .about_section_title > h2 {
   font-weight: 700;
@@ -2363,8 +2375,8 @@ span.rating-stars {
   height: auto;
 }
 
-.recommend_card_box>.card_box>.package_deals_card>.package_bundle {
-  text-align: end;
+.recommend_card_box > .card_box > .package_deals_card > .package_bundle {
+  text-align: start;
 }
 
 .recommend_card_box>.card_box>.package_deals_card>.package_bundle>p {
@@ -2372,10 +2384,15 @@ span.rating-stars {
   margin-bottom: 0px;
 }
 
-.recommend_card_box>.card_box>.package_deals_card>.package_bundle>.bundle_bag {
-  text-align: end;
+.recommend_card_box
+  > .card_box
+  > .package_deals_card
+  > .package_bundle
+  > .bundle_bag {
+  text-align: start;
   display: flex;
-  justify-content: end;
+  justify-content: start !important;
+  margin-top: 10px;
 }
 
 .recommend_card_box>.card_box>.package_deals_card>.package_bundle>.bundle_bag>.bundle {
