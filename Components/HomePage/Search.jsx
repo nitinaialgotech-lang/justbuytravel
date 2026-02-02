@@ -20,7 +20,7 @@ export default function Search() {
     // ********************************************************************************************************************
     const router = useRouter();
     const pathname = usePathname();
-    const isBookFlightsPage = pathname?.includes("book-flights") ?? false;
+    const isBookFlightsPage = pathname?.includes("flights") ?? false;
     const isBookHotelsPage = pathname?.includes("book-hotels") ?? false;
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";

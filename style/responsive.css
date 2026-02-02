@@ -628,6 +628,21 @@
     font-size: 32px !important;
     line-height: 1.2;
   }
+  /***************************************************** about us */
+  .experience_section > .about_experience_items > .about_experience_box {
+    width: 115px;
+    height: 115px;
+  }
+  .about_section_title > h2 {
+    font-size: 23px;
+  }
+  .about_section_title > p {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .experience_section > .about_experience_items {
+    padding: 20px 0;
+  }
   .detail_about {
     margin-top: -15%;
   }

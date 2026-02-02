@@ -13,40 +13,60 @@ export default function QuickLinks() {
                             <div className="section_title relative m-0 ">
                                 <h2 className="mb-2">Quick Links</h2>
                             </div>
-                            <div className="quick_links ">
-                                {/* *********************************************** */}
+                            <div className="quick_links">
                                 <div className="quick_link_box">
+
+                                    {/* ================= Asia Hotels ================= */}
                                     <div className="quick_link_items">
-                                        {/* <h4>Asia Flights</h4> */}
-                                        <ul className='p-0 flex capitalize'>
-                                            <li ><Link href={"/book-hotels-dubai"}> Dubai Hotel</Link></li>
-                                            {/* <li ><Link href={"/newyork"}>New York To London</Link></li> */}
-                                            <li ><Link href={"/hotels-in-australia"}> Australia Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-canada"}> Canada Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-denmark"}> Denmark Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-glasgow"}> glasgow Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-goa"}> goa Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-ireland"}> ireland Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-manchester"}> menchester Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-New-York"}> new york Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-paris"}> paris Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-san-francisco"}> san-francisco Hotel</Link></li>
-                                            <li ><Link href={"/hotels-in-uk"}> united-kingdom Hotel</Link></li>
-                                            <li ><Link href={"/singapore"}> singapore Hotel</Link></li>
-                                            <li ><Link href={"/sydney"}> sydney Hotel</Link></li>
-                                            <li ><Link href={"/tokyo"}> tokyo Hotel</Link></li>
-                                            <li ><Link href={"/usa"}> usa Hotel</Link></li>
-
-
-
-
+                                        <h4 className="p-0 m-0">Asia Hotels</h4>
+                                        <ul className="p-0 m-0 flex capitalize">
+                                            <li><Link href="/book-hotels-dubai">Dubai Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-goa">Goa Hotel</Link> |</li>
+                                            <li><Link href="/singapore">Singapore Hotel</Link> |</li>
+                                            <li><Link href="/tokyo">Tokyo Hotel</Link></li>
                                         </ul>
+                                        <hr />
                                     </div>
-                                    <hr></hr>
-                                </div>
-                                {/* *********************************************** */}
 
+                                    {/* ================= Europe Hotels ================= */}
+                                    <div className="quick_link_items">
+                                        <h4 className="p-0 m-0">Europe Hotels</h4>
+                                        <ul className="p-0 m-0 flex capitalize">
+                                            <li><Link href="/hotels-in-denmark">Denmark Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-glasgow">Glasgow Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-ireland">Ireland Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-manchester">Manchester Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-paris">Paris Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-uk">United Kingdom Hotel</Link></li>
+                                        </ul>
+                                        <hr />
+                                    </div>
+
+                                    {/* ================= North America Hotels ================= */}
+                                    <div className="quick_link_items">
+                                        <h4 className="p-0 m-0">North America Hotels</h4>
+                                        <ul className="p-0 m-0 flex capitalize">
+                                            <li><Link href="/hotels-in-canada">Canada Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-new-york">New York Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-san-francisco">San Francisco Hotel</Link> |</li>
+                                            <li><Link href="/usa">USA Hotel</Link></li>
+                                        </ul>
+                                        <hr />
+                                    </div>
+
+                                    {/* ================= Australia Hotels ================= */}
+                                    <div className="quick_link_items">
+                                        <h4 className="p-0 m-0">Australia Hotels</h4>
+                                        <ul className="p-0 m-0 flex capitalize">
+                                            <li><Link href="/hotels-in-australia">Australia Hotel</Link> |</li>
+                                            <li><Link href="/sydney">Sydney Hotel</Link></li>
+                                        </ul>
+                                        <hr />
+                                    </div>
+
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -56,8 +56,8 @@ export default function Header() {
         }, 150); // 150ms delay
     }
     const pathname = pathnamne ?? "";
-    const isBookHotels = pathname.includes("book-hotels");
-    const isBookFlights = pathname.includes("book-flights");
+    const isBookHotels = pathname.includes("book-hotels-online");
+    const isBookFlights = pathname.includes("flights");
     const isBookCruises = pathname.includes("book-cruises");
     const isBookPackages = pathname.includes("book-packages");
     const isBlog = pathname.includes("/blog");
@@ -93,7 +93,7 @@ export default function Header() {
                                 <Nav className="gap-4 nav-max-height-100" navbarScroll>
                                     <Nav.Link
                                         as={Link}
-                                        href="/book-hotels"
+                                        href="/book-hotels-online"
                                         className={`capitalize ${isBookHotels ? "g_color" : ""}`}
                                     >
                                         <span>
@@ -105,7 +105,7 @@ export default function Header() {
                                     </Nav.Link>
                                     <Nav.Link
                                         as={Link}
-                                        href="/book-flights"
+                                        href="/flights"
                                         className={`capitalize ${isBookFlights ? "g_color" : ""}`}
                                     >
                                         <span>
@@ -205,7 +205,7 @@ export default function Header() {
                                                     <ul>
                                                         <li>
                                                             <Link
-                                                                href={"/book-hotels"}
+                                                                href={"/book-hotels-online"}
                                                                 className={`flex justify-between items-center ${isBookHotels ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
@@ -222,7 +222,7 @@ export default function Header() {
                                                         </li>
                                                         <li>
                                                             <Link
-                                                                href={"/book-flights"}
+                                                                href={"/flights"}
                                                                 className={`flex justify-between items-center ${isBookFlights ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
@@ -292,7 +292,7 @@ export default function Header() {
                                                         </li>
                                                         <li className="">
                                                             <Link
-                                                                href={"/aboutus"}
+                                                                href={""}
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
