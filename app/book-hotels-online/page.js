@@ -4,12 +4,12 @@ import React, { Suspense } from 'react'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
 
 export const metadata = {
-    title: "Book Hotels - Best Prices & Deals Worldwide",
-    description: "Book hotels worldwide with the best prices guaranteed. Compare rates from top booking sites including Expedia, Booking.com, and Hotels.com. Find your perfect accommodation.",
+    title: "Book Hotels Online | Hotel Deals Online | Just Buy Travel",
+    description: " Book hotels online and find the best hotel deals online with Just Buy Travel. Compare prices, explore cheap hotels, and book your stay securely worldwide.",
     keywords: "book hotels, hotel booking, cheap hotels, hotel deals, hotel reservations, accommodation booking, hotel comparison",
     openGraph: {
-        title: "Book Hotels - Best Prices & Deals Worldwide | Just Buy Travel",
-        description: "Book hotels worldwide with the best prices guaranteed. Compare rates from top booking sites.",
+        title: "Book Hotels Online | Hotel Deals Online | Just Buy Travel",
+        description: " Book hotels online and find the best hotel deals online with Just Buy Travel. Compare prices, explore cheap hotels, and book your stay securely worldwide.",
         type: "website",
     },
     alternates: {

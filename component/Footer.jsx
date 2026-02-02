@@ -39,7 +39,7 @@ export default function Footer() {
 
   return (
     <>
-      {pathname == "/book-flights" ?
+      {pathname == "/flights" ?
         <FlightQuickLinks />
         :
         <QuickLinks />
@@ -196,13 +196,13 @@ export default function Footer() {
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={"/book-hotels"}> Hotels</Link>
+                  <Link href={"/book-hotels-online"}> Hotels</Link>
                 </li>
                 <li className="dot">
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={"/book-flights"}> Flight</Link>
+                  <Link href={"/flights"}> Flight</Link>
                 </li>
                 <li className="dot">
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
@@ -248,14 +248,9 @@ export default function Footer() {
               </p>
             </div>
           </div>
-
-
           {/* ******************************************************************** botton ooter */}
-
-
         </footer>
       </section>
-
       <button
         type="button"
         title="Scroll to top"

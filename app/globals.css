@@ -6,8 +6,7 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-BlackItalic.woff2")
-      format("woff2"),
+    url("/fonts/Gilroy-BlackItalic.woff2") format("woff2"),
     url("/fonts/Gilroy-BlackItalic.woff") format("woff");
   font-weight: 900;
   font-style: italic;
@@ -17,10 +16,8 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-ExtraBoldItalic.woff2")
-      format("woff2"),
-    url("/fonts/Gilroy-ExtraBoldItalic.woff")
-      format("woff");
+    url("/fonts/Gilroy-ExtraBoldItalic.woff2") format("woff2"),
+    url("/fonts/Gilroy-ExtraBoldItalic.woff") format("woff");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -49,8 +46,7 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-BoldItalic.woff2")
-      format("woff2"),
+    url("/fonts/Gilroy-BoldItalic.woff2") format("woff2"),
     url("/fonts/Gilroy-BoldItalic.woff") format("woff");
   font-weight: bold;
   font-style: italic;
@@ -70,8 +66,7 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-HeavyItalic.woff2")
-      format("woff2"),
+    url("/fonts/Gilroy-HeavyItalic.woff2") format("woff2"),
     url("/fonts/Gilroy-HeavyItalic.woff") format("woff");
   font-weight: 900;
   font-style: italic;
@@ -101,10 +96,8 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-MediumItalic.woff2")
-      format("woff2"),
-    url("/fonts/Gilroy-MediumItalic.woff")
-      format("woff");
+    url("/fonts/Gilroy-MediumItalic.woff2") format("woff2"),
+    url("/fonts/Gilroy-MediumItalic.woff") format("woff");
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -123,8 +116,7 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-LightItalic.woff2")
-      format("woff2"),
+    url("/fonts/Gilroy-LightItalic.woff2") format("woff2"),
     url("/fonts/Gilroy-LightItalic.woff") format("woff");
   font-weight: 300;
   font-style: italic;
@@ -144,10 +136,8 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-SemiBoldItalic.woff2")
-      format("woff2"),
-    url("/fonts/Gilroy-SemiBoldItalic.woff")
-      format("woff");
+    url("/fonts/Gilroy-SemiBoldItalic.woff2") format("woff2"),
+    url("/fonts/Gilroy-SemiBoldItalic.woff") format("woff");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
@@ -166,10 +156,8 @@
 @font-face {
   font-family: "Gilroy-RegularItalic";
   src:
-    url("/fonts/Gilroy-RegularItalic.woff2")
-      format("woff2"),
-    url("/fonts/Gilroy-RegularItalic.woff")
-      format("woff");
+    url("/fonts/Gilroy-RegularItalic.woff2") format("woff2"),
+    url("/fonts/Gilroy-RegularItalic.woff") format("woff");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -188,8 +176,7 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-ThinItalic.woff2")
-      format("woff2"),
+    url("/fonts/Gilroy-ThinItalic.woff2") format("woff2"),
     url("/fonts/Gilroy-ThinItalic.woff") format("woff");
   font-weight: 100;
   font-style: italic;
@@ -199,8 +186,7 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-UltraLight.woff2")
-      format("woff2"),
+    url("/fonts/Gilroy-UltraLight.woff2") format("woff2"),
     url("/fonts/Gilroy-UltraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
@@ -210,10 +196,8 @@
 @font-face {
   font-family: "Gilroy";
   src:
-    url("/fonts/Gilroy-UltraLightItalic.woff2")
-      format("woff2"),
-    url("/fonts/Gilroy-UltraLightItalic.woff")
-      format("woff");
+    url("/fonts/Gilroy-UltraLightItalic.woff2") format("woff2"),
+    url("/fonts/Gilroy-UltraLightItalic.woff") format("woff");
   font-weight: 200;
   font-style: italic;
   font-display: swap;
@@ -237,6 +221,9 @@ body {
   font-family: var(--font-fam), sans-serif;
 }
 
+.padding_left {
+  padding: 50px;
+}
 /* ============================
    Global Page Loader (center)
    ============================ */
@@ -1458,10 +1445,13 @@ button {
 .termscondition_section {
   margin: 50px 0px;
 }
-
+/* ***** trusted partner ********* */
+.trusted_partner_section {
+  min-height: 300px;
+}
 /* *********************** page banner section */
 .page_banner_section {
-  min-height: 400px;
+  padding: 100px 0px 140px 0px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -1481,17 +1471,6 @@ button {
   padding: 10px;
 }
 
-/* .about_section::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://justbuytravel.com/wp-content/uploads/2025/07/landing-top-img-4.png");
-  background-repeat: no-repeat;
-  background-position: 100% 0;
-  background-size: 16%;
-  pointer-events: none;
-} */
 .detail_about {
   background-color: rgba(255, 255, 255, 0.9);
   /* backdrop-filter: blur(104px); */
@@ -1516,6 +1495,9 @@ button {
 }
 .sky_red {
   background-color: rgba(230, 217, 240, 1);
+}
+.sky_lighblue {
+  background-color: rgba(223, 240, 238, 1);
 }
 .break_point {
   padding: 30px 0px;
@@ -1590,6 +1572,60 @@ button {
   text-decoration-style: solid;
   text-decoration-thickness: 14%;
   text-decoration-skip-ink: auto;
+}
+/* *************************************** */
+.experience_section > .about_experience_items {
+  padding: 40px 0px;
+}
+.about_section_title > h2 {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: 0%;
+  text-align: center;
+}
+.about_section_title > p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+.experience_section > .about_experience_items > .about_experience_box {
+  width: 215px;
+  height: 215px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50% !important;
+}
+.experience_section > .about_experience_items > .about_experience_box > h4 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+.about_experience_items {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.about_experience_img {
+  background-image: url("/logo/about_experience_icon.png");
+  background-size: cover;
+  background-position: top !important;
+}
+.about_experience_button {
+  top: 50% !important;
+}
+.experience_about_trailer > .card > img {
+  width: 100%;
+  min-height: 300px;
+  max-height: 300px;
 }
 /* ******************** */
 .trust_guide_section {
@@ -1849,7 +1885,6 @@ button {
 .blog_card_box {
   padding: 15px 5px;
   height: 100%;
-
 }
 
 .blog_card_box > .blog_card {
@@ -2281,9 +2316,16 @@ span.rating-stars {
 }
 
 /* ************************************** quick Links >>>>>>>>xxxxxxxxxxxxxxxxxxxxxxxx */
+.quick_link_items {
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+}
+.quick_link_items > hr {
+  margin: 8px 0px !important;
+}
 .quick_links {
   /* box-shadow: 0px 0px 35px 2px rgb(0 0 0 / 5%); */
-  padding: 0px;
+  padding-top: 20px;
 }
 
 .quick_links > .quick_link_box {
@@ -2293,6 +2335,7 @@ span.rating-stars {
   font-family: var(--font-fam);
   color: var(--color);
   font-weight: 700;
+  font-size: 18px;
 }
 
 .quick_links > .quick_link_box > .quick_link_items > ul > li {
@@ -2300,7 +2343,7 @@ span.rating-stars {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .quick_links > .quick_link_box > .quick_link_items > ul > li > a {
@@ -3448,7 +3491,7 @@ span.rating-stars {
   left: 0;
   width: 100%;
   height: 0;
-  background-color: #000;
+  background-color: var(--bg-color);
   transition: all 0.3s ease-in-out;
 }
 .example-2 .icon-content a:hover .filled {
