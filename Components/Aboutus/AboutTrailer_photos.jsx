@@ -25,28 +25,22 @@ export default function AboutTrailer_photos() {
     // ****************** state end *****
     const fallbackIconicCards = [
         {
-            img: "/iconic/iconic.jpg"
+            img: "/aboutus/publicphoto/p1.png"
         },
         {
-            img: "/iconic/iconic4.jpg"
+            img: "/aboutus/publicphoto/p2.png"
         },
         {
-            img: "/iconic/iconic6.jpg"
+            img: "/aboutus/publicphoto/p3.png"
         },
         {
-            img: "/iconic/iconic7.jpg"
+            img: "/aboutus/publicphoto/p1.png"
         },
         {
-            img: "/iconic/iconic.jpg"
+            img: "/aboutus/publicphoto/p2.png"
         },
         {
-            img: "/iconic/iconic4.jpg"
-        },
-        {
-            img: "/iconic/iconic6.jpg"
-        },
-        {
-            img: "/iconic/iconic7.jpg"
+            img: "/aboutus/publicphoto/p3.png"
         },
     ];
     /************************************ */
