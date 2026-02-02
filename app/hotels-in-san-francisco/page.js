@@ -93,7 +93,7 @@ export default function page() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}
             />
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <Header />
                 <SanFrancBanner />
             </Suspense>

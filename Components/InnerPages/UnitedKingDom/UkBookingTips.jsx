@@ -149,7 +149,7 @@ export default function UkBookingTips() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        Best Places to Stay: Last Minute Hotels UK and Cheap Deals
+                                        Best Places to Stay: Last minute hotel Uk and Cheap Deals
                                     </h2>
                                 </div>
 
@@ -159,7 +159,7 @@ export default function UkBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    You don’t have to stress out about finding the right place to stay in the UK.To find the best<span className='g_color font-semibold'> last minute hotel deals UK,</span> you can look through a lot of different places. This way, you can find something that fits your wants and budget. All over the UK, from busy city areas to quiet countryside, you can find cheap hotels. There are many<span className='g_color font-semibold'> hotel stays UK</span> that you can check out to save money and have a better trip.You can do<span className='g_color font-semibold'> last minute bookings uk </span> with us, so keep an eye out for the best deals and plan your stay wel with us.
+                                    You don't need to worry about finding the perfect place to stay in the UK. You can find a wide range of last-minute hotel deals in various locations across the UK. This allows travelers to compare options and choose accommodation that suits their needs and budget. From bustling city centers to tranquil countryside locations, it's possible to find affordable hotels in the UK that offer comfort and convenience. Many hotel stays in the UK are available with reviews, helping travelers plan better and save money while enjoying their trip.
 
                                 </p>
 

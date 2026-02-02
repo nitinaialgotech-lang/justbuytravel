@@ -15,7 +15,7 @@ export default function AboutDetail() {
                             {/* ********** */}
                             <div className="about_content">
                                 <p>
-                                    JustBuyTravel is a premier digital travel platform dedicated to helping travelers explore the world for less. By offering exceptional value deals across a vast global network of hotels, holiday properties, flights, and curated activities, we make dream vacations a reality. Whether through our website, JustBuyTravel ensures a seamless experience with 24/7 dedicated customer support. Committed to leveraging modern technology, our team is focused on making every journey easier, more affordable, and completely hassle-free.
+                                    <strong>JustBuyTravel is a premier digital travel platform</strong>  dedicated to helping travelers <strong>explore the world for less.</strong>  By offering exceptional value deals across a vast global network of <strong>hotels,</strong>  holiday properties, <strong>flights,</strong> and curated activities, we make dream vacations a reality. Whether through our website, JustBuyTravel ensures a seamless experience with <strong>24/7 dedicated customer support.</strong>  Committed to leveraging modern technology, our team is focused on making every journey easier, more <strong>affordable,</strong>  and completely <strong>hassle-free.</strong>
                                 </p>
                             </div>
                             {/* ************ */}

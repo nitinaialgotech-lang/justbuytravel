@@ -1451,7 +1451,7 @@ button {
 }
 /* *********************** page banner section */
 .page_banner_section {
-  padding: 100px 0px 140px 0px;
+  padding: 140px 0px 200px 0px !important;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -1467,18 +1467,24 @@ button {
   background-size: cover;
 }
 
-.about_content {
+/* .about_content {
   padding: 10px;
+} */
+.detail_about > .about_content > p {
+  font-size: 22px;
+  /* font-weight: 500 !important; */
 }
-
+.detail_about > .about_content > p > strong {
+  font-weight: 600 !important;
+}
 .detail_about {
-  background-color: rgba(255, 255, 255, 0.9);
-  /* backdrop-filter: blur(104px); */
+  background-color: rgba(255, 255, 255, 0.77);
+  backdrop-filter: blur(8px);
   border-radius: 16px;
   box-shadow: 0px 2px 28.1px 0px rgba(143, 170, 188, 0.18);
 
-  padding: 40px;
-  margin-top: -5%;
+  padding: 30px 40px 40px 40px;
+  margin-top: -8%;
   z-index: 1;
   /* display: revert; */
   display: rela;
@@ -1503,7 +1509,7 @@ button {
   padding: 30px 0px;
 }
 .about_review_section > .head_line > h2 {
-  padding: 30px 0px;
+  padding: 30px 0px 50px 0px !important;
 }
 .box_content_box {
   width: 100%;
@@ -1578,15 +1584,14 @@ button {
   padding: 40px 0px;
 }
 .about_section_title > h2 {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 48px;
   line-height: 1.2;
-  letter-spacing: 0%;
   text-align: center;
 }
 .about_section_title > p {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 30px;
   letter-spacing: 0%;
   text-align: center;
@@ -1626,6 +1631,9 @@ button {
   width: 100%;
   min-height: 300px;
   max-height: 300px;
+}
+.bitmore_section > .section_title {
+  padding: 0px 0px 10px 0px;
 }
 /* ******************** */
 .trust_guide_section {

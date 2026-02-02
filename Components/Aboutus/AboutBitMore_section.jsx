@@ -13,7 +13,7 @@ export default function AboutBitMore_section() {
                             <div className="bitmore_section padding_top">
 
                                 <div className="section_title">
-                                    <h2 className='m-0 p-0'>
+                                    <h2 className='m-0 p-0 capitalize'>
                                         A bit more about us...
                                     </h2>
                                 </div>
