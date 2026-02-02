@@ -7,10 +7,10 @@ export default function AboutExperience() {
                 <div className="container">
                     <div className="row">
                         <div className="about_section_title text-center">
-                            <h2 className='capitalize'>
+                            <h2 className='capitalize m-0'>
                                 A Trusted Voice in The Conversation between Travelers and experience
                             </h2>
-                            <p>
+                            <p className='capitalize'>
                                 we sitat theintersectionof people-powered travel guidanceand the businessesthat bringthe experienceto life.
                             </p>
                         </div>

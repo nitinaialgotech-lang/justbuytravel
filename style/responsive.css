@@ -631,8 +631,8 @@
   }
   .experience_about_trailer > .card > img {
     width: 100%;
-    min-height: 250px;
-    max-height: 250px;
+    min-height: 180px;
+    max-height: 180px;
   }
   .experience_section > .about_experience_items > .about_experience_box {
     width: 115px;
@@ -652,7 +652,7 @@
     padding: 20px 0;
   }
   .detail_about {
-    margin-top: -15%;
+    margin-top: -22%;
   }
 
   .booking_platform > .plane_icon {
@@ -666,7 +666,7 @@
     padding: 10px 0;
   }
   .page_banner_section {
-    padding: 20px 0 75px !important;
+    padding: 35px 0 100px !important;
   }
   .platform_img {
     padding: 0;
@@ -676,6 +676,7 @@
   }
   .detail_about > .about_content > p {
     text-align: justify !important;
+    font-size: 18px;
   }
   /* (((((((((((((((((((((((((((( single apge  */
   .tab_head > ul {
