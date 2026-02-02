@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
 import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
+import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 import DubaiFaqSection from './DubaiFaqSection';
 
 import {
@@ -153,9 +154,7 @@ export default function DubaiRecomdSection() {
                                     </SwiperSlide>
                                 ))
                                 : nearbyPlace?.map((item, i) => {
-                                    const image = item?.photos
-                                        ?.slice(0, 1)
-                                        ?.map((item) => item?.name);
+                                    const imageSrc = getPlacePhotoUrl(item);
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
@@ -173,7 +172,7 @@ export default function DubaiRecomdSection() {
                                                         <div className="card_box pe-">
                                                             <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                                 <img
-                                                                    src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                    src={imageSrc}
                                                                     className="card_rounded w-full h-full object-cover"
                                                                     alt={"Hotel image"}
                                                                 />

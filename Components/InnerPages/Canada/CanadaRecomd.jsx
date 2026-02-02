@@ -21,6 +21,7 @@ import CanadaAmazingDeals from './CanadaAmazingDeals';
 import { useRouter } from 'next/navigation';
 import { searchHotel1 } from '@/app/Route/endpoints';
 import { createHotelSlug } from "@/app/utils/seo";
+import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 export default function CanadaRecomd() {
 
     /************************* ustate contetn *** */
@@ -192,7 +193,7 @@ export default function CanadaRecomd() {
                                                         <div className="card_box pe-">
                                                             <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                                 <img
-                                                                    src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                    src={imageSrc}
                                                                     className="card_rounded w-full h-full object-cover"
                                                                     alt={"Hotel image"}
                                                                 />

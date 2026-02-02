@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
+  
   async redirects() {
     return [
       {

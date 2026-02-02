@@ -21,6 +21,7 @@ import TokyoBookingTips from './TokyoBookingTips';
 import TokyoAmazingDeals from './TokyoAmazingDeals';
 import { useRouter } from 'next/navigation';
 import { createHotelSlug } from "@/app/utils/seo";
+import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 
 export default function TokyoRecomand() {
     /************************* ustate contetn *** */
@@ -172,9 +173,7 @@ export default function TokyoRecomand() {
                                     </SwiperSlide>
                                 ))
                                 : nearbyPlace?.map((item, i) => {
-                                    const image = item?.photos
-                                        ?.slice(0, 1)
-                                        ?.map((item) => item?.name);
+                                    const imageSrc = getPlacePhotoUrl(item);
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
@@ -192,7 +191,7 @@ export default function TokyoRecomand() {
                                                         <div className="card_box pe-">
                                                             <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                                 <img
-                                                                    src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                    src={imageSrc}
                                                                     className="card_rounded w-full h-full object-cover"
                                                                     alt={"Hotel image"}
                                                                 />

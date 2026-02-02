@@ -14,6 +14,7 @@ import HotelIcon, { FlightIcon } from "@/component/icons";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { SetSelectAll } from "../Redux/Reducer";
+import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 export default function Search() {
 
     // **************************************************************************************
@@ -441,10 +442,7 @@ export default function Search() {
 
                                                             const photoUrl = getPhotoUrl(place);
                                                             const hasImageError = imageErrors[placeId];
-                                                            const displayImage = photoUrl && !hasImageError ? photoUrl : 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel';
-                                                            const image = place?.photos?.slice(0, 1)?.map((item) => item?.name);
-
-
+                                                            const displayImage = getPlacePhotoUrl(place) || (photoUrl && !hasImageError ? photoUrl : 'https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel');
 
                                                             return (
                                                                 <div
@@ -469,7 +467,7 @@ export default function Search() {
                                                                                 </div>
                                                                             )}
                                                                             <img
-                                                                                src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                                src={displayImage}
                                                                                 alt={place.displayName?.text || 'Hotel'}
                                                                                 className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId] ? 'opacity-0' : 'opacity-100'
                                                                                     }`}
@@ -609,13 +607,7 @@ export default function Search() {
 
                                                                 const photoUrl = getPhotoUrl(place);
                                                                 const hasImageError = imageErrors[placeId];
-                                                                const displayImage =
-                                                                    photoUrl && !hasImageError
-                                                                        ? photoUrl
-                                                                        : "https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel";
-                                                                const image = place?.photos
-                                                                    ?.slice(0, 1)
-                                                                    ?.map((item) => item?.name);
+                                                                const displayImage = getPlacePhotoUrl(place) || (photoUrl && !hasImageError ? photoUrl : "https://via.placeholder.com/120x120/f3f4f6/9ca3af?text=Hotel");
 
                                                                 return (
                                                                     <div
@@ -636,7 +628,7 @@ export default function Search() {
                                                                                     </div>
                                                                                 )}
                                                                                 <img
-                                                                                    src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                                    src={displayImage}
                                                                                     alt={place.displayName?.text || "Hotel"}
                                                                                     className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId]
                                                                                         ? "opacity-0"

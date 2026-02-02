@@ -8,6 +8,7 @@ import "../../../style/searchresult.css";
 import Link from "next/link";
 import "../../../style/search.scss";
 import { createHotelSlug } from "@/app/utils/seo";
+import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 
 export default function ViewAllHotels() {
     const searchQuery = useSearchParams();
@@ -178,11 +179,7 @@ export default function ViewAllHotels() {
                             </div>
                         ) : (
                                 hotelData.slice(0, visibleCount).map((item, i) => {
-
-                                    const image = item?.photos
-                                        ?.slice(0, 1)
-                                        ?.map((item) => item?.name);
-                                    // ****** text
+                                    const imageSrc = getPlacePhotoUrl(item);
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
@@ -202,7 +199,7 @@ export default function ViewAllHotels() {
                                                     <div className="hotel-img-wrap">
                                                         <a href="#" className="hotel-img">
                                                             <img
-                                                                src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${image}`}
+                                                                src={imageSrc}
                                                                 className="rounded-3xl w-full h-full object-cover"
                                                                 loading="lazy"
                                                             />

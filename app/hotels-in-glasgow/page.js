@@ -1,5 +1,6 @@
 import Header from '@/component/Header'
 import GlasGowBanner from '@/Components/InnerPages/GlasGow/GlasGowBanner'
+import { Suspense } from 'react'
 export const metadata = {
     title: "Hotels in Glasgow | Luxury & Family Stays | Just Buy Travel ",
     description:

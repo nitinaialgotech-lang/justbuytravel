@@ -27,3 +27,17 @@ export const getAssetPath = (path) => {
   return `${basePath}${cleanPath}`;
 };
 
+const PLACEHOLDER_HOTEL_IMAGE = "/blog/blog_img.webp";
+
+/**
+ * Get a valid image URL for a place/hotel item from the API.
+ * Handles array/undefined from photos and returns placeholder when no photo.
+ */
+export const getPlacePhotoUrl = (item) => {
+  if (!item) return getAssetPath(PLACEHOLDER_HOTEL_IMAGE);
+  const raw = item?.photos?.[0]?.name ?? item?.photos?.slice(0, 1)?.[0]?.name;
+  const name = typeof raw === "string" ? raw : Array.isArray(raw) ? raw[0] : "";
+  if (!name || name === "undefined") return getAssetPath(PLACEHOLDER_HOTEL_IMAGE);
+  return `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${encodeURIComponent(name)}`;
+};
+

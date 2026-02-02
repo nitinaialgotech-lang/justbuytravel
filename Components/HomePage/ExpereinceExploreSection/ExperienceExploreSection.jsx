@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { createHotelSlug } from "@/app/utils/seo";
-import { getAssetPath } from "@/app/utils/assetPath";
+import { getAssetPath, getPlacePhotoUrl } from "@/app/utils/assetPath";
 
 // Import Swiper styles
 import "swiper/css";
@@ -119,8 +119,7 @@ export default function ExperienceExploreSection() {
                 });
             },
             (err) => {
-                console.error("Geolocation error", err);
-                setLocationError(err.message || "Unable to fetch location");
+                setLocationError(err?.message || "Unable to fetch location");
                 setCoords(DEFAULT_COORDS);
             }
         );
@@ -225,18 +224,14 @@ export default function ExperienceExploreSection() {
                                 {(nearbyPlaceslist.length ? nearbyPlaceslist : NearCard)?.map((item, i) => {
                                     const title =
                                         item?.displayName?.text || item?.content || "Place";
-                                    const imgName = item?.photos?.[0]?.name;
+                                    const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
                                     const placeId = item?.id;
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
                                                 <div className="card relative border-0">
                                                     <img
-                                                        src={
-                                                            imgName
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : getAssetPath(item?.img || "/no-image.jpg")
-                                                        }
+                                                        src={imageSrc}
                                                         className="card-img-top card_rounded"
                                                         alt="Place"
                                                     />
@@ -360,18 +355,14 @@ export default function ExperienceExploreSection() {
                             ).map((item, i) => {
                                 const title =
                                     item?.displayName?.text || item?.content || "Place";
-                                const imgName = item?.photos?.[0]?.name;
+                                const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
                                 const placeId = item?.id;
                                 return (
                                     <SwiperSlide key={i}>
                                         <div className="experience_explore_section ">
                                             <div className="card  relative border-0 ">
                                                 <img
-                                                    src={
-                                                        imgName
-                                                            ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                            : getAssetPath(item?.img || "/no-image.jpg")
-                                                    }
+                                                    src={imageSrc}
                                                     className=" card_rounded "
                                                     alt={title}
                                                 />
