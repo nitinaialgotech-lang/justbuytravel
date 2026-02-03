@@ -10,16 +10,15 @@ import Trusted_Favourite_Companies from '@/Components/TrustedPartner/Trusted&Fav
 import Blogs from '@/Components/HomePage/Blog/Blogs'
 import Footer from '@/component/Footer'
 import Flight_Faq_Section from '@/Components/Book-Flights/Flight_Faq_Section'
-import Flight_Hotel_Guide_Section from '@/Components/Book-Flights/Flight_Hotel_Guide_Section'
 import Trust_Guide_Section from '@/Components/Aboutus/Trust_Guide_Section'
 
 export const metadata = {
-    title: "Book Flights - Compare & Save on Airfare",
-    description: "Book cheap flights and compare airfare from leading airlines. Find the best flight deals, compare prices, and book your tickets with confidence.",
+    title: "Book Flights Online | Cheap Flights Online | Just Buy Travel",
+    description: "Do you want to book flights online? Just Buy Travel helps you check prices, compare airlines, and connect with trusted booking partners simple and stress-free.",
     keywords: "book flights, cheap flights, flight booking, airfare deals, compare flights, airline tickets, flight search, discount flights",
     openGraph: {
-        title: "Book Flights - Compare & Save on Airfare | Just Buy Travel",
-        description: "Book cheap flights and compare airfare from leading airlines. Find the best flight deals.",
+        title: "Book Flights Online | Cheap Flights Online | Just Buy Travel",
+        description: "Do you want to book flights online? Just Buy Travel helps you check prices, compare airlines, and connect with trusted booking partners simple and stress-free.",
         type: "website",
     },
     alternates: {

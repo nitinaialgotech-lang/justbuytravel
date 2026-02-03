@@ -22,6 +22,7 @@ import IreLandBookingTips from './IreLandBookingTips';
 import { useRouter } from 'next/navigation';
 import { createHotelSlug } from "@/app/utils/seo";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
+import IreladFaqSection from './IreladFaqSection';
 export default function IreLandRecond() {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
@@ -259,7 +260,7 @@ export default function IreLandRecond() {
             <IreLandBookingTips />
             <IreLandAmazingDeals />
             <Blogs />
-            <FaqSection />
+            <IreladFaqSection />
             <Footer />
 
 

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function GoaAmazingDeals() {
@@ -21,7 +22,7 @@ export default function GoaAmazingDeals() {
                                     When planning your stay, it is useful to look for hotels in Goa near beach if you want easy access to the sea. Some travellers prefer beachfront hotels in Goa for direct views and a peaceful atmosphere. Visitors looking for premium comfort often choose 5 star and luxury hotels in Goa, which offer high service standards and modern amenities.
                                 </p>
                                 <p>
-                                    Budget-conscious travellers can still find comfort by selecting cheap hotels in Goa that provide clean rooms and convenient locations. Party lovers and explorers usually prefer hotels in North Goa near beach, while families often feel more relaxed in hotels in South Goa for families, where surroundings are quieter and more spacious. For short trips or quick arrivals, hotels in Goa near airport offer added convenience.
+                                    Budget-conscious travellers can still find comfort by selecting <Link href={"/hotels-in-dubai"} className=' g_color'>cheap hotels</Link>  in Goa that provide clean rooms and convenient locations. Party lovers and explorers usually prefer hotels in North Goa near the beach, while families often feel more relaxed in hotels in South Goa for families, where surroundings are quieter and more spacious. For short trips or quick arrivals, hotels in Goa near airports offer added convenience.
                                 </p>
                                 <p>
                                     Booking early helps secure better prices, while flexible plans may allow access to seasonal offers. By using hotel comparison tools, checking guest reviews, and understanding cancellation policies, travellers can make informed choices. With the right planning, your time in Goa can stay fun, simple, and well within budget.

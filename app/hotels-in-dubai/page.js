@@ -23,7 +23,7 @@ export const metadata = {
 
 // ******************************************************
 export default function page() {
-   
+
     const FaqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",

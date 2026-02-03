@@ -12,7 +12,7 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import Blogs from '@/Components/HomePage/Blog/Blogs';
-import FaqSection from '@/Components/HomePage/Faq/FaqSection';
+import Aurtralia_Faq_Section from './Aurtralia_Faq_Section';
 import Footer from '@/component/Footer';
 import AustraliaNearByPlaces from './AustraliaNearByPlaces';
 import AutraliaIconicPlaces from './AutraliaIconicPlaces';
@@ -258,7 +258,9 @@ export default function AutraliaRecomand() {
 
 
             <Blogs />
-            <FaqSection />
+            {/* <FaqSection />
+            < */}
+            <Aurtralia_Faq_Section />
             <Footer />
 
         </>

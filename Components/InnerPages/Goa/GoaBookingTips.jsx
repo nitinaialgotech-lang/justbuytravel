@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import Link from 'next/link';
 export default function GoaBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
@@ -159,7 +160,7 @@ export default function GoaBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Planning a trip to Goa becomes easier when you choose accommodation that matches your budget and travel style. Whether you prefer lively areas close to markets and nightlife or quieter neighbourhoods near the coast, Goa offers hotel options suited to different needs and budgets.
+                                    Planning a trip to Goa becomes easier when you choose accommodation that matches your budget and travel style. You can also explore more destinations on our <Link href={"/hotels"} className='g_color'>hotels</Link> page.
 
                                 </p>
                                 <p>

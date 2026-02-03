@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import "../HomePage/Faq/faq.css"
+import "../../HomePage/Faq/faq.css"
 import { Accordion } from 'react-bootstrap'
 import { GoPlusCircle } from "react-icons/go"
 import { MdArrowOutward } from 'react-icons/md'

@@ -9,7 +9,7 @@ const DEFAULT_KEY = "0"
 
 const FAQS = [
     {
-        title: 'Which hotels in Ireland allow pets?Are there cheap hotels in Goa near the beach?',
+        title: 'Which hotels in Ireland allow pets?',
         content: <>
             Many hotels in Ireland welcome pets, especially countryside stays, coastal lodges, and select city hotels. Pet policies vary by property, so it’s best to check hotel rules, fees, and size limits before planning your stay.
 

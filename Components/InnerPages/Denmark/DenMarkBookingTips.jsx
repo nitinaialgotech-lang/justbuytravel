@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import Link from 'next/link';
 export default function DenMarkBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
@@ -159,7 +160,7 @@ export default function DenMarkBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Finding the right place to stay can make a big difference when planning a trip. From lively city centres to peaceful coastal towns, travellers can choose accommodation based on comfort, location, and budget. Selecting the right area helps keep Denmark hotel booking simple and stress-free.
+                                    Finding the right place to stay can make a big difference when planning a trip. From lively city centres to peaceful coastal towns, travellers can choose accommodation based on comfort, location, and budget. Selecting the right area helps keep <Link href={"/hotels"} className="g_color " >Denmark hotel booking</Link>  simple and stress-free.
                                 </p>
                                 <p>
                                     Travellers who want to book hotels in Denmark often look for locations with easy access to transport, attractions, and dining. Smaller towns are a good choice for those who prefer quieter surroundings. By comparing prices, locations, and guest reviews, it becomes easier to identify the best hotels in Denmark without overspending. Just Buy Travel helps travellers compare trusted listings and make confident booking decisions for a smooth and enjoyable stay.

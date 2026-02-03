@@ -22,6 +22,7 @@ import { useRouter } from 'next/navigation';
 import { searchHotel1 } from '@/app/Route/endpoints';
 import { createHotelSlug } from "@/app/utils/seo";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
+import Canada_Faq_Section from './Canada_Faq_Section';
 export default function CanadaRecomd() {
 
     /************************* ustate contetn *** */
@@ -173,9 +174,7 @@ export default function CanadaRecomd() {
                                     </SwiperSlide>
                                 ))
                                 : nearbyPlace?.map((item, i) => {
-                                    const image = item?.photos
-                                        ?.slice(0, 1)
-                                        ?.map((item) => item?.name);
+                                    const imageSrc = getPlacePhotoUrl(item);
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
@@ -188,8 +187,7 @@ export default function CanadaRecomd() {
                                                 <div className="card_col">
                                                     <div
                                                         className="recommend_card_box   card_rounded  recomand_card_shadow  
-                                                        "
-                                                    >
+                                                        ">
                                                         <div className="card_box pe-">
                                                             <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
                                                                 <img
@@ -271,7 +269,7 @@ export default function CanadaRecomd() {
             <CanadaAmazingDeals />
 
             <Blogs />
-            <FaqSection />
+            <Canada_Faq_Section />
             <Footer />
 
         </>

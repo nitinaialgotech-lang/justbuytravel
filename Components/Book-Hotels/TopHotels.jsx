@@ -201,7 +201,7 @@ export default function TopHotels() {
                                                                         </span>
                                                                     </div>
                                                                     <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
-                                                                        View Detail
+                                                                        View Details
                                                                     </button>
                                                                 </div>
                                                                 {/* *************** rating_list */}

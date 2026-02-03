@@ -38,7 +38,7 @@ const FAQS = [
     {
         title: 'When is the best time to book a hotel in Manchester?',
         content: <>
-            Booking early is usually best if you’re travelling during major matches, concerts, holidays, or peak weekends. For normal dates, you can often find good deals by comparing prices across multiple properties and staying flexible with check-in days.
+            Booking early is usually best if you’re travelling during <span className='fw-semibold g_color'>major matches, concerts, holidays, or peak weekends.</span>  For normal dates, you can often find good deals by comparing prices across multiple properties and staying flexible with check-in days.
 
         </>,
         key: "4"

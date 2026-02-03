@@ -26,17 +26,17 @@ const FAQS = [
         </>,
         key: "1"
     },
-    {
-        title: 'How can travelers save money on hotel stays?',
-        content: 'Travelers looking to save money should explore platforms that focus on cheap hotel booking online, which helps identify affordable accommodation options without compromising essential amenities.',
-        key: "2"
-    },
+    // {
+    //     title: 'How can travelers save money on hotel stays?',
+    //     content: 'Travelers looking to save money should explore platforms that focus on cheap hotel booking online, which helps identify affordable accommodation options without compromising essential amenities.',
+    //     key: "2"
+    // },
     {
         title: 'Are there affordable and budget hotels in Dubai?',
         content: <>
             Yes, there are many budget and cheap hotels in Dubai that provide pleasant stay at reasonable prices. These hotels are ideal for travelers who want good value without spending too much.
         </>,
-        key: "3"
+        key: "2"
     },
     {
         title: 'Which areas are the best places to stay in Dubai?',
@@ -44,7 +44,7 @@ const FAQS = [
             Popular places to stay in Dubai include areas near Dubai Mall for shopping, Dubai Marina for waterfront views, and central locations close to major attractions. Each area offers a different experience depending on your travel style.
 
         </>,
-        key: "4"
+        key: "3"
     },
     {
         title: 'Can I find last-minute hotel deals in Dubai?',
@@ -52,7 +52,7 @@ const FAQS = [
             Yes, travelers can often find last-minute hotel deals in Dubai, especially during off-peak seasons. Comparing hotel options online can help you find good offers even when booking close to your travel date.
 
         </>,
-        key: "5"
+        key: "4"
     }
 ]
 export default function DubaiFaqSection() {

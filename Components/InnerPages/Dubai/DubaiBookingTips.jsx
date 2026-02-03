@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import Link from 'next/link';
 export default function DubaiBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
@@ -159,18 +160,18 @@ export default function DubaiBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Finding the <span className='g_color font-semibold'> best hotels in Dubai </span> does not have to be difficult. With many options available online, travelers can  <span className='g_color font-semibold'> compare  prices, locations, and reviews before they book hotels in Dubai.</span> This helps you save time and avoid paying more than needed.
+                                    Finding the  best hotels in Dubai does not have to be difficult. With many options available online.Travelers can compare prices, locations, and reviews before they book hotels in Dubai and explore other destinations on our <Link href={"/hotels"} className=' g_color'>Hotels</Link>  page. This helps you save time and avoid paying more than needed.
                                 </p>
-                                <p>If you are planning your trip in advance, you may find great rates on <span className='g_color font-semibold'> 5 star hotels in Dubai </span> as well as comfortable budget hotels in Dubai. Travelers booking closer to their travel date can also find last minute hotel deals in Dubai, especially during off-peak seasons.
+                                <p>If you are planning your trip in advance, you may find great rates on   5 star hotels in Dubai as well as comfortable budget hotels in Dubai. Travelers booking closer to their travel date can also find last minute hotel deals in Dubai, especially during off-peak seasons.
 
                                 </p>
                                 <p>
-                                    Dubai hotel booking online allows you to explore different areas of the city with ease. From the busy streets near Downtown to the relaxed atmosphere of<span className='g_color font-semibold'>Dubai Marina, </span> each area offers a unique stay experience. Reading guest reviews and comparing hotel features can help you choose the best place to stay in Dubai.
+                                    Dubai hotel booking online allows you to explore different areas of the city with ease. From the busy streets near Downtown to the relaxed atmosphere of Dubai Marina, each area offers a unique stay experience. Reading guest reviews and comparing hotel features can help you choose the best place to stay in Dubai.
 
                                 </p>
 
                                 <p>
-                                    With the right planning, you can <span className='g_color font-semibold'>enjoy a comfortable stay, stay within your budget, </span> and make the most of your time in this vibrant city.
+                                    With the right planning, you can  enjoy a comfortable stay, stay within your budget, and make the most of your time in this vibrant city.
 
                                 </p>
 

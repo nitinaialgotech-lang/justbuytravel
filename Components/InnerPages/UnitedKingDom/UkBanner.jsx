@@ -14,7 +14,7 @@ export default function UkBanner() {
                                 <div className="banner_box home_banner">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            Book Hotel in<span> UK</span>
+                                            Hotels in<span> UK</span>
                                         </h1>
                                         <p className='capitalize'>
                                             Helping travelers choose the best hotels in the UK with transparent pricing, verified stays, and reliable information.

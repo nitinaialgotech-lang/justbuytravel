@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function DubaiAmazingDeals() {
@@ -27,7 +28,7 @@ export default function DubaiAmazingDeals() {
 
                                 </p>
                                 <p>
-                                    Location also plays an important role when deciding where to stay. Hotels near Dubai Mall are a great choice for travelers who enjoy shopping and city attractions. On the other hand, hotels in Dubai Marina are popular for their waterfront views, dining options, and relaxed atmosphere. Exploring different neighborhoods helps travelers discover the best places to stay in Dubai based on their plans.
+                                    Location also plays an important role when deciding where to stay. Hotels near Dubai Mall are a great choice for travelers who enjoy shopping and city attractions. On the other hand, hotels in Dubai Marina are popular for their waterfront views, dining options, and relaxed atmosphere. Travelers planning trips to other cities can also explore <Link href={"/hotels-in-paris"} className='g_color'>hotels in Paris</Link>  for more international stay options.
                                 </p>
                                 <p>
                                     Another advantage of Dubai hotel booking online is flexibility. Travelers who book early often find better availability, while those planning a quick trip may still find last minute hotel deals in Dubai, especially during quieter travel periods. Reading recent reviews and checking hotel features such as cancellation policies can make the booking process smoother.
