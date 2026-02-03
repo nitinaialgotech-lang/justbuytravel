@@ -273,6 +273,7 @@ export default function Search() {
     };
 
 
+    console.log(pathname, "..............");
 
 
 
@@ -280,9 +281,10 @@ export default function Search() {
         <>
             <section className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"}`}>
                 <div className="container">
-                    <div className="search_container ">
+                    <div className={`${isBookHotelsPage ? 'searchhotelcontainer' : "search_container "}`}>
                         <div className="search_container_box  rounded-2xl  w-full">
                             {
+                                !isBookFlightsPage && !isBookHotelsPage ? (
                                 !isBookFlightsPage && !isBookHotelsPage ? (
 
                                     <div className="search_tab">
