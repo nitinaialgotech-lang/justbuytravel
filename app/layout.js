@@ -1,6 +1,6 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
-import { Suspense } from "react";
+import Script from "next/script";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -14,6 +14,9 @@ const metadata = {
     icon: "/favicon.ico",
   },
   manifest: "/manifest.json",
+  verification: {
+    google: "PhX0a5Jh4LTkKXDaMzapVLNklJD-1d3611XLM9l3y4U",
+  },
   openGraph: {
     title: "Just Buy Travel",
     description: "Just Buy Travel is a travel agency that helps you find the best hotels and flights for your trip.",
@@ -80,6 +83,29 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Y79K6935MZ"
+          strategy="afterInteractive"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-Y79K6935MZ');
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              gtag('event', 'conversion', {'send_to': 'G-Y79K6935MZ/lSTWCKuLh5IDENOrkoAD'});
+            `,
+          }}
+        />
 
         <script
           type="application/ld+json"

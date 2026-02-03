@@ -4,7 +4,7 @@ import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
 import Blog_Right_Sidebar from '@/Components/Blogs/Blog_Right_Section/Blog_Right_Sidebar';
-import { Get_Blogs, Get_Blog_category } from '@/app/Route/endpoints';
+import { Get_All_Blog_Posts_For_Static, Get_Blog_By_Slug, Get_Blog_category } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
 import { SlCalender } from 'react-icons/sl';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -13,12 +13,8 @@ import "../../../style/responsive.css";
 
 export async function generateStaticParams() {
     try {
-        const response = await Get_Blogs();
-        const blogs = response?.posts || [];
-        
-        return blogs.map((blog) => ({
-            slug: blog.slug,
-        }));
+        const blogs = await Get_All_Blog_Posts_For_Static();
+        return (blogs || []).map((blog) => ({ slug: blog.slug }));
     } catch (error) {
         console.error('Error generating static params:', error);
         return [];
@@ -28,18 +24,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
     try {
         const { slug } = await params;
-        const response = await Get_Blogs();
-        const blogs = response?.posts || [];
-        
-        const blog = blogs.find(b => b.slug === slug);
-        
+        const blog = await Get_Blog_By_Slug(slug);
         if (!blog) {
             return {
                 title: 'Blog Not Found',
                 description: 'The requested blog post could not be found.',
             };
         }
-        
         return generateBlogMetadata(blog);
     } catch (error) {
         console.error('Error generating metadata:', error);
@@ -52,12 +43,9 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPostPage({ params }) {
     const { slug } = await params;
-    
+
     try {
-        const response = await Get_Blogs();
-        const blogs = response?.posts || [];
-        const blog = blogs.find(b => b.slug === slug);
-        
+        const blog = await Get_Blog_By_Slug(slug);
         if (!blog) {
             notFound();
         }

@@ -1,4 +1,4 @@
-import { Get_Blogs } from './Route/endpoints';
+import { Get_All_Blog_Posts_For_Static } from './Route/endpoints';
 
 export const dynamic = 'force-static';
 
@@ -14,31 +14,31 @@ export default async function sitemap() {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/aboutus`,
+      url: `${baseUrl}/about-us`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/contactus`,
+      url: `${baseUrl}/contact-us`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/blogs`,
+      url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/book-hotels`,
+      url: `${baseUrl}/hotels`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/book-flights`,
+      url: `${baseUrl}/flights`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -56,6 +56,30 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/view-all-hotels`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/search`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/my-favorite-travel-resources`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/desclimer`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/privacy-policy`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
@@ -67,6 +91,103 @@ export default async function sitemap() {
       changeFrequency: 'yearly',
       priority: 0.5,
     },
+    // Country / city hotel landing pages
+    {
+      url: `${baseUrl}/hotels-in-uk`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-usa`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-australia`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-canada`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-denmark`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-dubai`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-glasgow`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-goa`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-ireland`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-manchester`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-new-york`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-paris`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-san-francisco`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-singapore`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-sydney`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/hotels-in-tokyo`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
   ];
 
 
@@ -74,15 +195,29 @@ export default async function sitemap() {
   // Fetch dynamic blog posts
   let blogPages = [];
   try {
-    const response = await Get_Blogs();
-    const blogs = response?.data || [];
-    
-    blogPages = blogs.map(blog => ({
-      url: `${baseUrl}/blog/${blog.slug}`,
-      lastModified: blog.modified ? new Date(blog.modified) : new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    }));
+    const blogs = await Get_All_Blog_Posts_For_Static();
+
+    blogPages = blogs.flatMap(blog => {
+      const lastModified =
+        blog.modified || blog.date
+          ? new Date(blog.modified || blog.date)
+          : new Date();
+
+      return [
+        {
+          url: `${baseUrl}/blog/${blog.slug}`,
+          lastModified,
+          changeFrequency: 'monthly',
+          priority: 0.7,
+        },
+        {
+          url: `${baseUrl}/blogs/${blog.slug}`,
+          lastModified,
+          changeFrequency: 'monthly',
+          priority: 0.6,
+        },
+      ];
+    });
   } catch (error) {
     console.error('Error fetching blogs for sitemap:', error);
   }

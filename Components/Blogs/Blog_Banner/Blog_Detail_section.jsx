@@ -8,25 +8,33 @@ import Blog_Right_Sidebar from '../Blog_Right_Section/Blog_Right_Sidebar';
 import Blog_Detail from '../Blog_Detail/Blog_Detail';
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { useQuery } from '@tanstack/react-query';
-import { Get_Blogs, Get_Blog_category } from '@/app/Route/endpoints';
+import { Get_Blogs, Get_Blog_By_Slug, Get_Blog_category } from '@/app/Route/endpoints';
 import { useSearchParams, useParams } from 'next/navigation';
 
-export default function Blog_Detail_section({ initialSlug }) {
-
-    const { data, isLoading } = useQuery({
-        queryKey: ["blog"],
-        queryFn: () => Get_Blogs()
-    })
-    const { data: categoriesData } = useQuery({
-        queryKey: ["blog_category"],
-        queryFn: () => Get_Blog_category()
-    })
+export default function Blog_Detail_section({ initialSlug, initialPost }) {
 
     const blog_slug = useSearchParams();
     const params = useParams();
     const slug = initialSlug || params?.slug || blog_slug.get("detail");
-    // ***************************************
-    const selectedPost = data?.posts?.find((item) => item?.slug === slug);
+    const hasSlug = Boolean(slug);
+
+    const { data: singlePost, isLoading: isLoadingSingle } = useQuery({
+        queryKey: ["blog", slug],
+        queryFn: () => Get_Blog_By_Slug(slug),
+        enabled: hasSlug && !initialPost,
+    });
+    const { data: listData, isLoading: isLoadingList } = useQuery({
+        queryKey: ["blog"],
+        queryFn: () => Get_Blogs(),
+        enabled: !hasSlug,
+    });
+    const { data: categoriesData } = useQuery({
+        queryKey: ["blog_category"],
+        queryFn: () => Get_Blog_category()
+    });
+
+    const selectedPost = initialPost ?? (hasSlug ? singlePost : null) ?? listData?.posts?.find((item) => item?.slug === slug);
+    const isLoading = hasSlug ? (initialPost ? false : isLoadingSingle) : isLoadingList;
     const categories = categoriesData?.data || [];
     const firstCategoryId = selectedPost?.categories?.[0];
     const category = categories.find((c) => Number(c.id) === Number(firstCategoryId));
