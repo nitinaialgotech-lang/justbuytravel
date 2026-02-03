@@ -159,7 +159,8 @@ export default function UkBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    You don't need to worry about finding the perfect place to stay in the UK. You can find a wide range of last-minute hotel deals in various locations across the UK. This allows travelers to compare options and choose accommodation that suits their needs and budget. From bustling city centers to tranquil countryside locations, it's possible to find affordable hotels in the UK that offer comfort and convenience. Many hotel stays in the UK are available with reviews, helping travelers plan better and save money while enjoying their trip.
+                                    You don't need to worry about finding the perfect place to stay in the UK. You can find a wide range of <Link href="/hotels" className="g_color">last-minute hotel deals</Link> in various locations across the UK. This allows travelers to compare options and choose accommodation that suits their needs and budget. From bustling city centers to tranquil countryside locations, it's possible to find affordable hotels in the UK that offer comfort and convenience. Many hotel stays in the UK are available with reviews, helping travelers plan better and save money while enjoying their trip.
+
 
                                 </p>
 

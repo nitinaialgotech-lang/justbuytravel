@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import Link from 'next/link';
 export default function ManchesterBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
@@ -155,11 +156,11 @@ export default function ManchesterBookingTips() {
 
                             </div>
                         </div>
-                        {/* ********************* content >>>>>>>>>>> */}
+                        {/* ********************* content >>>>>>>>>https://justbuytravel.com/hotels>> */}
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Manchester is a city full of culture, sports, music, and year-round events. Choosing from the best hotels in Manchester can make your stay more comfortable, whether you are visiting for work, attending a major event, or planning a short city break. The right accommodation helps save time, reduce travel stress, and improve your overall experience.
+                                    Manchester is a city full of culture, sports, music, and year-round events. Choosing from the <Link className="g_color" href={"/hotels"}>best hotels</Link> in Manchester can make your stay more comfortable, whether you are visiting for work, attending a major event, or planning a short city break. The right accommodation helps save time, reduce travel stress, and improve your overall experience.
 
                                 </p>
                                 <p>

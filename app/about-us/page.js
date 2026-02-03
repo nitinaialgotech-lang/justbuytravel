@@ -15,7 +15,7 @@ export const metadata = {
         type: "website",
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/aboutus`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/about-us`,
     },
     robots: {
         index: false,

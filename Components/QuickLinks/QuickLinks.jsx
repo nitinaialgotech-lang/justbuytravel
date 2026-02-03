@@ -1,12 +1,14 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 export default function QuickLinks() {
+    const route = usePathname();
     return (
 
         <>
 
-            <section className=''>
+            <section className={`${route === "/about-us" ? "padding_top" : ""} padding_bottom`}>
 
-                <div className="container padding_bottom ">
+                <div className="container ">
                     <div className="row">
                         <div className="col-lg-12">
                             {/* ********** links */}

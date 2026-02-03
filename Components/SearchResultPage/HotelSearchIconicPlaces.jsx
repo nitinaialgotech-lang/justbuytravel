@@ -59,9 +59,9 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
     return (
         <>
-            <section>
+            <section className="padding_bottom">
                 <div className="container ">
-                    <div className="explore_section section_title ">
+                    <div className="explore_section section_title  ">
                         <h2 className="mb-0">Iconic Places</h2>
                         <p>Where history, culture, and beauty come together</p>
                     </div>

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function IreLandAmazingDeals() {
@@ -26,7 +27,7 @@ export default function IreLandAmazingDeals() {
                                 Those who prefer premium comfort can enjoy luxury hotels in Ireland, which feature elegant interiors, attentive service, and scenic surroundings. These hotels are often located near iconic landmarks, coastal views, or historic settings, offering a more refined travel experience.
                             </p>
                             <p>
-                                Seasonal offers and promotions allow travellers to benefit from Ireland hotel deals, helping manage accommodation costs during peak or off-peak travel periods. These deals are useful for city breaks, romantic trips, or flexible travel plans.
+                                Seasonal offers and promotions allow travellers to benefit from Ireland hotel deals, helping manage accommodation costs during peak or off-peak travel periods. These deals are useful for<Link href="/hotels-in-new-york" className="g_color">city breaks</Link>, romantic trips, or flexible travel plans.
                             </p>
                             <p>
                                 In western Ireland, travellers often choose boutique hotels in Galway, Ireland, known for their local charm, personalised service, and unique character. These stays appeal to visitors who value authenticity and a more intimate atmosphere.

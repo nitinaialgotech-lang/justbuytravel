@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function ManchesterAmazingDeals() {
@@ -22,7 +23,7 @@ export default function ManchesterAmazingDeals() {
                                 </p>
 
                                 <p>
-                                    If you’re unsure where to stay, Just Buy Travel provides helpful location insights and filters that make comparison simple. You can review hotels near areas such as the Northern Quarter, Deansgate, or close to Old Trafford, depending on your plans. Verified listings, clear pricing, and real guest feedback help travellers choose confidently.
+                                    If you’re unsure where to stay,<Link className="g_color" href={"/"}>Just Buy Travel</Link>  provides helpful location insights and filters that make comparison simple. You can review hotels near areas such as the Northern Quarter, Deansgate, or close to Old Trafford, depending on your plans. Verified listings, clear pricing, and real guest feedback help travellers choose confidently.
                                 </p>
                                 <p>
                                     Transparency matters when planning a trip. This is why Just Buy Travel is committed to providing clear information about hotels, prices, and partner policies without any surprises. The website supports flexible travel planning by helping users understand options before proceeding.

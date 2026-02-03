@@ -14,7 +14,7 @@ export const metadata = {
         type: "website",
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/contactus`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/contact-us`,
     },
     robots: {
         index: false,
@@ -34,7 +34,7 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
-            
+
             <Suspense fallback={<div>Loading...</div>}>
                 <Header />
                 <ContactUs />

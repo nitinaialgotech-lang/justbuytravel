@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import Link from 'next/link';
 
 export default function IreLandBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
@@ -164,7 +165,7 @@ export default function IreLandBookingTips() {
                                     Are you planning a trip to Ireland? The country offers a wide range of places to stay, from lively city hotels to peaceful countryside retreats. Whether you prefer a comfortable budget stay or a luxury resort, choosing the right hotel can make your trip more enjoyable.
                                 </p>
                                 <p>
-                                    Finding and comparing hotels in Ireland becomes easier when you review prices, locations, and guest feedback in one place. Travelers can <span className='g_color font-semibold'>book hotels in Ireland </span>based on travel style, trip length, and preferred location, making planning more flexible and stress-free.
+                                    Finding and comparing hotels in Ireland becomes easier when you review prices, locations, and guest feedback in one place. Travelers can <Link href="/hotels" className="g_color">book hotels in Ireland</Link> based on travel style, trip length, and preferred location, making planning more flexible and stress-free.
                                 </p>
                                 <p>
                                     Many visitors also look for hotel deals or vouchers in Ireland to manage travel costs better. These options can suit different trips, including short city breaks, romantic weekends, and family holidays. By using trusted booking partners and clear pricing information, travelers can plan their stay with confidence and avoid unexpected charges.

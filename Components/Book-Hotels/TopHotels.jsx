@@ -161,6 +161,8 @@ export default function TopHotels() {
                                 ))
                                 : Hotels?.map((item, i) => {
                                     const imageSrc = getPlacePhotoUrl(item);
+                                    console.log(item?.photos, "item");
+
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
