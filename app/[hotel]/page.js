@@ -9,11 +9,11 @@ import {
 } from '@/app/utils/seo';
 import "../../style/responsive.css";
 
-// Static export: only these paths are built. Add more slugs to pre-render more hotel pages.
+// Pre-render a placeholder; allow all other [hotel] slugs at request time (avoids 404 for place slugs like /london-eye-ChIJ...).
 export async function generateStaticParams() {
     return [{ hotel: "placeholder" }];
 }
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }) {
     try {

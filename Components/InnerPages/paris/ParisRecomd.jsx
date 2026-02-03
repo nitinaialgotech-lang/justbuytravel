@@ -173,9 +173,7 @@ export default function ParisRecomd() {
                                     </SwiperSlide>
                                 ))
                                 : nearbyPlace?.map((item, i) => {
-                                    const image = item?.photos
-                                        ?.slice(0, 1)
-                                        ?.map((item) => item?.name);
+                                    const imageSrc = getPlacePhotoUrl(item);
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength
