@@ -15,7 +15,10 @@ export default function AboutDetail() {
                             {/* ********** */}
                             <div className="about_content">
                                 <p>
-                                    <strong>JustBuyTravel is a premier digital travel platform</strong>  dedicated to helping travelers <strong>explore the world for less.</strong>  By offering exceptional value deals across a vast global network of <strong>hotels,</strong>  holiday properties, <strong>flights,</strong> and curated activities, we make dream vacations a reality. Whether through our website, JustBuyTravel ensures a seamless experience with <strong>24/7 dedicated customer support.</strong>  Committed to leveraging modern technology, our team is focused on making every journey easier, more <strong>affordable,</strong>  and completely <strong>hassle-free.</strong>
+                                    <strong>Just Buy Travel is a digital travel platform</strong>  that helps travellers explore destinations and compare hotel options from around the world. <strong>We focus</strong> on providing clear and useful information so <strong>users can understand different accommodation choices easily.</strong> Our goal is to make travel planning simple and stress-free by helping people review <strong>luxury, affordable, and tourist-friendly stays</strong>  before making any decision.
+                                </p>
+                                <p>
+                                    We work with <strong> trusted travel partners</strong> to share updated listings and relevant details, allowing travellers to research options based on their needs and budget. By bringing together multiple hotel choices in one place, Just Buy Travel supports informed travel planning and helps users feel confident while exploring new destinations.
                                 </p>
                             </div>
                             {/* ************ */}
@@ -28,7 +31,7 @@ export default function AboutDetail() {
                             <div className="about_review_section">
                                 <div className="head_line section_title">
                                     <h2>
-                                        Globally recognised and growing every day
+                                        Helping Travellers Explore Better Hotel Options
                                     </h2>
                                 </div>
                                 <div className="box_content ">
@@ -37,11 +40,13 @@ export default function AboutDetail() {
                                         <div className="col-lg-6">
                                             <div className="box_content_box sky_blue">
                                                 <div className="content">
-                                                    <h2 className='p-0 m-0'>
-                                                        24/7
+                                                    <h2 className='p-0 m-0 text-center flex flex-col justify-center items-center'>
+                                                        Compare
+                                                        <img src={getAssetPath("/aboutus/Vector.png")} width={50} alt="" />
                                                     </h2>
-                                                    <p>
-                                                        Customer Support
+                                                    <p className='m-0'>
+                                                        Hotel Prices
+
                                                     </p>
                                                 </div>
                                             </div>
@@ -51,10 +56,11 @@ export default function AboutDetail() {
                                             <div className="box_content_box sky_yellow mrt-20">
                                                 <div className="content">
                                                     <h2 className='p-0 m-0'>
-                                                        1M+
+                                                        Explore
                                                     </h2>
-                                                    <p>
-                                                        Real traveler reviews
+                                                    <p className='m-0'>
+                                                        Travel Destinations
+
                                                     </p>
                                                 </div>
                                             </div>
@@ -64,10 +70,10 @@ export default function AboutDetail() {
                                             <div className="box_content_box sky_green">
                                                 <div className="content">
                                                     <h2 className='p-0 m-0'>
-                                                        100+
+                                                        Find
                                                     </h2>
-                                                    <p>
-                                                        Countries with accommodation
+                                                    <p className='m-0'>
+                                                        Travel Insights
                                                     </p>
                                                 </div>
                                             </div>
@@ -77,10 +83,11 @@ export default function AboutDetail() {
                                             <div className="box_content_box sky_red">
                                                 <div className="content">
                                                     <h2 className='p-0 m-0'>
-                                                        1k+
+                                                        Trusted
                                                     </h2>
-                                                    <p>
-                                                        Hotels and homes worldwide
+                                                    <p className='m-0'>
+                                                        Partner Listings
+
                                                     </p>
                                                 </div>
                                             </div>
@@ -98,7 +105,7 @@ export default function AboutDetail() {
             </section>
             <AboutBitMore_section />
             <AboutExperience />
-            <AboutTrailer_photos />
+            {/* <AboutTrailer_photos /> */}
         </>
     )
 }

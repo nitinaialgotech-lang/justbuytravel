@@ -14,8 +14,9 @@ export default function AboutBitMore_section() {
 
                                 <div className="section_title">
                                     <h2 className='m-0 p-0 capitalize'>
-                                        A bit more about us...
+                                        A Bit More About Us:
                                     </h2>
+                                    <p>Helping you find the best travel options without any hassle.</p>
                                 </div>
 
                                 <div className="row">
@@ -24,12 +25,13 @@ export default function AboutBitMore_section() {
                                             <img src={getAssetPath("/aboutus/bit1.png")} alt="" className='relative' />
                                             <div className="content absolute ">
                                                 <p className=''>
-                                                    What exactly does Justbuytravel offer?
+                                                    What does Just Buy Travel offer?
+
                                                 </p>
                                                 <h2>
-                                                    Flights, and more at affordable prices
+                                                    Flights and travel options at fair prices
                                                 </h2>
-                                                <Link href={""}>Check Now</Link>
+                                                <Link href={"/flights"}>Check Now</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -42,9 +44,9 @@ export default function AboutBitMore_section() {
                                             <div className="content absolute ">
 
                                                 <h2>
-                                                    Book a memreable moment with your travel buddy!
+                                                    Plan memorable trips with confidence
                                                 </h2>
-                                                <Link href={""}>Check Now</Link>
+                                                <Link href={"/"}>Check Now</Link>
                                             </div>
                                         </div>
 
@@ -58,7 +60,7 @@ export default function AboutBitMore_section() {
                                                 <h2>
                                                     Luxury hotels at affordable prices
                                                 </h2>
-                                                <Link href={""}>Check Now</Link>
+                                                <Link href={"/hotels"}>Check Now</Link>
                                             </div>
                                         </div>
                                     </div>

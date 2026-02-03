@@ -166,6 +166,8 @@ export default function TopHotels() {
                                     const name = item?.displayName?.text ?? item?.name ?? '';
                                     const id = item?.id;
                                     const imageSrc = getPlacePhotoUrl(item);
+                                    console.log(item?.photos, "item");
+
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
                                         return text.length > maxLength

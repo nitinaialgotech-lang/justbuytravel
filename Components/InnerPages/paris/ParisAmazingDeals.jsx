@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function ParisAmazingDeals() {
@@ -18,7 +19,7 @@ export default function ParisAmazingDeals() {
                                     Choosing the right place to stay in Paris does not mean paying more than necessary. Whether you are visiting for a weekend getaway, business travel, or a long-planned holiday, the city offers options for every travel style and budget. The key is choosing accommodation that matches your plans, preferred location, and comfort level without adding stress to your trip.
                                 </p>
                                 <p>
-                                    Many travellers choose to <span className='g_color fw-semibold'> book hotels in Paris</span>  that balance comfort, location, and fair pricing. From stylish boutique stays to well-known luxury hotels in Paris, understanding what each area offers helps travellers make better choices. Central neighbourhoods provide easy access to attractions, dining, and transport, while quieter districts suit those who prefer a relaxed pace. Areas close to landmarks remain popular, especially hotels near Eiffel Tower Paris, for their convenience and classic city experience.
+                                    Many travellers choose to <Link href={"/hotels-in-paris"} className='g_color fw-semibold'> book hotels in Paris</Link>  that balance comfort, location, and fair pricing. From stylish boutique stays to well-known luxury hotels in Paris, understanding what each area offers helps travellers make better choices. Central neighbourhoods provide easy access to attractions, dining, and transport, while quieter districts suit those who prefer a relaxed pace. Those travelling between major European cities can also explore <Link href={"/hotels-in-manchester"} className='g_color fw-semibold'> hotels in Manchester</Link> as part of their journey.
                                 </p>
                                 <p>
                                     Travellers focused on savings often benefit from Paris hotel deals, which vary based on season, demand, and travel flexibility. Booking during quieter periods or staying slightly outside major tourist zones can lead to better value without sacrificing comfort. There are also best affordable hotels in Paris that offer clean rooms, reliable service, and easy access to public transport, making them ideal for short stays and extended visits alike.

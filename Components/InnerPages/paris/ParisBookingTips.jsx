@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import Link from 'next/link';
 export default function ParisBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
@@ -163,7 +164,7 @@ export default function ParisBookingTips() {
 
                                 </p>
                                 <p>
-                                    Visitors travelling on a tighter budget can still enjoy a pleasant stay by selecting cheap hotels in Paris located near metro lines or quieter neighbourhoods. These stays often provide clean rooms, reliable services, and good value.
+                                    Visitors travelling on a tighter budget can still enjoy a pleasant stay by selecting <Link href="/hotels" className="g_color">cheap hotels</Link>  in Paris located near metro lines or quieter neighbourhoods. These stays often provide clean rooms, reliable services, and good value.
 
                                 </p>
                                 <p>

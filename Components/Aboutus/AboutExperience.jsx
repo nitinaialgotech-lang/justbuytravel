@@ -8,10 +8,11 @@ export default function AboutExperience() {
                     <div className="row">
                         <div className="about_section_title text-center">
                             <h2 className='capitalize m-0'>
-                                A Trusted Voice in The Conversation between Travelers and experience
+                                Trusted Travel Guidance That Connects People
                             </h2>
                             <p className='capitalize'>
-                                we sitat theintersectionof people-powered travel guidanceand the businessesthat bringthe experienceto life.
+                                We help travelers discover reliable options through trusted travel partners.
+
                             </p>
                         </div>
                         <div className="col-lg-12">

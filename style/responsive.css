@@ -36,6 +36,7 @@
   }
   .banner_box > .title > p {
     font-size: 14px;
+    text-transform: none !important;
   }
   .banner_box > .title > h5 {
     display: none;
@@ -101,12 +102,15 @@
 }
 /* ************************************************************************************************************************ */
 @media only screen and (max-width: 767px) {
-  .bottom_images{
-      display: none;
+  .searchhotelcontainer {
+    padding: 0px !important;
   }
-  .no-found-page h1{
+  .bottom_images {
+    display: none;
+  }
+  .no-found-page h1 {
     font-size: 32px;
-}
+  }
   /* ********** */
   .search_container {
     box-shadow: none;

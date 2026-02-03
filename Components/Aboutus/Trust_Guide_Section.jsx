@@ -43,7 +43,7 @@ export default function Trust_Guide_Section() {
     const navigate = useRouter();
     const route = usePathname();
     return (
-        <section className={`trust_guide_section ${route == "/aboutus" || route == "/hotels" || route == "/my-favorite-travel-resources" ? "" : "bg_grey"}   padding_top padding_bottom `}>
+        <section className={`trust_guide_section ${route == "/hotels" || route == "/my-favorite-travel-resources" ? "" : "bg_grey"}   padding_top padding_bottom `}>
             <div className="container">
                 <div className="row justify-center">
                     <div className="col-lg-12">

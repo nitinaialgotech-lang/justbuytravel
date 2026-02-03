@@ -139,7 +139,7 @@ export default function Header() {
                                         </span>
                                         <span className={isBlog ? "g_color" : ""}>blogs</span>
                                     </Nav.Link>
-                                    <Nav.Link as={Link} href="/aboutus" className={`capitalize ${isAboutUs ? "g_color" : ""}`}>
+                                    <Nav.Link as={Link} href="/about-us" className={`capitalize ${isAboutUs ? "g_color" : ""}`}>
                                         <span>
                                             <HeaderAboutUsIcon color={isAboutUs ? undefined : "#1D1F27"} />
                                         </span>
