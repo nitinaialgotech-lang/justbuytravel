@@ -21,6 +21,7 @@ import FaqSection from '@/Components/HomePage/Faq/FaqSection';
 import { useRouter } from 'next/navigation';
 import { createHotelSlug } from "@/app/utils/seo";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
+import NewYorkFaqSection from './NewYorkFaqSection';
 // ********************************************************
 export default function NewYorkRecondSection() {
     /************************* ustate contetn *** */
@@ -259,7 +260,7 @@ export default function NewYorkRecondSection() {
 
             <NewYorkAmazingDeals />
             <Blogs />
-            <FaqSection />
+            <NewYorkFaqSection />
 
             <Footer />
 

@@ -21,6 +21,7 @@ import UkAmazingDeals from './UkAmazingDeals';
 import { useRouter } from 'next/navigation';
 import { createHotelSlug } from "@/app/utils/seo";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
+import UKFaq_Section from './UKFaq_Section';
 
 
 
@@ -260,7 +261,7 @@ export default function UkRecomd() {
             <UkBookingTips />
             <UkAmazingDeals />
             <Blogs />
-            <FaqSection />
+            <UKFaq_Section />
             <Footer />
 
         </>

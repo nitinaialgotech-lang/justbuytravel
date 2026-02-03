@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import Link from 'next/link';
 export default function GlasGowBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
@@ -159,7 +160,8 @@ export default function GlasGowBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Glasgow offers a mix of historic landmarks, local culture, and friendly neighbourhoods. The place you choose to stay can affect how smoothly your trip goes, whether you arrive for business meetings or a relaxing break.  Many travellers focus on location, comfort, and value when they book hotels in Glasgow, as the right choice helps them save time and enjoy the city more comfortably.
+                                    Glasgow offers a mix of historic landmarks, local culture, and friendly neighbourhoods. The place you choose to stay can affect how smoothly your trip goes, whether you arrive for business meetings or a relaxing break. Many travellers focus on location, comfort, and value when they <Link href={"/hotels"}>book hotels</Link> in Glasgow, as the right choice helps them save time and enjoy the city more comfortably.
+
 
                                 </p>
                                 <p>

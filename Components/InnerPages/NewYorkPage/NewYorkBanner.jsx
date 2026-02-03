@@ -15,9 +15,9 @@ export default function NewYorkBanner() {
                                         <h1 className='capitalize'>
                                             Hotels in<span> New York</span>
                                         </h1>
-                                        {/* <h5 className='capitalize'>
-                                            How can we help you travel better for less?
-                                        </h5> */}
+                                        <p className='capitalize'>
+                                            Compare hotels in New York using trusted platforms to choose comfortable stays with transparent pricing and easy booking.
+                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -72,7 +72,7 @@ export default function Hotel_IconicPlaces() {
 
     return (
         <>
-            <section className=" padding_bottom padding_top">
+            <section className=" padding_bottom ">
                 <div className="container ">
                     <div className="explore_section section_title ">
                         <h2 className="mb-0">Iconic Destinations Around the World</h2>

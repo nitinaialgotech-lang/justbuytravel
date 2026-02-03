@@ -21,6 +21,7 @@ import SanFranceAmazingDeals from './SanFranceAmazingDeals';
 import { useRouter } from 'next/navigation';
 import { createHotelSlug } from "@/app/utils/seo";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
+import SanFrancFaqSection from './SanFrancFaqSection';
 export default function SanFrancRecomd() {
 
   /************************* ustate contetn *** */
@@ -212,7 +213,7 @@ export default function SanFrancRecomd() {
                                       {item?.rating} ({item?.userRatingCount})
                                     </span>
                                   </div>
-                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
+                                  <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
                                     View Detail
                                   </button>
                                 </div>
@@ -258,7 +259,8 @@ export default function SanFrancRecomd() {
       <SanFranceAmazingDeals />
 
       <Blogs />
-      <FaqSection />
+      {/* <FaqSection /> */}
+      <SanFrancFaqSection />
       <Footer />
 
     </>

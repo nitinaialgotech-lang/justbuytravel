@@ -18,7 +18,7 @@ const BANNER_TITLES = {
   restaurants: <>Great Places <span>To eat</span></>,
 }
 
-const DEFAULT_BANNER_TITLE = <>Compare &  <span>Book Hotels</span> Online Easily</>
+const DEFAULT_BANNER_TITLE = <>Compare &  <span>Book Hotels</span> Online </>
 
 export default function BookHotels_Banner() {
   const selectAllKey = useSelector((state) => state.user.SelectAll)
@@ -37,8 +37,8 @@ export default function BookHotels_Banner() {
                       {DEFAULT_BANNER_TITLE}
                     </h1>
                     <p className='capitalize'>
-                      Compare hotel prices, <strong className=''> find the best deals,</strong> and book hotels online securely with trusted travel platforms.
-
+                      {/* Compare hotel prices, <strong className=''> find the best deals,</strong> and book hotels online securely with trusted travel platforms. */}
+                      Find great hotel deals, explore trusted options, and book hotels online with ease.
                     </p>
                   </div>
                 </div>

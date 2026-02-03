@@ -70,9 +70,8 @@ export default function Footer() {
                   {/* ************* */}
                   <div className="footer_desc">
                     <p className="">
-                      <span>
-                        We offer
-                      </span> unforgettable experiences <span>to the world’s most stunning destinations. Let us guide you through </span>seamless adventures, <span>creating memories that last a</span> lifetime.
+
+                      We provide authentic <span>travel guides, destination information, local experiences, travel news, expert tips,</span> and smart suggestions  to help travelers plan <span>better trips.</span>
                     </p>
                   </div>
                 </div>

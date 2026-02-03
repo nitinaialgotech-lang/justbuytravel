@@ -61,7 +61,7 @@ export default function Header() {
     const isBookCruises = pathname.includes("book-cruises");
     const isBookPackages = pathname.includes("book-packages");
     const isBlog = pathname.includes("/blog");
-    const isAboutUs = pathname.includes("aboutus");
+    const isAboutUs = pathname.includes("about-us");
 
     return (
         <>
@@ -279,7 +279,7 @@ export default function Header() {
 
                                                         <li className="">
                                                             <Link
-                                                                href={"/aboutus"}
+                                                                href={"/about-us"}
                                                                 className={`flex justify-between items-center ${isAboutUs ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
