@@ -4,6 +4,50 @@ import moment from 'moment'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { getAssetPath } from "@/app/utils/assetPath";
+
+function getInitials(displayName) {
+    if (!displayName || typeof displayName !== "string") return "?";
+    const parts = displayName.trim().split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase().slice(0, 2);
+    return (parts[0]?.[0] || "?").toUpperCase();
+}
+
+function ReviewAvatar({ photoUri, displayName, size = 48 }) {
+    const [broken, setBroken] = useState(false);
+    const showPhoto = photoUri && !broken;
+    const initials = getInitials(displayName);
+    if (showPhoto) {
+        return (
+            <img
+                src={photoUri}
+                width={size}
+                height={size}
+                alt={displayName || "Reviewer"}
+                onError={() => setBroken(true)}
+                style={{ objectFit: "cover", borderRadius: "50%" }}
+            />
+        );
+    }
+    return (
+        <span
+            className="review_avatar_initials"
+            style={{
+                width: size,
+                height: size,
+                borderRadius: "50%",
+                background: "#e0e0e0",
+                color: "#555",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: Math.max(12, size * 0.4),
+                fontWeight: 600,
+            }}
+        >
+            {initials}
+        </span>
+    );
+}
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -67,7 +111,7 @@ export default function HotelAllReview({ reviews }) {
                                             <div className="review_head flex justify-between ">
                                                 <div className="user">
                                                     <div className="user_img flex items-center gap-3">
-                                                        <span> <img src={item?.authorAttribution?.photoUri} width={48} height={48} alt="" /></span>
+                                                        <span><ReviewAvatar photoUri={item?.authorAttribution?.photoUri} displayName={item?.authorAttribution?.displayName} size={48} /></span>
                                                         <span>
                                                             <h6 className='m-0'>
                                                                 {item?.authorAttribution?.displayName}
@@ -188,8 +232,8 @@ export default function HotelAllReview({ reviews }) {
                                                         <div className="review_head flex justify-between ">
                                                             <div className="user">
                                                                 <div className="user_img flex items-center gap-2">
-                                                                    <span> <img src={item?.authorAttribution?.photoUri} width={38} height={38} alt="" /></span>
-                                                                    <span>
+<span><ReviewAvatar photoUri={item?.authorAttribution?.photoUri} displayName={item?.authorAttribution?.displayName} size={38} /></span>
+                                                                            <span>
                                                                         <h6 className='m-0'>
                                                                             {item?.authorAttribution?.displayName}
                                                                         </h6>
@@ -262,7 +306,7 @@ export default function HotelAllReview({ reviews }) {
                                     <Modal.Header closeButton>
                                         <Modal.Title>
                                             <div className="user_img flex items-center gap-2">
-                                                <span> <img src={modalReview?.authorAttribution?.photoUri} width={38} height={38} alt="" /></span>
+                                                <span><ReviewAvatar photoUri={modalReview?.authorAttribution?.photoUri} displayName={modalReview?.authorAttribution?.displayName} size={38} /></span>
                                                 <span>
                                                     <h6 className='m-0'>
                                                         {modalReview?.authorAttribution?.displayName}

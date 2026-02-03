@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createHotelSlug } from "@/app/utils/seo";
 import { getAssetPath, getPlacePhotoUrl } from "@/app/utils/assetPath";
 
@@ -98,6 +99,7 @@ export default function ExperienceExploreSection() {
         },
     ];
 
+    const router = useRouter();
     const [isBeginning, setIsBeginning] = useState(true);
     const [secondActive, setSecondActive] = useState(true);
     const [nearbyActive, setNearbyActive] = useState(true);
@@ -223,14 +225,21 @@ export default function ExperienceExploreSection() {
                             >
                                 {(nearbyPlaceslist.length ? nearbyPlaceslist : NearCard)?.map((item, i) => {
                                     const title =
-                                        item?.displayName?.text || item?.content || "Place";
+                                        item?.displayName?.text || item?.content || item?.displayName || "Place";
                                     const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
                                     const placeId = item?.id;
+                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
                                     const fallbackImg = getAssetPath("/blog/blog_img.webp");
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
-                                                <div className="card relative border-0">
+                                                <div
+                                                    className="card relative border-0 cursor-pointer"
+                                                    onClick={() => slug !== '#' && router.push(slug)}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                >
                                                     <img
                                                         src={imageSrc}
                                                         className="card-img-top card_rounded"
@@ -254,9 +263,9 @@ export default function ExperienceExploreSection() {
                                                                 )}
                                                             </div>
                                                             {placeId && (
-                                                                <div className="">
+                                                                <div className="" onClick={(e) => e.stopPropagation()}>
                                                                     <Link
-                                                                        href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, placeId)}`}
+                                                                        href={slug}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                     >
                                                                         View Detail
@@ -359,13 +368,20 @@ export default function ExperienceExploreSection() {
                                 : fallbackIconicCards
                             ).map((item, i) => {
                                 const title =
-                                    item?.displayName?.text || item?.content || "Place";
+                                    item?.displayName?.text || item?.content || item?.displayName || "Place";
                                 const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
                                 const placeId = item?.id;
+                                const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
                                 return (
                                     <SwiperSlide key={i}>
                                         <div className="experience_explore_section ">
-                                            <div className="card  relative border-0 ">
+                                            <div
+                                                className="card relative border-0 cursor-pointer"
+                                                onClick={() => slug !== '#' && router.push(slug)}
+                                                role="button"
+                                                tabIndex={0}
+                                                onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                            >
                                                 <img
                                                     src={imageSrc}
                                                     className=" card_rounded "
@@ -388,9 +404,9 @@ export default function ExperienceExploreSection() {
                                                             )}
                                                         </div>
                                                         {placeId && (
-                                                            <div className="">
+                                                            <div className="" onClick={(e) => e.stopPropagation()}>
                                                                 <Link
-                                                                    href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, placeId)}`}
+                                                                    href={slug}
                                                                     className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                 >
                                                                     View Detail

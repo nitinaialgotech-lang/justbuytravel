@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createHotelSlug } from "@/app/utils/seo";
 
 // Import Swiper styles
@@ -21,6 +22,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 
 export default function IconicPlaceInSydney() {
+    const router = useRouter();
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
@@ -129,10 +131,17 @@ export default function IconicPlaceInSydney() {
                                         item?.displayName?.text || item?.content || "Place";
                                     const imgName = item?.photos?.[0]?.name;
                                     const placeId = item?.id;
+                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">
-                                                <div className="card  relative border-0 ">
+                                                <div
+                                                    className="card relative border-0 cursor-pointer"
+                                                    onClick={() => slug !== '#' && router.push(slug)}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                >
                                                     <img
                                                         src={
                                                             imgName
@@ -159,9 +168,9 @@ export default function IconicPlaceInSydney() {
                                                                 )}
                                                             </div>
                                                             {placeId && (
-                                                                <div className="mt-2">
+                                                                <div className="mt-2" onClick={(e) => e.stopPropagation()}>
                                                                     <Link
-                                                                        href={`/${createHotelSlug(title, placeId)}`}
+                                                                        href={slug}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                     >
                                                                         View Details

@@ -4,6 +4,9 @@ import { Restro } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createHotelSlug } from "@/app/utils/seo";
 
 // Import Swiper styles
 import "swiper/css";
@@ -18,6 +21,7 @@ import { getAssetPath, getPlacePhotoUrl } from "@/app/utils/assetPath";
 /******************* stqart function */
 export default function HotelDetailNearByPlaces({ lat, long }) {
     /********************* states *************** */
+    const router = useRouter();
     const [isBeginning, setIsBeginning] = useState(true);
     /********************************************  */
     const { data: nearbyRestaurantsData } = useQuery({
@@ -85,13 +89,21 @@ export default function HotelDetailNearByPlaces({ lat, long }) {
                                 className="mySwiper relative"
                             >
                                 {nearbyPlaceslist?.map((item, i) => {
-                                    const title = item?.displayName?.text || "Place";
+                                    const title = item?.displayName?.text || item?.displayName || "Place";
+                                    const placeId = item?.id;
+                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
                                     const imageSrc = getPlacePhotoUrl(item);
                                     const fallbackImg = getAssetPath("/blog/blog_img.webp");
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
-                                                <div className="card relative border-0">
+                                                <div
+                                                    className="card relative border-0 cursor-pointer"
+                                                    onClick={() => slug !== '#' && router.push(slug)}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                >
                                                     <img
                                                         src={imageSrc}
                                                         className="card-img-top card_rounded"
@@ -110,6 +122,16 @@ export default function HotelDetailNearByPlaces({ lat, long }) {
                                                                 {renderBootstrapStars(item?.rating)}
                                                                 <span className="ms-1">{item?.rating}</span>
                                                             </div>
+                                                            {placeId && (
+                                                                <div className="mt-2" onClick={(e) => e.stopPropagation()}>
+                                                                    <Link
+                                                                        href={slug}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Detail
+                                                                    </Link>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

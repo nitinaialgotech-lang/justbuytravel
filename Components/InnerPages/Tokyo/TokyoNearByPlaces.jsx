@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createHotelSlug } from "@/app/utils/seo";
 
 // Import Swiper styles
@@ -18,6 +19,7 @@ import { Navigation, Pagination } from "swiper/modules";
 /******************* stqart function */
 export default function TokyoNearByPlaces() {
     /********************* states *************** */
+    const router = useRouter();
     const [isBeginning, setIsBeginning] = useState(true);
     /* ********************************* */
     const renderBootstrapStars = (rating) => {
@@ -109,10 +111,18 @@ export default function TokyoNearByPlaces() {
                             >
                                 {nearbyPlaceslist?.map((item, i) => {
                                     const placeId = item?.id;
+                                    const title = item?.displayName?.text || item?.displayName || "Place";
+                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
-                                                <div className="card relative border-0">
+                                                <div
+                                                    className="card relative border-0 cursor-pointer"
+                                                    onClick={() => slug !== '#' && router.push(slug)}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                >
                                                     <img
                                                         src={
                                                             item?.photos?.[0]?.name
@@ -125,16 +135,16 @@ export default function TokyoNearByPlaces() {
                                                     <div className="card-body ps-0 flex justify-between">
                                                         <div className="card_detail">
                                                             <h5 className="card-title m-0">
-                                                                {item?.displayName?.text}
+                                                                {title}
                                                             </h5>
                                                             <div className="rating flex align-items-center gap-1">
                                                                 {renderBootstrapStars(item?.rating)}
                                                                 <span className="ms-1">{item?.rating}</span>
                                                             </div>
                                                             {placeId && (
-                                                                <div className="mt-2">
+                                                                <div className="mt-2" onClick={(e) => e.stopPropagation()}>
                                                                     <Link
-                                                                        href={`/${createHotelSlug(item?.displayName?.text || item?.displayName, placeId)}`}
+                                                                        href={slug}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                     >
                                                                         View Details

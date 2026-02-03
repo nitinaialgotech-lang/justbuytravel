@@ -15,6 +15,7 @@ import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { SetSelectAll } from "../Redux/Reducer";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
+import { createHotelSlug } from "@/app/utils/seo";
 export default function Search() {
 
     // **************************************************************************************
@@ -222,7 +223,8 @@ export default function Search() {
             viewSearchAll(lat, long)
         }
         else {
-            ViewHotels(id)
+            const name = place?.displayName?.text || place?.name || '';
+            ViewHotels(id, name);
         }
     };
 
@@ -261,9 +263,10 @@ export default function Search() {
     }
     // **************************** hotel search
 
-    const ViewHotels = (id) => {
-        router.push(`/hoteldetail?hotel=${id}`);
-
+    const ViewHotels = (id, name) => {
+        if (!id) return;
+        const slug = createHotelSlug(name || '', id);
+        router.push(`/${slug}`);
     };
     // *********************************
 

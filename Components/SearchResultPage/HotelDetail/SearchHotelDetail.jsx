@@ -138,11 +138,11 @@ export default function SearchHotelDetail() {
         ? HotelDetail.types.includes("lodging")
         : false;
 
-    // ********************************************************** Fetch hotel key for pricing
+    // ********************************************************** Fetch hotel key for pricing (testing.php – hotels only, not nearby restaurants/iconic places)
     const { data: hoteldata } = useQuery({
-        queryKey: ["hoteldata", locationName],
+        queryKey: ["hoteldata", locationName, isHotelLodging],
         queryFn: () => searchHotelName(locationName,locationAddress),
-        enabled: Boolean(locationName),
+        enabled: Boolean(locationName) && isHotelLodging,
         retry: 1,
     })
     console.log(data,"hoteldataaaa");
@@ -372,7 +372,8 @@ export default function SearchHotelDetail() {
                                             </ul>
 
                                         </div>
-                                        {/* ***************** */}
+                                        {/* ***************** price section – hotels only, hidden for iconic places & nearby restaurants */}
+                                        {isHotelLodging && (
                                         <div className="price_hotel flex  gap-3">
                                             <div className="price">
                                                 <h4 className="m-0">
@@ -386,6 +387,7 @@ export default function SearchHotelDetail() {
                                                 </button>
                                             </div>
                                         </div>
+                                        )}
                                     </div>
                                 </div>
                                 {/* **************** end ************ */}
@@ -484,6 +486,7 @@ export default function SearchHotelDetail() {
                                                                         {HotelDetail?.rating} ({ratingCount} reviews )</p>
 
                                                                 </div>
+                                                                {isHotelLodging ? (
                                                                 <div className="price_hotel flex items-center gap-3">
                                                                     <div className="price">
                                                                         <h4 className="m-0">
@@ -500,6 +503,11 @@ export default function SearchHotelDetail() {
                                                                         <img src={getAssetPath("/popup/add.png")} className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
                                                                     </div>
                                                                 </div>
+                                                                ) : (
+                                                                <div className="popup_header_close ">
+                                                                    <img src={getAssetPath("/popup/add.png")} className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
+                                                                </div>
+                                                                )}
                                                                 {/* ************ */}
 
                                                             </div>
