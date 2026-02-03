@@ -4,7 +4,7 @@ import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
 import Blog_Right_Sidebar from '@/Components/Blogs/Blog_Right_Section/Blog_Right_Sidebar';
-import { Get_Blog_By_Slug, Get_Blog_category } from '@/app/Route/endpoints';
+import { Get_Blog_By_Slug, Get_Blog_category, Get_All_Blog_Categories, Get_All_Blog_Posts_For_Static } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
 import { SlCalender } from 'react-icons/sl';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -23,7 +23,37 @@ const RESERVED_SEGMENTS = new Set([
   'view-all-hotels'
 ]);
 
-export const dynamic = 'force-dynamic';
+// Static export: pre-render all known (category, slug) blog paths at build time.
+export async function generateStaticParams() {
+  try {
+    const [categoriesRes, allPosts] = await Promise.all([
+      Get_All_Blog_Categories(),
+      Get_All_Blog_Posts_For_Static(),
+    ]);
+    const categories = categoriesRes?.data || [];
+    const idToSlug = Object.fromEntries(
+      categories.map((c) => [String(c.id), (c.slug || '').toLowerCase()])
+    );
+    const params = [];
+    for (const post of allPosts) {
+      const slug = post.slug;
+      if (!slug) continue;
+      const categoryIds = post.categories || [];
+      for (const id of categoryIds) {
+        const categorySlug = idToSlug[String(id)];
+        if (categorySlug && !RESERVED_SEGMENTS.has(categorySlug)) {
+          params.push({ hotel: categorySlug, slug });
+        }
+      }
+    }
+    return params;
+  } catch (err) {
+    console.warn('generateStaticParams [hotel]/[slug]:', err?.message);
+    return [];
+  }
+}
+
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }) {
   try {

@@ -40,6 +40,24 @@ export const Get_Blog_By_Slug = async (slug) => {
 export const Get_Blog_category = async () => {
     return await https_blog.get("/categories?per_page=20")
 }
+
+/** Fetch all categories (for static export generateStaticParams). */
+export const Get_All_Blog_Categories = async () => {
+    return await https_blog.get("/categories?per_page=100")
+}
+
+/** Fetch all posts in pages (for static export generateStaticParams). Max 50 pages × 100 = 5000 posts. */
+export const Get_All_Blog_Posts_For_Static = async () => {
+    const first = await https_blog.get("/posts?per_page=100&page=1");
+    const totalPages = Number(first.headers["x-wp-totalpages"]) || 1;
+    const allPosts = [...(first.data || [])];
+    const maxPages = Math.min(totalPages, 50);
+    for (let page = 2; page <= maxPages; page++) {
+        const res = await https_blog.get(`/posts?per_page=100&page=${page}`);
+        allPosts.push(...(res.data || []));
+    }
+    return allPosts;
+}
 // export const Get_Blog_data = async (id) => {
 
 

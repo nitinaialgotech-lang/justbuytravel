@@ -19,7 +19,9 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { createHotelSlug } from "@/app/utils/seo";
-import { getPlacePhotoUrl } from "@/app/utils/assetPath";
+import { getPlacePhotoUrl, getAssetPath } from "@/app/utils/assetPath";
+
+const PLACEHOLDER_IMG = "/blog/blog_img.webp";
 export default function Recomended() {
     const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
     const [Active, setActive] = useState(true);
@@ -209,7 +211,11 @@ export default function Recomended() {
                                                                 <img
                                                                     src={imageSrc}
                                                                     className="card_rounded w-full h-full object-cover"
-                                                                    alt={"Hotel image"}
+                                                                    alt={item?.displayName?.text || "Hotel"}
+                                                                    onError={(e) => {
+                                                                        e.target.onerror = null;
+                                                                        e.target.src = getAssetPath(PLACEHOLDER_IMG);
+                                                                    }}
                                                                 />
                                                             </div>
                                                             {/* *** */}

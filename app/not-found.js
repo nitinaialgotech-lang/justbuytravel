@@ -1,8 +1,7 @@
-import Footer from "@/component/Footer";
 import Header from "@/component/Header";
 import Link from "next/link";
 import { getAssetPath } from "./utils/assetPath";
-const basePath = getAssetPath();
+
 export const metadata = {
   title: "404 - Page Not Found | Just Buy Travel",
   description:
@@ -22,7 +21,7 @@ export default function NotFound() {
           <div className="row">
             <div className="no-found-page col-12">
               <div className="text-center">
-                <img src={`${basePath}/404-page/sailor.png`} alt="404"className="m-auto"/>
+                <img src={getAssetPath("/404-page/sailor.png")} alt="404" className="m-auto" />
               </div>
               <div className="text-center mt-5">
                 <h1>404 - Page Not Found</h1>
@@ -39,8 +38,8 @@ export default function NotFound() {
           </div>
         </div>
         <div className="bottom_images">
-          <img src={`${basePath}/404-page/sailor-left.png`} alt="404"className="me-auto"/>
-          <img src={`${basePath}/404-page/sailor-right.png`} alt="404"className="ms-auto"/>
+          <img src={getAssetPath("/404-page/sailor-left.png")} alt="404" className="me-auto" />
+          <img src={getAssetPath("/404-page/sailor-right.png")} alt="404" className="ms-auto" />
         </div>
       </main>
     </>

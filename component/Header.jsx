@@ -56,7 +56,7 @@ export default function Header() {
         }, 150); // 150ms delay
     }
     const pathname = pathnamne ?? "";
-    const isBookHotels = pathname.includes("book-hotels-online");
+    const isBookHotels = pathname.includes("hotels");
     const isBookFlights = pathname.includes("flights");
     const isBookCruises = pathname.includes("book-cruises");
     const isBookPackages = pathname.includes("book-packages");
@@ -93,7 +93,7 @@ export default function Header() {
                                 <Nav className="gap-4 nav-max-height-100" navbarScroll>
                                     <Nav.Link
                                         as={Link}
-                                        href="/book-hotels-online"
+                                        href="/hotels"
                                         className={`capitalize ${isBookHotels ? "g_color" : ""}`}
                                     >
                                         <span>

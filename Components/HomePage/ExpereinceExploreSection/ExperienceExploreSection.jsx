@@ -226,6 +226,7 @@ export default function ExperienceExploreSection() {
                                         item?.displayName?.text || item?.content || "Place";
                                     const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
                                     const placeId = item?.id;
+                                    const fallbackImg = getAssetPath("/blog/blog_img.webp");
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
@@ -233,7 +234,11 @@ export default function ExperienceExploreSection() {
                                                     <img
                                                         src={imageSrc}
                                                         className="card-img-top card_rounded"
-                                                        alt="Place"
+                                                        alt={title}
+                                                        onError={(e) => {
+                                                            e.target.onerror = null;
+                                                            e.target.src = fallbackImg;
+                                                        }}
                                                     />
                                                     <div className="card-body ps-0 flex justify-between">
                                                         <div className="card_detail">

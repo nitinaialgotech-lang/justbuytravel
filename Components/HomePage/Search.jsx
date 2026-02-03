@@ -22,7 +22,7 @@ export default function Search() {
     const router = useRouter();
     const pathname = usePathname();
     const isBookFlightsPage = pathname?.includes("flights") ?? false;
-    const isBookHotelsPage = pathname?.includes("book-hotels") ?? false;
+    const isBookHotelsPage = pathname?.includes("hotels") ?? false;
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
     const [showDropdown, setShowDropdown] = useState(false);
@@ -283,7 +283,7 @@ export default function Search() {
                     <div className="search_container ">
                         <div className="search_container_box  rounded-2xl  w-full">
                             {
-                                !isBookFlightsPage ? (
+                                !isBookFlightsPage && !isBookHotelsPage ? (
 
                                     <div className="search_tab">
                                         <div className="tab_link flex justify-between items-center">

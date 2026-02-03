@@ -20,10 +20,10 @@ export default function QuickLinks() {
                                     <div className="quick_link_items">
                                         <h4 className="p-0 m-0">Asia Hotels</h4>
                                         <ul className="p-0 m-0 flex capitalize">
-                                            <li><Link href="/book-hotels-dubai">Dubai Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-dubai">Dubai Hotel</Link> |</li>
                                             <li><Link href="/hotels-in-goa">Goa Hotel</Link> |</li>
-                                            <li><Link href="/singapore">Singapore Hotel</Link> |</li>
-                                            <li><Link href="/tokyo">Tokyo Hotel</Link></li>
+                                            <li><Link href="/hotels-in-singapore">Singapore Hotel</Link> |</li>
+                                            <li><Link href="/hotels-in-tokyo">Tokyo Hotel</Link></li>
                                         </ul>
                                         <hr />
                                     </div>
@@ -49,7 +49,7 @@ export default function QuickLinks() {
                                             <li><Link href="/hotels-in-canada">Canada Hotel</Link> |</li>
                                             <li><Link href="/hotels-in-new-york">New York Hotel</Link> |</li>
                                             <li><Link href="/hotels-in-san-francisco">San Francisco Hotel</Link> |</li>
-                                            <li><Link href="/usa">USA Hotel</Link></li>
+                                            <li><Link href="/hotels-in-usa">USA Hotel</Link></li>
                                         </ul>
                                         <hr />
                                     </div>
@@ -59,7 +59,7 @@ export default function QuickLinks() {
                                         <h4 className="p-0 m-0">Australia Hotels</h4>
                                         <ul className="p-0 m-0 flex capitalize">
                                             <li><Link href="/hotels-in-australia">Australia Hotel</Link> |</li>
-                                            <li><Link href="/sydney">Sydney Hotel</Link></li>
+                                            <li><Link href="/hotels-in-sydney">Sydney Hotel</Link></li>
                                         </ul>
                                         <hr />
                                     </div>

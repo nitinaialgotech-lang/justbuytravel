@@ -5,7 +5,8 @@
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
 const siteName = 'Just Buy Travel';
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || 'https://goldenrod-woodcock-914779.hostingersite.com/';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const imageBaseUrl = basePath ? `${siteUrl}${basePath}` : siteUrl;
 
 /**
  * Generate metadata for blog posts
@@ -20,7 +21,7 @@ export function generateBlogMetadata(post) {
     
     const featuredImage = post?.featured_image_url || 
                          post?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
-                         `${basePath}/logo/cropped-Frame.png`;
+                         `${imageBaseUrl}/logo/cropped-Frame.png`;
     
     const author = post?._embedded?.author?.[0]?.name || 
                    post?.author_name || 
@@ -92,7 +93,7 @@ export function generateHotelMetadata(hotel) {
     const photos = hotel?.photos || [];
     const mainImage = photos.length > 0 
         ? `https://places.googleapis.com/v1/${photos[0].name}/media?maxHeightPx=1200&key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}`
-        : `${basePath}/logo/cropped-Frame.png`;
+        : `${imageBaseUrl}/logo/cropped-Frame.png`;
     
     const slug = createHotelSlug(name, hotel?.id || '');
     const canonicalUrl = `${siteUrl}/${slug}`;
@@ -157,7 +158,7 @@ export function generateDestinationMetadata(destination, customData = {}) {
     
     const canonicalUrl = `${siteUrl}/${destination}`;
     
-    const image = customData.image || `${basePath}/logo/cropped-Frame.png`;
+    const image = customData.image || `${imageBaseUrl}/logo/cropped-Frame.png`;
 
     return {
         title,
@@ -208,7 +209,7 @@ export function generateBlogStructuredData(post, slug) {
     
     const featuredImage = post?.featured_image_url || 
                          post?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
-                         `${basePath}/logo/cropped-Frame.png`;
+                         `${imageBaseUrl}/logo/cropped-Frame.png`;
     
     const author = post?._embedded?.author?.[0]?.name || 
                    post?.author_name || 
@@ -234,7 +235,7 @@ export function generateBlogStructuredData(post, slug) {
             name: siteName,
             logo: {
                 '@type': 'ImageObject',
-                url: `${basePath}/logo/cropped-Frame.png`,
+                url: `${imageBaseUrl}/logo/cropped-Frame.png`,
             },
         },
         datePublished: publishedDate,

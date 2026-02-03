@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { createHotelSlug } from "@/app/utils/seo";
+import { getAssetPath, getPlacePhotoUrl } from "@/app/utils/assetPath";
 
 // Import Swiper styles
 import "swiper/css";
@@ -117,23 +118,26 @@ export default function HotelSearchNearByLocation({
                             >
                                 {filteredNearbyPlaces?.map((item, i) => {
                                     const placeId = item?.id;
+                                    const title = item?.displayName?.text || "Place";
+                                    const imageSrc = getPlacePhotoUrl(item);
+                                    const fallbackImg = getAssetPath("/blog/blog_img.webp");
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
                                                 <div className="card relative border-0">
                                                     <img
-                                                        src={
-                                                            item?.photos?.[0]?.name
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item.photos[0].name}`
-                                                                : "/no-image.jpg"
-                                                        }
+                                                        src={imageSrc}
                                                         className="card-img-top card_rounded"
-                                                        alt="Place"
+                                                        alt={title}
+                                                        onError={(e) => {
+                                                            e.target.onerror = null;
+                                                            e.target.src = fallbackImg;
+                                                        }}
                                                     />
                                                     <div className="card-body ps-0 flex justify-between">
                                                         <div className="card_detail">
                                                             <h5 className="card-title m-0">
-                                                                {item?.displayName?.text}
+                                                                {title}
                                                             </h5>
                                                             <div className="rating flex align-items-center gap-1">
                                                                 {renderBootstrapStars(item?.rating)}

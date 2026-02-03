@@ -21,7 +21,7 @@ export default function AboutDetail() {
                             {/* ************ */}
                             <div className="break_point flex justify-center">
                                 <div className="icon">
-                                    <img src={getAssetPath("/aboutus/vector.png")} alt="" />
+                                    <img src={getAssetPath("/aboutus/Vector.png")} alt="" />
                                 </div>
                             </div>
                             {/* ********** */}

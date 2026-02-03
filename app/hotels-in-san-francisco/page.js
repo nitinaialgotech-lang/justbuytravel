@@ -6,7 +6,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
 const canonicalUrl = `${siteUrl}/hotels-in-san-francisco`;
 
 export const metadata = {
-    title: "Hotels in San Francisco | Cheap & Luxury",
+    title: "Hotels in San Francisco | Cheap & Luxury | Just Buy Travel",
     description:
         "Choose from affordable and premium hotels in San Francisco with reliable listings, central locations, and easy booking options. Visit the website now.",
     keywords: [

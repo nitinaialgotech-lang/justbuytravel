@@ -9,11 +9,11 @@ import {
 } from '@/app/utils/seo';
 import "../../style/responsive.css";
 
-export const dynamicParams = true;
-
-export function generateStaticParams() {
-    return [];
+// Static export: only these paths are built. Add more slugs to pre-render more hotel pages.
+export async function generateStaticParams() {
+    return [{ hotel: "placeholder" }];
 }
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }) {
     try {
@@ -28,12 +28,13 @@ export async function generateMetadata({ params }) {
         }
 
         const response = await GetHotel_Detail(hotelId);
-        const hotel = response?.data;
+        const body = response?.data;
+        const hotel = body?.displayName || body?.id ? body : body?.data ?? null;
 
         if (!hotel) {
             return {
-                title: 'Hotel Not Found',
-                description: 'The requested hotel could not be found.',
+                title: 'Hotel Details',
+                description: 'View detailed hotel information, reviews, and prices.',
             };
         }
 
@@ -49,18 +50,28 @@ export async function generateMetadata({ params }) {
 
 export default async function HotelDetailPage({ params }) {
     try {
-        // Await params in Next.js 15+
         const resolvedParams = await params;
-        const hotelId = getHotelIdFromSlug(resolvedParams?.hotel);
-        if (!hotelId) {
+        const slug = resolvedParams?.hotel;
+        const hotelId = getHotelIdFromSlug(slug);
+
+        // Only 404 when the URL is not a valid hotel slug (no place ID)
+        if (!slug || !hotelId) {
             notFound();
         }
 
-        const response = await GetHotel_Detail(hotelId);
-        const hotel = response?.data;
+        let hotel = null;
+        try {
+            const response = await GetHotel_Detail(hotelId);
+            // API returns hotel at top level (response.data) or wrapped in .data
+            const body = response?.data;
+            hotel = body?.displayName || body?.id ? body : body?.data ?? null;
+        } catch (apiError) {
+            console.error('Hotel API error:', apiError?.message);
+        }
 
+        // Always render detail page when we have a valid place ID; let client handle loading/error
         if (!hotel) {
-            notFound();
+            return <SearchHotelDetail />;
         }
 
         const hotelName = hotel?.displayName?.text || hotel?.name || 'Hotel';
@@ -68,7 +79,7 @@ export default async function HotelDetailPage({ params }) {
         const breadcrumbData = generateBreadcrumbStructuredData([
             { name: 'Home', path: '/' },
             { name: 'Hotels', path: '/hotels' },
-            { name: hotelName, path: `/${resolvedParams.hotel}` },
+            { name: hotelName, path: `/${slug}` },
         ]);
 
         return (
@@ -81,7 +92,6 @@ export default async function HotelDetailPage({ params }) {
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
                 />
-
                 <SearchHotelDetail />
             </>
         );
