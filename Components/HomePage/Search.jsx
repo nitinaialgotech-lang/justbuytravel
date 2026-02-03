@@ -285,7 +285,6 @@ export default function Search() {
                         <div className="search_container_box  rounded-2xl  w-full">
                             {
                                 !isBookFlightsPage && !isBookHotelsPage ? (
-                                !isBookFlightsPage && !isBookHotelsPage ? (
 
                                     <div className="search_tab">
                                         <div className="tab_link flex justify-between items-center">
