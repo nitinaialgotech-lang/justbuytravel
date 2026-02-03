@@ -467,7 +467,10 @@ export default function RecomendSection() {
 
                                         <SwiperSlide key={itemId}> <div className="card_col " key={i} >
 
-                                            <div className="recommend_card_box   card_rounded shadow margin_lr margin_md-lr ">
+                                            <div
+                                                className="recommend_card_box card_rounded shadow margin_lr margin_md-lr cursor-pointer"
+                                                onClick={() => viewDetails(item?.name, item?.hotel_identifier)}
+                                            >
 
                                                 <div className="card_box pe-">
                                                     <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
@@ -526,7 +529,10 @@ export default function RecomendSection() {
                                                             <h5 className='m-0'>
                                                                 {displayPrice}.00 <span>/ person</span>
                                                             </h5>
-                                                            <button className='button_bg2  rounded-full bg-color-green color_bl' onClick={() => viewDetails(item?.name, item?.hotel_identifier)}>
+                                                            <button
+                                                                className="button_bg2 rounded-full bg-color-green color_bl"
+                                                                onClick={(e) => { e.stopPropagation(); viewDetails(item?.name, item?.hotel_identifier); }}
+                                                            >
                                                                 Book Now
                                                             </button>
 

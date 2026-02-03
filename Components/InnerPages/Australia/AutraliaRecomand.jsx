@@ -171,6 +171,8 @@ export default function AutraliaRecomand() {
                                     </SwiperSlide>
                                 ))
                                 : nearbyPlace?.map((item, i) => {
+                                    const name = item?.displayName?.text ?? item?.name ?? '';
+                                    const id = item?.id;
                                     const imageSrc = getPlacePhotoUrl(item);
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
@@ -183,8 +185,8 @@ export default function AutraliaRecomand() {
                                             <SwiperSlide key={i}>
                                                 <div className="card_col">
                                                     <div
-                                                        className="recommend_card_box   card_rounded  recomand_card_shadow  
-                                                        "
+                                                        className="recommend_card_box card_rounded recomand_card_shadow cursor-pointer"
+                                                        onClick={() => viewDetail(id, name)}
                                                     >
                                                         <div className="card_box pe-">
                                                             <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
@@ -197,7 +199,7 @@ export default function AutraliaRecomand() {
                                                             {/* *** */}
                                                             <div className="card_box_detail card_rounded flex flex-col z-1  relative">
                                                                 <h4 className="m-0 capitalize">
-                                                                    {item?.displayName?.text}
+                                                                    {name || item?.displayName?.text}
                                                                 </h4>
                                                                 {/* ****** */}
 
@@ -211,7 +213,10 @@ export default function AutraliaRecomand() {
                                                                             {item?.rating} ({item?.userRatingCount})
                                                                         </span>
                                                                     </div>
-                                                                    <button className="button_bg2  rounded-full bg-color-green color_bl recomend_btn" onClick={() => viewDetail(item?.id, item?.displayName?.text)}>
+                                                                    <button
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                        onClick={(e) => { e.stopPropagation(); viewDetail(id, name); }}
+                                                                    >
                                                                         View Detail
                                                                     </button>
                                                                 </div>

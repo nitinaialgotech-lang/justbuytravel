@@ -68,7 +68,10 @@ export default function Hotel_IconicPlaces() {
         queryKey: ["touristattraction"],
         queryFn: () => TouristAttractionApi()
     })
-    const TouristAttraction = touristAttraction?.data;
+    const rawAttractions = touristAttraction?.data;
+    const TouristAttraction = rawAttractions?.length
+        ? [...new Map((rawAttractions || []).map((item, i) => [item?.id ?? `iconic-${i}`, item])).values()]
+        : rawAttractions;
 
     return (
         <>
@@ -129,7 +132,7 @@ export default function Hotel_IconicPlaces() {
                                     const imgName = item?.photos?.[0]?.name;
                                     const placeId = item?.id;
                                     return (
-                                        <SwiperSlide key={i}>
+                                        <SwiperSlide key={placeId || `iconic-${i}`}>
                                             <div className="experience_explore_section ">
                                                 <div className="card  relative border-0 ">
                                                     <img

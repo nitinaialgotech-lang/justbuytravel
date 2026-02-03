@@ -1,5 +1,49 @@
 import moment from 'moment';
-import React from 'react'
+import React, { useState } from 'react'
+
+function getInitials(displayName) {
+    if (!displayName || typeof displayName !== "string") return "?";
+    const parts = displayName.trim().split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase().slice(0, 2);
+    return (parts[0]?.[0] || "?").toUpperCase();
+}
+
+function ReviewAvatar({ photoUri, displayName, size = 40 }) {
+    const [broken, setBroken] = useState(false);
+    const showPhoto = photoUri && !broken;
+    const initials = getInitials(displayName);
+    if (showPhoto) {
+        return (
+            <img
+                src={photoUri}
+                width={size}
+                height={size}
+                alt={displayName || "Reviewer"}
+                onError={() => setBroken(true)}
+                style={{ objectFit: "cover", borderRadius: "50%" }}
+            />
+        );
+    }
+    return (
+        <span
+            className="review_avatar_initials"
+            style={{
+                width: size,
+                height: size,
+                borderRadius: "50%",
+                background: "#e0e0e0",
+                color: "#555",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: Math.max(12, size * 0.4),
+                fontWeight: 600,
+            }}
+        >
+            {initials}
+        </span>
+    );
+}
 
 export default function HotelReviews({ reviews }) {
     return (
@@ -16,7 +60,7 @@ export default function HotelReviews({ reviews }) {
                                             <div className="review_box_section">
                                                 <div className="review_head flex items-center gap-2">
                                                     <div className="usr_img">
-                                                        <img src={item?.authorAttribution?.photoUri} width={40} height={40} alt="" />
+                                                        <ReviewAvatar photoUri={item?.authorAttribution?.photoUri} displayName={item?.authorAttribution?.displayName} size={40} />
 
                                                     </div>
                                                     <div className="user_info">
