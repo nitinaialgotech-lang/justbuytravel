@@ -4,27 +4,32 @@ import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
 import Blog_Right_Sidebar from '@/Components/Blogs/Blog_Right_Section/Blog_Right_Sidebar';
-import { Get_All_Blog_Posts_For_Static, Get_Blog_By_Slug, Get_Blog_category } from '@/app/Route/endpoints';
+import { Get_Blog_By_Slug, Get_Blog_category, Get_All_Blog_Posts_For_Static } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
 import { SlCalender } from 'react-icons/sl';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import "../../../style/responsive.css";
 
+// Pre-render known blog slugs at build when API is reachable (e.g. local build).
 export async function generateStaticParams() {
-    try {
-        const blogs = await Get_All_Blog_Posts_For_Static();
-        return (blogs || []).map((blog) => ({ slug: blog.slug }));
-    } catch (error) {
-        console.error('Error generating static params:', error);
-        return [];
-    }
+  try {
+    const posts = await Get_All_Blog_Posts_For_Static();
+    return (posts || []).filter((p) => p?.slug).map((p) => ({ slug: p.slug }));
+  } catch (err) {
+    console.warn('generateStaticParams blog/[slug]:', err?.message);
+    return [];
+  }
 }
+
+// Always render on server so /blog/[slug] works on Hostinger even when build had no API access.
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }) {
     try {
         const { slug } = await params;
-        const blog = await Get_Blog_By_Slug(slug);
+        const blog = await getBlogBySlug(slug);
         if (!blog) {
             return {
                 title: 'Blog Not Found',
@@ -41,11 +46,27 @@ export async function generateMetadata({ params }) {
     }
 }
 
+async function getBlogBySlug(slug) {
+    if (!slug) return null;
+    let blog = await Get_Blog_By_Slug(slug);
+    if (!blog) {
+        try {
+            const decoded = decodeURIComponent(slug);
+            if (decoded !== slug) blog = await Get_Blog_By_Slug(decoded);
+        } catch (_) {}
+    }
+    if (!blog) {
+        await new Promise((r) => setTimeout(r, 800));
+        blog = await Get_Blog_By_Slug(slug);
+    }
+    return blog;
+}
+
 export default async function BlogPostPage({ params }) {
     const { slug } = await params;
 
     try {
-        const blog = await Get_Blog_By_Slug(slug);
+        const blog = await getBlogBySlug(slug);
         if (!blog) {
             notFound();
         }
@@ -62,7 +83,7 @@ export default async function BlogPostPage({ params }) {
         const blogStructuredData = generateBlogStructuredData(blog, slug);
         const breadcrumbData = generateBreadcrumbStructuredData([
             { name: 'Home', path: '/' },
-            { name: 'Blogs', path: '/blogs' },
+            { name: 'Blog', path: '/blog' },
             { name: blog.title?.rendered || 'Blog Post', path: `/blog/${slug}` }
         ]);
         
@@ -85,7 +106,7 @@ export default async function BlogPostPage({ params }) {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8">
-                                <div className="title flex flex-col gap-2 padding_bottom">
+                                <div className="title flex flex-col gap-2 pb-4">
                                     <div className="blog_section_left_bar">
                                         <div className="breadcrumb m-0">
                                             <p className="flex flex-wrap items-center gap-1 m-0">

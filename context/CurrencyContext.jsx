@@ -22,7 +22,10 @@ export const CURRENCY_LABELS = {
   INR: { symbol: "₹", code: "INR", name: "Indian Rupee" },
 };
 
-const SUPPORTED_CURRENCIES = Object.keys(CURRENCY_RATES);
+// Currencies we have explicit conversion rates for.
+// react-select-currency can return many more codes; for those we still
+// allow selection but treat the rate as 1:1 with USD.
+const SUPPORTED_RATE_CURRENCIES = Object.keys(CURRENCY_RATES);
 const DEFAULT_CURRENCY = "USD";
 
 const CurrencyContext = createContext(null);
@@ -30,7 +33,10 @@ const CurrencyContext = createContext(null);
 function getInitialCurrency() {
   if (typeof window === "undefined") return DEFAULT_CURRENCY;
   const stored = localStorage.getItem(CURRENCY_STORAGE_KEY);
-  return SUPPORTED_CURRENCIES.includes(stored) ? stored : DEFAULT_CURRENCY;
+  if (typeof stored === "string" && stored.trim()) {
+    return stored.toUpperCase();
+  }
+  return DEFAULT_CURRENCY;
 }
 
 export function CurrencyProvider({ children }) {
@@ -41,10 +47,11 @@ export function CurrencyProvider({ children }) {
   }, []);
 
   const setCurrency = useCallback((newCurrency) => {
-    if (!SUPPORTED_CURRENCIES.includes(newCurrency)) return;
-    setCurrencyState(newCurrency);
+    if (!newCurrency || typeof newCurrency !== "string") return;
+    const upper = newCurrency.toUpperCase();
+    setCurrencyState(upper);
     if (typeof window !== "undefined") {
-      localStorage.setItem(CURRENCY_STORAGE_KEY, newCurrency);
+      localStorage.setItem(CURRENCY_STORAGE_KEY, upper);
     }
   }, []);
 
@@ -73,7 +80,8 @@ export function CurrencyProvider({ children }) {
     setCurrency,
     formatPrice,
     convertFromUsd,
-    supportedCurrencies: SUPPORTED_CURRENCIES,
+    // only the currencies we have real FX rates for
+    supportedCurrencies: SUPPORTED_RATE_CURRENCIES,
     currencyLabels: CURRENCY_LABELS,
   };
 

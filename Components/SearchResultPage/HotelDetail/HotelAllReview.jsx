@@ -118,7 +118,7 @@ export default function HotelAllReview({ reviews }) {
                                                             </h6>
                                                         </span>
                                                     </div>
-                                                    <div className="rating hotel_rating flex gap-2 items-center">
+                                                    <div className="review_head flex justify-between ">
                                                         <span>
                                                             {renderBootstrapStars(item?.rating)}
                                                         </span>
@@ -228,38 +228,38 @@ export default function HotelAllReview({ reviews }) {
                                             `review-${index}`;
                                         return (
                                             <SwiperSlide key={slideKey}>
-                                                    <div className="review_box_section mobile_review_box_section  " >
-                                                        <div className="review_head flex justify-between ">
-                                                            <div className="user">
-                                                                <div className="user_img flex items-center gap-2">
-<span><ReviewAvatar photoUri={item?.authorAttribution?.photoUri} displayName={item?.authorAttribution?.displayName} size={38} /></span>
-                                                                            <span>
-                                                                        <h6 className='m-0'>
-                                                                            {item?.authorAttribution?.displayName}
-                                                                        </h6>
-                                                                    </span>
-                                                                </div>
-                                                                <div className="rating hotel_rating flex gap-2 items-center">
-                                                                    <span>
-                                                                        {renderBootstrapStars(item?.rating)}
-                                                                    </span>
-                                                                    <span>
-                                                                        <p className='m-0'>
-                                                                            {moment(item?.publishTime).format("DD MMM YYYY")}
-                                                                        </p>
-                                                                    </span>
-                                                                </div>
+                                                <div className="review_box_section mobile_review_box_section  " >
+                                                    <div className="review_head flex justify-between ">
+                                                        <div className="user">
+                                                            <div className="user_img flex items-center gap-2">
+                                                                <span><ReviewAvatar photoUri={item?.authorAttribution?.photoUri} displayName={item?.authorAttribution?.displayName} size={38} /></span>
+                                                                <span>
+                                                                    <h6 className='m-0'>
+                                                                        {item?.authorAttribution?.displayName}
+                                                                    </h6>
+                                                                </span>
                                                             </div>
-                                                            <div className="like_button">
-                                                                <img src={getAssetPath("/review/like.png")} alt="" />
+                                                            <div className="review_head flex justify-between ">
+                                                                <span>
+                                                                    {renderBootstrapStars(item?.rating)}
+                                                                </span>
+                                                                <span>
+                                                                    <p className='m-0'>
+                                                                        {moment(item?.publishTime).format("DD MMM YYYY")}
+                                                                    </p>
+                                                                </span>
                                                             </div>
                                                         </div>
-                                                        {/* ********************** */}
-                                                        <div className="review_content">
-                                                            <p className=''>
-                                                                {displayedText}
-                                                                {!isExpanded && isLongText && "..."}
-                                                            </p>
+                                                        <div className="like_button">
+                                                            <img src={getAssetPath("/review/like.png")} alt="" />
+                                                        </div>
+                                                    </div>
+                                                    {/* ********************** */}
+                                                    <div className="review_content">
+                                                        <p className=''>
+                                                            {displayedText}
+                                                            {!isExpanded && isLongText && "..."}
+                                                        </p>
 
                                                         <button onClick={() => handleShow(item)}> {"Read more"}</button>
                                                     </div>

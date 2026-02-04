@@ -1,5 +1,3 @@
-import { CssVarsProvider } from '@mui/material';
-
 /** @type {import('next').NextConfig} */
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -7,9 +5,11 @@ const nextConfig = {
   reactStrictMode: true,
   basePath,
   async redirects() {
-    const redirects = [
-      { source: "/book-hotel", destination: "/hotels", permanent: true },
-
+    return [
+      { source: '/blogs', destination: '/blog', permanent: true },
+      { source: '/book-hotel', destination: '/hotels', permanent: true },
+      { source: '/book-flights', destination: '/flights', permanent: true },
+      { source: '/blogs/:path*', destination: '/blog/:path*', permanent: true },
       { source: "/book-hotel/denmark", destination: "/hotels-in-denmark", permanent: true },
       { source: "/book-hotel/glasgow", destination: "/hotels-in-glasgow", permanent: true },
       { source: "/book-hotel/goa", destination: "/hotels-in-goa", permanent: true },
@@ -17,12 +17,10 @@ const nextConfig = {
       { source: "/book-hotel/ireland", destination: "/hotels-in-ireland", permanent: true },
       { source: "/book-hotel/manchester", destination: "/hotels-in-manchester", permanent: true },
       { source: "/book-hotel/paris", destination: "/hotels-in-paris", permanent: true },
-
       { source: "/book-hotel/san-francisco", destination: "/hotels-in-san-francisco", permanent: true },
       { source: "/book-hotel/new-york", destination: "/hotels-in-new-york", permanent: true },
       { source: "/book-hotel/san-francisco", destination: "/hotels-in-san-francisco", permanent: true },
       { source: "/dubai", destination: "/hotels-in-dubai", permanent: true },
-      { source: "/view-all-hotels", destination: "/hotels", permanent: true },
       { source: "/tokyo", destination: "/hotels-in-tokyo", permanent: true },
       { source: "/singapore", destination: "/hotels-in-singapore", permanent: true },
       { source: "/newyork", destination: "/hotels-in-new-york", permanent: true },
@@ -53,24 +51,13 @@ const nextConfig = {
       { source: "/book-hotel/sydney", destination: "/hotels-in-sydney", permanent: true },
       { source: "/book-hotel/london", destination: "/hotels-in-london", permanent: true },
       { source: "/about", destination: "/about-us", permanent: true },
-      { source: "/contact/page/35", destination: "/contact-us", permanent: true },
-      { source: "/contact/page/39", destination: "/contact-us", permanent: true },
-      { source: "/contact/page/2", destination: "/contact-us", permanent: true },
-      { source: "/blog_post_page=2", destination: "/blog", permanent: true },
-      { source: "/contact/page/42", destination: "/contact-us", permanent: true },
       { source: "/book-hotel/usa", destination: "/hotels-in-usa", permanent: true },
-
       { source: "/book-hotel/manchester/page/1", destination: "/hotels-in-manchester", permanent: true },
       { source: "/book-hotel/london/page/1", destination: "/hotels-in-uk", permanent: true },
       { source: "/book-hotels-online/hotels-in-dubai", destination: "/hotels-in-dubai", permanent: true },
       { source: "/book-hotel/glasgow/page/1", destination: "/hotels-in-glasgow", permanent: true },
-      { source: "/book-hotel/page/1", destination: "/hotels", permanent: true },
-
-      { source: "/book-hotel/page/1", destination: "/hotels", permanent: true },
       { source: "/book-hotel/singapore/page/1", destination: "/hotels-in-singapore", permanent: true },
     ];
-    return redirects;
   },
-};
-
+}
 export default nextConfig;

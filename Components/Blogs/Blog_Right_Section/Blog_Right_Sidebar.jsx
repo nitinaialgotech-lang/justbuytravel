@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Get_Blogs } from '@/app/Route/endpoints'
+import { Get_Blogs, Get_Blog_category } from '@/app/Route/endpoints'
 import { getAssetPath } from '@/app/utils/assetPath'
 
 export default function Blog_Right_Sidebar() {
@@ -10,9 +10,20 @@ export default function Blog_Right_Sidebar() {
         queryKey: ["blog_sidebar_recent"],
         queryFn: () => Get_Blogs(),
     })
+    const { data: categoriesData } = useQuery({
+        queryKey: ["blog_category"],
+        queryFn: () => Get_Blog_category(),
+    })
 
     const posts = data?.posts || []
     const recentPosts = posts.slice(0, 4)
+    const categories = categoriesData?.data || []
+    const getPostHref = (post) => {
+        const firstCatId = post?.categories?.[0]
+        const cat = categories.find((c) => Number(c.id) === Number(firstCatId))
+        const catSlug = cat?.slug
+        return catSlug ? `/${catSlug}/${post?.slug || ""}` : `/blog/${post?.slug || ""}`
+    }
 
     return (
         <>
@@ -52,10 +63,10 @@ export default function Blog_Right_Sidebar() {
 
                             return (
                                 <li key={post?.id || post?.slug}>
-                                    <Link href={`/blogs/${post?.slug || ""}`} className="post_img">
+                                    <Link href={getPostHref(post)} className="post_img">
                                         <img src={imageUrl} className="rounded" alt={title} />
                                     </Link>
-                                    <span className="box_post_title">
+                                    <Link href={getPostHref(post)} className="box_post_title text-decoration-none text-dark">
                                         <h5 className="m-0">
                                             {title}
                                         </h5>
@@ -64,7 +75,7 @@ export default function Blog_Right_Sidebar() {
                                                 {date}
                                             </p>
                                         )}
-                                    </span>
+                                    </Link>
                                 </li>
                             )
                         })}

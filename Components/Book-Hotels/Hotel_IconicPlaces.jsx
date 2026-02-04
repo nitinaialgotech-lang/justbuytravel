@@ -7,7 +7,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
+// import Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import { FaRegHeart } from "react-icons/fa";
@@ -17,54 +17,18 @@ import {
 } from "react-icons/md";
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
+import CardShimmerEffect from "@/component/CardShimmerEffect";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 export default function Hotel_IconicPlaces() {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
-    const fallbackIconicCards = [
-        {
-            img: "/iconic/iconic.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/iconic/iconic4.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/iconic/iconic6.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/iconic/iconic7.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-    ];
+
     /************************************ */
-    const renderBootstrapStars = (rating) => {
-        const stars = [];
-        const value = Number(rating) || 0;
-        const maxStars = 5;
-        const fullStars = Math.floor(value);
-        const hasHalfStar = value - fullStars >= 0.5;
 
-        for (let i = 0; i < Math.min(fullStars, maxStars); i++) {
-            stars.push(<i key={`full-${i}`} className="bi bi-star-fill"></i>);
-        }
-
-        if (hasHalfStar && stars.length < maxStars) {
-            stars.push(<i key="half" className="bi bi-star-half"></i>);
-        }
-
-        while (stars.length < maxStars) {
-            stars.push(<i key={`empty-${stars.length}`} className="bi bi-star"></i>);
-        }
-
-        return stars;
-    };
     // ****************************** apis 
-    const { data: touristAttraction } = useQuery({
+    const { data: touristAttraction, isLoading } = useQuery({
         queryKey: ["touristattraction"],
         queryFn: () => TouristAttractionApi()
     })
@@ -72,6 +36,7 @@ export default function Hotel_IconicPlaces() {
     const TouristAttraction = rawAttractions?.length
         ? [...new Map((rawAttractions || []).map((item, i) => [item?.id ?? `iconic-${i}`, item])).values()]
         : rawAttractions;
+
 
     return (
         <>
@@ -123,53 +88,54 @@ export default function Hotel_IconicPlaces() {
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper relative"
                             >
-                                {(TouristAttraction?.length
-                                    ? TouristAttraction
-                                    : fallbackIconicCards
-                                ).map((item, i) => {
-                                    const title =
-                                        item?.name || item?.displayName?.text || item?.content || "Place";
-                                    const imgName = item?.photos?.[0]?.name;
-                                    const placeId = item?.id;
-                                    return (
-                                        <SwiperSlide key={placeId || `iconic-${i}`}>
-                                            <div className="experience_explore_section ">
-                                                <div className="card  relative border-0 ">
-                                                    <img
-                                                        src={
-                                                            imgName
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : getAssetPath(item?.img || "/no-image.jpg")
-                                                        }
-                                                        className=" card_rounded "
-                                                        alt={title}
-                                                    />
-                                                    {/* <div className="heart_icon absolute top-2 right-4">
+                                {isLoading
+                                    ? Array.from({ length: 4 }).map((_, i) => (
+                                        <SwiperSlide key={`shimmer-${i}`}>
+                                            <CardShimmerEffect />
+                                        </SwiperSlide>)) : rawAttractions?.map((item, i) => {
+                                            const title =
+                                                item?.name || item?.displayName?.text || item?.content || "Place";
+                                            const imgName = item?.photos?.[0]?.name;
+                                            const placeId = item?.id;
+                                            return (
+                                                <SwiperSlide key={placeId || `iconic-${i}`}>
+                                                    <div className="experience_explore_section ">
+                                                        <div className="card  relative border-0 ">
+                                                            <img
+                                                                src={
+                                                                    imgName
+                                                                        ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
+                                                                        : getAssetPath(item?.img || "/no-image.jpg")
+                                                                }
+                                                                className=" card_rounded "
+                                                                alt={title}
+                                                            />
+                                                            {/* <div className="heart_icon absolute top-2 right-4">
                                                         <span>
                                                             <FaRegHeart />
                                                         </span>
                                                     </div> */}
-                                                    <div className="card-body ps-0 flex justify-between ">
-                                                        <div className="card_detail hotel_card_detail">
-                                                            <h5 className="card-title m-0">{title}</h5>
-                                                            {/* <p className="m-0">{item?.address}</p> */}
-                                                            {placeId && (
-                                                                <div className="mt-2">
-                                                                    <Link
-                                                                        href={`/${createHotelSlug(title, placeId)}`}
-                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                                                    >
-                                                                        View Details
-                                                                    </Link>
+                                                            <div className="card-body ps-0 flex justify-between ">
+                                                                <div className="card_detail hotel_card_detail">
+                                                                    <h5 className="card-title m-0">{title}</h5>
+                                                                    {/* <p className="m-0">{item?.address}</p> */}
+                                                                    {placeId && (
+                                                                        <div className="mt-2">
+                                                                            <Link
+                                                                                href={`/${createHotelSlug(title, placeId)}`}
+                                                                                className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                            >
+                                                                                View Details
+                                                                            </Link>
+                                                                        </div>
+                                                                    )}
                                                                 </div>
-                                                            )}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
-                                })}
+                                                </SwiperSlide>
+                                            );
+                                        })}
                             </Swiper>
                             <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">

@@ -1,4 +1,15 @@
-import { Get_All_Blog_Posts_For_Static } from './Route/endpoints';
+import { Get_All_Blog_Posts_For_Static, Get_All_Blog_Categories } from './Route/endpoints';
+
+const RESERVED_SEGMENTS = new Set([
+  'about-us', 'blog', 'blogs', 'book-cruises', 'book-flights', 'book-hotels',
+  'book-packages', 'contact-us', 'desclimer', 'flights', 'hotel', 'hoteldetail',
+  'hotels', 'hotels-in-australia', 'hotels-in-canada', 'hotels-in-denmark',
+  'hotels-in-dubai', 'hotels-in-glasgow', 'hotels-in-goa', 'hotels-in-ireland',
+  'hotels-in-manchester', 'hotels-in-new-york', 'hotels-in-paris', 'hotels-in-san-francisco',
+  'hotels-in-singapore', 'hotels-in-sydney', 'hotels-in-tokyo', 'hotels-in-uk', 'hotels-in-usa',
+  'my-favorite-travel-resources', 'privacy-policy', 'search', 'term-and-conditions',
+  'view-all-hotels',
+]);
 
 export const dynamic = 'force-static';
 
@@ -20,12 +31,6 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/contact-us`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
@@ -42,30 +47,6 @@ export default async function sitemap() {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/book-packages`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/book-cruises`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/view-all-hotels`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/search`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.6,
     },
     {
       url: `${baseUrl}/my-favorite-travel-resources`,
@@ -192,31 +173,44 @@ export default async function sitemap() {
 
 
 
-  // Fetch dynamic blog posts
+  // Fetch dynamic blog posts and categories (category URLs = canonical for blogs)
   let blogPages = [];
   try {
-    const blogs = await Get_All_Blog_Posts_For_Static();
+    const [blogs, categoriesRes] = await Promise.all([
+      Get_All_Blog_Posts_For_Static(),
+      Get_All_Blog_Categories(),
+    ]);
+    const categories = categoriesRes?.data || [];
+    const idToSlug = Object.fromEntries(
+      categories.map((c) => [String(c.id), (c.slug || '').toLowerCase()])
+    );
 
     blogPages = blogs.flatMap(blog => {
       const lastModified =
         blog.modified || blog.date
           ? new Date(blog.modified || blog.date)
           : new Date();
-
-      return [
-        {
-          url: `${baseUrl}/blog/${blog.slug}`,
-          lastModified,
-          changeFrequency: 'monthly',
-          priority: 0.7,
-        },
-        {
-          url: `${baseUrl}/blogs/${blog.slug}`,
-          lastModified,
-          changeFrequency: 'monthly',
-          priority: 0.6,
-        },
-      ];
+      const entries = [];
+      const categoryIds = blog.categories || [];
+      for (const id of categoryIds) {
+        const catSlug = idToSlug[String(id)];
+        if (catSlug && !RESERVED_SEGMENTS.has(catSlug)) {
+          entries.push({
+            url: `${baseUrl}/${catSlug}/${blog.slug}`,
+            lastModified,
+            changeFrequency: 'monthly',
+            priority: 0.8,
+          });
+          break;
+        }
+      }
+      entries.push({
+        url: `${baseUrl}/blog/${blog.slug}`,
+        lastModified,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      });
+      return entries;
     });
   } catch (error) {
     console.error('Error fetching blogs for sitemap:', error);

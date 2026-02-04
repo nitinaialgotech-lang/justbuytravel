@@ -156,7 +156,7 @@ export default function Footer() {
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
-                        <Link href={"/contactus"}> Contact Us</Link>
+                        <Link href={"/contact-us"}> Contact Us</Link>
                       </li>
                       <li className="dot">
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
@@ -219,7 +219,7 @@ export default function Footer() {
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={"/blog"}>Blogs</Link>
+                  <Link href={"/blog"}>Blog</Link>
                 </li>
 
               </ul>
@@ -227,6 +227,7 @@ export default function Footer() {
             <div className="mail_link">
               <ul className="m-0 p-0">
                 <li className="md_mail">
+                  {/* mailto:support@example.com */}
                   <Link href={""} className="flex items-center gap-1">
                     <strong className="g_color"><TbMailFilled /></strong>  support@justbuytravel.com
                   </Link>

@@ -8,7 +8,7 @@ import 'swiper/css';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import 'swiper/css/pagination';
 import { useQuery } from '@tanstack/react-query';
-import { Get_Blogs } from '@/app/Route/endpoints';
+import { Get_Blogs, Get_Blog_category } from '@/app/Route/endpoints';
 export default function Blogs() {
     // (((((((((((((((((())))))))))))))))))
     const [isBlogActive, BlogActive] = useState(true);
@@ -16,9 +16,18 @@ export default function Blogs() {
     const { data, isLoading } = useQuery({
         queryKey: ["blog"],
         queryFn: () => Get_Blogs()
-
     })
-    console.log(data?.posts, "blog");
+    const { data: categoriesData } = useQuery({
+        queryKey: ["blog_category"],
+        queryFn: () => Get_Blog_category(),
+    })
+    const categories = categoriesData?.data || []
+    const getBlogHref = (item) => {
+        const firstCatId = item?.categories?.[0]
+        const cat = categories.find((c) => Number(c.id) === Number(firstCatId))
+        const catSlug = cat?.slug
+        return catSlug ? `/${catSlug}/${item?.slug}` : `/blog/${item?.slug}`
+    }
 
     if (isLoading) return <div className='pt-20 pb-20 text-center'>
         <h4>
@@ -55,7 +64,7 @@ export default function Blogs() {
                                                     Top Rated
                                                 </div> */}
                                                 <div className="content mt-2">
-                                                    <Link href={`/blogs/${item?.slug}`}>
+                                                    <Link href={getBlogHref(item)}>
                                                         {item?.title?.rendered}
                                                     </Link>
                                                 </div>
@@ -136,7 +145,7 @@ export default function Blogs() {
                                                             Top Rated
                                                         </div> */}
                                                         <div className="content mt-2">
-                                                            <Link href={`/blogs/${item?.slug}`}>
+                                                            <Link href={getBlogHref(item)}>
                                                                 {item?.title?.rendered}
                                                             </Link>
                                                         </div>

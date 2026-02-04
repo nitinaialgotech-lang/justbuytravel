@@ -18,18 +18,14 @@ import {
 } from "react-icons/md";
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
+import CardShimmerEffect from "@/component/CardShimmerEffect";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
     /************ state start ******** */
     const router = useRouter();
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
-    const fallbackIconicCards = [
-        { img: "/iconic/iconic.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
-        { img: "/iconic/iconic4.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
-        { img: "/iconic/iconic6.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
-        { img: "/iconic/iconic7.jpg", content: "Half-Day Railway Market and Floating Market Tour in Thailand" },
-    ];
+
     /************************************ */
     const renderBootstrapStars = (rating) => {
         const stars = [];
@@ -53,7 +49,7 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
         return stars;
     };
     // ************************************* iconic places apis 
-    const { data: iconicPlacesData } = useQuery({
+    const { data: iconicPlacesData, isLoading } = useQuery({
         queryKey: ["iconicPlacesNearby", lat, long],
         queryFn: () => IconicPlaces(lat, long),
         enabled: lat != null && long != null,
@@ -109,67 +105,68 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper relative"
                             >
-                                {(iconicPlacesList.length
-                                    ? iconicPlacesList
-                                    : fallbackIconicCards
-                                ).map((item, i) => {
-                                    const title =
-                                        item?.displayName?.text || item?.content || "Place";
-                                    const imgName = item?.photos?.[0]?.name;
-                                    const placeId = item?.id;
-                                    const slug = placeId ? `/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.content || '', placeId)}` : '#';
-                                    return (
-                                        <SwiperSlide key={i}>
-                                            <div className="experience_explore_section ">
-                                                <div
-                                                    className="card relative border-0 cursor-pointer"
-                                                    onClick={() => slug !== '#' && router.push(slug)}
-                                                    role="button"
-                                                    tabIndex={0}
-                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
-                                                >
-                                                    <img
-                                                        src={
-                                                            imgName
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
-                                                                : getAssetPath(item?.img || "/no-image.jpg")
-                                                        }
-                                                        className=" card_rounded "
-                                                        alt={title}
-                                                    />
-                                                    <div className="heart_icon absolute top-2 right-4">
-                                                        <span>
-                                                            <FaRegHeart />
-                                                        </span>
-                                                    </div>
-                                                    <div className="card-body ps-0 flex justify-between ">
-                                                        <div className="card_detail">
-                                                            <h5 className="card-title m-0">{title}</h5>
-                                                            <div className="rating flex align-items-center gap-1">
-                                                                {item?.rating
-                                                                    ? renderBootstrapStars(item?.rating)
-                                                                    : renderBootstrapStars(4)}
-                                                                {item?.rating && (
-                                                                    <span className="ms-1">{item?.rating}</span>
-                                                                )}
+                                {isLoading
+                                    ? Array.from({ length: 4 }).map((_, i) => (
+                                        <SwiperSlide key={`shimmer-${i}`}>
+                                            <CardShimmerEffect />
+                                        </SwiperSlide>)) : iconicPlacesList?.map((item, i) => {
+                                            const title =
+                                                item?.displayName?.text || item?.content || "Place";
+                                            const imgName = item?.photos?.[0]?.name;
+                                            const placeId = item?.id;
+                                            const slug = placeId ? `/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.content || '', placeId)}` : '#';
+                                            return (
+                                                <SwiperSlide key={i}>
+                                                    <div className="experience_explore_section ">
+                                                        <div
+                                                            className="card relative border-0 cursor-pointer"
+                                                            onClick={() => slug !== '#' && router.push(slug)}
+                                                            role="button"
+                                                            tabIndex={0}
+                                                            onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                        >
+                                                            <img
+                                                                src={
+                                                                    imgName
+                                                                        ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
+                                                                        : getAssetPath(item?.img || "/no-image.jpg")
+                                                                }
+                                                                className=" card_rounded "
+                                                                alt={title}
+                                                            />
+                                                            <div className="heart_icon absolute top-2 right-4">
+                                                                <span>
+                                                                    <FaRegHeart />
+                                                                </span>
                                                             </div>
-                                                            {placeId && (
-                                                                <div className="mt-2" onClick={(e) => e.stopPropagation()}>
-                                                                    <Link
-                                                                        href={slug}
-                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                                                    >
-                                                                        View Detail
-                                                                    </Link>
+                                                            <div className="card-body ps-0 flex justify-between ">
+                                                                <div className="card_detail">
+                                                                    <h5 className="card-title m-0">{title}</h5>
+                                                                    <div className="rating flex align-items-center gap-1">
+                                                                        {item?.rating
+                                                                            ? renderBootstrapStars(item?.rating)
+                                                                            : renderBootstrapStars(4)}
+                                                                        {item?.rating && (
+                                                                            <span className="ms-1">{item?.rating}</span>
+                                                                        )}
+                                                                    </div>
+                                                                    {placeId && (
+                                                                        <div className="mt-2" onClick={(e) => e.stopPropagation()}>
+                                                                            <Link
+                                                                                href={slug}
+                                                                                className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                            >
+                                                                                View Details
+                                                                            </Link>
+                                                                        </div>
+                                                                    )}
                                                                 </div>
-                                                            )}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
-                                })}
+                                                </SwiperSlide>
+                                            );
+                                        })}
                             </Swiper>
                             <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">

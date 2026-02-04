@@ -16,6 +16,7 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { Navigation, Pagination } from "swiper/modules";
+import CardShimmerEffect from '@/component/CardShimmerEffect';
 /******************* stqart function */
 
 export default function SanFrancNearBy() {
@@ -45,7 +46,7 @@ export default function SanFrancNearBy() {
         return stars;
     };
     /********************************************  */
-    const { data: nearbyRestaurantsData } = useQuery({
+    const { data: nearbyRestaurantsData, isLoading } = useQuery({
         queryKey: ["restaurantsNearby", "San Francisco"],
         queryFn: () => NearbyRestaurant("San Francisco"),
     });
@@ -109,55 +110,59 @@ export default function SanFrancNearBy() {
                                 }}
                                 className="mySwiper relative"
                             >
-                                {nearbyPlaceslist?.map((item, i) => {
-                                    const placeId = item?.id;
-                                    const title = item?.displayName?.text || item?.displayName || "Place";
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
-                                    return (
-                                        <SwiperSlide key={i}>
-                                            <div className="experience_explore_section">
-                                                <div
-                                                    className="card relative border-0 cursor-pointer"
-                                                    onClick={() => slug !== '#' && router.push(slug)}
-                                                    role="button"
-                                                    tabIndex={0}
-                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
-                                                >
-                                                    <img
-                                                        src={
-                                                            item?.photos?.[0]?.name
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item.photos[0].name}`
-                                                                : "/no-image.jpg"
-                                                        }
-                                                        className="card-img-top card_rounded"
-                                                        alt="Place"
-                                                    />
-                                                    <div className="card-body ps-0 flex justify-between">
-                                                        <div className="card_detail">
-                                                            <h5 className="card-title m-0">
-                                                                {title}
-                                                            </h5>
-                                                            <div className="rating flex align-items-center gap-1">
-                                                                {renderBootstrapStars(item?.rating)}
-                                                                <span className="ms-1">{item?.rating}</span>
-                                                            </div>
-                                                            {placeId && (
-                                                                <div className="mt-2" onClick={(e) => e.stopPropagation()}>
-                                                                    <Link
-                                                                        href={slug}
-                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                                                    >
-                                                                        View Details
-                                                                    </Link>
+                                {isLoading
+                                    ? Array.from({ length: 4 }).map((_, i) => (
+                                        <SwiperSlide key={`shimmer-${i}`}>
+                                            <CardShimmerEffect />
+                                        </SwiperSlide>)) : nearbyPlaceslist?.map((item, i) => {
+                                            const placeId = item?.id;
+                                            const title = item?.displayName?.text || item?.displayName || "Place";
+                                            const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                            return (
+                                                <SwiperSlide key={i}>
+                                                    <div className="experience_explore_section">
+                                                        <div
+                                                            className="card relative border-0 cursor-pointer"
+                                                            onClick={() => slug !== '#' && router.push(slug)}
+                                                            role="button"
+                                                            tabIndex={0}
+                                                            onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                        >
+                                                            <img
+                                                                src={
+                                                                    item?.photos?.[0]?.name
+                                                                        ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item.photos[0].name}`
+                                                                        : "/no-image.jpg"
+                                                                }
+                                                                className="card-img-top card_rounded"
+                                                                alt="Place"
+                                                            />
+                                                            <div className="card-body ps-0 flex justify-between">
+                                                                <div className="card_detail">
+                                                                    <h5 className="card-title m-0">
+                                                                        {title}
+                                                                    </h5>
+                                                                    <div className="rating flex align-items-center gap-1">
+                                                                        {renderBootstrapStars(item?.rating)}
+                                                                        <span className="ms-1">{item?.rating}</span>
+                                                                    </div>
+                                                                    {placeId && (
+                                                                        <div className="mt-2" onClick={(e) => e.stopPropagation()}>
+                                                                            <Link
+                                                                                href={slug}
+                                                                                className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                            >
+                                                                                View Details
+                                                                            </Link>
+                                                                        </div>
+                                                                    )}
                                                                 </div>
-                                                            )}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
-                                })}
+                                                </SwiperSlide>
+                                            );
+                                        })}
                             </Swiper>
                             <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">

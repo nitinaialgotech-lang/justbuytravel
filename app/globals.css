@@ -423,6 +423,7 @@ button {
   margin: 0;
   text-transform: capitalize !important;
   font-weight: 500 !important;
+  text-transform: none !important;
 }
 
 .supporting_text {
@@ -1356,7 +1357,8 @@ button {
   cursor: pointer;
 }
 
-.blog_post_box > li > span {
+.blog_post_box > li > span,
+.blog_post_box > li > .box_post_title {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -3784,4 +3786,8 @@ span.rating-stars {
   width: 100%;
   position: absolute;
   bottom: 0;
+  z-index: -1;
+}
+.Blog_Detail_section a{
+  color: var(--bg-color);
 }

@@ -18,7 +18,7 @@ export default function Trusted_Partner_Banner() {
                                             <h2 className='m-0'>
                                                 Book with JustBuyTravel
                                             </h2>
-                                            <div class="search_sign_button flex gap-2 items-center"><Link class="sign-in-button bg-color-black text-white" variant="outline-success" href="">Book Hotels</Link></div>
+                                            <div className="search_sign_button flex gap-2 items-center"><Link className="sign-in-button bg-color-black text-white" variant="outline-success" href="">Book Hotels</Link></div>
                                         </div>
                                     </div>
                                 </div>

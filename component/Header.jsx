@@ -18,8 +18,7 @@ import { FiPlus } from "react-icons/fi";
 import { IoPricetag } from "react-icons/io5";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { getAssetPath } from "../app/utils/assetPath";
-import { useCurrency } from "@/context/CurrencyContext";
-import { CURRENCY_LABELS } from "@/context/CurrencyContext";
+import CurrencyPicker from "./CurrencyPicker";
 import "../app/globals.css";
 import "../style/responsive.css";
 import {
@@ -34,7 +33,6 @@ import { usePathname } from "next/navigation";
 
 export default function Header() {
     const pathnamne = usePathname();
-    const { currency, setCurrency, supportedCurrencies } = useCurrency();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [show, setShow] = useState(false);
     const [navOpen, setNavOpen] = useState(false);
@@ -137,7 +135,7 @@ export default function Header() {
                                         <span>
                                             <HeaderBlogIcon color={isBlog ? undefined : "#1D1F27"} />
                                         </span>
-                                        <span className={isBlog ? "g_color" : ""}>blogs</span>
+                                        <span className={isBlog ? "g_color" : ""}>blog</span>
                                     </Nav.Link>
                                     <Nav.Link as={Link} href="/about-us" className={`capitalize ${isAboutUs ? "g_color" : ""}`}>
                                         <span>
@@ -145,30 +143,7 @@ export default function Header() {
                                         </span>
                                         <span className={isAboutUs ? "g_color" : ""}>about us</span>
                                     </Nav.Link>
-                                    <div className="d-flex align-items-center gap-2">
-                                        <NavDropdown
-                                            title={
-                                                <>
-                                                    <IoPricetag className="me-1" />
-                                                    {CURRENCY_LABELS[currency]?.symbol || currency}{" "}
-                                                    {currency}
-                                                </>
-                                            }
-                                            id="currency-dropdown"
-                                            className="lang-currency-dropdown"
-                                        >
-                                            {supportedCurrencies.map((code) => (
-                                                <NavDropdown.Item
-                                                    key={code}
-                                                    onClick={() => setCurrency(code)}
-                                                    active={currency === code}
-                                                >
-                                                    {CURRENCY_LABELS[code]?.symbol} {code} –{" "}
-                                                    {CURRENCY_LABELS[code]?.name}
-                                                </NavDropdown.Item>
-                                            ))}
-                                        </NavDropdown>
-                                    </div>
+                                    <CurrencyPicker />
                                 </Nav>
                                 {/* ******** */}
                             </Navbar.Collapse>
@@ -272,7 +247,7 @@ export default function Header() {
                                                                     <span>
                                                                         <HeaderBlogIcon />
                                                                     </span>
-                                                                    <span>blogs</span>
+                                                                    <span>blog</span>
                                                                 </span>
                                                             </Link>
                                                         </li>
@@ -296,29 +271,7 @@ export default function Header() {
                                                                 className="flex justify-between items-center"
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">
-                                                                    <NavDropdown
-                                                                        title={
-                                                                            <>
-                                                                                <IoPricetag className="me-1" />
-                                                                                {CURRENCY_LABELS[currency]?.symbol ||
-                                                                                    currency}{" "}
-                                                                                {currency}
-                                                                            </>
-                                                                        }
-                                                                        id="currency-dropdown"
-                                                                        className="lang-currency-dropdown"
-                                                                    >
-                                                                        {supportedCurrencies.map((code) => (
-                                                                            <NavDropdown.Item
-                                                                                key={code}
-                                                                                onClick={() => setCurrency(code)}
-                                                                                active={currency === code}
-                                                                            >
-                                                                                {CURRENCY_LABELS[code]?.symbol} {code} –{" "}
-                                                                                {CURRENCY_LABELS[code]?.name}
-                                                                            </NavDropdown.Item>
-                                                                        ))}
-                                                                    </NavDropdown>
+                                                                    <CurrencyPicker />
                                                                 </span>{" "}
                                                                 {/* <span>
                                   <FiPlus />

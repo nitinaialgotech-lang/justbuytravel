@@ -41,8 +41,6 @@ export default function Blog_Detail_section({ initialSlug, initialPost }) {
     const blog_content = selectedPost?.content?.rendered || "";
     const blog_img = selectedPost?.yoast_head_json?.og_image || [];
 
-    console.log(data, "blog section .................");
-
     return (
         <>
             <section className='Blog_Detail_section blog_pt blog_pb blog_pt'>

@@ -137,6 +137,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
         return null;
     }
 
+    console.log(hotelPrice, "prices::::::::::::::::::");
     return (
         <>
             <section className='padding_bottom'>
@@ -231,7 +232,6 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                         const totalBeforeTax = ratePerNight * nights;
                                         const tax = Number(item.tax || 0);
                                         const grandTotal = totalBeforeTax + tax;
-
                                         const displayImg = matchedImg?.img;
                                         const logoAlt = item.name;
 
