@@ -7,7 +7,7 @@ import Blogs from '../HomePage/Blog/Blogs'
 export default function Book_CruisesBanner() {
     return (
         <>
-            <section className='about_section inner_page_banner_section relative'>
+            <section className='about_section  only_content_banner relative'>
                 <div className="container">
                     <div className="row justify-center">
                         <div className="col-lg-12">

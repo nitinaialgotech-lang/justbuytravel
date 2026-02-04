@@ -221,12 +221,7 @@ export default function Footer() {
                 <li>
                   <Link href={"/blog"}>Blogs</Link>
                 </li>
-                <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
-                </li>
-                <li>
-                  <Link href={"/aboutus"}> About</Link>
-                </li>
+
               </ul>
             </div>
             <div className="mail_link">
@@ -243,7 +238,7 @@ export default function Footer() {
           <div className="botom_footer">
             <div className="web_address">
               <p className="m-0">
-                @2025 justbuytravel. All rights reserved
+                @2026 justbuytravel. All rights reserved
               </p>
             </div>
           </div>

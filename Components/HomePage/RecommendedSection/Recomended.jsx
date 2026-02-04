@@ -21,7 +21,6 @@ import {
 import { createHotelSlug } from "@/app/utils/seo";
 import { getPlacePhotoUrl, getAssetPath } from "@/app/utils/assetPath";
 
-const PLACEHOLDER_IMG = "/blog/blog_img.webp";
 export default function Recomended() {
     const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
     const [Active, setActive] = useState(true);
@@ -169,12 +168,11 @@ export default function Recomended() {
                                     spaceBetween: 15,
                                 },
                                 640: {
-                                    slidesPerView: 1, // mobile
-                                    spaceBetween: 20,
+                                    slidesPerView: 1.5
                                 },
+
                                 768: {
-                                    slidesPerView: 2, // tablet
-                                    spaceBetween: 20,
+                                    slidesPerView: 2.5,
                                 },
                                 1024: {
                                     slidesPerView: 4, // desktop (optional)
@@ -214,10 +212,7 @@ export default function Recomended() {
                                                                     src={imageSrc}
                                                                     className="card_rounded w-full h-full object-cover"
                                                                     alt={item?.displayName?.text || "Hotel"}
-                                                                    onError={(e) => {
-                                                                        e.target.onerror = null;
-                                                                        e.target.src = getAssetPath(PLACEHOLDER_IMG);
-                                                                    }}
+
                                                                 />
                                                             </div>
                                                             {/* *** */}

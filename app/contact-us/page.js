@@ -35,7 +35,7 @@ export default function page() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <Header />
                 <ContactUs />
                 <Footer />

@@ -150,20 +150,55 @@ export default function ExperienceExploreSection() {
         return stars;
     };
     /***********************xxxxxxxxxxx................ nearby placess api  */
-    const { data: nearbyRestaurantsData } = useQuery({
+    const { data: nearbyRestaurantsData, isLoading: isIconicPlacesLoading, } = useQuery({
         queryKey: ["restaurantsNearby", coords.lat, coords.lng],
         queryFn: () => Restro(coords.lat, coords.lng),
         enabled: coords.lat !== null && coords.lng !== null,
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
     // ************************************* iconic places apis 
-    const { data: iconicPlacesData } = useQuery({
+    const { data: iconicPlacesData, isLoading } = useQuery({
         queryKey: ["iconicPlacesNearby", coords.lat, coords.lng],
         queryFn: () => IconicPlaces(coords.lat, coords.lng),
         enabled: coords.lat !== null && coords.lng !== null,
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
+    // ***xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    const ShimmerCard = () => {
+        return (
+            <div className="card_col">
+                <div className="recommend_card_box card_rounded recomand_card_shadow margin_lr">
+                    <div className="card_box">
+                        {/* IMAGE */}
+                        <div
+                            className="card_box_img card_rounded relative overflow-hidden shimmer-bg shimmer-min-250"
+                        />
 
+                        {/* DETAILS */}
+                        <div className="card_box_detail card_rounded relative">
+                            {/* TITLE */}
+                            <div className="shimmer-bg shimmer-rounded shimmer-75x18" />
+
+                            {/* SPACING */}
+                            <div className="shimmer-spacer-10" />
+
+                            {/* RATING + BUTTON */}
+                            <div className="price_book flex justify-between items-center">
+                                {/* RATING */}
+                                <div className="flex gap-1 items-center">
+                                    <div className="shimmer-bg shimmer-rounded shimmer-60x14" />
+                                    <div className="shimmer-bg shimmer-rounded shimmer-40x14" />
+                                </div>
+
+                                {/* BUTTON */}
+                                <div className="shimmer-bg shimmer-rounded shimmer-90x28" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
     return (
         <>
             <section className="experience_explore_section padding_bottom">
@@ -209,11 +244,11 @@ export default function ExperienceExploreSection() {
                                         spaceBetween: 15,
                                     },
                                     640: {
-                                        slidesPerView: 1, // mobile
+                                        slidesPerView: 2, // mobile
                                         spaceBetween: 20,
                                     },
                                     768: {
-                                        slidesPerView: 2, // tablet
+                                        slidesPerView: 2.5, // tablet
                                         spaceBetween: 20,
                                     },
                                     1024: {
@@ -223,62 +258,74 @@ export default function ExperienceExploreSection() {
                                 }}
                                 className="mySwiper relative"
                             >
-                                {(nearbyPlaceslist.length ? nearbyPlaceslist : NearCard)?.map((item, i) => {
-                                    const title =
-                                        item?.displayName?.text || item?.content || item?.displayName || "Place";
-                                    const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
-                                    const placeId = item?.id;
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
-                                    const fallbackImg = getAssetPath("/blog/blog_img.webp");
-                                    return (
-                                        <SwiperSlide key={i}>
-                                            <div className="experience_explore_section">
-                                                <div
-                                                    className="card relative border-0 cursor-pointer"
-                                                    onClick={() => slug !== '#' && router.push(slug)}
-                                                    role="button"
-                                                    tabIndex={0}
-                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
-                                                >
-                                                    <img
-                                                        src={imageSrc}
-                                                        className="card-img-top card_rounded"
-                                                        alt={title}
-                                                        onError={(e) => {
-                                                            e.target.onerror = null;
-                                                            e.target.src = fallbackImg;
-                                                        }}
-                                                    />
-                                                    <div className="card-body ps-0 flex justify-between">
-                                                        <div className="card_detail">
-                                                            <h5 className="card-title m-0">
-                                                                {title}
-                                                            </h5>
-                                                            <div className="rating flex align-items-center gap-1">
-                                                                {item?.star
-                                                                    ? item.star
-                                                                    : renderBootstrapStars(item?.rating)}
-                                                                {item?.rating && (
-                                                                    <span className="ms-1">{item?.rating}</span>
+                                {isIconicPlacesLoading || nearbyRestaurantsData?.length
+                                    ? Array.from({ length: 4 }).map((_, i) => (
+                                        <SwiperSlide key={`shimmer-${i}`}>
+                                            <ShimmerCard />
+                                        </SwiperSlide>
+                                    ))
+                                    : nearbyPlaceslist?.map((item, i) => {
+                                        const title =
+                                            item?.displayName?.text ||
+                                            item?.content ||
+                                            item?.displayName ||
+                                            "Place";
+
+                                        const imageSrc =
+                                            getPlacePhotoUrl(item)
+
+                                        const placeId = item?.id;
+                                        const slug = placeId
+                                            ? `/${createHotelSlug(title, placeId)}`
+                                            : "#";
+
+
+                                        return (
+                                            <SwiperSlide key={i}>
+                                                <div className="experience_explore_section">
+                                                    <div
+                                                        className="card relative border-0 cursor-pointer"
+                                                        onClick={() => slug !== '#' && router.push(slug)}
+                                                        role="button"
+                                                        tabIndex={0}
+                                                        onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                    >
+                                                        <img
+                                                            src={imageSrc}
+                                                            className="card-img-top card_rounded"
+                                                            alt={title}
+
+                                                        />
+                                                        <div className="card-body ps-0 flex justify-between">
+                                                            <div className="card_detail">
+                                                                <h5 className="card-title m-0">
+                                                                    {title}
+                                                                </h5>
+                                                                <div className="rating flex align-items-center gap-1">
+                                                                    {item?.star
+                                                                        ? item.star
+                                                                        : renderBootstrapStars(item?.rating)}
+                                                                    {item?.rating && (
+                                                                        <span className="ms-1">{item?.rating}</span>
+                                                                    )}
+                                                                </div>
+                                                                {placeId && (
+                                                                    <div className="" onClick={(e) => e.stopPropagation()}>
+                                                                        <Link
+                                                                            href={slug}
+                                                                            className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                        >
+                                                                            View Detail
+                                                                        </Link>
+                                                                    </div>
                                                                 )}
                                                             </div>
-                                                            {placeId && (
-                                                                <div className="" onClick={(e) => e.stopPropagation()}>
-                                                                    <Link
-                                                                        href={slug}
-                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                                                    >
-                                                                        View Detail
-                                                                    </Link>
-                                                                </div>
-                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
-                                })}
+                                            </SwiperSlide>
+                                        );
+                                    })}
                             </Swiper>
                             <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">
@@ -351,9 +398,12 @@ export default function ExperienceExploreSection() {
                                 425: {
                                     slidesPerView: 1.5,
                                 },
+                                640: {
+                                    slidesPerView: 2.5
+                                },
 
                                 768: {
-                                    slidesPerView: 1,
+                                    slidesPerView: 2.5,
                                 },
                                 992: {
                                     slidesPerView: 4,
@@ -363,63 +413,67 @@ export default function ExperienceExploreSection() {
                             modules={[Pagination, Navigation]}
                             className="mySwiper relative"
                         >
-                            {(iconicPlacesList.length
-                                ? iconicPlacesList
-                                : fallbackIconicCards
-                            ).map((item, i) => {
-                                const title =
-                                    item?.displayName?.text || item?.content || item?.displayName || "Place";
-                                const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
-                                const placeId = item?.id;
-                                const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
-                                return (
-                                    <SwiperSlide key={i}>
-                                        <div className="experience_explore_section ">
-                                            <div
-                                                className="card relative border-0 cursor-pointer"
-                                                onClick={() => slug !== '#' && router.push(slug)}
-                                                role="button"
-                                                tabIndex={0}
-                                                onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
-                                            >
-                                                <img
-                                                    src={imageSrc}
-                                                    className=" card_rounded "
-                                                    alt={title}
-                                                />
-                                                <div className="heart_icon absolute top-2 right-4">
-                                                    <span>
-                                                        <FaRegHeart />
-                                                    </span>
-                                                </div>
-                                                <div className="card-body ps-0 flex justify-between ">
-                                                    <div className="card_detail">
-                                                        <h5 className="card-title m-0">{title}</h5>
-                                                        <div className="rating flex align-items-center gap-1">
-                                                            {item?.rating
-                                                                ? renderBootstrapStars(item?.rating)
-                                                                : renderBootstrapStars(4)}
-                                                            {item?.rating && (
-                                                                <span className="ms-1">{item?.rating}</span>
+                            {isLoading || iconicPlacesData?.length
+                                ? Array.from({ length: 4 }).map((_, i) => (
+                                    <SwiperSlide key={`shimmer-${i}`}>
+                                        <ShimmerCard />
+                                    </SwiperSlide>
+                                ))
+                                :
+                                iconicPlacesList?.map((item, i) => {
+                                    const title =
+                                        item?.displayName?.text || item?.content || item?.displayName || "Place";
+                                    const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
+                                    const placeId = item?.id;
+                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    return (
+                                        <SwiperSlide key={i}>
+                                            <div className="experience_explore_section ">
+                                                <div
+                                                    className="card relative border-0 cursor-pointer"
+                                                    onClick={() => slug !== '#' && router.push(slug)}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter' && slug !== '#') router.push(slug); }}
+                                                >
+                                                    <img
+                                                        src={imageSrc}
+                                                        className=" card_rounded "
+                                                        alt={title}
+                                                    />
+                                                    <div className="heart_icon absolute top-2 right-4">
+                                                        <span>
+                                                            <FaRegHeart />
+                                                        </span>
+                                                    </div>
+                                                    <div className="card-body ps-0 flex justify-between ">
+                                                        <div className="card_detail">
+                                                            <h5 className="card-title m-0">{title}</h5>
+                                                            <div className="rating flex align-items-center gap-1">
+                                                                {item?.rating
+                                                                    ? renderBootstrapStars(item?.rating)
+                                                                    : renderBootstrapStars(4)}
+                                                                {item?.rating && (
+                                                                    <span className="ms-1">{item?.rating}</span>
+                                                                )}
+                                                            </div>
+                                                            {placeId && (
+                                                                <div className="" onClick={(e) => e.stopPropagation()}>
+                                                                    <Link
+                                                                        href={slug}
+                                                                        className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                                                    >
+                                                                        View Detail
+                                                                    </Link>
+                                                                </div>
                                                             )}
                                                         </div>
-                                                        {placeId && (
-                                                            <div className="" onClick={(e) => e.stopPropagation()}>
-                                                                <Link
-                                                                    href={slug}
-                                                                    className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                                                >
-                                                                    View Detail
-                                                                </Link>
-                                                            </div>
-                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </SwiperSlide>
-                                );
-                            })}
+                                        </SwiperSlide>
+                                    );
+                                })}
                         </Swiper>
                         <div className="button_swiper2 absolute ">
                             <div className="buttons_icon relative">

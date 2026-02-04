@@ -119,7 +119,7 @@ export default function GetOfferSection() {
                                                             </div>
 
                                                             {/* RIGHT IMAGE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
-                                                            <div className="banner_image relative order-first order-lg-last ">
+                                                            <div className="banner_image relative order-first order-lg-last order-md-last ">
                                                                 <div className="swiper_inner_img">
                                                                     <img
                                                                         src={getAssetPath(item.banner)}

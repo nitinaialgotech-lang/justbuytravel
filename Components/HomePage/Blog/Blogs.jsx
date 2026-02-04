@@ -105,8 +105,12 @@ export default function Blogs() {
 
                                 },
 
+                                640: {
+                                    slidesPerView: 1.5
+                                },
+
                                 768: {
-                                    slidesPerView: 1,
+                                    slidesPerView: 2.5,
                                 },
                                 992: {
                                     slidesPerView: 4,

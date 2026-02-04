@@ -81,12 +81,11 @@ export default function PackageDeals() {
                                         spaceBetween: 15,
                                     },
                                     640: {
-                                        slidesPerView: 1, // mobile
-                                        spaceBetween: 20,
+                                        slidesPerView: 1.5
                                     },
+
                                     768: {
-                                        slidesPerView: 2, // tablet
-                                        spaceBetween: 20,
+                                        slidesPerView: 2,
                                     },
                                     1024: {
                                         slidesPerView: 4, // desktop (optional)

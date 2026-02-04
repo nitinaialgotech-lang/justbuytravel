@@ -6,7 +6,6 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const nextConfig = {
   reactStrictMode: true,
   basePath,
-  // Redirect so /book-hotels-online (used in nav/footer) resolves to the hotels page
   async redirects() {
     const redirects = [
       { source: "/book-hotel", destination: "/hotels", permanent: true },
@@ -22,16 +21,12 @@ const nextConfig = {
       { source: "/book-hotel/san-francisco", destination: "/hotels-in-san-francisco", permanent: true },
       { source: "/book-hotel/new-york", destination: "/hotels-in-new-york", permanent: true },
       { source: "/book-hotel/san-francisco", destination: "/hotels-in-san-francisco", permanent: true },
-
-
-      { source: "/hotels", destination: "/hotels", permanent: true },
       { source: "/dubai", destination: "/hotels-in-dubai", permanent: true },
       { source: "/view-all-hotels", destination: "/hotels", permanent: true },
       { source: "/tokyo", destination: "/hotels-in-tokyo", permanent: true },
       { source: "/singapore", destination: "/hotels-in-singapore", permanent: true },
       { source: "/newyork", destination: "/hotels-in-new-york", permanent: true },
       { source: "/goa", destination: "/hotels-in-goa", permanent: true },
-
       { source: "/canada", destination: "/hotels-in-canada", permanent: true },
       { source: "/australia", destination: "/hotels-in-australia", permanent: true },
       { source: "/denmark", destination: "/hotels-in-denmark", permanent: true },
@@ -41,7 +36,6 @@ const nextConfig = {
       { source: "/glasgow", destination: "/hotels-in-glasgow", permanent: true },
       { source: "/san-francisco", destination: "/hotels-in-san-francisco", permanent: true },
       { source: "/book-hotel/new-york-2", destination: "/hotels-in-new-york", permanent: true },
-
       { source: "/book-hotel/singapore", destination: "/hotels-in-singapore", permanent: true },
       { source: "/book-hotel/dubai", destination: "/hotels-in-dubai", permanent: true },
       { source: "/book-hotel/tokyo", destination: "/hotels-in-tokyo", permanent: true },
@@ -56,8 +50,6 @@ const nextConfig = {
       { source: "/book-hotel/san-francisco", destination: "/hotels-in-san-francisco", permanent: true },
       { source: "/book-hotel/canada", destination: "/hotels-in-canada", permanent: true },
       { source: "/book-hotel/australia", destination: "/hotels-in-australia", permanent: true },
-
-
       { source: "/book-hotel/sydney", destination: "/hotels-in-sydney", permanent: true },
       { source: "/book-hotel/london", destination: "/hotels-in-london", permanent: true },
       { source: "/about", destination: "/about-us", permanent: true },
@@ -76,9 +68,6 @@ const nextConfig = {
 
       { source: "/book-hotel/page/1", destination: "/hotels", permanent: true },
       { source: "/book-hotel/singapore/page/1", destination: "/hotels-in-singapore", permanent: true },
-
-
-
     ];
     return redirects;
   },

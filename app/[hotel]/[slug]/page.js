@@ -137,13 +137,13 @@ export default async function BlogDetailWithCategoryPage({ params }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
         />
 
-          <Header />
+        <Header />
 
         <section className="Blog_Detail_section blog_pt blog_pb blog_pt">
           <div className="container">
             <div className="row">
               <div className="col-lg-8">
-                <div className="title flex flex-col gap-2 padding_bottom">
+                <div className="title flex flex-col gap-2 padding_b30">
                   <div className="blog_section_left_bar">
                     <div className="breadcrumb m-0">
                       <p className="flex flex-wrap items-center gap-1 m-0">
@@ -166,10 +166,10 @@ export default async function BlogDetailWithCategoryPage({ params }) {
                       <span>
                         {blog?.date
                           ? new Date(blog.date).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric',
-                            })
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })
                           : ''}
                       </span>
                     </div>
