@@ -51,10 +51,10 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
     const priceDataKey = `${checkinDate}-${checkoutDate}-${hotelPrice?.length || 0}-${JSON.stringify(hotelPrice?.map(p => p.rate))}`;
 
     const bookingImg = [
-        { name: "Booking.com", img: "/logo/hoteldetail/Booking_com.png", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84" },
+        { name: "Booking.com", img: "/logo/hoteldetail/Booking_Com.png", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84" },
         { name: "expedia.com", img: "/logo/hoteldetail/expedia_logo.svg", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8645&campaign_id=594" },
         { name: "agoda.com", img: "/logo/hoteldetail/Agoda.png", affiliateBase: "" },
-        { name: "vio.com", img: "/logo/hoteldetail/vio_com.png", affiliateBase: "" },
+        { name: "vio.com", img: "/logo/hoteldetail/Vio_com.png", affiliateBase: "" },
         { name: "traveloka.com", img: "/logo/hoteldetail/travelok.svg", affiliateBase: "" },
         { name: "Trip.com", img: "/logo/hoteldetail/tripcom.webp", affiliateBase: "https://tp.media/r?marker=620562&trs=404603&p=8626&campaign_id=121" },
     ];
