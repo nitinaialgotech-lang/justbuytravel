@@ -38,7 +38,7 @@ export default function page() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(hotelDetailSchema) }}
             />
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <SearchHotelDetail />
             </Suspense>
         </>
