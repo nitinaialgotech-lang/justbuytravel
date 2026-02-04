@@ -220,7 +220,7 @@ export default function CanadaRecomd() {
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                         onClick={(e) => { e.stopPropagation(); viewDetail(id, name); }}
                                                                     >
-                                                                        View Detail
+                                                                        View Details
                                                                     </button>
                                                                 </div>
                                                                 {/* *************** rating_list */}

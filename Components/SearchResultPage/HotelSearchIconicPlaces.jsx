@@ -159,7 +159,7 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
                                                                         href={slug}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                     >
-                                                                        View Detail
+                                                                        View Details
                                                                     </Link>
                                                                 </div>
                                                             )}

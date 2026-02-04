@@ -4,22 +4,25 @@ import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
 import Blog_Right_Sidebar from '@/Components/Blogs/Blog_Right_Section/Blog_Right_Sidebar';
-import { Get_All_Blog_Posts_For_Static, Get_Blog_By_Slug, Get_Blog_category } from '@/app/Route/endpoints';
+import { Get_Blog_By_Slug, Get_Blog_category, Get_All_Blog_Posts_For_Static } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
 import { SlCalender } from 'react-icons/sl';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import "../../../style/responsive.css";
 
+// Pre-render all known blog slugs at build so /blog/[slug] works on static hosts (e.g. Hostinger).
 export async function generateStaticParams() {
-    try {
-        const blogs = await Get_All_Blog_Posts_For_Static();
-        return (blogs || []).map((blog) => ({ slug: blog.slug }));
-    } catch (error) {
-        console.error('Error generating static params:', error);
-        return [];
-    }
+  try {
+    const posts = await Get_All_Blog_Posts_For_Static();
+    return (posts || []).filter((p) => p?.slug).map((p) => ({ slug: p.slug }));
+  } catch (err) {
+    console.warn('generateStaticParams blog/[slug]:', err?.message);
+    return [];
+  }
 }
+
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }) {
     try {

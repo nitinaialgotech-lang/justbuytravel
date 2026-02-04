@@ -11,9 +11,13 @@ export const https_hotels = axios.create({
     transformResponse: [(data) => data],
 });
 
+const blogHeaders = { ...commonHeaders };
+if (typeof window === 'undefined') {
+    blogHeaders['User-Agent'] = 'JustBuyTravel/1.0 (https://justbuytravel.com)';
+}
 export const https_blog = axios.create({
     baseURL: "https://justbuytravel.in/wp-json/wp/v2",
-    headers: commonHeaders,
+    headers: blogHeaders,
 });
 
 export const https_api = axios.create({

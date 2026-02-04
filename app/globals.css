@@ -1347,7 +1347,8 @@ button {
   cursor: pointer;
 }
 
-.blog_post_box > li > span {
+.blog_post_box > li > span,
+.blog_post_box > li > .box_post_title {
   display: flex;
   flex-direction: column;
   gap: 10px;
