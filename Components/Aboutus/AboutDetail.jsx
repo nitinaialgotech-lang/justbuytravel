@@ -42,7 +42,7 @@ export default function AboutDetail() {
                                                 <div className="content">
                                                     <h2 className='p-0 m-0 text-center flex flex-col justify-center items-center'>
                                                         Compare
-                                                        <img src={getAssetPath("/aboutus/Vector.png")} width={50} alt="" />
+
                                                     </h2>
                                                     <p className='m-0'>
                                                         Hotel Prices
