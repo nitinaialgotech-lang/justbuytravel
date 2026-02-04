@@ -134,6 +134,10 @@ If you use **Git** on Hostinger, set in the Node.js / Git UI:
 
 ## Troubleshooting: 404 and ERR_TOO_MANY_REDIRECTS
 
+- **404 on blog detail pages** (`/blog/my-post` or `/category/my-post`):
+  1. The app must be running with **`npm start`** (Node.js). Blog detail pages are rendered on the server; if you only upload files and the host serves them statically (no Node process), blog URLs will 404.
+  2. Your web server (Nginx/Apache) must **proxy all requests** to the Next.js app (e.g. port 3000). If it looks for a file at `/blog/my-post` and returns 404 without forwarding to Node, fix the server config (see Nginx example in the doc).
+  3. Blog content is fetched from `https://justbuytravel.in/wp-json/wp/v2`. If that URL is **blocked or fails from Hostinger** (firewall, security plugin), the page will 404. Fix: allow Hostinger’s server IP in WordPress/firewall, or **build on your PC** (where the API works), then upload the project **including the `.next` folder** and on the server run only **`npm start`** (do not run `npm run build` on Hostinger). Then blog pages are served from the pre-rendered build.
 - **404 on place pages** (e.g. `/london-eye-ChIJ...`, `/sukhna-lake-ChIJ...`): The app uses a dynamic `[hotel]` route. If you see 404s for those URLs, ensure `app/[hotel]/page.js` has `dynamicParams: true` so paths not in `generateStaticParams` are handled at request time (this is set in the repo).
 - **404 on `/book-hotels-online`**: The site redirects `/book-hotels-online` to `/hotels` in `next.config.mjs`. Rebuild after any config change.
 - **ERR_TOO_MANY_REDIRECTS**: Usually a **basePath mismatch**. If the site is served at the **root** (e.g. `https://yourdomain.com/`), leave `NEXT_PUBLIC_BASE_PATH` **unset** on Hostinger. If you set `NEXT_PUBLIC_BASE_PATH` (e.g. `/travel`) but the domain or proxy serves the app at root, the browser and server can redirect each other in a loop. Fix: either remove `NEXT_PUBLIC_BASE_PATH` when at root, or ensure the app is actually served under that subpath and all links use it.

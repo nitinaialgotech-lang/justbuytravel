@@ -311,7 +311,9 @@ button {
 .padding_top {
   padding-top: 50px;
 }
-
+.padding_b30 {
+  padding-bottom: 30px !important;
+}
 .padding_b70 {
   padding-bottom: 70px !important;
 }
@@ -420,6 +422,7 @@ button {
   font-size: 20px;
   margin: 0;
   font-weight: 500 !important;
+  text-transform: none !important;
 }
 
 .supporting_text {
@@ -1391,7 +1394,13 @@ button {
   gap: 2px;
   text-transform: capitalize;
 }
-
+.blog_section_left_bar > .breadcrumb > p {
+  font-weight: 500;
+}
+.blog_section_left_bar > .breadcrumb > p > a {
+  color: var(--bg-color);
+  text-decoration: none;
+}
 /* ************************************************** button to top  */
 .bottom-to-top {
   position: fixed;
@@ -3768,4 +3777,8 @@ span.rating-stars {
   width: 100%;
   position: absolute;
   bottom: 0;
+  z-index: -1;
+}
+.Blog_Detail_section a{
+  color: var(--bg-color);
 }

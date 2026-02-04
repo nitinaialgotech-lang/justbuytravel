@@ -49,7 +49,7 @@ export default function Blog_Detail_section({ initialSlug, initialPost }) {
                         <div className='col-lg-8 '>
 
                             {selectedPost && (
-                                <div className="title flex flex-col gap-2 padding_bottom">
+                                <div className="title flex flex-col gap-2 padding_b30">
                                     {/* **************************************** */}
                                     <div className='blog_section_left_bar'>
                                         <div className="breadcrumb m-0">

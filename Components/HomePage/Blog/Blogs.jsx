@@ -26,7 +26,7 @@ export default function Blogs() {
         const firstCatId = item?.categories?.[0]
         const cat = categories.find((c) => Number(c.id) === Number(firstCatId))
         const catSlug = cat?.slug
-        return catSlug ? `/${catSlug}/${item?.slug}` : `/blogs/${item?.slug}`
+        return catSlug ? `/${catSlug}/${item?.slug}` : `/blog/${item?.slug}`
     }
 
     if (isLoading) return <div className='pt-20 pb-20 text-center'>

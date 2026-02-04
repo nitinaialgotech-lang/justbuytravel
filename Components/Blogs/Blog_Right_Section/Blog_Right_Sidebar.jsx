@@ -22,7 +22,7 @@ export default function Blog_Right_Sidebar() {
         const firstCatId = post?.categories?.[0]
         const cat = categories.find((c) => Number(c.id) === Number(firstCatId))
         const catSlug = cat?.slug
-        return catSlug ? `/${catSlug}/${post?.slug || ""}` : `/blogs/${post?.slug || ""}`
+        return catSlug ? `/${catSlug}/${post?.slug || ""}` : `/blog/${post?.slug || ""}`
     }
 
     return (

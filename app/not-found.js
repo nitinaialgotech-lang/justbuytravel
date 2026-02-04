@@ -31,7 +31,7 @@ export default function NotFound() {
                   deals.
                 </p>
                 <Link href="/" className="web-btn mt-3 button_bg2 d-inline-block">
-                  Home
+                  Back to Home
                 </Link>
               </div>
             </div>

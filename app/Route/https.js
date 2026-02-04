@@ -18,6 +18,7 @@ if (typeof window === 'undefined') {
 export const https_blog = axios.create({
     baseURL: "https://justbuytravel.in/wp-json/wp/v2",
     headers: blogHeaders,
+    timeout: 20000,
 });
 
 export const https_api = axios.create({

@@ -156,7 +156,7 @@ export default function Footer() {
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                       </li>
                       <li>
-                        <Link href={"/contactus"}> Contact Us</Link>
+                        <Link href={"/contact-us"}> Contact Us</Link>
                       </li>
                       <li className="dot">
                         <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
@@ -219,7 +219,7 @@ export default function Footer() {
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
                 </li>
                 <li>
-                  <Link href={"/blog"}>Blogs</Link>
+                  <Link href={"/blog"}>Blog</Link>
                 </li>
                 <li className="dot">
                   <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />

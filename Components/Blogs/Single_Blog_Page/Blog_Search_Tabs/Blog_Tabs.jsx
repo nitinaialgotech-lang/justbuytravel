@@ -110,7 +110,7 @@ export default function Blog_Tabs() {
     const catId = post?.categories?.[0];
     const cat = categories?.data?.find((c) => c.id === catId);
     const catSlug = cat?.slug;
-    return catSlug ? `/${catSlug}/${post?.slug}` : `/blogs/${post?.slug}`;
+    return catSlug ? `/${catSlug}/${post?.slug}` : `/blog/${post?.slug}`;
   };
 
   return (
@@ -285,7 +285,7 @@ export default function Blog_Tabs() {
                                                 {/* ****************************** */}
                                                 <div className="blog_card_heading">
                                                   <h4 className="m-0">
-                                                    <Link href={cat_slug ? `/${cat_slug}/${post?.slug}` : `/blogs/${post?.slug}`}>
+                                                    <Link href={cat_slug ? `/${cat_slug}/${post?.slug}` : `/blog/${post?.slug}`}>
                                                       {post?.title?.rendered}
                                                     </Link>
                                                   </h4>

@@ -1,10 +1,10 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Blog_Detail from '@/Components/Blogs/Blog_Detail/Blog_Detail';
 import Blog_Right_Sidebar from '@/Components/Blogs/Blog_Right_Section/Blog_Right_Sidebar';
-import { Get_Blog_By_Slug, Get_Blog_category, Get_All_Blog_Categories, Get_All_Blog_Posts_For_Static } from '@/app/Route/endpoints';
+import { Get_Blog_By_Slug, Get_All_Blog_Categories, Get_All_Blog_Posts_For_Static } from '@/app/Route/endpoints';
 import { generateBlogMetadata, generateBlogStructuredData, generateBreadcrumbStructuredData } from '@/app/utils/seo';
 import { SlCalender } from 'react-icons/sl';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -53,6 +53,8 @@ export async function generateStaticParams() {
   }
 }
 
+// Always render on server so category blog URLs work on Hostinger even when build had no API access.
+export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
 export async function generateMetadata({ params }) {
@@ -65,7 +67,7 @@ export async function generateMetadata({ params }) {
     }
 
     const [categoriesRes, blog] = await Promise.all([
-      Get_Blog_category(),
+      Get_All_Blog_Categories(),
       Get_Blog_By_Slug(slug),
     ]);
     const categories = categoriesRes?.data || [];
@@ -101,18 +103,25 @@ export default async function BlogDetailWithCategoryPage({ params }) {
 
   try {
     const [categoriesRes, blog] = await Promise.all([
-      Get_Blog_category(),
+      Get_All_Blog_Categories(),
       Get_Blog_By_Slug(slug),
     ]);
     const categories = categoriesRes?.data || [];
     const validCategorySlugs = categories.map((c) => (c.slug || '').toLowerCase());
 
-    if (!validCategorySlugs.includes(categorySlugLower)) {
+    if (!blog) {
       notFound();
     }
 
-    if (!blog) {
-      notFound();
+    if (!validCategorySlugs.includes(categorySlugLower)) {
+      redirect(`/blog/${slug}`);
+    }
+
+    const categoryInUrl = categories.find((c) => (c.slug || '').toLowerCase() === categorySlugLower);
+    const postCategoryIds = blog.categories || [];
+    const postHasThisCategory = categoryInUrl && postCategoryIds.some((id) => Number(id) === Number(categoryInUrl.id));
+    if (!postHasThisCategory) {
+      redirect(`/blog/${slug}`);
     }
 
     const blogContent = blog?.content?.rendered || '';
@@ -122,7 +131,7 @@ export default async function BlogDetailWithCategoryPage({ params }) {
     const blogStructuredData = generateBlogStructuredData(blog, slug);
     const breadcrumbData = generateBreadcrumbStructuredData([
       { name: 'Home', path: '/' },
-      { name: 'Blogs', path: '/blogs' },
+      { name: 'Blog', path: '/blog' },
       { name: blog.title?.rendered || 'Blog Post', path: `/${categorySlug}/${slug}` },
     ]);
 
@@ -143,7 +152,7 @@ export default async function BlogDetailWithCategoryPage({ params }) {
           <div className="container">
             <div className="row">
               <div className="col-lg-8">
-                <div className="title flex flex-col gap-2 padding_bottom">
+                <div className="title flex flex-col gap-2 pb-4">
                   <div className="blog_section_left_bar">
                     <div className="breadcrumb m-0">
                       <p className="flex flex-wrap items-center gap-1 m-0">
