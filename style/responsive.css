@@ -1161,6 +1161,13 @@
     min-height: 375px;
     height: 100%;
   }
+  .experience_section > .about_experience_items > .about_experience_box {
+    width: 100px;
+    height: 100px;
+  }
+  .experience_section > .about_experience_items > .about_experience_box > h4 {
+    font-size: 14px;
+  }
 }
 /* ***************************************************************************************** */
 @media only screen and (max-width: 390px) {

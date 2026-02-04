@@ -82,7 +82,7 @@ export default function HotelReviews({ reviews }) {
                                 })
                             }
                         </div>
-                        <div className="col-lg-4"></div>
+
                     </div>
                 </div>
 

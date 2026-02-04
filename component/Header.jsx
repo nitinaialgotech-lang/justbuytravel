@@ -180,7 +180,7 @@ export default function Header() {
                                                     <ul>
                                                         <li>
                                                             <Link
-                                                                href={"/book-hotels-online"}
+                                                                href={"/hotels"}
                                                                 className={`flex justify-between items-center ${isBookHotels ? "g_color" : ""}`}
                                                             >
                                                                 <span className="flex gap-2 items-center capitalize">

@@ -85,10 +85,10 @@ export default function HotelAllReview({ reviews }) {
                     <div className="row">
                         <div className="section_title">
                             <h2 className='m-0'>
-                                Trailers Reviews
+                                Google Reviews
                             </h2>
                             <p>
-                                Voices of satisfaction from our premium community.
+                                Reviews from Google & public sources. Not owned or verified by JustBuy Travel.
                             </p>
                         </div>
                         {/* ******************** */}
@@ -118,7 +118,7 @@ export default function HotelAllReview({ reviews }) {
                                                             </h6>
                                                         </span>
                                                     </div>
-                                                    <div className="review_head flex justify-between ">
+                                                    <div className="rating hotel_rating flex gap-2 items-center">
                                                         <span>
                                                             {renderBootstrapStars(item?.rating)}
                                                         </span>
@@ -139,10 +139,14 @@ export default function HotelAllReview({ reviews }) {
                                                     {displayedText}
                                                     {!isExpanded && isLongText && "..."}
                                                 </p>
-
-                                                <button onClick={() =>
-                                                    setExpandedIndex(isExpanded ? null : index)
-                                                }> {isExpanded ? "Read less" : "Read more"}</button>
+                                                {
+                                                    isLongText ?
+                                                        <button onClick={() =>
+                                                            setExpandedIndex(isExpanded ? null : index)
+                                                        }> {isExpanded ? "Read less" : "Read more"}</button>
+                                                        :
+                                                        ""
+                                                }
                                             </div>
                                         </div>
 
@@ -239,7 +243,7 @@ export default function HotelAllReview({ reviews }) {
                                                                     </h6>
                                                                 </span>
                                                             </div>
-                                                            <div className="review_head flex justify-between ">
+                                                            <div className="rating hotel_rating flex gap-2 items-center">
                                                                 <span>
                                                                     {renderBootstrapStars(item?.rating)}
                                                                 </span>
