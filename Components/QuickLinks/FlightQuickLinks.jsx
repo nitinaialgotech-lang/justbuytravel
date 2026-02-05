@@ -1,10 +1,12 @@
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 export default function FlightQuickLinks() {
+    const pathname = usePathname();
     return (
-        <section className=''>
-            <div className="container padding_bottom ">
+        <section className={`padding_bottom ${pathname == "/about-us" ? "padding_top" : " "}`}>
+            <div className="container ">
                 <div className="row">
                     <div className="col-lg-12">
                         {/* ********** links */}

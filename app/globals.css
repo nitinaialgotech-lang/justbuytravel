@@ -412,7 +412,7 @@ button {
 }
 
 .banner_box > .title > h1 {
-  font-size: 70px;
+  font-size: 95px;
   color: var(--color);
   font-weight: 900;
   line-height: 1;
@@ -603,19 +603,19 @@ button {
 
 .button_bg2 {
   text-decoration: none;
-  font-weight: 600;
   font-family: var(--font-fam);
   background-color: var(--bg-color);
-  padding: 7.5px 18px;
+  padding: 6px 18px;
   color: var(--background) !important;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-left: 2px;
   display: flex;
   word-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  font-size: 17px;
+  font-size: 15px;
   right: 10px;
+  text-transform: capitalize;
   top: 13%;
 }
 
@@ -1222,7 +1222,6 @@ button {
   display: flex;
   padding-right: 20px;
   width: 100%;
-  justify-content: start;
   padding-left: 20px;
   align-items: center;
   border-radius: 0rem 0rem 1.4rem 1.4rem;
@@ -1527,22 +1526,26 @@ button {
 }
 
 .sky_blue {
-  background-color: rgba(214, 225, 244, 1);
+  background-color: #f2f7ff;
+  border: 1px solid #d6e1f4;
 }
 
 .sky_yellow {
-  background-color: rgba(244, 227, 201, 1);
+  background-color: #fffaf2;
+  border: 1px solid #f4e3c9;
 }
 
 .sky_green {
-  background-color: rgba(216, 237, 214, 1);
+  background-color: #f3fff2;
+  border: 1px solid #d8edd6;
 }
 
 .sky_red {
-  background-color: rgba(230, 217, 240, 1);
+  background-color: #f9f2ff;
+  border: 1px solid #e6d9f0;
 }
 .sky_lighblue {
-  background-color: rgba(223, 240, 238, 1);
+  background-color: #dff0ee;
 }
 .break_point {
   padding: 30px 0px;
@@ -2423,7 +2426,7 @@ span.rating-stars {
   font: 500;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   margin-top: 10px;
 }
 
@@ -2440,7 +2443,7 @@ span.rating-stars {
 
 .quick_links > .quick_link_box > .quick_link_items > ul {
   flex-wrap: wrap;
-  column-gap: 15px;
+  column-gap: 5px;
   /* margin: 20px 0 0; */
   padding: 0;
   list-style: none;
@@ -2987,7 +2990,8 @@ span.rating-stars {
   max-height: 100px;
 }
 
-/* Blog detail Elementor accordion icon sizing */
+/* Blog detail Elementor accordion icon sizing 
+/* ************************************************************************************************************************* */
 .blog_content details > summary {
   list-style: none;
 }
@@ -2996,7 +3000,7 @@ span.rating-stars {
   display: none;
 }
 
-.blog_content .e-n-accordion-item-title-icon {
+/* .blog_content .e-n-accordion-item-title-icon {
   width: 18px;
   height: 18px;
   display: inline-flex;
@@ -3057,28 +3061,6 @@ span.rating-stars {
   fill: currentColor;
 }
 
-.blog_content details > div[role="region"] {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition:
-    max-height 0.45s ease-in-out,
-    opacity 0.35s ease-in-out,
-    padding 0.35s ease-in-out;
-  padding: 0 16px;
-  will-change: max-height, opacity;
-}
-
-.blog_content details[open] > div[role="region"] {
-  max-height: 1000px;
-  opacity: 1;
-  padding: 0 16px 14px;
-}
-
-.blog_content .e-n-accordion-item-title-icon svg {
-  transition: transform 0.35s ease;
-}
-
 .blog_content details[open] .e-n-accordion-item-title-icon svg {
   transform: rotate(180deg);
 }
@@ -3099,6 +3081,144 @@ span.rating-stars {
   display: none;
 }
 
+.blog_content .e-n-accordion {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e7edf3;
+  background: #fff;
+}
+
+.blog_content .e-n-accordion-item {
+  border-bottom: 1px solid #e7edf3;
+}
+
+.blog_content .e-n-accordion-item:last-child {
+  border-bottom: none;
+}
+
+.blog_content summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog_content summary::-webkit-details-marker {
+  display: none;
+}
+
+.blog_content details > div[role="region"] {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.45s ease,
+    opacity 0.3s ease;
+  opacity: 0;
+}
+
+.blog_content details > div[role="region"] > * {
+  overflow: hidden;
+  padding: 0 16px;
+}
+
+.blog_content details:hover > div[role="region"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.blog_content details:hover > div[role="region"] > * {
+  padding-bottom: 14px;
+}
+
+.blog_content .e-n-accordion-item-title-icon svg {
+  transition: transform 0.35s ease;
+}
+
+.blog_content details:hover .e-n-accordion-item-title-icon svg {
+  transform: rotate(180deg);
+} */
+
+.blog_content .e-n-accordion {
+  border-radius: 8px;
+  border: 1px solid #e7edf3;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+.blog_content .e-n-accordion-item {
+  border-bottom: 1px solid #e7edf3;
+}
+
+.blog_content .e-n-accordion-item:last-child {
+  border-bottom: none;
+}
+.blog_content summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.blog_content summary::-webkit-details-marker {
+  display: none;
+}
+.blog_content .e-n-accordion-item-title-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #12c081;
+  flex-shrink: 0;
+}
+
+.blog_content .e-n-accordion-item-title-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  transition: transform 0.35s ease;
+}
+.blog_content details > div[role="region"] {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease;
+}
+.blog_content details > div[role="region"] > * {
+  overflow: hidden;
+  padding: 0 16px 14px;
+}
+.blog_content details:hover,
+.blog_content details:has(div[role="region"]:hover) {
+  background-color: #f6fbff;
+}
+.blog_content details:hover > div[role="region"],
+.blog_content details:has(div[role="region"]:hover) > div[role="region"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.blog_content details:hover .e-n-accordion-item-title-icon svg,
+.blog_content
+  details:has(div[role="region"]:hover)
+  .e-n-accordion-item-title-icon
+  svg {
+  transform: rotate(180deg);
+}
+.blog_content details:hover .e-n-accordion-item-title-icon > .e-opened > svg {
+  transform: rotate(180deg);
+  display: none;
+}
+
+/* ************************************************************************************************************************* */
 .view-price-title-row {
   display: flex;
   justify-content: space-between;
@@ -3788,6 +3908,6 @@ span.rating-stars {
   bottom: 0;
   z-index: -1;
 }
-.Blog_Detail_section a{
+.Blog_Detail_section a {
   color: var(--bg-color);
 }

@@ -39,13 +39,18 @@ export default function Footer() {
 
   return (
     <>
-      {pathname == "/flights" ?
-        <FlightQuickLinks />
-        :
-        <QuickLinks />
-      }
+      {pathname === "/flights" && <FlightQuickLinks />}
 
-      <section className="footer_section padding_top relative ">
+      {pathname === "/hotels" && <QuickLinks />}
+
+      {pathname !== "/flights" && pathname !== "/hotels" && (
+        <>
+          <FlightQuickLinks />
+          <QuickLinks />
+        </>
+      )}
+
+      <section className="footer_section relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
           <div className="left_img ">
             <img src={getAssetPath("/footer/icon/left_img.svg")} alt="" />

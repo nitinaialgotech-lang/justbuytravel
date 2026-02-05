@@ -15,7 +15,7 @@ export default function Blog_Tabs() {
 
   const searchParams = useSearchParams();
   const categorySlugFromUrl = searchParams.get("category");
-
+  const [expandedId, setExpandedId] = useState(null);
   const [activeKey, setActiveKey] = useState("showall"); // default tab
 
   const { data: categories } = useQuery({
@@ -113,6 +113,8 @@ export default function Blog_Tabs() {
     return catSlug ? `/${catSlug}/${post?.slug}` : `/blog/${post?.slug}`;
   };
 
+  const category_name = categories?.data?.map((item, i) => item?.name)
+
   return (
 
     <>
@@ -137,46 +139,14 @@ export default function Blog_Tabs() {
                         ))
                       ) : (
                         blog_data?.posts?.map((item) => {
-                          const text = item.excerpt.rendered
-                            ?.replace(/<[^>]*>/g, "")
-                            .split(" ");
-                          const fullText = text.slice(0, 30).join(" ");
+                          const rawText = item.excerpt.rendered?.replace(/<[^>]*>/g, "") || "";
+                          const shortText = rawText.slice(0, 120);
+                          const isLong = rawText.length > 120;
+
                           const cat_name = item?.name;
                           const date_it = item?.date;
                           const formatted = moment(date_it).format("MMMM D, YYYY");
                           return (
-                            // <div className="col-lg-4" key={post.id}>
-                            //   <div className="blog_card_box mb-10">
-                            //     <div className="blog_card">
-                            //       <div className="blog_card_img">
-                            //         <img
-                            //           src={
-                            //             post?.yoast_head_json?.og_image?.[0]?.url ||
-                            //             "/default-image.webp"
-                            //           }
-                            //           alt=""
-                            //         />
-                            //       </div>
-
-                            //       <div className="blog_card_body blog_showall_body">
-                            //         <h4>
-                            //           <Link href={`/blogs/${post.slug}`}>
-                            //             {post.title.rendered}
-                            //           </Link>
-                            //         </h4>
-
-                            //         <div
-                            //           dangerouslySetInnerHTML={{
-                            //             __html:
-                            //               fullText + (text.length > 30 ? "..." : ""),
-                            //           }}
-                            //         />
-                            //       </div>
-                            //     </div>
-                            //   </div>
-                            // </div>
-
-
 
 
                             <div className="col-lg-4" key={item.id}>
@@ -193,9 +163,9 @@ export default function Blog_Tabs() {
                                   {/* ****************************** */}
                                   <div className="blog_card_body">
                                     <div className="card_body_blog_time flex justify-between items-center">
-                                      {/* <button className="button_bg2 px-3 py-1 bg-dark text-light">
-                                        {item?.name} ,,,,
-                                      </button> */}
+                                      <button className="button_bg2 px-3 py-1 bg-dark text-light">
+                                        {cat_name}
+                                      </button>
                                       <p className="m-0 g_color">{formatted}</p>
                                     </div>
                                     {/* ****************************** */}
@@ -208,9 +178,15 @@ export default function Blog_Tabs() {
                                     </div>
                                     {/* ****************************** */}
                                     <div
-                                      className="blog_card_content text-justify"
-                                      dangerouslySetInnerHTML={{ __html: fullText + (text.length > 30 ? "..." : "") }}
+                                      className="blog_card_content"
+                                      dangerouslySetInnerHTML={{
+                                        __html: expandedId === item.id
+                                          ? rawText
+                                          : shortText + (isLong ? "..." : "")
+                                      }}
                                     />
+
+
 
                                     <div className="blog_card_user flex items-center gap-2">
                                       <span className='g_color'>
@@ -222,13 +198,6 @@ export default function Blog_Tabs() {
                                 </div>
                               </div>
                             </div>
-
-
-
-
-
-
-
                           );
                         })
                       )}
@@ -292,7 +261,7 @@ export default function Blog_Tabs() {
                                                 </div>
                                                 {/* ****************************** */}
                                                 <div
-                                                  className="blog_card_content text-justify"
+                                                  className="blog_card_content "
                                                   dangerouslySetInnerHTML={{ __html: fullText + (text.length > 30 ? "..." : "") }}
                                                 />
 
