@@ -109,7 +109,7 @@ export default function Find_CruisesSection() {
                                 <SwiperSlide key={`${item?.name ?? "region"}-${idx}`}>
                                     <div className="card_col">
                                         <div
-                                            className="recommend_card_box   card_rounded  recomand_card_shadow  
+                                            className="recommend_card_box   card_rounded  recomand_card_shadow  book_cruise_card 
                                                         "
                                         >
                                             <div className="card_box pe-">
@@ -121,7 +121,7 @@ export default function Find_CruisesSection() {
                                                     />
                                                 </div>
                                                 {/* *** */}
-                                                <div className="card_box_detail card_rounded flex flex-col z-1 find_cruise_detail  relative">
+                                                <div className="card_box_detail flex flex-col z-1 find_cruise_detail  relative">
                                                     <h4 className="m-0 capitalize">
                                                         {item?.name}
                                                     </h4>
@@ -144,7 +144,7 @@ export default function Find_CruisesSection() {
 
                         </Swiper>
                         {/*xxxxxxxx */}
-                        <div className="button_swiper2 absolute ">
+                        <div className="button_swiper absolute ">
                             <div className="buttons_icon relative">
                                 <button
                                     id="recomand_prev1"

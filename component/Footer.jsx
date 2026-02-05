@@ -13,6 +13,8 @@ import QuickLinks from "@/Components/QuickLinks/QuickLinks";
 import FlightQuickLinks from "@/Components/QuickLinks/FlightQuickLinks";
 import { usePathname } from "next/navigation";
 import { FaLinkedin } from "react-icons/fa6";
+import { GoDotFill } from "react-icons/go";
+
 export default function Footer() {
   // ***************************************
   const [visible, setVisible] = useState(false);
@@ -39,16 +41,16 @@ export default function Footer() {
 
   return (
     <>
-      {pathname === "/flights" && <FlightQuickLinks />}
 
-      {pathname === "/hotels" && <QuickLinks />}
 
-      {pathname !== "/flights" && pathname !== "/hotels" && (
-        <>
-          <FlightQuickLinks />
-          <QuickLinks />
-        </>
-      )}
+
+
+
+
+
+      <QuickLinks />
+
+
 
       <section className="footer_section padding_top relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
@@ -158,25 +160,25 @@ export default function Footer() {
                         <Link href={"/aboutus"}>  About us</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/contact-us"}> Contact Us</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/privacy-policy"}> Privacy Policy</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/term-and-conditions"}>Terms and Conditions</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/disclaimer"}> Disclaimer</Link>
@@ -197,31 +199,31 @@ export default function Footer() {
                   <Link href={""}>  Home</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/book-hotels-online"}> Hotels</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/flights"}> Flight</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/book-cruises"}>Cruises</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/book-packages"}>Packages</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/blog"}>Blog</Link>
