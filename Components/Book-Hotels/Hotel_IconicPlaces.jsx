@@ -66,12 +66,18 @@ export default function Hotel_IconicPlaces() {
     // ****************************** apis 
     const { data: touristAttraction } = useQuery({
         queryKey: ["touristattraction"],
-        queryFn: () => TouristAttractionApi()
-    })
-    const rawAttractions = touristAttraction?.data;
-    const TouristAttraction = rawAttractions?.length
-        ? [...new Map((rawAttractions || []).map((item, i) => [item?.id ?? `iconic-${i}`, item])).values()]
-        : rawAttractions;
+        queryFn: () => TouristAttractionApi(),
+    });
+    // Legacy API may return either a plain array or an object with `results`
+    const raw = touristAttraction?.data;
+    const rawAttractions = Array.isArray(raw?.results)
+        ? raw.results
+        : Array.isArray(raw)
+        ? raw
+        : [];
+    const TouristAttraction = rawAttractions.length
+        ? [...new Map(rawAttractions.map((item, i) => [item?.id ?? `iconic-${i}`, item])).values()]
+        : [];
 
     return (
         <>
@@ -138,7 +144,7 @@ export default function Hotel_IconicPlaces() {
                                                     <img
                                                         src={
                                                             imgName
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
+                                                                ? `/api/get-photo?name=${encodeURIComponent(imgName)}&maxWidthPx=400`
                                                                 : getAssetPath(item?.img || "/no-image.jpg")
                                                         }
                                                         className=" card_rounded "
@@ -156,7 +162,7 @@ export default function Hotel_IconicPlaces() {
                                                             {placeId && (
                                                                 <div className="mt-2">
                                                                     <Link
-                                                                        href={`/${createHotelSlug(title, placeId)}`}
+                                                                        href={`/hotel/${createHotelSlug(title, placeId)}`}
                                                                         className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
                                                                     >
                                                                         View Details

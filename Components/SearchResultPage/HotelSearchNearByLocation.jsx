@@ -121,7 +121,7 @@ export default function HotelSearchNearByLocation({
                                 {filteredNearbyPlaces?.map((item, i) => {
                                     const placeId = item?.id;
                                     const title = item?.displayName?.text || item?.displayName || "Place";
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                     const imageSrc = getPlacePhotoUrl(item);
                                     const fallbackImg = getAssetPath("/blog/blog_img.webp");
                                     return (

@@ -130,7 +130,7 @@ export default function IconicPlaceInIreland() {
                                         item?.displayName?.text || item?.content || "Place";
                                     const imgName = item?.photos?.[0]?.name;
                                     const placeId = item?.id;
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">
@@ -144,7 +144,7 @@ export default function IconicPlaceInIreland() {
                                                     <img
                                                         src={
                                                             imgName
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
+                                                                ? `/api/get-photo?name=${encodeURIComponent(imgName)}&maxWidthPx=300`
                                                                 : getAssetPath(item?.img || "/no-image.jpg")
                                                         }
                                                         className=" card_rounded "

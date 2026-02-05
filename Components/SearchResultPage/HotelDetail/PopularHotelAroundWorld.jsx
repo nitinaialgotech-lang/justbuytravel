@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, TopHotelAroundWorld } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -33,12 +33,23 @@ export default function PopularHotelAroundWorld({ lat, long }) {
     // const lat = 44.500000;
     // const long = -89.500000;
 
-    const { data: nearbyPlacesData, isLoading } = useQuery({
+    const { data: nearbyPlacesData, isLoading, isError } = useQuery({
         queryKey: ["lodgingnearby", lat, long],
         queryFn: () => nearbyPlaces(lat, long),
         enabled: lat != null && long != null,
     });
-    const nearbyPlace = nearbyPlacesData?.data?.places;
+    const nearbyPlace = nearbyPlacesData?.data?.places || [];
+
+    // Fallback: when nearby search fails or returns no places, use global top hotels
+    const { data: topData, isLoading: isTopLoading } = useQuery({
+        queryKey: ["tophotels-global"],
+        queryFn: () => TopHotelAroundWorld(),
+        enabled: !lat || !long || isError || nearbyPlace.length === 0,
+    });
+
+    const topHotels = topData?.data?.results || [];
+    const hotelsToShow = nearbyPlace.length ? nearbyPlace : topHotels;
+    const loading = isLoading || (!nearbyPlace.length && isTopLoading);
 
     /***************** end of api calls ************* */
 
@@ -136,16 +147,16 @@ export default function PopularHotelAroundWorld({ lat, long }) {
                                     spaceBetween: 20,
                                 },
                             }}
-                            loop={!isLoading}
+                            loop={!loading}
                             id="swiper_sldie"
                         >
-                            {isLoading
+                            {loading
                                 ? Array.from({ length: 4 }).map((_, i) => (
                                     <SwiperSlide key={`shimmer-${i}`}>
                                         <ShimmerCard />
                                     </SwiperSlide>
                                 ))
-                                : nearbyPlace?.map((item, i) => {
+                                : hotelsToShow.map((item, i) => {
                                     const name = item?.displayName?.text ?? item?.name ?? '';
                                     const id = item?.id;
                                     const imageSrc = getPlacePhotoUrl(item);

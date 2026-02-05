@@ -1,14 +1,13 @@
 import { notFound } from 'next/navigation';
 import SearchHotelDetail from '@/Components/SearchResultPage/HotelDetail/SearchHotelDetail';
 import { GetHotel_Detail } from '@/app/Route/endpoints';
-import { generateHotelMetadata, generateHotelStructuredData, generateBreadcrumbStructuredData, createSlug } from '@/app/utils/seo';
+import { generateHotelMetadata, generateHotelStructuredData, generateBreadcrumbStructuredData, createSlug, getHotelIdFromSlug } from '@/app/utils/seo';
 import "../../../style/responsive.css";
 
-export const dynamic = 'force-static';
-export const dynamicParams = false;
+export const dynamic = 'force-dynamic';
 
 export function generateStaticParams() {
-    return [{ slug: "placeholder" }];
+    return [];
 }
 
 // Generate dynamic metadata for each hotel
@@ -16,15 +15,16 @@ export async function generateMetadata({ params, searchParams }) {
     try {
         const { slug } = params;
         const { id } = searchParams;
+        const placeId = id || (slug ? getHotelIdFromSlug(slug) : null);
         
-        if (!id) {
+        if (!placeId) {
             return {
                 title: 'Hotel Details',
                 description: 'View detailed hotel information, reviews, and prices.',
             };
         }
         
-        const response = await GetHotel_Detail(id);
+        const response = await GetHotel_Detail(placeId);
         const hotel = response?.data;
         
         if (!hotel) {
@@ -47,14 +47,15 @@ export async function generateMetadata({ params, searchParams }) {
 export default async function HotelDetailPage({ params, searchParams }) {
     const { slug } = params;
     const { id, hotel_id, code } = searchParams;
+    const placeId = id || hotel_id || code || (slug ? getHotelIdFromSlug(slug) : null);
     
     try {
-        // If we have an ID, fetch the hotel details for structured data
+        // If we have a place ID (from query or slug), fetch the hotel details for structured data
         let hotel = null;
         let structuredData = null;
         
-        if (id) {
-            const response = await GetHotel_Detail(id);
+        if (placeId) {
+            const response = await GetHotel_Detail(placeId);
             hotel = response?.data;
             
             if (hotel) {
@@ -65,7 +66,7 @@ export default async function HotelDetailPage({ params, searchParams }) {
                 const breadcrumbData = generateBreadcrumbStructuredData([
                     { name: 'Home', path: '/' },
                     { name: 'Hotels', path: '/hotels' },
-                    { name: hotelName, path: `/hotel/${slug}?id=${id}` }
+                    { name: hotelName, path: `/hotel/${slug}?id=${placeId}` }
                 ]);
                 
                 return (

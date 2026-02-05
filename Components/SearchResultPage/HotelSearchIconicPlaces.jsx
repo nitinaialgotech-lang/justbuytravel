@@ -117,7 +117,7 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
                                         item?.displayName?.text || item?.content || "Place";
                                     const imgName = item?.photos?.[0]?.name;
                                     const placeId = item?.id;
-                                    const slug = placeId ? `/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.content || '', placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.content || '', placeId)}` : '#';
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">
@@ -131,7 +131,7 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
                                                     <img
                                                         src={
                                                             imgName
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${imgName}`
+                                                                ? `/api/get-photo?name=${imgName}`
                                                                 : getAssetPath(item?.img || "/no-image.jpg")
                                                         }
                                                         className=" card_rounded "

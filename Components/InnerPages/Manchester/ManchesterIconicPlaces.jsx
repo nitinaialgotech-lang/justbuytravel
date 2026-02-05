@@ -130,7 +130,7 @@ export default function ManchesterIconicPlaces() {
                                         item?.displayName?.text || item?.content || "Place";
                                     const imgName = item?.photos?.[0]?.name;
                                     const placeId = item?.id;
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section ">

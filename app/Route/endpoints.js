@@ -1,4 +1,4 @@
-import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity } from "./https"
+import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity, https_places } from "./https"
 
 // Helper function to disambiguate common city names
 
@@ -95,27 +95,56 @@ export const Get_cityName = async (id) => {
 }
 // *************************** search text 
 export const searchText = async (text, limit = 50) => {
-    return await https_SearchCity.get(`/text-search.php?textQuery=${text}&maxResultCount=${limit}`)
+    return await https_places.get(`/text-search`, {
+        params: {
+            textQuery: text,
+            maxResultCount: limit,
+        },
+    });
 }
 export const searchHotel = async (text, limit = 50) => {
-    return await https_SearchCity.get(`/text-search.php?textQuery=hotels and tourist_attraction in ${text}&maxResultCount=${limit}`)
+    return await https_places.get(`/text-search`, {
+        params: {
+            textQuery: `hotels and tourist_attraction in ${text}`,
+            maxResultCount: limit,
+        },
+    });
 }
 export const searchHotel1 = async (text, limit = 50) => {
-    return await https_SearchCity.get(`/text-search.php?textQuery=hotels in ${text}&maxResultCount=${limit}&includedTypes=lodging`)
+    return await https_places.get(`/text-search`, {
+        params: {
+            textQuery: `hotels in ${text}`,
+            maxResultCount: limit,
+            includedType: "lodging",
+        },
+    });
 }
 export const searchTouristAttraction = async (text, limit = 50) => {
-    return await https_SearchCity.get(`/text-search.php?textQuery=tourist_attraction in ${text}&maxResultCount=${limit}`)
+    return await https_places.get(`/text-search`, {
+        params: {
+            textQuery: `tourist_attraction in ${text}`,
+            maxResultCount: limit,
+        },
+    });
 }
 export const NearbyRestaurant = async (text, limit = 50) => {
-    return await https_SearchCity.get(`/text-search.php?textQuery=Restaurant in ${text}&maxResultCount=${limit}&includedTypes=restaurant`)
+    return await https_places.get(`/text-search`, {
+        params: {
+            textQuery: `Restaurant in ${text}`,
+            maxResultCount: limit,
+            includedType: "restaurant",
+        },
+    });
 }
 /******************* testing hotel detail */
+// Use stable PHP backend for hotel key resolution to ensure Xotelo integration keeps working.
 export const searchHotelName = async (name, address) => {
-    return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`)
+    return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`);
 }
 /********************************** check in check out apis >>>>>>>>>>>> */
+// Use existing PHP pricing endpoint which already returns the expected Xotelo shape.
 export const HotelCheckInCheckOut = async (hotelkey, checkin, checkout) => {
-    // Default to 7 days if dates not provided
+    // Default to 1 night if dates not provided
     const defaultCheckin = checkin || new Date().toISOString().split('T')[0];
     const defaultCheckout = checkout || (() => {
         const date = new Date();
@@ -124,42 +153,115 @@ export const HotelCheckInCheckOut = async (hotelkey, checkin, checkout) => {
     })();
 
     const url = `/pricing.php?hotel_key=${hotelkey}&chk_in=${defaultCheckin}&chk_out=${defaultCheckout}`;
-
-    const response = await https_SearchCity.get(url);
-
-    return response;
+    return await https_SearchCity.get(url);
 }
 export const TopHotelAroundWorld = async () => {
-    return await https_SearchCity.get(`/top-hotels.php?includedType=lodging`)
+    try {
+        // Primary source: Next.js Google Places aggregation
+        const res = await https_places.get(`/top-hotels`, {
+            params: {
+                includedType: "lodging",
+            },
+        });
+
+        // If we already have results, return as-is
+        if (Array.isArray(res?.data?.results) && res.data.results.length > 0) {
+            return res;
+        }
+    } catch (e) {
+        // swallow and try legacy fallback
+    }
+
+    // Fallback: legacy PHP endpoint (ensures Hotels page still shows data)
+    const legacy = await https_SearchCity.get(`/top-hotels.php?includedType=lodging`);
+    const raw = legacy?.data;
+    const legacyResults = Array.isArray(raw?.results)
+        ? raw.results
+        : Array.isArray(raw?.places)
+        ? raw.places
+        : Array.isArray(raw)
+        ? raw
+        : [];
+
+    return {
+        data: {
+            includedType: "lodging",
+            count: legacyResults.length,
+            results: legacyResults,
+        },
+    };
 }
 export const TouristAttractionApi = async () => {
-    return await https_SearchCity.get(`/top-hotels.php?includedType=tourist_attraction`)
+    // Use legacy PHP endpoint for iconic tourist attractions (stable data source)
+    return await https_SearchCity.get(`/top-hotels.php?includedType=tourist_attraction`);
 }
 export const RestaurantApi = async (text) => {
-    return await https_SearchCity.get(`/text-search.php?textQuery=${text}&includedType=restaurant`)
+    // Use the same suggest pipeline for restaurants, filtered server-side
+    return await autoComplete(text, 10, "restaurant");
 }
-export const autoComplete = async (text, limit = 10) => {
-    return await https_SearchCity.get(`/autocomplete.php?input=${text}&maxResultCount=${limit}`)
+export const autoComplete = async (text, limit = 10, mode = "all") => {
+    // Use text-search–based suggest endpoint for stricter type control
+    return await https_places.get(`/search-suggest`, {
+        params: {
+            input: text,
+            maxResultCount: limit,
+            mode,
+        },
+    });
 }
 export const nearbyPlaces = async (lat, lng, maxResultCount = 20, pageToken = null) => {
-    let url = `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=lodging&radius=10000&maxResultCount=${maxResultCount}`;
+    const params = {
+        latitude: lat,
+        longitude: lng,
+        radius: 10000,
+        maxResultCount,
+        includedTypes: "lodging",
+    };
     if (pageToken) {
-        url += `&pageToken=${encodeURIComponent(pageToken)}`;
+        params.pageToken = pageToken;
     }
-    return await https_SearchCity.get(url);
+    return await https_places.get(`/nearby-search`, { params });
 };
 
 export const Restro = async (lat, lng) => {
-    return await https_SearchCity.get(
-        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=restaurant&radius=10000&maxResultCount=10`
-    );
+    return await https_places.get(`/nearby-search`, {
+        params: {
+            latitude: lat,
+            longitude: lng,
+            radius: 10000,
+            maxResultCount: 10,
+            includedTypes: "restaurant",
+        },
+    });
 };
 
 export const IconicPlaces = async (lat, lng) => {
-    return await https_SearchCity.get(
-        `/nearby-search.php?latitude=${lat}&longitude=${lng}&includedTypes=tourist_attraction&radius=10000&maxResultCount=10`
-    );
+    return await https_places.get(`/nearby-search`, {
+        params: {
+            latitude: lat,
+            longitude: lng,
+            radius: 10000,
+            maxResultCount: 10,
+            includedTypes: "tourist_attraction",
+        },
+    });
 };
 export const GetHotel_Detail = async (id) => {
-    return await https_SearchCity.get(`/place-details.php?placeId=${id}`)
+    return await https_places.get(`/place-details`, {
+        params: {
+            placeId: id,
+        },
+    });
+}
+
+// Combined resolver: place details + Xotelo search + pricing
+export const GetHotelPlacePricing = async (placeId, chk_in, chk_out, currency = "USD") => {
+    return await https_places.get(`/place-pricing`, {
+        params: {
+            placeId,
+            chk_in,
+            chk_out,
+            currency,
+        },
+    });
 }

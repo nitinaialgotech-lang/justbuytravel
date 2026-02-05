@@ -39,8 +39,7 @@ export async function generateMetadata({ params }) {
         }
 
         return generateHotelMetadata(hotel);
-    } catch (error) {
-        console.error('Error generating hotel metadata:', error);
+    } catch {
         return {
             title: 'Hotel Details',
             description: 'View hotel information and compare prices.',
@@ -65,8 +64,8 @@ export default async function HotelDetailPage({ params }) {
             // API returns hotel at top level (response.data) or wrapped in .data
             const body = response?.data;
             hotel = body?.displayName || body?.id ? body : body?.data ?? null;
-        } catch (apiError) {
-            console.error('Hotel API error:', apiError?.message);
+        } catch {
+            // API failed; hotel stays null, SearchHotelDetail will fetch on client
         }
 
         // Always render detail page when we have a valid place ID; let client handle loading/error
@@ -99,7 +98,6 @@ export default async function HotelDetailPage({ params }) {
         if (error?.digest === 'NEXT_HTTP_ERROR_FALLBACK;404') {
             throw error;
         }
-        console.error('Error loading hotel:', error);
         return <SearchHotelDetail />;
     }
 }

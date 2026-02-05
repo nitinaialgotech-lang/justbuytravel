@@ -22,7 +22,7 @@ export default function Popular_Flight_Hotel_section() {
         queryKey: ["tophotels"],
         queryFn: () => TopHotelAroundWorld()
     })
-    const Hotels = TopHotels?.data;
+    const Hotels = TopHotels?.data?.results || [];
     /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (

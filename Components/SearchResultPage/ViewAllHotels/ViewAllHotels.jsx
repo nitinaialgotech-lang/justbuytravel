@@ -71,8 +71,7 @@ export default function ViewAllHotels() {
         enabled: !hasCoords && geoAttempted,
     });
 
-    const topPlacesRaw = topData?.data;
-    const topPlacesList = Array.isArray(topPlacesRaw) ? topPlacesRaw : (topPlacesRaw?.places ?? []);
+    const topPlacesList = topData?.data?.results || [];
     const hotelData = hasCoords ? accumulatedPlaces : topPlacesList;
     const isLoadingHotels = hasCoords ? isLoading : topLoading;
     const isErrorHotels = hasCoords ? isError : topError;
@@ -274,7 +273,7 @@ export default function ViewAllHotels() {
                                                     </div> */}
                                                         <div className="btn-and-price-area">
                                                             <Link
-                                                                href={`/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.name, item?.id)}`}
+                                                                href={`/hotel/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.name, item?.id)}`}
                                                                 className="primary-btn1"
                                                             >
                                                                 <span>

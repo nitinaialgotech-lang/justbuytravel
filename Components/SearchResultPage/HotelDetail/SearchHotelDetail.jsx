@@ -424,7 +424,7 @@ export default function SearchHotelDetail() {
                                                     <div className="image_head side_image_head">
                                                         <img
                                                             className="cursor-pointer"
-                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${oneImage}`}
+                                                            src={`/api/get-photo?name=${oneImage}&maxWidthPx=1200`}
                                                             alt="" onClick={() => setOpen(true)}
                                                         />
                                                     </div>
@@ -438,7 +438,7 @@ export default function SearchHotelDetail() {
                                                                     <img
                                                                         className="cursor-pointer"
                                                                         onClick={() => setOpen(true)}
-                                                                        src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                                        src={`/api/get-photo?name=${item?.name}&maxWidthPx=100`}
                                                                         alt=""
                                                                     />
                                                                 </div>
@@ -578,7 +578,7 @@ export default function SearchHotelDetail() {
                                                                                 <SwiperSlide key={index}>
                                                                                     <div className="banner_img mobile_banner popup_slider_img ">
                                                                                         <img
-                                                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                                                            src={`/api/get-photo?name=${item?.name}&maxWidthPx=1200`}
                                                                                             width="100%"
                                                                                             className="card_rounded"
                                                                                         />
@@ -632,7 +632,7 @@ export default function SearchHotelDetail() {
                                                 <SwiperSlide key={index}>
                                                     <div className="banner_img mobile_banner ">
                                                         <img
-                                                            src={`https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item?.name}`}
+                                                            src={`/api/get-photo?name=${item?.name}&maxWidthPx=1200`}
                                                             width="100%"
                                                             className="card_rounded"
                                                         />

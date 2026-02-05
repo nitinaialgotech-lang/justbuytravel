@@ -30,3 +30,14 @@ export const https_SearchCity = axios.create({
     baseURL: "https://justbuygear.com/justbuytravel-api",
     headers: commonHeaders,
 });
+
+// Internal API client for Next.js routes (e.g., Google Places text/nearby/place-details)
+// Use an absolute URL on the server and a relative URL in the browser.
+const isServer = typeof window === "undefined";
+const siteBase =
+    (isServer ? process.env.NEXT_PUBLIC_SITE_URL : undefined) || "http://localhost:3000";
+
+export const https_places = axios.create({
+    baseURL: isServer ? `${siteBase.replace(/\/$/, "")}/api` : "/api",
+    headers: commonHeaders,
+});

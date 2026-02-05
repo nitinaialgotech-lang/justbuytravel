@@ -6,7 +6,8 @@
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "build": "node scripts/inject-base-path.js && next build && node scripts/restore-base-path-placeholder.js",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "places-api": "node server/places-api.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -23,6 +24,7 @@
     "bootstrap-icons": "^1.13.1",
     "gsap": "^3.14.2",
     "moment": "^2.30.1",
+    "express": "^4.21.2",
     "next": "^16.1.6",
     "react": "19.2.1",
     "react-bootstrap": "^2.10.10",

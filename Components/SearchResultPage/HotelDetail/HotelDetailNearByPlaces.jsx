@@ -91,7 +91,7 @@ export default function HotelDetailNearByPlaces({ lat, long }) {
                                 {nearbyPlaceslist?.map((item, i) => {
                                     const title = item?.displayName?.text || item?.displayName || "Place";
                                     const placeId = item?.id;
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                     const imageSrc = getPlacePhotoUrl(item);
                                     const fallbackImg = getAssetPath("/blog/blog_img.webp");
                                     return (

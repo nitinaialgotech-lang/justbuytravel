@@ -77,6 +77,7 @@ export default function Searchinput() {
   // Fetch autocomplete results
   const { data: autoCompleteData, isLoading } = useQuery({
     queryKey: ["autoComplete", searchContent],
+    // This compact search input is for hotels; keep using generic text search
     queryFn: () => searchText(searchContent),
     enabled: searchContent.length > 0,
     staleTime: 30000, // Cache for 30 seconds

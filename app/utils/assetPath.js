@@ -38,6 +38,8 @@ export const getPlacePhotoUrl = (item) => {
   const raw = item?.photos?.[0]?.name ?? item?.photos?.slice(0, 1)?.[0]?.name;
   const name = typeof raw === "string" ? raw : Array.isArray(raw) ? raw[0] : "";
   if (!name || name === "undefined") return getAssetPath(PLACEHOLDER_HOTEL_IMAGE);
-  return `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${encodeURIComponent(name)}`;
+  // Use internal Next.js proxy for Google Place photos (faster, cached, no API key on client)
+  // Cards and text-search results should stay lightweight.
+  return `/api/get-photo?name=${encodeURIComponent(name)}&maxWidthPx=300`;
 };
 

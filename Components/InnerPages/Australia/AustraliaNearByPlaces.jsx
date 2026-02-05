@@ -113,7 +113,7 @@ export default function AustraliaNearByPlaces() {
                                 {nearbyPlaceslist?.map((item, i) => {
                                     const placeId = item?.id;
                                     const title = item?.displayName?.text || item?.displayName || "Place";
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
@@ -127,7 +127,7 @@ export default function AustraliaNearByPlaces() {
                                                     <img
                                                         src={
                                                             item?.photos?.[0]?.name
-                                                                ? `https://justbuygear.com/justbuytravel-api/get-photo.php?name=${item.photos[0].name}`
+                                                                ? `/api/get-photo?name=${encodeURIComponent(item.photos[0].name)}&maxWidthPx=300`
                                                                 : "/no-image.jpg"
                                                         }
                                                         className="card-img-top card_rounded"

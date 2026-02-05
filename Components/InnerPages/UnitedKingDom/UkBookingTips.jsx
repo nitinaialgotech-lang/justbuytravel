@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import Link from 'next/link'
 import { getAssetPath } from "@/app/utils/assetPath";
 // Import Swiper styles
 import "swiper/css";

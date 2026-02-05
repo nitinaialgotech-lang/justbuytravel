@@ -152,20 +152,23 @@ export default function Search() {
 
     // Fetch autocomplete results
     const { data: autoCompleteData, isLoading } = useQuery({
-        queryKey: ["autoComplete", searchContent, searchAll],
+        queryKey: ["autoComplete", searchContent, searchType, activeTab],
         queryFn: () => {
-            if (searchType == "all" || activeTab == "all") {
-                return searchText(searchContent)
+            // "Search all" tab: all types (city, country, hotel, restaurant)
+            if (searchType === "all" || activeTab === "all") {
+                return autoComplete(searchContent, 10, "all");
             }
-            else if (searchType == "hotels" || activeTab == "hotels") {
-                return searchHotel(searchContent)
+            // Hotels tab: hotel-focused suggestions
+            if (searchType === "hotels" || activeTab === "hotels") {
+                return searchHotel(searchContent);
             }
-            else if (searchType == "restaurants" || activeTab == "restaurants") {
-                return RestaurantApi(searchContent)
+            // Restaurants tab: restaurant-only suggestions with same UX as hotels
+            if (searchType === "restaurants" || activeTab === "restaurants") {
+                return autoComplete(searchContent, 10, "restaurant");
             }
-
+            // Default fallback: generic text search
+            return searchText(searchContent);
         },
-
         enabled: searchContent.length > 0,
         staleTime: 30000, // Cache for 30 seconds
     });
@@ -266,7 +269,7 @@ export default function Search() {
     const ViewHotels = (id, name) => {
         if (!id) return;
         const slug = createHotelSlug(name || '', id);
-        router.push(`/${slug}`);
+        router.push(`/hotel/${slug}`);
     };
     // *********************************
 

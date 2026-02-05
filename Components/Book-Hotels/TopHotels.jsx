@@ -22,10 +22,10 @@ export default function TopHotels() {
         queryKey: ["tophotels"],
         queryFn: () => TopHotelAroundWorld()
     })
-    const rawHotels = TopHotels?.data;
-    const Hotels = rawHotels?.length
-        ? [...new Map((rawHotels || []).map((h, i) => [h?.id ?? `hotel-${i}`, h])).values()]
-        : rawHotels;
+    const rawHotels = TopHotels?.data?.results || [];
+    const Hotels = rawHotels.length
+        ? [...new Map(rawHotels.map((h, i) => [h?.id ?? `hotel-${i}`, h])).values()]
+        : [];
     /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (
@@ -90,7 +90,7 @@ export default function TopHotels() {
     const viewDetail = (name, id) => {
         if (!id) return;
         const slug = createHotelSlug(name, id);
-        router.push(`/${slug}`);
+        router.push(`/hotel/${slug}`);
     };
 
     return (

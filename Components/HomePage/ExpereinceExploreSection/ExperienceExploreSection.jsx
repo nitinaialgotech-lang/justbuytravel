@@ -228,7 +228,7 @@ export default function ExperienceExploreSection() {
                                         item?.displayName?.text || item?.content || item?.displayName || "Place";
                                     const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
                                     const placeId = item?.id;
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                     const fallbackImg = getAssetPath("/blog/blog_img.webp");
                                     return (
                                         <SwiperSlide key={i}>
@@ -371,7 +371,7 @@ export default function ExperienceExploreSection() {
                                     item?.displayName?.text || item?.content || item?.displayName || "Place";
                                 const imageSrc = getPlacePhotoUrl(item) || getAssetPath(item?.img || "/blog/blog_img.webp");
                                 const placeId = item?.id;
-                                const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                 return (
                                     <SwiperSlide key={i}>
                                         <div className="experience_explore_section ">

@@ -112,7 +112,7 @@ export default function ManchesterNearByPlaces() {
                                 {nearbyPlaceslist?.map((item, i) => {
                                     const placeId = item?.id;
                                     const title = item?.displayName?.text || item?.displayName || "Place";
-                                    const slug = placeId ? `/${createHotelSlug(title, placeId)}` : '#';
+                                    const slug = placeId ? `/hotel/${createHotelSlug(title, placeId)}` : '#';
                                     return (
                                         <SwiperSlide key={i}>
                                             <div className="experience_explore_section">
