@@ -1061,6 +1061,10 @@
   letter-spacing: 0%;
   padding-bottom: 30px;
 }
+.view_price_detial_content > p {
+  font-size: 13px;
+  padding: 0px 5px;
+}
 .content_box_detail > .view_price_box {
   background-color: #ffffff;
   border-radius: 12px;

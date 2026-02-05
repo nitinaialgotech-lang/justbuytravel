@@ -418,6 +418,9 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                     </div>
                                 )}
 
+                                <p className='m-0 text-center'>
+                                    Prices shown are based on available data and may not always be accurate. Final prices are confirmed at the time of booking.
+                                </p>
                             </div>
                         </div>
                     </div>

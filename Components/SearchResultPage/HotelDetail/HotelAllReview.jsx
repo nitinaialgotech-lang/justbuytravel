@@ -83,11 +83,11 @@ export default function HotelAllReview({ reviews }) {
             <section className='trailer_review_section padding_bottom'>
                 <div className="container">
                     <div className="row">
-                        <div className="section_title">
+                        <div className="section_title hotel_review">
                             <h2 className='m-0'>
                                 Google Reviews
                             </h2>
-                            <p>
+                            <p className='review'>
                                 Reviews from Google & public sources. Not owned or verified by JustBuy Travel.
                             </p>
                         </div>

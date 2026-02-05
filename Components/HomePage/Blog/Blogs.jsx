@@ -54,13 +54,18 @@ export default function Blogs() {
                         <button class="button_bg2 " onClick={() => route.push("/blog")}>View all</button>
                     </div>
                 </div>
-
                 {/* ********************** */}
                 <div className="d-none d-lg-block">
                     <div className="row">
-
                         {
                             data?.posts?.slice(1, 5).map((item, i) => {
+                                const limitWords = (text, limit) => {
+                                    if (!text) return "";
+                                    const words = text.split(" ");
+                                    return words.length > limit
+                                        ? words.slice(0, limit).join(" ") + " ..."
+                                        : text;
+                                };
                                 return (
 
                                     <div className="col-12 col-md-6 col-lg-3" key={i}>
@@ -73,19 +78,16 @@ export default function Blogs() {
                                                 </div> */}
                                                 <div className="content mt-2">
                                                     <Link href={getBlogHref(item)}>
-                                                        {item?.title?.rendered}
+                                                        {limitWords(item?.title?.rendered, 11)}
                                                     </Link>
                                                 </div>
                                             </div>
                                         </div>
                                         {/* **************** */}
                                     </div>
-
                                 )
-
                             })
                         }
-
                     </div>
                 </div>
                 {/* ****************************************************************************************   display block >>>>>>>>>>>>>>>>>>>> */}
