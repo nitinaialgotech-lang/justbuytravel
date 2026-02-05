@@ -4,32 +4,43 @@ import { RiCheckboxCircleLine } from 'react-icons/ri'
 import { useCurrency } from "@/context/CurrencyContext";
 import { getAssetPath } from "@/app/utils/assetPath";
 
-export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, hotelData, onSearchDates, isLoadingPrices, initialCheckin, initialCheckout, showPricing = true }) {
+export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, hotelData, onSearchDates, isLoadingPrices, showPricing = true }) {
     const { formatPrice } = useCurrency();
     const hotelPrice = PriceRate?.data?.raw?.result?.rates;
     const allRatesData = PriceRate?.data?.raw?.result; // This might have deep links
 
-    // Initialize dates: check-in is today, check-out is 7 days later (or use parent's initial dates)
+    // Initialize dates:
+    // - default check-in: 3 days after today
+    // - default check-out: next day (4 days after today)
     const getTodayDate = () => {
         const today = new Date();
         return today.toISOString().split('T')[0];
     };
 
-    const getSevenDaysLater = () => {
-        const sevenDays = new Date();
-        sevenDays.setDate(sevenDays.getDate() + 1);
-        return sevenDays.toISOString().split('T')[0];
+    const getDefaultCheckin = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + 3);
+        return d.toISOString().split('T')[0];
     };
 
-    const [checkinDate, setCheckinDate] = useState(initialCheckin || getTodayDate());
-    const [checkoutDate, setCheckoutDate] = useState(initialCheckout || getSevenDaysLater());
+    const getDefaultCheckout = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + 4);
+        return d.toISOString().split('T')[0];
+    };
+
+    const [checkinDate, setCheckinDate] = useState(getDefaultCheckin());
+    const [checkoutDate, setCheckoutDate] = useState(getDefaultCheckout());
     const [lastUpdated, setLastUpdated] = useState(new Date());
 
-    // Sync with parent's dates when they change
+    // Auto-trigger price search on first render using default dates
     useEffect(() => {
-        if (initialCheckin) setCheckinDate(initialCheckin);
-        if (initialCheckout) setCheckoutDate(initialCheckout);
-    }, [initialCheckin, initialCheckout]);
+        if (onSearchDates) {
+            onSearchDates(getDefaultCheckin(), getDefaultCheckout());
+        }
+        // We intentionally run this only once on mount
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Update timestamp when price data changes
     useEffect(() => {
@@ -137,6 +148,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
         return null;
     }
 
+    console.log(hotelPrice, "prices::::::::::::::::::");
     return (
         <>
             <section className='padding_bottom'>
@@ -231,7 +243,6 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
                                         const totalBeforeTax = ratePerNight * nights;
                                         const tax = Number(item.tax || 0);
                                         const grandTotal = totalBeforeTax + tax;
-
                                         const displayImg = matchedImg?.img;
                                         const logoAlt = item.name;
 

@@ -27,14 +27,12 @@ export default function page() {
         { name: 'Home', path: '/' },
         { name: 'View All Hotels', path: '/view-all-hotels' }
     ]);
-
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
-            
             <Header />
             <ViewAllHotelBanner />
             <Footer />

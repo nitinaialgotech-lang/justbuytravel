@@ -38,6 +38,9 @@ export default function Search() {
     const [searchContent, setSearchContent] = useState("");
     const [activeTab, setActiveTab] = useState(isBookHotelsPage ? "hotels" : "all");
     const [textContent, setContenttext] = useState(isBookHotelsPage ? "Search hotels by name or city" : "");
+    // When true and the input is empty, we still fetch a default mixed list
+    // of popular places so something shows as soon as the field is focused.
+    const [showDefaultOnFocus, setShowDefaultOnFocus] = useState(false);
     useEffect(() => {
         setSearchContent(query);
     }, [query]);
@@ -152,11 +155,17 @@ export default function Search() {
 
     // Fetch autocomplete results
     const { data: autoCompleteData, isLoading } = useQuery({
-        queryKey: ["autoComplete", searchContent, searchType, activeTab],
+        queryKey: ["autoComplete", searchContent, searchType, activeTab, showDefaultOnFocus],
         queryFn: () => {
-            // "Search all" tab: all types (city, country, hotel, restaurant)
+            // "Search all" tab: all types (city, country, hotel, restaurant, attractions)
             if (searchType === "all" || activeTab === "all") {
-                return autoComplete(searchContent, 10, "all");
+                // If there is no user input yet but the field was focused,
+                // seed the query with a generic term so we show something useful.
+                const queryText =
+                    searchContent && searchContent.trim().length > 0
+                        ? searchContent
+                        : "hotel";
+                return autoComplete(queryText, 10, "all");
             }
             // Hotels tab: hotel-focused suggestions
             if (searchType === "hotels" || activeTab === "hotels") {
@@ -169,7 +178,8 @@ export default function Search() {
             // Default fallback: generic text search
             return searchText(searchContent);
         },
-        enabled: searchContent.length > 0,
+        // Enable when the user has typed OR when we've asked to show defaults on focus
+        enabled: searchContent.length > 0 || showDefaultOnFocus,
         staleTime: 30000, // Cache for 30 seconds
     });
 
@@ -195,7 +205,7 @@ export default function Search() {
     // Show dropdown when there are results
     useEffect(() => {
         const places = autoCompleteData?.data?.places || [];
-        if (places.length > 0 && searchContent.length > 0) {
+        if (places.length > 0 && (searchContent.length > 0 || showDefaultOnFocus)) {
             setShowDropdown(true);
         } else {
             setShowDropdown(false);
@@ -205,6 +215,10 @@ export default function Search() {
     const handleInputChange = (e) => {
         const value = e.target.value;
         setSearchContent(value);
+        // As soon as the user types something, stop forcing default data.
+        if (value.length > 0 && showDefaultOnFocus) {
+            setShowDefaultOnFocus(false);
+        }
         setShowDropdown(value.length > 0);
         setSelectedIndex(-1);
     };
@@ -416,6 +430,11 @@ export default function Search() {
                                                 onChange={handleInputChange}
                                                 onKeyDown={handleKeyDown}
                                                 onFocus={() => {
+                                                    // When focusing with an empty input, trigger default
+                                                    // suggestions so the user immediately sees data.
+                                                    if (!searchContent.trim()) {
+                                                        setShowDefaultOnFocus(true);
+                                                    }
                                                     if (places.length > 0) setShowDropdown(true);
                                                 }}
                                                 className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-12 capitalize"
@@ -466,8 +485,8 @@ export default function Search() {
                                                                         }`}
                                                                 >
                                                                     {/* Hotel Image */}
-                                                                    <div className="flex-shrink-0">
-                                                                        <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
+                                                                    <div className="flex-shrink-0 suggest_image">
+                                                                        <div className="rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                                                                             {imageLoading[placeId] && (
                                                                                 <div className="absolute inset-0 flex items-center justify-center">
                                                                                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
@@ -590,6 +609,9 @@ export default function Search() {
                                                     onChange={handleInputChange}
                                                     onKeyDown={handleKeyDown}
                                                     onFocus={() => {
+                                                        if (!searchContent.trim()) {
+                                                            setShowDefaultOnFocus(true);
+                                                        }
                                                         if (places.length > 0) setShowDropdown(true);
                                                     }}
                                                     className="block relative w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body"

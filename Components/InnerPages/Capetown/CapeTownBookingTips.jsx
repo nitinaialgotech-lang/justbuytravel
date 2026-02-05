@@ -8,25 +8,26 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
-export default function GuidePackage() {
+import Link from 'next/link';
+export default function CapeTownBookingTips() {
     const [secondActive, setSecondActive] = useState(true);
     const card = [
         {
-            img: "/innerpages/canada/cn4.webp"
+            img: "/innerpages/denmark/dn4.webp"
         },
         {
-            img: "/innerpages/canada/cn1.webp"
+            img: "/innerpages/denmark/dn1.webp"
         },
         {
-            img: "/innerpages/canada/cn2.webp"
+            img: "/innerpages/denmark/dn2.webp"
         },
         {
-            img: "/innerpages/canada/cn3.webp"
+            img: "/innerpages/denmark/dn3.webp"
         },
     ]
     return (
         <>
-            <section className='hotel_booking_tips_section padding_bottom padding_top '>
+            <section className='hotel_booking_tips_section padding_bottom padding_top bg_grey'>
                 <div className="container">
                     <div className="row items-center">
                         {/* ******  image */}
@@ -37,23 +38,23 @@ export default function GuidePackage() {
                                 <div className="row ">
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src={getAssetPath("/innerpages/canada/cn4.webp")} alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn4.webp")} alt="" />
                                         </div>
 
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="hotel_tips_img">
-                                            <img src={getAssetPath("/innerpages/canada/cn1.webp")} alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn1.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6  mt-4">
                                         <div className="hotel_tips_img">
-                                            <img src={getAssetPath("/innerpages/canada/cn2.webp")} alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn2.webp")} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 mt-4 ">
                                         <div className="hotel_tips_img">
-                                            <img src={getAssetPath("/innerpages/canada/cn3.webp")} alt="" />
+                                            <img src={getAssetPath("/innerpages/denmark/dn3.webp")} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -87,12 +88,9 @@ export default function GuidePackage() {
                                             425: {
                                                 slidesPerView: 1.5,
                                             },
-                                            640: {
-                                                slidesPerView: 1.5
-                                            },
 
                                             768: {
-                                                slidesPerView: 2.5,
+                                                slidesPerView: 1,
                                             },
                                             992: {
                                                 slidesPerView: 4,
@@ -152,7 +150,7 @@ export default function GuidePackage() {
                             <div className="hotel_tips_title">
                                 <div className="tips_title">
                                     <h2>
-                                        We guide you with trust, helping you find what’s truly best for you.
+                                        Find the Best Places to Stay and Book Hotels in Denmark Online
                                     </h2>
                                 </div>
 
@@ -161,32 +159,15 @@ export default function GuidePackage() {
                         {/* ********************* content >>>>>>>>>>> */}
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
+                                <p>
+                                    Finding the right place to stay can make a big difference when planning a trip. From lively city centres to peaceful coastal towns, travellers can choose accommodation based on comfort, location, and budget. Selecting the right area helps keep <Link href={"/hotels"} className="g_color " >Denmark hotel booking</Link>  simple and stress-free.
+                                </p>
+                                <p>
+                                    Travellers who want to book hotels in Denmark often look for locations with easy access to transport, attractions, and dining. Smaller towns are a good choice for those who prefer quieter surroundings. By comparing prices, locations, and guest reviews, it becomes easier to identify the best hotels in Denmark without overspending. Just Buy Travel helps travellers compare trusted listings and make confident booking decisions for a smooth and enjoyable stay.
+                                </p>
 
-                                <p>
-                                    <span className='g_color font-semibold'>Personalized Recommendations</span>
-                                    <br></br>
-                                    Get personalised hotel recommendations based on your preferences, budget, and previous journeys, making it simple to find hotels online that actually suit you.
-                                </p>
-                                <p>
-                                    <span className='g_color font-semibold'>Easy Booking Experience</span>
-                                    <br></br>
-                                    Enjoy fast, safe reservations with rapid confirmation – no hassles, just easy vacation planning.
-                                </p>
-                                <p>
-                                    <span className='g_color font-semibold'>Best Price Guarantee</span>
-                                    <br></br>
-                                    We provide exceptional discounts on luxury stays, assuring the best hotel deals worldwide at the lowest costs.
-                                </p>
-                                <p>
-                                    <span className='g_color font-semibold'>Trusted by Thousands</span>
-                                    <br></br>
-                                    Many tourists trust our expert picks and exclusive access to the best hotel booking site for value and service.
-                                </p>
-                                <p>
-                                    <span className='g_color font-semibold'>Easily compare hotel prices</span>
-                                    <br></br>
-                                    Easily compare hotel prices from 100+ sites and take advantage of exclusive online hotel deals.
-                                </p>
+
+
 
 
 

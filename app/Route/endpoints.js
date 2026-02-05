@@ -142,18 +142,33 @@ export const searchHotelName = async (name, address) => {
     return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`);
 }
 /********************************** check in check out apis >>>>>>>>>>>> */
-// Use existing PHP pricing endpoint which already returns the expected Xotelo shape.
-export const HotelCheckInCheckOut = async (hotelkey, checkin, checkout) => {
-    // Default to 1 night if dates not provided
-    const defaultCheckin = checkin || new Date().toISOString().split('T')[0];
-    const defaultCheckout = checkout || (() => {
-        const date = new Date();
-        date.setDate(date.getDate() + 1);
-        return date.toISOString().split('T')[0];
-    })();
+// Now use internal Next.js pricing API instead of legacy PHP endpoint.
+// This keeps all traffic on the Node.js stack while still talking to Xotelo from the server.
+export const HotelCheckInCheckOut = async (hotelkey, checkin, checkout, currency = "USD") => {
+    // Guard against accidental calls without a hotel key so we don't hit /api/pricing incorrectly.
+    if (!hotelkey) {
+        throw new Error("Missing hotel key – cannot fetch pricing");
+    }
 
-    const url = `/pricing.php?hotel_key=${hotelkey}&chk_in=${defaultCheckin}&chk_out=${defaultCheckout}`;
-    return await https_SearchCity.get(url);
+    // Default to 1 night if dates not provided
+    const defaultCheckin = checkin || new Date().toISOString().split("T")[0];
+    const defaultCheckout =
+        checkout ||
+        (() => {
+            const date = new Date();
+            date.setDate(date.getDate() + 1);
+            return date.toISOString().split("T")[0];
+        })();
+
+    // Call internal /api/pricing route via https_places (base: /api in browser, full URL on server)
+    return await https_places.get(`/pricing`, {
+        params: {
+            hotel_key: hotelkey,
+            chk_in: defaultCheckin,
+            chk_out: defaultCheckout,
+            currency,
+        },
+    });
 }
 export const TopHotelAroundWorld = async () => {
     try {

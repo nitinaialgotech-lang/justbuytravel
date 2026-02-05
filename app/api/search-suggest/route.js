@@ -121,7 +121,7 @@ async function handleRequest(req) {
         allowedTypes = new Set(["locality", "country"]);
         break;
       default:
-        allowedTypes = new Set(["locality", "country", "lodging", "restaurant"]);
+        allowedTypes = new Set(["locality", "country", "lodging", "restaurant","tourist_attraction"]);
         break;
     }
 

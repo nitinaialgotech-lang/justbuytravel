@@ -149,12 +149,14 @@ export default function SearchHotelDetail() {
     const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
 
     // ********************************************************** price data
-    const { data: PriceData, refetch: refetchPrices, isLoading: isPriceLoading, isFetching: isPriceFetching } = useQuery({
+    const { data: PriceData, isLoading: isPriceLoading, isFetching: isPriceFetching } = useQuery({
         queryKey: ["pricedata", hotelKey, searchCheckin, searchCheckout],
         queryFn: () => {
             return HotelCheckInCheckOut(hotelKey, searchCheckin, searchCheckout);
         },
-        enabled: Boolean(hotelKey),
+        // Only run when we actually have a resolved hotel key
+        // and both check-in and check-out dates.
+        enabled: Boolean(hotelKey && searchCheckin && searchCheckout),
         retry: 1,
         cacheTime: 0, // Don't cache results
         staleTime: 0, // Always consider data stale
@@ -183,14 +185,10 @@ export default function SearchHotelDetail() {
 
     // Handler for date search from ViewPriceDetail component
     const handleSearchDates = async (checkin, checkout) => {
-        // Update state
+        // Update state – this will automatically trigger the
+        // pricing query once a valid hotelKey is available.
         setSearchCheckin(checkin);
         setSearchCheckout(checkout);
-
-        // Force immediate refetch after state update
-        setTimeout(() => {
-            refetchPrices();
-        }, 100);
     };
 
     const hotelDescription = null;
@@ -424,7 +422,7 @@ export default function SearchHotelDetail() {
                                                     <div className="image_head side_image_head">
                                                         <img
                                                             className="cursor-pointer"
-                                                            src={`/api/get-photo?name=${oneImage}&maxWidthPx=1200`}
+                                                            src={`/api/get-photo?name=${oneImage}&maxWidthPx=2400`}
                                                             alt="" onClick={() => setOpen(true)}
                                                         />
                                                     </div>
@@ -438,7 +436,7 @@ export default function SearchHotelDetail() {
                                                                     <img
                                                                         className="cursor-pointer"
                                                                         onClick={() => setOpen(true)}
-                                                                        src={`/api/get-photo?name=${item?.name}&maxWidthPx=100`}
+                                                                        src={`/api/get-photo?name=${item?.name}&maxWidthPx=300`}
                                                                         alt=""
                                                                     />
                                                                 </div>

@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 --------------------------- */
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 // Default max width for large images (hero/gallery)
-const MAX_WIDTH = 1200;
+const MAX_WIDTH = 2400;
 
 /* ---------------------------
    CORS + CACHE

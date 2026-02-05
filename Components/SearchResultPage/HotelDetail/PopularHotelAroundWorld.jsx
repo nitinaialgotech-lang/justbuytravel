@@ -93,7 +93,7 @@ export default function PopularHotelAroundWorld({ lat, long }) {
         <>
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
-                    <h2 className="mb-0">Popular Hotels Around the World</h2>
+                    <h2 className="mb-0">Popular Hotels Near You</h2>
                     <p>Voices of satisfaction from our premium community</p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}

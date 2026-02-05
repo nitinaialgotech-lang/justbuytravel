@@ -9,9 +9,11 @@ import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-i
 import 'swiper/css/pagination';
 import { useQuery } from '@tanstack/react-query';
 import { Get_Blogs, Get_Blog_category } from '@/app/Route/endpoints';
+import { useRouter } from 'next/navigation';
 export default function Blogs() {
     // (((((((((((((((((())))))))))))))))))
     const [isBlogActive, BlogActive] = useState(true);
+    const route = useRouter()
     // ******************************************************
     const { data, isLoading } = useQuery({
         queryKey: ["blog"],
@@ -39,14 +41,20 @@ export default function Blogs() {
     return (
         <>
             <section className='blog_section container padding_top padding_bottom  '>
-                <div className="section_title ">
-                    <h2 className='mb-0 capitalize'>
-                        From the blog
-                    </h2>
-                    <p>
-                        Whatever you're into, we’ve got it
-                    </p>
+                <div className="blog flex justify-between items-center">
+                    <div className="section_title ">
+                        <h2 className='mb-0 capitalize'>
+                            From the blog
+                        </h2>
+                        <p>
+                            Read our travel blog for tips, destination ideas, and smart travel inspiration.
+                        </p>
+                    </div>
+                    <div className="view_all_blog mt-2">
+                        <button className="button_bg2 " onClick={() => route.push("/blog")}>View all</button>
+                    </div>
                 </div>
+
                 {/* ********************** */}
                 <div className="d-none d-lg-block">
                     <div className="row">
@@ -114,8 +122,12 @@ export default function Blogs() {
 
                                 },
 
+                                640: {
+                                    slidesPerView: 1.5
+                                },
+
                                 768: {
-                                    slidesPerView: 1,
+                                    slidesPerView: 2.5,
                                 },
                                 992: {
                                     slidesPerView: 4,

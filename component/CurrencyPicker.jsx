@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useState, useMemo } from "react";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -28,10 +28,10 @@ export default function CurrencyPicker() {
         className="d-flex align-items-center gap-2 border-0 bg-transparent p-0"
         onClick={() => setOpen(true)}
       >
-        <IoPricetag className="me-1" />
-        <span>
+        {/* <IoPricetag className={`${open ? "g_color" : ""} me-1`} /> */}
+        <span className={`${open ? "g_color" : ""}`}>
           {currentLabel
-            ? `${currentLabel.symbol} ${currentLabel.code} - ${currentLabel.name}`
+            ? `${currentLabel.symbol} ${currentLabel.code}`
             : currency}
         </span>
       </button>
@@ -70,9 +70,8 @@ export default function CurrencyPicker() {
                   <button
                     key={code}
                     type="button"
-                    className={`w-100 text-start btn btn-sm mb-1 ${
-                      code === currency ? "btn-primary" : "btn-light"
-                    }`}
+                    className={`w-100 p-2 text-start btn btn-sm mb-1 ${code === currency ? "bg-color-green text-white" : "btn-light"
+                      }`}
                     onClick={() => {
                       setCurrency(code);
                       setOpen(false);

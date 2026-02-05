@@ -33,8 +33,8 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
-            
-            <Suspense fallback={<div>Loading...</div>}>
+
+            <Suspense >
                 <Header />
                 <PackageBanner />
             </Suspense>

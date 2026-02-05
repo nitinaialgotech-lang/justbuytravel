@@ -19,13 +19,13 @@ export const metadata = {
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/usa`,
     },
     robots: { index: false, follow: false },
-};  
+};
 export default function page() {
 
     return (
         <>
-            
-            <Suspense fallback={<div>Loading...</div>}>
+
+            <Suspense >
                 <Header />
                 <UsaBanner />
             </Suspense>

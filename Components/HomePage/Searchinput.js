@@ -215,8 +215,8 @@ export default function Searchinput() {
                   }`}
                 >
                   {/* Hotel Image */}
-                  <div className="flex-shrink-0">
-                    <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
+                  <div className="flex-shrink-0 suggest_image">
+                    <div className="rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                       {imageLoading[placeId] && (
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>

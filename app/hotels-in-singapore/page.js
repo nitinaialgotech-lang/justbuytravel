@@ -25,7 +25,7 @@ export const metadata = {
 export default function page() {
     return (
         <>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <Header />
                 <SingaporeBanner />
                 <SingaporeRecomdSection />

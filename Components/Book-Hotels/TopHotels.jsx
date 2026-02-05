@@ -166,7 +166,7 @@ export default function TopHotels() {
                                     const name = item?.displayName?.text ?? item?.name ?? '';
                                     const id = item?.id;
                                     const imageSrc = getPlacePhotoUrl(item);
-                                    console.log(item?.photos, "item");
+                                    console.log(item, "item");
 
                                     const truncateText = (text, maxLength = 20) => {
                                         if (!text) return "";
@@ -176,54 +176,54 @@ export default function TopHotels() {
                                     };
                                     return (
                                         <SwiperSlide key={id || `hotel-${i}`}>
-                                                <div className="card_col">
-                                                    <div
-                                                        className="recommend_card_box card_rounded recomand_card_shadow cursor-pointer"
-                                                        onClick={() => viewDetail(name, id)}
-                                                    >
-                                                        <div className="card_box pe-">
-                                                            <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
-                                                                <img
-                                                                    src={imageSrc}
-                                                                    className="card_rounded w-full h-full object-cover"
-                                                                    alt={"Hotel image"}
-                                                                />
-                                                            </div>
-                                                            {/* *** */}
-                                                            <div className="card_box_detail card_rounded flex flex-col z-1  relative">
-                                                                <h4 className="m-0 capitalize">
-                                                                    {name || item?.name}
-                                                                </h4>
-                                                                {/* ****** */}
-
-                                                                {/* ****************** */}
-
-                                                                {/* ******* */}
-                                                                <div className="price_book flex justify-between items-center">
-                                                                    <div className="rating flex align-items-center gap-1">
-                                                                        {renderBootstrapStars(item?.rating)}
-                                                                        <span className="ms-1">
-                                                                            {item?.rating} ({item?.userRatingCount})
-                                                                        </span>
-                                                                    </div>
-                                                                    <button
-                                                                        className="button_bg2  rounded-full bg-color-green color_bl recomend_btn"
-                                                                        onClick={(e) => {
-                                                                            e.stopPropagation();
-                                                                            viewDetail(name, id);
-                                                                        }}
-                                                                    >
-                                                                        View Details
-                                                                    </button>
-                                                                </div>
-                                                                {/* *************** rating_list */}
-                                                            </div>
+                                            <div className="card_col">
+                                                <div
+                                                    className="recommend_card_box card_rounded recomand_card_shadow cursor-pointer"
+                                                    onClick={() => viewDetail(name, id)}
+                                                >
+                                                    <div className="card_box pe-">
+                                                        <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
+                                                            <img
+                                                                src={imageSrc}
+                                                                className="card_rounded w-full h-full object-cover"
+                                                                alt={"Hotel image"}
+                                                            />
                                                         </div>
-                                                        {/* *********** */}
+                                                        {/* *** */}
+                                                        <div className="card_box_detail card_rounded flex flex-col z-1  relative">
+                                                            <h4 className="m-0 capitalize">
+                                                                {name || item?.name}
+                                                            </h4>
+                                                            {/* ****** */}
+
+                                                            {/* ****************** */}
+
+                                                            {/* ******* */}
+                                                            <div className="price_book flex justify-between items-center">
+                                                                <div className="rating flex align-items-center gap-1">
+                                                                    {renderBootstrapStars(item?.rating)}
+                                                                    <span className="ms-1">
+                                                                        {item?.rating} ({item?.reviews})
+                                                                    </span>
+                                                                </div>
+                                                                <button
+                                                                    className="button_bg2  rounded-full bg-color-green color_bl recomend_btn"
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        viewDetail(name, id);
+                                                                    }}
+                                                                >
+                                                                    View Details
+                                                                </button>
+                                                            </div>
+                                                            {/* *************** rating_list */}
+                                                        </div>
                                                     </div>
                                                     {/* *********** */}
                                                 </div>
-                                            </SwiperSlide>
+                                                {/* *********** */}
+                                            </div>
+                                        </SwiperSlide>
                                     );
                                 })}
                         </Swiper>

@@ -18,8 +18,8 @@ export const metadata = {
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/about-us`,
     },
     robots: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
     },
 };
 
@@ -35,7 +35,7 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <Header />
                 <About_banner />
                 <Footer />

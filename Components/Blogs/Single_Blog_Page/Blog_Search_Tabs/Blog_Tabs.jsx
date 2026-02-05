@@ -8,14 +8,13 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from "react";
 import { Tab } from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
-import { FaRegUserCircle } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 export default function Blog_Tabs() {
 
   const searchParams = useSearchParams();
   const categorySlugFromUrl = searchParams.get("category");
-
+  const [expandedId, setExpandedId] = useState(null);
   const [activeKey, setActiveKey] = useState("showall"); // default tab
 
   const { data: categories } = useQuery({
@@ -105,6 +104,27 @@ export default function Blog_Tabs() {
 
   const TotalPages = blog_data?.totalPages || 0;
 
+  // Helper to get dynamic author name + image
+  const getAuthorInfo = (post) => {
+    const authorName = post?.yoast_head_json?.author || "JustBuyTravel";
+
+    // Default generic blog avatar
+    let authorImage = "/blog/blog_img.webp";
+
+    const name = authorName?.toLowerCase() || "";
+
+    // Specific avatar for Sulagna
+    if (name.includes("sulagna")) {
+      authorImage = "/blog/Sulagna.webp";
+    }
+    // Specific avatar for Mike
+    else if (name.includes("mike")) {
+      authorImage = "/blog/Mike.webp";
+    }
+
+    return { authorName, authorImage };
+  };
+
   // For "Show all" tab: use post's first category in URL when available (category/slug instead of blogs/slug)
   const getPostHref = (post) => {
     const catId = post?.categories?.[0];
@@ -137,46 +157,20 @@ export default function Blog_Tabs() {
                         ))
                       ) : (
                         blog_data?.posts?.map((item) => {
-                          const text = item.excerpt.rendered
-                            ?.replace(/<[^>]*>/g, "")
-                            .split(" ");
-                          const fullText = text.slice(0, 30).join(" ");
-                          const cat_name = item?.name;
+                          const rawText = item.excerpt.rendered?.replace(/<[^>]*>/g, "") || "";
+                          const shortText = rawText.slice(0, 120);
+                          const isLong = rawText.length > 120;
+
+                          // Find this post's primary category (first in the array)
+                          const primaryCatId = item?.categories?.[0];
+                          const primaryCat = categories?.data?.find((c) => c.id === primaryCatId);
+                          const cat_name = primaryCat?.name || "Blog";
+
+                          const { authorName, authorImage } = getAuthorInfo(item);
+
                           const date_it = item?.date;
                           const formatted = moment(date_it).format("MMMM D, YYYY");
                           return (
-                            // <div className="col-lg-4" key={post.id}>
-                            //   <div className="blog_card_box mb-10">
-                            //     <div className="blog_card">
-                            //       <div className="blog_card_img">
-                            //         <img
-                            //           src={
-                            //             post?.yoast_head_json?.og_image?.[0]?.url ||
-                            //             "/default-image.webp"
-                            //           }
-                            //           alt=""
-                            //         />
-                            //       </div>
-
-                            //       <div className="blog_card_body blog_showall_body">
-                            //         <h4>
-                            //           <Link href={`/blogs/${post.slug}`}>
-                            //             {post.title.rendered}
-                            //           </Link>
-                            //         </h4>
-
-                            //         <div
-                            //           dangerouslySetInnerHTML={{
-                            //             __html:
-                            //               fullText + (text.length > 30 ? "..." : ""),
-                            //           }}
-                            //         />
-                            //       </div>
-                            //     </div>
-                            //   </div>
-                            // </div>
-
-
 
 
                             <div className="col-lg-4" key={item.id}>
@@ -193,9 +187,9 @@ export default function Blog_Tabs() {
                                   {/* ****************************** */}
                                   <div className="blog_card_body">
                                     <div className="card_body_blog_time flex justify-between items-center">
-                                      {/* <button className="button_bg2 px-3 py-1 bg-dark text-light">
-                                        {item?.name} ,,,,
-                                      </button> */}
+                                      <button className="button_bg2 px-3 py-1 bg-dark text-light">
+                                        {cat_name}
+                                      </button>
                                       <p className="m-0 g_color">{formatted}</p>
                                     </div>
                                     {/* ****************************** */}
@@ -208,34 +202,37 @@ export default function Blog_Tabs() {
                                     </div>
                                     {/* ****************************** */}
                                     <div
-                                      className="blog_card_content text-justify"
-                                      dangerouslySetInnerHTML={{ __html: fullText + (text.length > 30 ? "..." : "") }}
+                                      className="blog_card_content"
+                                      dangerouslySetInnerHTML={{
+                                        __html: expandedId === item.id
+                                          ? rawText
+                                          : shortText + (isLong ? "..." : "")
+                                      }}
                                     />
 
+
+
                                     <div className="blog_card_user flex items-center gap-2">
-                                      <span className='g_color'>
-                                        <FaRegUserCircle />
+                                      <span className="g_color">
+                                        <img
+                                          src={authorImage}
+                                          alt={authorName}
+                                          className="rounded-full"
+                                          width={24}
+                                          height={24}
+                                        />
                                       </span>
-                                      <span className="g_color capitalize">Sulagna</span>
+                                      <span className="g_color capitalize">{authorName}</span>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-
-
-
-
-
-
-
                           );
                         })
                       )}
                     </div>
                   </Tab>
-
-
                   {/* ************************** ********************************************************************************************/}
                   {
                     categories?.data?.map((item, i) => {
@@ -262,6 +259,8 @@ export default function Blog_Tabs() {
                                       // Get plain text words from excerpt
                                       const text = post.excerpt.rendered?.replace(/<[^>]*>/g, "").split(" ");
                                       const fullText = text?.slice(0, 30).join(" "); // first 50 words
+
+                                      const { authorName, authorImage } = getAuthorInfo(post);
                                       // *************************************
                                       return (
                                         <div className="col-lg-4" key={post.id}>
@@ -292,15 +291,21 @@ export default function Blog_Tabs() {
                                                 </div>
                                                 {/* ****************************** */}
                                                 <div
-                                                  className="blog_card_content text-justify"
+                                                  className="blog_card_content "
                                                   dangerouslySetInnerHTML={{ __html: fullText + (text.length > 30 ? "..." : "") }}
                                                 />
 
                                                 <div className="blog_card_user flex items-center gap-2">
-                                                  <span className='g_color'>
-                                                    <FaRegUserCircle />
+                                                  <span className="g_color">
+                                                    <img
+                                                      src={authorImage}
+                                                      alt={authorName}
+                                                      className="rounded-full"
+                                                      width={24}
+                                                      height={24}
+                                                    />
                                                   </span>
-                                                  <span className="g_color capitalize">Sulagna</span>
+                                                  <span className="g_color capitalize">{authorName}</span>
                                                 </div>
                                               </div>
                                             </div>

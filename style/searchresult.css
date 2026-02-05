@@ -1163,9 +1163,13 @@
 
 .popup_sidebar > .item > .content_item > .button > button {
   padding: 10px 17px;
-  border: 1px solid #3a3f45;
+  border: 1px solid var(--bg-color);
+  color: var(--bg-color);
   border-radius: 8px;
   border-width: 1.5px;
+}
+.popup_sidebar > .item > .content_item > a {
+  color: var(--bg-color);
 }
 .popup_slider_img > img {
   width: 100%;

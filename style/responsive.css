@@ -10,7 +10,141 @@
   --cl-bl: rgba(29, 31, 39, 1);
 }
 
+@media only screen and (max-width: 1024px) {
+  .mobile_search_box {
+    padding: 20px;
+    box-shadow: 0px 0px 3px 0px #c5c5c5;
+    border-radius: 13px;
+  }
+  .mobile_search_box form > input {
+    border-radius: 10px;
+    padding: 13px 43px;
+  }
+  .mobile_search_box form > ul > li > a {
+    color: var(--color);
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .mobile_search_box > .form_search_expedia > iframe {
+    min-height: 305px;
+    height: 100%;
+  }
+
+  .mobile_search_box form > .icon_search {
+    top: 15%;
+  }
+  .navbar_link_item > .navbar-nav > a {
+    font-size: 14px;
+    padding: 0px 6px !important;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    gap: 5px !important;
+  }
+  .lang-currency-dropdown a {
+    font-size: 12px;
+  }
+  .navbar_link_item svg {
+    width: 16px;
+    height: 16px;
+  }
+  .navbar-brand > .logo > img {
+    width: 150px;
+    height: 100%;
+  }
+  .card_box_detail {
+    gap: 5px !important;
+  }
+  .card_box_detail > .price_book {
+    flex-direction: column;
+    gap: 7px;
+    justify-content: start;
+    align-items: start;
+  }
+  .swiper-slide .slide-text > .text > h2 {
+    font-size: 32px;
+    line-height: 35px;
+  }
+  .swiper-slide .slide-text > .text_point {
+    font-size: 12px;
+  }
+  .destination_box > .destination_img > img {
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+    min-height: 200px;
+  }
+  .booking_platform > .plane_icon {
+    left: 40%;
+  }
+  .booking_platform > .plane_icon > img {
+    max-width: 18%;
+    transform: rotate(262deg);
+  }
+  .footer_bottom_link > .link > ul {
+    gap: 20px;
+    font-size: 14px;
+  }
+  .footer_links > .link > ul > li > a {
+    font-size: 14px;
+  }
+}
+
 @media only screen and (max-width: 992px) {
+  /* ************convas */
+  .offcanvas-title > .logo > img {
+    width: 90%;
+  }
+  .offcanvas-header .btn-close {
+    font-size: 20px;
+  }
+  .header_shadow {
+    box-shadow: 0 0 4px 1px #ebebeb;
+  }
+  .mega_menu_item > .mega_menu_link > ul {
+    padding-top: 35px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 30px;
+  }
+  .mega_menu_item > .mega_menu_link > ul > li {
+    margin-bottom: 18px;
+    padding: 0px 0px 12px 0px;
+    border-bottom: 1px solid #f1f1f1;
+  }
+  .mega_menu_item > .mega_menu_link > ul > li > a {
+    letter-spacing: 0.4px;
+    color: #110f0f;
+    line-height: 1;
+    position: relative;
+    font-family: var(--font-fam);
+    font-weight: 650;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.5s ease-out 0s;
+    position: relative;
+    align-items: center;
+    background-color: transparent;
+  }
+  .mega_menu_item
+    > .mega_menu_link
+    > ul
+    > li
+    > a
+    > span
+    > span:nth-child(1)
+    svg {
+    width: 20px;
+    height: 20px;
+  }
+  .button_nav {
+    background-color: var(--bg-color);
+  }
+  .button_nav > a {
+    color: var(--color);
+    text-decoration: none;
+    font-weight: 600;
+    font-family: var(--font-fam);
+  }
   /* ***************** */
   .search_container > .search_container_box > .search_tab {
     padding: 0 !important;
@@ -34,10 +168,7 @@
     font-size: clamp(34px, 7.5vw, 85px) !important;
     line-height: 1.05;
   }
-  .banner_box > .title > p {
-    font-size: 14px;
-    text-transform: none !important;
-  }
+
   .banner_box > .title > h5 {
     display: none;
   }
@@ -48,9 +179,20 @@
   /* ********* swiper  */
   .swiper-slide .slide-text > .text > h2 {
     margin-bottom: 0px !important;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 500;
-    line-height: 35px;
+    line-height: 28px;
+  }
+  /* ********************** trusted plane  */
+  .booking_platform > .plane_icon {
+    left: 55%;
+  }
+  .booking_platform > .plane_icon > img {
+    max-width: 30%;
+  }
+  .swiper-slide .slide-text > .text > p {
+    font-size: 14px;
+    margin-bottom: 0px !important;
   }
   .swiper-slide .slide-text > .text_point {
     font-size: 10px;
@@ -67,6 +209,10 @@
   }
   .recomend_section {
     overflow-y: hidden !important;
+  }
+  /* ******************* inner pages  */
+  .only_content_banner {
+    padding: 0px 0 !important;
   }
   /* *********************************************** */
 
@@ -99,6 +245,16 @@
     min-height: 250px;
     height: 100%;
   } */
+  .footer_bottom_link > .link > ul {
+    font-size: 12px;
+    gap: 10px;
+  }
+  .footer_bottom_link > .link > ul > .dot > img {
+    display: none;
+  }
+  .footer_bottom_link > .link > ul > li > a {
+    font-size: 15px;
+  }
 }
 /* ************************************************************************************************************************ */
 @media only screen and (max-width: 767px) {
@@ -110,6 +266,10 @@
   }
   .no-found-page h1 {
     font-size: 32px;
+  }
+  /* ************* pages ***** */
+  .only_content_banner {
+    padding: 40px 0px !important;
   }
   /* ********** */
   .search_container {
@@ -215,28 +375,6 @@
   }
   /* ****************** */
 
-  .mobile_search_box {
-    padding: 20px;
-    box-shadow: 0px 0px 3px 0px #c5c5c5;
-    border-radius: 13px;
-  }
-  .mobile_search_box form > input {
-    border-radius: 10px;
-    padding: 13px 43px;
-  }
-  .mobile_search_box form > ul > li > a {
-    color: var(--color);
-    font-size: 15px;
-    text-decoration: none;
-  }
-  .mobile_search_box > .form_search_expedia > iframe {
-    min-height: 305px;
-    height: 100%;
-  }
-
-  .mobile_search_box form > .icon_search {
-    top: 15%;
-  }
   .section_title > h2 {
     font-size: clamp(22px, 4.8vw, 32px);
     font-weight: 700;
@@ -371,60 +509,7 @@
     margin-top: -25%;
   }
   /* ********************************************************   canva s */
-  .offcanvas-title > .logo > img {
-    width: 90%;
-  }
-  .offcanvas-header .btn-close {
-    font-size: 20px;
-  }
-  .header_shadow {
-    box-shadow: 0 0 4px 1px #ebebeb;
-  }
-  .mega_menu_item > .mega_menu_link > ul {
-    padding-top: 35px;
-    padding-bottom: 30px;
-    padding-left: 20px;
-    padding-right: 30px;
-  }
-  .mega_menu_item > .mega_menu_link > ul > li {
-    margin-bottom: 18px;
-    padding: 0px 0px 12px 0px;
-    border-bottom: 1px solid #f1f1f1;
-  }
-  .mega_menu_item > .mega_menu_link > ul > li > a {
-    letter-spacing: 0.4px;
-    color: #110f0f;
-    line-height: 1;
-    position: relative;
-    font-family: var(--font-fam);
-    font-weight: 650;
-    font-size: 15px;
-    text-decoration: none;
-    transition: all 0.5s ease-out 0s;
-    position: relative;
-    align-items: center;
-    background-color: transparent;
-  }
-  .mega_menu_item
-    > .mega_menu_link
-    > ul
-    > li
-    > a
-    > span
-    > span:nth-child(1)
-    svg {
-    width: 20px;
-    height: 20px;
-  }
-  .button_nav {
-    background-color: var(--bg-color);
-  }
-  .button_nav > a {
-    color: var(--color);
-    text-decoration: none;
-    font-weight: 600;
-    font-family: var(--font-fam);
-  }
+
   /* *** footer  */
   .footer_detail {
     padding: 0px 20px;
@@ -1075,6 +1160,13 @@
   .mobile_search_box > .form_search_expedia > iframe {
     min-height: 375px;
     height: 100%;
+  }
+  .experience_section > .about_experience_items > .about_experience_box {
+    width: 100px;
+    height: 100px;
+  }
+  .experience_section > .about_experience_items > .about_experience_box > h4 {
+    font-size: 14px;
   }
 }
 /* ***************************************************************************************** */

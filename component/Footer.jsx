@@ -39,13 +39,18 @@ export default function Footer() {
 
   return (
     <>
-      {pathname == "/flights" ?
-        <FlightQuickLinks />
-        :
-        <QuickLinks />
-      }
+      {pathname === "/flights" && <FlightQuickLinks />}
 
-      <section className="footer_section padding_top relative ">
+      {pathname === "/hotels" && <QuickLinks />}
+
+      {pathname !== "/flights" && pathname !== "/hotels" && (
+        <>
+          <FlightQuickLinks />
+          <QuickLinks />
+        </>
+      )}
+
+      <section className="footer_section relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
           <div className="left_img ">
             <img src={getAssetPath("/footer/icon/left_img.svg")} alt="" />
@@ -221,17 +226,13 @@ export default function Footer() {
                 <li>
                   <Link href={"/blog"}>Blog</Link>
                 </li>
-                <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
-                </li>
-                <li>
-                  <Link href={"/aboutus"}> About</Link>
-                </li>
+
               </ul>
             </div>
             <div className="mail_link">
               <ul className="m-0 p-0">
                 <li className="md_mail">
+                  {/* mailto:support@example.com */}
                   <Link href={""} className="flex items-center gap-1">
                     <strong className="g_color"><TbMailFilled /></strong>  support@justbuytravel.com
                   </Link>
@@ -243,7 +244,7 @@ export default function Footer() {
           <div className="botom_footer">
             <div className="web_address">
               <p className="m-0">
-                @2025 justbuytravel. All rights reserved
+                @2026 justbuytravel. All rights reserved
               </p>
             </div>
           </div>

@@ -101,8 +101,12 @@ export default function DestinationSection() {
 
                                     },
 
+                                    640: {
+                                        slidesPerView: 2.5
+                                    },
+
                                     768: {
-                                        slidesPerView: 1,
+                                        slidesPerView: 2.5,
                                     },
                                     992: {
                                         slidesPerView: 4,
