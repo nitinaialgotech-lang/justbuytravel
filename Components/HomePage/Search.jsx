@@ -13,7 +13,7 @@ import Search_flight_section from "../Book-Flights/Search_flight_section";
 import HotelIcon, { FlightIcon } from "@/component/icons";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { SetSelectAll } from "../Redux/Reducer";
+import { nameCity, setLat, setLong, SetSelectAll } from "../Redux/Reducer";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 import { createHotelSlug } from "@/app/utils/seo";
 export default function Search() {
@@ -32,12 +32,12 @@ export default function Search() {
     const [imageLoading, setImageLoading] = useState({});
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
-    const dispatch = useDispatch();
     const [searchAll, setSearchAll] = useState(!isBookHotelsPage);
     const [searchType, setSearchType] = useState(isBookHotelsPage ? "hotels" : "all");
     const [searchContent, setSearchContent] = useState("");
     const [activeTab, setActiveTab] = useState(isBookHotelsPage ? "hotels" : "all");
     const [textContent, setContenttext] = useState(isBookHotelsPage ? "Search hotels by name or city" : "");
+    const dispatch = useDispatch();
     useEffect(() => {
         setSearchContent(query);
     }, [query]);
@@ -258,9 +258,16 @@ export default function Search() {
     const cityName = places?.map((item) => item?.displayName?.text)
     // (**************************** mrouter )
 
+    // const viewSearchAll = (lat, long) => {
+    //     route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
+    // }
+
     const viewSearchAll = (lat, long) => {
-        route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
-    }
+        dispatch(setLat(lat));
+        dispatch(setLong(long));
+        dispatch(nameCity(cityName));
+        router.push('/search');
+    };
     // **************************** hotel search
 
     const ViewHotels = (id, name) => {

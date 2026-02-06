@@ -105,6 +105,31 @@ export default function Blog_Tabs() {
 
   const TotalPages = blog_data?.totalPages || 0;
 
+
+  // **********************************************
+  // Helper to get dynamic author name + image
+  const getAuthorInfo = (post) => {
+    const authorName = post?.yoast_head_json?.author || "JustBuyTravel";
+
+    // Default generic blog avatar
+    let authorImage = "/blog/blog_img.webp";
+
+    const name = authorName?.toLowerCase() || "";
+
+    // Specific avatar for Sulagna
+    if (name.includes("sulagna")) {
+      authorImage = "/blog/Sulagna.webp";
+    }
+    // Specific avatar for Mike
+    else if (name.includes("mike")) {
+      authorImage = "/blog/Mike.webp";
+    }
+
+    return { authorName, authorImage };
+  };
+
+
+
   // For "Show all" tab: use post's first category in URL when available (category/slug instead of blogs/slug)
   const getPostHref = (post) => {
     const catId = post?.categories?.[0];
@@ -115,10 +140,15 @@ export default function Blog_Tabs() {
 
   const category_name = categories?.data?.map((item, i) => item?.name)
 
+
+
+
+
+
   return (
 
     <>
-      <section>
+      <section className="">
         <div className="container">
           <div className="row justify-center">
             <div className="col-lg-12">
@@ -138,15 +168,22 @@ export default function Blog_Tabs() {
                           <BlogShimmerCard key={i} />
                         ))
                       ) : (
-                        blog_data?.posts?.map((item) => {
+                        blog_data?.posts?.slice(0, 9)?.map((item) => {
                           const rawText = item.excerpt.rendered?.replace(/<[^>]*>/g, "") || "";
                           const shortText = rawText.slice(0, 120);
                           const isLong = rawText.length > 120;
 
-                          const cat_name = item?.name;
+                          // Find this post's primary category (first in the array)
+                          const primaryCatId = item?.categories?.[0];
+                          const primaryCat = categories?.data?.find((c) => c.id === primaryCatId);
+                          const cat_name = primaryCat?.name || "Blog";
+
+                          const { authorName, authorImage } = getAuthorInfo(item);
+
                           const date_it = item?.date;
                           const formatted = moment(date_it).format("MMMM D, YYYY");
                           return (
+
 
 
                             <div className="col-lg-4" key={item.id}>
@@ -188,11 +225,19 @@ export default function Blog_Tabs() {
 
 
 
+
+
                                     <div className="blog_card_user flex items-center gap-2">
-                                      <span className='g_color'>
-                                        <FaRegUserCircle />
+                                      <span className="g_color">
+                                        <img
+                                          src={authorImage}
+                                          alt={authorName}
+                                          className="rounded-full"
+                                          width={24}
+                                          height={24}
+                                        />
                                       </span>
-                                      <span className="g_color capitalize">Sulagna</span>
+                                      <span className="g_color capitalize">{authorName}</span>
                                     </div>
                                   </div>
                                 </div>
@@ -288,7 +333,7 @@ export default function Blog_Tabs() {
                 </Tabs>
 
                 {/* ********************************** yav b more button ........... */}
-                <div className="loadmore text-center flex justify-center padding_bottom ">
+                <div className="loadmore text-center flex justify-center padding_top  padding_bottom ">
                   {/* <button className="button_bg2" type="button" onClick={() => setcount(count + 1)}>
                     {isLoading ? <p className="m-0">..Loading</p> : <p className="m-0">Load More</p>}
                   </button> */}
@@ -308,7 +353,7 @@ export default function Blog_Tabs() {
                       }
                       onPageChange={handlePageClick}
                       pageCount={TotalPages}
-                      pageRangeDisplayed={2}   // desktop visible range
+                      pageRangeDisplayed={4}   // desktop visible range
                       marginPagesDisplayed={1}
                       forcePage={count - 1}
                       containerClassName="pagination"

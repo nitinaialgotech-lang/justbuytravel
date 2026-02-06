@@ -1,8 +1,8 @@
-import Footer from '@/component/Footer'
-import Header from '@/component/Header'
-import CapeTownBanner from '@/Components/InnerPages/Capetown/CapeTownBanner'
-import CapTownRecomd from '@/Components/InnerPages/Capetown/CapTownRecomd'
+import Header from '@/component/Header';
+import SandiegoBanner from '@/Components/InnerPages/San-Diego/SandiegoBanner';
 import React from 'react'
+
+
 export const metadata = {
     title: "",
     description:
@@ -16,7 +16,7 @@ export const metadata = {
         type: "website",
     },
     alternates: {
-        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com/hotels-in-capetown',
+        canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com/hotels-in-san-diego',
     },
     robots: { index: false, follow: false },
 };
@@ -24,10 +24,7 @@ export default function page() {
     return (
         <>
             <Header />
-
-            <CapeTownBanner />
-            <CapTownRecomd />
-
+            <SandiegoBanner />
         </>
     )
 }

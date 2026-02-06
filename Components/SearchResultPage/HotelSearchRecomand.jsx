@@ -24,6 +24,8 @@ export default function HotelSearchRecomand({ lat, long, name }) {
     const { data: nearbyPlacesData, isLoading } = useQuery({
         queryKey: ["lodgingnearby", lat, long],
         queryFn: () => nearbyPlaces(lat, long),
+        enabled: !!location,
+        refetchOnWindowFocus: false
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 

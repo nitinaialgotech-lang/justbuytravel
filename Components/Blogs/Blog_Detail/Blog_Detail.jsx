@@ -3,77 +3,75 @@ import React, { useEffect } from 'react'
 import gsap from "gsap";
 
 const BlogDetailsShimmer = () => {
-    return (
-        <section>
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12 p-0">
+	return (
+		<section>
+			<div className="container">
+				<div className="row">
+					<div className="col-lg-12 p-0">
 
-                        {/* Image Shimmer */}
-                        <div className="blog_img blog_pb">
-                            <div
-                                className="shimmer-bg rounded-2xl shimmer-100p-420"
-                            />
-                        </div>
+						{/* Image Shimmer */}
+						<div className="blog_img blog_pb">
+							<div
+								className="shimmer-bg rounded-2xl shimmer-100p-420"
+							/>
+						</div>
 
-                        {/* Content Shimmer */}
-                        <div className="blog_content blog_pb">
+						{/* Content Shimmer */}
+						<div className="blog_content blog_pb">
 
-                            {/* Paragraph lines */}
-                            {Array.from({ length: 8 }).map((_, i) => (
-                                <div
-                                    key={i}
-                                    className={`shimmer-line mb-3 ${i === 7 ? "shimmer-60p-16" : "shimmer-100p-16"}`}
-                                />
-                            ))}
+							{/* Paragraph lines */}
+							{Array.from({ length: 8 }).map((_, i) => (
+								<div
+									key={i}
+									className={`shimmer-line mb-3 ${i === 7 ? "shimmer-60p-16" : "shimmer-100p-16"}`}
+								/>
+							))}
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default function Blog_detail({ content, blog_image, load }) {
 
 
-    return (
-        <>
-            {/* ***************************** */}
-            {load ? (
-                <BlogDetailsShimmer />
-            ) : (
+	return (
+		<>
+			{/* ***************************** */}
+			{load ? (
+				<BlogDetailsShimmer />
+			) : (
 
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12 p-0">
-                            <div className="blog_img blog_pb">
-                                {Array.isArray(blog_image) &&
-                                    blog_image.map((item, index) => (
-                                        <img
-                                            key={`blog-image-${item?.url || index}`}
-                                            src={item?.url}
-                                            alt=""
-                                            className="rounded-2xl"
-                                        />
-                                    ))}
-                            </div>
-                            <div
-                                className="blog_content blog_pb "
-                                dangerouslySetInnerHTML={{ __html: content }}
-                            >
-                                {/* ******************* */}
-                                {/* ******************* */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<div className="container">
+					<div className="row">
+						<div className="col-lg-12 p-0">
+							<div className="blog_img blog_pb">
+								{Array.isArray(blog_image) &&
+									blog_image.map((item, index) => (
+										<img
+											key={`blog-image-${item?.url || index}`}
+											src={item?.url}
+											alt=""
+											className="rounded-2xl"
+										/>
+									))}
+							</div>
+							<div
+								className="blog_content blog_pb "
+								dangerouslySetInnerHTML={{ __html: content }}
+							>
+								{/* ******************* */}
+								{/* ******************* */}
+							</div>
+						</div>
+					</div>
+				</div>
 
-            )
-            }
-
-
+			)
+			}
 
 
 
@@ -85,7 +83,9 @@ export default function Blog_detail({ content, blog_image, load }) {
 
 
 
-            {/* <div class="e-n-accordion" aria-label="Accordion. Open links with Enter or Space, close with Escape, and navigate with Arrow Keys">
+
+
+			{/* <div class="e-n-accordion" aria-label="Accordion. Open links with Enter or Space, close with Escape, and navigate with Arrow Keys">
 						<details id="e-n-accordion-item-3430" class="e-n-accordion-item" open="">
 				<summary class="e-n-accordion-item-title" data-accordion-index="1" tabindex="0" aria-expanded="true" aria-controls="e-n-accordion-item-3430">
 					<span class="e-n-accordion-item-title-header"><div class="e-n-accordion-item-title-text"> 1. Is Thailand a good destination for budget travelers? </div></span>
@@ -170,6 +170,6 @@ export default function Blog_detail({ content, blog_image, load }) {
 					</details>
 					</div> */}
 
-        </>
-    )
+		</>
+	)
 }

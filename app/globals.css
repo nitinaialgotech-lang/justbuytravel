@@ -1077,7 +1077,7 @@ button {
 .search_banner_box > .title > h1,
 .search_banner_box > .title > h2 {
   color: var(--color);
-  font-size: 80px;
+  font-size: 95px;
   font-weight: 900;
   line-height: 95px;
 }
@@ -1086,7 +1086,18 @@ button {
 .search_banner_box > .title > h2 > span {
   color: var(--bg-color);
 }
-
+.section_search_home_banner {
+  padding: 80px 0px 50px;
+}
+.currency {
+  font-weight: 600;
+  font-style: medium;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.65) !important;
+  font-family: var(--font-fam);
+  align-items: center;
+  display: flex;
+}
 /* (****************************** swiper .css  */
 .swiper {
   width: 100%;
@@ -2455,7 +2466,7 @@ span.rating-stars {
   font-family: var(--font-fam);
   color: var(--color);
   font-weight: 600 !important;
-  font-size: 10px !important;
+  font-size: 12px;
 }
 
 .quick_links > .quick_link_box > .quick_link_items > ul > li {

@@ -1,61 +1,46 @@
+
+
 "use client";
-import React, { useEffect } from "react";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useMemo } from "react";
-import { FaRegHeart, FaUserAlt } from "react-icons/fa";
-import { IoTime } from "react-icons/io5";
+import React from 'react'
+import ThiallandNearBy from './ThiallandNearBy';
+import ThialandIconic from './ThialandIconic';
+import ThialandBookingTips from './ThialandBookingTips';
+import ThialandAmazingDeals from './ThialandAmazingDeals';
+import ThialandFaqSection from './ThialandFaqSection';
+import { useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces as fetchNearbyPlaces, nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import Blogs from "@/Components/HomePage/Blog/Blogs";
+import Footer from "@/component/Footer";
+import { useRouter } from "next/navigation";
 import { createHotelSlug } from "@/app/utils/seo";
-import { getPlacePhotoUrl, getAssetPath } from "@/app/utils/assetPath";
+import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 
-export default function Recomended() {
-    const DEFAULT_COORDS = { lat: 28.6139, lng: 77.209 };
+
+export default function ThialandRecomd() {
+    /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
-    const [coords, setCoords] = useState(DEFAULT_COORDS);
-    const [locationError, setLocationError] = useState(null);
-
-    useEffect(() => {
-        if (typeof window === "undefined" || !navigator?.geolocation) {
-            setLocationError("Geolocation is not supported");
-            setCoords(DEFAULT_COORDS);
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                setCoords({
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude,
-                });
-            },
-            (err) => {
-                setLocationError(err?.message || "Unable to fetch location");
-                setCoords(DEFAULT_COORDS);
-            }
-        );
-    }, []);
+    /*********************** end stte ****** */
+    /********************* apis calls *********** */
+    // const lat = 53.483959;
+    // const long = -2.244644;
 
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", coords.lat, coords.lng],
-        queryFn: () => nearbyPlaces(coords.lat, coords.lng),
-        enabled: coords.lat !== null && coords.lng !== null,
+        queryKey: ["lodgingnearby", "thialand"],
+        queryFn: () => searchHotel1("thialand"),
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
 
-    // ***xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    /***************** end of api calls ************* */
+    /************************ shimmer effetct *****************/
     const ShimmerCard = () => {
         return (
             <div className="card_col">
@@ -91,7 +76,8 @@ export default function Recomended() {
             </div>
         );
     };
-
+    /*********************** end of shimmer effect ************* */
+    // *****************************************************************************************
     const renderBootstrapStars = (rating) => {
         const stars = [];
         const value = Number(rating) || 0;
@@ -113,21 +99,21 @@ export default function Recomended() {
 
         return stars;
     };
-    // **********************************************************
+    // **********
+    /************************************************ route path  */
     const router = useRouter();
     const viewDetail = (id, name) => {
         if (!id) return;
         const slug = createHotelSlug(name, id);
         router.push(`/${slug}`);
     };
-
     return (
         <>
+            {/* ******************** section start ********************** */}
             <section className="recomend_section container  padding_bottom">
                 <div className="section_title relative ">
-                    <h2 className="mb-0">Recommended Hotels &   Travel Deals for You</h2>
-                    <p>Handpicked hotel stays based on popular destinations and top ratings
-                    </p>
+                    <h2 className="mb-0">Recommended For You</h2>
+                    <p>Handpicked experiences tailored to your interests</p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
                     </div>
@@ -145,15 +131,15 @@ export default function Recomended() {
                             // pagination={{
                             //     clickable: true,
                             // }}
-                            modules={[Navigation, Pagination]}
+                            modules={[Navigation, Autoplay, Pagination]}
                             className="mySwiper"
                             // navigation={true}
                             onSwiper={(swiper) => setActive(swiper.isBeginning)}
                             onSlideChange={(swiper) => setActive(swiper.isBeginning)}
-                            // autoplay={{
-                            //     delay: 3000,
-                            //     disableOnInteraction: false,
-                            // }}
+                            autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,
@@ -168,11 +154,12 @@ export default function Recomended() {
                                     spaceBetween: 15,
                                 },
                                 640: {
-                                    slidesPerView: 1.5
+                                    slidesPerView: 1, // mobile
+                                    spaceBetween: 20,
                                 },
-
                                 768: {
-                                    slidesPerView: 2.5,
+                                    slidesPerView: 2, // tablet
+                                    spaceBetween: 20,
                                 },
                                 1024: {
                                     slidesPerView: 4, // desktop (optional)
@@ -211,8 +198,7 @@ export default function Recomended() {
                                                                 <img
                                                                     src={imageSrc}
                                                                     className="card_rounded w-full h-full object-cover"
-                                                                    alt={item?.displayName?.text || "Hotel"}
-
+                                                                    alt={"Hotel image"}
                                                                 />
                                                             </div>
                                                             {/* *** */}
@@ -275,6 +261,16 @@ export default function Recomended() {
                     </div>
                 </div>
             </section>
+            <ThiallandNearBy />
+            <ThialandIconic />
+            <ThialandBookingTips />
+            <ThialandAmazingDeals />
+
+
+
+            <Blogs />
+            <ThialandFaqSection />
+            <Footer />
         </>
     );
 }

@@ -1,6 +1,6 @@
 "use client";
 import Header from '@/component/Header'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchSection from '../HomePage/SearchSection'
 import SearchSidebar from './SearchSidebar'
 import SearchContentBox from './SearchContentBox'
@@ -12,18 +12,22 @@ import { useQuery } from '@tanstack/react-query'
 import { nearbyPlaces, SearchLocation } from '@/app/Route/endpoints'
 import Footer from '@/component/Footer';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 export default function SearchResult() {
 
-    const searchCity = useSearchParams();
+    // const searchCity = useSearchParams();
 
-    const city = searchCity.get("name")
+    // const city = searchCity.get("name")
+
+
+    const city = useSelector((state) => state?.user?.SearchDetail?.name?.[0]);
 
     return (
         <>
             <Header />
             {/* ************************** */}
             <section className='padding_bottom pb-md-0'>
-                <div className="section_search_home_banner pt-10 pb-10 rounded-3xl flex items-center">
+                <div className="section_search_home_banner rounded-3xl flex items-center">
                     {/* *************************** box title */}
                     <div className="container">
                         <div className="row justify-center">
@@ -31,7 +35,7 @@ export default function SearchResult() {
                                 <div className="search_banner_box">
                                     <div className="title text-center">
                                         <h1 className='capitalize'>
-                                            {city}  <span> hotels </span>
+                                            hotels  in  <span>   {city} </span>
                                         </h1>
                                         {/* <h5 className='capitalize'>
 
