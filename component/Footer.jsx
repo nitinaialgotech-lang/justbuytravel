@@ -68,10 +68,11 @@ export default function Footer() {
                 <div className="footer_content flex flex-col">
                   <div className="footer_logo">
                     <div className="logo text-center flex justify-center">
-                      <img
-                        src={getAssetPath("/footer/icon/footer_logo.webp")}
-                        alt="Just Buy Travel Logo"
-                      />
+                      <Link href={"/"}>
+                        <img
+                          src={getAssetPath("/footer/icon/footer_logo.webp")}
+                          alt="Just Buy Travel Logo"
+                        /></Link>
                     </div>
                   </div>
                   {/* ************* */}
@@ -195,12 +196,8 @@ export default function Footer() {
           <div className="footer_bottom_link ">
             <div className="link">
               <ul className="flex  items-center p-0 m-0">
-                <li>
-                  <Link href={""}>  Home</Link>
-                </li>
-                <li className="dot">
-                  <GoDotFill />
-                </li>
+
+
                 <li>
                   <Link href={"/book-hotels-online"}> Hotels</Link>
                 </li>
@@ -208,7 +205,7 @@ export default function Footer() {
                   <GoDotFill />
                 </li>
                 <li>
-                  <Link href={"/flights"}> Flight</Link>
+                  <Link href={"/flights"}> Flights</Link>
                 </li>
                 <li className="dot">
                   <GoDotFill />
