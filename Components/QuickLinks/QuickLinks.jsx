@@ -7,7 +7,7 @@ export default function QuickLinks() {
     return (
 
         <>
-            <section className={`padding_bottom ${route == "/about-us" ? "padding_top" : ""}  bg_brown `} >
+            <section className={`padding_bottom ${route == "/about-us" ? "padding_top" : ""}  bg_brown md_padding md_pbtop`} >
                 <div className="container  ">
                     <div className="row">
                         {/* <div className="section_title relative m-0 ">

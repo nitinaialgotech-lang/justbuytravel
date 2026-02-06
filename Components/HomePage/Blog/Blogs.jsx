@@ -41,7 +41,7 @@ export default function Blogs() {
     return (
         <>
             <section className='blog_section container padding_top padding_bottom  '>
-                <div className="blog flex justify-between items-center">
+                {/* <div className="blog flex justify-between items-center">
                     <div className="section_title ">
                         <h2 className='mb-0 capitalize'>
                             From the blog
@@ -52,6 +52,32 @@ export default function Blogs() {
                     </div>
                     <div className="view_all_blog mt-2">
                         <button class="button_bg2 " onClick={() => route.push("/blog")}>View all</button>
+                    </div>
+                </div> */}
+                <div className="d-none d-lg-block">
+                    <div className="section_title relative flex items-center justify-between">
+                        <span>
+                            <h2 className="mb-0"> From the blog</h2>
+                            <p>Read our travel blog for tips, destination ideas, and smart travel inspiration.</p>
+                        </span>
+                        <span className='font-semibold g_color'>
+                            <button className='button_bg2 me-2 mt-4' onClick={() => route.push("/blog")}>view all</button>
+                        </span>
+
+                    </div>
+                </div>
+
+                {/* ************************** mobile view show  */}
+                <div className="section_title  d-block d-lg-none">
+
+                    <h2 className="mb-0">From the blog</h2>
+                    <div className="section_title relative flex items-center justify-between">
+                        <span>
+                            <p>Read our travel blog for tips, destination ideas, and smart travel inspiration.</p>
+                        </span>
+                        <span className='font-semibold g_color'>
+                            <button className='button_bg2 me-2 mt-2' onClick={() => route.push("/blog")}>view all</button>
+                        </span>
                     </div>
                 </div>
                 {/* ********************** */}
