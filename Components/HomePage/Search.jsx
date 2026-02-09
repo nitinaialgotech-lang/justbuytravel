@@ -299,7 +299,7 @@ export default function Search() {
 
     return (
         <>
-            <section className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"}`}>
+            <section className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"} `}>
                 <div className="container">
                     <div className={`${isBookHotelsPage ? 'searchhotelcontainer' : "search_container "}`}>
                         <div className="search_container_box  rounded-2xl  w-full">

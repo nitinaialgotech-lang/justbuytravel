@@ -1,16 +1,19 @@
 import { forwardRef } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 export const CustomToggle = forwardRef(({ children, onClick, show }, ref) => (
     <button
         ref={ref}
-        className="bg-color-green border-0 flex items-center gap-1"
+        className="flex items-center gap-1 capitalize"
         onClick={(e) => {
             e.preventDefault();
             onClick(e);
         }}
     >
         {children}
-        {show ? <FaChevronUp /> : <FaChevronDown />}
+        <FaChevronDown
+            className={`transition-transform duration-200 ${show ? "rotate-180" : "rotate-0"
+                }`}
+        />
     </button>
 ));

@@ -27,7 +27,7 @@ export default function SearchResult() {
         <>
             <Header />
             {/* ************************** */}
-            <section className='padding_bottom pb-md-0'>
+            <section className=' pb-md-0'>
                 <div className="section_search_home_banner rounded-3xl flex items-center">
                     {/* *************************** box title */}
                     <div className="container">
@@ -53,11 +53,17 @@ export default function SearchResult() {
                     {/* ************************ search Box */}
                 </div>
             </section>
-            <Search />
+
+            <div className="padding_b_0">
+
+                <Search />
+            </div>
+
+
 
             {/* ***************************************************** seasrch container  */}
             <div className="container">
-                <div className="crums z-1 relative">
+                <div className="crums z-1 relative d-none d-lg-block">
                     <nav aria-label="breadcrumb ">
                         <ol className="breadcrumb mb-2 padding_bottom ps-2 pb-md-0">
                             <li className="breadcrumb-item"><Link href="/">Home</Link></li>
@@ -66,19 +72,10 @@ export default function SearchResult() {
                         </ol>
                     </nav>
                 </div>
-                <SearchFilter />
-                <div className="row">
-
-                    <div className="col-lg-12">
-
-                        <SearchContentBox />
-                    </div>
-
-                </div>
             </div>
+            <SearchFilter />
 
-
-
+            <SearchContentBox />
 
             <Footer />
         </>

@@ -15,10 +15,10 @@ export const metadata = {
         description:
             "Explore hotels in Sydney, from luxury stays to affordable options. Compare the best hotels in Sydney and plan your trip with Just Buy Travel. ",
         type: "website",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/sydney`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/hotels-in-sydney`,
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/sydney`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/hotels-in-sydney`,
     },
     robots: { index: false, follow: false },
 };

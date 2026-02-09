@@ -14,10 +14,10 @@ export const metadata = {
         description:
             "Explore hotels in Singapore, from luxury stays to affordable options. Compare the best hotels in Singapore and plan your trip with Just Buy Travel. ",
         type: "website",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/singapore`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/hotels-in-singapore`,
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/singapore`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/hotels-in-singapore`,
     },
     robots: { index: false, follow: false },
 };

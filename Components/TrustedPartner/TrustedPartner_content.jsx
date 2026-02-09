@@ -18,9 +18,9 @@ export default function TrustedPartner_content() {
                                 <div className="content_order_list">
                                     <ul className='p-0 ps-3'>
                                         {/* ******** */}
-                                        <li><Link href={""}>Skyscanner</Link> <span>Skyscanner is my favorite flight search engine. It searches small websites and budget airlines that larger search sites tend to miss. It is hands-down the number one place to start.</span></li>
+
                                         {/* ************* */}
-                                        <li><Link href={""}>Going.com</Link> <span>Going.com (formerly Scott’s Cheap Flights) finds incredible flight deals and sends them directly to your inbox. If you’re flexible with your dates and destinations, you can score some amazing deals and save hundreds of dollars in the process!</span></li>
+
                                         {/* ************* */}
                                         <li><Link href={""}>Hostelworld </Link> <span>This is the best hostel accommodation site out there, with the largest inventory, best search interface, and widest availability.</span></li>
                                         {/* ************* */}
