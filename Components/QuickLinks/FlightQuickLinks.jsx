@@ -5,13 +5,13 @@ import React from 'react'
 export default function FlightQuickLinks() {
     const pathname = usePathname();
     return (
-        <section className={`padding_bottom ${pathname == "/about-us" ? "padding_top" : " "}`}>
+        <section className={` ${pathname == "/about-us" ? "padding_top" : " "} ${pathname == "/flights" ? "padding_bottom" : "padding_b20"}`}>
             <div className="container ">
                 <div className="row">
                     <div className="col-lg-12">
                         {/* ********** links */}
                         <div className="section_title relative m-0 ">
-                            <h2 className="mb-2">Quick Links</h2>
+                            <h2 className="m-0 link_title">Quick Links</h2>
                         </div>
                         {/* <div className="quick_links ">
                             
@@ -49,7 +49,7 @@ export default function FlightQuickLinks() {
                             <div className="quick_link_box">
                                 <div className="quick_link_items">
                                     <h4 className="m-0 p-0">Asia Flights</h4>
-                                    <ul className="p-0 flex capitalize">
+                                    <ul className="p-0 m-0 flex capitalize">
                                         <li><Link href="https://booking.tpx.lu/Bv7yjVYW">Dubai Flight</Link> |</li>
                                         <li><Link href="https://booking.tpx.lu/2pMmP4fE">Goa Flight</Link> |</li>
                                         <li><Link href="https://booking.tpx.lu/48690FgK">Singapore Flight</Link> |</li>

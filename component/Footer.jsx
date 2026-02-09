@@ -50,7 +50,7 @@ export default function Footer() {
         </>
       )}
 
-      <section className="footer_section relative ">
+      <section className="footer_section padding_top relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
           <div className="left_img ">
             <img src={getAssetPath("/footer/icon/left_img.svg")} alt="" />

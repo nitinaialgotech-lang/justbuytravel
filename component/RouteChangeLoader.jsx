@@ -14,7 +14,6 @@ export default function RouteChangeLoader() {
     const id = requestAnimationFrame(() => setLoading(false));
     return () => cancelAnimationFrame(id);
   }, [pathname, searchParams]);
-
   useEffect(() => {
     // Show when user starts navigation (click internal link, or back/forward)
     const onClick = (e) => {
@@ -33,6 +32,13 @@ export default function RouteChangeLoader() {
       const nextUrl = new URL(href, window.location.href);
       if (nextUrl.origin !== window.location.origin) return;
       if (nextUrl.pathname.startsWith("/_next")) return;
+
+      // If the user clicks a link to the SAME page (same pathname + search),
+      // don't show the global route loader, because Next.js will not trigger
+      // a navigation event and the loader would get stuck.
+      const currentPathWithSearch = window.location.pathname + window.location.search;
+      const nextPathWithSearch = nextUrl.pathname + nextUrl.search;
+      if (currentPathWithSearch === nextPathWithSearch) return;
 
       setLoading(true);
     };
