@@ -182,6 +182,17 @@ export default function Blog_Tabs() {
 
                           const date_it = item?.date;
                           const formatted = moment(date_it).format("MMMM D, YYYY");
+                          // ******************* short title ...............
+                          const truncateWords = (text, wordLimit) => {
+                            if (!text) return "";
+
+                            const plainText = text.replace(/<[^>]*>/g, ""); // remove HTML
+                            const words = plainText.split(/\s+/);
+
+                            if (words.length <= wordLimit) return plainText;
+
+                            return words.slice(0, wordLimit).join(" ") + "...";
+                          };
                           return (
 
 
@@ -209,7 +220,7 @@ export default function Blog_Tabs() {
                                     <div className="blog_card_heading">
                                       <h4 className="m-0">
                                         <Link href={getPostHref(item)}>
-                                          {item?.title?.rendered}
+                                          {truncateWords(item?.title?.rendered, 7)}
                                         </Link>
                                       </h4>
                                     </div>
@@ -222,11 +233,6 @@ export default function Blog_Tabs() {
                                           : shortText + (isLong ? "..." : "")
                                       }}
                                     />
-
-
-
-
-
                                     <div className="blog_card_user flex items-center gap-2">
                                       <span className="g_color">
                                         <img
@@ -337,7 +343,6 @@ export default function Blog_Tabs() {
                   {/* <button className="button_bg2" type="button" onClick={() => setcount(count + 1)}>
                     {isLoading ? <p className="m-0">..Loading</p> : <p className="m-0">Load More</p>}
                   </button> */}
-
                   <div className="pagination_section">
                     <ReactPaginate
                       breakLabel="..."
@@ -363,13 +368,6 @@ export default function Blog_Tabs() {
                     />
                   </div>
                 </div>
-
-
-
-
-
-
-
               </div>
               {/* **************** */}
             </div>

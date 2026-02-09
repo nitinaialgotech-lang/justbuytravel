@@ -32,7 +32,7 @@ export default function SearchPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
             />
-            <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <Suspense >
                 <SearchResult />
             </Suspense>
         </>

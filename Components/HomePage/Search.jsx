@@ -243,19 +243,29 @@ export default function Search() {
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
             setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
-        } else if (e.key === 'Enter' && selectedIndex >= 0) {
-            e.preventDefault();
-            // handleSelectPlace(places[selectedIndex])
+        }
 
-
-        } else if (e.key === 'Escape') {
+        // else if (e.key === 'Enter' && selectedIndex >= 0) {
+        //     e.preventDefault();
+        //     handleSelectPlace(places[selectedIndex])
+        // } 
+        if (e.key === 'Enter') {
+            if (selectedIndex >= 0) {
+                // Select highlighted item
+                e.preventDefault();
+                handleSelectPlace(places[selectedIndex]);
+                setShowDropdown(false);
+            }
+        }
+        else if (e.key === 'Escape') {
             setShowDropdown(false);
         }
     };
 
     // Extract places from response - handle both direct response and nested data
     const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
-    const cityName = places?.map((item) => item?.displayName?.text)
+    const cityName = places?.map((item) => item?.displayName?.text) || "undefined";
+    const city_id = places?.map((item) => item?.id) || "undefined";
     // (**************************** mrouter )
 
     // const viewSearchAll = (lat, long) => {
@@ -266,7 +276,7 @@ export default function Search() {
         dispatch(setLat(lat));
         dispatch(setLong(long));
         dispatch(nameCity(cityName));
-        router.push('/search');
+        router.push(`/search?${cityName}-${city_id}`);
     };
     // **************************** hotel search
 
@@ -283,7 +293,7 @@ export default function Search() {
     };
 
 
-    console.log(pathname, "..............");
+    console.log(pathname, places, "..............");
 
 
 

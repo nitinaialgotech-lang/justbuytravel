@@ -13,6 +13,7 @@ import { nearbyPlaces, SearchLocation } from '@/app/Route/endpoints'
 import Footer from '@/component/Footer';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import SearchFilter from './SearchFilter';
 export default function SearchResult() {
 
     // const searchCity = useSearchParams();
@@ -65,6 +66,7 @@ export default function SearchResult() {
                         </ol>
                     </nav>
                 </div>
+                <SearchFilter />
                 <div className="row">
 
                     <div className="col-lg-12">

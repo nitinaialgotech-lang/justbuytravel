@@ -1973,10 +1973,10 @@ button {
   line-height: 1.45;
 }
 
-.blog_card > .blog_card_body > .blog_card_user > img {
+.blog_card > .blog_card_body > .blog_card_user > span:nth-child(1) img {
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   object-fit: cover;
 }
 
@@ -2036,7 +2036,7 @@ button {
 
 .trusted_banner_img {
   background-color: rgb(80, 83, 240);
-  background-image: url(https://justbuytravel.com/wp-content/uploads/2025/07/Bg-hotel-sec-home.png);
+  background-image: url("/banners/banner.webp");
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 10px;
@@ -2100,18 +2100,25 @@ button {
   border-radius: 10px;
   font-weight: 700;
 }
-
-.explore_content > .content_icon > h3 {
+.explore_content > .content_icon > a {
+  text-decoration: none;
+}
+.explore_content > .content_icon > a:hover > p {
+  color: var(--bg-color);
+}
+.explore_content > .content_icon > a > p {
   font-size: 18px;
   line-height: 1.4;
   font-weight: 600;
   text-transform: capitalize;
+  color: var(--cl-brown);
 }
 
-.explore_content > .content_icon > img {
-  max-width: 121px;
-  height: 100%;
+.explore_content > .content_icon > a > img {
   width: 100%;
+  height: 100%;
+  max-width: 121px;
+  max-height: 121px;
 }
 
 /* ********************** contact us  */
@@ -3049,147 +3056,6 @@ span.rating-stars {
   display: none;
 }
 
-/* .blog_content .e-n-accordion-item-title-icon {
-  width: 18px;
-  height: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-.blog_content .e-n-accordion-item-title-icon svg {
-  width: 18px;
-  height: 18px;
-}
-
-.blog_content .e-n-accordion-item-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-}
-
-.blog_content .e-n-accordion-item-title-header {
-  flex: 1;
-}
-
-.blog_content .e-n-accordion {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #e7edf3;
-  background-color: #ffffff;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-}
-
-.blog_content .e-n-accordion details {
-  margin: 0;
-  border-bottom: 1px solid #e7edf3;
-  background-color: #ffffff;
-}
-
-.blog_content .e-n-accordion details:last-child {
-  border-bottom: none;
-}
-
-.blog_content .e-n-accordion-item-title {
-  padding: 12px 16px;
-  font-weight: 600;
-}
-
-.blog_content details[open] .e-n-accordion-item-title {
-  background-color: #f6fbff;
-}
-
-.blog_content .e-n-accordion-item-title-icon {
-  color: #12c081;
-}
-
-.blog_content .e-n-accordion-item-title-icon svg {
-  fill: currentColor;
-}
-
-.blog_content details[open] .e-n-accordion-item-title-icon svg {
-  transform: rotate(180deg);
-}
-
-.blog_content .e-n-accordion-item .e-opened {
-  display: none;
-}
-
-.blog_content .e-n-accordion-item .e-closed {
-  display: inline-flex;
-}
-
-.blog_content .e-n-accordion-item[open] .e-opened {
-  display: inline-flex;
-}
-
-.blog_content .e-n-accordion-item[open] .e-closed {
-  display: none;
-}
-
-.blog_content .e-n-accordion {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #e7edf3;
-  background: #fff;
-}
-
-.blog_content .e-n-accordion-item {
-  border-bottom: 1px solid #e7edf3;
-}
-
-.blog_content .e-n-accordion-item:last-child {
-  border-bottom: none;
-}
-
-.blog_content summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 12px 16px;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.blog_content summary::-webkit-details-marker {
-  display: none;
-}
-
-.blog_content details > div[role="region"] {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition:
-    grid-template-rows 0.45s ease,
-    opacity 0.3s ease;
-  opacity: 0;
-}
-
-.blog_content details > div[role="region"] > * {
-  overflow: hidden;
-  padding: 0 16px;
-}
-
-.blog_content details:hover > div[role="region"] {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-
-.blog_content details:hover > div[role="region"] > * {
-  padding-bottom: 14px;
-}
-
-.blog_content .e-n-accordion-item-title-icon svg {
-  transition: transform 0.35s ease;
-}
-
-.blog_content details:hover .e-n-accordion-item-title-icon svg {
-  transform: rotate(180deg);
-} */
-
 .blog_content .e-n-accordion {
   border-radius: 8px;
   border: 1px solid #e7edf3;
@@ -3595,6 +3461,15 @@ span.rating-stars {
   font-size: 40px;
   font-weight: 700;
 }
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .elementor-element
+  > .elementor-widget-container
+  > h2 {
+  font-size: 40px;
+  font-weight: 700;
+}
 
 .blog_content
   > .elementor
@@ -3972,4 +3847,16 @@ span.rating-stars {
 }
 .Blog_Detail_section a {
   color: var(--bg-color);
+}
+/* ****************** sewarch filter  ....... */
+.search_filter {
+  border-radius: 10px;
+  padding: 10px !important;
+  box-shadow: 0 0 3px #c5c5c5;
+}
+.search_filter > .filter_items > .default > .dropdown > button {
+  padding: auto;
+  border-radius: 5px;
+  padding: 2px 3px !important;
+  font-size: 16px;
 }
