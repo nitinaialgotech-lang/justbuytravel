@@ -1,6 +1,7 @@
 import React from 'react'
 import Trust_Guide_Section from './Trust_Guide_Section'
 import AboutDetail from './AboutDetail'
+import Blogs from '../HomePage/Blog/Blogs'
 
 export default function About_banner() {
     return (
@@ -26,6 +27,8 @@ export default function About_banner() {
             <AboutDetail />
 
             <Trust_Guide_Section />
+
+            <Blogs />
         </>
     )
 }

@@ -13,6 +13,8 @@ import QuickLinks from "@/Components/QuickLinks/QuickLinks";
 import FlightQuickLinks from "@/Components/QuickLinks/FlightQuickLinks";
 import { usePathname } from "next/navigation";
 import { FaLinkedin } from "react-icons/fa6";
+import { GoDotFill } from "react-icons/go";
+
 export default function Footer() {
   // ***************************************
   const [visible, setVisible] = useState(false);
@@ -39,16 +41,16 @@ export default function Footer() {
 
   return (
     <>
-      {pathname === "/flights" && <FlightQuickLinks />}
 
-      {pathname === "/hotels" && <QuickLinks />}
 
-      {pathname !== "/flights" && pathname !== "/hotels" && (
-        <>
-          <FlightQuickLinks />
-          <QuickLinks />
-        </>
-      )}
+
+
+
+
+
+      <QuickLinks />
+
+
 
       <section className="footer_section padding_top relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
@@ -66,10 +68,11 @@ export default function Footer() {
                 <div className="footer_content flex flex-col">
                   <div className="footer_logo">
                     <div className="logo text-center flex justify-center">
-                      <img
-                        src={getAssetPath("/footer/icon/footer_logo.webp")}
-                        alt="Just Buy Travel Logo"
-                      />
+                      <Link href={"/"}>
+                        <img
+                          src={getAssetPath("/footer/icon/footer_logo.webp")}
+                          alt="Just Buy Travel Logo"
+                        /></Link>
                     </div>
                   </div>
                   {/* ************* */}
@@ -158,25 +161,25 @@ export default function Footer() {
                         <Link href={"/aboutus"}>  About us</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/contact-us"}> Contact Us</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/privacy-policy"}> Privacy Policy</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/term-and-conditions"}>Terms and Conditions</Link>
                       </li>
                       <li className="dot">
-                        <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                        <GoDotFill />
                       </li>
                       <li>
                         <Link href={"/disclaimer"}> Disclaimer</Link>
@@ -193,35 +196,31 @@ export default function Footer() {
           <div className="footer_bottom_link ">
             <div className="link">
               <ul className="flex  items-center p-0 m-0">
-                <li>
-                  <Link href={""}>  Home</Link>
-                </li>
-                <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
-                </li>
+
+
                 <li>
                   <Link href={"/book-hotels-online"}> Hotels</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
-                  <Link href={"/flights"}> Flight</Link>
+                  <Link href={"/flights"}> Flights</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/book-cruises"}>Cruises</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/book-packages"}>Packages</Link>
                 </li>
                 <li className="dot">
-                  <img src={getAssetPath("/footer/icon/Ellipse.svg")} alt="" />
+                  <GoDotFill />
                 </li>
                 <li>
                   <Link href={"/blog"}>Blog</Link>

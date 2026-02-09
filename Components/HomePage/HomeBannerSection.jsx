@@ -1,7 +1,8 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import Search from './Search';
 import SearchSection from './SearchSection';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetAction } from '../Redux/Reducer';
 
 const BANNER_TITLES = {
     all: <>Smart Travel <span>Planning</span></>,
@@ -14,8 +15,12 @@ const DEFAULT_BANNER_TITLE = <>Smarter <span> Travel Planning </span> for  Hotel
 
 export default function
     HomeBannerSection() {
+    const dispatch = useDispatch()
     const selectAllKey = useSelector((state) => state.user.SelectAll);
     const bannerData = (selectAllKey && BANNER_TITLES[selectAllKey]) || DEFAULT_BANNER_TITLE;
+    useEffect(() => {
+        dispatch(resetAction());
+    }, [dispatch]);
     return (
         <>
             <section className='mp-s mp-e'>

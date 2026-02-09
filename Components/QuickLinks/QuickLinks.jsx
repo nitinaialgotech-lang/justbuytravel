@@ -1,74 +1,28 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import FlightQuickLinks from './FlightQuickLinks';
+import HotelQuickLinks from './HotelQuickLinks';
 export default function QuickLinks() {
     const route = usePathname();
     return (
 
         <>
-
-            <section className={`${route === "/about-us" ? "" : ""} padding_bottom`}>
-
-                <div className="container ">
+            <section className={`padding_bottom  bg_brown md_padding md_pbtop `} >
+                <div className="container  ">
                     <div className="row">
-                        <div className="col-lg-12">
-                            {/* ********** links */}
-                            <div className="section_title relative m-0 ">
-                                <h2 className="m-0 link_title">Quick Links</h2>
-                            </div>
-                            <div className="quick_links">
-                                <div className="quick_link_box">
+                        {/* <div className="section_title relative m-0 ">
+                            <h2 className="m-0 link_title">Quick Links</h2>
+                        </div> */}
+                        <div className={`col-lg-6`}>
+                            {/* ******hotel */}
+                            <HotelQuickLinks />
 
-                                    {/* ================= Asia Hotels ================= */}
-                                    <div className="quick_link_items">
-                                        <h4 className="p-0 m-0">Asia Hotels</h4>
-                                        <ul className="p-0 m-0 flex capitalize">
-                                            <li><Link href="/hotels-in-dubai">Dubai Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-goa">Goa Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-singapore">Singapore Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-tokyo">Tokyo Hotel</Link></li>
-                                        </ul>
-                                        <hr />
-                                    </div>
 
-                                    {/* ================= Europe Hotels ================= */}
-                                    <div className="quick_link_items">
-                                        <h4 className="p-0 m-0">Europe Hotels</h4>
-                                        <ul className="p-0 m-0 flex capitalize">
-                                            <li><Link href="/hotels-in-denmark">Denmark Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-glasgow">Glasgow Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-ireland">Ireland Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-manchester">Manchester Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-paris">Paris Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-uk">United Kingdom Hotel</Link></li>
-                                        </ul>
-                                        <hr />
-                                    </div>
-
-                                    {/* ================= North America Hotels ================= */}
-                                    <div className="quick_link_items">
-                                        <h4 className="p-0 m-0">North America Hotels</h4>
-                                        <ul className="p-0 m-0 flex capitalize">
-                                            <li><Link href="/hotels-in-canada">Canada Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-new-york">New York Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-san-francisco">San Francisco Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-usa">USA Hotel</Link></li>
-                                        </ul>
-                                        <hr />
-                                    </div>
-
-                                    {/* ================= Australia Hotels ================= */}
-                                    <div className="quick_link_items">
-                                        <h4 className="p-0 m-0">Australia Hotels</h4>
-                                        <ul className="p-0 m-0 flex capitalize">
-                                            <li><Link href="/hotels-in-australia">Australia Hotel</Link> |</li>
-                                            <li><Link href="/hotels-in-sydney">Sydney Hotel</Link></li>
-                                        </ul>
-                                        <hr />
-                                    </div>
-
-                                </div>
-                            </div>
-
+                        </div>
+                        {/* ************************** */}
+                        <div className={` col-lg-6 `}>
+                            {/* **********  flight */}
+                            <FlightQuickLinks />
                         </div>
                     </div>
                 </div>

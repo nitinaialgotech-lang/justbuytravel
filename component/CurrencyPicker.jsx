@@ -28,10 +28,11 @@ export default function CurrencyPicker() {
         className="d-flex align-items-center gap-2 border-0 bg-transparent p-0"
         onClick={() => setOpen(true)}
       >
-        {/* <IoPricetag className={`${open ? "g_color" : ""} me-1`} /> */}
-        <span className={`${open ? "g_color" : ""}`}>
+        {/* <IoPricetag className={`${open ? "g_color" : ""} `} /> */}
+        <span className={`${open ? "g_color" : ""} currency`}>
           {currentLabel
             ? `${currentLabel.symbol} ${currentLabel.code}`
+            ? `${currentLabel.symbol} ${currentLabel.code} `
             : currency}
         </span>
       </button>
@@ -93,4 +94,3 @@ export default function CurrencyPicker() {
     </>
   );
 }
-

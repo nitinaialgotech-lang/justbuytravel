@@ -13,7 +13,7 @@ import Search_flight_section from "../Book-Flights/Search_flight_section";
 import HotelIcon, { FlightIcon } from "@/component/icons";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { SetSelectAll } from "../Redux/Reducer";
+import { nameCity, setLat, setLong, SetSelectAll } from "../Redux/Reducer";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 import { createHotelSlug } from "@/app/utils/seo";
 export default function Search() {
@@ -32,15 +32,18 @@ export default function Search() {
     const [imageLoading, setImageLoading] = useState({});
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
-    const dispatch = useDispatch();
     const [searchAll, setSearchAll] = useState(!isBookHotelsPage);
     const [searchType, setSearchType] = useState(isBookHotelsPage ? "hotels" : "all");
     const [searchContent, setSearchContent] = useState("");
     const [activeTab, setActiveTab] = useState(isBookHotelsPage ? "hotels" : "all");
     const [textContent, setContenttext] = useState(isBookHotelsPage ? "Search hotels by name or city" : "");
+<<<<<<< HEAD
     // When true and the input is empty, we still fetch a default mixed list
     // of popular places so something shows as soon as the field is focused.
     const [showDefaultOnFocus, setShowDefaultOnFocus] = useState(false);
+=======
+    const dispatch = useDispatch();
+>>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
     useEffect(() => {
         setSearchContent(query);
     }, [query]);
@@ -260,24 +263,41 @@ export default function Search() {
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
             setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
-        } else if (e.key === 'Enter' && selectedIndex >= 0) {
-            e.preventDefault();
-            // handleSelectPlace(places[selectedIndex])
+        }
 
-
-        } else if (e.key === 'Escape') {
+        // else if (e.key === 'Enter' && selectedIndex >= 0) {
+        //     e.preventDefault();
+        //     handleSelectPlace(places[selectedIndex])
+        // } 
+        if (e.key === 'Enter') {
+            if (selectedIndex >= 0) {
+                // Select highlighted item
+                e.preventDefault();
+                handleSelectPlace(places[selectedIndex]);
+                setShowDropdown(false);
+            }
+        }
+        else if (e.key === 'Escape') {
             setShowDropdown(false);
         }
     };
 
     // Extract places from response - handle both direct response and nested data
     const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
-    const cityName = places?.map((item) => item?.displayName?.text)
+    const cityName = places?.map((item) => item?.displayName?.text) || "undefined";
+    const city_id = places?.map((item) => item?.id) || "undefined";
     // (**************************** mrouter )
 
+    // const viewSearchAll = (lat, long) => {
+    //     route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
+    // }
+
     const viewSearchAll = (lat, long) => {
-        route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
-    }
+        dispatch(setLat(lat));
+        dispatch(setLong(long));
+        dispatch(nameCity(cityName));
+        router.push(`/search?${cityName}-${city_id}`);
+    };
     // **************************** hotel search
 
     const ViewHotels = (id, name) => {
@@ -293,7 +313,7 @@ export default function Search() {
     };
 
 
-    console.log(pathname, "..............");
+    console.log(pathname, places, "..............");
 
 
 

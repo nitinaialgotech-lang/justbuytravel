@@ -9,6 +9,12 @@
   --cl-brown: rgba(115, 115, 115, 1);
   --cl-bl: rgba(29, 31, 39, 1);
 }
+@media only screen and (max-width: 1200px) {
+  .blog_card_box > .blog_card > .blog_card_img > img {
+    max-height: 200px;
+    min-height: 200px;
+  }
+}
 
 @media only screen and (max-width: 1024px) {
   .mobile_search_box {
@@ -1153,6 +1159,17 @@
   .footer_section > .bg_back > .left_img > img {
     width: 100%;
     height: 100%;
+  }
+  /* ******************* quick links ......... */
+  .quick_links {
+    margin-top: 0px;
+    padding: 0px 20px !important;
+  }
+  .md_padding {
+    padding-bottom: 20px !important;
+  }
+  .md_pbtop {
+    padding-top: 20px !important;
   }
 }
 /* ********************* pixel ................................................7 ........ */

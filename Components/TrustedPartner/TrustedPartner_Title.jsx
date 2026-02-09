@@ -3,7 +3,7 @@ import React from 'react'
 export default function TrustedPartner_Title() {
     return (
         <>
-            <section className='page_banner_section trusted_partner_section'>
+            <section className='only_content_banner '>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">

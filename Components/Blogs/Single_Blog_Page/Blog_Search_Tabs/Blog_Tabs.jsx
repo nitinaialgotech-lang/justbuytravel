@@ -104,6 +104,11 @@ export default function Blog_Tabs() {
 
   const TotalPages = blog_data?.totalPages || 0;
 
+<<<<<<< HEAD
+=======
+
+  // **********************************************
+>>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
   // Helper to get dynamic author name + image
   const getAuthorInfo = (post) => {
     const authorName = post?.yoast_head_json?.author || "JustBuyTravel";
@@ -125,6 +130,11 @@ export default function Blog_Tabs() {
     return { authorName, authorImage };
   };
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
   // For "Show all" tab: use post's first category in URL when available (category/slug instead of blogs/slug)
   const getPostHref = (post) => {
     const catId = post?.categories?.[0];
@@ -133,10 +143,20 @@ export default function Blog_Tabs() {
     return catSlug ? `/${catSlug}/${post?.slug}` : `/blog/${post?.slug}`;
   };
 
+<<<<<<< HEAD
+=======
+  const category_name = categories?.data?.map((item, i) => item?.name)
+
+
+
+
+
+
+>>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
   return (
 
     <>
-      <section>
+      <section className="">
         <div className="container">
           <div className="row justify-center">
             <div className="col-lg-12">
@@ -156,7 +176,7 @@ export default function Blog_Tabs() {
                           <BlogShimmerCard key={i} />
                         ))
                       ) : (
-                        blog_data?.posts?.map((item) => {
+                        blog_data?.posts?.slice(0, 9)?.map((item) => {
                           const rawText = item.excerpt.rendered?.replace(/<[^>]*>/g, "") || "";
                           const shortText = rawText.slice(0, 120);
                           const isLong = rawText.length > 120;
@@ -170,7 +190,19 @@ export default function Blog_Tabs() {
 
                           const date_it = item?.date;
                           const formatted = moment(date_it).format("MMMM D, YYYY");
+                          // ******************* short title ...............
+                          const truncateWords = (text, wordLimit) => {
+                            if (!text) return "";
+
+                            const plainText = text.replace(/<[^>]*>/g, ""); // remove HTML
+                            const words = plainText.split(/\s+/);
+
+                            if (words.length <= wordLimit) return plainText;
+
+                            return words.slice(0, wordLimit).join(" ") + "...";
+                          };
                           return (
+
 
 
                             <div className="col-lg-4" key={item.id}>
@@ -196,7 +228,7 @@ export default function Blog_Tabs() {
                                     <div className="blog_card_heading">
                                       <h4 className="m-0">
                                         <Link href={getPostHref(item)}>
-                                          {item?.title?.rendered}
+                                          {truncateWords(item?.title?.rendered, 7)}
                                         </Link>
                                       </h4>
                                     </div>
@@ -209,9 +241,6 @@ export default function Blog_Tabs() {
                                           : shortText + (isLong ? "..." : "")
                                       }}
                                     />
-
-
-
                                     <div className="blog_card_user flex items-center gap-2">
                                       <span className="g_color">
                                         <img
@@ -324,11 +353,10 @@ export default function Blog_Tabs() {
                 </Tabs>
 
                 {/* ********************************** yav b more button ........... */}
-                <div className="loadmore text-center flex justify-center padding_bottom ">
+                <div className="loadmore text-center flex justify-center padding_top  padding_bottom ">
                   {/* <button className="button_bg2" type="button" onClick={() => setcount(count + 1)}>
                     {isLoading ? <p className="m-0">..Loading</p> : <p className="m-0">Load More</p>}
                   </button> */}
-
                   <div className="pagination_section">
                     <ReactPaginate
                       breakLabel="..."
@@ -344,7 +372,7 @@ export default function Blog_Tabs() {
                       }
                       onPageChange={handlePageClick}
                       pageCount={TotalPages}
-                      pageRangeDisplayed={2}   // desktop visible range
+                      pageRangeDisplayed={4}   // desktop visible range
                       marginPagesDisplayed={1}
                       forcePage={count - 1}
                       containerClassName="pagination"
@@ -354,13 +382,6 @@ export default function Blog_Tabs() {
                     />
                   </div>
                 </div>
-
-
-
-
-
-
-
               </div>
               {/* **************** */}
             </div>

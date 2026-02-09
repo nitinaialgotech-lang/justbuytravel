@@ -51,8 +51,8 @@ export default function CapTownIconincs() {
     };
     // ************************************* iconic places apis 
     const { data: iconicPlacesData, isLoading } = useQuery({
-        queryKey: ["iconicPlacesNearby", "Denmark"],
-        queryFn: () => searchTouristAttraction("Denmark")
+        queryKey: ["iconicPlacesNearby", "cape town"],
+        queryFn: () => searchTouristAttraction("cape town")
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
 

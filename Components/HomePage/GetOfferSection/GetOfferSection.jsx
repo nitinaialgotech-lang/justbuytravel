@@ -10,8 +10,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { FaCheck } from "react-icons/fa";
 import { TiArrowUp } from "react-icons/ti";
+import { usePathname, useRouter } from "next/navigation";
 export default function GetOfferSection() {
-
+    const route = useRouter();
 
     const card = [
         {
@@ -109,7 +110,7 @@ export default function GetOfferSection() {
                                                                 </div>
                                                                 {/* ***** */}
                                                                 <div className="text_button mt-2">
-                                                                    <button className="flex items-center  arrow_button  ">
+                                                                    <button className="flex items-center  arrow_button" onClick={() => route.push("/book-packages")} >
                                                                         <span>view all activities </span>{" "}
                                                                         <span>
                                                                             <TiArrowUp />
