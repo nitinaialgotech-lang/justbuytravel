@@ -20,13 +20,13 @@ export default function Searchinput() {
     }
 
     const photo = place.photos[0];
-    
+
     // Try different possible paths for photo URL
     // 1. Direct URI field
     if (photo.uri) {
       return photo.uri;
     }
-    
+
     // 2. Direct URL field
     if (photo.url) {
       return photo.url;
@@ -127,10 +127,10 @@ export default function Searchinput() {
   const handleKeyDown = (e) => {
     // Extract places from response - handle both direct response and nested data
     const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
-    
+
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex((prev) => 
+      setSelectedIndex((prev) =>
         prev < places.length - 1 ? prev + 1 : prev
       );
     } else if (e.key === 'ArrowUp') {
@@ -207,14 +207,13 @@ export default function Searchinput() {
                   key={placeId}
                   onClick={() => handleSelectPlace(place)}
                   onMouseEnter={() => setSelectedIndex(index)}
-                  className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ${
-                    selectedIndex === index 
-                      ? 'bg-blue-50 border-l-4 border-blue-500' 
-                      : 'hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
+                  className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ${selectedIndex === index
+                    ? 'bg-blue-50 border-l-4 border-blue-500'
+                    : 'hover:bg-gray-50 border-l-4 border-transparent'
+                    }`}
                 >
                   {/* Hotel Image */}
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                       {imageLoading[placeId] && (
                         <div className="absolute inset-0 flex items-center justify-center">
@@ -224,9 +223,8 @@ export default function Searchinput() {
                       <img
                         src={displayImage}
                         alt={place.displayName?.text || 'Hotel'}
-                        className={`w-full h-full object-cover transition-opacity duration-200 ${
-                          imageLoading[placeId] ? 'opacity-0' : 'opacity-100'
-                        }`}
+                        className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId] ? 'opacity-0' : 'opacity-100'
+                          }`}
                         onLoadStart={() => handleImageLoadStart(placeId)}
                         onLoad={() => handleImageLoad(placeId)}
                         onError={(e) => handleImageError(placeId, e)}
@@ -249,7 +247,7 @@ export default function Searchinput() {
                       <div className="flex items-center gap-2">
                         <div className="flex items-center gap-1">
                           <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                           </svg>
                           <span className="text-gray-800 text-xs font-medium">
                             {place.rating.toFixed(1)}
@@ -270,7 +268,7 @@ export default function Searchinput() {
                   </div>
 
                   {/* Arrow Icon */}
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

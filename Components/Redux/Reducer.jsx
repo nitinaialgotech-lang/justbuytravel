@@ -9,8 +9,9 @@ const initialState = {
         long: "",
         name: ""
     }
-
 }
+
+// 
 const counterSlice = createSlice({
     name: "user",
     initialState,

@@ -1,7 +1,7 @@
-import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity } from "./https"
+import { https_api, https_blog, https_blog_category, https_checkIn, https_flights, https_hotels, https_SearchCity } from "./https"
 
 // Helper function to disambiguate common city names
-
+const key =process.env.NEXT_PUBLIC_SERPAPI_KEY;
 
 export const SearchLocation = async (search, address) => {
     return await https_api.get(`/search.php?city=${search}&full_address=${address}`)
@@ -162,4 +162,8 @@ export const IconicPlaces = async (lat, lng) => {
 };
 export const GetHotel_Detail = async (id) => {
     return await https_SearchCity.get(`/place-details.php?placeId=${id}`)
+}
+
+export const Get_Flights = async (from, to, date) => {
+    return await https_flights.get(`/search.json?engine=google_flights&departure_id=${from}&arrival_id=${to}&currency=USD&type=2&outbound_date=${date}&api_key=${key}`)
 }

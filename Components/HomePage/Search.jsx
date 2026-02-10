@@ -480,7 +480,7 @@ export default function Search() {
                                                                         }`}
                                                                 >
                                                                     {/* Hotel Image */}
-                                                                    <div className="flex-shrink-0">
+                                                                    <div className="shrink-0">
                                                                         <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                                                                             {imageLoading[placeId] && (
                                                                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -537,7 +537,7 @@ export default function Search() {
                                                                     </div>
 
                                                                     {/* Arrow Icon */}
-                                                                    <div className="flex-shrink-0">
+                                                                    <div className="shrink-0">
                                                                         <svg
                                                                             className="w-5 h-5 text-gray-400"
                                                                             fill="none"
@@ -641,7 +641,7 @@ export default function Search() {
                                                                             }`}
                                                                     >
                                                                         {/* Hotel Image */}
-                                                                        <div className="flex-shrink-0">
+                                                                        <div className="shrink-0">
                                                                             <div className="w-15 h-15 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                                                                                 {imageLoading[placeId] && (
                                                                                     <div className="absolute inset-0 flex items-center justify-center">
@@ -709,7 +709,7 @@ export default function Search() {
                                                                         </div>
 
                                                                         {/* Arrow Icon */}
-                                                                        <div className="flex-shrink-0">
+                                                                        <div className="shrink-0">
                                                                             <svg
                                                                                 className="w-5 h-5 text-gray-400"
                                                                                 fill="none"
@@ -754,7 +754,7 @@ export default function Search() {
                                                 </div>
                                                 <button
                                                     type="submit"
-                                                    className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 w-full w-100  search_padding "
+                                                    className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 w-full  search_padding "
                                                 >
                                                     Search
                                                 </button>

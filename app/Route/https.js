@@ -30,3 +30,8 @@ export const https_SearchCity = axios.create({
     baseURL: "https://justbuygear.com/justbuytravel-api",
     headers: commonHeaders,
 });
+
+export const https_flights = axios.create({
+    baseURL: "https://serpapi.com",
+    headers: commonHeaders,
+});
