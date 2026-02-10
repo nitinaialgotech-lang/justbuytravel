@@ -1226,6 +1226,19 @@ button {
 
 .content_box_detail {
   padding: 20px 20px;
+  background-color: #FAFCFF;
+  border-radius: 10px;
+  border: 1px solid #E5EAF4;
+}
+.content_box_detail > h4 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.partners_logo{
+  border-radius: 10px;
+  border: 1px solid rgba(58 63 69 / 10%);
+  padding: 30px;
+  background-color: #ffffff;
 }
 
 /* **********************************************    Blog Details Section */
@@ -3720,4 +3733,12 @@ span.rating-stars {
   border-radius: 5px;
   padding: 2px 3px !important;
   font-size: 16px;
+}
+.suggest_image img{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;  
+}
+.partners_logo img{
+  width: 150px;
 }

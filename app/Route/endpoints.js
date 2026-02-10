@@ -261,6 +261,17 @@ export const IconicPlaces = async (lat, lng) => {
         },
     });
 };
+export const GetSerpHotelDetail = async (q, checkin, checkout, adults = 2, currency = "USD") => {
+    return await https_places.get(`/serp-hotel`, {
+        params: {
+            q,
+            check_in_date: checkin,
+            check_out_date: checkout,
+            adults,
+            currency,
+        },
+    });
+};
 export const GetHotel_Detail = async (id) => {
     return await https_places.get(`/place-details`, {
         params: {

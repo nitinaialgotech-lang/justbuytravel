@@ -31,7 +31,6 @@ export default function CurrencyPicker() {
         {/* <IoPricetag className={`${open ? "g_color" : ""} `} /> */}
         <span className={`${open ? "g_color" : ""} currency`}>
           {currentLabel
-            ? `${currentLabel.symbol} ${currentLabel.code}`
             ? `${currentLabel.symbol} ${currentLabel.code} `
             : currency}
         </span>

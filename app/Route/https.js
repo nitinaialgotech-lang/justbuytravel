@@ -33,11 +33,14 @@ export const https_SearchCity = axios.create({
 
 // Internal API client for Next.js routes (e.g., Google Places text/nearby/place-details)
 // Use an absolute URL on the server and a relative URL in the browser.
+// When NEXT_PUBLIC_BASE_PATH is set, API routes are served under that path.
 const isServer = typeof window === "undefined";
 const siteBase =
     (isServer ? process.env.NEXT_PUBLIC_SITE_URL : undefined) || "http://localhost:3000";
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
+const apiPrefix = basePath ? `${basePath}/api` : "/api";
 
 export const https_places = axios.create({
-    baseURL: isServer ? `${siteBase.replace(/\/$/, "")}/api` : "/api",
+    baseURL: isServer ? `${siteBase.replace(/\/$/, "")}${apiPrefix}` : apiPrefix,
     headers: commonHeaders,
 });

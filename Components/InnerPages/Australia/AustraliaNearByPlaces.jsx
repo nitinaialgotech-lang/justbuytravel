@@ -16,6 +16,7 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { Navigation, Pagination } from "swiper/modules";
+import CardShimmerEffect from '@/component/CardShimmerEffect';
 /******************* stqart function */
 
 export default function AustraliaNearByPlaces() {
@@ -46,7 +47,7 @@ export default function AustraliaNearByPlaces() {
         return stars;
     };
     /********************************************  */
-    const { data: nearbyRestaurantsData } = useQuery({
+    const { data: nearbyRestaurantsData, isLoading } = useQuery({
         queryKey: ["restaurantsNearby", "Australia"],
         queryFn: () => NearbyRestaurant("Australia"),
     });

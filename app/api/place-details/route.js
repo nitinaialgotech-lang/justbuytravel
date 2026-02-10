@@ -74,7 +74,9 @@ async function handleRequest(req) {
       languageCode = "",
       regionCode = "",
       sessionToken = "",
-      fieldMask = MINIMAL_FIELD_MASK,
+      // Use the richer default so hotel amenities (amenityOptions, lodgingMetadata, etc.)
+      // are returned without callers having to pass a custom mask.
+      fieldMask = DEFAULT_FIELD_MASK,
     } = data;
 
     if (!placeId) {

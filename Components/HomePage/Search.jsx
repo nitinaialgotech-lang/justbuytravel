@@ -37,13 +37,10 @@ export default function Search() {
     const [searchContent, setSearchContent] = useState("");
     const [activeTab, setActiveTab] = useState(isBookHotelsPage ? "hotels" : "all");
     const [textContent, setContenttext] = useState(isBookHotelsPage ? "Search hotels by name or city" : "");
-<<<<<<< HEAD
-    // When true and the input is empty, we still fetch a default mixed list
-    // of popular places so something shows as soon as the field is focused.
+    // When true, we show a default set of suggestions (e.g. popular hotels)
+    // as soon as the search input is focused, even if the user hasn't typed yet.
     const [showDefaultOnFocus, setShowDefaultOnFocus] = useState(false);
-=======
     const dispatch = useDispatch();
->>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
     useEffect(() => {
         setSearchContent(query);
     }, [query]);
@@ -213,7 +210,7 @@ export default function Search() {
         } else {
             setShowDropdown(false);
         }
-    }, [autoCompleteData, searchContent]);
+    }, [autoCompleteData, searchContent, showDefaultOnFocus]);
 
     const handleInputChange = (e) => {
         const value = e.target.value;

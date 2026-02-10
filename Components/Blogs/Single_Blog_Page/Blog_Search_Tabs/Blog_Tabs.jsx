@@ -104,11 +104,8 @@ export default function Blog_Tabs() {
 
   const TotalPages = blog_data?.totalPages || 0;
 
-<<<<<<< HEAD
-=======
 
   // **********************************************
->>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
   // Helper to get dynamic author name + image
   const getAuthorInfo = (post) => {
     const authorName = post?.yoast_head_json?.author || "JustBuyTravel";
@@ -130,11 +127,8 @@ export default function Blog_Tabs() {
     return { authorName, authorImage };
   };
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
   // For "Show all" tab: use post's first category in URL when available (category/slug instead of blogs/slug)
   const getPostHref = (post) => {
     const catId = post?.categories?.[0];
@@ -143,8 +137,6 @@ export default function Blog_Tabs() {
     return catSlug ? `/${catSlug}/${post?.slug}` : `/blog/${post?.slug}`;
   };
 
-<<<<<<< HEAD
-=======
   const category_name = categories?.data?.map((item, i) => item?.name)
 
 
@@ -152,7 +144,6 @@ export default function Blog_Tabs() {
 
 
 
->>>>>>> c4831b18cda63d451149a6bc1cdc744c9c3620a9
   return (
 
     <>

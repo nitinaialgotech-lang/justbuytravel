@@ -3,12 +3,11 @@ import React, { useEffect, useState, useMemo } from "react";
 import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
-import { GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName } from "@/app/Route/endpoints";
+import { GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName, GetSerpHotelDetail } from "@/app/Route/endpoints";
 import { useParams, useSearchParams } from "next/navigation";
 import AboutHotelDetail from "./AboutHotelDetail";
 import NearByHotel from "./NearByHotel";
 import HotelLocation from "./HotelLocation";
-import SearchSidebar from "../SearchSidebar";
 import Footer from "@/component/Footer";
 import HotelFacilities from "./HotelFacilities";
 import ImageGallery from "./ImageGallery";
@@ -44,7 +43,7 @@ import { getHotelIdFromSlug } from "@/app/utils/seo";
 import { getAssetPath } from "@/app/utils/assetPath";
 
 export default function SearchHotelDetail() {
-    const { formatPrice } = useCurrency();
+    const { formatPrice, currency } = useCurrency();
     const search_detail = useSearchParams();
     const params = useParams();
     const [open, setOpen] = useState(false);
@@ -128,9 +127,9 @@ export default function SearchHotelDetail() {
     const oneImage = HotelDetail?.photos?.slice(0, 1)?.map((item) => item?.name) || '';
     const longitude = HotelDetail?.location?.longitude;
     const latitude = HotelDetail?.location?.latitude;
-    const itemrating = HotelDetail?.rating
-    const ratingCount = HotelDetail?.userRatingCount
-    const userReviews = HotelDetail?.reviews
+    const itemrating = HotelDetail?.rating;
+    const ratingCount = HotelDetail?.userRatingCount;
+    const userReviews = HotelDetail?.reviews;
     // ****************************************** to fetch the detail of hotel api >>>>>>>>>>>>>>>>>>>>>>>>
     const locationName = (HotelDetail?.displayName?.text ?? HotelDetail?.displayName ?? "").toString().trim();
     const locationAddress = (HotelDetail?.formattedAddress?.text ?? HotelDetail?.formattedAddress ?? "").toString().trim();
@@ -138,21 +137,57 @@ export default function SearchHotelDetail() {
         ? HotelDetail.types.includes("lodging")
         : false;
 
+    // ****************************************** derive hotel amenities from Google Places amenityOptions
+    const hotelAmenties = useMemo(() => {
+        const rawOptions = HotelDetail?.amenityOptions;
+        if (!Array.isArray(rawOptions) || rawOptions.length === 0) return [];
+
+        const labels = rawOptions
+            .map((opt) => {
+                if (!opt) return null;
+
+                // Prefer any human-readable text Google provides
+                const rawName =
+                    opt.displayName?.text ||
+                    opt.localizedText ||
+                    opt.amenityType ||
+                    opt.type ||
+                    opt.category ||
+                    null;
+
+                if (!rawName) return null;
+
+                const label = rawName
+                    .toString()
+                    .replace(/_/g, " ")
+                    .replace(/\s+/g, " ")
+                    .trim()
+                    .toLowerCase()
+                    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+                return label || null;
+            })
+            .filter(Boolean);
+
+        // Deduplicate while preserving order
+        return Array.from(new Set(labels));
+    }, [HotelDetail]);
+
     // ********************************************************** Fetch hotel key for pricing (testing.php – hotels only, not nearby restaurants/iconic places)
     const { data: hoteldata } = useQuery({
         queryKey: ["hoteldata", locationName, isHotelLodging],
-        queryFn: () => searchHotelName(locationName,locationAddress),
+        queryFn: () => searchHotelName(locationName, locationAddress),
         enabled: Boolean(locationName) && isHotelLodging,
         retry: 1,
     })
-    console.log(data,"hoteldataaaa");
+    console.log(data, "hoteldataaaa");
     const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
 
     // ********************************************************** price data
     const { data: PriceData, isLoading: isPriceLoading, isFetching: isPriceFetching } = useQuery({
-        queryKey: ["pricedata", hotelKey, searchCheckin, searchCheckout],
+        queryKey: ["pricedata", hotelKey, searchCheckin, searchCheckout, currency],
         queryFn: () => {
-            return HotelCheckInCheckOut(hotelKey, searchCheckin, searchCheckout);
+            return HotelCheckInCheckOut(hotelKey, searchCheckin, searchCheckout, currency);
         },
         // Only run when we actually have a resolved hotel key
         // and both check-in and check-out dates.
@@ -183,6 +218,87 @@ export default function SearchHotelDetail() {
         return { bestPriceUsd: minTotal === Infinity ? null : minTotal, bestProvider: provider };
     }, [rate, searchCheckin, searchCheckout]);
 
+    // ********************************************************** SerpAPI hotel details (only for lodging / hotel detail page)
+    const { data: serpHotelData } = useQuery({
+        queryKey: ["serpHotelDetail", locationName, searchCheckin, searchCheckout, currency],
+        queryFn: () => GetSerpHotelDetail(locationName, searchCheckin, searchCheckout, 2, currency),
+        enabled: Boolean(locationName) && isHotelLodging,
+        retry: 1,
+    });
+    const serpHotelDetail = serpHotelData?.data.raw;
+    console.log(serpHotelDetail, "serpHotelDetail");
+
+    // ****************************************** Normalize & map partner logos (Booking, Expedia, Hotels, Trip only)
+    const normalizePartnerSource = (source) => {
+        if (!source) return "";
+        const value = source.toString().toLowerCase();
+
+        if (value.includes("booking")) return "Booking";
+        if (value.includes("expedia")) return "Expedia";
+        if (value.includes("hotel")) return "Hotels";
+        if (value.includes("trip")) return "Trip";
+
+        return source;
+    };
+
+    const PARTNER_LOGOS = {
+        Booking: getAssetPath("/logo/hoteldetail/Booking.com_logo.svg.png"),
+        Expedia: getAssetPath("/logo/hoteldetail/expedia_logo.svg"),
+        Hotels: getAssetPath("/logo/hoteldetail/hotelsdotcom-logo.jpg"),
+        Trip: getAssetPath("/logo/hoteldetail/tripcom.webp"),
+    };
+
+    // Inspect full SerpAPI response in the browser devtools console
+    useEffect(() => {
+        if (serpHotelDetail) {
+            // eslint-disable-next-line no-console
+            console.log("SerpAPI hotel detail (serpHotelDetail):", serpHotelDetail);
+        }
+    }, [serpHotelDetail]);
+
+    // ****************************************** Derive human-friendly description (prefer SerpAPI, fallback to Google Places)
+    const hotelDescription = useMemo(() => {
+        const serpDetails = serpHotelDetail?.description;
+        return (
+            serpDetails ||
+            (locationAddress ? `About ${locationName} – ${locationAddress}` : "") ||
+            ""
+        );
+    }, [serpHotelDetail?.description, locationAddress, locationName]);
+
+    // ****************************************** Merge amenities from Google Places & SerpAPI
+    const serpAmenities = useMemo(() => {
+        const raw =
+            serpHotelDetail?.amenities || [];
+        if (!Array.isArray(raw)) return [];
+
+        const labels = raw
+            .map((item) => {
+                if (!item) return null;
+                const name =
+                    (typeof item === "string" ? item : item.name || item.title || item.type) ||
+                    null;
+                if (!name) return null;
+                const label = name
+                    .toString()
+                    .replace(/_/g, " ")
+                    .replace(/\s+/g, " ")
+                    .trim()
+                    .toLowerCase()
+                    .replace(/\b\w/g, (c) => c.toUpperCase());
+                return label || null;
+            })
+            .filter(Boolean);
+
+        return Array.from(new Set(labels));
+    }, [serpHotelDetail]);
+
+    const combinedAmenities = useMemo(() => {
+        const base = Array.isArray(hotelAmenties) ? hotelAmenties : [];
+        const extra = Array.isArray(serpAmenities) ? serpAmenities : [];
+        return Array.from(new Set([...base, ...extra]));
+    }, [hotelAmenties, serpAmenities]);
+
     // Handler for date search from ViewPriceDetail component
     const handleSearchDates = async (checkin, checkout) => {
         // Update state – this will automatically trigger the
@@ -190,10 +306,6 @@ export default function SearchHotelDetail() {
         setSearchCheckin(checkin);
         setSearchCheckout(checkout);
     };
-
-    const hotelDescription = null;
-    const hotelAmenties = null;
-    const hotelPricing = null;
 
     // ********************************** auto scroll 
     const priceSectionRef = useRef(null);
@@ -372,19 +484,19 @@ export default function SearchHotelDetail() {
                                         </div>
                                         {/* ***************** price section – hotels only, hidden for iconic places & nearby restaurants */}
                                         {isHotelLodging && (
-                                        <div className="price_hotel flex  gap-3">
-                                            <div className="price">
-                                                <h4 className="m-0">
-                                                    {bestPriceUsd != null ? formatPrice(bestPriceUsd) : "—"}
-                                                </h4>
-                                                <p className="m-0">{bestProvider || "Best price"}</p>
+                                            <div className="price_hotel flex  gap-3">
+                                                <div className="price">
+                                                    <h4 className="m-0">
+                                                        {bestPriceUsd != null ? formatPrice(bestPriceUsd) : "—"}
+                                                    </h4>
+                                                    <p className="m-0">{bestProvider || "Best price"}</p>
+                                                </div>
+                                                <div className="price_view_detail">
+                                                    <button className="hotel_detail_button text-white" onClick={handleScrollToPrice}>
+                                                        View Deals
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div className="price_view_detail">
-                                                <button className="hotel_detail_button text-white" onClick={handleScrollToPrice}>
-                                                    View Deals
-                                                </button>
-                                            </div>
-                                        </div>
                                         )}
                                     </div>
                                 </div>
@@ -485,26 +597,26 @@ export default function SearchHotelDetail() {
 
                                                                 </div>
                                                                 {isHotelLodging ? (
-                                                                <div className="price_hotel flex items-center gap-3">
-                                                                    <div className="price">
-                                                                        <h4 className="m-0">
-                                                                            {bestPriceUsd != null ? formatPrice(bestPriceUsd) : "—"}
-                                                                        </h4>
-                                                                        <p className="m-0">{bestProvider || "Best price"}</p>
+                                                                    <div className="price_hotel flex items-center gap-3">
+                                                                        <div className="price">
+                                                                            <h4 className="m-0">
+                                                                                {bestPriceUsd != null ? formatPrice(bestPriceUsd) : "—"}
+                                                                            </h4>
+                                                                            <p className="m-0">{bestProvider || "Best price"}</p>
+                                                                        </div>
+                                                                        <div className="price_view_detail">
+                                                                            <button className="hotel_detail_button text-white" onClick={() => { handleScrollToPrice(); setOpen(false); }}>
+                                                                                View details
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="popup_header_close ">
+                                                                            <img src={getAssetPath("/popup/add.png")} className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="price_view_detail">
-                                                                        <button className="hotel_detail_button text-white" onClick={() => { handleScrollToPrice(); setOpen(false); }}>
-                                                                            View details
-                                                                        </button>
-                                                                    </div>
+                                                                ) : (
                                                                     <div className="popup_header_close ">
                                                                         <img src={getAssetPath("/popup/add.png")} className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
                                                                     </div>
-                                                                </div>
-                                                                ) : (
-                                                                <div className="popup_header_close ">
-                                                                    <img src={getAssetPath("/popup/add.png")} className="cursor-pointer" alt="" onClick={() => setOpen(false)} />
-                                                                </div>
                                                                 )}
                                                                 {/* ************ */}
 
@@ -648,23 +760,121 @@ export default function SearchHotelDetail() {
                     </div>
                 </div>
             </section>
-            {/* ******************* */}
-            <div
-                ref={mounted ? priceSectionRef : null}
-                className={mounted ? "price-section" : undefined}
-            >
-                <ViewPriceDetail
-                    PriceRate={PriceData}
-                    hotelName={locationName}
-                    hotelAddress={locationAddress}
-                    hotelData={hoteldata?.data}
-                    onSearchDates={handleSearchDates}
-                    isLoadingPrices={isPriceLoading || isPriceFetching}
-                    initialCheckin={searchCheckin}
-                    initialCheckout={searchCheckout}
-                    showPricing={isHotelLodging}
-                />
-            </div>
+
+            {/* ************** Main detail content below gallery: description, amenities & pricing ************** */}
+            <section className="detail_page_padding">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+
+                            <div className="content_box_detail">
+                                <h4 className="mb-4">View prices for your travel dates</h4>
+
+                                {/* Inline date controls for SERP partner prices */}
+                                <div className="row g-3 mb-4">
+                                    <div className="col-md-4 col-6">
+                                        <label htmlFor="serp-checkin" className="form-label text-sm">
+                                            Check-in
+                                        </label>
+                                        <input
+                                            id="serp-checkin"
+                                            type="date"
+                                            className="form-control"
+                                            value={searchCheckin}
+                                            min={getTodayDate()}
+                                            onChange={(e) => setSearchCheckin(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-md-4 col-6">
+                                        <label htmlFor="serp-checkout" className="form-label text-sm">
+                                            Check-out
+                                        </label>
+                                        <input
+                                            id="serp-checkout"
+                                            type="date"
+                                            className="form-control"
+                                            value={searchCheckout}
+                                            min={searchCheckin || getTodayDate()}
+                                            onChange={(e) => setSearchCheckout(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-md-4 col-12 d-flex align-items-end">
+                                        <button
+                                            type="button"
+                                            className="hotel_detail_button hotel_mobile_button text-white w-100"
+                                            onClick={() => handleSearchDates(searchCheckin, searchCheckout)}
+                                        >
+                                            Change dates
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="price_wrapper">
+                                    {serpHotelDetail?.featured_prices
+                                        ?.map((item) => {
+                                            const normalizedSource = normalizePartnerSource(item?.source);
+
+                                            if (!["Booking", "Expedia", "Hotels", "Trip"].includes(normalizedSource)) {
+                                                return null;
+                                            }
+
+                                            return {
+                                                ...item,
+                                                normalizedSource,
+                                            };
+                                        })
+                                        .filter(Boolean)
+                                        .map((item, index) => (
+                                            <div
+                                                key={index}
+                                                className="flex items-center gap-2 mb-3 partners_logo justify-between"
+                                            >
+                                                <div className="p_logo">
+                                                    <img
+                                                        src={PARTNER_LOGOS[item.normalizedSource]}
+                                                        alt={item.normalizedSource}
+                                                    />
+                                                </div>
+                                                <div className="p_name">
+                                                    <span className="text-sm">{item.source}</span>
+                                                </div>
+                                                <div className="price_rate">
+                                                    <span className="text-sm">{item.rate_per_night.lowest}/night</span>
+                                                    <button className="btn hotel_detail_button hotel_mobile_button text-white view-price-search-button">View Details</button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row matrix_fix">
+                        <div className="col-lg-8">
+                            <div className="content_box_detail rounded-2xl border border-gray-300 bg-white">
+                                <AboutHotelDetail detail={hotelDescription} load={isLoading} />
+                                <HotelFacilities hotelAmenties={combinedAmenities} load={isLoading} />
+                            </div>
+                        </div>
+                        <div className="col-lg-4">
+                            <div
+                                ref={mounted ? priceSectionRef : null}
+                                className={mounted ? "price-section" : undefined}
+                            >
+                                <ViewPriceDetail
+                                    PriceRate={PriceData}
+                                    hotelName={locationName}
+                                    hotelAddress={locationAddress}
+                                    hotelData={hoteldata?.data}
+                                    onSearchDates={handleSearchDates}
+                                    isLoadingPrices={isPriceLoading || isPriceFetching}
+                                    showPricing={isHotelLodging}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <HotelAllReview reviews={userReviews} />
             <HotelLocation lat={latitude} long={longitude} load={isLoading} />
             <PopularHotelAroundWorld lat={latitude} long={longitude} />

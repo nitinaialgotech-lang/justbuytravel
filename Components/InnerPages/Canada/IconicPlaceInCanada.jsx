@@ -19,6 +19,7 @@ import {
 } from "react-icons/md";
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
+import CardShimmerEffect from "@/component/CardShimmerEffect";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 
@@ -27,24 +28,7 @@ export default function IconicPlaceInCanada() {
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);
     // ****************** state end *****
-    const fallbackIconicCards = [
-        {
-            img: "/iconic/iconic.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/iconic/iconic4.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/iconic/iconic6.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-        {
-            img: "/iconic/iconic7.jpg",
-            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
-        },
-    ];
+
     /************************************ */
     const renderBootstrapStars = (rating) => {
         const stars = [];
@@ -68,7 +52,7 @@ export default function IconicPlaceInCanada() {
         return stars;
     };
     // ************************************* iconic places apis 
-    const { data: iconicPlacesData } = useQuery({
+    const { data: iconicPlacesData, isLoading } = useQuery({
         queryKey: ["iconicPlacesNearby", "canada"], // ["iconicPlacesNearby", lat, long]
         queryFn: () => searchTouristAttraction("Canada"),
     });
