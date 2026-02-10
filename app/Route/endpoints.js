@@ -1,7 +1,7 @@
 import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity, https_places } from "./https"
 
 // Helper function to disambiguate common city names
-
+const key =process.env.NEXT_PUBLIC_SERPAPI_KEY;
 
 export const SearchLocation = async (search, address) => {
     return await https_api.get(`/search.php?city=${search}&full_address=${address}`)
@@ -269,6 +269,31 @@ export const GetSerpHotelDetail = async (q, checkin, checkout, adults = 2, curre
             check_out_date: checkout,
             adults,
             currency,
+        },
+    });
+};
+
+// SerpAPI Google Flights wrapper via internal Next.js API
+export const GetSerpFlights = async (
+    departure_id,
+    arrival_id,
+    outbound_date,
+    return_date = "",
+    adults = 1,
+    children = 0,
+    currency = "USD",
+    travel_class = "ECONOMY"
+) => {
+    return await https_places.get(`/serp-flight`, {
+        params: {
+            departure_id,
+            arrival_id,
+            outbound_date,
+            return_date,
+            adults,
+            children,
+            currency,
+            travel_class,
         },
     });
 };

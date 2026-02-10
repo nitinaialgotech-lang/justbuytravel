@@ -316,7 +316,7 @@ export default function Search() {
 
     return (
         <>
-            <section className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"}`}>
+            <section className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"} `}>
                 <div className="container">
                     <div className={`${isBookHotelsPage ? 'searchhotelcontainer' : "search_container "}`}>
                         <div className="search_container_box  rounded-2xl  w-full">
@@ -502,8 +502,8 @@ export default function Search() {
                                                                         }`}
                                                                 >
                                                                     {/* Hotel Image */}
-                                                                    <div className="flex-shrink-0 suggest_image">
-                                                                        <div className="rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
+                                                                    <div className="shrink-0">
+                                                                        <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                                                                             {imageLoading[placeId] && (
                                                                                 <div className="absolute inset-0 flex items-center justify-center">
                                                                                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
@@ -559,7 +559,7 @@ export default function Search() {
                                                                     </div>
 
                                                                     {/* Arrow Icon */}
-                                                                    <div className="flex-shrink-0">
+                                                                    <div className="shrink-0">
                                                                         <svg
                                                                             className="w-5 h-5 text-gray-400"
                                                                             fill="none"
@@ -666,7 +666,7 @@ export default function Search() {
                                                                             }`}
                                                                     >
                                                                         {/* Hotel Image */}
-                                                                        <div className="flex-shrink-0">
+                                                                        <div className="shrink-0">
                                                                             <div className="w-15 h-15 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
                                                                                 {imageLoading[placeId] && (
                                                                                     <div className="absolute inset-0 flex items-center justify-center">
@@ -734,7 +734,7 @@ export default function Search() {
                                                                         </div>
 
                                                                         {/* Arrow Icon */}
-                                                                        <div className="flex-shrink-0">
+                                                                        <div className="shrink-0">
                                                                             <svg
                                                                                 className="w-5 h-5 text-gray-400"
                                                                                 fill="none"
@@ -779,7 +779,7 @@ export default function Search() {
                                                 </div>
                                                 <button
                                                     type="submit"
-                                                    className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 w-full w-100  search_padding "
+                                                    className="  z-10 mt-2  bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs  focus:outline-none button_bg2 w-full  search_padding "
                                                 >
                                                     Search
                                                 </button>

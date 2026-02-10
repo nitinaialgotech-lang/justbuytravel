@@ -14,10 +14,10 @@ export const metadata = {
         description:
             "Explore hotels in Tokyo, from luxury stays to affordable options. Compare the best hotels in Tokyo and plan your trip with Just Buy Travel. ",
         type: "website",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/tokyo`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/hotels-in-tokyo`,
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/tokyo`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com'}/hotels-in-tokyo`,
     },
     robots: { index: false, follow: false },
 };
