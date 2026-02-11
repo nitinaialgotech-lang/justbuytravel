@@ -3982,11 +3982,11 @@ span.rating-stars {
 }
 .header_input {
   border: 1px solid var(--b-color);
-  width: 33%;
+  width: 25%;
   border-radius: 5px;
 }
 .header_input_1 {
-  width: 65%;
+  width: 45%;
   display: flex;
   position: relative;
 }
@@ -4111,14 +4111,16 @@ span.rating-stars {
   gap: 12px;
   margin-bottom: 12px;
 }
-
+.border_bt{
+  border-bottom: 1px solid var(--b-color) !important;
+}
 .reach_dot {
   width: 10px;
   height: 10px;
   background: var(--bg-color);
   border-radius: 50%;
   position: absolute;
-  left: -20px;
+  left: -22px;
   top: 6px;
 }
 .flight_chart_box_input {

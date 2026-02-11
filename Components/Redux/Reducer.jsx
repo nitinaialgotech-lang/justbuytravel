@@ -13,7 +13,8 @@ const initialState = {
         startfrom: "",
         endto: "",
         startDate: "",
-        endDate: ""
+        endDate: "",
+        type:"1"
 
     }
 }
@@ -42,6 +43,7 @@ const counterSlice = createSlice({
                 endto: action.payload.endto || "",
                 startDate: action.payload.startDate || "",
                 endDate: action.payload.endDate || "",
+                type: action.payload.type || "",
             };
         },
 

@@ -1,12 +1,30 @@
-import React from 'react'
-
+"use client"
+import { GetSerpFlights } from '@/app/Route/endpoints';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import moment from "moment";
 export default function Flight_Search_Detail() {
-    const [flights, setFlights] = useState([]);
-
+    const [flights, setFlights] = useState("");
+    const engine="google_flights";
+const departure_id = useSelector(state => state.user.SearchFlight.startfrom);
+const start_date = useSelector(state => state.user.SearchFlight.startDate);
+const  back_date = useSelector(state => state.user.SearchFlight.endDate);
+const arrival_id = useSelector(state => state.user.SearchFlight.endto);
+const type = useSelector(state => state.user.SearchFlight.type);
+const outbound_date = moment(start_date).format("YYYY-MM-DD");
+const return_date = moment(back_date).format("YYYY-MM-DD");
 
     const { data } = useQuery({
-        queryKey: ['flights'],
-        queryFn: () => GetSerpFlights(),
+        queryKey: ['flights',engine, departure_id,  outbound_date,return_date, arrival_id,type],
+        queryFn: () => GetSerpFlights(
+           { engine,
+            departure_id,
+            arrival_id,
+            outbound_date,
+            return_date: type === "1" ? return_date : undefined,
+            type}
+        ),
         onSuccess: (data) => {
             setFlights(data);
         },
@@ -16,6 +34,7 @@ export default function Flight_Search_Detail() {
     });
     console.log(data, "pkpkpkpkpkpkp", flights);
 
+    const flight = data?.data?.flights?.best_flights?.map((item) => item)
     return (
         <>
 
@@ -37,6 +56,8 @@ export default function Flight_Search_Detail() {
 
                                 <div className="departure bg-white rounded-2xl  border border-gray-100 text-left overflow-hidden">
                                     <div className="departure_chart border-b border-gray-100  px-4 ">
+
+
                                         <div className="row items-center">
                                             <div className="col-lg-12">
                                                 {/* *********** headerrr */}
@@ -49,7 +70,7 @@ export default function Flight_Search_Detail() {
                                                             </div>
                                                             <div className="departure_time">
                                                                 <h4 className='m-0'>
-                                                                    Departure - Tu,Mar 03
+                                                                    Departure - {data?.data?.outbound_date}
                                                                 </h4>
                                                                 <span className="sub">628 kg CO₂ · 1 stop</span>
                                                             </div>
@@ -59,7 +80,7 @@ export default function Flight_Search_Detail() {
                                                     <div className="col-lg-5">
                                                         <div className="departure_item flex items-center justify-end gap-3 md:gap-4">
                                                             <div className="price">
-                                                                $620
+                                                                ${data?.data?.flights?.price_insights?.lowest_price}
                                                             </div>
                                                             <button className='button_bg2'>
                                                                 Select Flight
@@ -71,23 +92,43 @@ export default function Flight_Search_Detail() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="departure_body px-4 md:px-6 pb-4 md:pb-5">
-                                        <div className="row items-center">
-                                            <div className="col-lg-1 flex flex-col items-center gap-2 text-sm text-gray-600">
-                                                <img src="/flights/MU.png" alt="" width={30} />
 
-                                                <span>Indgo</span>
+
+
+
+                                    <div className="departure_body px-4 md:px-6 pb-4 md:pb-5">
+                                        {
+                                            flight?.map((item) => {
+                                                return (
+                                                    <>
+                                                    
+                                                    
+                                                    
+                                        <div className="row items-center py-3 border_bt">
+                                            <div className="col-lg-1 flex flex-col items-center gap-2 text-sm text-gray-600">
+                                                <img src={item?.airline_logo} alt="" width={30} />
+
+                                             
 
                                             </div>
                                             <div className="col-lg-6">
-                                                <div className="contet">
+                                                {
+                                                    item?.flights?.map((planes) => {
+                                                        const formattedTime = moment(planes?.arrival_airport?.time, "YYYY-MM-DD HH:mm").format("hh:mm A");
+                                                        const ardate = moment(planes?.arrival_airport?.time).format("LL");
+                                                        const departure_Time = moment(planes?.departure_airport?.time, "YYYY-MM-DD HH:mm").format("hh:mm A");
+                                                        const dpdate = moment(planes?.departure_airport?.time).format("LL");
+                                                        return (
+                                                            <>
+                                                            
+                                                <div className="contet ">
                                                     <div className="timeline space-y-4">
                                                         {/* Leg 1 */}
                                                         <div className="leg">
                                                             <div className="reach_dot" />
                                                             <div className="leg-content">
-                                                                <p className="time">10:10 AM · Paris Charles de Gaulle (CDG)</p>
-                                                                <p className="meta">Travel time · 1h 30m</p>
+                                                                <p className="time">{formattedTime} · {planes?.arrival_airport?.name} ({planes?.arrival_airport?.id})</p>
+                                                                <p className="meta">Travel day - {ardate}</p>
 
 
                                                             </div>
@@ -101,14 +142,19 @@ export default function Flight_Search_Detail() {
                                                         <div className="leg">
                                                             <div className="reach_dot" />
                                                             <div className="leg-content">
-                                                                <p className="time">12:10 PM · Heathrow Airport (LHR)</p>
-                                                                <p className="meta">Travel time · 10h 40m</p>
+                                                                <p className="time">{ departure_Time} · {planes?.departure_airport?.name} ({planes?.departure_airport?.id})</p>
+                                                                <p className="meta">Travel day - {dpdate}</p>
 
 
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                            
+                                                            </>
+                                                        )
+                                                    })
+                                                }
 
                                             </div>
                                             <div className="col-lg-4">
@@ -125,6 +171,10 @@ export default function Flight_Search_Detail() {
                                                 </div>
                                             </div>
                                         </div>
+                                                    </>
+                                                )
+                                            })
+                                        }
 
                                     </div>
                                 </div>

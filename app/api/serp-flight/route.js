@@ -49,12 +49,15 @@ async function handleRequest(req) {
       arrival_id = "",
       outbound_date = "",
       return_date = "",
-      adults = 1,
-      children = 0,
-      currency = "USD",
+      type = "1",
+//  *******************************
+
+// *************************
+  
+      currency = "USD",                                                                                 
       country = "us",
       language = "en",
-      travel_class = "ECONOMY",
+     
     } = data;
 
     if (!departure_id || !arrival_id || !outbound_date) {
@@ -74,13 +77,12 @@ async function handleRequest(req) {
       departure_id,
       arrival_id,
       outbound_date,
-      return_date: return_date || undefined,
-      adults: adults ? Number(adults) : undefined,
-      children: children ? Number(children) : undefined,
+      return_date: type === "1" ? return_date : undefined,
+      type:"1",
       currency,
       hl: language,
       gl: country,
-      travel_class,
+      
       api_key: SERP_API_KEY,
     });
 
@@ -90,10 +92,8 @@ async function handleRequest(req) {
         arrival_id,
         outbound_date,
         return_date: return_date || null,
-        adults: Number(adults) || 1,
-        children: Number(children) || 0,
+        type,
         currency,
-        travel_class,
         flights,
       },
       { status: 200, headers: corsHeaders }

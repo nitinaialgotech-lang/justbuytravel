@@ -274,33 +274,30 @@ export const GetSerpHotelDetail = async (q, checkin, checkout, adults = 2, curre
 };
 
 // SerpAPI Google Flights wrapper via internal Next.js API
-export const GetSerpFlights = async (
-    engine,
-    departure_id = "CDG",
-    arrival_id = "AUS",
-    currency = "USD",
-    type = "1",
+export const GetSerpFlights = async ({
+    engine = "google_flights",
+    departure_id,
+    arrival_id,
     outbound_date,
     return_date,
+    currency = "USD",
+    type = "1",
     travel_class = 1,
-
-) => {
+}) => {
     return await https_places.get(`/serp-flight`, {
         params: {
             engine,
             departure_id,
             arrival_id,
             outbound_date,
-            type,
             return_date,
             currency,
-            travel_class
-
-
-
+            type,
+            travel_class,
         },
     });
 };
+
 export const GetHotel_Detail = async (id) => {
     return await https_places.get(`/place-details`, {
         params: {
@@ -320,11 +317,13 @@ export const GetHotelPlacePricing = async (placeId, chk_in, chk_out, currency = 
         },
     });
 }
-export const Flight_AutoCompletion = async (search_name) => {
-    return await https_AutoCompletetion.get(`/search.json`, {
+// SerpAPI Google Flights autocomplete via internal Next.js API
+// This avoids CORS issues by calling our own `/api/flightautocomplete` route
+// from the browser, and letting the server talk to SerpAPI.
+export const Flight_AutoCompletion = async (q) => {
+    return await https_places.get(`/flightautocomplete`, {
         params: {
-            engine: "google_flights_autocomplete",
-            q: search_name
+            q,
         },
     });
 }
