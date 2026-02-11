@@ -73,12 +73,12 @@ export default function Header() {
                                 href="/"
                                 onClick={() => window.dispatchEvent(new Event("reset-search"))}
                             >
-                                <div className="logo">
-                                    <img
-                                        src={getAssetPath("/logo/logo.png.webp")}
-                                        alt="Just Buy Travel - Your Trusted Travel Companion"
-                                    />
-                                </div>
+
+                                <img
+                                    src={getAssetPath("/logo/logo.png.webp")}
+                                    alt="Just Buy Travel - Your Trusted Travel Companion"
+                                />
+
                             </Navbar.Brand>
                             {/* *********************** */}
                             <button onClick={handleShow} className="d-block d-lg-none">

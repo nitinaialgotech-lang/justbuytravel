@@ -31,6 +31,11 @@ export const https_SearchCity = axios.create({
     headers: commonHeaders,
 });
 
+// **************************
+export const https_AutoCompletetion = axios.create({
+    baseURL: "https://serpapi.com/",
+    headers: commonHeaders,
+});
 // Internal API client for Next.js routes (e.g., Google Places text/nearby/place-details)
 // Use an absolute URL on the server and a relative URL in the browser.
 // When NEXT_PUBLIC_BASE_PATH is set, API routes are served under that path.
@@ -44,3 +49,4 @@ export const https_places = axios.create({
     baseURL: isServer ? `${siteBase.replace(/\/$/, "")}${apiPrefix}` : apiPrefix,
     headers: commonHeaders,
 });
+

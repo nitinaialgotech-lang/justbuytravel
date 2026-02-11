@@ -337,8 +337,6 @@ export default function Search() {
                                                             setContenttext("Search places and hotels");
                                                             handleSearchTypeChange("all");
                                                             dispatch(SetSelectAll("all"))
-
-
                                                         }}
                                                     >
                                                         <span>

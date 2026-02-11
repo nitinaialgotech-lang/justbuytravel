@@ -1,7 +1,7 @@
-import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity, https_places } from "./https"
+import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity, https_places, https_flights, https_AutoCompletetion } from "./https"
 
 // Helper function to disambiguate common city names
-const key =process.env.NEXT_PUBLIC_SERPAPI_KEY;
+const key = process.env.NEXT_PUBLIC_SERPAPI_KEY;
 
 export const SearchLocation = async (search, address) => {
     return await https_api.get(`/search.php?city=${search}&full_address=${address}`)
@@ -193,10 +193,10 @@ export const TopHotelAroundWorld = async () => {
     const legacyResults = Array.isArray(raw?.results)
         ? raw.results
         : Array.isArray(raw?.places)
-        ? raw.places
-        : Array.isArray(raw)
-        ? raw
-        : [];
+            ? raw.places
+            : Array.isArray(raw)
+                ? raw
+                : [];
 
     return {
         data: {
@@ -275,25 +275,29 @@ export const GetSerpHotelDetail = async (q, checkin, checkout, adults = 2, curre
 
 // SerpAPI Google Flights wrapper via internal Next.js API
 export const GetSerpFlights = async (
-    departure_id,
-    arrival_id,
-    outbound_date,
-    return_date = "",
-    adults = 1,
-    children = 0,
+    engine,
+    departure_id = "CDG",
+    arrival_id = "AUS",
     currency = "USD",
-    travel_class = "ECONOMY"
+    type = "1",
+    outbound_date,
+    return_date,
+    travel_class = 1,
+
 ) => {
     return await https_places.get(`/serp-flight`, {
         params: {
+            engine,
             departure_id,
             arrival_id,
             outbound_date,
+            type,
             return_date,
-            adults,
-            children,
             currency,
-            travel_class,
+            travel_class
+
+
+
         },
     });
 };
@@ -316,3 +320,12 @@ export const GetHotelPlacePricing = async (placeId, chk_in, chk_out, currency = 
         },
     });
 }
+export const Flight_AutoCompletion = async (search_name) => {
+    return await https_AutoCompletetion.get(`/search.json`, {
+        params: {
+            engine: "google_flights_autocomplete",
+            q: search_name
+        },
+    });
+}
+
