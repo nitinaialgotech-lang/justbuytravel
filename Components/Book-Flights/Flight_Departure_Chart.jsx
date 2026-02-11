@@ -1,5 +1,5 @@
 "use client"
-import { Get_Flights } from '@/app/Route/endpoints';
+import { GetSerpFlights } from '@/app/Route/endpoints';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 

@@ -1,7 +1,7 @@
 import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity, https_places } from "./https"
 
 // Helper function to disambiguate common city names
-const key =process.env.NEXT_PUBLIC_SERPAPI_KEY;
+const key = process.env.NEXT_PUBLIC_SERPAPI_KEY;
 
 export const SearchLocation = async (search, address) => {
     return await https_api.get(`/search.php?city=${search}&full_address=${address}`)
@@ -193,10 +193,10 @@ export const TopHotelAroundWorld = async () => {
     const legacyResults = Array.isArray(raw?.results)
         ? raw.results
         : Array.isArray(raw?.places)
-        ? raw.places
-        : Array.isArray(raw)
-        ? raw
-        : [];
+            ? raw.places
+            : Array.isArray(raw)
+                ? raw
+                : [];
 
     return {
         data: {
@@ -272,6 +272,13 @@ export const GetSerpHotelDetail = async (q, checkin, checkout, adults = 2, curre
         },
     });
 };
+export const GetAiModal = async (q) => {
+    return await https_places.get(`/serp-ai-modal`, {
+        params: {
+            q
+        },
+    });
+}
 
 // SerpAPI Google Flights wrapper via internal Next.js API
 export const GetSerpFlights = async (

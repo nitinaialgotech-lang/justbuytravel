@@ -3993,3 +3993,6 @@ span.rating-stars {
 .header_input_head > .header_title > .content > .item > span {
   color: var(--pc-color);
 }
+.partners_logo img{
+  width: 150px;
+}

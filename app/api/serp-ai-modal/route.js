@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { getJson } from "serpapi";
 
-// Use Node.js runtime (serpapi uses Node APIs); ensures route is registered
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -45,74 +44,54 @@ async function handleRequest(req) {
     const data = { ...Object.fromEntries(url.searchParams), ...body };
 
     const {
-      departure_id = "",
-      arrival_id = "",
-      outbound_date = "",
-      return_date = "",
-      adults = 1,
-      children = 0,
-      currency = "USD",
-      country = "us",
-      language = "en",
-      travel_class: raw_travel_class = "ECONOMY",
-      type = "2", // SerpAPI flight type: "2" = round trip
+      q = "",
+      location = "",
+      gl = "us",
+      hl = "en",
+      device = "",
+      subsequent_request_token = "",
     } = data;
 
-    // Normalize travel class; SerpAPI rejects numeric "0" etc.
-    let travel_class =
-      typeof raw_travel_class === "string" ? raw_travel_class.trim() : "";
-    if (!travel_class || travel_class === "0") {
-      travel_class = undefined;
-    }
+    const query = typeof q === "string" ? q.trim() : "";
 
-    if (!departure_id || !arrival_id || !outbound_date) {
+    if (!query) {
       return NextResponse.json(
-        {
-          error:
-            "Parameters departure_id, arrival_id and outbound_date are required",
-        },
+        { error: "Parameter q (search query) is required" },
         { status: 400, headers: corsHeaders }
       );
     }
 
-    // Directly call SerpAPI Google Flights engine with minimal, known-good payload
-    // (match the official SerpAPI example first; add extras later if needed).
-    const flights = await getJson({
-      engine: "google_flights",
-      departure_id,
-      arrival_id,
-      currency,
-      outbound_date,
-      type,
+    const params = {
+      engine: "google_ai_mode",
+      q: query,
       api_key: SERP_API_KEY,
-    });
+    };
+
+    if (location) params.location = location;
+    if (gl) params.gl = gl;
+    if (hl) params.hl = hl;
+    if (device) params.device = device;
+    if (subsequent_request_token) params.subsequent_request_token = subsequent_request_token;
+
+    const json = await getJson(params);
 
     return NextResponse.json(
       {
-        departure_id,
-        arrival_id,
-        outbound_date,
-        return_date: return_date || null,
-        adults: Number(adults) || 1,
-        children: Number(children) || 0,
-        currency,
-        travel_class,
-        type,
-        flights,
+        q: query,
+        text_blocks: json?.text_blocks ?? null,
+        ask_ai_mode: json?.ask_ai_mode ?? null,
+        raw: json,
       },
       { status: 200, headers: corsHeaders }
     );
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error("SerpAPI /api/serp-flight error:", err);
+    console.error("SerpAPI /api/serp-ai-modal error:", err);
 
     const status = err?.response?.status || 500;
 
-    // Try to capture any SerpAPI error payload or JSON embedded in the message
     let respData =
-      err?.response?.data ??
-      err?.responseBody ??
-      null;
+      err?.response?.data ?? err?.responseBody ?? null;
     if (!respData && typeof err?.message === "string") {
       try {
         respData = JSON.parse(err.message);
@@ -142,4 +121,3 @@ async function handleRequest(req) {
     );
   }
 }
-

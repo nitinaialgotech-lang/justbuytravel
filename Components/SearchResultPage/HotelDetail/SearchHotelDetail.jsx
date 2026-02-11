@@ -3,9 +3,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import "../../../style/searchresult.css";
 import HotelDetailContent from "./HotelDetailContent";
 import { useQuery } from "@tanstack/react-query";
-import { GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName, GetSerpHotelDetail } from "@/app/Route/endpoints";
+import { GetHotel_Detail, HotelCheckInCheckOut, HotelDetail, searchHotelDetail, searchHotelName, GetSerpHotelDetail, GetAiModal } from "@/app/Route/endpoints";
 import { useParams, useSearchParams } from "next/navigation";
 import AboutHotelDetail from "./AboutHotelDetail";
+import SerpAiModalContent from "./SerpAiModalContent";
 import NearByHotel from "./NearByHotel";
 import HotelLocation from "./HotelLocation";
 import Footer from "@/component/Footer";
@@ -180,6 +181,7 @@ export default function SearchHotelDetail() {
         enabled: Boolean(locationName) && isHotelLodging,
         retry: 1,
     })
+
     console.log(data, "hoteldataaaa");
     const hotelKey = hoteldata?.data?.xotelo?.hotel_key;
 
@@ -227,6 +229,13 @@ export default function SearchHotelDetail() {
     });
     const serpHotelDetail = serpHotelData?.data.raw;
     console.log(serpHotelDetail, "serpHotelDetail");
+    const aiModalQuery = [locationName, locationAddress].filter(Boolean).join(" ");
+    const { data: aimodal } = useQuery({
+        queryKey: ["aimodal", aiModalQuery],
+        queryFn: () => GetAiModal("About " + aiModalQuery),
+        enabled: Boolean(aiModalQuery),
+        retry: 1,
+    });
 
     // ****************************************** Normalize & map partner logos (Booking, Expedia, Hotels, Trip only)
     const normalizePartnerSource = (source) => {
@@ -235,8 +244,10 @@ export default function SearchHotelDetail() {
 
         if (value.includes("booking")) return "Booking";
         if (value.includes("expedia")) return "Expedia";
-        if (value.includes("hotel")) return "Hotels";
-        if (value.includes("trip")) return "Trip";
+        if (value.includes("hotel.com")) return "Hotels";
+        if (value.includes("trip.com")) return "Trip";
+        if (value.includes("tripadvisor.com")) return "";
+
 
         return source;
     };
@@ -246,6 +257,62 @@ export default function SearchHotelDetail() {
         Expedia: getAssetPath("/logo/hoteldetail/expedia_logo.svg"),
         Hotels: getAssetPath("/logo/hoteldetail/hotelsdotcom-logo.jpg"),
         Trip: getAssetPath("/logo/hoteldetail/tripcom.webp"),
+    };
+
+    // Full address string reused for affiliate / search URLs
+    const fullAddress = [locationName, locationAddress].filter(Boolean).join(", ").trim() || locationName || locationAddress || "";
+
+    // Affiliate bases for key partners (match ViewPriceDetail.jsx)
+    const AFFILIATE_BASES = {
+        Booking: "https://tp.media/r?marker=620562&trs=404603&p=2076&campaign_id=84",
+        Expedia: "https://tp.media/r?marker=620562&trs=404603&p=8645&campaign_id=594",
+        Trip: "https://tp.media/r?marker=620562&trs=404603&p=8626&campaign_id=121",
+    };
+
+    const buildAffiliateLink = (affiliateBase, hotelUrl) => {
+        if (!hotelUrl) return null;
+        if (!affiliateBase) return hotelUrl;
+        return `${affiliateBase}&u=${encodeURIComponent(hotelUrl)}`;
+    };
+
+    const buildPartnerHotelUrl = (item, normalizedSource, checkin, checkout) => {
+        if (!fullAddress) return null;
+
+        // Prefer direct deep links from SerpAPI when available
+        const directLink =
+            item?.deep_link ||
+            item?.booking_url ||
+            item?.url ||
+            item?.link;
+        if (directLink && typeof directLink === "string" && (directLink.startsWith("http://") || directLink.startsWith("https://"))) {
+            return directLink;
+        }
+
+        const encodedHotel = encodeURIComponent(fullAddress);
+        const los = Math.max(
+            1,
+            Math.ceil(
+                (new Date(checkout) - new Date(checkin)) /
+                (1000 * 60 * 60 * 24)
+            )
+        );
+
+        if (normalizedSource === "Booking") {
+            return `https://www.booking.com/searchresults.html?ss=${encodedHotel}&checkin=${checkin}&checkout=${checkout}`;
+        }
+        if (normalizedSource === "Expedia") {
+            return `https://www.expedia.com/Hotel-Search?destination=${encodedHotel}&startDate=${checkin}&endDate=${checkout}`;
+        }
+        if (normalizedSource === "Trip") {
+            // Trip.com: pass full address and dates, include currency
+            return `https://www.trip.com/hotels/list?flexType=1&destName=${encodedHotel}&searchWord=${encodedHotel}&searchType=H&checkin=${checkin}&checkout=${checkout}&crn=1&adult=2&curr=${encodeURIComponent(currency)}&locale=en-US&old=1`;
+        }
+        if (normalizedSource === "Hotels") {
+            return `https://www.hotels.com/search.do?destination=${encodedHotel}&checkIn=${checkin}&checkOut=${checkout}&q-room-0-adults=2&q-room-0-children=0`;
+        }
+
+        // Fallback: general Google search
+        return `https://www.google.com/search?q=hotel+${encodedHotel}+${encodeURIComponent(item?.source || "")}`;
     };
 
     // Inspect full SerpAPI response in the browser devtools console
@@ -762,118 +829,146 @@ export default function SearchHotelDetail() {
             </section>
 
             {/* ************** Main detail content below gallery: description, amenities & pricing ************** */}
-            <section className="detail_page_padding">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
+            {isHotelLodging ? (
+                <> <section className="detail_page_padding">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
 
-                            <div className="content_box_detail">
-                                <h4 className="mb-4">View prices for your travel dates</h4>
+                                <div className="content_box_detail">
+                                    <h4 className="mb-4">View prices for your travel dates</h4>
 
-                                {/* Inline date controls for SERP partner prices */}
-                                <div className="row g-3 mb-4">
-                                    <div className="col-md-4 col-6">
-                                        <label htmlFor="serp-checkin" className="form-label text-sm">
-                                            Check-in
-                                        </label>
-                                        <input
-                                            id="serp-checkin"
-                                            type="date"
-                                            className="form-control"
-                                            value={searchCheckin}
-                                            min={getTodayDate()}
-                                            onChange={(e) => setSearchCheckin(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="col-md-4 col-6">
-                                        <label htmlFor="serp-checkout" className="form-label text-sm">
-                                            Check-out
-                                        </label>
-                                        <input
-                                            id="serp-checkout"
-                                            type="date"
-                                            className="form-control"
-                                            value={searchCheckout}
-                                            min={searchCheckin || getTodayDate()}
-                                            onChange={(e) => setSearchCheckout(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="col-md-4 col-12 d-flex align-items-end">
-                                        <button
-                                            type="button"
-                                            className="hotel_detail_button hotel_mobile_button text-white w-100"
-                                            onClick={() => handleSearchDates(searchCheckin, searchCheckout)}
-                                        >
-                                            Change dates
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className="price_wrapper">
-                                    {serpHotelDetail?.featured_prices
-                                        ?.map((item) => {
-                                            const normalizedSource = normalizePartnerSource(item?.source);
-
-                                            if (!["Booking", "Expedia", "Hotels", "Trip"].includes(normalizedSource)) {
-                                                return null;
-                                            }
-
-                                            return {
-                                                ...item,
-                                                normalizedSource,
-                                            };
-                                        })
-                                        .filter(Boolean)
-                                        .map((item, index) => (
-                                            <div
-                                                key={index}
-                                                className="flex items-center gap-2 mb-3 partners_logo justify-between"
+                                    {/* Inline date controls for SERP partner prices */}
+                                    <div className="row g-3 mb-4">
+                                        <div className="col-md-4 col-6">
+                                            <label htmlFor="serp-checkin" className="form-label text-sm">
+                                                Check-in
+                                            </label>
+                                            <input
+                                                id="serp-checkin"
+                                                type="date"
+                                                className="form-control"
+                                                value={searchCheckin}
+                                                min={getTodayDate()}
+                                                onChange={(e) => setSearchCheckin(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="col-md-4 col-6">
+                                            <label htmlFor="serp-checkout" className="form-label text-sm">
+                                                Check-out
+                                            </label>
+                                            <input
+                                                id="serp-checkout"
+                                                type="date"
+                                                className="form-control"
+                                                value={searchCheckout}
+                                                min={searchCheckin || getTodayDate()}
+                                                onChange={(e) => setSearchCheckout(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="col-md-4 col-12 d-flex align-items-end">
+                                            <button
+                                                type="button"
+                                                className="hotel_detail_button hotel_mobile_button text-white w-100"
+                                                onClick={() => handleSearchDates(searchCheckin, searchCheckout)}
                                             >
-                                                <div className="p_logo">
-                                                    <img
-                                                        src={PARTNER_LOGOS[item.normalizedSource]}
-                                                        alt={item.normalizedSource}
-                                                    />
+                                                Change dates
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className="price_wrapper">
+                                        {serpHotelDetail?.featured_prices
+                                            ?.map((item) => {
+                                                const normalizedSource = normalizePartnerSource(item?.source);
+
+                                                if (!["Booking", "Expedia", "Hotels", "Trip"].includes(normalizedSource)) {
+                                                    return null;
+                                                }
+
+                                                return {
+                                                    ...item,
+                                                    normalizedSource,
+                                                };
+                                            })
+                                            .filter(Boolean)
+                                            .map((item, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="flex items-center gap-2 mb-3 partners_logo justify-between"
+                                                >
+                                                    <div className="p_logo">
+                                                        <img
+                                                            src={PARTNER_LOGOS[item.normalizedSource]}
+                                                            alt={item.normalizedSource}
+                                                        />
+                                                    </div>
+                                                    <div className="p_name">
+                                                        <span className="text-sm">{item.source}</span>
+                                                    </div>
+                                                    <div className="price_rate">
+                                                        <span className="text-sm">
+                                                            {item.rate_per_night?.lowest
+                                                                ? `${item.rate_per_night.lowest}/night`
+                                                                : ""}
+                                                        </span>
+                                                        {(() => {
+                                                            const hotelUrl = buildPartnerHotelUrl(
+                                                                item,
+                                                                item.normalizedSource,
+                                                                searchCheckin,
+                                                                searchCheckout
+                                                            );
+                                                            const affiliateBase = AFFILIATE_BASES[item.normalizedSource];
+                                                            const finalLink = buildAffiliateLink(affiliateBase, hotelUrl);
+
+                                                            return finalLink ? (
+                                                                <a
+                                                                    href={finalLink}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="btn hotel_detail_button hotel_mobile_button text-white view-price-search-button"
+                                                                >
+                                                                    View Details
+                                                                </a>
+                                                            ) : (
+                                                                <button className="btn hotel_detail_button hotel_mobile_button text-white view-price-search-button">
+                                                                    View Details
+                                                                </button>
+                                                            );
+                                                        })()}
+                                                    </div>
                                                 </div>
-                                                <div className="p_name">
-                                                    <span className="text-sm">{item.source}</span>
-                                                </div>
-                                                <div className="price_rate">
-                                                    <span className="text-sm">{item.rate_per_night.lowest}/night</span>
-                                                    <button className="btn hotel_detail_button hotel_mobile_button text-white view-price-search-button">View Details</button>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="row matrix_fix">
-                        <div className="col-lg-8">
-                            <div className="content_box_detail rounded-2xl border border-gray-300 bg-white">
-                                <AboutHotelDetail detail={hotelDescription} load={isLoading} />
-                                <HotelFacilities hotelAmenties={combinedAmenities} load={isLoading} />
+                </section></>
+            ) : (
+                <>
+                    <div className="container">
+                        <div className="row matrix_fix">
+                            <div className="col-lg-8">
+                                <div className="content_box_detail rounded-2xl border border-gray-300 bg-white">
+                                    {aimodal?.data && (
+                                        <div className="px-3 pb-3">
+                                            <h4 className="mb-3 fw-semibold">About this place</h4>
+                                            <SerpAiModalContent data={aimodal.data} />
+                                        </div>
+                                    )}
+                                    <HotelFacilities hotelAmenties={combinedAmenities} load={isLoading} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-lg-4">
-                            <div
-                                ref={mounted ? priceSectionRef : null}
-                                className={mounted ? "price-section" : undefined}
-                            >
-                                <ViewPriceDetail
-                                    PriceRate={PriceData}
-                                    hotelName={locationName}
-                                    hotelAddress={locationAddress}
-                                    hotelData={hoteldata?.data}
-                                    onSearchDates={handleSearchDates}
-                                    isLoadingPrices={isPriceLoading || isPriceFetching}
-                                    showPricing={isHotelLodging}
-                                />
+                            <div className="col-lg-4">
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </>
+            )}
+
 
             <HotelAllReview reviews={userReviews} />
             <HotelLocation lat={latitude} long={longitude} load={isLoading} />

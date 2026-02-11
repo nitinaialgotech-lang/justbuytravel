@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { VscArrowSwap } from "react-icons/vsc";
 import { BiRadioCircle } from "react-icons/bi";
@@ -5,9 +6,26 @@ import { IoLocationSharp } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { FaUser } from "react-icons/fa";
 import Flight_Departure_Chart from './Flight_Departure_Chart';
+import { GetSerpFlights } from "@/app/Route/endpoints";
+import { useQuery } from "@tanstack/react-query";
 export default function Flight_Departure() {
+    const { data } = useQuery({
+        queryKey: ["flights"],
+        queryFn: () => GetSerpFlights(
+            "CDG",
+            "AUS",
+            "2026-03-03",
+            "",
+            "1",
+            "0",
+            "USD",
+            "ECONOMY"
+        )
+    })
+    console.log(data, "flights");
     return (
         <>
+
 
             <section className='flight_departure_section py-8 md:py-10'>
                 <div className="container mx-auto px-4 md:px-6 lg:px-8">

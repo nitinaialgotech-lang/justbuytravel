@@ -13,6 +13,9 @@ export const CURRENCY_RATES = {
   INR: 83.12,
 };
 
+// Public, no-key FX API for live rates (USD base)
+const FX_API_URL = "https://api.exchangerate.host/latest?base=USD";
+
 export const CURRENCY_LABELS = {
   USD: { symbol: "$", code: "USD", name: "US Dollar" },
   EUR: { symbol: "€", code: "EUR", name: "Euro" },
@@ -41,9 +44,42 @@ function getInitialCurrency() {
 
 export function CurrencyProvider({ children }) {
   const [currency, setCurrencyState] = useState(DEFAULT_CURRENCY);
+  const [rates, setRates] = useState(CURRENCY_RATES);
+  const [ratesLastUpdated, setRatesLastUpdated] = useState(null);
 
   useEffect(() => {
     setCurrencyState(getInitialCurrency());
+  }, []);
+
+  // Fetch dynamic FX rates (with graceful fallback to static defaults)
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadRates() {
+      try {
+        const res = await fetch(FX_API_URL);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json?.rates || typeof json.rates !== "object") return;
+
+        if (cancelled) return;
+
+        // Merge server rates with our defaults so we always have at least the known ones
+        setRates((prev) => ({
+          ...prev,
+          ...json.rates,
+        }));
+        setRatesLastUpdated(json.date || new Date().toISOString());
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error("Failed to load FX rates, using static defaults", e);
+      }
+    }
+
+    loadRates();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const setCurrency = useCallback((newCurrency) => {
@@ -58,21 +94,21 @@ export function CurrencyProvider({ children }) {
   const formatPrice = useCallback(
     (amountUsd, options = {}) => {
       if (amountUsd == null || typeof amountUsd !== "number") return "";
-      const rate = CURRENCY_RATES[currency] ?? 1;
+      const rate = rates[currency] ?? rates.USD ?? 1;
       const value = amountUsd * rate;
       const { symbol } = CURRENCY_LABELS[currency] ?? { symbol: currency };
       const { decimals = 2 } = options;
       return `${symbol}${value.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
     },
-    [currency]
+    [currency, rates]
   );
 
   const convertFromUsd = useCallback(
     (amountUsd) => {
       if (amountUsd == null || typeof amountUsd !== "number") return 0;
-      return amountUsd * (CURRENCY_RATES[currency] ?? 1);
+      return amountUsd * (rates[currency] ?? rates.USD ?? 1);
     },
-    [currency]
+    [currency, rates]
   );
 
   const value = {
@@ -80,6 +116,8 @@ export function CurrencyProvider({ children }) {
     setCurrency,
     formatPrice,
     convertFromUsd,
+    rates,
+    ratesLastUpdated,
     // only the currencies we have real FX rates for
     supportedCurrencies: SUPPORTED_RATE_CURRENCIES,
     currencyLabels: CURRENCY_LABELS,
