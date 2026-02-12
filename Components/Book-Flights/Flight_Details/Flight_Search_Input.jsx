@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { VscArrowSwap } from "react-icons/vsc";
 import { BiRadioCircle } from "react-icons/bi";
@@ -24,12 +24,12 @@ export default function Flight_Search_Input() {
   const [range, setRange] = useState();
   const [open, setOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [typed, setType] = useState("1")
+  const [typed, setType] = useState("1");
   const [showToDropdown, setShowToDropdown] = useState(false);
   // ****************
   const [showPassengerDropdown, setShowPassengerDropdown] = useState(false);
-const [passengerCount, setPassengerCount] = useState(1);
-const passengerRef = useRef(null);
+  const [passengerCount, setPassengerCount] = useState(1);
+  const passengerRef = useRef(null);
   // ************************************
   const q = from;
   const qTo = to;
@@ -37,25 +37,26 @@ const passengerRef = useRef(null);
   const [travelClass, setTravelClass] = useState("Economy (included basic)");
   const [travelId, setTravelClassId] = useState("1");
   // *******************************
-  const departure_id = useSelector(state => state.user.SearchFlight.startfrom);
-  const start_date = useSelector(state => state.user.SearchFlight.startDate);
-  const back_date = useSelector(state => state.user.SearchFlight.endDate);
-  const arrival_id = useSelector(state => state.user.SearchFlight.endto);
+  const departure_id = useSelector(
+    (state) => state.user.SearchFlight.startfrom,
+  );
+  const start_date = useSelector((state) => state.user.SearchFlight.startDate);
+  const back_date = useSelector((state) => state.user.SearchFlight.endDate);
+  const arrival_id = useSelector((state) => state.user.SearchFlight.endto);
 
-  const pathname = usePathname()
+  const pathname = usePathname();
   // *********************
   const handlePassengerToggle = () => {
     setShowPassengerDropdown((prev) => !prev);
     setShowClassDropdown(false);
   };
 
-
   const formatted =
     range?.from && range?.to
       ? `${format(range.from, "EEE, MMM d")} - ${format(
-        range.to,
-        "EEE, MMM d"
-      )}`
+          range.to,
+          "EEE, MMM d",
+        )}`
       : "";
 
   // Fetch autocomplete results for departure airport
@@ -94,45 +95,43 @@ const passengerRef = useRef(null);
         endDate: range?.to,
         type: typed,
         travelClass: travelId,
-        passen_count: passengerCount
-      })
+        passen_count: passengerCount,
+      }),
     );
     router.push("/flight-details");
   };
   const whatType = [
     {
       id: "2",
-      name: "One Way"
+      name: "One Way",
     },
     {
       id: "1",
-      name: "Round Trip"
+      name: "Round Trip",
     },
     {
       id: "3",
-      name: "Multi-city"
+      name: "Multi-city",
     },
-  ]
+  ];
   const economy = [
     {
-
       eco_name: "Economy (included basic)",
       id: "1",
     },
     {
       eco_name: "Premium Economy",
       id: "2",
-
     },
     {
       eco_name: "Business Class",
-      id: "3"
+      id: "3",
     },
     {
       eco_name: "First Class",
-      id: "4"
-    }
-  ]
+      id: "4",
+    },
+  ];
   console.log(travelClass, "..................");
   // **************************************************************************
   const UpdateFlight_Detail = () => {
@@ -144,26 +143,34 @@ const passengerRef = useRef(null);
         endDate: back_date,
         type: typed,
         travelClass: travelId,
-        passen_count: passengerCount
-      })
+        passen_count: passengerCount,
+      }),
     );
-  }
-// ******************************************
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (passengerRef.current && !passengerRef.current.contains(event.target)) {
-      setShowPassengerDropdown(false);
-    }
   };
+  // ******************************************
+  const calendarRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => document.removeEventListener("mousedown", handleClickOutside);
-}, []);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <section className={`flight_detail_section  ${pathname !== "/" ? "padding_bottom" : " padding_t20"}`}>
-      <div className="container mx-auto ">
-        <div className={`flight_chart_box_input bg-white rounded ${pathname !== "/" ? "shadow-md" : " "}  border border-gray-100  space-y-5`}>
+    <section
+      className={`flight_detail_section  ${pathname !== "/" ? "padding_bottom" : ""} ${pathname === "/flights" ? "padding_t20" : ""}`}
+    >
+      <div className="container mx-auto md-p0 p-0 ">
+        <div
+          className={`flight_chart_box_input bg-white rounded ${pathname !== "/" ? "shadow-md" : " "}  border border-gray-100  space-y-5`}
+        >
           <div className="row m-0 ">
             <div className="header_input_head space-y-4">
               <div className="header_title m-0">
@@ -176,42 +183,39 @@ useEffect(() => {
                     </div> */}
                     {/* *****************************************************************   typexxxxxxxxxxxxxxxx */}
                     <div className="type_item flex gap-3">
-                      {
-                        whatType?.map((item) => {
-                          return (
-
-                            <div className="type" key={item?.id}>
-                              <label className="flex items-center cursor-pointer">
-                                <input
-                                  type="radio"
-                                  name="tripType"
-                                  value={item.id}
-                                  checked={typed === item.id}
-                                  onChange={(e) => setType(e.target.value)}
-                                  onClick={() => {
-                                    if (pathname == "/flight-details") {
-                                      UpdateFlight_Detail()
-                                    }
-                                  }}
-                                />
-                                <span>{item?.name}</span>
-                              </label>
-                            </div>
-                          )
-                        })
-                      }
+                      {whatType?.map((item) => {
+                        return (
+                          <div className="type" key={item?.id}>
+                            <label className="flex items-center cursor-pointer">
+                              <input
+                                type="radio"
+                                name="tripType"
+                                value={item.id}
+                                checked={typed === item.id}
+                                onChange={(e) => setType(e.target.value)}
+                                onClick={() => {
+                                  if (pathname == "/flight-details") {
+                                    UpdateFlight_Detail();
+                                  }
+                                }}
+                              />
+                              <span>{item?.name}</span>
+                            </label>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                   {/* *****************************************************************   passenger xxxxxxxxxxxxxxxxx */}
-                  
-
-
 
                   {/* *****************************************************************   Class Type*/}
                   <div className="item relative">
                     <span
                       className="cursor-pointer select-none"
-                      onClick={() => { setShowClassDropdown((prev) => !prev), setShowPassengerDropdown(false) }}
+                      onClick={() => {
+                        (setShowClassDropdown((prev) => !prev),
+                          setShowPassengerDropdown(false));
+                      }}
                     >
                       {travelClass}
                     </span>
@@ -221,9 +225,11 @@ useEffect(() => {
                       className={`
       absolute left-0 top-10 z-20 min-w-[220px] bg-white border border-gray-200 
       rounded-lg shadow-xl transition-all duration-200 ease-in-out
-      ${showClassDropdown
-                          ? "opacity-100 visible translate-y-0"
-                          : "opacity-0 invisible -translate-y-2"}
+      ${
+        showClassDropdown
+          ? "opacity-100 visible translate-y-0"
+          : "opacity-0 invisible -translate-y-2"
+      }
     `}
                       onMouseLeave={() => setShowClassDropdown(false)}
                     >
@@ -235,20 +241,18 @@ useEffect(() => {
                               type="button"
                               onClick={() => {
                                 setTravelClass(item?.eco_name);
-                                setTravelClassId(item?.id)
+                                setTravelClassId(item?.id);
                                 setShowClassDropdown(false);
                                 if (pathname == "/flight-details") {
-                                  UpdateFlight_Detail()
+                                  UpdateFlight_Detail();
                                 }
                               }}
                               className="text-left px-3 py-2 rounded-md hover:bg-gray-100 transition"
                             >
                               {item?.eco_name}
                             </button>
-                          )
-                        }
-
-                        )}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -269,7 +273,7 @@ useEffect(() => {
                       name="from"
                       id="from"
                       placeholder="Leaving From"
-                      className="block w-full  bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
+                      className="block w-full  bg-neutral-secondary-medium  border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
                       value={from}
                       onChange={(e) => {
                         const value = e.target.value;
@@ -302,7 +306,7 @@ useEffect(() => {
                           autoDropdownData.map((suggestion, index) => {
                             const primaryAirport =
                               Array.isArray(suggestion.airports) &&
-                                suggestion.airports.length > 0
+                              suggestion.airports.length > 0
                                 ? suggestion.airports[0]
                                 : null;
 
@@ -318,13 +322,15 @@ useEffect(() => {
                                 className="w-full text-left px-4 py-2 hover:bg-gray-50 cursor-pointer"
                               >
                                 <div className="text-sm font-medium text-gray-900">
-                                  <strong>{suggestion?.airports?.[0]?.id} - </strong>{suggestion?.airports?.[0]?.name}
+                                  <strong>
+                                    {suggestion?.airports?.[0]?.id} -{" "}
+                                  </strong>
+                                  {suggestion?.airports?.[0]?.name}
                                 </div>
 
                                 <div className="text-xs text-gray-500">
                                   City {suggestion?.airports?.[0]?.city}
                                 </div>
-
                               </button>
                             );
                           })
@@ -384,7 +390,7 @@ useEffect(() => {
                           autoToDropdownData.map((suggestion, index) => {
                             const primaryAirport =
                               Array.isArray(suggestion.airports) &&
-                                suggestion.airports.length > 0
+                              suggestion.airports.length > 0
                                 ? suggestion.airports[0]
                                 : null;
 
@@ -407,7 +413,6 @@ useEffect(() => {
                                 <div className="text-xs text-gray-500">
                                   City {primaryAirport?.city}
                                 </div>
-
                               </button>
                             );
                           })
@@ -421,10 +426,8 @@ useEffect(() => {
                   </div>
                 </div>
 
-                
-
                 {/* *********************** Dateeeeeeeeeeeeeeeeeeee *********************** */}
-                <div className="header_input relative h-12 ">
+                <div className="header_input relative h-12 " ref={calendarRef}>
                   <div className="icon icon absolute inset-y-0 start-3 flex items-center  pointer-events-none icon_search">
                     <SlCalender />
                   </div>
@@ -452,34 +455,35 @@ useEffect(() => {
                 {/* *********************** adultsssssssssssssssssssssss *********************** */}
                 <div className="header_input relative h-12" ref={passengerRef}>
                   {/* Input Trigger */}
-                  
-                    <div className="icon icon absolute inset-y-0 start-3 flex items-center  pointer-events-none icon_search">
+
+                  <div className="icon icon absolute inset-y-0 start-3 flex items-center  pointer-events-none icon_search">
                     <FaUser />
                   </div>
-                    <input
-                      type="text"
-                      readOnly
-                      onClick={() => setShowPassengerDropdown((prev) => !prev)}
-                      value={`${passengerCount} Adult${passengerCount > 1 ? "s" : ""}`}
-                      className="block w-full cursor-pointer h-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
-                    />
+                  <input
+                    type="text"
+                    readOnly
+                    onClick={() => setShowPassengerDropdown((prev) => !prev)}
+                    value={`${passengerCount} Adult${passengerCount > 1 ? "s" : ""}`}
+                    className="block w-full cursor-pointer h-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
+                  />
 
-                    {/* Arrow Icon */}
-                    <FiChevronDown
-                      className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 ${showPassengerDropdown ? "rotate-180" : "rotate-0"
-                        }`}
-                      size={18}
-                    />
-                 
+                  {/* Arrow Icon */}
+                  <FiChevronDown
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 ${
+                      showPassengerDropdown ? "rotate-180" : "rotate-0"
+                    }`}
+                    size={18}
+                  />
 
                   {/*........................................ Dropdown ........................................ */}
                   <div
                     className={`absolute left-0 mt-2 w-full bg-white border border-gray-200 
     rounded-xl shadow-2xl transition-all duration-300 ease-out origin-top z-50
-    ${showPassengerDropdown
-                        ? "opacity-100 scale-100 translate-y-0"
-                        : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                      }`}
+    ${
+      showPassengerDropdown
+        ? "opacity-100 scale-100 translate-y-0"
+        : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+    }`}
                   >
                     <div className="px-4 py-3 flex items-center justify-between">
                       <span className="text-sm text-gray-600">Adults</span>
