@@ -299,7 +299,9 @@ button {
 .bg-color-black {
   background-color: var(--foreground) !important;
 }
-
+.p_grey{
+  color: var(--pc-color);
+}
 .padding_bottom {
   padding-bottom: 50px;
 }
@@ -3976,19 +3978,25 @@ span.rating-stars {
   border: 0;
   padding: 10px 30px;
   border-radius: 5px;
+  color: var(--pc-color);
 }
 .departure_item {
   padding: 10px 20px;
 }
 .header_input {
   border: 1px solid var(--b-color);
-  width: 25%;
+  width: 18%;
   border-radius: 5px;
 }
 .header_input_1 {
   width: 45%;
   display: flex;
   position: relative;
+}
+.header_input > .icon > svg{
+  color: var(--pc-color);
+  fill: var(--pc-color);
+  font-size: 14px;
 }
 .header_input_1 > .arrow {
   z-index: 1;
@@ -4031,11 +4039,26 @@ span.rating-stars {
   font-size: 15px;
 }
 .departure_title_head {
-  padding: 20px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
   font-size: 25px;
 }
 .departure_title_head > h2 {
   font-size: 32px;
+}
+.color{
+  background-color: #00852f !important;
+  color:#ffffff !important;
+ 
+}
+.button_flight{
+  border:1px solid var(--bg-color);
+  color:var(--bg-color) !important;
+  background-color: #ffffff !important;
+  transition: .15s ease-in-out;
+}
+.button_flight:hover {
+  background-color: var(--bg-color) !important;
+  color: #ffffff !important;
 }
 .departure_title {
   padding: 10px 20px;
@@ -4111,11 +4134,11 @@ span.rating-stars {
   gap: 12px;
   margin-bottom: 12px;
 }
-.border_bt{
+.border_bt {
   border-bottom: 1px solid var(--b-color) !important;
 }
 .reach_dot {
-  width: 10px;
+width: 10px;
   height: 10px;
   background: var(--bg-color);
   border-radius: 50%;
@@ -4124,7 +4147,7 @@ span.rating-stars {
   top: 6px;
 }
 .flight_chart_box_input {
-  padding: 15px 15px;
+  padding: 50px 30px;
 }
 .leg-content {
   font-size: 14px !important;
@@ -4172,11 +4195,78 @@ span.rating-stars {
   font-size: 12px;
   color: #6b7280;
 }
+.badge-pill {
+  border-radius: 999px;
+}
+
+.badge-soft {
+  background: #e5f3ff;
+  color: #1d4ed8;
+}
+.header_input_head > .header_title > .content > .item > .type_item {
+  align-items: center;
+}
+.header_input_head > .header_title > .content > .item > .type_item > .type {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.header_input_head
+  > .header_title
+  > .content
+  > .item
+  > .type_item
+  > .type
+  > label > input {
+  width: 12px;
+}
+.header_input_head
+  > .header_title
+  > .content
+  > .item
+  > .type_item
+  > .type
+  > label{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .contet {
+    padding:20px;
+  }
+  .border_custom{
+    border: 1px solid var(--b-color) !important;
+  }
+.header_input_head
+  > .header_title
+  > .content
+  > .item
+  > .type_item
+  > .type
+  > label > span {
+  font-size: 14px;
+  color: var(--pc-color);
+  font-weight: 600;
+}
+.svg_icon > svg{
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: var(--b-color);
+}
+.svg_icon > svg > span {
+  font-size: 14px;
+  color: var(--pc-color);
+  font-weight: 600;
+}
 .header_input_head > .header_title > .content {
   padding: 0px 0px 10px 0px;
 }
 .header_input_head > .header_title > .content > .item > span {
+  font-size: 14px;
   color: var(--pc-color);
+  font-weight: 600;
 }
 /* *******calender >>>>>>>>>>>>>>> */
 /* Main selected days (start + end) */

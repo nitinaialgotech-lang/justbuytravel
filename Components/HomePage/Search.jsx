@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { nameCity, setLat, setLong, SetSelectAll } from "../Redux/Reducer";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 import { createHotelSlug } from "@/app/utils/seo";
+import Flight_Search_Input from "../Book-Flights/Flight_Details/Flight_Search_Input";
 export default function Search() {
 
     // **************************************************************************************
@@ -422,7 +423,8 @@ export default function Search() {
                             {/* ********************* search input xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
                             <div className="search_box_input d-none d-lg-block">
                                 {searchType === "flights" || isBookFlightsPage ? (
-                                    <Search_flight_section />
+                                    // <Search_flight_section />
+                                    <Flight_Search_Input />
                                 ) : (
 
                                     <form

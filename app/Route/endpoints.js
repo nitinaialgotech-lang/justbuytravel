@@ -283,6 +283,7 @@ export const GetSerpFlights = async ({
     currency = "USD",
     type = "1",
     travel_class = 1,
+    adults = 1,
 }) => {
     return await https_places.get(`/serp-flight`, {
         params: {
@@ -294,6 +295,7 @@ export const GetSerpFlights = async ({
             currency,
             type,
             travel_class,
+            adults,
         },
     });
 };
