@@ -73,12 +73,12 @@ export default function Header() {
                                 href="/"
                                 onClick={() => window.dispatchEvent(new Event("reset-search"))}
                             >
-                                <div className="logo">
-                                    <img
-                                        src={getAssetPath("/logo/logo.png.webp")}
-                                        alt="Just Buy Travel - Your Trusted Travel Companion"
-                                    />
-                                </div>
+
+                                <img
+                                    src={getAssetPath("/logo/logo.png.webp")}
+                                    alt="Just Buy Travel - Your Trusted Travel Companion"
+                                />
+
                             </Navbar.Brand>
                             {/* *********************** */}
                             <button onClick={handleShow} className="d-block d-lg-none">
@@ -86,7 +86,7 @@ export default function Header() {
                             </button>
 
                             {/* ************************ */}
-                            <Navbar.Collapse className="justify-end navbar_link_item">
+                            <div className="d-none d-lg-flex flex-grow-1 justify-content-end navbar_link_item">
                                 {/* ******** */}
                                 <Nav className="gap-4 nav-max-height-100" navbarScroll>
                                     <Nav.Link
@@ -146,7 +146,7 @@ export default function Header() {
                                     <CurrencyPicker />
                                 </Nav>
                                 {/* ******** */}
-                            </Navbar.Collapse>
+                            </div>
                         </Container>
                     </Navbar>
 

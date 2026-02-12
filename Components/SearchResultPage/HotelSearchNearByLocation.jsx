@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Restro } from "@/app/Route/endpoints";
+import { Restro, NearbyRestaurant } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,6 +23,8 @@ export default function HotelSearchNearByLocation({
     long,
     locationName,
     excludePlaceId,
+    placeName,
+    useTextSearch,
 }) {
     /********************* states *************** */
     const router = useRouter();
@@ -51,9 +53,9 @@ export default function HotelSearchNearByLocation({
     };
     /********************************************  */
     const { data: nearbyRestaurantsData } = useQuery({
-        queryKey: ["restaurantsNearby", lat, long],
-        queryFn: () => Restro(lat, long),
-        enabled: lat != null && long != null,
+        queryKey: ["restaurantsNearby", lat, long, placeName, useTextSearch],
+        queryFn: () => useTextSearch && placeName ? NearbyRestaurant(placeName) : Restro(lat, long),
+        enabled: (useTextSearch && !!placeName) || (lat != null && long != null),
     });
     const nearbyPlaceslist = nearbyRestaurantsData?.data?.places ?? [];
     const filteredNearbyPlaces = excludePlaceId

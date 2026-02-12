@@ -1,5 +1,5 @@
 "use client"
-import { IconicPlaces } from "@/app/Route/endpoints";
+import { IconicPlaces, searchTouristAttraction } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,7 +19,7 @@ import {
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
 /****************************** start function >>>>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
+export default function HotelSearchIconicPlaces({ lat, long, locationName, placeName, useTextSearch }) {
     /************ state start ******** */
     const router = useRouter();
     const [secondActive, setSecondActive] = useState(true);
@@ -54,9 +54,9 @@ export default function HotelSearchIconicPlaces({ lat, long, locationName }) {
     };
     // ************************************* iconic places apis 
     const { data: iconicPlacesData } = useQuery({
-        queryKey: ["iconicPlacesNearby", lat, long],
-        queryFn: () => IconicPlaces(lat, long),
-        enabled: lat != null && long != null,
+        queryKey: ["iconicPlacesNearby", lat, long, placeName, useTextSearch],
+        queryFn: () => useTextSearch && placeName ? searchTouristAttraction(placeName) : IconicPlaces(lat, long),
+        enabled: (useTextSearch && !!placeName) || (lat != null && long != null),
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
     return (

@@ -8,6 +8,13 @@ const initialState = {
         lat: "",
         long: "",
         name: ""
+    },
+    SearchFlight: {
+        startfrom: "",
+        endto: "",
+        startDate: "",
+        endDate: ""
+
     }
 }
 
@@ -28,8 +35,18 @@ const counterSlice = createSlice({
         nameCity: (state, action) => {
             state.SearchDetail.name = action.payload
         },
+        // *******************
+        setSearchFlight: (state, action) => {
+            state.SearchFlight = {
+                startfrom: action.payload.startfrom || "",
+                endto: action.payload.endto || "",
+                startDate: action.payload.startDate || "",
+                endDate: action.payload.endDate || "",
+            };
+        },
+
         resetAction: () => initialState,
     }
 })
-export const { SetSelectAll, setLat, setLong, nameCity, resetAction } = counterSlice.actions;
+export const { SetSelectAll, setLat, setLong, nameCity, setSearchFlight, resetAction } = counterSlice.actions;
 export default counterSlice.reducer

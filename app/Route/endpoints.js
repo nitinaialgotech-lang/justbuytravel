@@ -1,4 +1,4 @@
-import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity, https_places } from "./https"
+import { https_api, https_blog, https_blog_category, https_checkIn, https_hotels, https_SearchCity, https_places, https_flights, https_AutoCompletetion } from "./https"
 
 // Helper function to disambiguate common city names
 const key = process.env.NEXT_PUBLIC_SERPAPI_KEY;
@@ -135,11 +135,6 @@ export const NearbyRestaurant = async (text, limit = 50) => {
             includedType: "restaurant",
         },
     });
-}
-/******************* testing hotel detail */
-// Use stable PHP backend for hotel key resolution to ensure Xotelo integration keeps working.
-export const searchHotelName = async (name, address) => {
-    return await https_SearchCity.get(`/testing.php?hotel=${name}&include_xotelo=1`);
 }
 /********************************** check in check out apis >>>>>>>>>>>> */
 // Now use internal Next.js pricing API instead of legacy PHP endpoint.
@@ -282,25 +277,29 @@ export const GetAiModal = async (q) => {
 
 // SerpAPI Google Flights wrapper via internal Next.js API
 export const GetSerpFlights = async (
-    departure_id,
-    arrival_id,
-    outbound_date,
-    return_date = "",
-    adults = 1,
-    children = 0,
+    engine,
+    departure_id = "CDG",
+    arrival_id = "AUS",
     currency = "USD",
-    travel_class = "ECONOMY"
+    type = "1",
+    outbound_date,
+    return_date,
+    travel_class = 1,
+
 ) => {
     return await https_places.get(`/serp-flight`, {
         params: {
+            engine,
             departure_id,
             arrival_id,
             outbound_date,
+            type,
             return_date,
-            adults,
-            children,
             currency,
-            travel_class,
+            travel_class
+
+
+
         },
     });
 };
@@ -323,3 +322,11 @@ export const GetHotelPlacePricing = async (placeId, chk_in, chk_out, currency = 
         },
     });
 }
+export const Flight_AutoCompletion = async (search_name) => {
+    return await https_places.get(`/flight-autocomplete`, {
+        params: {
+            q: search_name,
+        },
+    });
+}
+

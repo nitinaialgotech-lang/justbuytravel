@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { nearbyPlaces } from "@/app/Route/endpoints";
+import { nearbyPlaces, searchHotel1 } from "@/app/Route/endpoints";
 import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
@@ -17,14 +17,14 @@ import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 
 
 // *************************************************************
-export default function HotelSearchRecomand({ lat, long, name }) {
+export default function HotelSearchRecomand({ lat, long, name, placeName, useTextSearch }) {
     /************************* ustate contetn *** */
     const [Active, setActive] = useState(true);
     /*********************** end stte ****** */
     const { data: nearbyPlacesData, isLoading } = useQuery({
-        queryKey: ["lodgingnearby", lat, long],
-        queryFn: () => nearbyPlaces(lat, long),
-        enabled: !!location,
+        queryKey: ["lodgingnearby", lat, long, placeName, useTextSearch],
+        queryFn: () => useTextSearch && placeName ? searchHotel1(placeName) : nearbyPlaces(lat, long),
+        enabled: (useTextSearch && !!placeName) || (!!lat && !!long),
         refetchOnWindowFocus: false
     });
     const nearbyPlace = nearbyPlacesData?.data?.places;
@@ -97,7 +97,8 @@ export default function HotelSearchRecomand({ lat, long, name }) {
     };
     // *************************  view al hotels 
     const viewAllHotels = () => {
-        router.push(`/view-all-hotels?lat=${lat}&long=${long}&name=${name}`)
+        const displayName = placeName || (Array.isArray(name) ? name?.[0] : name) || "";
+        router.push(`/view-all-hotels?lat=${lat}&long=${long}&name=${encodeURIComponent(displayName)}${useTextSearch ? "&type=region" : ""}`)
     }
     return (
         <>

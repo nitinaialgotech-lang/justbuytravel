@@ -124,11 +124,11 @@ async function handleRequest(req) {
     const debug =
       status === 500 && !respData
         ? {
-            name: err?.name || null,
-            message: err?.message || null,
-            stack: err?.stack || null,
-            toString: err ? String(err) : null,
-          }
+          name: err?.name || null,
+          message: err?.message || null,
+          stack: err?.stack || null,
+          toString: err ? String(err) : null,
+        }
         : null;
 
     return NextResponse.json(

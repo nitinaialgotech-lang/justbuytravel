@@ -12,16 +12,27 @@ import { useQuery } from '@tanstack/react-query'
 import { nearbyPlaces, SearchLocation } from '@/app/Route/endpoints'
 import Footer from '@/component/Footer';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLat, setLong, nameCity } from '@/Components/Redux/Reducer';
 import SearchFilter from './SearchFilter';
 export default function SearchResult() {
+    const dispatch = useDispatch();
+    const searchParams = useSearchParams();
+    const cityFromRedux = useSelector((state) => state?.user?.SearchDetail?.name?.[0]);
 
-    // const searchCity = useSearchParams();
+    // Sync URL params to Redux when landing on search page (ensures correct data from Enter or direct link)
+    useEffect(() => {
+        const lat = searchParams.get("lat");
+        const long = searchParams.get("long");
+        const name = searchParams.get("name");
+        if (lat && long && name) {
+            dispatch(setLat(lat));
+            dispatch(setLong(long));
+            dispatch(nameCity([name]));
+        }
+    }, [searchParams, dispatch]);
 
-    // const city = searchCity.get("name")
-
-
-    const city = useSelector((state) => state?.user?.SearchDetail?.name?.[0]);
+    const city = searchParams.get("name") || cityFromRedux;
 
     return (
         <>

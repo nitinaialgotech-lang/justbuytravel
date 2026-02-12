@@ -14,13 +14,13 @@ function ShimmerMap() {
 export default function HotelLocation({ lat, long, load }) {
     return (
         <>
-            <section className="padding_bottom">
+            <section className="padding_bottom hotel_location_section">
                 <div className="container">
                     <div className="nearbyhotels rounded-2xl ">
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className=" section_title ">
-                                    <h2 className="m-0">Location</h2>
+                                    <h3 className="serp_sub_title">Location</h3>
                                 </div>
                                 {/* *********************** */}
                                 {

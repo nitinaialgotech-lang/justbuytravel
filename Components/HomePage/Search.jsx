@@ -60,7 +60,6 @@ export default function Search() {
     }, []);
 
 
-    console.log(route, "............");
 
 
     // const handleSearch = () => {
@@ -178,8 +177,8 @@ export default function Search() {
             // Default fallback: generic text search
             return searchText(searchContent);
         },
-        // Enable when the user has typed OR when we've asked to show defaults on focus
-        enabled: searchContent.length > 0 || showDefaultOnFocus,
+        // API requires min 2 chars - only run when user typed 2+ chars, or show defaults on empty focus
+        enabled: showDefaultOnFocus || searchContent.trim().length >= 2,
         staleTime: 30000, // Cache for 30 seconds
     });
 
@@ -223,26 +222,29 @@ export default function Search() {
         setSelectedIndex(-1);
     };
 
+    // Check if place is a hotel/lodging (redirect to hotel detail page)
+    const isHotelPlace = (place) => {
+        const types = place?.types || [];
+        return types.includes("lodging");
+    };
+
     const handleSelectPlace = (place) => {
 
         setSearchContent(place.displayName?.text || place.formattedAddress || "");
         setShowDropdown(false);
-        const lat =
-            place?.location?.latitude || " "
+        const lat = place?.location?.latitude || "";
+        const long = place?.location?.longitude || "";
+        const id = place?.id;
+        const name = place?.displayName?.text || place?.name || place?.formattedAddress || "";
 
-        const long =
-            place?.location?.longitude || " "
-        const id = place?.id
-        // You can add navigation or search logic here
-        // ************************************** searching hortel or search alll
-        if (searchAll) {
-
-            viewSearchAll(lat, long)
-        }
-        else {
-            const name = place?.displayName?.text || place?.name || '';
+        // If it's a hotel (lodging), always go to hotel detail page
+        if (isHotelPlace(place)) {
             ViewHotels(id, name);
+            return;
         }
+
+        // City, country, or region: show hotels and details for that location (search results page)
+        viewSearchAll(place);
     };
 
 
@@ -267,10 +269,11 @@ export default function Search() {
         //     handleSelectPlace(places[selectedIndex])
         // } 
         if (e.key === 'Enter') {
-            if (selectedIndex >= 0) {
-                // Select highlighted item
+            // Only use results when query has completed (avoid stale data from previous search)
+            if (places.length > 0 && !isLoading) {
                 e.preventDefault();
-                handleSelectPlace(places[selectedIndex]);
+                const placeToSelect = selectedIndex >= 0 ? places[selectedIndex] : places[0];
+                handleSelectPlace(placeToSelect);
                 setShowDropdown(false);
             }
         }
@@ -281,19 +284,24 @@ export default function Search() {
 
     // Extract places from response - handle both direct response and nested data
     const places = autoCompleteData?.data?.places || autoCompleteData?.places || [];
-    const cityName = places?.map((item) => item?.displayName?.text) || "undefined";
-    const city_id = places?.map((item) => item?.id) || "undefined";
-    // (**************************** mrouter )
 
-    // const viewSearchAll = (lat, long) => {
-    //     route?.push(`/search?lat=${lat}&long=${long}&name=${cityName}`)
-    // }
-
-    const viewSearchAll = (lat, long) => {
+    // Navigate to search page: show hotels and details for city/region/country
+    const viewSearchAll = (place) => {
+        const lat = place?.location?.latitude ?? "";
+        const long = place?.location?.longitude ?? "";
+        const placeName = place?.displayName?.text || place?.formattedAddress || place?.name || "";
+        const types = place?.types || [];
+        const isCountry = types.includes("country");
+        const isLargeRegion = types.includes("administrative_area_level_1");
         dispatch(setLat(lat));
         dispatch(setLong(long));
-        dispatch(nameCity(cityName));
-        router.push(`/search?${cityName}-${city_id}`);
+        dispatch(nameCity([placeName]));
+        const params = new URLSearchParams();
+        if (lat) params.set("lat", lat);
+        if (long) params.set("long", long);
+        if (placeName) params.set("name", placeName);
+        if (isCountry || isLargeRegion) params.set("type", "region");
+        router.push(`/search?${params.toString()}`);
     };
     // **************************** hotel search
 
@@ -310,7 +318,6 @@ export default function Search() {
     };
 
 
-    console.log(pathname, places, "..............");
 
 
 
@@ -337,8 +344,6 @@ export default function Search() {
                                                             setContenttext("Search places and hotels");
                                                             handleSearchTypeChange("all");
                                                             dispatch(SetSelectAll("all"))
-
-
                                                         }}
                                                     >
                                                         <span>

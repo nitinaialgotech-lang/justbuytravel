@@ -14,16 +14,25 @@ import { useSelector } from "react-redux";
 
 
 export default function SearchContentBox() {
-    // ********************************
-    // const searchQuery = useSearchParams();
-
-
-    // const lat = searchQuery.get("lat");
-    // const long = searchQuery.get("long");
-    // const name = searchQuery.get("name");
-    // ********************************************************
+    const searchParams = useSearchParams();
+    // Use URL params as source of truth (synced from Enter/direct link), fallback to Redux
+    const latFromUrl = searchParams.get("lat");
+    const longFromUrl = searchParams.get("long");
+    const nameFromUrl = searchParams.get("name");
     const lat = useSelector((state) => state?.user?.SearchDetail?.lat)
     const long = useSelector((state) => state?.user?.SearchDetail?.long)
+    const name = useSelector((state) => state?.user?.SearchDetail?.name)
+    // Prefer URL params when available (ensures correct data on load)
+    const latVal = latFromUrl || lat;
+    const longVal = longFromUrl || long;
+    const nameVal = nameFromUrl ? [nameFromUrl] : name;
+    const placeType = searchParams.get("type");
+    const placeName = nameFromUrl || (Array.isArray(nameVal) ? nameVal?.[0] : nameVal);
+    // Known country/region names - use text search when URL lacks type=region (e.g. old links, bookmarks)
+    const COUNTRY_LIKE_NAMES = ["united states", "usa", "india", "united kingdom", "uk", "canada", "australia", "germany", "france", "spain", "italy", "japan", "china", "brazil", "mexico"];
+    const looksLikeCountry = placeName && COUNTRY_LIKE_NAMES.some((c) => String(placeName).toLowerCase().includes(c));
+    // Use text search for countries/large regions - nearby search returns wrong localized results
+    const useTextSearch = ((placeType === "country" || placeType === "region") || looksLikeCountry) && !!placeName;
 
 
     // const { data, isLoading } = useQuery({
@@ -43,7 +52,7 @@ export default function SearchContentBox() {
     return (
         <>
             {/* ********************** recomand section show    */}
-            <HotelSearchRecomand lat={lat} long={long} name={name} />
+            <HotelSearchRecomand lat={latVal} long={longVal} name={nameVal} placeName={placeName} useTextSearch={useTextSearch} />
 
             {/* *************** swimmer effect ***************** */}
 
@@ -54,9 +63,9 @@ export default function SearchContentBox() {
 
 
             {/* **************************************** near buy location xxxxxxxxxxxxxxxxxxxxx */}
-            <HotelSearchNearByLocation lat={lat} long={long} />
+            <HotelSearchNearByLocation lat={latVal} long={longVal} placeName={placeName} useTextSearch={useTextSearch} />
             {/* ******************************* iconic plaeces xxxxxxxxxxxxxxxxxxxxxxxxxx */}
-            <HotelSearchIconicPlaces lat={lat} long={long} />
+            <HotelSearchIconicPlaces lat={latVal} long={longVal} placeName={placeName} useTextSearch={useTextSearch} />
         </>
     );
 }

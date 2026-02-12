@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react'
+import { usePathname } from "next/navigation";
 import { RiCheckboxCircleLine } from 'react-icons/ri'
 import { useCurrency } from "@/context/CurrencyContext";
 import { getAssetPath } from "@/app/utils/assetPath";
+import { buildAffiliateLinkWithSubId } from "@/lib/tpLink";
 
 export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, hotelData, onSearchDates, isLoadingPrices, showPricing = true }) {
     const { formatPrice } = useCurrency();
+    const pathname = usePathname() || "/";
     const hotelPrice = PriceRate?.data?.raw?.result?.rates;
     const allRatesData = PriceRate?.data?.raw?.result; // This might have deep links
 
@@ -33,14 +36,8 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
     const [checkoutDate, setCheckoutDate] = useState(getDefaultCheckout());
     const [lastUpdated, setLastUpdated] = useState(new Date());
 
-    // Auto-trigger price search on first render using default dates
-    useEffect(() => {
-        if (onSearchDates) {
-            onSearchDates(getDefaultCheckin(), getDefaultCheckout());
-        }
-        // We intentionally run this only once on mount
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // ViewPriceDetail uses parent's searchCheckin/searchCheckout; no need to call onSearchDates on mount
+    // (SearchHotelDetail already initializes with same defaults, and calling here caused extra refetches)
 
     // Update timestamp when price data changes
     useEffect(() => {
@@ -133,17 +130,15 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
         return `https://www.google.com/search?q=hotel+${encodedHotel}+${encodeURIComponent(siteName || "")}`;
     }
 
-    // Helper function to build affiliate link with specific hotel URL
+    // Helper function to build affiliate link with SubID tracking and specific hotel URL
     const buildAffiliateLink = (affiliateBase, hotelUrl) => {
-        if (!hotelUrl) {
-            return null;
-        }
-        if (!affiliateBase) {
-            return hotelUrl;
-        }
-        const finalLink = `${affiliateBase}&u=${encodeURIComponent(hotelUrl)}`;
-        return finalLink;
-    }
+        if (!hotelUrl) return null;
+        if (!affiliateBase) return hotelUrl;
+        return buildAffiliateLinkWithSubId(affiliateBase, hotelUrl, {
+            page: pathname,
+            placement: "view_price_deal",
+        });
+    };
     if (!showPricing) {
         return null;
     }

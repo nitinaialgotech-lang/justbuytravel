@@ -190,7 +190,7 @@ async function handleRequest(req) {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": API_KEY,
         "X-Goog-FieldMask":
-          "places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.location,places.photos,places.priceLevel,places.websiteUri,places.nationalPhoneNumber",
+          "places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.location,places.photos,places.priceLevel,places.websiteUri,places.nationalPhoneNumber,places.types",
       },
       body: JSON.stringify(payload),
     });

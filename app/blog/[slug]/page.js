@@ -97,10 +97,8 @@ export default async function BlogPostPage({ params }) {
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
                 />
-                
-                <div className='container blog'>
-                    <Header />
-                </div>
+
+                <Header />
 
                 <section className="Blog_Detail_section blog_pt blog_pb blog_pt">
                     <div className="container">

@@ -214,7 +214,7 @@ export default function HotelAllReview({ reviews }) {
                                 className="mySwiper relative"
                             >
                                 {
-                                    reviews?.map((item, index) => {
+                                    visibleReviews?.map((item, index) => {
                                         console.log(item?.text, ",,,,iten");
 
                                         const text = item?.text?.text || "";
@@ -275,7 +275,16 @@ export default function HotelAllReview({ reviews }) {
                                     })
                                 }
                             </Swiper >
-
+                            {reviews?.length > 3 && !showAll && (
+                                <div className="review_more mt-4 d-block d-lg-none">
+                                    <button
+                                        onClick={() => setShowAll(true)}
+                                        className="text-black underline font-semibold capitalize"
+                                    >
+                                        View more reviews
+                                    </button>
+                                </div>
+                            )}
                             {/* <div className="button_swiper2 absolute ">
                                 <div className="buttons_icon relative">
                                     <button

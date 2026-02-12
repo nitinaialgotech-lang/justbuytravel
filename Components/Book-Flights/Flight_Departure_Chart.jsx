@@ -4,27 +4,13 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 
 export default function Flight_Departure_Chart() {
-    const [flights, setFlights] = useState([]);
-  const {data} = useQuery({
-    queryKey: ['flights'],
-    queryFn: () => Get_Flights("CDG", "AUS", "2026-03-03"),
-    onSuccess: (data) => {
-      setFlights(data);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
-  console.log(data,"pkpkpkpkpkpkp",flights);
- 
+
     return (
         <>
 
 
             <div className="row justify-center departure_chart_section padding_b30   pb-10 pt-6">
                 <div className="col-lg-12">
-
-
                     <div className="section_title departure_title_head space-y-3 mb-8">
                         <h2>
                             Best Departure Chart
@@ -34,7 +20,6 @@ export default function Flight_Departure_Chart() {
                         </p>
                     </div>
                     <div className="col-lg-12 text-center justify-center m-auto">
-
                         <div className="departure bg-white rounded-2xl  border border-gray-100 text-left overflow-hidden">
                             <div className="departure_chart border-b border-gray-100  px-4 ">
                                 <div className="row items-center">

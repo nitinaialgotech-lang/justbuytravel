@@ -77,10 +77,12 @@ async function handleRequest(req) {
       api_key: SERP_API_KEY,
     });
 
-    const firstProperty =
-      properties?.properties && properties.properties.length
-        ? properties.properties[0]
-        : null;
+    const propsList = properties?.properties && properties.properties.length
+      ? properties.properties
+      : properties?.ads && properties.ads.length
+        ? properties.ads
+        : [];
+    const firstProperty = propsList.length ? propsList[0] : null;
 
     if (!firstProperty?.property_token) {
       // Return 200 so clients don't confuse "no hotel found" with "route not found"
@@ -111,6 +113,7 @@ async function handleRequest(req) {
 
     return NextResponse.json(
       {
+        found: true,
         query: q,
         check_in_date: check_in_date || null,
         check_out_date: check_out_date || null,
