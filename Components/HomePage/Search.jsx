@@ -316,14 +316,26 @@ export default function Search() {
 
   return (
     <>
+
+
+<section className={` ${pathname == "/flights" ? "d-block" : "d-none"}`}>
+  <Flight_Search_Input />
+</section>
+
+
       <section
-        className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"} `}
+        className={`Search_section  ${isBookFlightsPage ? "padding_topf50 padding_b70" : "padding_bottom"}   ${pathname == "/flights" ? "d-none" : ""} `}
       >
         <div className="container">
           <div
             className={`${isBookHotelsPage ? "searchhotelcontainer" : "search_container "}`}
           >
-            <div className="search_container_box  rounded-2xl  w-full">
+
+
+
+
+            
+            <div className={`search_container_box  rounded-2xl  w-full`}>
               {!isBookFlightsPage && !isBookHotelsPage ? (
                 <div className="search_tab">
                   <div className="tab_link flex justify-between items-center">
@@ -420,8 +432,8 @@ export default function Search() {
                 " "
               )}
               {/* ********************* search input xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
-              <div className="search_box_input d-none d-lg-block">
-                {pathname === "/flights" ? <Search_flight_section /> : ""}
+              <div className={`${pathname !== "/flights" ? "search_box_input" : ""} d-none d-lg-block`}>
+                {/* {pathname === "/flights" ? <Search_flight_section /> : ""} */}
                 {searchType == "flights" || isBookFlightsPage ? (
                   <Flight_Search_Input />
                 ) : (
@@ -620,7 +632,7 @@ export default function Search() {
               <div
                 className={`${searchType === "flights" || isBookFlightsPage ? "p-0" : ""}mobile_search_box  d-block d-lg-none`}
               >
-                {pathname === "/flights" ? <Search_flight_section /> : ""}
+                {/* {pathname === "/flights" ? <Search_flight_section /> : ""} */}
                 {searchType === "flights" || isBookFlightsPage ? (
                   <Flight_Search_Input />
                 ) : (

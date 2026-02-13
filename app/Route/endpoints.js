@@ -300,6 +300,31 @@ export const GetSerpFlights = async ({
     });
 };
 
+// SerpAPI Google Flights booking options (same params as SerpApi::Client for google_flights)
+export const GetSerpBookingOptions = async ({
+    engine = "google_flights",
+    departure_id,
+    arrival_id,
+    outbound_date,
+    return_date,
+    booking_token,
+    currency = "USD",
+    hl = "en",
+}) => {
+    return await https_places.get(`/serp-bookingoptions`, {
+        params: {
+            engine,
+            departure_id,
+            arrival_id,
+            outbound_date,
+            return_date,
+            booking_token,
+            currency,
+            hl,
+        },
+    });
+};
+
 export const GetHotel_Detail = async (id) => {
     return await https_places.get(`/place-details`, {
         params: {

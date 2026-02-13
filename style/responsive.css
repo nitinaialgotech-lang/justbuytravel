@@ -1372,6 +1372,13 @@
     font-size: 12px;
     padding-bottom: 3px !important;
   }
+  .header_input > .drop_in > button{
+    padding:10px 10px !important;
+    border-bottom: 1px solid var(--grey-cl) ;
+  }
+  .header_input > .drop_in > button > .text-in{
+    font-size: 12px !important;
+  }
 }
 
 /* ********************* pixel ................................................7 ........ */

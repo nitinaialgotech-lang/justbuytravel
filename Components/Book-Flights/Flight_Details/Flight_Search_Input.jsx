@@ -15,6 +15,7 @@ import { Flight_AutoCompletion } from "@/app/Route/endpoints";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { useFormik } from "formik";
 // **************************************************************
 export default function Flight_Search_Input() {
   const dispatch = useDispatch();
@@ -85,6 +86,15 @@ export default function Flight_Search_Input() {
   }, [pathname]);
 
   const autoToDropdownData = autoCompleteToData?.data?.suggestions || [];
+
+
+// ******************************** formik & yup
+
+// const formik = useFormik({
+//   initialValues:{
+
+//   }
+// })
 
   const handleSearch = () => {
     dispatch(
@@ -169,7 +179,7 @@ export default function Flight_Search_Input() {
     >
       <div className="container mx-auto md-p0 p-0 ">
         <div
-          className={`flight_chart_box_input bg-white rounded ${pathname !== "/" ? "shadow-md" : " "}  border border-gray-100  space-y-5`}
+          className={`flight_chart_box_input bg-white custorm ${pathname !== "/" ? "" : " "}    space-y-5`}
         >
           <div className="row m-0 ">
             <div className="header_input_head space-y-4">
@@ -210,25 +220,32 @@ export default function Flight_Search_Input() {
 
                   {/* *****************************************************************   Class Type*/}
                   <div className="item relative">
-                    <span
-                      className="cursor-pointer select-none"
+                    <button
+                      type="button"
                       onClick={() => {
-                        (setShowClassDropdown((prev) => !prev),
-                          setShowPassengerDropdown(false));
+                        setShowClassDropdown((prev) => !prev);
+                        setShowPassengerDropdown(false);
                       }}
+                      className="flex items-center gap-1.5 cursor-pointer select-none bg-transparent border-0 p-0 text-inherit hover:opacity-80 transition-opacity"
                     >
-                      {travelClass}
-                    </span>
+                      <span>{travelClass}</span>
+                      <FiChevronDown
+                        className={`shrink-0 transition-transform duration-300 ease-out ${
+                          showClassDropdown ? "rotate-180" : "rotate-0"
+                        }`}
+                        size={18}
+                      />
+                    </button>
 
                     {/* Dropdown */}
                     <div
                       className={`
       absolute left-0 top-10 z-20 min-w-[220px] bg-white border border-gray-200 
-      rounded-lg shadow-xl transition-all duration-200 ease-in-out
+      rounded-lg shadow-xl transition-all duration-300 ease-out origin-top
       ${
         showClassDropdown
-          ? "opacity-100 visible translate-y-0"
-          : "opacity-0 invisible -translate-y-2"
+          ? "opacity-100 scale-100 translate-y-0"
+          : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
       }
     `}
                       onMouseLeave={() => setShowClassDropdown(false)}
@@ -357,7 +374,7 @@ export default function Flight_Search_Input() {
                       type="text"
                       name="to"
                       id="to"
-                      className="block w-full h-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
+                      className="block w-full h-full bg-neutral-secondary-medium  border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
                       onChange={(e) => {
                         const value = e.target.value;
                         setTo(value);
@@ -381,7 +398,7 @@ export default function Flight_Search_Input() {
                     />
                     {/* *********************** auto dropdown data for destination *********************** */}
                     {showToDropdown && (
-                      <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto">
+                      <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto drop_in">
                         {isLoadingTo ? (
                           <div className="px-4 py-3 text-center text-gray-500 text-sm">
                             Loading airports...
@@ -405,7 +422,7 @@ export default function Flight_Search_Input() {
                                 }}
                                 className="w-full text-left px-4 py-2 hover:bg-gray-50 cursor-pointer"
                               >
-                                <div className="text-sm font-medium text-gray-900">
+                                <div className="text-sm font-medium text-gray-900 text-in">
                                   <strong>{primaryAirport?.id} - </strong>
                                   {primaryAirport?.name}
                                 </div>
@@ -437,7 +454,7 @@ export default function Flight_Search_Input() {
                     onClick={() => setOpen(!open)}
                     name="dates"
                     id="dates"
-                    className="block w-full h-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize cursor-pointer"
+                    className="block w-full h-full bg-neutral-secondary-medium  text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize cursor-pointer"
                     placeholder={formatted || "Select departure & return"}
                   />
                   {open && (
@@ -464,7 +481,7 @@ export default function Flight_Search_Input() {
                     readOnly
                     onClick={() => setShowPassengerDropdown((prev) => !prev)}
                     value={`${passengerCount} Adult${passengerCount > 1 ? "s" : ""}`}
-                    className="block w-full cursor-pointer h-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
+                    className="block w-full cursor-pointer h-full bg-neutral-secondary-medium  border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
                   />
 
                   {/* Arrow Icon */}
@@ -485,7 +502,7 @@ export default function Flight_Search_Input() {
         : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
     }`}
                   >
-                    <div className="px-4 py-3 flex items-center justify-between">
+                    <div className="px-3 py-3 flex items-center justify-between">
                       <span className="text-sm text-gray-600">Adults</span>
 
                       <div className="flex items-center gap-3">
@@ -515,7 +532,7 @@ export default function Flight_Search_Input() {
                       </div>
                     </div>
 
-                    <div className="px-4 pb-4">
+                    <div className="px-3 pb-4">
                       <button
                         onClick={() => setShowPassengerDropdown(false)}
                         className="w-full bg-brand text-white rounded-lg py-2 text-sm font-medium hover:opacity-90 transition button_bg2"

@@ -4,10 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import { useRouter } from "next/navigation";
 
 export default function Flight_Search_Detail() {
   const [flights, setFlights] = useState("");
   const engine = "google_flights";
+  const route = useRouter()
 
   const departure_id = useSelector(
     (state) => state.user.SearchFlight.startfrom,
@@ -63,6 +65,11 @@ export default function Flight_Search_Detail() {
 
   const flight = data?.data?.flights?.best_flights || [];
 
+  // ************************************************ BOOKING _OPTIONS >>>>>>>>>>>>>>>>>>>>>>
+  const Boooking_options = (token) => {
+  route.push(`/booking-options?_tok=${token}`)
+  }
+
   // Loading state – simple skeleton card
   if (isLoading) {
     return (
@@ -70,7 +77,7 @@ export default function Flight_Search_Detail() {
         <div className="container">
           <div className="row justify-center">
             <div className="col-lg-10">
-              <div className="bg-white rounded border border-gray-100 p-6 shadow-sm space-y-4">
+              <div className="bg-white rounded card_rounded border-gray-100 p-6 shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="space-y-2">
                     <div className="h-5 w-40 bg-gray-200 rounded animate-pulse" />
@@ -94,7 +101,7 @@ export default function Flight_Search_Detail() {
         <div className="container">
           <div className="row justify-center">
             <div className="col-lg-8">
-              <div className="bg-red-50 border border-red-100 text-red-700 rounded p-6 text-center space-y-2">
+              <div className="bg-red-50 card_rounded border-red-100 text-red-700 rounded p-6 text-center space-y-2">
                 <h2 className="text-lg font-semibold">
                   We couldn’t load flights right now
                 </h2>
@@ -168,7 +175,7 @@ export default function Flight_Search_Detail() {
 
             {/* Results card */}
             <div className="col-lg-12 text-center justify-center m-auto">
-              <div className="departure bg-white rounded border border-gray-100 text-left overflow-hidden shadow-sm">
+              <div className="departure bg-white rounded card_rounded border-gray-100 text-left overflow-hidden shadow-sm">
                 <div className="departure_body px-4 md:px-6 pb-4 md:pb-5 space-y-4">
                   {!hasFlights && (
                     <div className="py-8 text-center space-y-2">
@@ -214,6 +221,7 @@ export default function Flight_Search_Detail() {
                           key={idx}
                         >
                           <div className="col-lg-8 p-0">
+                          {/* ****************************** mobile view show   */}
                             <div className="d-block d-lg-none">
                               <div className="departure_item flex justify-end items-center gap-2  p-0 text-right  ">
                                 <div className="text-[11px] uppercase tracking-wide text-gray-400">
@@ -225,7 +233,7 @@ export default function Flight_Search_Detail() {
                                     data?.data?.flights?.price_insights
                                       ?.lowest_price}
                                 </div>
-                                <button className="button_bg2 px-4 md:px-5 py-2 rounded text-sm font-semibold whitespace-nowrap mt-1 button_flight">
+                                <button className="button_bg2 px-4 md:px-5 py-2 rounded text-sm font-semibold whitespace-nowrap mt-1 button_flight " onClick={() => Boooking_options(item?.departure_token)}>
                                   Select flight
                                 </button>
                               </div>
@@ -262,18 +270,18 @@ export default function Flight_Search_Detail() {
                                   </span>
                                 </div>
                                 <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 mt-1 text">
-                                  <span className="inline-flex items-center px-2 py-0.5 rounded bg-emerald-50 text-gray-700 border border-emerald-100">
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded bg-emerald-50 text-gray-700 card_rounded border-emerald-100">
                                     {stopsLabel}
                                   </span>
                                   {item?.total_duration && (
-                                    <span className="inline-flex items-center px-2 py-0.5 rounded bg-gray-50 text-gray-700 border border-gray-200 sky_yellow">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded bg-gray-50 text-gray-700 card_rounded border-gray-200 sky_yellow">
                                       Total{" "}
                                       {Math.floor(item.total_duration / 60)}h{" "}
                                       {item.total_duration % 60}m
                                     </span>
                                   )}
                                   {item?.carbon_emissions?.this_flight && (
-                                    <span className="inline-flex items-center px-2 py-0.5 rounded bg-emerald-50  border border-emerald-100 sky_green text-gray-700">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded bg-emerald-50  card_rounded border-emerald-100 sky_green text-gray-700">
                                       Carbon:{" "}
                                       {(
                                         item.carbon_emissions.this_flight / 1000
@@ -285,6 +293,7 @@ export default function Flight_Search_Detail() {
                               </div>
                             </div>
                           </div>
+                          {/* ******************************  on desktop showw................. */}
                           <div className="col-lg-4 d-none d-lg-block">
                             <div className="departure_item flex justify-end items-center gap-2 md:gap-2 p-0 text-right">
                               <div className="text-[11px] uppercase tracking-wide text-gray-400">
@@ -296,7 +305,7 @@ export default function Flight_Search_Detail() {
                                   data?.data?.flights?.price_insights
                                     ?.lowest_price}
                               </div>
-                              <button className="button_bg2 px-4 md:px-5 py-2 rounded text-sm font-semibold whitespace-nowrap mt-1 button_flight">
+                              <button className="button_bg2 px-4 md:px-5 py-2 rounded text-sm font-semibold whitespace-nowrap mt-1 button_flight p-0" onClick={() => Boooking_options(item?.departure_token)}>
                                 Select flight
                               </button>
                             </div>
@@ -361,13 +370,13 @@ export default function Flight_Search_Detail() {
                                     {/* Center line with stops & duration */}
                                     <div className="flex-1 flex flex-col items-center">
                                       <div className="flex items-center w-full max-w-xs justify-between">
-                                        <span className="inline-block w-4 h-4 rounded-full border border-gray-400 bg-white" />
+                                        <span className="inline-block w-4 h-4 rounded-full card_rounded border-gray-400 bg-white" />
                                         <div className="flex-1 h-px bg-gray-300 mx-1" />
-                                        <span className="inline-flex items-center px-2 py-0.5 rounded   text-[11px] text-gray-700 color flex justify-center items-center shadow-sm text ">
+                                        <span className="inline-flex  items-center px-2 py-0.5 rounded   text-[11px] text-gray-700 color flex justify-center items-center shadow-sm text stop_span">
                                           {stopsLabel}
                                         </span>
                                         <div className="flex-1 h-px bg-gray-300 mx-1" />
-                                        <span className="inline-block w-4 h-4 rounded-full border border-gray-400 bg-white" />
+                                        <span className="inline-block w-4 h-4 rounded-full card_rounded border-gray-400 bg-white" />
                                       </div>
                                       {durationLabel && (
                                         <div className="mt-1 text-xs text-black text-center text">
