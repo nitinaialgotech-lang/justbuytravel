@@ -16,6 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useFormik } from "formik";
+import * as yup from "yup"
 // **************************************************************
 export default function Flight_Search_Input() {
   const dispatch = useDispatch();
@@ -38,9 +39,7 @@ export default function Flight_Search_Input() {
   const [travelClass, setTravelClass] = useState("Economy ");
   const [travelId, setTravelClassId] = useState("1");
   // *******************************
-  const departure_id = useSelector(
-    (state) => state.user.SearchFlight.startfrom,
-  );
+  const departure_id = useSelector((state) => state.user.SearchFlight.startfrom);
   const start_date = useSelector((state) => state.user.SearchFlight.startDate);
   const back_date = useSelector((state) => state.user.SearchFlight.endDate);
   const arrival_id = useSelector((state) => state.user.SearchFlight.endto);
@@ -90,11 +89,20 @@ export default function Flight_Search_Input() {
 
   // ******************************** formik & yup
 
-  // const formik = useFormik({
-  //   initialValues:{
-
-  //   }
-  // })
+  const formik = useFormik({
+    initialValues:{
+      From:"",
+      To:"",
+      SelectDate:range?.from,
+      EndDate:range?.to
+    },
+    validationSchema:yup.object({
+      From:yup.string().required(),
+      To:yup.string().required(),
+      SelectDate:yup.string().required(),
+      EndDate:yup.string().required()
+    })
+  })
 
   const handleSearch = () => {
     dispatch(
@@ -110,6 +118,10 @@ export default function Flight_Search_Input() {
     );
     router.push("/flight-details");
   };
+
+
+
+
   const whatType = [
     {
       id: "2",
@@ -160,22 +172,22 @@ export default function Flight_Search_Input() {
   // ******************************************
   const calendarRef = useRef(null);
   const classRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (classRef.current && !classRef.current.contains(event.target)) {
-        setShowClassDropdown(false);
-      }
+// Close dropdowns when clicking outside
+useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (passengerRef.current && !passengerRef.current.contains(e.target)) {
+      setShowPassengerDropdown(false);
     }
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-
+    if (classRef.current && !classRef.current.contains(e.target)) {
+      setShowClassDropdown(false);
+    }
+    if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
 
 
   return (
@@ -251,7 +263,7 @@ export default function Flight_Search_Input() {
                               onClick={() => {
                                 setTravelClass(item?.eco_name);
                                 setTravelClassId(item?.id);
-                                setShowClassDropdown(true);
+                                setShowClassDropdown(false);
                                 if (pathname == "/flight-details") {
                                   UpdateFlight_Detail();
                                 }
@@ -280,13 +292,14 @@ export default function Flight_Search_Input() {
                     </div>
                     <input
                       type="text"
-                      name="from"
+                      name="To"
                       id="from"
                       placeholder="Leaving From"
                       className="block w-full  bg-neutral-secondary-medium  border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
-                      value={from}
+                      
                       onChange={(e) => {
                         const value = e.target.value;
+                        formik?.handleChange(e.target.value)
                         setFrom(value);
                         if (value.trim().length > 1) {
                           setShowDropdown(true);
@@ -305,6 +318,9 @@ export default function Flight_Search_Input() {
                       }}
                       aria-label="Leaving From"
                     />
+                    {
+                      formik?.errors?.From && (<p className="text-red-300">{ formik?.errors?.From}</p>)
+                    }
                     {/* *********************** auto dropdown data *********************** */}
                     {showDropdown && (
                       <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto">
@@ -365,11 +381,12 @@ export default function Flight_Search_Input() {
                     </div>
                     <input
                       type="text"
-                      name="to"
+                      name="To"
                       id="to"
                       className="block w-full h-full bg-neutral-secondary-medium  border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
                       onChange={(e) => {
                         const value = e.target.value;
+                        formik?.handleChange(e.target.value)
                         setTo(value);
                         if (value.trim().length > 1) {
                           setShowToDropdown(true);
@@ -389,6 +406,9 @@ export default function Flight_Search_Input() {
                         setTimeout(() => setShowToDropdown(false), 150);
                       }}
                     />
+                    {
+                      formik?.errors?.To && ( <p className="text-red-300">{formik?.errors?.To}</p>)
+                    }
                     {/* *********************** auto dropdown data for destination *********************** */}
                     {showToDropdown && (
                       <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto drop_in">
