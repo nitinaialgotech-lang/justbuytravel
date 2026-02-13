@@ -13,8 +13,9 @@ export const CURRENCY_RATES = {
   INR: 83.12,
 };
 
-// Public, no-key FX API for live rates (USD base)
-const FX_API_URL = "https://api.exchangerate.host/latest?base=USD";
+// Use internal API route to avoid CORS and "Failed to fetch" (proxies external FX APIs server-side)
+const basePath = (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_BASE_PATH) || "";
+const FX_API_URL = `${basePath}/api/fx-rates`.replace(/\/+/g, "/") || "/api/fx-rates";
 
 export const CURRENCY_LABELS = {
   USD: { symbol: "$", code: "USD", name: "US Dollar" },

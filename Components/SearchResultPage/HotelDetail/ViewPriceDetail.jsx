@@ -77,13 +77,26 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
     // Full address for search: "Rome Cavalieri, A Waldorf Astoria Hotel, Rome, Lazio, Italy" (not truncated)
     const fullAddress = [hotelName, hotelAddress].filter(Boolean).join(", ").trim() || hotelName || hotelAddress || "";
 
+    // Ensure deep link domain matches the displayed provider (e.g. Trip.com must go to trip.com, not makemytrip)
+    const linkMatchesProvider = (url, providerName) => {
+        if (!url || typeof url !== "string") return false;
+        const lower = url.toLowerCase();
+        const site = (providerName || "").toLowerCase();
+        if (site.includes("booking") && !site.includes("dot")) return lower.includes("booking.com");
+        if (site.includes("expedia")) return lower.includes("expedia");
+        if (site.includes("trip.com") || (site.includes("trip") && !site.includes("tripadvisor"))) {
+            return lower.includes("trip.com") && !lower.includes("makemytrip") && !lower.includes("cleartrip");
+        }
+        return true; // for Agoda, Vio, etc. accept any valid link
+    };
+
     // Helper function to construct booking site URLs (only use Google as last resort for unknown brands)
     const constructBookingUrl = (siteName, hotelData, priceRateItem, checkin, checkout) => {
         if (!fullAddress) return null;
 
         // PRIORITY 1: Use deep_link from the current rate item when present (API’s direct booking link)
         const itemLink = priceRateItem?.deep_link || priceRateItem?.url || priceRateItem?.link || priceRateItem?.booking_url;
-        if (itemLink && typeof itemLink === "string" && (itemLink.startsWith("http://") || itemLink.startsWith("https://"))) {
+        if (itemLink && typeof itemLink === "string" && (itemLink.startsWith("http://") || itemLink.startsWith("https://")) && linkMatchesProvider(itemLink, siteName)) {
             return itemLink;
         }
 
@@ -92,7 +105,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
             const n = normalizeProviderName(siteName);
             const siteData = hotelData.xotelo.rates.find((r) => normalizeProviderName(r?.name) === n || (r?.name && normalizeProviderName(r.name).includes(n)));
             const xotelLink = siteData?.deep_link || siteData?.url || siteData?.link;
-            if (xotelLink && typeof xotelLink === "string" && (xotelLink.startsWith("http://") || xotelLink.startsWith("https://"))) {
+            if (xotelLink && typeof xotelLink === "string" && (xotelLink.startsWith("http://") || xotelLink.startsWith("https://")) && linkMatchesProvider(xotelLink, siteName)) {
                 return xotelLink;
             }
         }
@@ -103,7 +116,7 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
             const n = normalizeProviderName(siteName);
             const rateData = ratesArr.find((r) => normalizeProviderName(r?.name) === n || (r?.name && normalizeProviderName(r.name).includes(n)));
             const rateLink = rateData?.deep_link || rateData?.url || rateData?.link;
-            if (rateLink && typeof rateLink === "string" && (rateLink.startsWith("http://") || rateLink.startsWith("https://"))) {
+            if (rateLink && typeof rateLink === "string" && (rateLink.startsWith("http://") || rateLink.startsWith("https://")) && linkMatchesProvider(rateLink, siteName)) {
                 return rateLink;
             }
         }
@@ -114,9 +127,13 @@ export default function ViewPriceDetail({ PriceRate, hotelName, hotelAddress, ho
         const site = (siteName || "").toLowerCase().trim();
         const los = Math.max(1, Math.ceil((new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24)));
 
-        // Trip.com/Vio: pass full address as "Rome Cavalieri, A Waldorf Astoria Hotel, Rome, Lazio, Italy" (encoded as %20/%2C)
-        const buildTripComUrl = () =>
-            `https://www.trip.com/hotels/list?flexType=1&destName=${encodedHotel}&searchWord=${encodedHotel}&searchType=H&checkin=${checkin}&checkout=${checkout}&crn=1&adult=2&curr=USD&locale=en-US&old=1`;
+        // Trip.com/Vio: use same full search string as Booking.com for consistency
+        const buildTripComUrl = () => {
+            const isIndia = fullAddress.toLowerCase().includes("india");
+            const tripLocale = isIndia ? "en-in" : "en-US";
+            const tripCurr = isIndia ? "INR" : "USD";
+            return `https://www.trip.com/hotels/list?flexType=1&destName=${encodedHotel}&searchWord=${encodedHotel}&searchType=H&checkin=${checkin}&checkout=${checkout}&crn=1&adult=2&curr=${tripCurr}&locale=${tripLocale}&old=1`;
+        };
 
         if (site.includes("booking") && !site.includes("dot")) return `https://www.booking.com/searchresults.html?ss=${encodedHotel}&checkin=${checkin}&checkout=${checkout}`;
         if (site.includes("expedia")) return `https://www.expedia.com/Hotel-Search?destination=${encodedHotel}&startDate=${checkin}&endDate=${checkout}`;

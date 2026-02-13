@@ -40,7 +40,8 @@ import GalleryModal from "./GalleryModal";
 import { MdOutlineKeyboardArrowLeft, MdExpandMore, MdExpandLess } from "react-icons/md";
 import { LuBedDouble, LuBedSingle, LuBed, LuHotel, LuHouse, LuWaves, LuTreePalm } from "react-icons/lu";
 import { useCurrency } from "@/context/CurrencyContext";
-import { getHotelIdFromSlug } from "@/app/utils/seo";
+import { getHotelIdFromSlug, createHotelSlug } from "@/app/utils/seo";
+import { saveRecentlyViewedProperty } from "@/app/utils/recentlyViewed";
 import { getAssetPath } from "@/app/utils/assetPath";
 import { AFFILIATE_BASES } from "@/lib/affiliateBases";
 import { buildAffiliateLinkWithSubId } from "@/lib/tpLink";
@@ -195,6 +196,20 @@ export default function SearchHotelDetail() {
         ? HotelDetail.types.includes("lodging")
         : false;
 
+    // Save to recently viewed when hotel loads (lodging only)
+    useEffect(() => {
+        if (!HotelDetail || !code || !isHotelLodging) return;
+        const name = (HotelDetail?.displayName?.text ?? HotelDetail?.displayName ?? HotelDetail?.name ?? "").toString().trim();
+        if (!name) return;
+        const slug = createHotelSlug(name, code);
+        saveRecentlyViewedProperty({
+            id: code,
+            name,
+            slug,
+            address: (HotelDetail?.formattedAddress?.text ?? HotelDetail?.formattedAddress ?? "").toString().trim() || undefined,
+        });
+    }, [HotelDetail, code, isHotelLodging]);
+
     // ****************************************** derive hotel amenities from Google Places amenityOptions
     const hotelAmenties = useMemo(() => {
         const rawOptions = HotelDetail?.amenityOptions;
@@ -273,10 +288,10 @@ export default function SearchHotelDetail() {
     const normalizePartnerSource = (source) => {
         if (!source) return "";
         const value = source.toString().toLowerCase();
-        // Exact matches only – avoid false positives (e.g. "Hotel Booking Zone", "Cleartrip.com")
+        // Exact matches only – avoid false positives (e.g. "Hotel Booking Zone", "Cleartrip.com", "MakeMyTrip.com")
         if (value.includes("booking.com")) return "Booking";
         if (value.includes("expedia")) return "Expedia";
-        if (value.includes("trip.com") && !value.includes("cleartrip")) return "Trip";
+        if (value.includes("trip.com") && !value.includes("cleartrip") && !value.includes("makemytrip")) return "Trip";
         return null;
     };
 
@@ -402,18 +417,30 @@ export default function SearchHotelDetail() {
         return serpName.includes(ourKey) || ourName.includes(serpKey) || serpKey.includes(ourKey) || ourKey.includes(serpKey);
     }, [serpHotelDetail?.name, locationName]);
 
+    // Ensure direct link domain matches the displayed partner (e.g. Trip.com row must go to trip.com, not makemytrip)
+    const directLinkMatchesSource = (url, source) => {
+        if (!url || typeof url !== "string") return false;
+        const lower = url.toLowerCase();
+        if (source === "Booking") return lower.includes("booking.com");
+        if (source === "Expedia") return lower.includes("expedia");
+        if (source === "Trip") return lower.includes("trip.com") && !lower.includes("makemytrip") && !lower.includes("cleartrip");
+        return false;
+    };
+
     const buildPartnerHotelUrl = (item, normalizedSource, checkin, checkout) => {
         const searchTerm = (locationName || fullAddress || "").trim();
         if (!searchTerm) return null;
 
         const directLink = item?.deep_link || item?.booking_url || item?.url || item?.link;
         const hasValidDirectLink = directLink && typeof directLink === "string" && (directLink.startsWith("http://") || directLink.startsWith("https://"));
+        const linkMatchesPartner = hasValidDirectLink && directLinkMatchesSource(directLink, normalizedSource);
 
-        if (hotelsMatch && hasValidDirectLink) {
+        if (hotelsMatch && linkMatchesPartner) {
             return directLink;
         }
 
         const encodedHotel = encodeURIComponent(searchTerm);
+        console.log("searchTerm", searchTerm);
 
         // Booking.com: "ss" supports free-text hotel name search – works correctly
         if (normalizedSource === "Booking") {
@@ -428,7 +455,11 @@ export default function SearchHotelDetail() {
             return `https://${expediaHost}/Hotel-Search?destination=${encodedHotel}&hotelName=${encodedHotelName}&startDate=${checkin}&endDate=${checkout}&adults=2&rooms=1`;
         }
         if (normalizedSource === "Trip") {
-            return `https://www.trip.com/hotels/list?flexType=1&destName=${encodedHotel}&searchWord=${encodedHotel}&searchType=H&checkin=${checkin}&checkout=${checkout}&crn=1&adult=2&curr=${encodeURIComponent(currency)}&locale=en-US&old=1`;
+            // Trip.com: use same full search string as Booking.com (ss) for consistency
+            const isIndia = (locationAddress || locationName || "").toLowerCase().includes("india");
+            const tripLocale = isIndia ? "en-in" : "en-US";
+            const tripCurr = isIndia ? "INR" : currency;
+            return `https://www.trip.com/hotels/detail/?cityEnName=1&destName=${encodedHotel}&searchWord=${encodedHotel}&searchType=H&checkin=${checkin}&checkout=${checkout}&crn=1&adult=2&curr=${encodeURIComponent(tripCurr)}&locale=${tripLocale}&old=1`;
         }
 
         // Fallback: general Google search (for unknown sources)

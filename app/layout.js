@@ -84,6 +84,15 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 
+        {/* Travelpayout Tech Solutions: Content Analytics, LinkSwitcher, Emerald */}
+        {/* Place first so it loads faster. Get script URL from: Travelpayouts → AI tools → your Project → Install & Activate */}
+        {process.env.NEXT_PUBLIC_TRAVELPAYOUT_SCRIPT_SRC && (
+          <Script
+            src={process.env.NEXT_PUBLIC_TRAVELPAYOUT_SCRIPT_SRC}
+            strategy="afterInteractive"
+          />
+        )}
+
         {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Y79K6935MZ"
@@ -115,7 +124,6 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

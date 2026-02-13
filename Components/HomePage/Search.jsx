@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { FaHotel, FaUser } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
@@ -16,6 +16,31 @@ import { useDispatch } from "react-redux";
 import { nameCity, setLat, setLong, SetSelectAll } from "../Redux/Reducer";
 import { getPlacePhotoUrl } from "@/app/utils/assetPath";
 import { createHotelSlug } from "@/app/utils/seo";
+import Flight_Search_Input from "../Book-Flights/Flight_Details/Flight_Search_Input";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { MdHistory } from "react-icons/md";
+import { getRecentlyViewedProperties } from "@/app/utils/recentlyViewed";
+
+const RECENT_SEARCHES_KEY = "justbuytravel_recent_searches";
+const MAX_RECENT_SEARCHES = 5;
+
+function getRecentSearches() {
+    if (typeof window === "undefined") return [];
+    try {
+        const stored = localStorage.getItem(RECENT_SEARCHES_KEY);
+        return stored ? JSON.parse(stored) : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveRecentSearch(item) {
+    const recent = getRecentSearches();
+    const filtered = recent.filter((r) => r.name !== item.name || r.lat !== item.lat || r.long !== item.long);
+    const updated = [{ ...item, timestamp: Date.now() }, ...filtered].slice(0, MAX_RECENT_SEARCHES);
+    localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(updated));
+}
+
 export default function Search() {
 
     // **************************************************************************************
@@ -40,7 +65,49 @@ export default function Search() {
     // When true, we show a default set of suggestions (e.g. popular hotels)
     // as soon as the search input is focused, even if the user hasn't typed yet.
     const [showDefaultOnFocus, setShowDefaultOnFocus] = useState(false);
+    const [nearbyLocation, setNearbyLocation] = useState(null);
+    const [recentSearches, setRecentSearches] = useState([]);
+    const [recentlyViewed, setRecentlyViewed] = useState([]);
     const dispatch = useDispatch();
+
+    // Reverse geocode to get city name from coordinates
+    const reverseGeocode = useCallback(async (lat, lng) => {
+        try {
+            const res = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`,
+                { headers: { "User-Agent": "JustBuyTravel/1.0" } }
+            );
+            const data = await res.json();
+            if (data?.address) {
+                const city = data.address.city || data.address.town || data.address.village ||
+                    data.address.municipality || data.address.county;
+                if (city) return { name: city, lat, long: lng };
+            }
+        } catch (_) { }
+        return null;
+    }, []);
+
+    // Fetch nearby location when user focuses empty input
+    const fetchNearbyLocation = useCallback(() => {
+        if (typeof navigator === "undefined" || !navigator?.geolocation) return;
+        navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+                const { latitude, longitude } = pos.coords;
+                const result = await reverseGeocode(latitude, longitude);
+                if (result) setNearbyLocation(result);
+            },
+            () => setNearbyLocation(null),
+            { enableHighAccuracy: true, timeout: 8000, maximumAge: 300000 }
+        );
+    }, [reverseGeocode]);
+
+    // Refresh recent searches and recently viewed when dropdown opens with empty input
+    useEffect(() => {
+        if (showDefaultOnFocus && !searchContent.trim()) {
+            setRecentSearches(getRecentSearches());
+            setRecentlyViewed(getRecentlyViewedProperties());
+        }
+    }, [showDefaultOnFocus, searchContent]);
     useEffect(() => {
         setSearchContent(query);
     }, [query]);
@@ -201,10 +268,12 @@ export default function Search() {
         };
     }, []);
 
-    // Show dropdown when there are results
+    // Show dropdown when there are results, or when focused empty (show Nearby/Recent/Popular)
     useEffect(() => {
         const places = autoCompleteData?.data?.places || [];
-        if (places.length > 0 && (searchContent.length > 0 || showDefaultOnFocus)) {
+        const hasTypedResults = searchContent.trim().length > 0 && places.length > 0;
+        const isEmptyFocusSuggestions = showDefaultOnFocus && !searchContent.trim();
+        if (hasTypedResults || isEmptyFocusSuggestions) {
             setShowDropdown(true);
         } else {
             setShowDropdown(false);
@@ -222,14 +291,29 @@ export default function Search() {
         setSelectedIndex(-1);
     };
 
-    // Check if place is a hotel/lodging (redirect to hotel detail page)
+    // Check if place is a hotel/lodging (redirect to detail page)
     const isHotelPlace = (place) => {
         const types = place?.types || [];
         return types.includes("lodging");
     };
 
-    const handleSelectPlace = (place) => {
+    // Check if place is a restaurant (redirect to detail page)
+    const isRestaurantPlace = (place) => {
+        const types = place?.types || [];
+        return types.includes("restaurant");
+    };
 
+    // Check if place is an iconic place / tourist attraction (redirect to detail page)
+    const isIconicPlace = (place) => {
+        const types = place?.types || [];
+        return types.includes("tourist_attraction");
+    };
+
+    // Restaurant and iconic places go to detail page; city/region/country go to search page
+    const isDetailPlace = (place) =>
+        isHotelPlace(place) || isRestaurantPlace(place) || isIconicPlace(place);
+
+    const handleSelectPlace = (place) => {
         setSearchContent(place.displayName?.text || place.formattedAddress || "");
         setShowDropdown(false);
         const lat = place?.location?.latitude || "";
@@ -237,14 +321,37 @@ export default function Search() {
         const id = place?.id;
         const name = place?.displayName?.text || place?.name || place?.formattedAddress || "";
 
-        // If it's a hotel (lodging), always go to hotel detail page
-        if (isHotelPlace(place)) {
+        // Hotel, restaurant, or iconic place: go to detail page
+        if (isDetailPlace(place)) {
             ViewHotels(id, name);
             return;
         }
 
-        // City, country, or region: show hotels and details for that location (search results page)
+        // City (e.g. New Delhi), country, or region: go to search page (hotels in that location)
+        if (name && (lat || long)) {
+            saveRecentSearch({ name, lat, long });
+        }
         viewSearchAll(place);
+    };
+
+    // Handle selecting nearby or recent location (place-like object)
+    const handleSelectNearbyOrRecent = (item) => {
+        const place = {
+            displayName: { text: item.name },
+            formattedAddress: item.name,
+            location: { latitude: item.lat, longitude: item.long },
+        };
+        saveRecentSearch({ name: item.name, lat: item.lat, long: item.long });
+        viewSearchAll(place);
+        setShowDropdown(false);
+        setSearchContent(item.name);
+    };
+
+    // Handle selecting a recently viewed hotel
+    const handleSelectRecentlyViewed = (item) => {
+        setShowDropdown(false);
+        setSearchContent(item.name);
+        router.push(`/hotel/${item.slug}`);
     };
 
 
@@ -429,7 +536,8 @@ export default function Search() {
                             {/* ********************* search input xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
                             <div className="search_box_input d-none d-lg-block">
                                 {searchType === "flights" || isBookFlightsPage ? (
-                                    <Search_flight_section />
+                                    // <Search_flight_section />
+                                    <Flight_Search_Input />
                                 ) : (
 
                                     <form
@@ -453,9 +561,10 @@ export default function Search() {
                                                 onKeyDown={handleKeyDown}
                                                 onFocus={() => {
                                                     // When focusing with an empty input, trigger default
-                                                    // suggestions so the user immediately sees data.
+                                                    // suggestions (Nearby, Recent, Popular) like TripAdvisor
                                                     if (!searchContent.trim()) {
                                                         setShowDefaultOnFocus(true);
+                                                        fetchNearbyLocation();
                                                     }
                                                     if (places.length > 0) setShowDropdown(true);
                                                 }}
@@ -479,13 +588,82 @@ export default function Search() {
                                                     ref={dropdownRef}
                                                     className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto"
                                                 >
-                                                    {isLoading ? (
+                                                    {/* Nearby & Recent sections when input is empty (TripAdvisor-style) */}
+                                                    {!searchContent.trim() && showDefaultOnFocus && (
+                                                        <div className="border-b border-gray-100">
+                                                            {nearbyLocation && (
+                                                                <div
+                                                                    onMouseDown={(e) => { e.preventDefault(); handleSelectNearbyOrRecent(nearbyLocation); }}
+                                                                    className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors"
+                                                                >
+                                                                    <div className="shrink-0 w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
+                                                                        <HiOutlineLocationMarker className="w-5 h-5 text-blue-600" />
+                                                                    </div>
+                                                                    <div className="flex-1 min-w-0">
+                                                                        <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Nearby</div>
+                                                                        <div className="font-medium text-gray-900">{nearbyLocation.name}</div>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                            {recentSearches.length > 0 && (
+                                                                <div className="px-4 py-2">
+                                                                    <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                                                        <MdHistory className="w-4 h-4" /> Recent searches
+                                                                    </div>
+                                                                    {recentSearches.map((item, idx) => (
+                                                                        <div
+                                                                            key={`${item.name}-${idx}`}
+                                                                            onMouseDown={(e) => { e.preventDefault(); handleSelectNearbyOrRecent(item); }}
+                                                                            className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-gray-50 rounded-lg px-2 -mx-2 transition-colors"
+                                                                        >
+                                                                            <HiOutlineLocationMarker className="w-4 h-4 text-gray-400 shrink-0" />
+                                                                            <span className="text-sm text-gray-900 truncate">{item.name}</span>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                            {recentlyViewed.length > 0 && (
+                                                                <div className="px-4 py-2">
+                                                                    <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                                                        <FaHotel className="w-4 h-4" /> Recently viewed
+                                                                    </div>
+                                                                    {recentlyViewed.map((item, idx) => (
+                                                                        <div
+                                                                            key={`viewed-${item.id}-${idx}`}
+                                                                            onMouseDown={(e) => { e.preventDefault(); handleSelectRecentlyViewed(item); }}
+                                                                            className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-gray-50 rounded-lg px-2 -mx-2 transition-colors"
+                                                                        >
+                                                                            <FaHotel className="w-4 h-4 text-gray-400 shrink-0" />
+                                                                            <div className="flex-1 min-w-0">
+                                                                                <span className="text-sm text-gray-900 truncate block">{item.name}</span>
+                                                                                {item.address && (
+                                                                                    <span className="text-xs text-gray-500 truncate block">{item.address}</span>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                            {!nearbyLocation && recentSearches.length === 0 && recentlyViewed.length === 0 && !isLoading && places.length === 0 && (
+                                                                <div className="px-4 py-4 text-center text-gray-500 text-sm">
+                                                                    Allow location access for nearby suggestions
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                    {(isLoading && !searchContent.trim() && !nearbyLocation && recentSearches.length === 0 && recentlyViewed.length === 0) ? (
                                                         <div className="px-4 py-6 text-center text-gray-500 text-sm">
                                                             <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
-                                                            Loading hotels...
+                                                            Loading suggestions...
                                                         </div>
                                                     ) : places.length > 0 ? (
-                                                        places.map((place, index) => {
+                                                        <>
+                                                            {!searchContent.trim() && showDefaultOnFocus && (nearbyLocation || recentSearches.length > 0 || recentlyViewed.length > 0) && (
+                                                                <div className="px-4 py-2 border-b border-gray-100">
+                                                                    <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Popular</div>
+                                                                </div>
+                                                            )}
+                                                            {places.map((place, index) => {
                                                             const placeId = place.id || `place-${index}`;
 
                                                             const photoUrl = getPhotoUrl(place);
@@ -581,7 +759,8 @@ export default function Search() {
                                                                     </div>
                                                                 </div>
                                                             );
-                                                        })
+                                                        })}
+                                                        </>
                                                     ) : searchContent.length > 0 ? (
                                                         <div className="px-4 py-6 text-center text-gray-500 text-sm">
                                                             <svg
@@ -633,6 +812,7 @@ export default function Search() {
                                                     onFocus={() => {
                                                         if (!searchContent.trim()) {
                                                             setShowDefaultOnFocus(true);
+                                                            fetchNearbyLocation();
                                                         }
                                                         if (places.length > 0) setShowDropdown(true);
                                                     }}
@@ -647,13 +827,77 @@ export default function Search() {
                                                         ref={dropdownRef}
                                                         className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto"
                                                     >
-                                                        {isLoading ? (
+                                                        {/* Nearby & Recent on mobile */}
+                                                        {!searchContent.trim() && showDefaultOnFocus && (
+                                                            <div className="border-b border-gray-100">
+                                                                {nearbyLocation && (
+                                                                    <div
+                                                                        onClick={() => handleSelectNearbyOrRecent(nearbyLocation)}
+                                                                        className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
+                                                                    >
+                                                                        <div className="shrink-0 w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
+                                                                            <HiOutlineLocationMarker className="w-5 h-5 text-blue-600" />
+                                                                        </div>
+                                                                        <div className="flex-1 min-w-0">
+                                                                            <div className="text-xs font-medium text-gray-500 uppercase">Nearby</div>
+                                                                            <div className="font-medium text-gray-900">{nearbyLocation.name}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                                {recentSearches.length > 0 && (
+                                                                    <div className="px-4 py-2">
+                                                                        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase mb-2">
+                                                                            <MdHistory className="w-4 h-4" /> Recent searches
+                                                                        </div>
+                                                                        {recentSearches.map((item, idx) => (
+                                                                            <div
+                                                                                key={`recent-m-${item.name}-${idx}`}
+                                                                                onClick={() => handleSelectNearbyOrRecent(item)}
+                                                                                className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-gray-50 rounded-lg px-2 -mx-2"
+                                                                            >
+                                                                                <HiOutlineLocationMarker className="w-4 h-4 text-gray-400 shrink-0" />
+                                                                                <span className="text-sm text-gray-900 truncate">{item.name}</span>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
+                                                                {recentlyViewed.length > 0 && (
+                                                                    <div className="px-4 py-2">
+                                                                        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase mb-2">
+                                                                            <FaHotel className="w-4 h-4" /> Recently viewed
+                                                                        </div>
+                                                                        {recentlyViewed.map((item, idx) => (
+                                                                            <div
+                                                                                key={`viewed-m-${item.id}-${idx}`}
+                                                                                onClick={() => handleSelectRecentlyViewed(item)}
+                                                                                className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-gray-50 rounded-lg px-2 -mx-2"
+                                                                            >
+                                                                                <FaHotel className="w-4 h-4 text-gray-400 shrink-0" />
+                                                                                <div className="flex-1 min-w-0">
+                                                                                    <span className="text-sm text-gray-900 truncate block">{item.name}</span>
+                                                                                    {item.address && (
+                                                                                        <span className="text-xs text-gray-500 truncate block">{item.address}</span>
+                                                                                    )}
+                                                                                </div>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )}
+                                                        {(isLoading && !searchContent.trim() && !nearbyLocation && recentSearches.length === 0 && recentlyViewed.length === 0) ? (
                                                             <div className="px-4 py-6 text-center text-gray-500 text-sm">
                                                                 <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
-                                                                Loading hotels...
+                                                                Loading suggestions...
                                                             </div>
                                                         ) : places.length > 0 ? (
-                                                            places.map((place, index) => {
+                                                            <>
+                                                                {!searchContent.trim() && showDefaultOnFocus && (nearbyLocation || recentSearches.length > 0 || recentlyViewed.length > 0) && (
+                                                                    <div className="px-4 py-2 border-b border-gray-100">
+                                                                        <div className="text-xs font-medium text-gray-500 uppercase">Popular</div>
+                                                                    </div>
+                                                                )}
+                                                                {places.map((place, index) => {
                                                                 const placeId = place.id || `place-${index}`;
 
                                                                 const photoUrl = getPhotoUrl(place);
@@ -756,7 +1000,8 @@ export default function Search() {
                                                                         </div>
                                                                     </div>
                                                                 );
-                                                            })
+                                                            })}
+                                                            </>
                                                         ) : searchContent.length > 0 ? (
                                                             <div className="px-4 py-6 text-center text-gray-500 text-sm">
                                                                 <svg
