@@ -16,6 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useFormik } from "formik";
+import * as yup from "yup"
 // **************************************************************
 export default function Flight_Search_Input() {
   const dispatch = useDispatch();
@@ -35,12 +36,10 @@ export default function Flight_Search_Input() {
   const q = from;
   const qTo = to;
   const [showClassDropdown, setShowClassDropdown] = useState(false);
-  const [travelClass, setTravelClass] = useState("Economy (included basic)");
+  const [travelClass, setTravelClass] = useState("Economy ");
   const [travelId, setTravelClassId] = useState("1");
   // *******************************
-  const departure_id = useSelector(
-    (state) => state.user.SearchFlight.startfrom,
-  );
+  const departure_id = useSelector((state) => state.user.SearchFlight.startfrom);
   const start_date = useSelector((state) => state.user.SearchFlight.startDate);
   const back_date = useSelector((state) => state.user.SearchFlight.endDate);
   const arrival_id = useSelector((state) => state.user.SearchFlight.endto);
@@ -55,9 +54,9 @@ export default function Flight_Search_Input() {
   const formatted =
     range?.from && range?.to
       ? `${format(range.from, "EEE, MMM d")} - ${format(
-          range.to,
-          "EEE, MMM d",
-        )}`
+        range.to,
+        "EEE, MMM d",
+      )}`
       : "";
 
   // Fetch autocomplete results for departure airport
@@ -88,13 +87,22 @@ export default function Flight_Search_Input() {
   const autoToDropdownData = autoCompleteToData?.data?.suggestions || [];
 
 
-// ******************************** formik & yup
+  // ******************************** formik & yup
 
-// const formik = useFormik({
-//   initialValues:{
-
-//   }
-// })
+  const formik = useFormik({
+    initialValues:{
+      From:"",
+      To:"",
+      SelectDate:range?.from,
+      EndDate:range?.to
+    },
+    validationSchema:yup.object({
+      From:yup.string().required(),
+      To:yup.string().required(),
+      SelectDate:yup.string().required(),
+      EndDate:yup.string().required()
+    })
+  })
 
   const handleSearch = () => {
     dispatch(
@@ -110,6 +118,10 @@ export default function Flight_Search_Input() {
     );
     router.push("/flight-details");
   };
+
+
+
+
   const whatType = [
     {
       id: "2",
@@ -126,7 +138,7 @@ export default function Flight_Search_Input() {
   ];
   const economy = [
     {
-      eco_name: "Economy (included basic)",
+      eco_name: "Economy",
       id: "1",
     },
     {
@@ -159,19 +171,24 @@ export default function Flight_Search_Input() {
   };
   // ******************************************
   const calendarRef = useRef(null);
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
+  const classRef = useRef(null);
+// Close dropdowns when clicking outside
+useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (passengerRef.current && !passengerRef.current.contains(e.target)) {
+      setShowPassengerDropdown(false);
+    }
+    if (classRef.current && !classRef.current.contains(e.target)) {
+      setShowClassDropdown(false);
+    }
+    if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <section
@@ -201,7 +218,7 @@ export default function Flight_Search_Input() {
                                 type="radio"
                                 name="tripType"
                                 value={item.id}
-                                checked={typed === item.id}
+                                checked={typed}
                                 onChange={(e) => setType(e.target.value)}
                                 onClick={() => {
                                   if (pathname == "/flight-details") {
@@ -219,7 +236,7 @@ export default function Flight_Search_Input() {
                   {/* *****************************************************************   passenger xxxxxxxxxxxxxxxxx */}
 
                   {/* *****************************************************************   Class Type*/}
-                  <div className="item relative">
+                  <div className="item relative" ref={classRef}>
                     <button
                       type="button"
                       onClick={() => {
@@ -230,29 +247,16 @@ export default function Flight_Search_Input() {
                     >
                       <span>{travelClass}</span>
                       <FiChevronDown
-                        className={`shrink-0 transition-transform duration-300 ease-out ${
-                          showClassDropdown ? "rotate-180" : "rotate-0"
-                        }`}
+                        className={`shrink-0 transition-transform duration-300 ease-out ${showClassDropdown ? "rotate-180" : "rotate-0"
+                          }`}
                         size={18}
                       />
                     </button>
 
-                    {/* Dropdown */}
-                    <div
-                      className={`
-      absolute left-0 top-10 z-20 min-w-[220px] bg-white border border-gray-200 
-      rounded-lg shadow-xl transition-all duration-300 ease-out origin-top
-      ${
-        showClassDropdown
-          ? "opacity-100 scale-100 translate-y-0"
-          : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-      }
-    `}
-                      onMouseLeave={() => setShowClassDropdown(false)}
-                    >
-                      <div className="flex flex-col p-3">
-                        {economy?.map((item, index) => {
-                          return (
+                    {showClassDropdown && (
+                      <div className="absolute left-0 top-10 z-20 min-w-[220px] bg-white border border-gray-200 rounded-lg shadow-xl transition-all duration-300 ease-out origin-top">
+                        <div className="flex flex-col p-3">
+                          {economy?.map((item, index) => (
                             <button
                               key={index}
                               type="button"
@@ -268,11 +272,12 @@ export default function Flight_Search_Input() {
                             >
                               {item?.eco_name}
                             </button>
-                          );
-                        })}
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
+
 
                   {/* ************ */}
                 </div>
@@ -287,13 +292,14 @@ export default function Flight_Search_Input() {
                     </div>
                     <input
                       type="text"
-                      name="from"
+                      name="To"
                       id="from"
                       placeholder="Leaving From"
                       className="block w-full  bg-neutral-secondary-medium  border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
-                      value={from}
+                      
                       onChange={(e) => {
                         const value = e.target.value;
+                        formik?.handleChange(e.target.value)
                         setFrom(value);
                         if (value.trim().length > 1) {
                           setShowDropdown(true);
@@ -312,6 +318,9 @@ export default function Flight_Search_Input() {
                       }}
                       aria-label="Leaving From"
                     />
+                    {
+                      formik?.errors?.From && (<p className="text-red-300">{ formik?.errors?.From}</p>)
+                    }
                     {/* *********************** auto dropdown data *********************** */}
                     {showDropdown && (
                       <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto">
@@ -323,7 +332,7 @@ export default function Flight_Search_Input() {
                           autoDropdownData.map((suggestion, index) => {
                             const primaryAirport =
                               Array.isArray(suggestion.airports) &&
-                              suggestion.airports.length > 0
+                                suggestion.airports.length > 0
                                 ? suggestion.airports[0]
                                 : null;
 
@@ -372,11 +381,12 @@ export default function Flight_Search_Input() {
                     </div>
                     <input
                       type="text"
-                      name="to"
+                      name="To"
                       id="to"
                       className="block w-full h-full bg-neutral-secondary-medium  border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-10 capitalize"
                       onChange={(e) => {
                         const value = e.target.value;
+                        formik?.handleChange(e.target.value)
                         setTo(value);
                         if (value.trim().length > 1) {
                           setShowToDropdown(true);
@@ -396,6 +406,9 @@ export default function Flight_Search_Input() {
                         setTimeout(() => setShowToDropdown(false), 150);
                       }}
                     />
+                    {
+                      formik?.errors?.To && ( <p className="text-red-300">{formik?.errors?.To}</p>)
+                    }
                     {/* *********************** auto dropdown data for destination *********************** */}
                     {showToDropdown && (
                       <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto drop_in">
@@ -407,7 +420,7 @@ export default function Flight_Search_Input() {
                           autoToDropdownData.map((suggestion, index) => {
                             const primaryAirport =
                               Array.isArray(suggestion.airports) &&
-                              suggestion.airports.length > 0
+                                suggestion.airports.length > 0
                                 ? suggestion.airports[0]
                                 : null;
 
@@ -486,9 +499,8 @@ export default function Flight_Search_Input() {
 
                   {/* Arrow Icon */}
                   <FiChevronDown
-                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 ${
-                      showPassengerDropdown ? "rotate-180" : "rotate-0"
-                    }`}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 ${showPassengerDropdown ? "rotate-180" : "rotate-0"
+                      }`}
                     size={18}
                   />
 
@@ -496,11 +508,10 @@ export default function Flight_Search_Input() {
                   <div
                     className={`absolute left-0 mt-2 w-full bg-white border border-gray-200 
     rounded-xl shadow-2xl transition-all duration-300 ease-out origin-top z-50
-    ${
-      showPassengerDropdown
-        ? "opacity-100 scale-100 translate-y-0"
-        : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-    }`}
+    ${showPassengerDropdown
+                        ? "opacity-100 scale-100 translate-y-0"
+                        : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                      }`}
                   >
                     <div className="px-3 py-3 flex items-center justify-between">
                       <span className="text-sm text-gray-600">Adults</span>

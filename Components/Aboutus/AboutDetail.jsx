@@ -31,7 +31,7 @@ export default function AboutDetail() {
                             <div className="about_review_section">
                                 <div className="head_line section_title">
                                     <h2>
-                                        Helping Travellers Explore Better Hotel Options
+                                    Globally Recognised and Growing Every Day
                                     </h2>
                                 </div>
                                 <div className="box_content ">
@@ -41,11 +41,11 @@ export default function AboutDetail() {
                                             <div className="box_content_box sky_blue">
                                                 <div className="content">
                                                     <h2 className='p-0 m-0 text-center flex flex-col justify-center items-center'>
-                                                        Compare
+                                                    10K+
 
                                                     </h2>
                                                     <p className='m-0'>
-                                                        Hotel Prices
+                                                    Monthly Travel Readers
 
                                                     </p>
                                                 </div>
@@ -56,10 +56,10 @@ export default function AboutDetail() {
                                             <div className="box_content_box sky_yellow mrt-20">
                                                 <div className="content">
                                                     <h2 className='p-0 m-0'>
-                                                        Explore
+                                                    500+
                                                     </h2>
                                                     <p className='m-0'>
-                                                        Travel Destinations
+                                                    Curated Travel Articles
 
                                                     </p>
                                                 </div>
@@ -70,10 +70,10 @@ export default function AboutDetail() {
                                             <div className="box_content_box sky_green">
                                                 <div className="content">
                                                     <h2 className='p-0 m-0'>
-                                                        Find
+                                                    1M+
                                                     </h2>
                                                     <p className='m-0'>
-                                                        Travel Insights
+                                                        THotel & Deal Searches Redirected
                                                     </p>
                                                 </div>
                                             </div>
@@ -83,10 +83,10 @@ export default function AboutDetail() {
                                             <div className="box_content_box sky_red">
                                                 <div className="content">
                                                     <h2 className='p-0 m-0'>
-                                                        Trusted
+                                                    100%
                                                     </h2>
                                                     <p className='m-0'>
-                                                        Partner Listings
+                                                    Independent & Transparent Reviews
 
                                                     </p>
                                                 </div>
