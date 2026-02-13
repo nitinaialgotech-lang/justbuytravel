@@ -227,6 +227,9 @@ body {
   padding: 50px;
 }
 
+.lg-no{
+  display: none;
+}
 /* ============================
    Global Page Loader (center)
    ============================ */
@@ -4061,6 +4064,16 @@ span.rating-stars {
   width: 28% !important;
   margin: 0 !important;
 }
+.button_flight2{
+  border: 1px solid var(--bg-color);
+  color: var(--bg-color) !important;
+  background-color: #ffffff !important;
+  transition: .15s ease-in-out;
+}
+.button_flight2:hover {
+  background-color: var(--bg-color) !important;
+  color: #ffffff !important;
+}
 .stop_span {
   font-size: 12px;
   font-weight: 600;
@@ -4332,4 +4345,50 @@ width: 10px;
 }
 .rdp-chevron {
   fill: var(--bg-color) !important;
+}
+.book_fligh{
+  padding:20px 20px;
+}
+.selected_flight{
+  border:1px solid var(--b-color);
+  border-radius:10px;
+}
+.accordion-button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+  box-shadow: none !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #fff !important;
+  color: inherit !important;
+}
+.acor_header{
+  width: 80%;
+}
+.acor_header > .items >  .acot-tit > span{
+  font-size: 16;
+  font-weight: 600 !important;
+  text-transform: capitalize;
+}.acor_header > .items >  .acot-tit > p {
+  font-size: 12px;
+  color: var(--pc-color);
+  margin: 0px;
+}
+.acor_header > .items >   .tt-c > span {
+  color: var(--cl-bl);
+}
+.acor_header > .items >  .acot-tit > h2 {
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 0;
+}
+.price_list > .price_box {
+  padding:15px 30px;
+}
+.acor_p { 
+  padding:20px 30px !important;
 }

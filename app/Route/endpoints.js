@@ -324,6 +324,7 @@ export const GetSerpBookingOptions = async ({
         },
     });
 };
+// ***********************************
 
 export const GetHotel_Detail = async (id) => {
     return await https_places.get(`/place-details`, {
@@ -344,9 +345,7 @@ export const GetHotelPlacePricing = async (placeId, chk_in, chk_out, currency = 
         },
     });
 }
-// SerpAPI Google Flights autocomplete via internal Next.js API
-// This avoids CORS issues by calling our own `/api/flightautocomplete` route
-// from the browser, and letting the server talk to SerpAPI.
+
 export const Flight_AutoCompletion = async (q) => {
     return await https_places.get(`/flightautocomplete`, {
         params: {
