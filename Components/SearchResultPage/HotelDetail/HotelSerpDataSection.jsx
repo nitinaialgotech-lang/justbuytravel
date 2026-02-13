@@ -307,7 +307,113 @@ export default function HotelSerpDataSection({ data, isLoading, googleReviews })
                                 )}
                             </div>
                         )}
-
+ {(amenities.length > 0 || (amenitiesDetailed?.groups?.length > 0) || excludedAmenities.length > 0) && (
+                            <div className="serp_block serp_amenities_block margin_bottom">
+                                <h3 className="serp_block_title">What this place offers</h3>
+                                <p className="serp_google_reviews_text">Amenities are subject to change. Please confirm with the property.</p>
+                                {amenitiesDetailed?.groups?.length > 0 ? (
+                                    <>
+                                        {/* Popular amenities – highlighted at top */}
+                                        {amenitiesDetailed.popular?.length > 0 && (
+                                            <div className="serp_amenity_popular_row">
+                                                {amenitiesDetailed.popular.map((p, i) => {
+                                                    const Icon = getAmenityIcon(p.title);
+                                                    return (
+                                                        <div key={i} className="serp_amenity_popular_pill">
+                                                            <Icon className="serp_amenity_pill_icon" />
+                                                            <span>{p.title}</span>
+                                                            {p.label && <span className="serp_amenity_pill_badge">{p.label}</span>}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
+                                        {/* Category cards – always visible, no collapse */}
+                                        <div className="serp_amenity_grid">
+                                            {amenitiesDetailed.groups
+                                                .filter((g) => (g.list || []).some((i) => i.available !== false))
+                                                .map((group, gIdx) => {
+                                                    const CategoryIcon = getCategoryIcon(group.title);
+                                                    const items = (group.list || []).filter((i) => i.available !== false);
+                                                    if (items.length === 0) return null;
+                                                    return (
+                                                        <div key={gIdx} className="serp_amenity_card">
+                                                            <div className="serp_amenity_card_header">
+                                                                <span className="serp_amenity_card_icon">
+                                                                    <CategoryIcon />
+                                                                </span>
+                                                                <span className="serp_amenity_card_title">{group.title}</span>
+                                                            </div>
+                                                            <ul className="serp_amenity_card_list">
+                                                                {items.map((item, i) => {
+                                                                    const ItemIcon = getAmenityIcon(item.title);
+                                                                    return (
+                                                                        <li key={i} className="serp_amenity_card_item">
+                                                                            <ItemIcon className="serp_amenity_item_icon" />
+                                                                            <span>{item.title}</span>
+                                                                            {item.label && (
+                                                                                <span className={`serp_amenity_label_badge serp_amenity_label_${item.label.replace(/\s/g, "_").toLowerCase()}`}>
+                                                                                    {item.label}
+                                                                                </span>
+                                                                            )}
+                                                                        </li>
+                                                                    );
+                                                                })}
+                                                            </ul>
+                                                        </div>
+                                                    );
+                                                })}
+                                        </div>
+                                        {/* Excluded amenities – within amenities section */}
+                                        {excludedAmenities.length > 0 && (
+                                            <div className="serp_amenity_excluded">
+                                                <div className="serp_amenity_excluded_header">
+                                                    <IoCloseCircleOutline className="serp_amenity_excluded_icon" />
+                                                    <span className="serp_amenity_excluded_title">Not available</span>
+                                                </div>
+                                                <ul className="serp_amenity_excluded_list">
+                                                    {excludedAmenities.map((item, i) => (
+                                                        <li key={i} className="serp_amenity_excluded_item">
+                                                            <IoCloseCircleOutline className="serp_amenity_excluded_item_icon" />
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <>
+                                        {amenities.length > 0 && (
+                                            <div className="serp_amenity_tags_plain">
+                                                {amenities.map((a, i) => (
+                                                    <span key={i} className="serp_amenity_tag">
+                                                        <IoCheckmarkCircle className="serp_amenity_tag_icon" />
+                                                        {a}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {excludedAmenities.length > 0 && (
+                                            <div className="serp_amenity_excluded">
+                                                <div className="serp_amenity_excluded_header">
+                                                    <IoCloseCircleOutline className="serp_amenity_excluded_icon" />
+                                                    <span className="serp_amenity_excluded_title">Not available</span>
+                                                </div>
+                                                <ul className="serp_amenity_excluded_list">
+                                                    {excludedAmenities.map((item, i) => (
+                                                        <li key={i} className="serp_amenity_excluded_item">
+                                                            <IoCloseCircleOutline className="serp_amenity_excluded_item_icon" />
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        )}
                         {/* ========== Rating & Reviews Summary ========== */}
                         {(overallRating != null || locationRating != null || reviews.length > 0) && (
                             <div className="serp_block serp_rating_block">
@@ -559,113 +665,7 @@ export default function HotelSerpDataSection({ data, isLoading, googleReviews })
                         )}
 
                         {/* ========== Amenities ========== */}
-                        {(amenities.length > 0 || (amenitiesDetailed?.groups?.length > 0) || excludedAmenities.length > 0) && (
-                            <div className="serp_block serp_amenities_block">
-                                <h3 className="serp_block_title">What this place offers</h3>
-                                <p className="serp_google_reviews_text">Amenities are subject to change. Please confirm with the property.</p>
-                                {amenitiesDetailed?.groups?.length > 0 ? (
-                                    <>
-                                        {/* Popular amenities – highlighted at top */}
-                                        {amenitiesDetailed.popular?.length > 0 && (
-                                            <div className="serp_amenity_popular_row">
-                                                {amenitiesDetailed.popular.map((p, i) => {
-                                                    const Icon = getAmenityIcon(p.title);
-                                                    return (
-                                                        <div key={i} className="serp_amenity_popular_pill">
-                                                            <Icon className="serp_amenity_pill_icon" />
-                                                            <span>{p.title}</span>
-                                                            {p.label && <span className="serp_amenity_pill_badge">{p.label}</span>}
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                        )}
-                                        {/* Category cards – always visible, no collapse */}
-                                        <div className="serp_amenity_grid">
-                                            {amenitiesDetailed.groups
-                                                .filter((g) => (g.list || []).some((i) => i.available !== false))
-                                                .map((group, gIdx) => {
-                                                    const CategoryIcon = getCategoryIcon(group.title);
-                                                    const items = (group.list || []).filter((i) => i.available !== false);
-                                                    if (items.length === 0) return null;
-                                                    return (
-                                                        <div key={gIdx} className="serp_amenity_card">
-                                                            <div className="serp_amenity_card_header">
-                                                                <span className="serp_amenity_card_icon">
-                                                                    <CategoryIcon />
-                                                                </span>
-                                                                <span className="serp_amenity_card_title">{group.title}</span>
-                                                            </div>
-                                                            <ul className="serp_amenity_card_list">
-                                                                {items.map((item, i) => {
-                                                                    const ItemIcon = getAmenityIcon(item.title);
-                                                                    return (
-                                                                        <li key={i} className="serp_amenity_card_item">
-                                                                            <ItemIcon className="serp_amenity_item_icon" />
-                                                                            <span>{item.title}</span>
-                                                                            {item.label && (
-                                                                                <span className={`serp_amenity_label_badge serp_amenity_label_${item.label.replace(/\s/g, "_").toLowerCase()}`}>
-                                                                                    {item.label}
-                                                                                </span>
-                                                                            )}
-                                                                        </li>
-                                                                    );
-                                                                })}
-                                                            </ul>
-                                                        </div>
-                                                    );
-                                                })}
-                                        </div>
-                                        {/* Excluded amenities – within amenities section */}
-                                        {excludedAmenities.length > 0 && (
-                                            <div className="serp_amenity_excluded">
-                                                <div className="serp_amenity_excluded_header">
-                                                    <IoCloseCircleOutline className="serp_amenity_excluded_icon" />
-                                                    <span className="serp_amenity_excluded_title">Not available</span>
-                                                </div>
-                                                <ul className="serp_amenity_excluded_list">
-                                                    {excludedAmenities.map((item, i) => (
-                                                        <li key={i} className="serp_amenity_excluded_item">
-                                                            <IoCloseCircleOutline className="serp_amenity_excluded_item_icon" />
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-                                    </>
-                                ) : (
-                                    <>
-                                        {amenities.length > 0 && (
-                                            <div className="serp_amenity_tags_plain">
-                                                {amenities.map((a, i) => (
-                                                    <span key={i} className="serp_amenity_tag">
-                                                        <IoCheckmarkCircle className="serp_amenity_tag_icon" />
-                                                        {a}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        )}
-                                        {excludedAmenities.length > 0 && (
-                                            <div className="serp_amenity_excluded">
-                                                <div className="serp_amenity_excluded_header">
-                                                    <IoCloseCircleOutline className="serp_amenity_excluded_icon" />
-                                                    <span className="serp_amenity_excluded_title">Not available</span>
-                                                </div>
-                                                <ul className="serp_amenity_excluded_list">
-                                                    {excludedAmenities.map((item, i) => (
-                                                        <li key={i} className="serp_amenity_excluded_item">
-                                                            <IoCloseCircleOutline className="serp_amenity_excluded_item_icon" />
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-                                    </>
-                                )}
-                            </div>
-                        )}
+                       
 
                     </div>
                 </div>
