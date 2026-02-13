@@ -114,7 +114,6 @@ async function handleRequest(req) {
           departure_id: arrival_id,
           arrival_id: departure_id,
           date: return_date,
-
         });
       }
       serpParams = {
@@ -128,7 +127,6 @@ async function handleRequest(req) {
         departure_id,
         arrival_id,
         outbound_date,
-        
       };
       // Only send return_date for round trip (type=1)
       if (isRoundTrip && return_date) {
@@ -153,8 +151,7 @@ async function handleRequest(req) {
       { status: 200, headers: corsHeaders }
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("SerpAPI /api/serp-flight error:", err);
+    console.error("SerpAPI /api/flights/search error:", err);
 
     const status = err?.response?.status || 500;
 
@@ -174,11 +171,11 @@ async function handleRequest(req) {
     const debug =
       status === 500 && !respData
         ? {
-          name: err?.name || null,
-          message: err?.message || null,
-          stack: err?.stack || null,
-          toString: err ? String(err) : null,
-        }
+            name: err?.name || null,
+            message: err?.message || null,
+            stack: err?.stack || null,
+            toString: err ? String(err) : null,
+          }
         : null;
 
     return NextResponse.json(
@@ -192,4 +189,3 @@ async function handleRequest(req) {
     );
   }
 }
-

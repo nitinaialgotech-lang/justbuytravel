@@ -302,6 +302,48 @@ export const GetSerpFlights = async ({
     });
 };
 
+// SerpAPI Google Flights booking options
+// Accepts either a `booking_token` directly or a `departure_token`,
+// in which case the API route will derive a booking token first.
+export const GetSerpBookingOptions = async ({
+    engine = "google_flights",
+    departure_id,
+    arrival_id,
+    outbound_date,
+    return_date,
+    booking_token,
+    departure_token,
+    currency = "USD",
+    hl = "en",
+}) => {
+    console.log(
+        engine,
+        departure_id,
+        arrival_id,
+        outbound_date,
+        return_date,
+        booking_token,
+        departure_token,
+        currency,
+        hl,
+        "GetSerpBookingOptions params"
+    );
+
+    return await https_places.get(`/serp-bookingoptions`, {
+        params: {
+            engine,
+            departure_id,
+            arrival_id,
+            outbound_date,
+            return_date,
+            booking_token,
+            departure_token,
+            currency,
+            hl,
+        },
+    });
+};
+
 export const GetHotel_Detail = async (id) => {
     return await https_places.get(`/place-details`, {
         params: {

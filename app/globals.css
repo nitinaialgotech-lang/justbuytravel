@@ -4050,12 +4050,26 @@ span.rating-stars {
   color:#ffffff !important;
  
 }
-.button_flight{
-  border:1px solid var(--bg-color);
-  color:var(--bg-color) !important;
+.button_flight {
+  border: 1px solid var(--bg-color);
+  color: var(--bg-color) !important;
   background-color: #ffffff !important;
   transition: .15s ease-in-out;
+  padding: 0 !important;
+  height: 40px !important;
+  line-height: 41px !important;
+  width: 28% !important;
+  margin: 0 !important;
 }
+.stop_span {
+  font-size: 12px;
+  font-weight: 600;
+  height: 20px;
+  padding: 0 20px;
+  border-radius: 5px !important;
+  line-height: 20px;
+}
+
 .button_flight:hover {
   background-color: var(--bg-color) !important;
   color: #ffffff !important;
@@ -4147,7 +4161,9 @@ width: 10px;
   top: 6px;
 }
 .flight_chart_box_input {
-  padding: 50px 30px;
+  padding: 40px 30px;
+  border-radius: 10px !important;
+  box-shadow: 0 0 35px 2px #0000000d;
 }
 .leg-content {
   font-size: 14px !important;
@@ -4211,6 +4227,24 @@ width: 10px;
   gap: 5px;
   align-items: center;
 }
+.header_input_head
+  > .header_title
+  > .content
+  > .item
+  > button > span{
+    font-size: 14px;
+  color: var(--pc-color);
+  font-weight: 600;
+  }
+  .header_input_head
+  > .header_title
+  > .content
+  > .item
+  > button > svg{
+    font-size: 14px;
+  color: var(--pc-color);
+  font-weight: 600; 
+  }
 .header_input_head
   > .header_title
   > .content
