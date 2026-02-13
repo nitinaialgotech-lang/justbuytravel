@@ -1046,12 +1046,8 @@ export default function SearchHotelDetail() {
                                                 <p className="ta_price_empty_text">We couldn&apos;t find any pricing for this property. Try searching for a different hotel.</p>
                                             </div>
                                         ) : filteredPartnerPrices.length === 0 ? (
-                                            <div className="ta_price_empty">
-                                                <img
-                                                    src={getAssetPath("/price_img/price-icon1.png")}
-                                                    alt=""
-                                                    className="ta_price_empty_img"
-                                                />
+                                            <div className="ta_price_empty justify-content-center align-items-center">
+                                                
                                                 <h5 className="ta_price_empty_title">No prices for these dates</h5>
                                                 <p className="ta_price_empty_text">We couldn&apos;t find any prices for your selected dates. Try changing your check-in or check-out dates.</p>
                                             </div>

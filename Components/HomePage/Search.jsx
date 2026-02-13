@@ -792,7 +792,7 @@ export default function Search() {
                             <div className={`${searchType === "flights" || isBookFlightsPage ? "p-0" : ""}mobile_search_box  d-block d-lg-none`}>
                                 {
                                     searchType === "flights" || isBookFlightsPage ? (
-                                        <Search_flight_section />
+                                        <Flight_Search_Input />
                                     ) : (
                                         <div className="mobole_boxs relative">
                                             <form
