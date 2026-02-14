@@ -142,20 +142,6 @@ export default function Boooking_options({ airlineName = "British Airways",
                     </h2>
                     {/* ******************* */}
                     <div className="departure_time space-y-1">
-                      {/* <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm">
-                                  <span className="font-semibold text-gray-900">
-                                    
-                                    <span className="text-gray-400">→</span>{" "}
-                                 
-                                  </span>
-                                  <span className="hidden md:inline text-gray-400">
-                                  
-                                  </span>
-                                  <span className="text-gray-600 capitalize">
-                                   
-                               
-                                  </span>
-                                </div> */}
                       <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 mt-1 text">
                         <span className="inline-flex items-center px-2 py-0.5 rounded bg-emerald-50 text-gray-700 card_rounded border-emerald-100">
                           RoundTrip
@@ -183,46 +169,7 @@ export default function Boooking_options({ airlineName = "British Airways",
                   </div>
                 </div>
 
-                {/* Selected flight summary */}
-                {serpSelectedFlight && serpFirstSeg && serpLastSeg && (
-                  <div className="mt-3 text-sm text-gray-700 space-y-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-medium">
-                        {serpFirstSeg?.departure_airport?.id} &rarr;{" "}
-                        {serpLastSeg?.arrival_airport?.id}
-                      </span>
-                      <span className="text-gray-400">•</span>
-                      <span>
-                        {moment(
-                          serpFirstSeg?.departure_airport?.time,
-                          "YYYY-MM-DD HH:mm",
-                        ).format("MMM DD, h:mm A")}{" "}
-                        –{" "}
-                        {moment(
-                          serpLastSeg?.arrival_airport?.time,
-                          "YYYY-MM-DD HH:mm",
-                        ).format("MMM DD, h:mm A")}
-                      </span>
-                      {typeof serpSelectedFlight.total_duration === "number" && (
-                        <span className="text-gray-500">
-                          ({Math.floor(serpSelectedFlight.total_duration / 60)}h{" "}
-                          {serpSelectedFlight.total_duration % 60}m)
-                        </span>
-                      )}
-                    </div>
-                    {serpSelectedSegments.length > 1 && (
-                      <p className="text-xs text-gray-500">
-                        {serpSelectedSegments.length - 1} stop
-                        {serpSelectedSegments.length - 1 > 1 ? "s" : ""} •{" "}
-                        {serpSelectedSegments
-                          .slice(0, -1)
-                          .map((seg) => seg?.arrival_airport?.id)
-                          .filter(Boolean)
-                          .join(", ")}
-                      </p>
-                    )}
-                  </div>
-                )}
+               
               </div>
 
               {/* British Airways block */}
