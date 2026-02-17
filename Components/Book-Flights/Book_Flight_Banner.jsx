@@ -4,6 +4,7 @@ import "../../style/responsive.css";
 import Search from "../HomePage/Search";
 import Flight_Departure from "./Flight_Departure";
 import Flight_Search_Input from "@/Components/Book-Flights/Flight_Details/Flight_Search_Input";
+import Google_flights from "./Google_flights.jsx";
 export default function Book_Flight_Banner() {
   return (
     <>
@@ -30,6 +31,7 @@ export default function Book_Flight_Banner() {
           </div>
         </div>
       </section>
+      <Google_flights />
       <Search />
     </>
   );
