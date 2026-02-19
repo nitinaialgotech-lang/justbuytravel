@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import CanadaBanner from '@/Components/InnerPages/Canada/CanadaBanner'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Best Hotels in Canada | Budget & Luxury Stays | Just Buy Travel",
     description:
@@ -75,7 +76,6 @@ export default function page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}
             />
-
             <Suspense>
                 <Header />
                 <CanadaBanner />

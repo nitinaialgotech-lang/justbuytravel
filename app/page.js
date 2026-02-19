@@ -3,7 +3,8 @@
 
 import IndexPage from "@/Components/HomePage/IndexPage/IndexPage";
 import "../style/responsive.css"
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
   title: "Smart Travel Planning for Hotels & Flights | Just Buy Travel",

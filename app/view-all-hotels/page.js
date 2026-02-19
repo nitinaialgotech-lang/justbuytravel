@@ -3,7 +3,8 @@ import Header from '@/component/Header'
 import ViewAllHotelBanner from '@/Components/SearchResultPage/ViewAllHotels/ViewAllHotelBanner'
 import React from 'react'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "View All Hotels - Browse Complete Hotel Collection",
     description: "Browse our complete collection of hotels worldwide. Explore all available hotels, compare prices, read reviews, and find your ideal accommodation.",

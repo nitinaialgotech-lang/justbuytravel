@@ -4,6 +4,8 @@ import About_banner from '@/Components/Aboutus/About_banner'
 import AboutHotelDetail from '@/Components/SearchResultPage/HotelDetail/AboutHotelDetail'
 import React, { Suspense } from 'react'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
     title: "About Us - Your Trusted Travel Companion",

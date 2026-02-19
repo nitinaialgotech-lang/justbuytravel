@@ -3,6 +3,8 @@ import Header from '../../component/Header'
 import ContactUs from '@/Components/Contactus/ContactUs'
 import Footer from '@/component/Footer'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
     title: "Contact Us - Get in Touch",

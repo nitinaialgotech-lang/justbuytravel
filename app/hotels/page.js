@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import BookHotels_Banner from '@/Components/Book-Hotels/BookHotels_Banner'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Book Hotels Online | Hotel Deals Online | Just Buy Travel",
     description: " Book hotels online and find the best hotel deals online with Just Buy Travel. Compare prices, explore cheap hotels, and book your stay securely worldwide.",

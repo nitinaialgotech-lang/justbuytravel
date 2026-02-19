@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import AustraliaBanner from '@/Components/InnerPages/Australia/AustraliaBanner'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Affordable Hotels in Australia | Budget Hotel Deals | Just Buy Travel",
     description:

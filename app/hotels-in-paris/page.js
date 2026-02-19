@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import ParisBanner from '@/Components/InnerPages/paris/ParisBanner'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Hotel in Paris | Book hotels in Paris | Just Buy Travel ",
     description:

@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import UsaBanner from '@/Components/InnerPages/USA/UsaBanner'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Hotels in USA | Best hotels in USA | Just Buy Travel",
     description:

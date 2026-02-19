@@ -3,6 +3,8 @@ import Header from '@/component/Header'
 import CapeTownBanner from '@/Components/InnerPages/Capetown/CapeTownBanner'
 import CapTownRecomd from '@/Components/InnerPages/Capetown/CapTownRecomd'
 import React from 'react'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "",
     description:

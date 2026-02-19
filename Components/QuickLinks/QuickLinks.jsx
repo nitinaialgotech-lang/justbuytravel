@@ -1,9 +1,7 @@
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import FlightQuickLinks from './FlightQuickLinks';
 import HotelQuickLinks from './HotelQuickLinks';
 export default function QuickLinks() {
-    const route = usePathname();
     return (
 
         <>

@@ -2,7 +2,8 @@ import React from 'react'
 import Header from '@/component/Header'
 import Footer from '@/component/Footer'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Disclaimer | Just Buy Travel",
     description: "Read Just Buy Travel's disclaimer to understand the terms and conditions for using our travel services and website.",

@@ -12,7 +12,7 @@ import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import "../../../style/responsive.css";
 
 export const dynamic = 'force-dynamic';
-
+export const revalidate = 0;
 export function generateStaticParams() {
     return [];
 }

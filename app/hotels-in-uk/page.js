@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import UkBanner from '@/Components/InnerPages/UnitedKingDom/UkBanner'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
     title: "Hotels in UK | Best hotels in UK | Just Buy Travel",

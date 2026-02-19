@@ -1,6 +1,8 @@
 import Header from '@/component/Header';
 import MiamiBanner from '@/Components/InnerPages/Miami/MiamiBanner';
 import React from 'react'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "",
     description:

@@ -3,7 +3,8 @@ import Header from '@/component/Header'
 import Footer from '@/component/Footer'
 import Link from 'next/link';
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
   title: "Terms and Conditions | Just Buy Travel",
   description: "Read Just Buy Travel's terms and conditions to understand the rules and regulations for using our travel services and website.",

@@ -8,6 +8,8 @@ import Trusted_Partner_Banner from '@/Components/TrustedPartner/Trusted_Partner_
 import TrustedPartner_Title from '@/Components/TrustedPartner/TrustedPartner_Title'
 import Trusted_Explore_Category from '@/Components/TrustedPartner/Trusted_Explore_Category'
 import Trust_Guide_Section from '@/Components/Aboutus/Trust_Guide_Section'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "My Favorite Travel Resources | Just Buy Travel",
     description:

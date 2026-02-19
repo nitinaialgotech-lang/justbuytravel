@@ -1,7 +1,8 @@
 import Header from '@/component/Header';
 import SandiegoBanner from '@/Components/InnerPages/San-Diego/SandiegoBanner';
 import React from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
     title: "",

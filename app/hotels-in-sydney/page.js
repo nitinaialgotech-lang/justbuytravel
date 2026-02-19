@@ -2,7 +2,8 @@ import Header from '@/component/Header'
 import SydneyBanner from '@/Components/InnerPages/Sydney/SydneyBanner'
 import SydneyRecomd from '@/Components/InnerPages/Sydney/SydneyRecomd'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
     title: "Hotels in Sydney | Best hotels in Sydney | Just Buy Travel",

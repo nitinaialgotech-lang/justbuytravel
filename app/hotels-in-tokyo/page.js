@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import TokyoBanner from '@/Components/InnerPages/Tokyo/TokyoBanner'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
     title: "Hotels in Tokyo | Best hotels in Tokyo | Just Buy Travel",

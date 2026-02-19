@@ -204,12 +204,6 @@ export default async function sitemap() {
           break;
         }
       }
-      entries.push({
-        url: `${baseUrl}/blog/${blog.slug}`,
-        lastModified,
-        changeFrequency: 'monthly',
-        priority: 0.7,
-      });
       return entries;
     });
   } catch (error) {

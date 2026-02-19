@@ -11,7 +11,8 @@ import Blogs from '@/Components/HomePage/Blog/Blogs'
 import Footer from '@/component/Footer'
 import Flight_Faq_Section from '@/Components/Book-Flights/Flight_Faq_Section'
 import Trust_Guide_Section from '@/Components/Aboutus/Trust_Guide_Section'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Book Flights Online | Cheap Flights Online | Just Buy Travel",
     description: "Do you want to book flights online? Just Buy Travel helps you check prices, compare airlines, and connect with trusted booking partners simple and stress-free.",

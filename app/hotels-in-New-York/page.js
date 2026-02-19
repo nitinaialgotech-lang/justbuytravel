@@ -2,7 +2,8 @@ import Header from '@/component/Header'
 import NewYorkBanner from '@/Components/InnerPages/NewYorkPage/NewYorkBanner'
 import NewYorkRecondSection from '@/Components/InnerPages/NewYorkPage/NewYorkRecondSection'
 import React, { Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Hotels in New York | Beach, Budget & Luxury Stays | Just Buy Travel",
     description:

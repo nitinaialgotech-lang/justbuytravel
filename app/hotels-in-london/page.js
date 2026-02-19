@@ -1,6 +1,8 @@
 import Header from '@/component/Header'
 import LondonBanner from '@/Components/InnerPages/London/LondonBanner';
 import React from 'react'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "",
     description:

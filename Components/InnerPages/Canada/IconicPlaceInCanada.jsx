@@ -24,6 +24,24 @@ import CardShimmerEffect from "@/component/CardShimmerEffect";
 
 
 export default function IconicPlaceInCanada() {
+    const fallbackIconicCards = [
+        {
+            img: "/iconic/iconic.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+        },
+        {
+            img: "/iconic/iconic4.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+        },
+        {
+            img: "/iconic/iconic6.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+        },
+        {
+            img: "/iconic/iconic7.jpg",
+            content: "Half-Day Railway Market and Floating Market Tour in Thailand",
+        },
+    ];
     const router = useRouter();
     /************ state start ******** */
     const [secondActive, setSecondActive] = useState(true);

@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import SearchResult from '@/Components/SearchResultPage/SearchResult'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Search Hotels - Find Hotels by Location | Just Buy Travel",
     description: "Search and compare hotels by location. Find the best hotels near you with prices, reviews, and availability.",

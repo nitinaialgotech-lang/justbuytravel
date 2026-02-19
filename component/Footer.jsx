@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { MdLocationPin } from "react-icons/md";
 import { FaChevronUp } from "react-icons/fa";
@@ -11,7 +12,6 @@ import { RiTwitterXLine } from "react-icons/ri";
 import { getAssetPath } from "../app/utils/assetPath";
 import QuickLinks from "@/Components/QuickLinks/QuickLinks";
 import FlightQuickLinks from "@/Components/QuickLinks/FlightQuickLinks";
-import { usePathname } from "next/navigation";
 import { FaLinkedin } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
 
@@ -35,9 +35,6 @@ export default function Footer() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
-  // ***************************************
-  const pathname = usePathname();
-  console.log(pathname, ",,,,,,.");
 
   return (
     <>
@@ -49,9 +46,6 @@ export default function Footer() {
 
 
       <QuickLinks />
-
-
-
       <section className="footer_section padding_top relative ">
         <div className="bg_back absolute top-0 flex justify-between left-0 right-0">
           <div className="left_img ">

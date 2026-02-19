@@ -2,6 +2,8 @@ import Header from '@/component/Header'
 import Book_CruisesBanner from '@/Components/Book-Cruises/Book_CruisesBanner'
 import React, { Suspense } from 'react'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
     title: "Book Cruises - Find Your Perfect Cruise Vacation",

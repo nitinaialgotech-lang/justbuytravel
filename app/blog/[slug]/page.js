@@ -11,6 +11,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import "../../../style/responsive.css";
 
+
 // Pre-render known blog slugs at build when API is reachable (e.g. local build).
 export async function generateStaticParams() {
   try {
@@ -25,6 +26,7 @@ export async function generateStaticParams() {
 // Always render on server so /blog/[slug] works on Hostinger even when build had no API access.
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
+export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
     try {

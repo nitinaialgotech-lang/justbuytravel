@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import Header from '@/component/Header'
 import GoaBannner from '@/Components/InnerPages/Goa/GoaBannner'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: "Hotels in Goa | Beach, Budget & Luxury Stays | Just Buy Travel",
     description:

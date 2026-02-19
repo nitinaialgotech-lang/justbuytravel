@@ -1,7 +1,8 @@
 import Header from '@/component/Header'
 import SanFrancBanner from '@/Components/InnerPages/SanFransci/SanFrancBanner'
 import { React, Suspense } from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://justbuytravel.com';
 const canonicalUrl = `${siteUrl}/hotels-in-san-francisco`;
 

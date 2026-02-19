@@ -1,7 +1,8 @@
 import Header from "@/component/Header";
 import DenMarkBanner from "@/Components/InnerPages/Denmark/DenMarkBanner";
 import React, { Suspense } from "react";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 // *********************************************************
 export const metadata = {
     title: "Hotels in Denmark | Cheap & luxury hotels | Just Buy Travel ",

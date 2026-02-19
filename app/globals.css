@@ -4360,7 +4360,9 @@ width: 10px;
   box-shadow: none !important;
   outline: none !important;
 }
-
+.collapse{
+visibility: visible !important;
+}
 .accordion-button:not(.collapsed) {
   box-shadow: none !important;
 }

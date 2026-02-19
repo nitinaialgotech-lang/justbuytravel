@@ -2,7 +2,8 @@ import React from 'react'
 import Header from '@/component/Header'
 import Footer from '@/component/Footer'
 import { generateBreadcrumbStructuredData } from '@/app/utils/seo'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
   title: "Privacy Policy | Just Buy Travel",
   description: "Read Just Buy Travel's privacy policy to understand how we collect, use, and protect your personal information when you use our travel services.",

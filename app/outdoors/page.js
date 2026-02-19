@@ -3,7 +3,8 @@ import Header from '@/component/Header'
 import Outdoor_Attraction_Section from '@/Components/OutdoorDestination/Outdoor_Attraction_Section'
 import Outdoor_Banner from '@/Components/OutdoorDestination/Outdoor_Banner'
 import React from 'react'
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export default function page() {
     return (
         <>

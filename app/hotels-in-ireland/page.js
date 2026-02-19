@@ -1,6 +1,8 @@
 import Header from '@/component/Header'
 import IreLandBanner from '@/Components/InnerPages/Ireland/IreLandBanner'
 import React, { Suspense } from 'react'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const metadata = {
     title: " Hotels in Ireland | Cheap & Luxury Stays | Just Buy Travel ",
     description:
