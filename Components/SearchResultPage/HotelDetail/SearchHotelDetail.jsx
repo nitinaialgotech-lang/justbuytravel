@@ -494,9 +494,9 @@ export default function SearchHotelDetail() {
             typeof img === "string"
               ? img
               : img?.original_image ||
-                img?.original ||
-                img?.url ||
-                img?.thumbnail;
+              img?.original ||
+              img?.url ||
+              img?.thumbnail;
           return url ? { type: "url", url } : null;
         })
         .filter(Boolean);
@@ -1071,7 +1071,7 @@ export default function SearchHotelDetail() {
                           <span>
                             <FaShareAlt />
                           </span>
-                          <span className="share">Share</span>
+                          {/* <span className="share">Share</span> */}
                         </Link>
                       </div>
                     </div>
@@ -1135,8 +1135,8 @@ export default function SearchHotelDetail() {
                       <div className="price_hotel flex  gap-3">
                         <div className="price">
                           {isSerpPriceBusy &&
-                          !displayBestPrice &&
-                          searchCheckout ? (
+                            !displayBestPrice &&
+                            searchCheckout ? (
                             <>
                               <div
                                 className="shimmer-container shimmer-90x28 mb-2"
@@ -1386,9 +1386,9 @@ export default function SearchHotelDetail() {
                               <span className="ta_date_value">
                                 {dateRange?.from
                                   ? format(
-                                      dateRange.from,
-                                      isMobileView ? "MMM d" : "EEE, MMM d",
-                                    )
+                                    dateRange.from,
+                                    isMobileView ? "MMM d" : "EEE, MMM d",
+                                  )
                                   : "Select"}
                               </span>
                             </div>
@@ -1406,9 +1406,9 @@ export default function SearchHotelDetail() {
                               <span className="ta_date_value">
                                 {dateRange?.to
                                   ? format(
-                                      dateRange.to,
-                                      isMobileView ? "MMM d" : "EEE, MMM d",
-                                    )
+                                    dateRange.to,
+                                    isMobileView ? "MMM d" : "EEE, MMM d",
+                                  )
                                   : "Select"}
                               </span>
                             </div>
@@ -1504,9 +1504,8 @@ export default function SearchHotelDetail() {
 
                         {/* Arrow Icon */}
                         <FiChevronDown
-                          className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 ${
-                            showPassengerDropdown ? "rotate-180" : "rotate-0"
-                          }`}
+                          className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 ${showPassengerDropdown ? "rotate-180" : "rotate-0"
+                            }`}
                           size={18}
                         />
 
@@ -1514,11 +1513,10 @@ export default function SearchHotelDetail() {
                         <div
                           className={`absolute left-0 mt-2 w-full bg-white border border-gray-200 
                                                     rounded-xl shadow-2xl transition-all duration-300 ease-out origin-top z-50 pt-3
-                                                    ${
-                                                      showPassengerDropdown
-                                                        ? "opacity-100 scale-100 translate-y-0"
-                                                        : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                                                    }`}
+                                                    ${showPassengerDropdown
+                              ? "opacity-100 scale-100 translate-y-0"
+                              : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                            }`}
                         >
                           <div className="px-3 py-2 flex items-center justify-between border-b border-gray-100">
                             <span className="text-sm text-gray-600 text-height">
@@ -1791,12 +1789,12 @@ export default function SearchHotelDetail() {
                                 item.rooms && item.rooms.length > 0
                                   ? item.rooms
                                   : [
-                                      {
-                                        name: null,
-                                        rate_per_night: item.rate_per_night,
-                                        total_rate: item.total_rate,
-                                      },
-                                    ];
+                                    {
+                                      name: null,
+                                      rate_per_night: item.rate_per_night,
+                                      total_rate: item.total_rate,
+                                    },
+                                  ];
                               const hasMultipleRooms = rooms.length > 1;
                               const isExpanded =
                                 expandedPartners.has(partnerIndex);
@@ -1819,7 +1817,7 @@ export default function SearchHotelDetail() {
                                       <img
                                         src={
                                           PARTNER_LOGOS[
-                                            item.normalizedSource
+                                          item.normalizedSource
                                           ] || item.logo
                                         }
                                         alt={item.source}
@@ -1827,27 +1825,27 @@ export default function SearchHotelDetail() {
                                       {/* ************************* display show on mobile */}
                                       {(remarks.length > 0 ||
                                         discountRemarks.length > 0) && (
-                                        <div className="d-block d-lg-none">
-                                          <div className="ta_price_remarks ">
-                                            {discountRemarks.map((r, i) => (
-                                              <span
-                                                key={`disc-${i}`}
-                                                className="ta_remark ta_discount"
-                                              >
-                                                {r}
-                                              </span>
-                                            ))}
-                                            {remarks.map((r, i) => (
-                                              <span
-                                                key={`rem-${i}`}
-                                                className="ta_remark"
-                                              >
-                                                {r}
-                                              </span>
-                                            ))}
+                                          <div className="d-block d-lg-none">
+                                            <div className="ta_price_remarks ">
+                                              {discountRemarks.map((r, i) => (
+                                                <span
+                                                  key={`disc-${i}`}
+                                                  className="ta_remark ta_discount"
+                                                >
+                                                  {r}
+                                                </span>
+                                              ))}
+                                              {remarks.map((r, i) => (
+                                                <span
+                                                  key={`rem-${i}`}
+                                                  className="ta_remark"
+                                                >
+                                                  {r}
+                                                </span>
+                                              ))}
+                                            </div>
                                           </div>
-                                        </div>
-                                      )}
+                                        )}
                                     </div>
                                     <div className="ta_price_partner_info">
                                       <div className="ta_price_badges">
@@ -1867,27 +1865,27 @@ export default function SearchHotelDetail() {
                                       {/* ************************ display on window  */}
                                       {(remarks.length > 0 ||
                                         discountRemarks.length > 0) && (
-                                        <div className="d-none d-lg-block">
-                                          <div className="ta_price_remarks ">
-                                            {discountRemarks.map((r, i) => (
-                                              <span
-                                                key={`disc-${i}`}
-                                                className="ta_remark ta_discount"
-                                              >
-                                                {r}
-                                              </span>
-                                            ))}
-                                            {remarks.map((r, i) => (
-                                              <span
-                                                key={`rem-${i}`}
-                                                className="ta_remark"
-                                              >
-                                                {r}
-                                              </span>
-                                            ))}
+                                          <div className="d-none d-lg-block">
+                                            <div className="ta_price_remarks ">
+                                              {discountRemarks.map((r, i) => (
+                                                <span
+                                                  key={`disc-${i}`}
+                                                  className="ta_remark ta_discount"
+                                                >
+                                                  {r}
+                                                </span>
+                                              ))}
+                                              {remarks.map((r, i) => (
+                                                <span
+                                                  key={`rem-${i}`}
+                                                  className="ta_remark"
+                                                >
+                                                  {r}
+                                                </span>
+                                              ))}
+                                            </div>
                                           </div>
-                                        </div>
-                                      )}
+                                        )}
                                     </div>
                                   </div>
                                   <div className="ta_price_mid">
@@ -1920,20 +1918,20 @@ export default function SearchHotelDetail() {
                                           <span className="ta_price_total">
                                             {item.original_total_rate?.lowest !=
                                               null && (
-                                              <span className="ta_price_original_inline">
-                                                {formatSerpPrice(
-                                                  item.original_total_rate
-                                                    .lowest,
-                                                )}{" "}
-                                              </span>
-                                            )}
+                                                <span className="ta_price_original_inline">
+                                                  {formatSerpPrice(
+                                                    item.original_total_rate
+                                                      .lowest,
+                                                  )}{" "}
+                                                </span>
+                                              )}
                                             {formatSerpPrice(mainPriceTotal)}{" "}
                                             total
                                           </span>
                                         )}
                                         {mainBeforeTaxes &&
                                           mainBeforeTaxes !==
-                                            mainPricePerNight && (
+                                          mainPricePerNight && (
                                             <span className="ta_price_before_taxes">
                                               Before taxes & fees:{" "}
                                               {formatSerpPrice(mainBeforeTaxes)}
@@ -2077,7 +2075,7 @@ export default function SearchHotelDetail() {
                                               </div>
                                               <div className="ta_price_mid">
                                                 {roomPricePerNight ||
-                                                roomPriceTotal ? (
+                                                  roomPriceTotal ? (
                                                   <div className="ta_price_details">
                                                     {roomPricePerNight && (
                                                       <span className="ta_price_primary">
@@ -2102,7 +2100,7 @@ export default function SearchHotelDetail() {
                                                       )}
                                                     {beforeTaxes &&
                                                       beforeTaxes !==
-                                                        roomPricePerNight && (
+                                                      roomPricePerNight && (
                                                         <span className="ta_price_before_taxes">
                                                           Before taxes & fees:{" "}
                                                           {formatSerpPrice(
