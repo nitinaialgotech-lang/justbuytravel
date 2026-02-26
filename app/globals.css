@@ -4882,7 +4882,7 @@ span.rating-stars {
   top: 38% !important;
 }
 .searchbox_modal > .show-dropdown-suggestion {
-  max-height: 10vh !important;
+  max-height: 40vh !important;
 }
 .mobile_search_box2 > form > input {
   padding: 12px 25px;

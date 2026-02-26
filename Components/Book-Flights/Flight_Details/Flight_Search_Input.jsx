@@ -1019,22 +1019,17 @@ export default function Flight_Search_Input({ Tabin }) {
                         <DayPicker
                           mode="range"
                           selected={range}
-                          onSelect={(rangeDate) => {
-                            setRange(rangeDate);
-                            setFr(rangeDate?.from);
-                            setdayTo(rangeDate?.to);
-                            formik?.setFieldValue("range", rangeDate);
-                            console.log(rangeDate?.from, rangeDate?.to, "rabegteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                          onDayClick={(day) => {
+                            const newRange = addDayToRange(day, range); // use DayPicker helper
+                            setRange(newRange);
+                            setFr(newRange?.from);
+                            setdayTo(newRange?.to);
+                            formik?.setFieldValue("range", newRange);
 
-                            // Only close if both dates exist
-                            if (rangeDate?.from && rangeDate?.to) {
+                            if (newRange?.from && newRange?.to) {
                               setOpen(false);
                             }
-                            else {
-                              setOpen(true)
-                            }
                           }}
-                          disabled={{ before: new Date() }}
                         />
                       )}
 
