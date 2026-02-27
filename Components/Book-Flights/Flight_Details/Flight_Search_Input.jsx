@@ -6,7 +6,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { FaUser } from "react-icons/fa";
 import { DayPicker } from "react-day-picker";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import "react-day-picker/dist/style.css";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -1033,16 +1033,24 @@ export default function Flight_Search_Input({ Tabin }) {
                         <DayPicker
                           mode="range"
                           selected={range}
-                          fromMonth={today}
+                          defaultMonth={range?.to ?? range?.from ?? new Date()}
                           disabled={{ before: new Date() }}
                           onSelect={(rangeDate) => {
-                            setRange(rangeDate);
-                            setFr(rangeDate?.from);
-                            setdayTo(rangeDate?.to);
-                            formik?.setFieldValue("range", rangeDate);
-                            // only close when both from and to exist
-                            if (fr != "" && dayto != "") {
-                              setOpen(false)
+                            if (!rangeDate) return;
+                            const from = rangeDate.from ?? rangeDate.to;
+                            if (!from) return;
+                            const to = rangeDate.to;
+                            const isSingleDay =
+                              !to || from.getTime() === to.getTime();
+                            const finalRange = isSingleDay
+                              ? { from, to: addDays(from, 1) }
+                              : rangeDate;
+                            setRange(finalRange);
+                            setFr(finalRange.from);
+                            setdayTo(finalRange.to);
+                            formik?.setFieldValue("range", finalRange);
+                            if (finalRange.from && finalRange.to) {
+                              setOpen(false);
                             }
                           }}
                         />
