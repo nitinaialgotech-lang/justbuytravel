@@ -692,16 +692,20 @@ relative
                                                         textContent || "Search places and hotels"
                                                     }
                                                 />
-                                                {!isSearchModalOpen ? (
-                                                    <button
-                                                        type="submit"
-                                                        className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs focus:outline-none button_bg2 text-white rounded search_full_button_padding "
-                                                    >
-                                                        Search
-                                                    </button>
-                                                ) : (
-                                                    ""
-                                                )}
+                                                {!isSearchModalOpen ?
+                                                    (
+                                                        <button
+                                                            type="submit"
+                                                            className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs focus:outline-none button_bg2 text-white rounded search_full_button_padding "
+                                                        >
+                                                            Search
+                                                        </button>
+                                                    )
+                                                    :
+                                                    (
+                                                        ""
+                                                    )
+                                                }
                                             </div>
 
                                             {/* ********************************* seachinf dropdown xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
@@ -940,8 +944,11 @@ relative
                                                                     );
                                                                 })}
                                                             </>
-                                                        ) : searchContent.length > 0 ? (
-                                                            <div className="px-4 py-6 text-center text-gray-500 text-sm">
+                                                        ) : searchContent.trim().length > 0 &&
+                                                        !isLoading &&
+                                                        places &&
+                                                        places.length === 0 && (
+                                                            <div className="px-4 py-6 text-center text-gray-500 text-sm ">
                                                                 <svg
                                                                     className="w-12 h-12 mx-auto mb-2 text-gray-300"
                                                                     fill="none"
@@ -957,7 +964,7 @@ relative
                                                                 </svg>
                                                                 No hotels found for "{searchContent}"
                                                             </div>
-                                                        ) : null}
+                                                        )}
                                                     </div>
                                                 </div>
                                             )}

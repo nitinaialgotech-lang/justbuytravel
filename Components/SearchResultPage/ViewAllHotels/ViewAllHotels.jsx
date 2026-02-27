@@ -237,7 +237,7 @@ export default function ViewAllHotels() {
                                                 <div className="btn-and-price-area">
                                                     <Link
                                                         href={`/${createHotelSlug(item?.displayName?.text || item?.displayName || item?.name, item?.id)}`}
-                                                        className="primary-btn1"
+                                                        className="primary-btn1 text-white"
                                                     >
                                                         <span>
                                                             Book Now{" "}

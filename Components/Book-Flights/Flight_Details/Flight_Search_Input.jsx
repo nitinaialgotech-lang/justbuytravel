@@ -1026,8 +1026,8 @@ export default function Flight_Search_Input({ Tabin }) {
                             setdayTo(rangeDate?.to);
                             formik?.setFieldValue("range", rangeDate);
                             // only close when both from and to exist
-                            if (rangeDate?.from && rangeDate?.to) {
-                              setOpen(false);
+                            if (fr != "" && dayto != "") {
+                              setOpen(false)
                             }
                           }}
                         />
@@ -1074,8 +1074,8 @@ export default function Flight_Search_Input({ Tabin }) {
                   {/*........................................ Dropdown ........................................ */}
                   <div
                     className={`absolute left-0 mt-2 w-full bg-white border border-gray-200 
-    rounded-xl shadow-2xl transition-all duration-300 ease-out origin-top z-50
-    ${showPassengerDropdown
+                                                             rounded-xl shadow-2xl transition-all duration-300 ease-out origin-top z-50
+                    ${showPassengerDropdown
                         ? "opacity-100 scale-100 translate-y-0"
                         : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
                       }`}

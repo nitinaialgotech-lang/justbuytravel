@@ -1521,7 +1521,7 @@ export default function SearchHotelDetail() {
                           <div className="px-3 py-2 flex items-center justify-between border-b border-gray-100">
                             <span className="text-sm text-gray-600 text-height">
                               Adults <br></br>{" "}
-                              <span className="ft-sm"> (12+ yrs)</span>
+                              <span className="ft-sm"> (17+ yrs)</span>
                             </span>
                             <div className="flex items-center gap-3">
                               <button
