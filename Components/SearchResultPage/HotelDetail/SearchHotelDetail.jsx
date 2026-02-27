@@ -2022,9 +2022,11 @@ export default function SearchHotelDetail() {
                                 /* Room type rows - collapsible with animation  show on desktop */
 
                                 hasMultipleRooms && (
-                                  <div className="">
+                                  <div
+                                    key={`${partnerIndex}-desktop-rooms`}
+                                    className=""
+                                  >
                                     <div
-                                      key={`${partnerIndex}-rooms`}
                                       className={`ta_rooms_collapsible ${isExpanded ? "ta_rooms_expanded" : ""}`}
                                     >
                                       <div className="ta_rooms_inner">
@@ -2144,9 +2146,11 @@ export default function SearchHotelDetail() {
                                   </div>
                                 ),
                                 hasMultipleRooms && (
-                                  <div className="d-none d-lg-block">
+                                  <div
+                                    key={`${partnerIndex}-toggle-desktop`}
+                                    className="d-none d-lg-block"
+                                  >
                                     <div
-                                      key={`${partnerIndex}-toggle`}
                                       className={`ta_price_row ta_price_toggle_row ${isExpanded ? "ta_toggle_expanded" : ""}`}
                                       role="button"
                                       tabIndex={0}

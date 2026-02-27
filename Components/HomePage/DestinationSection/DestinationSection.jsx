@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -22,8 +22,6 @@ const card = [
 
 export default function DestinationSection() {
     const [isDestinationActive, setDestinationActive] = useState(true);
-    const RecomandprevRef = useRef(null);
-    const RecomandnextRef = useRef(null);
     const [Recomandcurrent, SetNearCurrent] = useState(0);
     return (
         <>
@@ -85,15 +83,7 @@ export default function DestinationSection() {
                                 }}
                                 modules={[Pagination, Navigation]}
                                 // onSwiper={(swiper) => setDestinationActive(swiper.isBeginning)}
-                                onSwiper={(swiper) => {
-                                    SetNearCurrent(swiper.realIndex); // initial index
-                                    setTimeout(() => {
-                                        swiper.params.navigation.prevEl = RecomandprevRef.current;
-                                        swiper.params.navigation.nextEl = RecomandnextRef.current;
-                                        swiper.navigation.init();
-                                        swiper.navigation.update();
-                                    });
-                                }}
+                                onSwiper={(swiper) => SetNearCurrent(swiper.realIndex)}
                                 onSlideChange={(swiper) => { setDestinationActive(swiper.isBeginning), SetNearCurrent(swiper.realIndex); }}
 
                                 breakpoints={{

@@ -20,7 +20,7 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 // import required modules
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import ExpediaBanner from "./Banner";
 import GetOfferSection from "../GetOfferSection/GetOfferSection";
 export default function ExperienceExploreSection() {
@@ -163,12 +163,10 @@ export default function ExperienceExploreSection() {
         enabled: coords.lat !== null && coords.lng !== null,
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
-    const IconprevRef = useRef(null);
-    const IconnextRef = useRef(null);
     const [currentIcoIndex, setCurrentIcoIndex] = useState(0);
-    const NearprevRef = useRef(null);
-    const NearnextRef = useRef(null);
     const [Nearcurrent, SetNearCurrent] = useState(0);
+    const nearSwiperRef = useRef(null);
+    const iconicSwiperRef = useRef(null);
     const pathname = usePathname();
     return (
         <>
@@ -189,26 +187,11 @@ export default function ExperienceExploreSection() {
                             <Swiper
                                 slidesPerView={3}
                                 spaceBetween={15}
-                                // pagination={{ clickable: true }}
-                                navigation={{
-                                    prevEl: "#custom_prev",
-                                    nextEl: "#custom_next",
-                                }}
                                 loop={true}
-                                // autoplay={{
-                                //     delay: 3100,
-                                //     disableOnInteraction: false,
-                                // }}
-                                modules={[Pagination, Navigation]}
-                                // onSwiper={(swiper) => setIsBeginning(swiper.isBeginning)}
+                                modules={[Pagination]}
                                 onSwiper={(swiper) => {
-                                    SetNearCurrent(swiper.realIndex); // initial index
-                                    setTimeout(() => {
-                                        swiper.params.navigation.prevEl = NearprevRef.current;
-                                        swiper.params.navigation.nextEl = NearnextRef.current;
-                                        swiper.navigation.init();
-                                        swiper.navigation.update();
-                                    });
+                                    nearSwiperRef.current = swiper;
+                                    SetNearCurrent(swiper.realIndex);
                                 }}
                                 onSlideChange={(swiper) => { setIsBeginning(swiper.isBeginning), SetNearCurrent(swiper.realIndex); }}
                                 breakpoints={{
@@ -304,6 +287,7 @@ export default function ExperienceExploreSection() {
                                         aria-label="Previous"
                                         className={`absolute ${Nearcurrent === 0 ? "d-none pointer-events-none" : ""
                                             }`}
+                                        onClick={() => nearSwiperRef.current?.slidePrev()}
                                     >
                                         <MdOutlineKeyboardArrowLeft size={30} />
                                     </button>
@@ -312,6 +296,7 @@ export default function ExperienceExploreSection() {
                                         id="custom_next"
                                         aria-label="Next"
                                         className="absolute"
+                                        onClick={() => nearSwiperRef.current?.slideNext()}
                                     >
                                         <MdOutlineKeyboardArrowRight size={30} />
                                     </button>
@@ -349,31 +334,12 @@ export default function ExperienceExploreSection() {
                         <Swiper
                             slidesPerView={3}
                             spaceBetween={15}
-                            // pagination={{ clickable: true }}
-                            navigation={{
-                                prevEl: "#experience_prev",
-                                nextEl: "#experience_next",
-                            }}
-
-                            // autoplay={{
-                            //     delay: 3000,
-                            //     disableOnInteraction: false,
-                            // }}
-                            // onSwiper={(swiper) => setSecondActive(swiper.isBeginning)}
+                            modules={[Pagination]}
                             onSwiper={(swiper) => {
-                                setCurrentIcoIndex(swiper.realIndex); // initial index
-                                setTimeout(() => {
-                                    swiper.params.navigation.prevEl = IconprevRef.current;
-                                    swiper.params.navigation.nextEl = IconnextRef.current;
-                                    swiper.navigation.init();
-                                    swiper.navigation.update();
-                                });
+                                iconicSwiperRef.current = swiper;
+                                setCurrentIcoIndex(swiper.realIndex);
                             }}
                             onSlideChange={(swiper) => { setSecondActive(swiper.isBeginning); setCurrentIcoIndex(swiper.realIndex) }}
-                            // autoplay={{
-                            //     delay: 3000,
-                            //     disableOnInteraction: false,
-                            // }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,
@@ -394,7 +360,6 @@ export default function ExperienceExploreSection() {
                                 },
                             }}
                             loop={true}
-                            modules={[Pagination, Navigation]}
                             className="mySwiper relative"
                         >
                             {(iconicPlacesList.length
@@ -463,6 +428,7 @@ export default function ExperienceExploreSection() {
                                     aria-label="Previous"
                                     className={`absolute ${currentIcoIndex === 0 ? "d-none pointer-events-none" : ""
                                         }`}
+                                    onClick={() => iconicSwiperRef.current?.slidePrev()}
                                 >
                                     <MdOutlineKeyboardArrowLeft size={30} />
                                 </button>
@@ -471,6 +437,7 @@ export default function ExperienceExploreSection() {
                                     id="experience_next"
                                     aria-label="Next"
                                     className="absolute"
+                                    onClick={() => iconicSwiperRef.current?.slideNext()}
                                 >
                                     <MdOutlineKeyboardArrowRight size={30} />
                                 </button>

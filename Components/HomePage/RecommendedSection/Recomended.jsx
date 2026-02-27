@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useMemo } from "react";
@@ -120,8 +120,6 @@ export default function Recomended() {
         const slug = createHotelSlug(name, id);
         router.push(`/${slug}`);
     };
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     return (
         <>
@@ -151,15 +149,7 @@ export default function Recomended() {
                             modules={[Navigation, Autoplay, Pagination]}
                             className="mySwiper"
                             // onSwiper={(swiper) => { setActive(swiper.isBeginning), setIsEnd(swiper.isEnd); }}
-                            onSwiper={(swiper) => {
-                                setCurrentIndex(swiper.realIndex); // initial index
-                                setTimeout(() => {
-                                    swiper.params.navigation.prevEl = prevRef.current;
-                                    swiper.params.navigation.nextEl = nextRef.current;
-                                    swiper.navigation.init();
-                                    swiper.navigation.update();
-                                });
-                            }}
+                            onSwiper={(swiper) => setCurrentIndex(swiper.realIndex)}
                             onSlideChange={(swiper) => { setActive(swiper.isBeginning), setIsEnd(swiper.isEnd); setCurrentIndex(swiper.realIndex) }}
                             autoplay={{
                                 delay: 3000,

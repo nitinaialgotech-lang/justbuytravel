@@ -19,7 +19,7 @@ const metadata = {
   },
   manifest: "/manifest.json",
   verification: {
-    google: "PhX0a5Jh4LTkKXDaMzapVLNklJD-1d3611XLM9l3y4U",
+    google: "2eXVbbybyASbG_ZLf-HKvKorBCAkehCJQfFmY_p_y-I",
   },
   openGraph: {
     title: "Just Buy Travel",
