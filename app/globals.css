@@ -4916,3 +4916,9 @@ span.rating-stars {
 .rdp-range_middle > button {
   background-color: #f0f0ff !important;
 }
+.btn-and-price-area > a > span > svg {
+  fill: #ffffff;
+}
+.experience_explore_section > .card {
+  background: transparent !important;
+}

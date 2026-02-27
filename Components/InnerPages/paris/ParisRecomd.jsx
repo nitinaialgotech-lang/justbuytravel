@@ -109,7 +109,7 @@ export default function ParisRecomd() {
           <h2 className="mb-0">Hotel Options Across Paris</h2>
           <p>
             Accommodation options located across major Paris areas near metro
-            stations, dining streets, and popular attractions for convenient
+            stations and popular attractions for convenient
             access during your stay.
           </p>
           <div className="title_icon absolute right-5   ">
@@ -164,79 +164,79 @@ export default function ParisRecomd() {
                   spaceBetween: 20,
                 },
               }}
-              loop={!isLoading}
+              loop={false}
               id="swiper_sldie"
             >
               {isLoading
                 ? Array.from({ length: 4 }).map((_, i) => (
-                    <SwiperSlide key={`shimmer-${i}`}>
-                      <ShimmerCard />
-                    </SwiperSlide>
-                  ))
+                  <SwiperSlide key={`shimmer-${i}`}>
+                    <ShimmerCard />
+                  </SwiperSlide>
+                ))
                 : nearbyPlace?.map((item, i) => {
-                    const name = item?.displayName?.text ?? item?.name ?? "";
-                    const id = item?.id;
-                    const imageSrc = getPlacePhotoUrl(item);
-                    const truncateText = (text, maxLength = 20) => {
-                      if (!text) return "";
-                      return text.length > maxLength
-                        ? text.slice(0, maxLength) + "..."
-                        : text;
-                    };
-                    return (
-                      <>
-                        <SwiperSlide key={i}>
-                          <div className="card_col">
-                            <div
-                              className="recommend_card_box card_rounded recomand_card_shadow cursor-pointer"
-                              onClick={() => viewDetail(id, name)}
-                            >
-                              <div className="card_box pe-">
-                                <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
-                                  <img
-                                    src={imageSrc}
-                                    className="card_rounded w-full h-full object-cover"
-                                    alt={"Hotel image"}
-                                  />
-                                </div>
-                                {/* *** */}
-                                <div className="card_box_detail card_rounded flex flex-col z-1  relative">
-                                  <h4 className="m-0 capitalize">
-                                    {name || item?.displayName?.text}
-                                  </h4>
-                                  {/* ****** */}
-
-                                  {/* ****************** */}
-
-                                  {/* ******* */}
-                                  <div className="price_book flex justify-between items-center">
-                                    <div className="rating flex align-items-center gap-1">
-                                      {renderBootstrapStars(item?.rating)}
-                                      <span className="ms-1">
-                                        {item?.rating} ({item?.userRatingCount})
-                                      </span>
-                                    </div>
-                                    <button
-                                      className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        viewDetail(id, name);
-                                      }}
-                                    >
-                                      View Details
-                                    </button>
-                                  </div>
-                                  {/* *************** rating_list */}
-                                </div>
+                  const name = item?.displayName?.text ?? item?.name ?? "";
+                  const id = item?.id;
+                  const imageSrc = getPlacePhotoUrl(item);
+                  const truncateText = (text, maxLength = 20) => {
+                    if (!text) return "";
+                    return text.length > maxLength
+                      ? text.slice(0, maxLength) + "..."
+                      : text;
+                  };
+                  return (
+                    <>
+                      <SwiperSlide key={i}>
+                        <div className="card_col">
+                          <div
+                            className="recommend_card_box card_rounded recomand_card_shadow cursor-pointer"
+                            onClick={() => viewDetail(id, name)}
+                          >
+                            <div className="card_box pe-">
+                              <div className="card_box_img card_rounded relative overflow-hidden card-img-250">
+                                <img
+                                  src={imageSrc}
+                                  className="card_rounded w-full h-full object-cover"
+                                  alt={"Hotel image"}
+                                />
                               </div>
-                              {/* *********** */}
+                              {/* *** */}
+                              <div className="card_box_detail card_rounded flex flex-col z-1  relative">
+                                <h4 className="m-0 capitalize">
+                                  {name || item?.displayName?.text}
+                                </h4>
+                                {/* ****** */}
+
+                                {/* ****************** */}
+
+                                {/* ******* */}
+                                <div className="price_book flex justify-between items-center">
+                                  <div className="rating flex align-items-center gap-1">
+                                    {renderBootstrapStars(item?.rating)}
+                                    <span className="ms-1">
+                                      {item?.rating} ({item?.userRatingCount})
+                                    </span>
+                                  </div>
+                                  <button
+                                    className="button_bg2 rounded-full bg-color-green color_bl recomend_btn"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      viewDetail(id, name);
+                                    }}
+                                  >
+                                    View Details
+                                  </button>
+                                </div>
+                                {/* *************** rating_list */}
+                              </div>
                             </div>
                             {/* *********** */}
                           </div>
-                        </SwiperSlide>
-                      </>
-                    );
-                  })}
+                          {/* *********** */}
+                        </div>
+                      </SwiperSlide>
+                    </>
+                  );
+                })}
             </Swiper>
             {/*xxxxxxxx */}
             <div className="button_swiper2 absolute ">
@@ -244,9 +244,8 @@ export default function ParisRecomd() {
                 <button
                   id="recomand_prev"
                   aria-label="Previous"
-                  className={`absolute ${
-                    Active ? "d-none pointer-events-none" : ""
-                  }`}
+                  className={`absolute ${Active ? "d-none pointer-events-none" : ""
+                    }`}
                 >
                   <MdOutlineKeyboardArrowLeft size={30} />
                 </button>

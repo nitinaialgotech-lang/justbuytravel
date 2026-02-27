@@ -10,6 +10,8 @@ import Book_Hotel_Guide_Section from './Book_HotelGuide_Section'
 import Book_Hotel_Faq_section from './Book_Hotel_Faq_section'
 import Trust_Guide_Section from '../Aboutus/Trust_Guide_Section'
 import { useSelector } from 'react-redux'
+import Recomended from '../HomePage/RecommendedSection/Recomended'
+import ExperienceExploreSection from '../HomePage/ExpereinceExploreSection/ExperienceExploreSection'
 
 const BANNER_TITLES = {
   all: <>Smart Travel <span>Planning</span></>,
@@ -49,9 +51,11 @@ export default function BookHotels_Banner() {
       </section>
 
       <Search />
-      <TopHotels />
-      <IconicPlaces />
+      <Recomended />
+      {/* <TopHotels /> */}
+      {/* <IconicPlaces /> */}
       <GuideHotel />
+      <ExperienceExploreSection />
       {/* <Trust_Guide_Section /> */}
       <Book_Hotel_Guide_Section />
       <Blogs />

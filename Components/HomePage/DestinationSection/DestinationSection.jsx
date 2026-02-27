@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -22,6 +22,9 @@ const card = [
 
 export default function DestinationSection() {
     const [isDestinationActive, setDestinationActive] = useState(true);
+    const RecomandprevRef = useRef(null);
+    const RecomandnextRef = useRef(null);
+    const [Recomandcurrent, SetNearCurrent] = useState(0);
     return (
         <>
             <section className='destination_section padding_bottom '>
@@ -44,9 +47,6 @@ export default function DestinationSection() {
                     {/* ******************** */}
                     <div className="d-none d-lg-block">
                         <div className="row  relative ">
-
-
-
                             {
                                 card?.map((item, k) => {
                                     return (
@@ -84,8 +84,17 @@ export default function DestinationSection() {
                                     disableOnInteraction: false,
                                 }}
                                 modules={[Pagination, Navigation]}
-                                onSwiper={(swiper) => setDestinationActive(swiper.isBeginning)}
-                                onSlideChange={(swiper) => setDestinationActive(swiper.isBeginning)}
+                                // onSwiper={(swiper) => setDestinationActive(swiper.isBeginning)}
+                                onSwiper={(swiper) => {
+                                    SetNearCurrent(swiper.realIndex); // initial index
+                                    setTimeout(() => {
+                                        swiper.params.navigation.prevEl = RecomandprevRef.current;
+                                        swiper.params.navigation.nextEl = RecomandnextRef.current;
+                                        swiper.navigation.init();
+                                        swiper.navigation.update();
+                                    });
+                                }}
+                                onSlideChange={(swiper) => { setDestinationActive(swiper.isBeginning), SetNearCurrent(swiper.realIndex); }}
 
                                 breakpoints={{
                                     320: {
@@ -118,9 +127,7 @@ export default function DestinationSection() {
                             >
                                 {
                                     card?.map((item, i) => {
-
                                         return (
-
                                             <>
                                                 <SwiperSlide key={i}>
                                                     <div className="destination_box">
@@ -133,25 +140,18 @@ export default function DestinationSection() {
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-
                                                 </SwiperSlide>
                                                 {/* ********************** */}
                                             </>
                                         )
-
                                     })
                                 }
                             </Swiper>
                             <div className="button_swiper absolute ">
                                 <div className="buttons_icon relative">
-
-                                    <button id='destination_prev' className={`absolute ${isDestinationActive ? 'd-none pointer-events-none' : ''}`}>
+                                    <button id='destination_prev' className={`absolute ${Recomandcurrent === 0 ? 'd-none pointer-events-none' : ''}`}>
                                         <MdOutlineKeyboardArrowLeft size={30} />
                                     </button>
-
-
                                     <button id='destination_next' className='absolute'>
                                         <MdOutlineKeyboardArrowRight size={30} />
                                     </button>

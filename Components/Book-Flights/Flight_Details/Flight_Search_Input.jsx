@@ -55,7 +55,7 @@ export default function Flight_Search_Input({ Tabin }) {
   const q = from;
   const qTo = to;
   const [showClassDropdown, setShowClassDropdown] = useState(false);
-  const [travelClass, setTravelClass] = useState("Economy ");
+  const [travelClass, setTravelClass] = useState("Economy");
   const [travelId, setTravelClassId] = useState(1);
   // *******************************
   const departure_id = useSelector(
@@ -102,8 +102,8 @@ export default function Flight_Search_Input({ Tabin }) {
       const names = {
         1: "Economy ",
         2: "Premium Economy",
-        3: "Business",
-        4: "First",
+        3: "Business Class",
+        4: "First Class",
       };
       setTravelClass(names[id] || "Economy ");
     }
@@ -283,10 +283,10 @@ export default function Flight_Search_Input({ Tabin }) {
   const allAirPortsTO = autoToDropdownData
     .filter((item) => Array.isArray(item.airports))
     .flatMap((item) => item.airports);
-
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
   console.log(fr, to, "tPPPPPppppppppppppppppppppppppppppppppppppp");
-
+  const today = new Date();
   return (
     <section
       className={`flight_detail_section  ${pathname !== "/" ? "padding_bottom" : ""} ${pathname === "/flights" ? "padding_t20" : ""} ${Tabin === "flights" ? "padding_t20 pb-0" : ""} `}
@@ -357,7 +357,12 @@ export default function Flight_Search_Input({ Tabin }) {
                     >
                       <FaUser />
 
-                      <span>{formatPassengerLabel()}</span>
+                      <span >
+
+                        {formatPassengerLabel()}
+
+
+                      </span>
 
                       <FiChevronDown
                         className={`shrink-0 transition-transform duration-300 ease-out ${showPassengerDropdown ? "rotate-180" : "rotate-0"
@@ -494,9 +499,9 @@ export default function Flight_Search_Input({ Tabin }) {
                         setShowClassDropdown((prev) => !prev);
                         setShowPassengerDropdown(false);
                       }}
-                      className="flex items-center gap-1.5 cursor-pointer select-none bg-transparent border-0 p-0 text-inherit hover:opacity-80 transition-opacity"
+                      className="flex items-center gap-1.5 cursor-pointer bg-transparent border-0 p-0 text-inherit"
                     >
-                      <span>{travelClass}</span>
+                      <span className="whitespace-nowrap">{travelClass}</span>
                       <FiChevronDown
                         className={`shrink-0 transition-transform duration-300 ease-out ${showClassDropdown ? "rotate-180" : "rotate-0"
                           }`}
@@ -971,8 +976,8 @@ export default function Flight_Search_Input({ Tabin }) {
                     }
                     value={
                       typed === 2
-                        ? range?.from
-                          ? format(range.from, "EEE, MMM d")
+                        ? range
+                          ? format(range, "EEE, MMM d")
                           : ""
                         : typed === 1
                           ? range?.from && range?.to
@@ -995,17 +1000,26 @@ export default function Flight_Search_Input({ Tabin }) {
 
                   {open && (
                     <div className="absolute z-50 mt-2 bg-white shadow-xl rounded-lg p-4">
+                      {/* ******* one way trip  */}
                       {typed == 2 && (
                         <DayPicker
                           mode="single"
-                          selected={range?.from}
+                          selected={range}
+                          month={currentMonth}
+                          fromMonth={today}
+                          onMonthChange={(month) => setCurrentMonth(month)}
                           onSelect={(date) => {
-                            setRange({ from: date });
+                            setRange(date);
                             // dispatch(setSearchFlight({
                             //     startDate: date,
                             //     endDate: undefined,
                             //   })
                             // );
+                            if (date) {
+                              setCurrentMonth(date);
+                            }
+
+                            setCurrentMonth(date);
                             console.log(date, "date,,,,,,");
 
                             formik?.setFieldValue("range", date);
@@ -1014,11 +1028,12 @@ export default function Flight_Search_Input({ Tabin }) {
                           disabled={{ before: new Date() }}
                         />
                       )}
-
+                      {/* *************Round trip */}
                       {typed == 1 && (
                         <DayPicker
                           mode="range"
                           selected={range}
+                          fromMonth={today}
                           disabled={{ before: new Date() }}
                           onSelect={(rangeDate) => {
                             setRange(rangeDate);
@@ -1032,11 +1047,12 @@ export default function Flight_Search_Input({ Tabin }) {
                           }}
                         />
                       )}
-
+                      {/* *****mutiway */}
                       {typed == 3 && (
                         <DayPicker
                           mode="single"
                           selected={range?.from}
+                          fromMonth={today}
                           onSelect={(date) => {
                             const newRange = { from: date };
                             setRange(newRange);
@@ -1065,8 +1081,11 @@ export default function Flight_Search_Input({ Tabin }) {
                   />
 
                   {/* Arrow Icon */}
-                  <FiChevronDown
-                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 ${showPassengerDropdown ? "rotate-180" : "rotate-0"
+                  <FiChevronDown onClick={() => {
+                    setShowPassengerDropdown((prev) => !prev)
+                    setShowClassDropdown(false)
+                  }}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-transform duration-300 cursor-pointer ${showPassengerDropdown ? "rotate-180" : "rotate-0"
                       }`}
                     size={18}
                   />
@@ -1082,7 +1101,7 @@ export default function Flight_Search_Input({ Tabin }) {
                   >
                     <div className="px-3 py-2 flex items-center justify-between border-b border-gray-100">
                       <span className="text-sm text-gray-600 text-height">
-                        Adults <br></br>{" "}
+                        Adult <br></br>{" "}
                         <span className="ft-sm"> (12+ yrs)</span>
                       </span>
                       <div className="flex items-center gap-3">

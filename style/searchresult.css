@@ -84,7 +84,7 @@
   letter-spacing: 0.48px;
   line-height: 1;
   padding: 20px 24px;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
   align-items: center;
   display: inline-flex;
@@ -1959,6 +1959,7 @@
 
   .hotel_setail_input {
     height: 55px;
+    width: 100%;
   }
 }
 

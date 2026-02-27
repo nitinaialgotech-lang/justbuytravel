@@ -182,7 +182,7 @@ export default function Footer() {
                         <GoDotFill />
                       </li>
                       <li>
-                        <Link href={"/disclaimer"}> Disclaimer</Link>
+                        <Link href={"/desclimer"}> Disclaimer</Link>
                       </li>
                     </ul>
                   </div>

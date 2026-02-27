@@ -22,7 +22,7 @@ export default function DubaiAmazingDeals() {
                   categories{" "}
                   <Link
                     href={
-                      "/https://justbuytravel.com/travel-news/top-attractions-in-dubai-for-2026"
+                      "https://justbuytravel.com/travel-news/top-attractions-in-dubai-for-2026"
                     }
                     className="g_color"
                   >
@@ -76,7 +76,7 @@ export default function DubaiAmazingDeals() {
                 </p>
                 <p>
                   Many visitors now view hotel options through{" "}
-                  <Link href={"/"}> Just Buy Travel </Link>
+                  <Link href={"/"} className="g_color"> Just Buy Travel </Link>
                   to see location information, guest feedback and available
                   amenities before deciding on a place to stay.
                 </p>

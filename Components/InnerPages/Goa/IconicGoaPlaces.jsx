@@ -79,8 +79,8 @@ export default function IconicGoaPlaces() {
           <div className="explore_section section_title ">
             <h2 className="mb-0">Famous Historical & Natural Places in Goa</h2>
             <p>
-              Explore Goa’s iconic forts, waterfalls, caves, and scenic coastal
-              landmarks
+              Explore Goa’s iconic forts, waterfalls, caves, scenic coastal landmarks, historic churches, quiet beaches, lush forests, and charming village spots.
+
             </p>
           </div>
           {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
@@ -96,7 +96,7 @@ export default function IconicGoaPlaces() {
                   prevEl: "#experience_prev",
                   nextEl: "#experience_next",
                 }}
-                loop={true}
+                loop={false}
                 // autoplay={{
                 //     delay: 3000,
                 //     disableOnInteraction: false,
@@ -158,11 +158,11 @@ export default function IconicGoaPlaces() {
                             className=" card_rounded "
                             alt={title}
                           />
-                          <div className="heart_icon absolute top-2 right-4">
+                          {/* <div className="heart_icon absolute top-2 right-4">
                             <span>
                               <FaRegHeart />
                             </span>
-                          </div>
+                          </div> */}
                           <div className="card-body ps-0 flex justify-between ">
                             <div className="card_detail">
                               <h5 className="card-title m-0">{title}</h5>
@@ -200,9 +200,8 @@ export default function IconicGoaPlaces() {
                   <button
                     id="experience_prev"
                     aria-label="Previous"
-                    className={`absolute ${
-                      secondActive ? "d-none pointer-events-none" : ""
-                    }`}
+                    className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                      }`}
                   >
                     <MdOutlineKeyboardArrowLeft size={30} />
                   </button>

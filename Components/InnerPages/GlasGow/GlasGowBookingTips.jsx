@@ -160,12 +160,14 @@ export default function GlasGowBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Glasgow offers a mix of historic landmarks, local culture, and friendly neighbourhoods. The place you choose to stay can affect how smoothly your trip goes, whether you arrive for business meetings or a relaxing break. Many travellers focus on location, comfort, and value when they <Link href={"/hotels"}>book hotels</Link> in Glasgow, as the right choice helps them save time and enjoy the city more comfortably.
+                                    Glasgow offers a mix of historical sites, local culture, and friendly neighborhoods. Where you choose to stay can determine how comfortable your trip will be, whether you're visiting for a business meeting or just to relax. Many travellers focus on location, comfort, and value when they book hotels in Glasgow, as the right choice helps them save time and enjoy the city more comfortably.
+
 
 
                                 </p>
                                 <p>
-                                    A smooth Glasgow hotel booking process helps visitors review prices, policies, and guest feedback before confirming plans. Staying near transport links and attractions makes travel easier and saves time. The best hotels in Glasgow often provide comfortable rooms, helpful services, and convenient access to city highlights. Planning ahead and checking verified listings helps reduce stress and ensures a relaxed, enjoyable stay across the city.
+                                    The easy Glasgow hotel booking process allows visitors to review prices, policies, and guest feedback before confirming their plans. Staying close to transport links and attractions makes travel easier and saves time. The best Glasgow hotels offer comfortable rooms, helpful service, and easy access to the city's highlights. Planning ahead and reviewing verified listings reduces stress and ensures a comfortable and enjoyable stay in the city.
+
                                 </p>
 
 

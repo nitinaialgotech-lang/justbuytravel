@@ -57,8 +57,8 @@ export default function NearByIreland() {
             <div className="explore_section section_title m">
               <h2 className="mb-0">Nearby Dining and Local Spots in Ireland</h2>
               <p>
-                Ireland has places to visit and restaurants near specific travel
-                areas for better local access during your stay.
+                Ireland has popular tourist destinations, cozy restaurants, beautiful landmarks, and cultural sites, all located within special travel areas for local access.
+
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function NearByIreland() {
                   prevEl: "#custom_prev",
                   nextEl: "#custom_next",
                 }}
-                loop={true}
+                loop={false}
                 // autoplay={{
                 //     delay: 3100,
                 //     disableOnInteraction: false,
@@ -175,9 +175,8 @@ export default function NearByIreland() {
                   <button
                     id="custom_prev"
                     aria-label="Previous"
-                    className={`absolute ${
-                      isBeginning ? "d-none pointer-events-none" : ""
-                    }`}
+                    className={`absolute ${isBeginning ? "d-none pointer-events-none" : ""
+                      }`}
                   >
                     <MdOutlineKeyboardArrowLeft size={30} />
                   </button>

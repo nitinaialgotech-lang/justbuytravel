@@ -82,7 +82,7 @@ export default function GuideHotel() {
                       prevEl: "#booking_tips_prev",
                       nextEl: "#booking_tips_next",
                     }}
-                    loop={true}
+                    loop={false}
                     // autoplay={{
                     //     delay: 3000,
                     //     disableOnInteraction: false,
@@ -132,9 +132,8 @@ export default function GuideHotel() {
                       <button
                         id="booking_tips_prev"
                         aria-label="Previous"
-                        className={`absolute ${
-                          secondActive ? "d-none pointer-events-none" : ""
-                        }`}
+                        className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                          }`}
                       >
                         <MdOutlineKeyboardArrowLeft size={30} />
                       </button>
@@ -212,7 +211,7 @@ export default function GuideHotel() {
                   select a stay that suits your travel schedule, preferred
                   areas, and overall accommodation requirements for your visit.
                 </p>
-                <p>
+                <p className="m-0">
                   Visitors can also access additional travel planning tools
                   available on{" "}
                   <Link href={"/"} className="g_color">

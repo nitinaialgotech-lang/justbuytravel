@@ -430,7 +430,7 @@ export default function RecomendSection() {
                                 slidesPerView: 4, // desktop (optional)
                             },
                         }}
-                        loop={!isLoading && hotels?.length > 0}
+                        loop={false}
                         id='swiper_sldie'
                     >
                         {(() => {

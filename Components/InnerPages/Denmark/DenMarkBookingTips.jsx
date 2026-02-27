@@ -132,9 +132,8 @@ export default function DenMarkBookingTips() {
                       <button
                         id="booking_tips_prev"
                         aria-label="Previous"
-                        className={`absolute ${
-                          secondActive ? "d-none pointer-events-none" : ""
-                        }`}
+                        className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                          }`}
                       >
                         <MdOutlineKeyboardArrowLeft size={30} />
                       </button>
@@ -174,9 +173,9 @@ export default function DenMarkBookingTips() {
                   restaurants, while others want a peaceful environment that is
                   far from the madding crowd. It is also useful to view{" "}
                   <Link href={"/hotels"} className="g_color">
-                    hotel options in other destinations before deciding on the
-                    right place{" "}
-                  </Link>{" "}
+                    hotel options </Link>{" "} in other destinations before deciding on the
+                  right place{" "}
+
                   to stay.
                 </p>
                 <p>

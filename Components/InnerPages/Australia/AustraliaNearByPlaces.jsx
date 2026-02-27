@@ -78,7 +78,7 @@ export default function AustraliaNearByPlaces() {
                   prevEl: "#custom_prev",
                   nextEl: "#custom_next",
                 }}
-                loop={true}
+                loop={false}
                 // autoplay={{
                 //     delay: 3100,
                 //     disableOnInteraction: false,
@@ -178,9 +178,8 @@ export default function AustraliaNearByPlaces() {
                   <button
                     id="custom_prev"
                     aria-label="Previous"
-                    className={`absolute ${
-                      isBeginning ? "d-none pointer-events-none" : ""
-                    }`}
+                    className={`absolute ${isBeginning ? "d-none pointer-events-none" : ""
+                      }`}
                   >
                     <MdOutlineKeyboardArrowLeft size={30} />
                   </button>

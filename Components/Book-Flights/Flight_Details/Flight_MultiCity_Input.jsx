@@ -213,7 +213,7 @@ export default function Flight_MultiCity_Input() {
 
   };
   console.log(formik?.errors, "errrrrr");
-
+  const today = new Date();
   return (
     <>
       <form onSubmit={formik?.handleSubmit}>
@@ -438,6 +438,7 @@ export default function Flight_MultiCity_Input() {
                           <DayPicker
                             mode="single"
                             selected={formik?.values?.flights?.[index]?.dateTime}
+                            fromMonth={today}
                             onSelect={(date) => {
                               formik?.setFieldValue(`flights[${index}].dateTime`, moment(date).format('YYYY-MM-DD'));
                               setDateFirstFrom(date);
@@ -460,9 +461,14 @@ export default function Flight_MultiCity_Input() {
 
                     </div>
                     {/* Remove leg - visible on desktop, right side */}
-                    <div className="flex cross_btn items-center justify-end ms-auto">
-                      <button className="btn p-0" type="button" onClick={() => removeInput(index)} aria-label="Remove flight"><RxCross2 /></button>
-                    </div>
+                    {
+                      index > 1 && (
+
+                        <div className="flex cross_btn items-center justify-end ms-auto">
+                          <button className="btn p-0" type="button" onClick={() => removeInput(index)} aria-label="Remove flight"><RxCross2 /></button>
+                        </div>
+                      )
+                    }
                   </div>
                 </div>
 
@@ -806,6 +812,7 @@ export default function Flight_MultiCity_Input() {
                           <DayPicker
                             mode="single"
                             selected={formik?.values?.flights?.[index]?.dateTime}
+                            fromMonth={today}
                             onSelect={(date) => {
                               formik?.setFieldValue(`flights[${index}].dateTime`, moment(date).format('YYYY-MM-DD'));
                               setDateFirstFrom(date);
@@ -838,9 +845,18 @@ export default function Flight_MultiCity_Input() {
 
                     </div>
                     {/* Remove leg - right side on mobile */}
-                    <div className="flex cross_btn items-center justify-end ms-auto">
-                      <button className="btn p-0" type="button" onClick={() => removeInput(index)} aria-label="Remove flight"><RxCross2 /></button>
-                    </div>
+                    {index > 1 && (
+                      <div className="flex cross_btn items-center justify-end ms-auto">
+                        <button
+                          className="btn p-0"
+                          type="button"
+                          onClick={() => removeInput(index)}
+                          aria-label="Remove flight"
+                        >
+                          <RxCross2 />
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
 

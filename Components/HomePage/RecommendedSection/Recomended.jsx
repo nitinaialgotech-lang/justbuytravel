@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useMemo } from "react";
@@ -26,7 +26,7 @@ export default function Recomended() {
     const [Active, setActive] = useState(true);
     const [coords, setCoords] = useState(DEFAULT_COORDS);
     const [locationError, setLocationError] = useState(null);
-
+    const [isEnd, setIsEnd] = useState(false);
     useEffect(() => {
         if (typeof window === "undefined" || !navigator?.geolocation) {
             setLocationError("Geolocation is not supported");
@@ -120,7 +120,9 @@ export default function Recomended() {
         const slug = createHotelSlug(name, id);
         router.push(`/${slug}`);
     };
-
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
     return (
         <>
             <section className="recomend_section container  padding_bottom">
@@ -141,19 +143,28 @@ export default function Recomended() {
                             navigation={{
                                 prevEl: "#recomand_prev",
                                 nextEl: "#recomand_next",
+
                             }}
                             // pagination={{
                             //     clickable: true,
                             // }}
-                            modules={[Navigation, Pagination]}
+                            modules={[Navigation, Autoplay, Pagination]}
                             className="mySwiper"
-                            // navigation={true}
-                            onSwiper={(swiper) => setActive(swiper.isBeginning)}
-                            onSlideChange={(swiper) => setActive(swiper.isBeginning)}
-                            // autoplay={{
-                            //     delay: 3000,
-                            //     disableOnInteraction: false,
-                            // }}
+                            // onSwiper={(swiper) => { setActive(swiper.isBeginning), setIsEnd(swiper.isEnd); }}
+                            onSwiper={(swiper) => {
+                                setCurrentIndex(swiper.realIndex); // initial index
+                                setTimeout(() => {
+                                    swiper.params.navigation.prevEl = prevRef.current;
+                                    swiper.params.navigation.nextEl = nextRef.current;
+                                    swiper.navigation.init();
+                                    swiper.navigation.update();
+                                });
+                            }}
+                            onSlideChange={(swiper) => { setActive(swiper.isBeginning), setIsEnd(swiper.isEnd); setCurrentIndex(swiper.realIndex) }}
+                            autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,
@@ -179,8 +190,9 @@ export default function Recomended() {
                                     spaceBetween: 20,
                                 },
                             }}
-                            loop={!isLoading}
+                            loop={true}
                             id="swiper_sldie"
+
                         >
                             {isLoading
                                 ? Array.from({ length: 4 }).map((_, i) => (
@@ -257,7 +269,7 @@ export default function Recomended() {
                                 <button
                                     id="recomand_prev"
                                     aria-label="Previous"
-                                    className={`absolute ${Active ? "d-none pointer-events-none" : ""
+                                    className={`absolute ${currentIndex === 0 ? "d-none pointer-events-none" : ""
                                         }`}
                                 >
                                     <MdOutlineKeyboardArrowLeft size={30} />

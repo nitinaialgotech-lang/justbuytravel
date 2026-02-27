@@ -164,7 +164,7 @@ export default function SandiegoRecomand() {
                                     spaceBetween: 20,
                                 },
                             }}
-                            loop={!isLoading}
+                            loop={false}
                             id="swiper_sldie"
                         >
                             {isLoading

@@ -78,7 +78,8 @@ export default function IconicPlacesInGlasGow({ lat, long }) {
         <div className="container padding_bottom">
           <div className="explore_section section_title ">
             <h2 className="mb-0">Iconic Places to Visit in Glasgow</h2>
-            <p>Where history, culture, and beauty come together</p>
+            <p>Famous landmarks and historical sites to visit during your trip are located near key areas of Glasgow city centre.
+            </p>
           </div>
           {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -93,7 +94,7 @@ export default function IconicPlacesInGlasGow({ lat, long }) {
                   prevEl: "#experience_prev",
                   nextEl: "#experience_next",
                 }}
-                loop={true}
+                loop={false}
                 // autoplay={{
                 //     delay: 3000,
                 //     disableOnInteraction: false,
@@ -155,11 +156,11 @@ export default function IconicPlacesInGlasGow({ lat, long }) {
                             className=" card_rounded "
                             alt={title}
                           />
-                          <div className="heart_icon absolute top-2 right-4">
+                          {/* <div className="heart_icon absolute top-2 right-4">
                             <span>
                               <FaRegHeart />
                             </span>
-                          </div>
+                          </div> */}
                           <div className="card-body ps-0 flex justify-between ">
                             <div className="card_detail">
                               <h5 className="card-title m-0">{title}</h5>
@@ -197,9 +198,8 @@ export default function IconicPlacesInGlasGow({ lat, long }) {
                   <button
                     id="experience_prev"
                     aria-label="Previous"
-                    className={`absolute ${
-                      secondActive ? "d-none pointer-events-none" : ""
-                    }`}
+                    className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                      }`}
                   >
                     <MdOutlineKeyboardArrowLeft size={30} />
                   </button>

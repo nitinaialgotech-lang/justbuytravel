@@ -96,7 +96,7 @@ export default function AutraliaIconicPlaces() {
                   prevEl: "#experience_prev",
                   nextEl: "#experience_next",
                 }}
-                loop={true}
+                loop={false}
                 // autoplay={{
                 //     delay: 3000,
                 //     disableOnInteraction: false,
@@ -158,11 +158,11 @@ export default function AutraliaIconicPlaces() {
                             className=" card_rounded "
                             alt={title}
                           />
-                          <div className="heart_icon absolute top-2 right-4">
+                          {/* <div className="heart_icon absolute top-2 right-4">
                             <span>
                               <FaRegHeart />
                             </span>
-                          </div>
+                          </div> */}
                           <div className="card-body ps-0 flex justify-between ">
                             <div className="card_detail">
                               <h5 className="card-title m-0">{title}</h5>
@@ -200,9 +200,8 @@ export default function AutraliaIconicPlaces() {
                   <button
                     id="experience_prev"
                     aria-label="Previous"
-                    className={`absolute ${
-                      secondActive ? "d-none pointer-events-none" : ""
-                    }`}
+                    className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                      }`}
                   >
                     <MdOutlineKeyboardArrowLeft size={30} />
                   </button>

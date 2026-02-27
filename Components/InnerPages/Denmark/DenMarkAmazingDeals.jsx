@@ -17,7 +17,7 @@ export default function DenMarkAmazingDeals() {
                 <p>
                   Denmark is a popular travel destination known for its
                   beautiful cities, seaside views, and relaxed lifestyle. For
-                  first-time visitors, understanding how to plan a Denmark trip
+                  first-time visitors, understanding how to plan a <Link className="g_color" href={"https://justbuytravel.com/travel-tips/plan-denmark-trip-first-time-visitors"}>Denmark trip </Link>
                   can make the experience easier and more organized. Choosing
                   the right accommodations plays a vital role in enjoying your
                   trip, whether you're visiting Copenhagen, Odense, or smaller

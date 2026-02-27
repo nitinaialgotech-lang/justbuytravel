@@ -33,10 +33,10 @@ export default function ParisAmazingDeals() {
                   neighbourhoods provide easy access to attractions, dining, and
                   transport, while quieter districts suit those who prefer a
                   relaxed pace. Those travelling between major European cities
-                  can also explore hotels in
+                  can also explore
                   <Link href={"/hotels-in-manchester"} className="g_color">
                     {" "}
-                    Manchester{" "}
+                    hotels in  Manchester{" "}
                   </Link>{" "}
                   as part of their journey.
                 </p>

@@ -13,6 +13,7 @@ import {
     MdOutlineKeyboardArrowLeft,
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import Link from 'next/link';
 export default function HotelBookingTips() {
 
     const [secondActive, setSecondActive] = useState(true);
@@ -169,10 +170,10 @@ export default function HotelBookingTips() {
                             <div className="hotel_tips_content">
                                 <p>
                                     Planning a trip to New York and looking for the right place to stay? With the right New York hotel booking tips, finding comfortable and affordable accommodation becomes easy. Whether you prefer staying near major attractions or in quieter neighborhoods, there are plenty of options for New York hotel booking that suit every travel style and budget.
-
                                 </p>
                                 <p>
-                                    Travelers can compare amenities, locations, and prices to discover the best hotels in New York without compromising on comfort. Exploring last minute hotel deals in New York can also help you save more, especially during peak travel seasons. By choosing trusted platforms, you can find affordable hotels in New York while ensuring a smooth and secure booking experience.
+                                    Travelers can compare amenities, locations, and prices to discover the best hotels in New York without compromising on comfort. Exploring last minute hotel deals in New York can also help you save more, especially during peak travel seasons. By choosing trusted platforms, you can find <Link className='g_color' href={"/hotels"}>affordable hotels</Link> in New York while ensuring a smooth and secure booking experience.
+
                                 </p>
 
                             </div>

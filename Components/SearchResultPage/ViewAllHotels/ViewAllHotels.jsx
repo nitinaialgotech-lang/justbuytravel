@@ -449,7 +449,7 @@ export default function ViewAllHotels() {
                         <div className="pagination_wrapper text-center flex justify-center mb-10">
                             {Array.isArray(hotelData) && (visibleCount < hotelData.length || (hasCoords && nextPageToken)) && (
                                 <button
-                                    className="px-3 py-2 rounded bg-color-green text-black font-semibold disabled:opacity-70"
+                                    className="px-3 py-2 rounded bg-color-green text-white font-semibold disabled:opacity-70"
                                     disabled={loadingMore}
                                     onClick={() => {
                                         if (visibleCount + loadMoreCount <= hotelData.length) {

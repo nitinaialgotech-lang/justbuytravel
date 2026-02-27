@@ -77,15 +77,15 @@ export default function Flight_Faq_Section() {
         }
     }
     return (
-        <section className="faq-wrapper padding_top  ">
+        <section className="faq-wrapper  padding_bottom ">
             <div className="container ">
                 <div className="section_title ">
                     <h2 className='mb-0 capitalize'>
                         Frequently Asked Questions
                     </h2>
-                    {/* <h5 >
+                    <h5 >
                         Simple answers to help you plan your stay with ease.
-                    </h5> */}
+                    </h5>
                 </div>
                 <Accordion activeKey={activeKey}>
                     {FAQS.map((item) => (

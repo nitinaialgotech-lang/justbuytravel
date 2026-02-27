@@ -57,8 +57,8 @@ export default function NearByPlacesInNewYork() {
                 <div className="container">
                     <div className="row">
                         <div className="explore_section section_title m">
-                            <h2 className="mb-0">Near By Locations</h2>
-                            <p>Explore nearby destinations and hidden gems</p>
+                            <h2 className="mb-0">Local Places Around Your Stay</h2>
+                            <p>Check local dining spots and visitor attractions around your hotel for simple access during your stay in the area.</p>
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@ export default function NearByPlacesInNewYork() {
                                     prevEl: "#custom_prev",
                                     nextEl: "#custom_next",
                                 }}
-                                loop={true}
+                                loop={false}
                                 // autoplay={{
                                 //     delay: 3100,
                                 //     disableOnInteraction: false,

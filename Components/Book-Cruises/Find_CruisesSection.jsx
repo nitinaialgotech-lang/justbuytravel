@@ -74,7 +74,7 @@ export default function Find_CruisesSection() {
                             //     delay: 3000,
                             //     disableOnInteraction: false,
                             // }}
-                            loop={true}
+                            loop={false}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,

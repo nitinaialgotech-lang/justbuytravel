@@ -320,9 +320,10 @@ export default function TrySearch({ tabActive }) {
         const isEmptyFocusSuggestions = showDefaultOnFocus && !searchContent.trim();
         if (hasTypedResults || isEmptyFocusSuggestions) {
             setShowDropdown(true);
-        } else {
-            setShowDropdown(false);
         }
+        // else {
+        //     setShowDropdown(false);
+        // }
     }, [autoCompleteData, searchContent, showDefaultOnFocus]);
 
     const handleInputChange = (e) => {
@@ -332,7 +333,8 @@ export default function TrySearch({ tabActive }) {
         if (value.length > 0 && showDefaultOnFocus) {
             setShowDefaultOnFocus(false);
         }
-        setShowDropdown(value.length > 0);
+        // setShowDropdown(value.length > 0);
+        setShowDropdown(true);
         setSelectedIndex(-1);
     };
 
@@ -529,6 +531,9 @@ export default function TrySearch({ tabActive }) {
         };
     }, [isSearchModalOpen]);
 
+    useEffect(() => {
+        console.log("showDropdown:", showDropdown, searchContent, "pkpkpkpkk", places);
+    }, [showDropdown, searchContent]);
     return (
         <>
             {isSearchModalOpen && (
@@ -685,7 +690,7 @@ relative
                                                             setShowDefaultOnFocus(true);
                                                             fetchNearbyLocation();
                                                         }
-                                                        if (places.length > 0) setShowDropdown(true);
+                                                        setShowDropdown(true);
                                                     }}
                                                     className="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-0 placeholder:text-body ps-12 capitalize"
                                                     placeholder={
@@ -802,18 +807,25 @@ relative
                                                                             Allow location access for nearby suggestions
                                                                         </div>
                                                                     )}
+
                                                             </div>
                                                         )}
                                                         {isLoading &&
-                                                            !searchContent.trim() &&
+                                                            !searchContent.trim()
+                                                            &&
                                                             !nearbyLocation &&
                                                             recentSearches.length === 0 &&
-                                                            recentlyViewed.length === 0 ? (
-                                                            <div className="px-4 py-6 text-center text-gray-500 text-sm">
-                                                                <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
-                                                                Loading suggestions...
-                                                            </div>
-                                                        ) : places.length > 0 ? (
+                                                            recentlyViewed.length === 0 &&
+                                                            (
+                                                                <div className="px-4 py-6 text-center text-gray-500 text-sm">
+                                                                    <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
+                                                                    Loading suggestions...
+                                                                </div>
+                                                            )
+                                                        }
+
+                                                        {/* {places.length > 0 && ( */}
+                                                        {!isLoading && places && places.length > 0 && (
                                                             <>
                                                                 {!searchContent.trim() &&
                                                                     showDefaultOnFocus &&
@@ -944,27 +956,28 @@ relative
                                                                     );
                                                                 })}
                                                             </>
-                                                        ) : searchContent.trim().length > 0 &&
-                                                        !isLoading &&
-                                                        places &&
-                                                        places.length === 0 && (
-                                                            <div className="px-4 py-6 text-center text-gray-500 text-sm ">
-                                                                <svg
-                                                                    className="w-12 h-12 mx-auto mb-2 text-gray-300"
-                                                                    fill="none"
-                                                                    stroke="currentColor"
-                                                                    viewBox="0 0 24 24"
-                                                                >
-                                                                    <path
-                                                                        strokeLinecap="round"
-                                                                        strokeLinejoin="round"
-                                                                        strokeWidth={2}
-                                                                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                                    />
-                                                                </svg>
-                                                                No hotels found for "{searchContent}"
-                                                            </div>
                                                         )}
+                                                        {!isLoading &&
+                                                            searchContent.trim().length > 0 &&
+                                                            places &&
+                                                            places.length === 0 && (
+                                                                <div className="px-4 py-6 text-center text-gray-500 text-sm ">
+                                                                    <svg
+                                                                        className="w-12 h-12 mx-auto mb-2 text-gray-300"
+                                                                        fill="none"
+                                                                        stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                    >
+                                                                        <path
+                                                                            strokeLinecap="round"
+                                                                            strokeLinejoin="round"
+                                                                            strokeWidth={2}
+                                                                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                                        />
+                                                                    </svg>
+                                                                    No hotels found for "{searchContent}"
+                                                                </div>
+                                                            )}
                                                     </div>
                                                 </div>
                                             )}

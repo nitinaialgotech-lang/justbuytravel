@@ -1,10 +1,10 @@
 "use client";
 import { IconicPlaces, nearbyPlaces, Restro } from "@/app/Route/endpoints";
 import { useQuery } from "@tanstack/react-query";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getPlaceDetailPath, getPlaceTypeFromTypes } from "@/app/utils/seo";
 import { getAssetPath, getPlacePhotoUrl } from "@/app/utils/assetPath";
 
@@ -163,10 +163,16 @@ export default function ExperienceExploreSection() {
         enabled: coords.lat !== null && coords.lng !== null,
     });
     const iconicPlacesList = iconicPlacesData?.data?.places ?? [];
-
+    const IconprevRef = useRef(null);
+    const IconnextRef = useRef(null);
+    const [currentIcoIndex, setCurrentIcoIndex] = useState(0);
+    const NearprevRef = useRef(null);
+    const NearnextRef = useRef(null);
+    const [Nearcurrent, SetNearCurrent] = useState(0);
+    const pathname = usePathname();
     return (
         <>
-            <section className="experience_explore_section padding_bottom">
+            <section className={`experience_explore_section padding_bottom ${pathname === "/hotels" ? "padding_top" : ""}`}>
 
                 <div className="container">
                     <div className="row">
@@ -194,8 +200,17 @@ export default function ExperienceExploreSection() {
                                 //     disableOnInteraction: false,
                                 // }}
                                 modules={[Pagination, Navigation]}
-                                onSwiper={(swiper) => setIsBeginning(swiper.isBeginning)}
-                                onSlideChange={(swiper) => setIsBeginning(swiper.isBeginning)}
+                                // onSwiper={(swiper) => setIsBeginning(swiper.isBeginning)}
+                                onSwiper={(swiper) => {
+                                    SetNearCurrent(swiper.realIndex); // initial index
+                                    setTimeout(() => {
+                                        swiper.params.navigation.prevEl = NearprevRef.current;
+                                        swiper.params.navigation.nextEl = NearnextRef.current;
+                                        swiper.navigation.init();
+                                        swiper.navigation.update();
+                                    });
+                                }}
+                                onSlideChange={(swiper) => { setIsBeginning(swiper.isBeginning), SetNearCurrent(swiper.realIndex); }}
                                 breakpoints={{
                                     320: {
                                         slidesPerView: 1.5,
@@ -287,7 +302,7 @@ export default function ExperienceExploreSection() {
                                     <button
                                         id="custom_prev"
                                         aria-label="Previous"
-                                        className={`absolute ${isBeginning ? "d-none pointer-events-none" : ""
+                                        className={`absolute ${Nearcurrent === 0 ? "d-none pointer-events-none" : ""
                                             }`}
                                     >
                                         <MdOutlineKeyboardArrowLeft size={30} />
@@ -309,8 +324,11 @@ export default function ExperienceExploreSection() {
 
             {/* ********************************************************************************************************************** section two big cities .........>>>>>>>>>>>>>>>>>> */}
 
+            {
+                pathname === "/hotels" ? " " :
 
-            <GetOfferSection />
+                    <GetOfferSection />
+            }
 
 
 
@@ -336,13 +354,26 @@ export default function ExperienceExploreSection() {
                                 prevEl: "#experience_prev",
                                 nextEl: "#experience_next",
                             }}
-                            loop={true}
+
                             // autoplay={{
                             //     delay: 3000,
                             //     disableOnInteraction: false,
                             // }}
-                            onSwiper={(swiper) => setSecondActive(swiper.isBeginning)}
-                            onSlideChange={(swiper) => setSecondActive(swiper.isBeginning)}
+                            // onSwiper={(swiper) => setSecondActive(swiper.isBeginning)}
+                            onSwiper={(swiper) => {
+                                setCurrentIcoIndex(swiper.realIndex); // initial index
+                                setTimeout(() => {
+                                    swiper.params.navigation.prevEl = IconprevRef.current;
+                                    swiper.params.navigation.nextEl = IconnextRef.current;
+                                    swiper.navigation.init();
+                                    swiper.navigation.update();
+                                });
+                            }}
+                            onSlideChange={(swiper) => { setSecondActive(swiper.isBeginning); setCurrentIcoIndex(swiper.realIndex) }}
+                            // autoplay={{
+                            //     delay: 3000,
+                            //     disableOnInteraction: false,
+                            // }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1.5,
@@ -362,6 +393,7 @@ export default function ExperienceExploreSection() {
                                     spaceBetween: 24,
                                 },
                             }}
+                            loop={true}
                             modules={[Pagination, Navigation]}
                             className="mySwiper relative"
                         >
@@ -389,11 +421,12 @@ export default function ExperienceExploreSection() {
                                                     className=" card_rounded "
                                                     alt={title}
                                                 />
-                                                <div className="heart_icon absolute top-2 right-4">
+                                                {/* **********heart */}
+                                                {/* <div className="heart_icon absolute top-2 right-4">
                                                     <span>
                                                         <FaRegHeart />
                                                     </span>
-                                                </div>
+                                                </div> */}
                                                 <div className="card-body ps-0 flex justify-between ">
                                                     <div className="card_detail">
                                                         <h5 className="card-title m-0">{title}</h5>
@@ -428,7 +461,7 @@ export default function ExperienceExploreSection() {
                                 <button
                                     id="experience_prev"
                                     aria-label="Previous"
-                                    className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                                    className={`absolute ${currentIcoIndex === 0 ? "d-none pointer-events-none" : ""
                                         }`}
                                 >
                                     <MdOutlineKeyboardArrowLeft size={30} />

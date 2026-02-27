@@ -73,7 +73,7 @@ export default function NearByInUk() {
                                     prevEl: "#custom_prev",
                                     nextEl: "#custom_next",
                                 }}
-                                loop={true}
+                                // loop={true}
                                 // autoplay={{
                                 //     delay: 3100,
                                 //     disableOnInteraction: false,

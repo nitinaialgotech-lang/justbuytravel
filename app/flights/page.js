@@ -38,17 +38,20 @@ export default function page() {
             <Suspense >
                 <Header />
                 <Book_Flight_Banner />
-                <Helping_travel_Explore />
-                {/* <Popular_Flight_Hotel_section /> */}
-                <Iconic_Flight_Hotel_section />
+                <div className='bg_grey'>
+
+                    <Helping_travel_Explore />
+                    {/* <Popular_Flight_Hotel_section /> */}
+                    <Iconic_Flight_Hotel_section />
+                </div>
                 {/* <Flight_Iconic_Places /> */}
-                <FlightTrusted_Section />
                 <Flight_Amazing_Deal />
+                <FlightTrusted_Section />
                 {/* <Flight_Hotel_Guide_Section /> */}
                 {/* <Trust_Guide_Section /> */}
-                <Flight_Faq_Section />
 
                 <Blogs />
+                <Flight_Faq_Section />
 
 
                 <Footer />

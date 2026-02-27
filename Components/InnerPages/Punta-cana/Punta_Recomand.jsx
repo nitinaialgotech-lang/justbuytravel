@@ -163,7 +163,7 @@ export default function Punta_Recomand() {
                                     spaceBetween: 20,
                                 },
                             }}
-                            loop={!isLoading}
+                            loop={false}
                             id="swiper_sldie"
                         >
                             {isLoading

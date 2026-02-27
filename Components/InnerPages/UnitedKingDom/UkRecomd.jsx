@@ -166,7 +166,7 @@ export default function UkRecomd() {
                                     spaceBetween: 20,
                                 },
                             }}
-                            loop={!isLoading}
+                            // loop={!isLoading}
                             id="swiper_sldie"
                         >
                             {isLoading

@@ -74,7 +74,7 @@ export default function SandiegoNearby() {
                                     prevEl: "#custom_prev",
                                     nextEl: "#custom_next",
                                 }}
-                                loop={true}
+                                loop={false}
                                 // autoplay={{
                                 //     delay: 3100,
                                 //     disableOnInteraction: false,

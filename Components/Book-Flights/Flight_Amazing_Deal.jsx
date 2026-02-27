@@ -5,7 +5,7 @@ import React from "react";
 export default function Flight_Amazing_Deal() {
     return (
         <>
-            <section className="newyork_amazing_deal padding_top">
+            <section className="newyork_amazing_deal padding_top padding_bottom">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -30,7 +30,7 @@ export default function Flight_Amazing_Deal() {
                                     Planning return flights in a single search makes itinerary management even easier. Viewing outbound and return options simultaneously ensures better alignment of travel dates and budget control. Pre-booking also reduces the likelihood of rushed bookings or last-minute overpricing.
 
                                 </p>
-                                <p>
+                                <p className="m-0">
                                     With clearly displayed airline routes, schedules, and price information, <Link href={"/"} className="g_color">JustBuyTravel</Link>  helps users better understand the many flight options available. By viewing essential details in advance, travelers can choose flights that best suit their destination, timing preferences, and overall travel plan—making the booking process more transparent and simple.
 
                                 </p>

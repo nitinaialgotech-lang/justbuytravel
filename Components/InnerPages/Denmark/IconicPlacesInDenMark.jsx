@@ -79,8 +79,7 @@ export default function IconicPlacesInDenMark() {
           <div className="explore_section section_title ">
             <h2 className="mb-0">Famous Landmarks Near Denmark Hotels</h2>
             <p>
-              Denmark has historic castles and famous landmarks close to the
-              hotel stay area, so you can easily explore while e
+              Denmark has historic castles and famous landmarks close to the hotel stay area, so you can easily explore while enjoying a comfortable stay.
             </p>
           </div>
           {/* *******************************************  show on deskltop >>>>>>>>>>>>>>>>>>>>>> */}
@@ -96,7 +95,7 @@ export default function IconicPlacesInDenMark() {
                   prevEl: "#experience_prev",
                   nextEl: "#experience_next",
                 }}
-                loop={true}
+                loop={false}
                 // autoplay={{
                 //     delay: 3000,
                 //     disableOnInteraction: false,
@@ -158,11 +157,11 @@ export default function IconicPlacesInDenMark() {
                             className=" card_rounded "
                             alt={title}
                           />
-                          <div className="heart_icon absolute top-2 right-4">
+                          {/* <div className="heart_icon absolute top-2 right-4">
                             <span>
                               <FaRegHeart />
                             </span>
-                          </div>
+                          </div> */}
                           <div className="card-body ps-0 flex justify-between ">
                             <div className="card_detail">
                               <h5 className="card-title m-0">{title}</h5>
@@ -200,9 +199,8 @@ export default function IconicPlacesInDenMark() {
                   <button
                     id="experience_prev"
                     aria-label="Previous"
-                    className={`absolute ${
-                      secondActive ? "d-none pointer-events-none" : ""
-                    }`}
+                    className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                      }`}
                   >
                     <MdOutlineKeyboardArrowLeft size={30} />
                   </button>

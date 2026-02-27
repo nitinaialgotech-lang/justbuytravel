@@ -145,7 +145,7 @@ export default function DubaiRecomdSection() {
                                     spaceBetween: 20,
                                 },
                             }}
-                            loop={!isLoading}
+                            loop={false}
                             id="swiper_sldie"
                         >
                             {isLoading

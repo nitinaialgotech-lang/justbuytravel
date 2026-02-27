@@ -73,8 +73,8 @@ export default function Hotel_IconicPlaces() {
     const rawAttractions = Array.isArray(raw?.results)
         ? raw.results
         : Array.isArray(raw)
-        ? raw
-        : [];
+            ? raw
+            : [];
     const TouristAttraction = rawAttractions.length
         ? [...new Map(rawAttractions.map((item, i) => [item?.id ?? `iconic-${i}`, item])).values()]
         : [];
@@ -100,7 +100,7 @@ export default function Hotel_IconicPlaces() {
                                     prevEl: "#experience_prev",
                                     nextEl: "#experience_next",
                                 }}
-                                loop={true}
+                                loop={false}
                                 // autoplay={{
                                 //     delay: 3000,
                                 //     disableOnInteraction: false,

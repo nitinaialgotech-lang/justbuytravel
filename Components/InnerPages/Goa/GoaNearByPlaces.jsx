@@ -59,7 +59,8 @@ export default function GoaNearByPlaces() {
                 Dining & Attraction Locations Near Goa Hotels
               </h2>
               <p>
-                Places to eat and explore located near popular hotel zones.{" "}
+                Places to eat and explore located near popular hotel zones, including restaurants, cafés, shopping areas, parks, and local attractions.
+                {" "}
               </p>
             </div>
           </div>
@@ -76,7 +77,7 @@ export default function GoaNearByPlaces() {
                   prevEl: "#custom_prev",
                   nextEl: "#custom_next",
                 }}
-                loop={true}
+                loop={false}
                 // autoplay={{
                 //     delay: 3100,
                 //     disableOnInteraction: false,
@@ -176,9 +177,8 @@ export default function GoaNearByPlaces() {
                   <button
                     id="custom_prev"
                     aria-label="Previous"
-                    className={`absolute ${
-                      isBeginning ? "d-none pointer-events-none" : ""
-                    }`}
+                    className={`absolute ${isBeginning ? "d-none pointer-events-none" : ""
+                      }`}
                   >
                     <MdOutlineKeyboardArrowLeft size={30} />
                   </button>
