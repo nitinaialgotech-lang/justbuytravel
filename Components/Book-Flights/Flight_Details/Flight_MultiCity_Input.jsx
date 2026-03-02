@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import "react-day-picker/dist/style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
-import { resetSearchFlight, setMultiCity, setSearchFlight } from "@/Components/Redux/Reducer";
+import { resetSearchFlight, SetFlightType, setMultiCity, setSearchFlight } from "@/Components/Redux/Reducer";
 import { Flight_AutoCompletion } from "@/app/Route/endpoints";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -118,7 +118,7 @@ export default function Flight_MultiCity_Input() {
     onSubmit: (values) => {
       console.log("value", values);
       dispatch(setMultiCity(values?.flights));
-      handleSubmit();
+      handleSubmit1();
     }
 
   });
@@ -127,11 +127,11 @@ export default function Flight_MultiCity_Input() {
 
   // ***************************************************************
   // Reset flight search on page mount
-  useEffect(() => {
-    if (pathname === "/flight") {
-      dispatch(resetSearchFlight());
-    }
-  }, [pathname, dispatch]);
+  // useEffect(() => {
+  //   if (pathname === "/flight") {
+  //     dispatch(resetSearchFlight());
+  //   }
+  // }, [pathname, dispatch]);
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -206,8 +206,9 @@ export default function Flight_MultiCity_Input() {
     legs
   }
   // ********************** apis
-  const handleSubmit = async () => {
+  const handleSubmit1 = async () => {
 
+    dispatch(SetFlightType(3))
     router.push("/multi-flight-detail")
 
 

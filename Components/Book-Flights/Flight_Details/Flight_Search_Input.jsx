@@ -364,8 +364,6 @@ export default function Flight_Search_Input({ Tabin }) {
     selectionPhaseRef.current = "start";
   };
 
-
-
   console.log(range, "range..............................");
   return (
     <section
@@ -1090,11 +1088,11 @@ export default function Flight_Search_Input({ Tabin }) {
                           onMonthChange={(month) => setCurrentMonth(month)}
                           onSelect={(date) => {
                             setRange(date);
-                            // dispatch(setSearchFlight({
-                            //     startDate: date,
-                            //     endDate: undefined,
-                            //   })
-                            // );
+                            dispatch(setSearchFlight({
+                              startDate: date,
+                              endDate: undefined,
+                            })
+                            );
                             if (date) {
                               setCurrentMonth(date);
                             }

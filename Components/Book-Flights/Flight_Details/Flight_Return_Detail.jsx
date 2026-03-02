@@ -27,6 +27,7 @@ export default function Flight_Return_Detail() {
     const return_date = moment(back_date).format("YYYY-MM-DD");
     const getData = useSearchParams();
     const departure_token = getData.get("tok");
+    const travelType = getData.get("type")
     // **********************
     const type = useSelector((state) => state.user.type);
     const travel_class = useSelector((state) => state.user.travelClass);
@@ -60,7 +61,6 @@ export default function Flight_Return_Detail() {
         payload.outbound_date = outbound_date;
         payload.return_date = return_date;
     } else {
-        // Multi-city: normalize legs to {departure_id, arrival_id, date} for SerpAPI
         const legs = Array.isArray(multicity)
             ? multicity
                 .map((f) => {
@@ -79,7 +79,7 @@ export default function Flight_Return_Detail() {
         payload.multi_city_json = legs.length >= 2 ? legs : null;
     }
 
-    // Common params
+
     payload.type = String(type);
     payload.departure_token = departure_token;
     payload.engine = "google_flights";
@@ -124,7 +124,13 @@ export default function Flight_Return_Detail() {
     const flights = data?.data?.intermediate_results?.other_flights || [];
     const Bestflights = data?.data?.intermediate_results?.best_flights || [];
     const searchParams = data?.flights?.search_parameters;
-    console.log(data, "dataaaaaaaaaaaaaa");
+    console.log(data, "dataaaaaaaaaaaaaa", payload, "payload");
+
+    const firstSegment = flights?.[0]?.flights?.[0];
+
+    const departName = firstSegment?.departure_airport?.id;
+    const arriveName = firstSegment?.arrival_airport?.id;
+
 
     const ShimmerCard = () => {
         return (
@@ -143,7 +149,6 @@ export default function Flight_Return_Detail() {
     return (
         <>
             <Flight_Search_Input />
-
             <section className="booking-options py-4">
                 <div className="container">
                     <div className="row justify-center">
@@ -153,14 +158,17 @@ export default function Flight_Return_Detail() {
                                 <div className=" px-3 py-2 border-b border-gray-100 ">
                                     <div className="flex flex-wrap items-center justify-between gap-2">
                                         <div className="left_detail">
-                                            <h2>Return Flights</h2>
-                                            <h2 className="text-lg  md:text-xl font-semibold text-gray-900 flex gap-2 items-center capitalize m-0">
-                                                <span>{arrival_id} </span>{" "}
-                                                <span className="swip">
-                                                    <VscArrowSwap />
-                                                </span>{" "}
-                                                <span>{departure_id}</span>
-                                            </h2>
+                                            {
+                                                travelType == "3" ?
+                                                    <h2 className="text-lg  md:text-xl font-semibold text-gray-900 flex gap-2 items-center capitalize mb-2">
+                                                        <span>{departName} </span>
+                                                        <span className="swip">
+                                                            <VscArrowSwap />
+                                                        </span>
+                                                        <span>{arriveName}</span>
+                                                    </h2>
+                                                    : <h2>Return Flights</h2>
+                                            }
 
                                             <div className="departure_time space-y-1">
                                                 <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 mt-1 text">
@@ -225,10 +233,9 @@ export default function Flight_Return_Detail() {
                                                             const travelTime = `${travelHours}h ${travelRemainingMinutes}m`;
 
                                                             return (
-                                                                <React.Fragment
-                                                                    key={`best-${i}`}
-                                                                >
-                                                                    <Accordion.Item eventKey={`best-${i}`}>
+                                                                <>
+
+                                                                    <Accordion.Item eventKey={`best-${i}`} key={`best-${i}`}>
                                                                         <Accordion.Header
                                                                             className="flight_accordian "
                                                                             onClick={() => {
@@ -473,7 +480,7 @@ export default function Flight_Return_Detail() {
                                                                             </div>
                                                                         </Accordion.Body>
                                                                     </Accordion.Item>
-                                                                </React.Fragment>
+                                                                </>
                                                             );
                                                         })}
                                                         <h2 className="other-flight py-2">Other flights</h2>

@@ -18,6 +18,7 @@ import moment from "moment";
 import { VscArrowSwap } from "react-icons/vsc";
 import { Accordion } from "react-bootstrap";
 import Link from "next/link";
+import { SetFlightType } from "@/Components/Redux/Reducer";
 
 
 
@@ -125,6 +126,9 @@ export default function Boooking_options() {
       </div>
     );
   };
+
+  console.log(travelType, "ughiougiouguio");
+
 
   return (
     <section className="booking-options py-4">
@@ -306,7 +310,7 @@ export default function Boooking_options() {
                                             </div>
                                             {/* ******************** select flight  */}
                                             <div className="select_flight departure_item flight_res">
-                                              <Link href={`/return-flight?tok=${encodeURIComponent(item?.departure_token || "")}`}
+                                              <Link href={`/return-flight?tok=${encodeURIComponent(item?.departure_token || "")}&type=${travelType}`}
                                                 className="button_bg2 px-4 md:px-5 py-2 rounded text-sm font-semibold whitespace-nowrap mt-1  p-0 "
 
                                               >
