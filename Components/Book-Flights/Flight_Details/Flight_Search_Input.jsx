@@ -287,6 +287,71 @@ export default function Flight_Search_Input({ Tabin }) {
 
   console.log(fr, to, "tPPPPPppppppppppppppppppppppppppppppppppppp");
   const today = new Date();
+  const selectionPhaseRef = useRef("start");
+  // *******************************************************
+  // Calendar open → show previous selection
+  const handleOpenCalendar = () => {
+    setOpen(true);
+    selectionPhaseRef.current = "start";
+  };
+
+
+  useEffect(() => {
+    if (open) {
+      // setRange(range ? new Date(range) : null)
+      selectionPhaseRef.current = "start";
+      if (range?.from && range?.to) {
+        setRange({
+          from: new Date(range.from),
+          to: new Date(range.to),
+        });
+      } else if (range?.from) {
+        setRange({ from: new Date(range.from), to: new Date(range.from) });
+      }
+
+      // selectionPhaseRef.current = "end"
+    }
+  }, [open]);
+
+  // *******************************************************
+  // Range selection logic
+  const handleRangeChange = (rangeDate) => {
+    if (!rangeDate?.from) return;
+
+    const start = rangeDate.from;
+    const end = rangeDate.to;
+    const nextDay = new Date(start);
+    nextDay.setDate(nextDay.getDate() + 1);
+
+
+    if (end && end > start) {
+      setRange(rangeDate);
+      formik.setFieldValue("range", rangeDate);
+      setOpen(false);
+      selectionPhaseRef.current = "start";
+      return;
+    }
+
+
+    if (selectionPhaseRef.current === "end") {
+      const newRange = { from: range?.from, to: start };
+      setRange(newRange);
+      formik.setFieldValue("range", newRange);
+      setOpen(false);
+      selectionPhaseRef.current = "start";
+      return;
+    }
+
+
+    const newRange = { from: start, to: nextDay };
+    setRange(newRange);
+    formik.setFieldValue("range", null);
+    selectionPhaseRef.current = "end";
+  };
+
+
+
+  console.log(range, "range..............................");
   return (
     <section
       className={`flight_detail_section  ${pathname !== "/" ? "padding_bottom" : ""} ${pathname === "/flights" ? "padding_t20" : ""} ${Tabin === "flights" ? "padding_t20 pb-0" : ""} `}
@@ -965,7 +1030,7 @@ export default function Flight_Search_Input({ Tabin }) {
                     type="text"
                     readOnly
                     name="range"
-                    onClick={() => setOpen(!open)}
+                    onClick={() => handleOpenCalendar()}
                     className="block w-full  bg-neutral-secondary-medium text-sm rounded-base ps-10 cursor-pointer focus:outline-none focus:ring-0"
                     placeholder={
                       typed === 2
@@ -1030,30 +1095,57 @@ export default function Flight_Search_Input({ Tabin }) {
                       )}
                       {/* *************Round trip */}
                       {typed == 1 && (
+
+
+
+                        // <DayPicker
+                        //   mode="range"
+                        //   selected={range}
+                        //   defaultMonth={range?.to ?? range?.from ?? new Date()}
+                        //   disabled={{ before: new Date() }}
+                        //   onSelect={(rangeDate) => {
+                        //     if (!rangeDate) return;
+                        //     const from = rangeDate.from ?? rangeDate.to;
+                        //     if (!from) return;
+                        //     const to = rangeDate.to;
+                        //     const isSingleDay =
+                        //       !to || from.getTime() === to.getTime();
+                        //     const finalRange = isSingleDay
+                        //       ? { from, to: addDays(from, 1) }
+                        //       : rangeDate;
+                        //     setRange(finalRange);
+                        //     setFr(finalRange.from);
+                        //     setdayTo(finalRange.to);
+                        //     formik?.setFieldValue("range", finalRange);
+                        //     if (finalRange.from && finalRange.to) {
+                        //       setOpen(false);
+                        //     }
+                        //   }}
+                        // />
+
+
                         <DayPicker
                           mode="range"
                           selected={range}
-                          defaultMonth={range?.to ?? range?.from ?? new Date()}
                           disabled={{ before: new Date() }}
-                          onSelect={(rangeDate) => {
-                            if (!rangeDate) return;
-                            const from = rangeDate.from ?? rangeDate.to;
-                            if (!from) return;
-                            const to = rangeDate.to;
-                            const isSingleDay =
-                              !to || from.getTime() === to.getTime();
-                            const finalRange = isSingleDay
-                              ? { from, to: addDays(from, 1) }
-                              : rangeDate;
-                            setRange(finalRange);
-                            setFr(finalRange.from);
-                            setdayTo(finalRange.to);
-                            formik?.setFieldValue("range", finalRange);
-                            if (finalRange.from && finalRange.to) {
-                              setOpen(false);
-                            }
-                          }}
+                          defaultMonth={range?.from ?? new Date()}
+                          onSelect={handleRangeChange}
                         />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                       )}
                       {/* *****mutiway */}
                       {typed == 3 && (

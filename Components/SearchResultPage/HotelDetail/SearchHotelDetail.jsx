@@ -165,7 +165,7 @@ export default function SearchHotelDetail() {
     if (calendarOpen) {
       setStartDate(searchCheckin ? new Date(searchCheckin) : null);
       setEndDate(searchCheckout ? new Date(searchCheckout) : null);
-      selectionPhaseRef.current = "start"; // first click after open = check-in
+      selectionPhaseRef.current = "start";
     }
   }, [calendarOpen]);
 
