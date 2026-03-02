@@ -313,40 +313,50 @@ export default function Flight_Search_Input({ Tabin }) {
     }
   }, [open]);
 
-  // *******************************************************
-  // Range selection logic
-  const handleRangeChange = (rangeDate) => {
-    if (!rangeDate?.from) return;
+  const handleRoundTripDayClick = (day) => {
+    if (!day) return;
 
-    const start = rangeDate.from;
-    const end = rangeDate.to;
-    const nextDay = new Date(start);
-    nextDay.setDate(nextDay.getDate() + 1);
+    const clickedDay = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+    const todayDate = new Date();
+    const todayStart = new Date(
+      todayDate.getFullYear(),
+      todayDate.getMonth(),
+      todayDate.getDate(),
+    );
 
+    if (clickedDay < todayStart) return;
 
-    if (end && end > start) {
-      setRange(rangeDate);
-      formik.setFieldValue("range", rangeDate);
-      setOpen(false);
-      selectionPhaseRef.current = "start";
-      return;
-    }
-
-
-    if (selectionPhaseRef.current === "end") {
-      const newRange = { from: range?.from, to: start };
+    // First click always starts a fresh round-trip so departure can be changed forward/backward.
+    if (selectionPhaseRef.current === "start") {
+      const newRange = { from: clickedDay, to: addDays(clickedDay, 1) };
       setRange(newRange);
-      formik.setFieldValue("range", newRange);
-      setOpen(false);
-      selectionPhaseRef.current = "start";
+      formik.setFieldValue("range", null);
+      selectionPhaseRef.current = "end";
       return;
     }
 
+    const currentFrom = range?.from
+      ? new Date(
+        range.from.getFullYear(),
+        range.from.getMonth(),
+        range.from.getDate(),
+      )
+      : clickedDay;
 
-    const newRange = { from: start, to: nextDay };
-    setRange(newRange);
-    formik.setFieldValue("range", null);
-    selectionPhaseRef.current = "end";
+    // If user clicks an earlier/same day while selecting return, treat it as a new departure.
+    if (clickedDay <= currentFrom) {
+      const restartRange = { from: clickedDay, to: addDays(clickedDay, 1) };
+      setRange(restartRange);
+      formik.setFieldValue("range", null);
+      selectionPhaseRef.current = "end";
+      return;
+    }
+
+    const finalRange = { from: currentFrom, to: clickedDay };
+    setRange(finalRange);
+    formik.setFieldValue("range", finalRange);
+    setOpen(false);
+    selectionPhaseRef.current = "start";
   };
 
 
@@ -1129,7 +1139,7 @@ export default function Flight_Search_Input({ Tabin }) {
                           selected={range}
                           disabled={{ before: new Date() }}
                           defaultMonth={range?.from ?? new Date()}
-                          onSelect={handleRangeChange}
+                          onDayClick={handleRoundTripDayClick}
                         />
 
 
