@@ -6,7 +6,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { FaUser } from "react-icons/fa";
 import { DayPicker } from "react-day-picker";
-import { format, addDays } from "date-fns";
+import { format } from "date-fns";
 import "react-day-picker/dist/style.css";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -306,17 +306,22 @@ export default function Flight_Search_Input({ Tabin }) {
           to: new Date(range.to),
         });
       } else if (range?.from) {
-        setRange({ from: new Date(range.from), to: new Date(range.from) });
+        setRange({ from: new Date(range.from), to: undefined });
       }
 
       // selectionPhaseRef.current = "end"
     }
   }, [open]);
 
-  const handleRoundTripDayClick = (day) => {
-    if (!day) return;
+  const handleRoundTripSelect = (rangeDate, selectedDay) => {
+    const pickedDay = selectedDay ?? rangeDate?.to ?? rangeDate?.from;
+    if (!pickedDay) return;
 
-    const clickedDay = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+    const clickedDay = new Date(
+      pickedDay.getFullYear(),
+      pickedDay.getMonth(),
+      pickedDay.getDate(),
+    );
     const todayDate = new Date();
     const todayStart = new Date(
       todayDate.getFullYear(),
@@ -328,7 +333,7 @@ export default function Flight_Search_Input({ Tabin }) {
 
     // First click always starts a fresh round-trip so departure can be changed forward/backward.
     if (selectionPhaseRef.current === "start") {
-      const newRange = { from: clickedDay, to: addDays(clickedDay, 1) };
+      const newRange = { from: clickedDay, to: undefined };
       setRange(newRange);
       formik.setFieldValue("range", null);
       selectionPhaseRef.current = "end";
@@ -345,7 +350,7 @@ export default function Flight_Search_Input({ Tabin }) {
 
     // If user clicks an earlier/same day while selecting return, treat it as a new departure.
     if (clickedDay <= currentFrom) {
-      const restartRange = { from: clickedDay, to: addDays(clickedDay, 1) };
+      const restartRange = { from: clickedDay, to: undefined };
       setRange(restartRange);
       formik.setFieldValue("range", null);
       selectionPhaseRef.current = "end";
@@ -1139,7 +1144,7 @@ export default function Flight_Search_Input({ Tabin }) {
                           selected={range}
                           disabled={{ before: new Date() }}
                           defaultMonth={range?.from ?? new Date()}
-                          onDayClick={handleRoundTripDayClick}
+                          onSelect={handleRoundTripSelect}
                         />
 
 
