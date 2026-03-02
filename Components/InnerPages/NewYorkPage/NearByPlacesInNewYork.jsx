@@ -58,7 +58,8 @@ export default function NearByPlacesInNewYork() {
                     <div className="row">
                         <div className="explore_section section_title m">
                             <h2 className="mb-0">Local Places Around Your Stay</h2>
-                            <p>Check local dining spots and visitor attractions around your hotel for simple access during your stay in the area.</p>
+                            <p>Check local dining spots and visitor attractions around your hotel for simple access during your stay in the area.
+                            </p>
                         </div>
                     </div>
 

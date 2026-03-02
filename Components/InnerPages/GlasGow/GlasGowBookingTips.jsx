@@ -160,10 +160,7 @@ export default function GlasGowBookingTips() {
                         <div className="col-lg-12">
                             <div className="hotel_tips_content">
                                 <p>
-                                    Glasgow offers a mix of historical sites, local culture, and friendly neighborhoods. Where you choose to stay can determine how comfortable your trip will be, whether you're visiting for a business meeting or just to relax. Many travellers focus on location, comfort, and value when they book hotels in Glasgow, as the right choice helps them save time and enjoy the city more comfortably.
-
-
-
+                                    Glasgow offers a mix of historical sites, local culture, and friendly neighborhoods. Where you choose to stay can determine how comfortable your trip will be, whether you're visiting for a business meeting or just to relax. Many travellers focus on location, comfort, and value when they book <Link className='g_color ' href={"/hotels"}>hotels in Glasgow</Link>, as the right choice helps them save time and enjoy the city more comfortably.
                                 </p>
                                 <p>
                                     The easy Glasgow hotel booking process allows visitors to review prices, policies, and guest feedback before confirming their plans. Staying close to transport links and attractions makes travel easier and saves time. The best Glasgow hotels offer comfortable rooms, helpful service, and easy access to the city's highlights. Planning ahead and reviewing verified listings reduces stress and ensures a comfortable and enjoyable stay in the city.

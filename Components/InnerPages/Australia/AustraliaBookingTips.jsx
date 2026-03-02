@@ -132,9 +132,8 @@ export default function AustraliaBookingTips() {
                       <button
                         id="booking_tips_prev"
                         aria-label="Previous"
-                        className={`absolute ${
-                          secondActive ? "d-none pointer-events-none" : ""
-                        }`}
+                        className={`absolute ${secondActive ? "d-none pointer-events-none" : ""
+                          }`}
                       >
                         <MdOutlineKeyboardArrowLeft size={30} />
                       </button>
@@ -175,9 +174,9 @@ export default function AustraliaBookingTips() {
                   experience.
                 </p>
                 <p>
-                  Many travelers search for{" "}
+                  Many travelers search for the{" "}
                   <Link href={"/hotels"} className="g_color">
-                    the best budget hotels{" "}
+                    best budget hotels{" "}
                   </Link>{" "}
                   in Australia to balance comfort and cost. These hotels often
                   provide clean rooms, helpful service, and easy access to

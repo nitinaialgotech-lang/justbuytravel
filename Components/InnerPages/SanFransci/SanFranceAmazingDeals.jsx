@@ -25,8 +25,7 @@ export default function SanFranceAmazingDeals() {
                 </p>
                 <p>
                   San Francisco is full of famous landmarks, cultural spots,
-                  shopping streets, and dining options, making it one of the
-                  <Link
+                  shopping streets, and dining options, making it one of the  <Link
                     href={
                       "https://justbuytravel.com/travel-news/8-most-beautiful-places-to-visit-in-california-beyond-los-angeles-and-san-francisco"
                     }

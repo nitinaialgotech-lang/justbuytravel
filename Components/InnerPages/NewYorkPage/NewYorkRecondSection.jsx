@@ -111,6 +111,7 @@ export default function NewYorkRecondSection() {
                 <div className="section_title relative ">
                     <h2 className="mb-0">Popular Hotels in New York</h2>
                     <p>Stay options located close to central New York districts, metro stations, dining streets, and visitor attractions for convenient travel access.
+
                     </p>
                     <div className="title_icon absolute right-5   ">
                         {/* <img src={getAssetPath("/home/destination/icon_plane.png")} alt="Travel plane icon" /> */}
