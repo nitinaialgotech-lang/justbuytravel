@@ -284,9 +284,9 @@ button {
   font-family: var(--font-fam);
 }
 
-/* p {
-  font-family: "outfit";
-} */
+p {
+  font-weight: 400 !important;
+}
 
 .margin_lr {
   margin-right: 15px;
@@ -523,6 +523,17 @@ button {
   color: var(--color);
   font-weight: 500;
   text-transform: capitalize;
+}
+.search_container
+  > .search_container_box
+  > .search_tab
+  > .tab_link
+  > ul
+  > li
+  > a
+  > span:nth-child(2)
+  > p {
+  font-weight: 600 !important;
 }
 
 .search_container
@@ -2525,7 +2536,6 @@ span.rating-stars {
 .hotel_tips_content > p {
   font-size: 16px;
   /* text-transform: capitalize; */
-  text-align: justify;
   font-weight: 500;
   line-height: 1.8;
   color: var(--p-color);
@@ -3553,10 +3563,19 @@ span.rating-stars {
   > ul {
   padding-left: 20px !important;
 }
-
 .blog_content
   > .elementor
   > .elementor-element
+  > .e-con-inner
+  > .elementor-element
+  > .elementor-widget-container
+  > img {
+  padding: 20px 0px !important;
+}
+.blog_content
+  > .elementor
+  > .elementor-element
+  > .e-con-inner
   > .elementor-element
   > .elementor-widget-container
   > ul
@@ -3567,26 +3586,29 @@ span.rating-stars {
 .blog_content
   > .elementor
   > .elementor-element
+  > .e-con-inner
   > .elementor-element
   > .elementor-widget-container
   > h3 {
-  font-size: 40px;
-  font-weight: 700;
+  font-size: 40px !important;
+  font-weight: 700 !important;
 }
 
 .blog_content
   > .elementor
   > .elementor-element
+  > .e-con-inner
   > .elementor-element
   > .elementor-widget-container
   > h2 {
-  font-size: 40px;
-  font-weight: 700;
+  font-size: 40px !important;
+  font-weight: 700 !important;
 }
 
 .blog_content
   > .elementor
   > .elementor-element
+  > .e-con-inner
   > .elementor-element
   > .elementor-widget-container
   > ul
@@ -3599,6 +3621,7 @@ span.rating-stars {
 .blog_content
   > .elementor
   > .elementor-element
+  > .e-con-inner
   > .elementor-element
   > .elementor-widget-container
   > p
@@ -3606,7 +3629,10 @@ span.rating-stars {
   font-weight: bold !important;
   font-size: 18px;
 }
-
+/* **************************** */
+.elementor-widget-container > h2 {
+}
+/* **************************** */
 .blog_content
   > .elementor
   > .elementor-element
@@ -3645,7 +3671,6 @@ span.rating-stars {
   > p
   > span {
   text-align: justify;
-
   line-height: 1.8;
 }
 
@@ -3657,7 +3682,6 @@ span.rating-stars {
   > p {
   color: var(--color) !important;
   font-size: 16px;
-
   font-weight: 400 !important;
 }
 
@@ -4921,4 +4945,45 @@ span.rating-stars {
 }
 .experience_explore_section > .card {
   background: transparent !important;
+}
+/* *********************** view all page design  */
+.sidebar_section > .hotel-grid-top-area {
+  width: 100%;
+  padding: 20px 20px;
+  border: 1px solid var(--b-color);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.sidebar_section
+  > .hotel-grid-top-area
+  > .search_box_input
+  > form
+  > .header_input {
+  width: 25%;
+}
+.sidebar_section
+  > .hotel-grid-top-area
+  > .search_box_input
+  > form
+  > .header_input_1 {
+  width: 100% !important;
+}
+.sidebar_section
+  > .hotel-grid-top-area
+  > .search_box_input
+  > form
+  > .header_input_1
+  > .header_input {
+  width: 100%;
+}
+.hotel-card {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid var(--b-color);
+  background-color: #ffff;
 }

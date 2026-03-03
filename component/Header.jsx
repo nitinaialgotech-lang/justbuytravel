@@ -75,7 +75,7 @@ export default function Header() {
                             >
 
                                 <img
-                                    src={getAssetPath("/logo/logo.png.webp")}
+                                    src={getAssetPath("/logo/web_logo.webp")}
                                     alt="Just Buy Travel - Your Trusted Travel Companion"
                                 />
 
@@ -161,7 +161,7 @@ export default function Header() {
                             <Offcanvas.Title>
                                 <div className="logo">
                                     <img
-                                        src={getAssetPath("/logo/logo.png.webp")}
+                                        src={getAssetPath("/logo/web_logo.webp")}
                                         width={100}
                                         height={"auto"}
                                         alt="Just Buy Travel - Your Trusted Travel Companion"

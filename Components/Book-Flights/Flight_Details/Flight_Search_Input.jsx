@@ -1059,9 +1059,9 @@ export default function Flight_Search_Input({ Tabin }) {
                           : ""
                         : typed === 1
                           ? range?.from && range?.to
-                            ? `${format(range.from, " MMM d")} - ${format(
+                            ? `${format(range.from, "EEE MMM d")} - ${format(
                               range.to,
-                              " MMM d",
+                              "EEE MMM d",
                             )}`
                             : ""
                           : range?.from

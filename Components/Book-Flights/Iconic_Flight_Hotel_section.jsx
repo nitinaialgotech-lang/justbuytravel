@@ -90,7 +90,7 @@ export default function Iconic_Flight_Hotel_section() {
         <>
             <section className=" padding_bottom ">
                 <div className="container ">
-                    <div className="section_title ">
+                    <div className="section_title flight-title ">
                         <h2 className="mb-0 capitalize">Popular flights near you</h2>
                         <p>Check nearby flight availability for selected destinations and view ticket options based on airline schedules and departure times from your location.
                         </p>

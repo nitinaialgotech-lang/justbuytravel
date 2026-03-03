@@ -132,15 +132,15 @@ async function handleRequest(req) {
 
     const suggestions = Array.isArray(parsed.suggestions)
       ? parsed.suggestions.filter((sug) => {
-          const place = sug?.placePrediction?.place;
-          if (!place) return false;
+        const place = sug?.placePrediction?.place;
+        if (!place) return false;
 
-          const primaryType = place.primaryType || "";
-          if (allowedPrimary.has(primaryType)) return true;
+        const primaryType = place.primaryType || "";
+        if (allowedPrimary.has(primaryType)) return true;
 
-          const types = Array.isArray(place.types) ? place.types : [];
-          return types.some((t) => allowedTypes.has(t));
-        })
+        const types = Array.isArray(place.types) ? place.types : [];
+        return types.some((t) => allowedTypes.has(t));
+      })
       : [];
 
     return NextResponse.json(

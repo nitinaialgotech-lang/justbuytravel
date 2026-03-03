@@ -91,7 +91,7 @@ export default function Popular_Flight_Hotel_section() {
     <>
       {/* ******************** section start ********************** */}
       <section className="recomend_section container  padding_bottom">
-        <div className="section_title relative ">
+        <div className="section_title relative flight-title">
           <h2 className="mb-0">Popular Flights Near You</h2>
           <p>
             Check nearby flight availability for selected destinations and view

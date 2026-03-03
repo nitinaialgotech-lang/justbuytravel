@@ -223,13 +223,11 @@ export const RestaurantApi = async (text) => {
     // Use the same suggest pipeline for restaurants, filtered server-side
     return await autoComplete(text, 10, "restaurant");
 }
-export const autoComplete = async (text, limit = 10, mode = "all") => {
+export const autoComplete = async (text) => {
     // Use text-search–based suggest endpoint for stricter type control
     return await https_places.get(`/search-suggest`, {
         params: {
             input: text,
-            maxResultCount: limit,
-            mode,
         },
     });
 }

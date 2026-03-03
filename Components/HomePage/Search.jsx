@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState, useRef, useCallback, use } from "react";
-import { FaHotel, FaUser } from "react-icons/fa";
+import { FaBed, FaHotel, FaUser } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -275,7 +275,7 @@ export default function TrySearch({ tabActive }) {
                     searchContent && searchContent.trim().length > 0
                         ? searchContent
                         : "hotel";
-                return autoComplete(queryText, 10, "all");
+                return autoComplete(queryText);
             }
             // Hotels tab: hotel-focused suggestions
             if (searchType === "hotels" || activeTab === "hotels") {
@@ -305,7 +305,6 @@ export default function TrySearch({ tabActive }) {
                 setShowDropdown(false);
             }
         };
-
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -434,7 +433,10 @@ export default function TrySearch({ tabActive }) {
 
     // Extract places from response - handle both direct response and nested data
     const places =
-        autoCompleteData?.data?.places || autoCompleteData?.places || [];
+        autoCompleteData?.data?.places ||
+        autoCompleteData?.places ||
+        autoCompleteData?.data?.suggestions ||
+        [];
 
     // Navigate to search page: show hotels and details for city/region/country
     const viewSearchAll = (place) => {
@@ -460,8 +462,7 @@ export default function TrySearch({ tabActive }) {
     const getCleanCityOrDistrict = (place) => {
         const components = place?.addressComponents || [];
 
-        const find = (type) =>
-            components.find((c) => c.types?.includes(type));
+        const find = (type) => components.find((c) => c.types?.includes(type));
 
         // 1️⃣ First preference → Locality (actual city name like Mohali)
         const locality = find("locality");
@@ -484,19 +485,19 @@ export default function TrySearch({ tabActive }) {
         if (state?.longText) {
             return state.longText;
         }
-        console.log(place?.displayName?.text, "pllllllllllwwwwwwwwwwwwwwwwwwweeeeeeeeeeeee");
+        console.log(
+            place?.displayName?.text,
+            "pllllllllllwwwwwwwwwwwwwwwwwwweeeeeeeeeeeee",
+        );
 
         // 4️⃣ Last fallback
         return place?.displayName?.text || "";
     };
 
-
-
-
-
-
-
-
+    console.log(
+        autoCompleteData,
+        "sssssssssssssssuuuuuuuuuuuuuuuuuuuggggggggggeeeeeeeeeeeeeetttttttt",
+    );
 
     // **************************** hotel search
 
@@ -532,7 +533,13 @@ export default function TrySearch({ tabActive }) {
     }, [isSearchModalOpen]);
 
     useEffect(() => {
-        console.log("showDropdown:", showDropdown, searchContent, "pkpkpkpkk", places);
+        console.log(
+            "showDropdown:",
+            showDropdown,
+            searchContent,
+            "pkpkpkpkk",
+            places,
+        );
     }, [showDropdown, searchContent]);
     return (
         <>
@@ -697,20 +704,16 @@ relative
                                                         textContent || "Search places and hotels"
                                                     }
                                                 />
-                                                {!isSearchModalOpen ?
-                                                    (
-                                                        <button
-                                                            type="submit"
-                                                            className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs focus:outline-none button_bg2 text-white rounded search_full_button_padding "
-                                                        >
-                                                            Search
-                                                        </button>
-                                                    )
-                                                    :
-                                                    (
-                                                        ""
-                                                    )
-                                                }
+                                                {!isSearchModalOpen ? (
+                                                    <button
+                                                        type="submit"
+                                                        className="absolute top-2 end-3 bg-brand hover:bg-brand-strong box-border border border-transparent shadow-xs font-medium leading-5 text-xs focus:outline-none button_bg2 text-white rounded search_full_button_padding "
+                                                    >
+                                                        Search
+                                                    </button>
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
 
                                             {/* ********************************* seachinf dropdown xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
@@ -728,7 +731,9 @@ relative
                                                                     <div
                                                                         onMouseDown={(e) => {
                                                                             e.preventDefault();
-                                                                            handleSelectNearbyOrRecent(nearbyLocation);
+                                                                            handleSelectNearbyOrRecent(
+                                                                                nearbyLocation,
+                                                                            );
                                                                         }}
                                                                         className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors"
                                                                     >
@@ -804,28 +809,25 @@ relative
                                                                     !isLoading &&
                                                                     places.length === 0 && (
                                                                         <div className="px-4 py-4 text-center text-gray-500 text-sm">
-                                                                            Allow location access for nearby suggestions
+                                                                            Allow location access for nearby
+                                                                            suggestions
                                                                         </div>
                                                                     )}
-
                                                             </div>
                                                         )}
                                                         {isLoading &&
-                                                            !searchContent.trim()
-                                                            &&
+                                                            !searchContent.trim() &&
                                                             !nearbyLocation &&
                                                             recentSearches.length === 0 &&
-                                                            recentlyViewed.length === 0 &&
-                                                            (
+                                                            recentlyViewed.length === 0 && (
                                                                 <div className="px-4 py-6 text-center text-gray-500 text-sm">
                                                                     <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
                                                                     Loading suggestions...
                                                                 </div>
-                                                            )
-                                                        }
+                                                            )}
 
                                                         {/* {places.length > 0 && ( */}
-                                                        {!isLoading && places && places.length > 0 && (
+                                                        {!isLoading && places && places.length > 0 ? (
                                                             <>
                                                                 {!searchContent.trim() &&
                                                                     showDefaultOnFocus &&
@@ -853,7 +855,9 @@ relative
                                                                         <div
                                                                             key={placeId}
                                                                             // onClick={() => handleSelectPlace(place)}
-                                                                            onMouseEnter={() => setSelectedIndex(index)}
+                                                                            onMouseEnter={() =>
+                                                                                setSelectedIndex(index)
+                                                                            }
                                                                             onMouseDown={(e) => {
                                                                                 e.preventDefault();
                                                                                 handleSelectPlace(place);
@@ -871,40 +875,24 @@ relative
                                                                                             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
                                                                                         </div>
                                                                                     )}
-                                                                                    <img
-                                                                                        src={displayImage}
-                                                                                        alt={
-                                                                                            place.displayName?.text || "Hotel"
-                                                                                        }
-                                                                                        className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId]
-                                                                                            ? "opacity-0"
-                                                                                            : "opacity-100"
-                                                                                            }`}
-                                                                                        onLoadStart={() =>
-                                                                                            handleImageLoadStart(placeId)
-                                                                                        }
-                                                                                        onLoad={() =>
-                                                                                            handleImageLoad(placeId)
-                                                                                        }
-                                                                                        onError={(e) =>
-                                                                                            handleImageError(placeId, e)
-                                                                                        }
-                                                                                        loading="lazy"
-                                                                                    />
+
+                                                                                    <FaBed />
+
                                                                                 </div>
                                                                             </div>
 
                                                                             {/* Hotel Info */}
 
                                                                             <div className="flex-1 min-w-0">
-                                                                                <div className="font-semibold text-gray-900 text-sm mb-1 truncate">
-                                                                                    {place.displayName?.text || "Hotel"}
+                                                                                <div className="font-semibold text-gray-900 text-sm mb-1 truncate capitalize">
+                                                                                    {place.autocomplete_suggestion ||
+                                                                                        "Hotel"}
                                                                                 </div>
-                                                                                {place.formattedAddress && (
+                                                                                {place.formattedAddress || place?.location ? (
                                                                                     <div className="text-gray-600 text-xs mb-2 line-clamp-1">
-                                                                                        {place.formattedAddress}
+                                                                                        {place?.location}
                                                                                     </div>
-                                                                                )}
+                                                                                ) : ""}
                                                                                 {place.rating && (
                                                                                     <div className="flex items-center gap-2">
                                                                                         <div className="flex items-center gap-1">
@@ -929,33 +917,63 @@ relative
                                                                                             <span className="text-gray-500 text-xs ml-2">
                                                                                                 {place.priceLevel === 0
                                                                                                     ? "Free"
-                                                                                                    : "$".repeat(place.priceLevel)}
+                                                                                                    : "$".repeat(
+                                                                                                        place.priceLevel,
+                                                                                                    )}
                                                                                             </span>
                                                                                         )}
                                                                                     </div>
                                                                                 )}
                                                                             </div>
 
-                                                                            {/* Arrow Icon */}
+                                                                            {/* Arrow Icon with images*/}
                                                                             <div className="shrink-0">
-                                                                                <svg
-                                                                                    className="w-5 h-5 text-gray-400"
-                                                                                    fill="none"
-                                                                                    stroke="currentColor"
-                                                                                    viewBox="0 0 24 24"
-                                                                                >
-                                                                                    <path
-                                                                                        strokeLinecap="round"
-                                                                                        strokeLinejoin="round"
-                                                                                        strokeWidth={2}
-                                                                                        d="M9 5l7 7-7 7"
-                                                                                    />
-                                                                                </svg>
+                                                                                {
+                                                                                    place?.thumbnail ?
+
+                                                                                        <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center relative">
+                                                                                            <img
+                                                                                                src={place?.thumbnail}
+                                                                                                alt={
+                                                                                                    place?.thumbnail || "Hotel"
+                                                                                                }
+                                                                                                className={`w-full h-full object-cover transition-opacity duration-200 ${imageLoading[placeId]
+                                                                                                    ? "opacity-0"
+                                                                                                    : "opacity-100"
+                                                                                                    }`}
+                                                                                                onLoadStart={() =>
+                                                                                                    handleImageLoadStart(placeId)
+                                                                                                }
+                                                                                                onLoad={() =>
+                                                                                                    handleImageLoad(placeId)
+                                                                                                }
+                                                                                                onError={(e) =>
+                                                                                                    handleImageError(placeId, e)
+                                                                                                }
+                                                                                                loading="lazy"
+                                                                                            />
+                                                                                        </div> :
+                                                                                        <svg
+                                                                                            className="w-5 h-5 text-gray-400"
+                                                                                            fill="none"
+                                                                                            stroke="currentColor"
+                                                                                            viewBox="0 0 24 24"
+                                                                                        >
+                                                                                            <path
+                                                                                                strokeLinecap="round"
+                                                                                                strokeLinejoin="round"
+                                                                                                strokeWidth={2}
+                                                                                                d="M9 5l7 7-7 7"
+                                                                                            />
+                                                                                        </svg>
+                                                                                }
                                                                             </div>
                                                                         </div>
                                                                     );
                                                                 })}
                                                             </>
+                                                        ) : (
+                                                            ""
                                                         )}
                                                         {!isLoading &&
                                                             searchContent.trim().length > 0 &&

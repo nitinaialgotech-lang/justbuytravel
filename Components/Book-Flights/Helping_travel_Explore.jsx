@@ -55,7 +55,7 @@ export default function Helping_travel_Explore() {
         <div className="container">
           <div className="row">
             <div className="helping_travel_section_title">
-              <div className="section_title">
+              <div className="section_title flight-title">
                 <h2 className="m-0">Plan Smart, Travel Easy</h2>
                 <p>
                   Before confirming tickets for your planned travel dates,

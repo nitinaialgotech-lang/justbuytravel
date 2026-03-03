@@ -55,12 +55,12 @@ export default function Blog_detail({ content, blog_image, load }) {
 											key={`blog-image-${item?.url || index}`}
 											src={item?.url}
 											alt=""
-											className="rounded-2xl"
+											className=""
 										/>
 									))}
 							</div>
 							<div
-								className="blog_content blog_pb "
+								className="blog_content  "
 								dangerouslySetInnerHTML={{ __html: content }}
 							>
 								{/* ******************* */}
